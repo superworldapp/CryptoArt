@@ -1,5 +1,8 @@
-var SimpleStorage = artifacts.require("./SimpleStorage.sol");
+var CryptoArt = artifacts.require("./CryptoArt.sol");
+var percentageCut = 10;
+var metaurl = 'http://geo.swapnil.art/'
+
 
 module.exports = function(deployer) {
-  deployer.deploy(SimpleStorage);
+  deployer.deploy(CryptoArt,percentageCut,metaurl);
 };
