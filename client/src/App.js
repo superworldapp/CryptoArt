@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import Main from './Components/MainComponents';
+import Main from './Components/MainComponent';
 import {HashRouter,BrowserRouter} from 'react-router-dom';
 class App extends Component {
 
