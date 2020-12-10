@@ -1,8 +1,8 @@
         pragma solidity ^0.6.0;
         pragma experimental ABIEncoderV2;
         
-        import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-        import "@openzeppelin/contracts/access/Ownable.sol";
+        import "https://github.com/kole-swapnil/openzepkole/token/ERC721/ERC721.sol";
+        import "https://github.com/kole-swapnil/openzepkole/access/Ownable.sol";
         
         
         contract Cryptoart is ERC721,Ownable{
@@ -32,6 +32,7 @@
                 uint tokenSellPrice;
                 string imgurl;
                 uint percut;
+                string tokenTitle;
             }
             
             mapping(uint => ArtToken) public Arts;
@@ -55,25 +56,24 @@
                 return(Arts[_tokenId]);
             }
             
-            function create(string memory _tokenHash,uint _tokenPrice,string memory _imgurl,uint _percut,bool _selling)public returns(bool){
+           function create(string memory _tokenHash,string memory _tokenTitle,uint _tokenPrice,string memory _imgurl,uint _percut)public returns(bool){
                 tokenCount++;
                 ArtToken memory y;
                 y.tokenIdentifier = tokenCount;
                 y.tokenHash = _tokenHash;
                 y.tokenCreator = msg.sender;
                 y.tokenOwner = msg.sender;
-                y.isSelling = _selling;
+                y.isSelling = false;
                 y.percut = _percut;
                 y.tokenPrice = _tokenPrice;
                 y.imgurl = _imgurl;
-                if(_selling == true){
-                    y.tokenSellPrice = _tokenPrice;
-                }
+                y.tokenTitle = _tokenTitle;
                 Arts[tokenCount] = y;
                 createToken(msg.sender,tokenCount);
                 emit tokencreated(tokenCount,msg.sender,_tokenPrice,now);
-                
+               
             }
+
             
             function putforsale(uint256 _tokenId,uint _sellprice) public{
                 Arts[_tokenId].isSelling = true;
@@ -141,6 +141,9 @@
                 }
                 return owntokens[msg.sender]; 
             }
-
+            function tokenURI(uint256 tokenId) public view override returns (string memory) {
+            string memory x = string(abi.encodePacked(metaUrl,tokenId));
+            return x;
+            }
             
         }

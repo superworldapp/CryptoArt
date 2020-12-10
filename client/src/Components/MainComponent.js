@@ -4,6 +4,7 @@ import getWeb3 from "../getWeb3";
 import "../App.css";
 import Header from "./HeaderComponent";
 import Home from './HomeComponent';
+import AllItemComponent from './AllArtComponent';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './FooterComponent';
 
@@ -53,6 +54,7 @@ class Main extends Component {
         <Header contract={this.state.contract} accounts={this.state.accounts} balance={this.state.balance} web3={this.state.web3}/>
         <Switch>
             <Route exact path="/home" component={() => <Home contract={this.state.contract} accounts={this.state.accounts}/>}/>
+            <Route exact path="/allart" component={() => <AllItemComponent contract={this.state.contract} accounts={this.state.accounts}/>}/>
             
             <Redirect to="/home"/>
         </Switch>

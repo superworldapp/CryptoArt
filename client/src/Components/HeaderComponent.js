@@ -140,12 +140,14 @@ class Header extends Component{
                             <NavItem>
                                 <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/home">Home</NavLink>
                             </NavItem>
-                            
+                            <NavItem>
+                                 <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/allart">Arts</NavLink>
+                            </NavItem>
                             </Nav>
                             
                         </Collapse>
                     </div>
-                    <h6 style={{ color: "white"}}>{this.props.accounts}</h6>
+                    <h6 style={{ color: "white"}}><small>{this.props.accounts}</small></h6>
                 </Navbar>
             
             </React.Fragment>

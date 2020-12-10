@@ -45,38 +45,9 @@ class Allpatrender extends Component{
         this.handleInputChange = this.handleInputChange.bind(this);
         this.buyitem = this.buyitem.bind(this);
     }
-    buyitem = async(typeitem) => {
-        // var res = await this.props.contract.methods.itemcount().call();
-        // var response2 = [];
-        // var response3= [];
-        // var cntres2 = 0 ;
-        // var cntres3 = 0;
-        // var rex2;
-        // for(var i=1;i<=res;i++){
-        //     var rex = await this.props.contract.methods.Items(i).call();
-        //     if(rex.itemtype == typeitem){
-        //     response2.push(rex);
-        //     cntres2++;
-        //     }
-        // }
-        
-        // console.log(response2);
-        // for(var j = 0;j<cntres2;j++){
-        //     rex2 = await this.props.contract?.methods.Manufacturers(response2[j].manadr).call();
-        //     response3.push(rex2);
-        //     cntres3++;
-        // }
-        // console.log(response3);
-        // var nearadd = await calDist(customer,response3,cntres3);
-        // console.log(nearadd);
-        
-        // //  for(var k = 0; k<cntres2;k++){
-        // //     if(nearadd == response.manadr){
-        // //         finalid = response2.itemid;
-        // //     }
-        // //  }
-        
-        // return(nearadd);
+    buyitem = async() => {
+        const res = await this.props.contract.methods.buyToken(this.props.dish.tokenIdentifier).send({from: this.props.accounts,value:this.props.dish.tokenSellPrice,gas : 1000000});
+         console.log(res);
     }  
     toggleModal() {
         this.setState({
@@ -106,23 +77,30 @@ class Allpatrender extends Component{
 
     render() {
         
-        var but = "visible" ;
-        this.converb(this.props.dish.price.toString());
+        var but = this.props.dish.isSelling?"visible":"invisible" ;
+        var bux = this.props.dish.isSelling?"invisible":"visible"
+        var bak = this.props.dish.isSelling?"bg-success text-white":"";
+        var artno = this.props.dish.tokenIdentifier;
+        this.converb(this.props.dish.tokenSellPrice.toString());
         var cl = "fa fa-laptop fa-5x";
         return(
            
-            <Card >
-            <i className={cl}></i>
+            <Card className={bak}>
+            <CardImg top width="100%" src={this.props.dish.imgurl} alt="Card image" />
             <CardBody>
-            <CardTitle>Item ID : {this.props.dish.itemid}</CardTitle>
-            <CardText><small>Item Type : {category(parseInt(this.props.dish.itemtype))}</small></CardText>
+            <CardTitle>Item Title : {this.props.dish.tokenTitle}</CardTitle>
+            <CardText><small>Item Creator : {this.props.dish.tokenCreator}</small></CardText>
+            <CardText><small>Item Owner : {this.props.dish.tokenOwner}</small></CardText>
             <CardText><small>Item Price : {util1}</small></CardText>
-            <CardText><small>GST : {this.props.dish.gst}</small></CardText>
-            <CardText><small>Description : {this.props.dish.description}</small></CardText>
-
-            <Col md={{size:10, offset:1}}>
-                <Button className={but} type="submit" color="primary">
+            <Col sm={{size:12}}>
+                <Button className={but} size="sm" type="submit" color="primary" onClick={this.buyitem}>
                     Buy Item
+                </Button>{'   '}
+                <Button className={but} size="sm" type="submit" color="primary" onClick={this.buyitem}>
+                    Sell Item
+                </Button>{'   '}
+                <Button className={bux} size="sm" type="submit" color="primary" onClick={this.buyitem}>
+                    DeSell Item
                 </Button>
             </Col>
             </CardBody>
@@ -175,8 +153,9 @@ var itemdesc;
 class AllItemComponent extends Component{
     constructor(props){
         super(props);
-        this.state = { docCount : 0, dish: [] , cust: [] , manuf: [] , isModalOpen1: false  }
+        this.state = { docCount : 0, dish: [] , cust: [] , manuf: [] , isModalOpen1: false ,title : "",arturl:"",price:"",arthash : "",percut:0 }
         this.toggleModal1 = this.toggleModal1.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
         //this.com = this.com.bind(this);
     }
     
@@ -186,23 +165,30 @@ class AllItemComponent extends Component{
             isModalOpen1: !this.state.isModalOpen1
         });
     }
-    createItem = async(itemtype,itemdesc,itemprice,itemgst) => {
-        // const res = await this.props.contract.methods.createItems(itemtype,itemdesc,itemprice,itemgst).send({from: this.props.accounts,gas : 1000000});
-        // console.log(res);
+    createItem = async(tokenhash1,tokentitle1,tokenprice1,imgurl1,percut1) => {
+         
     }
-    creatingItems = () => {
-        // itemtype = categoryrev(this.type.value);
-        // console.log(itemtype);
-        // itemprice = (conver(this.price.value));
+    creatingItems = async() => {
+        var tokenhash = this.state.arthash.toString();
+        var tokentitle = this.state.title;
+        var tokenprice = this.state.price;
+        var imgurl = this.state.arturl;
+        var percut = this.state.percut;
+        console.log(tokenhash,tokentitle,tokenprice,imgurl,percut);
+        const res = await this.props.contract.methods.create(tokenhash,tokentitle,tokenprice,imgurl,percut).send({from: this.props.accounts,gas : 1000000});
+         console.log(res);
         
-        // itemgst = this.gst.value;
-        // itemdesc = this.desc.value;
-        // console.log(itemtype);
-        // this.createItem(itemtype,itemdesc,itemprice,itemgst);
-        // this.toggleModal1();
+        this.toggleModal1();
     }
     
-    
+    handleInputChange(event){
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        this.setState({
+            [name] : value
+        })
+    }
     
     async componentDidMount(){
         var res = await this.props.contract?.methods.tokenCount().call();
@@ -234,38 +220,33 @@ class AllItemComponent extends Component{
             );
         })
         
-        var ch = this.props.registered == 1? "visible" : "invisible";
-        
+        var ch = "visible" ;
         return(
         <div className="container">
             <h2>All Items</h2>
             <Button color="success" className={ch} onClick={this.toggleModal1}>
-                Add Item
+                Add Art
             </Button>
             
             <Modal isOpen={this.state.isModalOpen1} toggle={this.toggleModal1} className="modal-xl">
                 <ModalHeader toggle={this.toggleModal1}>
-                    <h3>Add Items</h3>
+                    <h3>Add Artwork</h3>
                 </ModalHeader>
                 <ModalBody>
                     <Form>
                         <div className="row pl-5 pr-5">
-                            <div className="col-6">
+                        <div className="col-6">
                                 <FormGroup>
-                                    <Label htmlFor="type" className="ml-3">Item Type</Label>
-                                    <Input type="select" id="type" name="type" innerRef={(input) => this.type = input}>
-                                        <option>Select Item Type</option>
-                                        <option>Mobile</option>
-                                        <option>Laptop</option>
-                                        <option>Desktop</option>
-                                    </Input>
+                                    <Label htmlFor="title" className="ml-3">Token Title</Label>
+                                    <Input type="text" id="title" name="title"
+                                        onChange={this.handleInputChange}  />
                                 </FormGroup>
                             </div>
                             <div className="col-6">
                                 <FormGroup>
                                     <Label htmlFor="price" className="ml-3">Item Price</Label>
                                     <Input type="text" id="price" name="price"
-                                        innerRef={(input) => this.price = input}  />
+                                        onChange={this.handleInputChange}  />
                                 </FormGroup>
                             </div>
                         </div>
@@ -273,26 +254,34 @@ class AllItemComponent extends Component{
                             
                             <div className="col-12">
                                 <FormGroup>
-                                    <Label htmlFor="gst" className="ml-3">Item GST</Label>
-                                    <Input type="text" id="gst" name="gst"
-                                        innerRef={(input) => this.gst = input}  />
+                                    <Label htmlFor="arthash" className="ml-3">Art Hash</Label>
+                                    <Input type="text" id="arthash" name="arthash"
+                                        onChange={this.handleInputChange}  />
                                 </FormGroup>    
                             </div>
                         </div>
                         
                         <div className="row pl-5 pr-5">
-                            <div className="col-12">
+                            <div className="col-6">
                                 <FormGroup>
-                                    <Label htmlFor="desc" className="ml-3">Item Description</Label>
-                                    <Input type="text" id="desc" name="desc"
-                                        innerRef={(input) => this.desc = input}  />
+                                    <Label htmlFor="desc" className="ml-3">Art URL</Label>
+                                    <Input type="text" id="arturl" name="arturl"
+                                        onChange={this.handleInputChange}  />
                                 </FormGroup>
                             </div>
+                            <div className="col-6">
+                                <FormGroup>
+                                    <Label htmlFor="percut" className="ml-3">Percentage Cut</Label>
+                                    <Input type="number" id="percut" name="percut"
+                                        onChange={this.handleInputChange}  />
+                                </FormGroup>
+                            </div>
+
                         </div>
                         <br/>
                         <div className="row pl-5">
                             <div className="col-6">    
-                                <Button color="primary" onClick={this.creatingItems}>Add Item</Button>
+                                <Button color="primary" onClick={this.creatingItems}>Add</Button>
                             </div>
                         </div>
                         <br/>
