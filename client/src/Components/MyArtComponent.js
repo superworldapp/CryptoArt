@@ -38,12 +38,14 @@ class Allpatrender extends Component{
     // var yz = xy != 0?"bg-success text-white":"";
     constructor(props){
         super(props);
-        this.state = { docCount : 0, dish: [] , isModalOpen: false,qty: 0};
+        this.state = { docCount : 0, dish: [] , isModalOpen: false,sellPrice: 0};
         this.toggleModal = this.toggleModal.bind(this);
         this.converb = this.converb.bind(this);
         this.conver = this.conver.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.buyitem = this.buyitem.bind(this);
+        this.putForSale = this.putForSale.bind(this);
+        this.DeSale = this.DeSale.bind(this);
     }
     buyitem = async() => {
         const res = await this.props.contract.methods.buyToken(this.props.dish.tokenIdentifier).send({from: this.props.accounts,value:this.props.dish.tokenSellPrice,gas : 1000000});
@@ -64,14 +66,22 @@ class Allpatrender extends Component{
     }
     converb = async (x) => {
         util1 = (Web3.utils.fromWei(x, 'milli'));
+        return util1;
     }
     conver =  (x) => {
 
         util =  (Web3.utils.toWei(x, 'milli'));
         return util;
     }
-
-
+	    putForSale = async () => {
+        var nex = conver(this.state.sellPrice);
+        const res = await this.props.contract.methods.putforsale(this.props.dish.tokenIdentifier,nex).send({from: this.props.accounts,gas : 1000000});
+         console.log(res);
+    }
+    DeSale = async () => {
+        const res = await this.props.contract.methods.desale(this.props.dish.tokenIdentifier).send({from: this.props.accounts,gas : 1000000});
+         console.log(res);
+    }
   
     
 
@@ -93,15 +103,25 @@ class Allpatrender extends Component{
             <CardText><small>Item Owner : {this.props.dish.tokenOwner}</small></CardText>
             <CardText><small>Item Price : {util1}</small></CardText>
             <Col sm={{size:12}}>
-                <Button className={but} size="sm" type="submit" color="primary" onClick={this.buyitem}>
-                    Buy Item
-                </Button>{'   '}
-                <Button className={but} size="sm" type="submit" color="primary" onClick={this.buyitem}>
+                <Button className={bux} size="sm" type="submit" color="primary" onClick={this.toggleModal}>
                     Sell Item
                 </Button>{'   '}
-                <Button className={bux} size="sm" type="submit" color="primary" onClick={this.buyitem}>
+                <Button className={but} size="sm" type="submit" color="primary" onClick={this.DeSale}>
                     DeSell Item
                 </Button>
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal} className="modal-md">
+                    <ModalHeader toggle={this.toggleModal} className="pl-5">Put For Sale</ModalHeader>
+                        <Card className="pb-5">
+                        <CardImg top width="100%" src={this.props.dish.imgurl} alt="Card image" />
+                            <p className="m-auto p-2">Art Title: {this.props.dish.tokenTitle}</p>
+
+                            <div className="row m-auto pt-2">
+                                <p>Art Sell Price : </p>
+                                <p> <Input type="text" id="sellPrice" name="sellPrice" onChange={this.handleInputChange}></Input></p>
+                            </div>
+                            <p className="m-auto p-2"><Button type="submit" onClick={this.putForSale} >Confirm</Button> </p>
+                        </Card>
+                </Modal>
             </Col>
             </CardBody>
             
@@ -111,46 +131,10 @@ class Allpatrender extends Component{
 }
 
 
-function category(i) {
-
-        switch(i) {
-            case 0:
-                vx = 'Laptop';
-                break;
-            case 1:
-                vx = 'Mobile';
-                break;
-            case 2:
-                vx = 'Desktop';
-                break;
-        }
-        return vx;
-}
-
-function categoryrev(i) {
-
-    
-        if(i == "Laptop")
-        {
-            return 0;
-        }
-        else if(i == "Mobile")
-        {
-            return 1;
-        }
-        else if(i == "Desktop")
-        {
-            return 2;
-        }
-        
-}
-var itemtype;
-var itemprice;
-var itemgst;
-var itemdesc;
 
 
-class AllItemComponent extends Component{
+
+class MyItemComponent extends Component{
     constructor(props){
         super(props);
         this.state = { docCount : 0, dish: [] , cust: [] , manuf: [] , isModalOpen1: false ,title : "",arturl:"",price:"",arthash : "",percut:0 }
@@ -199,7 +183,10 @@ class AllItemComponent extends Component{
                 var response= [];
                 for(var i=1;i<=res;i++){
                     var rex = await this.props.contract?.methods.Arts(i).call();
-                    response.push(rex);
+                    if(rex.tokenOwner == this.props.accounts){
+                        response.push(rex);
+                    }
+                    
                 }
                 alldocs = [];
                 alldocs = response;
@@ -223,7 +210,7 @@ class AllItemComponent extends Component{
         var ch = "visible" ;
         return(
         <div className="container">
-            <h2>All Items</h2>
+            <h2>My Items</h2>
             <Button color="success" className={ch} onClick={this.toggleModal1}>
                 Add Art
             </Button>
@@ -304,4 +291,4 @@ class AllItemComponent extends Component{
     };
 }
 
-export default AllItemComponent;
+export default MyItemComponent;

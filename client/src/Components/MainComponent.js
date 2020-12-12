@@ -5,6 +5,7 @@ import "../App.css";
 import Header from "./HeaderComponent";
 import Home from './HomeComponent';
 import AllItemComponent from './AllArtComponent';
+import MyItemComponent from './MyArtComponent';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './FooterComponent';
 
@@ -55,6 +56,7 @@ class Main extends Component {
         <Switch>
             <Route exact path="/home" component={() => <Home contract={this.state.contract} accounts={this.state.accounts}/>}/>
             <Route exact path="/allart" component={() => <AllItemComponent contract={this.state.contract} accounts={this.state.accounts}/>}/>
+            <Route exact path="/myart" component={() => <MyItemComponent contract={this.state.contract} accounts={this.state.accounts}/>}/>
             
             <Redirect to="/home"/>
         </Switch>

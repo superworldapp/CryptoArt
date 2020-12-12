@@ -132,7 +132,7 @@ class Header extends Component{
                     <div className="container justify-center">
                     
                         <NavbarToggler onClick={this.togglenav}/>
-                        <NavbarBrand className="mr-auto" >CryproArt</NavbarBrand>
+                        <NavbarBrand className="mr-auto" >SUPERWORLD</NavbarBrand>
                         <Collapse isOpen = {this.state.isNavOpen} navbar>
                         
                             <Nav navbar className="m-auto">
@@ -142,6 +142,9 @@ class Header extends Component{
                             </NavItem>
                             <NavItem>
                                  <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/allart">Arts</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                 <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/myart">MyArt</NavLink>
                             </NavItem>
                             </Nav>
                             

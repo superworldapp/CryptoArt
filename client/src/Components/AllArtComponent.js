@@ -96,11 +96,8 @@ class Allpatrender extends Component{
                 <Button className={but} size="sm" type="submit" color="primary" onClick={this.buyitem}>
                     Buy Item
                 </Button>{'   '}
-                <Button className={but} size="sm" type="submit" color="primary" onClick={this.buyitem}>
-                    Sell Item
-                </Button>{'   '}
-                <Button className={bux} size="sm" type="submit" color="primary" onClick={this.buyitem}>
-                    DeSell Item
+                <Button className={bux} size="sm" type="submit" color="primary" >
+                    Place Offer
                 </Button>
             </Col>
             </CardBody>
@@ -224,9 +221,7 @@ class AllItemComponent extends Component{
         return(
         <div className="container">
             <h2>All Items</h2>
-            <Button color="success" className={ch} onClick={this.toggleModal1}>
-                Add Art
-            </Button>
+           
             
             <Modal isOpen={this.state.isModalOpen1} toggle={this.toggleModal1} className="modal-xl">
                 <ModalHeader toggle={this.toggleModal1}>
