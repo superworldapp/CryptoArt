@@ -5,6 +5,7 @@ import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col,
 import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from "web3";
 import { render } from 'react-dom';
+import axios from 'axios';
 
 var util;
 var util1;
@@ -13,20 +14,10 @@ var alldocs = [];
 var allcus = [];
 var allmanu = [];
 var customer;
-
-let conver =  (x) => {
-
-    util =  (Web3.utils.toWei(x, 'milli'));
-    return util;
-}
-let converb =(x) => {
-    util1 = (Web3.utils.fromWei(x, 'milli'));
-    return util1;
-}
+const ETHER = 1000000000000000000;
 
 
-
-var quantity;
+var filekn;
 var total;
 var finalid;
 
@@ -40,9 +31,7 @@ class Allpatrender extends Component{
         super(props);
         this.state = { docCount : 0, dish: [] , isModalOpen: false,sellPrice: 0};
         this.toggleModal = this.toggleModal.bind(this);
-        this.converb = this.converb.bind(this);
-        this.conver = this.conver.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
+       this.handleInputChange = this.handleInputChange.bind(this);
         this.buyitem = this.buyitem.bind(this);
         this.putForSale = this.putForSale.bind(this);
         this.DeSale = this.DeSale.bind(this);
@@ -64,18 +53,9 @@ class Allpatrender extends Component{
             [name] : value
         })
     }
-    converb = async (x) => {
-        util1 = (Web3.utils.fromWei(x, 'milli'));
-        return util1;
-    }
-    conver =  (x) => {
-
-        util =  (Web3.utils.toWei(x, 'milli'));
-        return util;
-    }
-	    putForSale = async () => {
-        var nex = conver(this.state.sellPrice);
-        const res = await this.props.contract.methods.putforsale(this.props.dish.tokenIdentifier,nex).send({from: this.props.accounts,gas : 1000000});
+	putForSale = async () => {
+        var nex = this.state.sellPrice*ETHER;
+        const res = await this.props.contract.methods.putforsale(this.props.dish.tokenIdentifier,(this.state.sellPrice*ETHER).toString()).send({from: this.props.accounts,gas : 1000000});
          console.log(res);
     }
     DeSale = async () => {
@@ -91,19 +71,19 @@ class Allpatrender extends Component{
         var bux = this.props.dish.isSelling?"invisible":"visible"
         var bak = this.props.dish.isSelling?"bg-success text-white":"";
         var artno = this.props.dish.tokenIdentifier;
-        this.converb(this.props.dish.tokenSellPrice.toString());
+
         var cl = "fa fa-laptop fa-5x";
         return(
            
             <Card className={bak}>
-            <CardImg top width="100%" src={this.props.dish.imgurl} alt="Card image" />
+            <a href={this.props.dish.imgurl} target="_blank"><CardImg top width="100%" src={this.props.dish.imgurl} alt="Card image" /></a>
             <CardBody>
             <CardTitle>Item Title : {this.props.dish.tokenTitle}</CardTitle>
             <CardText><small>Item Creator : {this.props.dish.tokenCreator}</small></CardText>
-            <CardText><small>Item Owner : {this.props.dish.tokenOwner}</small></CardText>
-            <CardText><small>Item Price : {util1}</small></CardText>
+            <CardText><small>Item Price : {Web3.utils.fromWei(this.props.dish.tokenPrice.toString(), 'ether')}</small></CardText>
+            <CardText><small>Item Sell Price : {Web3.utils.fromWei(this.props.dish.tokenSellPrice.toString(), 'ether')}</small></CardText>
             <Col sm={{size:12}}>
-                <Button className={bux} size="sm" type="submit" color="primary" onClick={this.toggleModal}>
+                <Button className="visible" size="sm" type="submit" color="primary" onClick={this.toggleModal}>
                     Sell Item
                 </Button>{'   '}
                 <Button className={but} size="sm" type="submit" color="primary" onClick={this.DeSale}>
@@ -140,7 +120,8 @@ class MyItemComponent extends Component{
         this.state = { docCount : 0, dish: [] , cust: [] , manuf: [] , isModalOpen1: false ,title : "",arturl:"",price:"",arthash : "",percut:0 }
         this.toggleModal1 = this.toggleModal1.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-        //this.com = this.com.bind(this);
+        this.fileSelectHandler = this.fileSelectHandler.bind(this);
+        this.fileUploadHandler = this.fileUploadHandler.bind(this);
     }
     
     
@@ -149,17 +130,15 @@ class MyItemComponent extends Component{
             isModalOpen1: !this.state.isModalOpen1
         });
     }
-    createItem = async(tokenhash1,tokentitle1,tokenprice1,imgurl1,percut1) => {
-         
-    }
+
     creatingItems = async() => {
         var tokenhash = this.state.arthash.toString();
         var tokentitle = this.state.title;
-        var tokenprice = this.state.price;
+        var tokenprice = (this.state.price*ETHER).toString();
         var imgurl = this.state.arturl;
         var percut = this.state.percut;
         console.log(tokenhash,tokentitle,tokenprice,imgurl,percut);
-        const res = await this.props.contract.methods.create(tokenhash,tokentitle,tokenprice,imgurl,percut).send({from: this.props.accounts,gas : 1000000});
+        const res = await this.props.contract.methods.create(tokenhash,tokentitle,(this.state.price*ETHER).toString(),imgurl,percut).send({from: this.props.accounts,gas : 1000000});
          console.log(res);
         
         this.toggleModal1();
@@ -195,6 +174,22 @@ class MyItemComponent extends Component{
 
               
          
+    }
+    fileSelectHandler = event => {
+        this.setState({
+            selectedFile : event.target.files[0] 
+        })
+    }
+    fileUploadHandler = event => {
+        const fd = new FormData();
+        fd.append('profile',this.state.selectedFile,this.state.selectedFile.name);
+        axios.post('http://localhost:4000/upload', fd)
+        .then(res => {
+            console.log(res.data.profile_url);
+            this.setState({
+                arturl : res.data.profile_url
+            })
+        });
     }
 
      render(){
@@ -239,23 +234,24 @@ class MyItemComponent extends Component{
                         </div>
                         <div className="row pl-5 pr-5">
                             
-                            <div className="col-12">
+                            <div className="col-6">
                                 <FormGroup>
                                     <Label htmlFor="arthash" className="ml-3">Art Hash</Label>
                                     <Input type="text" id="arthash" name="arthash"
                                         onChange={this.handleInputChange}  />
                                 </FormGroup>    
                             </div>
+                            <div className="col-6">
+                                <FormGroup>
+                                    <Label htmlFor="arthash" className="ml-3">Art</Label>
+                                    <Input type="file" onChange={this.fileSelectHandler}/>
+                                    <Button onClick={this.fileUploadHandler}>Upload</Button>
+                                </FormGroup>    
+                            </div>
+
                         </div>
                         
                         <div className="row pl-5 pr-5">
-                            <div className="col-6">
-                                <FormGroup>
-                                    <Label htmlFor="desc" className="ml-3">Art URL</Label>
-                                    <Input type="text" id="arturl" name="arturl"
-                                        onChange={this.handleInputChange}  />
-                                </FormGroup>
-                            </div>
                             <div className="col-6">
                                 <FormGroup>
                                     <Label htmlFor="percut" className="ml-3">Percentage Cut</Label>

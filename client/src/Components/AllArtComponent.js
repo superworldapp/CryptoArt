@@ -13,17 +13,7 @@ var alldocs = [];
 var allcus = [];
 var allmanu = [];
 var customer;
-
-let conver =  (x) => {
-
-    util =  (Web3.utils.toWei(x, 'milli'));
-    return util;
-}
-let converb =(x) => {
-    util1 = (Web3.utils.fromWei(x, 'milli'));
-    return util1;
-}
-
+const ETHER = 1000000000000000000;
 
 
 var quantity;
@@ -40,8 +30,6 @@ class Allpatrender extends Component{
         super(props);
         this.state = { docCount : 0, dish: [] , isModalOpen: false,qty: 0};
         this.toggleModal = this.toggleModal.bind(this);
-        this.converb = this.converb.bind(this);
-        this.conver = this.conver.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.buyitem = this.buyitem.bind(this);
     }
@@ -62,17 +50,6 @@ class Allpatrender extends Component{
             [name] : value
         })
     }
-    converb = async (x) => {
-        util1 = (Web3.utils.fromWei(x, 'milli'));
-    }
-    conver =  (x) => {
-
-        util =  (Web3.utils.toWei(x, 'milli'));
-        return util;
-    }
-
-
-  
     
 
     render() {
@@ -81,7 +58,6 @@ class Allpatrender extends Component{
         var bux = this.props.dish.isSelling?"invisible":"visible"
         var bak = this.props.dish.isSelling?"bg-success text-white":"";
         var artno = this.props.dish.tokenIdentifier;
-        this.converb(this.props.dish.tokenSellPrice.toString());
         var cl = "fa fa-laptop fa-5x";
         return(
            
@@ -91,7 +67,7 @@ class Allpatrender extends Component{
             <CardTitle>Item Title : {this.props.dish.tokenTitle}</CardTitle>
             <CardText><small>Item Creator : {this.props.dish.tokenCreator}</small></CardText>
             <CardText><small>Item Owner : {this.props.dish.tokenOwner}</small></CardText>
-            <CardText><small>Item Price : {util1}</small></CardText>
+            <CardText><small>Item Price : {Web3.utils.fromWei(this.props.dish.tokenSellPrice.toString(), 'ether')}</small></CardText>
             <Col sm={{size:12}}>
                 <Button className={but} size="sm" type="submit" color="primary" onClick={this.buyitem}>
                     Buy Item

@@ -150,7 +150,8 @@ class Header extends Component{
                             
                         </Collapse>
                     </div>
-                    <h6 style={{ color: "white"}}><small>{this.props.accounts}</small></h6>
+                    <h6 style={{ color: "white"}}><small>{this.props.accounts}</small>
+                    <br/><small>Balance : {Web3.utils.fromWei(this.props.balance.toString(), 'ether')}</small></h6>
                 </Navbar>
             
             </React.Fragment>
