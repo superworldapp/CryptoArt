@@ -59,6 +59,7 @@ class Allpatrender extends Component{
         var bak = this.props.dish.isSelling?"bg-success text-white":"";
         var artno = this.props.dish.tokenIdentifier;
         var cl = "fa fa-laptop fa-5x";
+        var pr = (Web3.utils.fromWei(this.props.dish.tokenSellPrice.toString(), 'ether') == 0)?"invisible":"visible";
         return(
            
             <Card className={bak}>
@@ -67,7 +68,7 @@ class Allpatrender extends Component{
             <CardTitle>Item Title : {this.props.dish.tokenTitle}</CardTitle>
             <CardText><small>Item Creator : {this.props.dish.tokenCreator}</small></CardText>
             <CardText><small>Item Owner : {this.props.dish.tokenOwner}</small></CardText>
-            <CardText><small>Item Price : {Web3.utils.fromWei(this.props.dish.tokenSellPrice.toString(), 'ether')}</small></CardText>
+            <CardText className={but}><small>Item Sell Price : {Web3.utils.fromWei(this.props.dish.tokenSellPrice.toString(), 'ether')} ETH</small></CardText>
             <Col sm={{size:12}}>
                 <Button className={but} size="sm" type="submit" color="primary" onClick={this.buyitem}>
                     Buy Item
@@ -83,44 +84,6 @@ class Allpatrender extends Component{
     }
 }
 
-
-function category(i) {
-
-        switch(i) {
-            case 0:
-                vx = 'Laptop';
-                break;
-            case 1:
-                vx = 'Mobile';
-                break;
-            case 2:
-                vx = 'Desktop';
-                break;
-        }
-        return vx;
-}
-
-function categoryrev(i) {
-
-    
-        if(i == "Laptop")
-        {
-            return 0;
-        }
-        else if(i == "Mobile")
-        {
-            return 1;
-        }
-        else if(i == "Desktop")
-        {
-            return 2;
-        }
-        
-}
-var itemtype;
-var itemprice;
-var itemgst;
-var itemdesc;
 
 
 class AllItemComponent extends Component{
@@ -138,9 +101,7 @@ class AllItemComponent extends Component{
             isModalOpen1: !this.state.isModalOpen1
         });
     }
-    createItem = async(tokenhash1,tokentitle1,tokenprice1,imgurl1,percut1) => {
-         
-    }
+
     creatingItems = async() => {
         var tokenhash = this.state.arthash.toString();
         var tokentitle = this.state.title;
@@ -189,6 +150,8 @@ class AllItemComponent extends Component{
             return (
                 <div key={x} className="col-4 col-md-3">
                     < Allpatrender dish={x} contract={this.props.contract} accounts={this.props.accounts}/>
+                    <br/>
+                    <br/>
                 </div>
             );
         })

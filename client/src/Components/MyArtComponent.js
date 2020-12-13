@@ -6,6 +6,7 @@ import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from "web3";
 import { render } from 'react-dom';
 import axios from 'axios';
+const SHA256 = require('crypto-js/sha256');
 
 var util;
 var util1;
@@ -71,7 +72,8 @@ class Allpatrender extends Component{
         var bux = this.props.dish.isSelling?"invisible":"visible"
         var bak = this.props.dish.isSelling?"bg-success text-white":"";
         var artno = this.props.dish.tokenIdentifier;
-
+        var pr = (Web3.utils.fromWei(this.props.dish.tokenSellPrice.toString(), 'ether') == 0)?"invisible":"visible";
+        var str = this.props.dish.isSelling?"ReSell Item":"Sell Item";
         var cl = "fa fa-laptop fa-5x";
         return(
            
@@ -80,11 +82,10 @@ class Allpatrender extends Component{
             <CardBody>
             <CardTitle>Item Title : {this.props.dish.tokenTitle}</CardTitle>
             <CardText><small>Item Creator : {this.props.dish.tokenCreator}</small></CardText>
-            <CardText><small>Item Price : {Web3.utils.fromWei(this.props.dish.tokenPrice.toString(), 'ether')}</small></CardText>
-            <CardText><small>Item Sell Price : {Web3.utils.fromWei(this.props.dish.tokenSellPrice.toString(), 'ether')}</small></CardText>
+            <CardText className = {pr}><small>Item Sell Price : {Web3.utils.fromWei(this.props.dish.tokenSellPrice.toString(), 'ether')} ETH</small></CardText>
             <Col sm={{size:12}}>
                 <Button className="visible" size="sm" type="submit" color="primary" onClick={this.toggleModal}>
-                    Sell Item
+                    {str}
                 </Button>{'   '}
                 <Button className={but} size="sm" type="submit" color="primary" onClick={this.DeSale}>
                     DeSell Item
@@ -183,11 +184,14 @@ class MyItemComponent extends Component{
     fileUploadHandler = event => {
         const fd = new FormData();
         fd.append('profile',this.state.selectedFile,this.state.selectedFile.name);
+        var newHash = SHA256(this.state.selectedFile);
+        console.log("file contents",this.state.selectedFile);
         axios.post('http://localhost:4000/upload', fd)
         .then(res => {
             console.log(res.data.profile_url);
             this.setState({
-                arturl : res.data.profile_url
+                arturl : res.data.profile_url,
+                arthash : newHash
             })
         });
     }
@@ -198,6 +202,8 @@ class MyItemComponent extends Component{
             return (
                 <div key={x} className="col-4 col-md-3">
                     < Allpatrender dish={x} contract={this.props.contract} accounts={this.props.accounts}/>
+                    <br/>
+                    <br/>
                 </div>
             );
         })
@@ -234,12 +240,12 @@ class MyItemComponent extends Component{
                         </div>
                         <div className="row pl-5 pr-5">
                             
-                            <div className="col-6">
+                        <div className="col-6">
                                 <FormGroup>
-                                    <Label htmlFor="arthash" className="ml-3">Art Hash</Label>
-                                    <Input type="text" id="arthash" name="arthash"
+                                    <Label htmlFor="percut" className="ml-3">Royalty Percentage</Label>
+                                    <Input type="number" id="percut" name="percut"
                                         onChange={this.handleInputChange}  />
-                                </FormGroup>    
+                                </FormGroup>
                             </div>
                             <div className="col-6">
                                 <FormGroup>
@@ -247,17 +253,6 @@ class MyItemComponent extends Component{
                                     <Input type="file" onChange={this.fileSelectHandler}/>
                                     <Button onClick={this.fileUploadHandler}>Upload</Button>
                                 </FormGroup>    
-                            </div>
-
-                        </div>
-                        
-                        <div className="row pl-5 pr-5">
-                            <div className="col-6">
-                                <FormGroup>
-                                    <Label htmlFor="percut" className="ml-3">Percentage Cut</Label>
-                                    <Input type="number" id="percut" name="percut"
-                                        onChange={this.handleInputChange}  />
-                                </FormGroup>
                             </div>
 
                         </div>

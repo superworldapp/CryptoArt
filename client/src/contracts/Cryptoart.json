@@ -469,6 +469,13 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "withdrawBalance",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "uint256",
@@ -14762,7 +14769,7 @@
         }
       },
       "links": {},
-      "address": "0x9277d503894d68f6b0091ae89E90e6c87C852534",
+      "address": "0x8C6fCa007F220f366933Ab31EcbD2178D1094Fd6",
       "transactionHash": "0x34614ad28486d284d1cf246c91fb17eee6572d79c92ddddaec9893aabce66dd9"
     }
   },

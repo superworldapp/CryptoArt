@@ -6,6 +6,7 @@
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "bootstrap-social": "^5.1.1",
+    "crypto-js": "^4.0.0",
     "font-awesome": "^4.7.0",
     "react": "16.11.0",
     "react-dom": "16.11.0",
