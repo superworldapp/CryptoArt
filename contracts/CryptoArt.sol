@@ -30,7 +30,7 @@
                 bool isSelling;
                 uint tokenPrice;
                 uint tokenSellPrice;
-                string imgurl;
+                string imgUrl;
                 uint percut;
                 string tokenTitle;
             }
@@ -66,7 +66,7 @@
                 y.isSelling = false;
                 y.percut = _percut;
                 y.tokenPrice = _tokenPrice;
-                y.imgurl = _imgurl;
+                y.imgUrl = _imgurl;
                 y.tokenTitle = _tokenTitle;
                 Arts[tokenCount] = y;
                 createToken(msg.sender,tokenCount);

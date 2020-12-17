@@ -51,12 +51,10 @@ class AllArt extends Component {
     }
 
     render() {
-        var but = this.props.art.isSelling ? 'visible' : 'invisible';
-        var bux = this.props.art.isSelling ? 'invisible' : 'visible';
-        var bak = this.props.art.isSelling ? 'bg-success text-white' : '';
-        var artno = this.props.art.tokenIdentifier;
-        var cl = 'fa fa-laptop fa-5x';
-        var pr =
+        let but = this.props.art.isSelling ? 'visible' : 'invisible';
+        let bux = this.props.art.isSelling ? 'invisible' : 'visible';
+        let bak = this.props.art.isSelling ? 'bg-success text-white' : '';
+        let pr =
             Web3.utils.fromWei(
                 this.props.art.tokenSellPrice.toString(),
                 'ether'
@@ -68,7 +66,7 @@ class AllArt extends Component {
                 <CardImg
                     top
                     width='100%'
-                    src={this.props.art.imgurl}
+                    src={this.props.art.imgUrl}
                     alt='Card image'
                 />
                 <CardBody>
@@ -129,10 +127,10 @@ class AllItemComponent extends Component {
             manuf: [],
             isModalOpen1: false,
             title: '',
-            arturl: '',
+            artUrl: '',
             price: '',
-            arthash: '',
-            percut: 0
+            artHash: '',
+            perCut: 0
         };
         this.toggleModal1 = this.toggleModal1.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -146,14 +144,14 @@ class AllItemComponent extends Component {
     }
 
     creatingItems = async () => {
-        var tokenhash = this.state.arthash.toString();
-        var tokentitle = this.state.title;
-        var tokenprice = this.state.price;
-        var imgurl = this.state.arturl;
-        var percut = this.state.percut;
-        console.log(tokenhash, tokentitle, tokenprice, imgurl, percut);
+        let tokenHash = this.state.artHash.toString();
+        let tokenTitle = this.state.title;
+        let tokenPrice = this.state.price;
+        let imgUrl = this.state.artUrl;
+        let perCut = this.state.perCut;
+        console.log(tokenHash, tokenTitle, tokenPrice, imgUrl, perCut);
         const res = await this.props.contract.methods
-            .create(tokenhash, tokentitle, tokenprice, imgurl, percut)
+            .create(tokenHash, tokenTitle, tokenPrice, imgUrl, perCut)
             .send({ from: this.props.accounts, gas: 1000000 });
         console.log(res);
 
@@ -170,12 +168,12 @@ class AllItemComponent extends Component {
     }
 
     async componentDidMount() {
-        var res = await this.props.contract?.methods.tokenCount().call();
+        let res = await this.props.contract?.methods.tokenCount().call();
         console.log(res);
 
-        var response = [];
-        for (var i = 1; i <= res; i++) {
-            var rex = await this.props.contract?.methods.Arts(i).call();
+        let response = [];
+        for (let i = 1; i <= res; i++) {
+            let rex = await this.props.contract?.methods.Arts(i).call();
             response.push(rex);
         }
         allDocs = [];
@@ -185,7 +183,7 @@ class AllItemComponent extends Component {
     }
 
     render() {
-        const Menu = this.state.art.map((x) => {
+        const menu = this.state.art.map((x) => {
             return (
                 <div key={x} className='col-4 col-md-3'>
                     <AllArt
@@ -199,7 +197,6 @@ class AllItemComponent extends Component {
             );
         });
 
-        var ch = 'visible';
         return (
             <div className='container'>
                 <h2>All Items</h2>
@@ -246,15 +243,15 @@ class AllItemComponent extends Component {
                                 <div className='col-12'>
                                     <FormGroup>
                                         <Label
-                                            htmlFor='arthash'
+                                            htmlFor='artHash'
                                             className='ml-3'
                                         >
                                             Art Hash
                                         </Label>
                                         <Input
                                             type='text'
-                                            id='arthash'
-                                            name='arthash'
+                                            id='artHash'
+                                            name='artHash'
                                             onChange={this.handleInputChange}
                                         />
                                     </FormGroup>
@@ -269,8 +266,8 @@ class AllItemComponent extends Component {
                                         </Label>
                                         <Input
                                             type='text'
-                                            id='arturl'
-                                            name='arturl'
+                                            id='artUrl'
+                                            name='artUrl'
                                             onChange={this.handleInputChange}
                                         />
                                     </FormGroup>
@@ -278,15 +275,15 @@ class AllItemComponent extends Component {
                                 <div className='col-6'>
                                     <FormGroup>
                                         <Label
-                                            htmlFor='percut'
+                                            htmlFor='perCut'
                                             className='ml-3'
                                         >
                                             Percentage Cut
                                         </Label>
                                         <Input
                                             type='number'
-                                            id='percut'
-                                            name='percut'
+                                            id='perCut'
+                                            name='perCut'
                                             onChange={this.handleInputChange}
                                         />
                                     </FormGroup>
@@ -309,7 +306,7 @@ class AllItemComponent extends Component {
                 </Modal>
                 <br />
                 <br />
-                <div className='row'>{Menu}</div>
+                <div className='row'>{menu}</div>
                 <br />
                 <br />
                 <br />

@@ -115,11 +115,11 @@ class Allpatrender extends Component {
         var cl = 'fa fa-laptop fa-5x';
         return (
             <Card className={bak}>
-                <a href={this.props.dish.imgurl} target='_blank'>
+                <a href={this.props.dish.imgUrl} target='_blank'>
                     <CardImg
                         top
                         width='100%'
-                        src={this.props.dish.imgurl}
+                        src={this.props.dish.imgUrl}
                         alt='Card image'
                     />
                 </a>
@@ -177,7 +177,7 @@ class Allpatrender extends Component {
                                 <CardImg
                                     top
                                     width='100%'
-                                    src={this.props.dish.imgurl}
+                                    src={this.props.dish.imgUrl}
                                     alt='Card image'
                                 />
                                 <p className='m-auto p-2'>
@@ -244,15 +244,15 @@ class MyItemComponent extends Component {
         var tokenhash = this.state.arthash.toString();
         var tokentitle = this.state.title;
         var tokenprice = (this.state.price * ETHER).toString();
-        var imgurl = this.state.arturl;
+        var imgUrl = this.state.arturl;
         var percut = this.state.percut;
-        console.log(tokenhash, tokentitle, tokenprice, imgurl, percut);
+        console.log(tokenhash, tokentitle, tokenprice, imgUrl, percut);
         const res = await this.props.contract.methods
             .create(
                 tokenhash,
                 tokentitle,
                 (this.state.price * ETHER).toString(),
-                imgurl,
+                imgUrl,
                 percut
             )
             .send({ from: this.props.accounts, gas: 1000000 });
