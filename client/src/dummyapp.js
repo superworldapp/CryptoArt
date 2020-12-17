@@ -1,7 +1,7 @@
 const CryptoArtContract = require("./contracts/Cryptoart.json");
 const Web3 = require("web3");
-var instance;
-var accounts;
+let instance;
+let accounts;
 
 Mount = async () => {
     const provider = new Web3.providers.HttpProvider(
