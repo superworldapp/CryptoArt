@@ -9,10 +9,8 @@ import {
     Label,
     Input,
     Col,
-    FormFeedback,
     Card,
     CardImg,
-    CardImgOverlay,
     CardTitle,
     CardBody,
     CardText,
@@ -26,30 +24,21 @@ import { render } from 'react-dom';
 import axios from 'axios';
 const SHA256 = require('art-js/sha256');
 
-var util;
-var util1;
-var vx;
-var alldocs = [];
-var allcus = [];
-var allmanu = [];
-var customer;
+
+let allDocs = [];
 const ETHER = 1000000000000000000;
 
-var filekn;
-var total;
-var finalid;
-
 class Allpatrender extends Component {
-    // var day = moment.unix(dish.dateofComp);
-    // var xy = dish.dateofComp;
-    // var date = new Date(xy*1000);
-    // var time = day.format('dddd MMMM Do YYYY, h:mm:ss a');
-    // var yz = xy != 0?"bg-success text-white":"";
+    // let day = moment.unix(art.dateofComp);
+    // let xy = art.dateofComp;
+    // let date = new Date(xy*1000);
+    // let time = day.format('dddd MMMM Do YYYY, h:mm:ss a');
+    // let yz = xy != 0?"bg-success text-white":"";
     constructor(props) {
         super(props);
         this.state = {
             docCount: 0,
-            dish: [],
+            art: [],
             isModalOpen: false,
             sellPrice: 0
         };
@@ -61,10 +50,10 @@ class Allpatrender extends Component {
     }
     buyItem = async () => {
         const res = await this.props.contract.methods
-            .buyToken(this.props.dish.tokenIdentifier)
+            .buyToken(this.props.art.tokenIdentifier)
             .send({
                 from: this.props.accounts,
-                value: this.props.dish.tokenSellPrice,
+                value: this.props.art.tokenSellPrice,
                 gas: 1000000
             });
         console.log(res);
@@ -83,10 +72,9 @@ class Allpatrender extends Component {
         });
     }
     putForSale = async () => {
-        var nex = this.state.sellPrice * ETHER;
         const res = await this.props.contract.methods
             .putforsale(
-                this.props.dish.tokenIdentifier,
+                this.props.art.tokenIdentifier,
                 (this.state.sellPrice * ETHER).toString()
             )
             .send({ from: this.props.accounts, gas: 1000000 });
@@ -94,49 +82,46 @@ class Allpatrender extends Component {
     };
     DeSale = async () => {
         const res = await this.props.contract.methods
-            .desale(this.props.dish.tokenIdentifier)
+            .desale(this.props.art.tokenIdentifier)
             .send({ from: this.props.accounts, gas: 1000000 });
         console.log(res);
     };
 
     render() {
-        var but = this.props.dish.isSelling ? 'visible' : 'invisible';
-        var bux = this.props.dish.isSelling ? 'invisible' : 'visible';
-        var bak = this.props.dish.isSelling ? 'bg-success text-white' : '';
-        var artno = this.props.dish.tokenIdentifier;
-        var pr =
+        let but = this.props.art.isSelling ? 'visible' : 'invisible';
+        let bak = this.props.art.isSelling ? 'bg-success text-white' : '';
+        let pr =
             Web3.utils.fromWei(
-                this.props.dish.tokenSellPrice.toString(),
+                this.props.art.tokenSellPrice.toString(),
                 'ether'
             ) == 0
                 ? 'invisible'
                 : 'visible';
-        var str = this.props.dish.isSelling ? 'ReSell Item' : 'Sell Item';
-        var cl = 'fa fa-laptop fa-5x';
+        let reSellOrSell = this.props.art.isSelling ? 'ReSell Item' : 'Sell Item';
         return (
             <Card className={bak}>
-                <a href={this.props.dish.imgUrl} target='_blank'>
+                <a href={this.props.art.imgUrl} target='_blank'>
                     <CardImg
                         top
                         width='100%'
-                        src={this.props.dish.imgUrl}
+                        src={this.props.art.imgUrl}
                         alt='Card image'
                     />
                 </a>
                 <CardBody>
                     <CardTitle>
-                        Item Title : {this.props.dish.tokenTitle}
+                        Item Title : {this.props.art.tokenTitle}
                     </CardTitle>
                     <CardText>
                         <small>
-                            Item Creator : {this.props.dish.tokenCreator}
+                            Item Creator : {this.props.art.tokenCreator}
                         </small>
                     </CardText>
                     <CardText className={pr}>
                         <small>
                             Item Sell Price :{' '}
                             {Web3.utils.fromWei(
-                                this.props.dish.tokenSellPrice.toString(),
+                                this.props.art.tokenSellPrice.toString(),
                                 'ether'
                             )}{' '}
                             ETH
@@ -150,7 +135,7 @@ class Allpatrender extends Component {
                             color='primary'
                             onClick={this.toggleModal}
                         >
-                            {str}
+                            {reSellOrSell}
                         </Button>
                         {'   '}
                         <Button
@@ -177,11 +162,11 @@ class Allpatrender extends Component {
                                 <CardImg
                                     top
                                     width='100%'
-                                    src={this.props.dish.imgUrl}
+                                    src={this.props.art.imgUrl}
                                     alt='Card image'
                                 />
                                 <p className='m-auto p-2'>
-                                    Art Title: {this.props.dish.tokenTitle}
+                                    Art Title: {this.props.art.tokenTitle}
                                 </p>
 
                                 <div className='row m-auto pt-2'>
@@ -218,15 +203,15 @@ class MyItemComponent extends Component {
         super(props);
         this.state = {
             docCount: 0,
-            dish: [],
+            art: [],
             cust: [],
             manuf: [],
             isModalOpen1: false,
             title: '',
-            arturl: '',
+            artUrl: '',
             price: '',
-            arthash: '',
-            percut: 0
+            artHash: '',
+            perCut: 0
         };
         this.toggleModal1 = this.toggleModal1.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -241,19 +226,19 @@ class MyItemComponent extends Component {
     }
 
     creatingItems = async () => {
-        var tokenhash = this.state.arthash.toString();
-        var tokentitle = this.state.title;
-        var tokenprice = (this.state.price * ETHER).toString();
-        var imgUrl = this.state.arturl;
-        var percut = this.state.percut;
-        console.log(tokenhash, tokentitle, tokenprice, imgUrl, percut);
+        let tokenHash = this.state.artHash.toString();
+        let tokenTitle = this.state.title;
+        let tokenPrice = (this.state.price * ETHER).toString();
+        let imgUrl = this.state.artUrl;
+        let perCut = this.state.perCut;
+        console.log(tokenHash, tokenTitle, tokenPrice, imgUrl, perCut);
         const res = await this.props.contract.methods
             .create(
-                tokenhash,
-                tokentitle,
+                tokenHash,
+                tokenTitle,
                 (this.state.price * ETHER).toString(),
                 imgUrl,
-                percut
+                perCut
             )
             .send({ from: this.props.accounts, gas: 1000000 });
         console.log(res);
@@ -271,20 +256,20 @@ class MyItemComponent extends Component {
     }
 
     async componentDidMount() {
-        var res = await this.props.contract?.methods.tokenCount().call();
+        let res = await this.props.contract?.methods.tokenCount().call();
         console.log(res);
 
-        var response = [];
-        for (var i = 1; i <= res; i++) {
-            var rex = await this.props.contract?.methods.Arts(i).call();
+        let response = [];
+        for (let i = 1; i <= res; i++) {
+            let rex = await this.props.contract?.methods.Arts(i).call();
             if (rex.tokenOwner == this.props.accounts) {
                 response.push(rex);
             }
         }
-        alldocs = [];
-        alldocs = response;
+        allDocs = [];
+        allDocs = response;
         console.log(response);
-        this.setState({ dish: alldocs });
+        this.setState({ art: allDocs });
     }
     fileSelectHandler = (event) => {
         this.setState({
@@ -298,23 +283,23 @@ class MyItemComponent extends Component {
             this.state.selectedFile,
             this.state.selectedFile.name
         );
-        var newHash = SHA256(this.state.selectedFile);
+        let newHash = SHA256(this.state.selectedFile);
         console.log('file contents', this.state.selectedFile);
         axios.post('http://localhost:4000/upload', fd).then((res) => {
             console.log(res.data.profile_url);
             this.setState({
-                arturl: res.data.profile_url,
-                arthash: newHash
+                artUrl: res.data.profile_url,
+                artHash: newHash
             });
         });
     };
 
     render() {
-        const Menu = this.state.dish.map((x) => {
+        const Menu = this.state.art.map((x) => {
             return (
                 <div key={x} className='col-4 col-md-3'>
                     <Allpatrender
-                        dish={x}
+                        art={x}
                         contract={this.props.contract}
                         accounts={this.props.accounts}
                     />
@@ -324,7 +309,7 @@ class MyItemComponent extends Component {
             );
         });
 
-        var ch = 'visible';
+        let ch = 'visible';
         return (
             <div className='container'>
                 <h2>My Items</h2>
@@ -378,15 +363,15 @@ class MyItemComponent extends Component {
                                 <div className='col-6'>
                                     <FormGroup>
                                         <Label
-                                            htmlFor='percut'
+                                            htmlFor='perCut'
                                             className='ml-3'
                                         >
                                             Royalty Percentage
                                         </Label>
                                         <Input
                                             type='number'
-                                            id='percut'
-                                            name='percut'
+                                            id='perCut'
+                                            name='perCut'
                                             onChange={this.handleInputChange}
                                         />
                                     </FormGroup>
@@ -394,7 +379,7 @@ class MyItemComponent extends Component {
                                 <div className='col-6'>
                                     <FormGroup>
                                         <Label
-                                            htmlFor='arthash'
+                                            htmlFor='artHash'
                                             className='ml-3'
                                         >
                                             Art
