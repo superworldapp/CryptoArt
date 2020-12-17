@@ -18,10 +18,10 @@ class Header extends Component {
         super(props);
 
         this.state = { isNavOpen: false };
-        this.togglenav = this.togglenav.bind(this);
+        this.toggleNav = this.toggleNav.bind(this);
     }
 
-    togglenav() {
+    toggleNav() {
         this.setState({ isNavOpen: !this.state.isNavOpen });
     }
     conver = async (x) => {
@@ -37,7 +37,7 @@ class Header extends Component {
         //         <Navbar dark expand="md">
         //             <div className="container justify-center">
 
-        //                 <NavbarToggler onClick={this.togglenav}/>
+        //                 <NavbarToggler onClick={this.toggleNav}/>
         //                 <NavbarBrand className="mr-auto" >BrimNet</NavbarBrand>
         //                 <Collapse isOpen = {this.state.isNavOpen} navbar>
 
@@ -72,7 +72,7 @@ class Header extends Component {
         //         <Navbar dark expand="md">
         //             <div className="container justify-center">
 
-        //                 <NavbarToggler onClick={this.togglenav}/>
+        //                 <NavbarToggler onClick={this.toggleNav}/>
         //                 <NavbarBrand className="mr-auto" >BrimNet</NavbarBrand>
         //                 <Collapse isOpen = {this.state.isNavOpen} navbar>
 
@@ -101,7 +101,7 @@ class Header extends Component {
         //         <Navbar dark expand="md">
         //             <div className="container justify-center">
 
-        //                 <NavbarToggler onClick={this.togglenav}/>
+        //                 <NavbarToggler onClick={this.toggleNav}/>
         //                 <NavbarBrand className="mr-auto" >BrimNet</NavbarBrand>
         //                 <Collapse isOpen = {this.state.isNavOpen} navbar>
 
@@ -131,10 +131,10 @@ class Header extends Component {
         //     );
         // }
         return (
-            <React.Fragment>
+            <>
                 <Navbar dark expand='md'>
                     <div className='container justify-center'>
-                        <NavbarToggler onClick={this.togglenav} />
+                        <NavbarToggler onClick={this.toggleNav} />
                         <NavbarBrand className='mr-auto'>
                             SUPERWORLD
                         </NavbarBrand>
@@ -191,7 +191,7 @@ class Header extends Component {
                         </small>
                     </h6>
                 </Navbar>
-            </React.Fragment>
+            </>
         );
     }
 }
