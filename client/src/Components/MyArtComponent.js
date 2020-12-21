@@ -22,7 +22,7 @@ import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
 import axios from 'axios';
-const SHA256 = require('art-js/sha256');
+const SHA256 = require('crypto-js/sha256');
 
 
 let allDocs = [];
