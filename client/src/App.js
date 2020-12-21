@@ -1,18 +1,16 @@
-
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import Main from './Components/MainComponent';
-import {HashRouter,BrowserRouter} from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 class App extends Component {
-
-  render() {
-    return (
-      <HashRouter basename="/">
-      <div className="App">
-        <Main />
-      </div>
-      </HashRouter>
-    );
-  }
+    render() {
+        return (
+            <HashRouter basename='/'>
+                <div className='App'>
+                    <Main />
+                </div>
+            </HashRouter>
+        );
+    }
 }
 
-export default App
+export default App;
