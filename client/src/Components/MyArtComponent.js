@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 //import moment from 'moment';
 import {
-    Breadcrumb,
-    BreadcrumbItem,
     Button,
     Form,
     FormGroup,
@@ -23,7 +21,46 @@ import Web3 from 'web3';
 import { render } from 'react-dom';
 import axios from 'axios';
 const SHA256 = require('crypto-js/sha256');
+import * as aws from 'aws-sdk';
+import * as dotenv from 'aws-sdk';
+import * as fs from 'fs';
+import * as util from 'util';
+import * as uuidv4 from 'uuid/v4';
+const S3 = require('aws-sdk/clients/s3');
+const AWS = require('aws-sdk');
 
+const path = require('path');
+
+// const readFile = util.promisify(fs.readFile);
+
+const BUCKET_NAME = 'superworldapp';
+
+// const s3 = new aws.S3({
+//     region: process.env.REGION,
+//     credentials: new aws.CognitoIdentityCredentials({
+//         IdentityPoolId: 'us-east-1:f7692b7a-0050-4823-9df7-1ab52e23b6c9'
+//     })
+// });
+
+AWS.config.update({
+    region: 'us-east-1',
+    credentials: new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'us-east-1:f7692b7a-0050-4823-9df7-1ab52e23b6c9'
+    })
+});
+const s3 = new S3();
+
+// const fileUpload = async () => {
+//     try {
+//         const data = await readFile('../images/sample-art.jpeg');
+//         const url = await uploadToS3(data);
+//         console.log(url);
+//     } catch (err) {
+//         console.log(err);
+//     }
+// };
+
+const SHA256 = require('crypto-js/sha256');
 
 let allDocs = [];
 const ETHER = 1000000000000000000;
@@ -97,7 +134,9 @@ class Allpatrender extends Component {
             ) == 0
                 ? 'invisible'
                 : 'visible';
-        let reSellOrSell = this.props.art.isSelling ? 'ReSell Item' : 'Sell Item';
+        let reSellOrSell = this.props.art.isSelling
+            ? 'ReSell Item'
+            : 'Sell Item';
         return (
             <Card className={bak}>
                 <a href={this.props.art.imgUrl} target='_blank'>
@@ -217,6 +256,7 @@ class MyItemComponent extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.fileSelectHandler = this.fileSelectHandler.bind(this);
         this.fileUploadHandler = this.fileUploadHandler.bind(this);
+        this.fileAwsHandler = this.fileAwsHandler.bind(this);
     }
 
     toggleModal1() {
@@ -272,25 +312,67 @@ class MyItemComponent extends Component {
         this.setState({ art: allDocs });
     }
     fileSelectHandler = (event) => {
+        console.log(event.target.files);
         this.setState({
             selectedFile: event.target.files[0]
         });
     };
     fileUploadHandler = (event) => {
-        const fd = new FormData();
-        fd.append(
-            'profile',
-            this.state.selectedFile,
-            this.state.selectedFile.name
-        );
-        let newHash = SHA256(this.state.selectedFile);
-        console.log('file contents', this.state.selectedFile);
-        axios.post('http://localhost:4000/upload', fd).then((res) => {
-            console.log(res.data.profile_url);
-            this.setState({
-                artUrl: res.data.profile_url,
-                artHash: newHash
-            });
+        //     const fd = new FormData();
+        //     fd.append(
+        //         'profile',
+        //         this.state.selectedFile,
+        //         this.state.selectedFile.name
+        //     );
+        //     let newHash = SHA256(this.state.selectedFile);
+        //     console.log('file contents', this.state.selectedFile);
+        //     axios.post('http://localhost:4000/upload', fd).then((res) => {
+        //         console.log(res.data.profile_url);
+        //         this.setState({
+        //             artUrl: res.data.profile_url,
+        //             artHash: newHash
+        //         });
+        //     });
+        this.fileAwsHandler(this.state.selectedFile);
+    };
+
+    // fileUploadHandler = async (data) => {
+    //     const name = uuidv4() + '.jpeg';
+    //     await s3
+    //         .putObject()({
+    //     Key: name,
+    //     Bucket: BUCKET_NAME,
+    //     ContentType: 'image/jpeg',
+    //     Body: data,
+    //     ACL: 'public-read'
+    // })
+    //         .promise();
+    //     return name;
+    // };
+
+    fileAwsHandler = async (file, callback) => {
+        console.log(file);
+        let newfilename = `image_${Date.now()}${path
+            .extname(file.name)
+            .toLowerCase()}`;
+        console.log(newfilename);
+        let params = {
+            ACL: 'public-read',
+            Bucket: BUCKET_NAME,
+            Key: 'marketplace/' + newfilename,
+            ContentType: file.type,
+            Body: file
+        };
+
+        s3.putObject(params, function (err, data) {
+            console.log('err: ', err);
+            if (err) {
+                console.log('error :', err);
+            } else {
+                callback(
+                    `https://superworldapp.s3.amazonaws.com/marketplace/${newfilename}`
+                );
+            }
         });
     };
 
