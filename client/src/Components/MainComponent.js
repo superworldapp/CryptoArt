@@ -9,6 +9,7 @@ import MyItemComponent from './MyArtComponent';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './FooterComponent';
 
+
 //import HDWalletProvider from "@truffle/hdwallet-provider";
 
 class Main extends Component {
