@@ -365,7 +365,6 @@ class MyItemComponent extends Component {
         };
 
         s3.putObject(params, function (err, data) {
-            console.log('err: ', err);
             if (err) {
                 console.log('error :', err);
             } else {
