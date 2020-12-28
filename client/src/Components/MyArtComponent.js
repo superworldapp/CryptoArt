@@ -257,6 +257,7 @@ class MyItemComponent extends Component {
         this.fileSelectHandler = this.fileSelectHandler.bind(this);
         this.fileUploadHandler = this.fileUploadHandler.bind(this);
         this.fileAwsHandler = this.fileAwsHandler.bind(this);
+        this.funccall = this.funccall.bind(this);
     }
 
     toggleModal1() {
@@ -333,8 +334,13 @@ class MyItemComponent extends Component {
         //             artHash: newHash
         //         });
         //     });
-        this.fileAwsHandler(this.state.selectedFile);
+
+        this.fileAwsHandler(this.state.selectedFile,this.funccall);
     };
+
+    funccall = (x) => {
+        console.log(x);
+    }
 
     // fileUploadHandler = async (data) => {
     //     const name = uuidv4() + '.jpeg';
