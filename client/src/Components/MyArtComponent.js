@@ -1,31 +1,24 @@
 import React, { Component } from 'react';
 //import moment from 'moment';
-import {
-    Button,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Col,
-    Card,
-    CardImg,
-    CardTitle,
-    CardBody,
-    CardText,
-    Modal,
-    ModalHeader,
-    ModalBody
-} from 'reactstrap';
+import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody,CardText,Modal,ModalHeader,ModalBody} from 'reactstrap';
 import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
 import axios from 'axios';
+
+import * as aws from 'aws-sdk';
+import * as dotenv from 'aws-sdk';
+import * as fs from 'fs';
+import * as util from 'util';
+import * as uuidv4 from 'uuid/v4';
+
 const SHA256 = require('crypto-js/sha256');
 // import * as aws from 'aws-sdk';
 // import * as dotenv from 'aws-sdk';
 // import * as fs from 'fs';
 // import * as util from 'util';
 // import * as uuidv4 from 'uuid/v4';
+
 const S3 = require('aws-sdk/clients/s3');
 const AWS = require('aws-sdk');
 
@@ -59,7 +52,6 @@ const s3 = new S3();
 //         console.log(err);
 //     }
 // };
-
 
 
 let allDocs = [];
@@ -172,8 +164,7 @@ class Allpatrender extends Component {
                             size='sm'
                             type='submit'
                             color='primary'
-                            onClick={this.toggleModal}
-                        >
+                            onClick={this.toggleModal}>
                             {reSellOrSell}
                         </Button>
                         {'   '}
@@ -182,19 +173,16 @@ class Allpatrender extends Component {
                             size='sm'
                             type='submit'
                             color='primary'
-                            onClick={this.DeSale}
-                        >
+                            onClick={this.DeSale}>
                             DeSell Item
                         </Button>
                         <Modal
                             isOpen={this.state.isModalOpen}
                             toggle={this.toggleModal}
-                            className='modal-md'
-                        >
+                            className='modal-md'>
                             <ModalHeader
                                 toggle={this.toggleModal}
-                                className='pl-5'
-                            >
+                                className='pl-5'>
                                 Put For Sale
                             </ModalHeader>
                             <Card className='pb-5'>
@@ -216,15 +204,15 @@ class Allpatrender extends Component {
                                             type='text'
                                             id='sellPrice'
                                             name='sellPrice'
-                                            onChange={this.handleInputChange}
-                                        ></Input>
+                                            onChange={
+                                                this.handleInputChange
+                                            }></Input>
                                     </p>
                                 </div>
                                 <p className='m-auto p-2'>
                                     <Button
                                         type='submit'
-                                        onClick={this.putForSale}
-                                    >
+                                        onClick={this.putForSale}>
                                         Confirm
                                     </Button>{' '}
                                 </p>
@@ -403,16 +391,14 @@ class MyItemComponent extends Component {
                 <Button
                     color='success'
                     className={ch}
-                    onClick={this.toggleModal1}
-                >
+                    onClick={this.toggleModal1}>
                     Add Art
                 </Button>
 
                 <Modal
                     isOpen={this.state.isModalOpen1}
                     toggle={this.toggleModal1}
-                    className='modal-xl'
-                >
+                    className='modal-xl'>
                     <ModalHeader toggle={this.toggleModal1}>
                         <h3>Add Artwork</h3>
                     </ModalHeader>
@@ -451,8 +437,7 @@ class MyItemComponent extends Component {
                                     <FormGroup>
                                         <Label
                                             htmlFor='perCut'
-                                            className='ml-3'
-                                        >
+                                            className='ml-3'>
                                             Royalty Percentage
                                         </Label>
                                         <Input
@@ -467,8 +452,7 @@ class MyItemComponent extends Component {
                                     <FormGroup>
                                         <Label
                                             htmlFor='artHash'
-                                            className='ml-3'
-                                        >
+                                            className='ml-3'>
                                             Art
                                         </Label>
                                         <Input
@@ -476,8 +460,7 @@ class MyItemComponent extends Component {
                                             onChange={this.fileSelectHandler}
                                         />
                                         <Button
-                                            onClick={this.fileUploadHandler}
-                                        >
+                                            onClick={this.fileUploadHandler}>
                                             Upload
                                         </Button>
                                     </FormGroup>
@@ -488,8 +471,7 @@ class MyItemComponent extends Component {
                                 <div className='col-6'>
                                     <Button
                                         color='primary'
-                                        onClick={this.creatingItems}
-                                    >
+                                        onClick={this.creatingItems}>
                                         Add
                                     </Button>
                                 </div>

@@ -1,22 +1,7 @@
 import React, { Component } from 'react';
-import {
-    Button,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Col,
-    Card,
-    CardImg,
-    CardTitle,
-    CardBody,
-    CardText,
-    Modal,
-    ModalHeader,
-    ModalBody
-} from 'reactstrap';
+import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody,CardText,Modal,ModalHeader,
+ModalBody} from 'reactstrap';
 import Web3 from 'web3';
-
 let allDocs = [];
 class AllArt extends Component {
     constructor(props) {
@@ -97,8 +82,7 @@ class AllArt extends Component {
                             size='sm'
                             type='submit'
                             color='primary'
-                            onClick={this.buyItem}
-                        >
+                            onClick={this.buyItem}>
                             Buy Item
                         </Button>
                         {'   '}
@@ -106,8 +90,7 @@ class AllArt extends Component {
                             className={bux}
                             size='sm'
                             type='submit'
-                            color='primary'
-                        >
+                            color='primary'>
                             Place Offer
                         </Button>
                     </Col>
@@ -204,8 +187,7 @@ class AllItemComponent extends Component {
                 <Modal
                     isOpen={this.state.isModalOpen1}
                     toggle={this.toggleModal1}
-                    className='modal-xl'
-                >
+                    className='modal-xl'>
                     <ModalHeader toggle={this.toggleModal1}>
                         <h3>Add Artwork</h3>
                     </ModalHeader>
@@ -244,8 +226,7 @@ class AllItemComponent extends Component {
                                     <FormGroup>
                                         <Label
                                             htmlFor='artHash'
-                                            className='ml-3'
-                                        >
+                                            className='ml-3'>
                                             Art Hash
                                         </Label>
                                         <Input
@@ -276,8 +257,7 @@ class AllItemComponent extends Component {
                                     <FormGroup>
                                         <Label
                                             htmlFor='perCut'
-                                            className='ml-3'
-                                        >
+                                            className='ml-3'>
                                             Percentage Cut
                                         </Label>
                                         <Input
@@ -294,8 +274,7 @@ class AllItemComponent extends Component {
                                 <div className='col-6'>
                                     <Button
                                         color='primary'
-                                        onClick={this.creatingItems}
-                                    >
+                                        onClick={this.creatingItems}>
                                         Add
                                     </Button>
                                 </div>
