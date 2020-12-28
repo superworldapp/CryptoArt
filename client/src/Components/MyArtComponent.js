@@ -5,12 +5,20 @@ import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
 import axios from 'axios';
+
 import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
 import * as util from 'util';
 import * as uuidv4 from 'uuid/v4';
+
 const SHA256 = require('crypto-js/sha256');
+// import * as aws from 'aws-sdk';
+// import * as dotenv from 'aws-sdk';
+// import * as fs from 'fs';
+// import * as util from 'util';
+// import * as uuidv4 from 'uuid/v4';
+
 const S3 = require('aws-sdk/clients/s3');
 const AWS = require('aws-sdk');
 
@@ -44,6 +52,7 @@ const s3 = new S3();
 //         console.log(err);
 //     }
 // };
+
 
 let allDocs = [];
 const ETHER = 1000000000000000000;
@@ -236,6 +245,7 @@ class MyItemComponent extends Component {
         this.fileSelectHandler = this.fileSelectHandler.bind(this);
         this.fileUploadHandler = this.fileUploadHandler.bind(this);
         this.fileAwsHandler = this.fileAwsHandler.bind(this);
+        this.funccall = this.funccall.bind(this);
     }
 
     toggleModal1() {
@@ -312,8 +322,13 @@ class MyItemComponent extends Component {
         //             artHash: newHash
         //         });
         //     });
-        this.fileAwsHandler(this.state.selectedFile);
+
+        this.fileAwsHandler(this.state.selectedFile,this.funccall);
     };
+
+    funccall = (x) => {
+        console.log(x);
+    }
 
     // fileUploadHandler = async (data) => {
     //     const name = uuidv4() + '.jpeg';
