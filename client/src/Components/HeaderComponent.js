@@ -153,15 +153,15 @@ class Header extends Component {
                     style={{
                         marginBottom: '-1.8rem'
                     }}>
-                    <div className='container justify-center'>
+                    
                         <NavbarToggler onClick={this.toggleNav} />
                         <NavbarBrand className='mr-auto'>
-                            <img src={LogoImg} alt='Logo Image' />
+                            <img src={LogoImg} alt='Logo Image' height='60' width='60'/>
                         </NavbarBrand>
                         <InputGroup
                             style={{
                                 position: 'relative',
-                                marginLeft: '1rem'
+                                marginLeft: '2rem'
                             }}>
                             <Input
                                 placeholder='Search for Artist, Art name'
@@ -170,7 +170,7 @@ class Header extends Component {
                                 style={{
                                     padding: '0 2rem',
                                     maxWidth: '400px',
-                                    borderRadius: '10px'
+                                    borderRadius: '20px'
                                 }}
                             />
                             <i
@@ -192,9 +192,7 @@ class Header extends Component {
                                 <NavItem>
                                     <NavLink
                                         className='nav-link'
-                                        style={{
-                                            width: 100
-                                        }}
+                                        
                                         to='/home'>
                                         Home
                                     </NavLink>
@@ -203,7 +201,7 @@ class Header extends Component {
                                     <NavLink
                                         className='nav-link'
                                         style={{
-                                            width: 150
+                                            width: 200
                                         }}
                                         to='/allart'>
                                         Art Marketplace
@@ -230,7 +228,8 @@ class Header extends Component {
                                             onClick={this.loggedInOrLoggedOut}
                                             style={{
                                                 color: '#fff',
-                                                width: 150
+                                                width: 150,
+                                                borderRadius: '30px'
                                             }}>
                                             Sign In
                                         </button>
@@ -238,8 +237,8 @@ class Header extends Component {
                                 )}
                             </Nav>
                         </Collapse>
-                    </div>
-                    <h6
+                   
+                    {/* <h6
                         style={{
                             fontWeight: 800
                         }}>
@@ -252,7 +251,7 @@ class Header extends Component {
                                 'ether'
                             )}
                         </small>
-                    </h6>
+                    </h6> */}
                 </Navbar>
                 <div
                     style={{
