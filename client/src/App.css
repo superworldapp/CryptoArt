@@ -65,3 +65,7 @@ address{
 .navbar-dark {
   background-color: #000000;
 }
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link  {
+  background: #5540C7
+}

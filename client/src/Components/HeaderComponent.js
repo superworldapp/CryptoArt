@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
-import LogoImg from '../images/logo.svg'
-import {Navbar,NavbarBrand,Nav,NavbarToggler,Collapse,NavItem, InputGroup, InputGroupAddon, InputGroupText, Input} from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import LogoImg from '../images/logo.svg';
+import {
+    Navbar,
+    NavbarBrand,
+    Nav,
+    NavbarToggler,
+    Collapse,
+    NavItem,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+    Input
+} from 'reactstrap';
+import { Link, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 let util;
 let util1;
@@ -25,16 +36,14 @@ class Header extends Component {
     };
 
     handleChange = (event) => {
-        this.setState({value: event.target.value})
-    }
+        this.setState({ value: event.target.value });
+    };
 
     loggedInOrLoggedOut = () => {
-        this.setState({isLoggedIn: !this.state.isLoggedIn})
-    }
+        this.setState({ isLoggedIn: !this.state.isLoggedIn });
+    };
 
-    signInIcon = () => {
-        
-    }
+    signInIcon = () => {};
 
     render() {
         // if (this.props.registered == 1 || this.props.registered == 2) {
@@ -138,7 +147,12 @@ class Header extends Component {
         // }
         return (
             <>
-                <Navbar light expand='md'>
+                <Navbar
+                    light
+                    expand='md'
+                    style={{
+                        marginBottom: '-1.8rem'
+                    }}>
                     <div className='container justify-center'>
                         <NavbarToggler onClick={this.toggleNav} />
                         <NavbarBrand className='mr-auto'>
@@ -155,7 +169,8 @@ class Header extends Component {
                                 onChange={this.handleChange}
                                 style={{
                                     padding: '0 2rem',
-                                    maxWidth: '400px'
+                                    maxWidth: '400px',
+                                    borderRadius: '10px'
                                 }}
                             />
                             <i
@@ -174,13 +189,15 @@ class Header extends Component {
                             <Nav
                                 navbar
                                 className={`m-auto d-flex align-items-center justify-content-end ${
-                                    this.state.isLoggedIn === false ? 'nav-pills' : ''
+                                    this.state.isLoggedIn === false
+                                        ? 'nav-pills'
+                                        : ''
                                 }`}>
                                 <NavItem>
                                     <NavLink
                                         className='nav-link'
                                         style={{
-                                            width: 150,
+                                            width: 100,
                                             color: '#5540C7'
                                         }}
                                         to='/home'>
@@ -247,6 +264,42 @@ class Header extends Component {
                         </small>
                     </h6>
                 </Navbar>
+                <div
+                    style={{
+                        textAlign: 'left',
+                        height: '20%',
+                        fontSize: '.8rem',
+                        marginLeft: '150px',
+                        textDecoration: 'underline'
+                    }}>
+                    <Link
+                        to='#'
+                        style={{
+                            color: '#ccc',
+                            margin: '0 1rem',
+                            cursor: 'pointer'
+                        }}>
+                        Caozhibing
+                    </Link>
+                    <Link
+                        to='#'
+                        style={{
+                            color: '#ccc',
+                            margin: '0 1rem',
+                            cursor: 'pointer'
+                        }}>
+                        Northern Lights
+                    </Link>
+                    <Link
+                        to='#'
+                        style={{
+                            color: '#ccc',
+                            margin: '0 1rem',
+                            cursor: 'pointer'
+                        }}>
+                        Winter Jacket
+                    </Link>
+                </div>
             </>
         );
     }
