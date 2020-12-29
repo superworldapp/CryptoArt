@@ -1,3 +1,8 @@
+/* Variables */
+:root {
+  --primary-color: #5540C7
+}
+
 .App {
   text-align: center;
 }
@@ -64,4 +69,12 @@ address{
 
 .navbar-dark {
   background-color: #000000;
+}
+
+.sign-in-btn  {
+  background: var(--primary-color);
+}
+
+.nav-link.active{
+  color: var(--primary-color) !important;
 }
