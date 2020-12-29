@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import {Navbar,NavbarBrand,Nav,NavbarToggler,Collapse,NavItem} from 'reactstrap';
+import LogoImg from '../images/logo.svg'
+import {Navbar,NavbarBrand,Nav,NavbarToggler,Collapse,NavItem, InputGroup, InputGroupAddon, InputGroupText, Input} from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import Web3 from 'web3';
-import '../App.css';
-var util;
-var util1;
+let util;
+let util1;
 
 class Header extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { isNavOpen: false };
+        this.state = { isNavOpen: false, value: '', isLoggedIn: false };
         this.toggleNav = this.toggleNav.bind(this);
     }
 
@@ -23,6 +23,19 @@ class Header extends Component {
     converb = async (x) => {
         util1 = Web3.utils.fromWei(x, 'milli');
     };
+
+    handleChange = (event) => {
+        this.setState({value: event.target.value})
+    }
+
+    loggedInOrLoggedOut = () => {
+        this.setState({isLoggedIn: !this.state.isLoggedIn})
+    }
+
+    signInIcon = () => {
+        
+    }
+
     render() {
         // if (this.props.registered == 1 || this.props.registered == 2) {
         //     return(
@@ -125,23 +138,52 @@ class Header extends Component {
         // }
         return (
             <>
-                <Navbar dark expand='md'>
+                <Navbar light expand='md'>
                     <div className='container justify-center'>
                         <NavbarToggler onClick={this.toggleNav} />
                         <NavbarBrand className='mr-auto'>
-                            SUPERWORLD
+                            <img src={LogoImg} alt='Logo Image' />
                         </NavbarBrand>
+                        <InputGroup
+                            style={{
+                                position: 'relative',
+                                marginLeft: '1rem'
+                            }}>
+                            <Input
+                                placeholder='Search for Artist, Art name'
+                                value={this.state.value}
+                                onChange={this.handleChange}
+                                style={{
+                                    padding: '0 2rem',
+                                    maxWidth: '400px'
+                                }}
+                            />
+                            <i
+                                class='fas fa-search'
+                                style={{
+                                    position: 'absolute',
+                                    left: '10px',
+                                    top: '25%',
+                                    color: '#ccc',
+                                    display: !this.state.value
+                                        ? 'block'
+                                        : 'none'
+                                }}></i>
+                        </InputGroup>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
-                            <Nav navbar className='m-auto'>
+                            <Nav
+                                navbar
+                                className={`m-auto d-flex align-items-center justify-content-end ${
+                                    this.state.isLoggedIn === false ? 'nav-pills' : ''
+                                }`}>
                                 <NavItem>
                                     <NavLink
                                         className='nav-link'
                                         style={{
-                                            width: 200,
-                                            justifyContent: 'space-around'
+                                            width: 150,
+                                            color: '#5540C7'
                                         }}
-                                        to='/home'
-                                    >
+                                        to='/home'>
                                         Home
                                     </NavLink>
                                 </NavItem>
@@ -149,30 +191,51 @@ class Header extends Component {
                                     <NavLink
                                         className='nav-link'
                                         style={{
-                                            width: 200,
-                                            justifyContent: 'space-around'
+                                            width: 150
                                         }}
-                                        to='/allart'
-                                    >
-                                        Arts
+                                        to='/allart'>
+                                        Art Marketplace
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink
                                         className='nav-link'
                                         style={{
-                                            width: 200,
-                                            justifyContent: 'space-around'
+                                            width: 150
                                         }}
-                                        to='/myart'
-                                    >
-                                        MyArt
+                                        to='/myart'>
+                                        <NavItem>
+                                            {this.state.isLoggedIn ? (
+                                                <i
+                                                    onClick={
+                                                        this.loggedInOrLoggedOut
+                                                    }
+                                                    class='fas fa-user-circle fa-2x'
+                                                    style={{
+                                                        color: '#5540C7'
+                                                    }}></i>
+                                            ) : (
+                                                <h5
+                                                    className='align-center justify-center'
+                                                    onClick={
+                                                        this.loggedInOrLoggedOut
+                                                    }
+                                                    style={{
+                                                        color: '#fff'
+                                                    }}>
+                                                    Sign Out
+                                                </h5>
+                                            )}
+                                        </NavItem>
                                     </NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>
                     </div>
-                    <h6 style={{ color: 'white' }}>
+                    <h6
+                        style={{
+                            fontWeight: 800
+                        }}>
                         <small>{this.props.accounts}</small>
                         <br />
                         <small>
