@@ -10,7 +10,7 @@ import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
 import * as util from 'util';
-import * as uuidv4 from 'uuid/v4';
+
 
 const SHA256 = require('crypto-js/sha256');
 // import * as aws from 'aws-sdk';
@@ -245,7 +245,7 @@ class MyItemComponent extends Component {
         this.fileSelectHandler = this.fileSelectHandler.bind(this);
         this.fileUploadHandler = this.fileUploadHandler.bind(this);
         this.fileAwsHandler = this.fileAwsHandler.bind(this);
-        this.funccall = this.funccall.bind(this);
+
     }
 
     toggleModal1() {
@@ -254,11 +254,11 @@ class MyItemComponent extends Component {
         });
     }
 
-    creatingItems = async () => {
+    creatingItems = async (x) => {
         let tokenHash = this.state.artHash.toString();
         let tokenTitle = this.state.title;
         let tokenPrice = (this.state.price * ETHER).toString();
-        let imgUrl = this.state.artUrl;
+        let imgUrl = x;
         let perCut = this.state.perCut;
         console.log(tokenHash, tokenTitle, tokenPrice, imgUrl, perCut);
         const res = await this.props.contract.methods
@@ -323,26 +323,10 @@ class MyItemComponent extends Component {
         //         });
         //     });
 
-        this.fileAwsHandler(this.state.selectedFile,this.funccall);
+        this.fileAwsHandler(this.state.selectedFile,this.creatingItems);
     };
 
-    funccall = (x) => {
-        console.log(x);
-    }
 
-    // fileUploadHandler = async (data) => {
-    //     const name = uuidv4() + '.jpeg';
-    //     await s3
-    //         .putObject()({
-    //     Key: name,
-    //     Bucket: BUCKET_NAME,
-    //     ContentType: 'image/jpeg',
-    //     Body: data,
-    //     ACL: 'public-read'
-    // })
-    //         .promise();
-    //     return name;
-    // };
 
     fileAwsHandler = async (file, callback) => {
         console.log(file);
@@ -459,10 +443,7 @@ class MyItemComponent extends Component {
                                             type='file'
                                             onChange={this.fileSelectHandler}
                                         />
-                                        <Button
-                                            onClick={this.fileUploadHandler}>
-                                            Upload
-                                        </Button>
+                                        
                                     </FormGroup>
                                 </div>
                             </div>
@@ -471,7 +452,7 @@ class MyItemComponent extends Component {
                                 <div className='col-6'>
                                     <Button
                                         color='primary'
-                                        onClick={this.creatingItems}>
+                                        onClick={this.fileUploadHandler}>
                                         Add
                                     </Button>
                                 </div>
