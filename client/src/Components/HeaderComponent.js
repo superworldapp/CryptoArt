@@ -188,17 +188,12 @@ class Header extends Component {
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav
                                 navbar
-                                className={`m-auto d-flex align-items-center justify-content-end ${
-                                    this.state.isLoggedIn === false
-                                        ? 'nav-pills'
-                                        : ''
-                                }`}>
+                                className='m-auto d-flex align-items-center justify-content-end'>
                                 <NavItem>
                                     <NavLink
                                         className='nav-link'
                                         style={{
-                                            width: 100,
-                                            color: '#5540C7'
+                                            width: 100
                                         }}
                                         to='/home'>
                                         Home
@@ -214,38 +209,33 @@ class Header extends Component {
                                         Art Marketplace
                                     </NavLink>
                                 </NavItem>
-                                <NavItem>
-                                    <NavLink
-                                        className='nav-link'
-                                        style={{
-                                            width: 150
-                                        }}
-                                        to='/myart'>
-                                        <NavItem>
-                                            {this.state.isLoggedIn ? (
-                                                <i
-                                                    onClick={
-                                                        this.loggedInOrLoggedOut
-                                                    }
-                                                    class='fas fa-user-circle fa-2x'
-                                                    style={{
-                                                        color: '#5540C7'
-                                                    }}></i>
-                                            ) : (
-                                                <h5
-                                                    className='align-center justify-center'
-                                                    onClick={
-                                                        this.loggedInOrLoggedOut
-                                                    }
-                                                    style={{
-                                                        color: '#fff'
-                                                    }}>
-                                                    Sign Out
-                                                </h5>
-                                            )}
-                                        </NavItem>
-                                    </NavLink>
-                                </NavItem>
+                                {this.state.isLoggedIn ? (
+                                    <NavItem>
+                                        <NavLink className='nav-link' to='/myart'>
+                                            <i
+                                                onClick={
+                                                    this.loggedInOrLoggedOut
+                                                }
+                                                class='fas fa-user-circle fa-2x'
+                                                style={{
+                                                    color: '#5540C7',
+                                                    cursor: 'pointer'
+                                                }}></i>
+                                        </NavLink>
+                                    </NavItem>
+                                ) : (
+                                    <NavItem>
+                                        <button
+                                            className='align-center justify-center btn sign-in-btn'
+                                            onClick={this.loggedInOrLoggedOut}
+                                            style={{
+                                                color: '#fff',
+                                                width: 150
+                                            }}>
+                                            Sign In
+                                        </button>
+                                    </NavItem>
+                                )}
                             </Nav>
                         </Collapse>
                     </div>
