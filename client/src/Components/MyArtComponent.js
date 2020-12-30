@@ -10,7 +10,7 @@ import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
 import * as util from 'util';
-import * as uuidv4 from 'uuid/v4';
+//import * as uuidv4 from 'uuid/v4';
 
 const SHA256 = require('crypto-js/sha256');
 // import * as aws from 'aws-sdk';

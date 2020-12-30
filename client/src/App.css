@@ -40,7 +40,12 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  text-align: center;
+  text-align: left !important;
+  /* align-content: left; */
+  color: #5540C6;
+  /* background-color: #fff;
+  padding: 60px 0; */
+  border-top: none;
 }
 .navi{
   position: fixed;
