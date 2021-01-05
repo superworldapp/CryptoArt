@@ -1,3 +1,8 @@
+/* Variables */
+:root {
+  --primary-color: #5540C7
+}
+
 .App {
   text-align: center;
 }
@@ -27,7 +32,7 @@
 
 .row-content {
   margin:0px auto;
-  padding: 50px 0px 50px 0px;
+  padding: 0px 0px 0px 0px;
   border-bottom: 1px ridge;
   min-height:400px;
 }
@@ -69,4 +74,23 @@ address{
 
 .navbar-dark {
   background-color: #000000;
+}
+
+.sign-in-btn  {
+  background: var(--primary-color);
+}
+
+.nav-link{
+
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 28px;
+
+color: #000000;
+}
+
+
+.nav-link.active{
+  color: var(--primary-color) !important;
 }

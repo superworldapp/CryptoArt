@@ -13,9 +13,11 @@
   -ms-flex-line-pack: center !important;
       align-content: center !important;
   color: #5540C6 !important;
-  background-color: #fff !important;
+  background-color: #D5D7FA !important;
   padding: 60px 0px;
   border-top: none;
+  position: relative;
+  bottom: 0;
 }
 
 .footer-container {
