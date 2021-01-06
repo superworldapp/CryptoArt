@@ -69,3 +69,22 @@ margin-top: 2px;
     outline: 0px;
     border: 0;
 }
+
+.rowImages{
+    display: flex;
+    justify-content: space-around;
+}
+.imageCards{
+    height: 300px;
+    width: 245px;
+}
+.text2{
+    font-family:Gibson;
+    font-size: 17px;
+    margin: 1px;
+    width: 100%;
+    display: flex;
+    padding: 7px;
+    bottom:2px;
+    justify-content: space-between;
+}
