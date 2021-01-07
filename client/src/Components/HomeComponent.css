@@ -15,13 +15,18 @@
     width: 40%;
     display: flex;
 }
+.upperView{
+    display: flex;
+    justify-content: space-between;
+}
 
 .img1{
-position: relative;;
+position: relative;
 width: 421px;
 height: 331px;
 right:  130px;
-top: 300px;
+padding: 20px;
+top:400px;
 }
 .img2{
 position: relative;
@@ -87,4 +92,82 @@ margin-top: 2px;
     padding: 7px;
     bottom:2px;
     justify-content: space-between;
+}
+
+
+.ctext{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+.ellispse
+{
+position: relative;
+width: 750px;
+height: 415px;
+right: 50%;
+top: 1px;
+}
+
+  /* Image Classes */
+.image8{
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    margin-left: 9%;
+    margin-top: 14%;
+}
+
+.image9{
+    position: absolute;
+    width: 84px;
+    height: 70px;
+    margin-left: 13.5%;
+    margin-top: 5%;
+}
+
+.image10{
+    position: absolute;
+    width: 100px;
+    height: 80px;
+    margin-left: 22%;
+    margin-top: 1%;
+}
+.image11{
+    position: absolute;
+    width: 76px;
+    height: 50px;
+    margin-left: 35%;
+    margin-top: 1%;
+}
+.image12{
+position: absolute;
+width: 80px;
+height: 80px;
+margin-left: 30%;
+margin-top: 12%;
+}
+
+.image13{
+    position: absolute;
+    width: 149px;
+    height: 127px;
+    margin-left: 21%;
+    margin-top: 18%;
+}
+
+.image14{
+position: absolute;
+width: 108px;
+height: 89px;
+margin-left: 19%;
+margin-top: 8.2%;
+}
+
+.image15{
+position: absolute;
+width: 82px;
+height: 70px;
+margin-left: 32%;
+margin-top: 5%;
 }

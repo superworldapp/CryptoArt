@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 // import { Container } from 'reactstrap';
-import { Container, Card, CardBody, CardSubtitle, CardText } from 'reactstrap';
+import { Container, Card, CardBody, CardSubtitle, CardText, CardImg } from 'reactstrap';
 import { Grid } from '@material-ui/core';
 import image1 from "../images/image 15.png";
 import image2 from "../images/image 16.png";
@@ -10,6 +10,18 @@ import image4 from "../images/image 23.png";
 import image5 from "../images/image 25.png";
 import image6 from "../images/image 28.png";
 import image7 from "../images/image 29.png";
+import image8 from "../images/image 7.png";
+import image9 from "../images/image 8.png";
+import image10 from "../images/image 9.png";
+import image11 from "../images/image 10.png";
+import image12 from "../images/image 11.png";
+import image13 from "../images/image 12.png";
+import image14 from "../images/image 13.png";
+import image15 from "../images/image 17.png";
+
+
+import anonUser from "../images/user.png";
+import p1 from "../images/p1.png"
 import svg1 from "../images/svg/angle.svg";
 import "./HomeComponent.css"
 
@@ -27,9 +39,18 @@ class Home extends Component {
             <>
                 <div className='Home'>
                     <Container>
-
+                        <div className = "upperView">
                         <div className="col1" >
                             <img className="img1" src={image1} alt="image1" />
+                            <img className="ellispse" src= {p1} alt = "ellipse"/>
+                            <img  className= "image8"  src= {image8} alt="img"/>
+                            <img  className= "image9"  src= {image9} alt="img"/>
+                            <img  className= "image10"  src= {image10} alt="img"/>
+                            <img  className= "image11"  src= {image11} alt="img"/>
+                            <img  className= "image12"  src= {image12} alt="img"/>
+                             <img  className= "image13"  src= {image13} alt="img"/> 
+                            <img  className= "image14"  src= {image14} alt="img"/>
+                             <img  className= "image15"  src= {image15} alt="img"/>   
                         </div>
                         <div className="col2">
                             <Grid container justify="center" alignContent="center" direction="column">
@@ -43,188 +64,60 @@ class Home extends Component {
                                 Start
                             </button>
                         </div>
+
+                        </div>
+                        
                         <br /> <br /><br /><br />
-                        <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '5%' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '10%' }}>
                             <p style={{ fontSize: '18px', fontFamily: 'Gibson', fontWeight: 'bold' }}> Trending</p>
                             <a href="" style={{ fontFamily: 'Gibson', fontWeight: '550', fontSize: '18px' }}> View more <img src={svg1} alt="svg1" /></a>
                         </div>
                         <div className="rowImages">
-                            <Grid container justify="space-between" direction="row" alignContent="flex-start">
-                                <Card>
-                                    <CardBody className="imageCards">
-                                        <img width="100%" src={image3} alt="Card image cap" />
-
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted">Alimation Character</CardSubtitle>
-                                        <CardText>0.5ETH</CardText>
-
-                                    </CardBody>
-                                </Card>
-                                <Card>
-                                    <CardBody className="imageCards">
-                                        <img width="100%" src={image4} alt="Card image cap" />
-
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted">Alimation Character</CardSubtitle>
-                                        <CardText>0.1ETH</CardText>
-
-                                    </CardBody>
-                                </Card>
-                                <Card>
-                                    <CardBody className="imageCards">
-                                        <img width="100%" src={image5} alt="Card image cap" />
-
-                                        <CardSubtitle tag="h6" className="mb-2 text-muted">Alimation Character</CardSubtitle>
-                                        <CardText>0.3ETH</CardText>
-
-                                    </CardBody>
-                                </Card>
-                                {/* <Card className="imageCards">
-                                    <CardBody>
-                                        <Grid justify="space-around" direction="column" alignContent="center">
-                                            <img className="img3" src={image3} alt="image3" />
-                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                <p style={{
-                                                    fontFamily: 'Gibson',
-                                                    fontSize: '18px',
-                                                    color: '#5540C7',
-                                                    padding: '7px',
-                                                    marginTop: '1%',
-                                                    marginRight: '1%',
-                                                    position: 'absolute'
-                                                }}>Alimation Character</p>
-                                                <p style={{
-                                                    fontFamily: 'Gibson',
-                                                    fontSize: '16px',
-                                                    marginLeft: '10%',
-                                                    padding: '7px',
-                                                    marginTop: '1.2%',
-                                                    position: 'absolute',
-                                                    color: 'black'
-                                                }}> 0.5ETH</p>
-
-                                            </div>
-                                        </Grid>
-                                    </CardBody>
-                                </Card>
-
                                 <Card className="imageCards">
+                                <CardImg top width="100%" src={image3} alt="Image3"></CardImg>
                                     <CardBody>
-                                        <Grid justify="space-around" direction="column" alignContent="center">
-                                            <img className="img3" src={image4} alt="image4" />
-                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                <p style={{
-                                                    fontFamily: 'Gibson',
-                                                    fontSize: '18px',
-                                                    color: '#5540C7',
-                                                    padding: '7px',
-                                                    marginTop: '1%',
-                                                    marginRight: '1%',
-                                                    position: 'absolute'
-                                                }}>Alimation Character</p>
-                                                <p style={{
-                                                    fontFamily: 'Gibson',
-                                                    fontSize: '16px',
-                                                    marginLeft: '10%',
-                                                    padding: '7px',
-                                                    marginTop: '1.2%',
-                                                    position: 'absolute',
-                                                    color: 'black'
-                                                }}> 0.5ETH</p>
+                                        <div style= {{
+                                            display:'flex',
+                                            justifyContent: 'center',
+                                            
+                                        }}>
+                                        <CardSubtitle >
+                                        <img 
+                                        style={{
+                                            marginRight:'30px'
+                                        }}
+                                        width='16px'
+                                        height='16px' 
+                                        className='rounded-circle'
+                                        src={anonUser} 
+                                            ></img>
+                                            </CardSubtitle>
+                                        <CardSubtitle 
+                                        style={{
+                                            fontFamily: 'Gibson',
+                                            fontSize: '14px',
+                                            color: '#5540C7',   
+                                        }}
+                                        
+                                        > {"Anonymous User"} </CardSubtitle>
+                                        </div>
+                                        <div className="ctext">
+                                        <CardText
+                                        style={{
+                                            fontFamily: 'Gibson',
+                                            fontSize: '15px',
+                                            color: '#5540C7',
+                                        }} >Alimation Character</CardText>
+                                        <CardText style={{fontFamily: 'Gibson',
+                                            fontSize: '12px',
+                                            color: '#5540C7',
 
-                                            </div>
-                                        </Grid>
+                                        }}>0.5ETH</CardText>
+                                        </div>
+                                       
                                     </CardBody>
                                 </Card>
-                                <Card className="imageCards">
-                                    <CardBody>
-                                        <Grid justify="space-around" direction="column" alignContent="center">
-                                            <img className="img3" src={image5} alt="image3" />
-                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                <p style={{
-                                                    fontFamily: 'Gibson',
-                                                    fontSize: '18px',
-                                                    color: '#5540C7',
-                                                    padding: '7px',
-                                                    marginTop: '1%',
-                                                    marginRight: '1%',
-                                                    position: 'absolute'
-                                                }}>Alimation Character</p>
-                                                <p style={{
-                                                    fontFamily: 'Gibson',
-                                                    fontSize: '16px',
-                                                    marginLeft: '10%',
-                                                    padding: '7px',
-                                                    marginTop: '1.2%',
-                                                    position: 'absolute',
-                                                    color: 'black'
-                                                }}> 0.5ETH</p>
-
-                                            </div>
-                                        </Grid>
-                                    </CardBody>
-                                </Card>
-                                <Card className="imageCards">
-                                    <CardBody>
-                                        <Grid justify="space-around" direction="column" alignContent="center">
-                                            <img className="img3" src={image6} alt="image3" />
-                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                <p style={{
-                                                    fontFamily: 'Gibson',
-                                                    fontSize: '18px',
-                                                    color: '#5540C7',
-                                                    padding: '7px',
-                                                    marginTop: '1%',
-                                                    marginRight: '1%',
-                                                    position: 'absolute'
-                                                }}>Alimation Character</p>
-                                                <p style={{
-                                                    fontFamily: 'Gibson',
-                                                    fontSize: '16px',
-                                                    marginLeft: '10%',
-                                                    padding: '7px',
-                                                    marginTop: '1.2%',
-                                                    position: 'absolute',
-                                                    color: 'black'
-                                                }}> 0.5ETH</p>
-
-                                            </div>
-                                        </Grid>
-                                    </CardBody>
-                                </Card> <Card className="imageCards">
-                                    <CardBody>
-                                        <Grid justify="space-around" direction="column" alignContent="center">
-                                            <img className="img3" src={image7} alt="image3" />
-                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                <p style={{
-                                                    fontFamily: 'Gibson',
-                                                    fontSize: '18px',
-                                                    color: '#5540C7',
-                                                    padding: '7px',
-                                                    marginTop: '1%',
-                                                    marginRight: '1%',
-                                                    position: 'absolute'
-                                                }}>Alimation Character</p>
-                                                <p style={{
-                                                    fontFamily: 'Gibson',
-                                                    fontSize: '16px',
-                                                    marginLeft: '10%',
-                                                    padding: '7px',
-                                                    marginTop: '1.2%',
-                                                    position: 'absolute',
-                                                    color: 'black'
-                                                }}> 0.5ETH</p>
-
-                                            </div>
-                                        </Grid>
-                                    </CardBody>
-                                </Card>
-                             */}
-                                {/* <img className="img3" src={image4} alt="image4" />
-                            <img className="img3" src={image5} alt="image5" />
-                            <img className="img3" src={image6} alt="image6" />
-                            <img className="img3" src={image7} alt="image7" />
-                             */}
-
-                            </Grid>
+                                
                         </div>
 
                         <br /><br /><br /><br /><br /><br /><br />
