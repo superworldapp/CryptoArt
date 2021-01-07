@@ -69,14 +69,15 @@
             }
             
             function batchCreator(string memory _tokenHash,string memory _tokenTitle,uint _tokenPrice,string memory _imgurl,uint _nos)public{
-                if(_nos > 1){
+                
                     batchcounter++;
                     batches[batchcounter] = _nos;
                     for(uint i=0;i<_nos;i++){
                     create(_tokenHash,_tokenTitle,_tokenPrice,_imgurl,batchcounter);
                     }
                         
-                }
+                
+          
             }
            function create(string memory _tokenHash,string memory _tokenTitle,uint _tokenPrice,string memory _imgurl,uint _batchid)public returns(uint){
                 tokenCount++;

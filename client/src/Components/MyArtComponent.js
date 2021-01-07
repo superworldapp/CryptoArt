@@ -53,6 +53,10 @@ class Allpatrender extends Component {
         this.buyItem = this.buyItem.bind(this);
         this.putForSale = this.putForSale.bind(this);
         this.DeSale = this.DeSale.bind(this);
+        this.StartAuction = this.StartAuction.bind(this);
+        this.EndAuction = this.EndAuction.bind(this);
+        
+        
     }
     buyItem = async () => {
         const res = await this.props.contract.methods
@@ -79,7 +83,7 @@ class Allpatrender extends Component {
     }
     putForSale = async () => {
         const res = await this.props.contract.methods
-            .putforsale(
+            .putForSale(
                 this.props.art.tokenIdentifier,
                 (this.state.sellPrice * ETHER).toString()
             )
@@ -88,14 +92,27 @@ class Allpatrender extends Component {
     };
     DeSale = async () => {
         const res = await this.props.contract.methods
-            .desale(this.props.art.tokenIdentifier)
+            .deSale(this.props.art.tokenIdentifier)
             .send({ from: this.props.accounts, gas: 1000000 });
         console.log(res);
     };
-
+    StartAuction = async () => {
+        const res = await this.props.contract.methods
+            .startbid(this.props.art.tokenIdentifier)
+            .send({ from: this.props.accounts, gas: 1000000 });
+        console.log(res);
+    };
+    EndAuction = async () => {
+        const res = await this.props.contract.methods
+            .closeBidOwner(this.props.art.tokenIdentifier)
+            .send({ from: this.props.accounts, gas: 1000000 });
+        console.log(res);
+    }
     render() {
         let but = this.props.art.isSelling ? 'visible' : 'invisible';
         let bak = this.props.art.isSelling ? 'bg-success text-white' : '';
+        let buk = this.props.art.auction.isBidding ? 'bg-warning' : '';
+        console.log(this.props.art.imgUrl);
         let pr =
             Web3.utils.fromWei(
                 this.props.art.tokenSellPrice.toString(),
@@ -106,13 +123,16 @@ class Allpatrender extends Component {
         let reSellOrSell = this.props.art.isSelling
             ? 'ReSell Item'
             : 'Sell Item';
+            let Auc = this.props.art.auction.isBidding
+            ? 'End Auction'
+            : 'Start Auction';
         return (
-            <Card className={bak}>
-                <a href={this.props.art.imgUrl} target='_blank'>
+            <Card className={this.props.art.auction.isBidding? buk:bak}>
+                <a href={this.props.art.imgurl} target='_blank'>
                     <CardImg
                         top
                         width='100%'
-                        src={this.props.art.imgUrl}
+                        src={this.props.art.imgurl}
                         alt='Card image'
                     />
                 </a>
@@ -158,8 +178,8 @@ class Allpatrender extends Component {
                             size='sm'
                             type='submit'
                             color='primary'
-                            onClick={this.DeSale}>
-                            Start Auction
+                            onClick={this.props.art.auction.isBidding ? this.EndAuction : this.StartAuction }>
+                            {Auc}
                         </Button>
                         <Modal
                             isOpen={this.state.isModalOpen}
@@ -174,7 +194,7 @@ class Allpatrender extends Component {
                                 <CardImg
                                     top
                                     width='100%'
-                                    src={this.props.art.imgUrl}
+                                    src={this.props.art.imgurl}
                                     alt='Card image'
                                 />
                                 <p className='m-auto p-2'>
@@ -254,7 +274,8 @@ class MyItemComponent extends Component {
                 imgUrl,
                 nos
             )
-            .send({ from: this.props.accounts, gas: 1000000 });
+            .send({ from: this.props.accounts, gas: 2500000 });
+                                                    
         console.log(res);
 
         this.toggleModal1();
@@ -325,7 +346,7 @@ class MyItemComponent extends Component {
     render() {
         const Menu = this.state.art.map((x) => {
             return (
-                <div key={x} className='col-4 col-md-3'>
+                <div key={x.tokenIdentifier} className='col-4 col-md-3'>
                     <Allpatrender
                         art={x}
                         contract={this.props.contract}
