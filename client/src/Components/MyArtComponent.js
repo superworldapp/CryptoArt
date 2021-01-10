@@ -12,27 +12,16 @@ import * as fs from 'fs';
 import * as util from 'util';
 
 const SHA256 = require('crypto-js/sha256');
-// import * as aws from 'aws-sdk';
-// import * as dotenv from 'aws-sdk';
-// import * as fs from 'fs';
-// import * as util from 'util';
-// import * as uuidv4 from 'uuid/v4';
 
 const S3 = require('aws-sdk/clients/s3');
 const AWS = require('aws-sdk');
 
 const path = require('path');
 
-// const readFile = util.promisify(fs.readFile);
+
 
 const BUCKET_NAME = 'superworldapp';
 
-// const s3 = new aws.S3({
-//     region: process.env.REGION,
-//     credentials: new aws.CognitoIdentityCredentials({
-//         IdentityPoolId: 'us-east-1:f7692b7a-0050-4823-9df7-1ab52e23b6c9'
-//     })
-// });
 
 AWS.config.update({
     region: 'us-east-1',
@@ -41,17 +30,6 @@ AWS.config.update({
     })
 });
 const s3 = new S3();
-
-// const fileUpload = async () => {
-//     try {
-//         const data = await readFile('../images/sample-art.jpeg');
-//         const url = await uploadToS3(data);
-//         console.log(url);
-//     } catch (err) {
-//         console.log(err);
-//     }
-// };
-
 
 let allDocs = [];
 const ETHER = 1000000000000000000;
@@ -175,6 +153,14 @@ class Allpatrender extends Component {
                             onClick={this.DeSale}>
                             DeSell Item
                         </Button>
+                        <Button
+                            className='visible'
+                            size='sm'
+                            type='submit'
+                            color='primary'
+                            onClick={this.DeSale}>
+                            Start Auction
+                        </Button>
                         <Modal
                             isOpen={this.state.isModalOpen}
                             toggle={this.toggleModal}
@@ -237,7 +223,7 @@ class MyItemComponent extends Component {
             artUrl: '',
             price: '',
             artHash: '',
-            perCut: 0
+            nos: 0
         };
         this.toggleModal1 = this.toggleModal1.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -258,15 +244,15 @@ class MyItemComponent extends Component {
         let tokenTitle = this.state.title;
         let tokenPrice = (this.state.price * ETHER).toString();
         let imgUrl = x;
-        let perCut = this.state.perCut;
-        console.log(tokenHash, tokenTitle, tokenPrice, imgUrl, perCut);
+        let nos = this.state.nos;
+        console.log(tokenHash, tokenTitle, tokenPrice, imgUrl, nos);
         const res = await this.props.contract.methods
-            .create(
+            .batchCreator(
                 tokenHash,
                 tokenTitle,
                 (this.state.price * ETHER).toString(),
                 imgUrl,
-                perCut
+                nos
             )
             .send({ from: this.props.accounts, gas: 1000000 });
         console.log(res);
@@ -306,22 +292,6 @@ class MyItemComponent extends Component {
         });
     };
     fileUploadHandler = (event) => {
-        //     const fd = new FormData();
-        //     fd.append(
-        //         'profile',
-        //         this.state.selectedFile,
-        //         this.state.selectedFile.name
-        //     );
-        //     let newHash = SHA256(this.state.selectedFile);
-        //     console.log('file contents', this.state.selectedFile);
-        //     axios.post('http://localhost:4000/upload', fd).then((res) => {
-        //         console.log(res.data.profile_url);
-        //         this.setState({
-        //             artUrl: res.data.profile_url,
-        //             artHash: newHash
-        //         });
-        //     });
-
         this.fileAwsHandler(this.state.selectedFile,this.creatingItems);
     };
 
@@ -419,14 +389,14 @@ class MyItemComponent extends Component {
                                 <div className='col-6'>
                                     <FormGroup>
                                         <Label
-                                            htmlFor='perCut'
+                                            htmlFor='nos'
                                             className='ml-3'>
-                                            Royalty Percentage
+                                            No. of Tokens
                                         </Label>
                                         <Input
                                             type='number'
-                                            id='perCut'
-                                            name='perCut'
+                                            id='nos'
+                                            name='nos'
                                             onChange={this.handleInputChange}
                                         />
                                     </FormGroup>
