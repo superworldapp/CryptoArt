@@ -11,7 +11,6 @@ import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
 import * as util from 'util';
 
-
 const SHA256 = require('crypto-js/sha256');
 // import * as aws from 'aws-sdk';
 // import * as dotenv from 'aws-sdk';

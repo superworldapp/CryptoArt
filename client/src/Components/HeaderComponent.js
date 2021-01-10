@@ -209,20 +209,24 @@ class Header extends Component {
                                 </NavItem>
                                 {this.state.isLoggedIn ? (
                                     <NavItem>
-                                        <NavLink className='nav-link' to='/myart'>
-                                            <i
-                                                onClick={
+                                        <NavLink className='nav-link' to='/home' onClick={
                                                     this.loggedInOrLoggedOut
-                                                }
-                                                class='fas fa-user-circle fa-2x'
+                                                }>
+                                            <i
+                                                
+                                                
                                                 style={{
                                                     color: '#5540C7',
                                                     cursor: 'pointer'
                                                 }}></i>
+                                                My Collections
                                         </NavLink>
                                     </NavItem>
                                 ) : (
                                     <NavItem>
+                                        <NavLink className='nav-link' to='/myart' onClick={
+                                                    this.loggedInOrLoggedOut
+                                                }>
                                         <button
                                             className='align-center justify-center btn sign-in-btn'
                                             onClick={this.loggedInOrLoggedOut}
@@ -233,8 +237,30 @@ class Header extends Component {
                                             }}>
                                             Sign In
                                         </button>
+                                        </NavLink>
                                     </NavItem>
                                 )}
+                                <NavItem>
+                                    <NavLink className='nav-link' to='/myart'>
+                                        <img
+                                            width='38px'
+                                            height='38px'
+                                            className='rounded-circle'
+                                            src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg/220px-Ash_Tree_-_geograph.org.uk_-_590710.jpg'
+                                            alt='profile'
+                                        />
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className='nav-link' to='#'>
+                                        <img
+                                            width='24px'
+                                            className='rounded-circle'
+                                            src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/1200px-Icon-round-Question_mark.svg.png'
+                                            alt='question-mark'
+                                        />
+                                    </NavLink>
+                                </NavItem>
                             </Nav>
                         </Collapse>
                    
