@@ -1,9 +1,13 @@
 .hidden{
-    overflow: hidden;
+    overflow-x: hidden;
 }
 .Home{
     display: flex;
     justify-content: space-around;
+}
+.upperView{
+    display: flex;
+    justify-content: space-between;
 }
 
 .col1{
@@ -12,40 +16,21 @@
     display: flex;
 }
 .col2{
-    width: 40%;
-    display: flex;
-}
-.upperView{
-    display: flex;
-    justify-content: space-between;
+    width: 100%;
 }
 
-.img1{
-position: relative;
-width: 421px;
-height: 331px;
-right:  130px;
-padding: 20px;
-top:400px;
+.text{
+    position: absolute;
+    margin-left: 2px;
+    right: 6%;
+    margin-top: 30%;
 }
-.img2{
-position: relative;
-width: 500px;
-height: 438px;
-left: 5%;
-margin-top: 2px;
-}
-
 .text1{
     font-family: Gibson;
     font-size: 17px;
-    margin: 1px;
     width: 100%;
-    position: relative;
-    bottom: -2%;
-    left:  12%;
 
-}
+} 
 .start-btn {
     position: absolute;
     opacity: 0.9;
@@ -60,7 +45,6 @@ margin-top: 2px;
     text-transform: uppercase;
     background-color: #5540c7;
     color: white;
-    bottom:15%;
     right: 20%;
 }
 
@@ -76,14 +60,23 @@ margin-top: 2px;
 }
 
 .rowImages{
-    display: flex;
+        display: flex;
+        flex-wrap:nowrap;
+        overflow-x: auto;
+} 
+        .card {
+          flex: 0 0 auto;
+        }
+      
+    /* display: flex;
     justify-content: space-around;
-}
+    overflow-x: auto; */
+
 .imageCards{
-    height: 300px;
-    width: 245px;
+    min-height: 280px;
+    min-width:   240px;
 }
-.text2{
+/* .text2{
     font-family:Gibson;
     font-size: 17px;
     margin: 1px;
@@ -92,7 +85,7 @@ margin-top: 2px;
     padding: 7px;
     bottom:2px;
     justify-content: space-between;
-}
+} */
 
 
 .ctext{
@@ -110,6 +103,26 @@ top: 1px;
 }
 
   /* Image Classes */
+
+
+.img1{
+    position: relative;
+    width: 421px;
+    height: 331px;
+    right:  130px;
+    padding: 20px;
+    top:400px;
+}
+
+.img2{
+    position: absolute;
+    width: 500px;
+    height: 430px;
+    margin-top: 2px;
+    margin-left: 2px;
+    right: 2%;
+    }
+    
 .image8{
     position: absolute;
     width: 120px;

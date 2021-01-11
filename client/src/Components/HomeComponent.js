@@ -20,11 +20,72 @@ import image14 from "../images/image 13.png";
 import image15 from "../images/image 17.png";
 
 
-import anonUser from "../images/user.png";
+import annonuser from "../images/user.png";
 import p1 from "../images/p1.png"
 import svg1 from "../images/svg/angle.svg";
 import "./HomeComponent.css"
 
+const cdata = [
+    {
+        cImg: image3,
+        calt: 'img3',
+        uimg: annonuser,
+        uname: 'annon name',
+        ctitle: 'Alimation Creation',
+        price: '0.5ETH',
+    },
+    {
+        cImg: image4,
+        calt: 'img4',
+        uimg: annonuser,
+        uname: 'annon name',
+        ctitle: 'Alimation Creation',
+        price: '0.5ETH',
+    },
+
+    {
+        cImg: image5,
+        calt: 'img5',
+        uimg: annonuser,
+        uname: 'annon name',
+        ctitle: 'Alimation Creation',
+        price: '0.5ETH',
+    },
+
+    {
+        cImg: image6,
+        calt: 'img6',
+        uimg: annonuser,
+        uname: 'annon name',
+        ctitle: 'Alimation Creation',
+        price: '0.5ETH',
+    },
+    {
+        cImg: image7,
+        calt: 'img7',
+        uimg: annonuser,
+        uname: 'annon name',
+        ctitle: 'Alimation Creation',
+        price: '0.5ETH',
+    },
+    {
+        cImg: image7,
+        calt: 'img7',
+        uimg: annonuser,
+        uname: 'annon name',
+        ctitle: 'Alimation Creation',
+        price: '0.5ETH',
+    },
+    {
+        cImg: image7,
+        calt: 'img7',
+        uimg: annonuser,
+        uname: 'annon name',
+        ctitle: 'Alimation Creation',
+        price: '0.5ETH',
+    }
+
+]
 
 
 class Home extends Component {
@@ -35,54 +96,8 @@ class Home extends Component {
         };
     }
 
-    cData =()=>{
-        const Trendingcard = [
-            {
-             cImg:'image3',
-             calt:'img3',
-             uimg:'annonuser',
-             uname:'annon name',
-             ctitle:'Alimation Creation',
-             price:'0.5ETH',
-             },
-             {
-             cImg:'image4',
-             calt:'img4',
-             uimg:'annonuser',
-             uname:'annon name',
-             ctitle:'Alimation Creation',
-             price:'0.5ETH',
-             },
-             
-             {
-             cImg:'image5',
-             calt:'img5',
-             uimg:'annonuser',
-             uname:'annon name',
-             ctitle:'Alimation Creation',
-             price: '0.5ETH',
-             },
-         
-             {
-             cImg:'image6',
-             calt:'img6',
-             uimg:'annonuser',
-             uname:'annon name',
-             ctitle:'Alimation Creation',
-             price:'0.5ETH',
-             },
-             {
-             cImg:'image7',
-             calt:'img7',
-             uimg:'annonuser',
-             uname:'annon name',
-             ctitle:'Alimation Creation',
-             price:'0.5ETH',
-             }
-         
-         ] 
-    };
-    
+
+
     render() {
         return (
             <>
@@ -101,251 +116,85 @@ class Home extends Component {
                                 <img className="image14" src={image14} alt="img" />
                                 <img className="image15" src={image15} alt="img" />
                             </div>
-                            <div className="col2">
-                                <Grid container justify="center" alignContent="center" direction="column">
+                            <div className="upperView"> 
                                     <img className="img2" src={image2} alt="image1" />
-                                    <p className="text1"> You can SELL and BUY digital art work here.
+                                 <div className="text">
+                                 <p className="text1"> You can SELL and BUY digital art work here.
                             <br />
-                            The art work can be used in yuor Superworld</p>
-                                </Grid>
+                            The art work can be used in yuor <a href= "https://www.superworldapp.com/">
+                                Superwolrd
+                                </a> 
+                                </p> 
+                            
 
                                 <button className="start-btn">
                                     Start
-                            </button>
-                            </div>
+                            </button> 
+
+
+                                 </div>
+                                                             </div>
 
                         </div>
                         <br /> <br /><br /><br />
-                        <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '10%' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '15%' }}>
                             <p style={{ fontSize: '18px', fontFamily: 'Gibson', fontWeight: 'bold' }}> Trending</p>
                             <a href="" style={{ fontFamily: 'Gibson', fontWeight: '550', fontSize: '18px' }}> View more <img src={svg1} alt="svg1" /></a>
                         </div>
                         <div className="rowImages">
-                            <Card className="imageCards">
-                                <CardImg top width="100%" src={image3} alt="image3"></CardImg>
-                                <CardBody>
-                                    <div style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
+                            {cdata.map((item) => {
+                                return (
+                                    <Card className="imageCards">
+                                        <CardImg top width="100%" src={item.cImg} alt="image3"></CardImg>
+                                        <CardBody>
+                                            <div style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
 
-                                    }}>
-                                        <CardSubtitle >
-                                            <img
-                                                style={{
-                                                    marginRight: '30px'
-                                                }}
-                                                width='16px'
-                                                height='16px'
-                                                className='rounded-circle'
-                                                src={anonUser}
-                                            ></img>
-                                        </CardSubtitle>
-                                        <CardSubtitle
-                                            style={{
-                                                fontFamily: 'Gibson',
-                                                fontSize: '14px',
-                                                color: '#5540C7',
-                                            }}
+                                            }}>
+                                                <CardSubtitle >
+                                                    <img
+                                                        style={{
+                                                            marginRight: '30px'
+                                                        }}
+                                                        width='16px'
+                                                        height='16px'
+                                                        className='rounded-circle'
+                                                        src={item.uimg}
+                                                    ></img>
+                                                </CardSubtitle>
+                                                <CardSubtitle
+                                                    style={{
+                                                        fontFamily: 'Gibson',
+                                                        fontSize: '14px',
+                                                        color: '#5540C7',
+                                                    }}
 
-                                        > User Name </CardSubtitle>
-                                    </div>
-                                    <div className="ctext">
-                                        <CardText
-                                            style={{
-                                                fontFamily: 'Gibson',
-                                                fontSize: '15px',
-                                                color: '#5540C7',
-                                            }} >Alimation Creation</CardText>
-                                        <CardText style={{
-                                            fontFamily: 'Gibson',
-                                            fontSize: '12px',
-                                            color: '#5540C7',
+                                                > {item.uname} </CardSubtitle>
+                                            </div>
+                                            <div className="ctext">
+                                                <CardText
+                                                    style={{
+                                                        fontFamily: 'Gibson',
+                                                        fontSize: '15px',
+                                                        color: '#5540C7',
+                                                    }} >Alimation Creation</CardText>
+                                                <CardText style={{
+                                                    fontFamily: 'Gibson',
+                                                    fontSize: '12px',
+                                                    color: 'black',
 
-                                        }}>0.5ETH</CardText>
-                                    </div>
+                                                }}>0.5ETH</CardText>
+                                            </div>
 
-                                </CardBody>
-                            </Card>
-                            <Card className="imageCards">
-                                <CardImg top width="100%" src={image4} alt="image3"></CardImg>
-                                <CardBody>
-                                    <div style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
+                                        </CardBody>
+                                    </Card>
 
-                                    }}>
-                                        <CardSubtitle >
-                                            <img
-                                                style={{
-                                                    marginRight: '30px'
-                                                }}
-                                                width='16px'
-                                                height='16px'
-                                                className='rounded-circle'
-                                                src={anonUser}
-                                            ></img>
-                                        </CardSubtitle>
-                                        <CardSubtitle
-                                            style={{
-                                                fontFamily: 'Gibson',
-                                                fontSize: '14px',
-                                                color: '#5540C7',
-                                            }}
+                                )
 
-                                        > User Name </CardSubtitle>
-                                    </div>
-                                    <div className="ctext">
-                                        <CardText
-                                            style={{
-                                                fontFamily: 'Gibson',
-                                                fontSize: '15px',
-                                                color: '#5540C7',
-                                            }} >Alimation Creation</CardText>
-                                        <CardText style={{
-                                            fontFamily: 'Gibson',
-                                            fontSize: '12px',
-                                            color: '#5540C7',
+                            })}
 
-                                        }}>0.5ETH</CardText>
-                                    </div>
 
-                                </CardBody>
-                            </Card>
-                            <Card className="imageCards">
-                                <CardImg top width="100%" src={image5} alt="image3"></CardImg>
-                                <CardBody>
-                                    <div style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-
-                                    }}>
-                                        <CardSubtitle >
-                                            <img
-                                                style={{
-                                                    marginRight: '30px'
-                                                }}
-                                                width='16px'
-                                                height='16px'
-                                                className='rounded-circle'
-                                                src={anonUser}
-                                            ></img>
-                                        </CardSubtitle>
-                                        <CardSubtitle
-                                            style={{
-                                                fontFamily: 'Gibson',
-                                                fontSize: '14px',
-                                                color: '#5540C7',
-                                            }}
-
-                                        > User Name </CardSubtitle>
-                                    </div>
-                                    <div className="ctext">
-                                        <CardText
-                                            style={{
-                                                fontFamily: 'Gibson',
-                                                fontSize: '15px',
-                                                color: '#5540C7',
-                                            }} >Alimation Creation</CardText>
-                                        <CardText style={{
-                                            fontFamily: 'Gibson',
-                                            fontSize: '12px',
-                                            color: '#5540C7',
-
-                                        }}>0.5ETH</CardText>
-                                    </div>
-
-                                </CardBody>
-                            </Card>
-                            <Card className="imageCards">
-                                <CardImg top width="100%" src={image6} alt="image3"></CardImg>
-                                <CardBody>
-                                    <div style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-
-                                    }}>
-                                        <CardSubtitle >
-                                            <img
-                                                style={{
-                                                    marginRight: '30px'
-                                                }}
-                                                width='16px'
-                                                height='16px'
-                                                className='rounded-circle'
-                                                src={anonUser}
-                                            ></img>
-                                        </CardSubtitle>
-                                        <CardSubtitle
-                                            style={{
-                                                fontFamily: 'Gibson',
-                                                fontSize: '14px',
-                                                color: '#5540C7',
-                                            }}
-
-                                        > User Name </CardSubtitle>
-                                    </div>
-                                    <div className="ctext">
-                                        <CardText
-                                            style={{
-                                                fontFamily: 'Gibson',
-                                                fontSize: '15px',
-                                                color: '#5540C7',
-                                            }} >Alimation Creation</CardText>
-                                        <CardText style={{
-                                            fontFamily: 'Gibson',
-                                            fontSize: '12px',
-                                            color: '#5540C7',
-
-                                        }}>0.5ETH</CardText>
-                                    </div>
-
-                                </CardBody>
-                            </Card>
-                            <Card className="imageCards">
-                                <CardImg top width="100%" src={image7} alt="image3"></CardImg>
-                                <CardBody>
-                                    <div style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-
-                                    }}>
-                                        <CardSubtitle >
-                                            <img
-                                                style={{
-                                                    marginRight: '30px'
-                                                }}
-                                                width='16px'
-                                                height='16px'
-                                                className='rounded-circle'
-                                                src={anonUser}
-                                            ></img>
-                                        </CardSubtitle>
-                                        <CardSubtitle
-                                            style={{
-                                                fontFamily: 'Gibson',
-                                                fontSize: '14px',
-                                                color: '#5540C7',
-                                            }}
-
-                                        > User Name </CardSubtitle>
-                                    </div>
-                                    <div className="ctext">
-                                        <CardText
-                                            style={{
-                                                fontFamily: 'Gibson',
-                                                fontSize: '15px',
-                                                color: '#5540C7',
-                                            }} >Alimation Creation</CardText>
-                                        <CardText style={{
-                                            fontFamily: 'Gibson',
-                                            fontSize: '12px',
-                                            color: '#5540C7',
-
-                                        }}>0.5ETH</CardText>
-                                    </div>
-
-                                </CardBody>
-                            </Card>
 
                         </div>
 
