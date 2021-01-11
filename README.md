@@ -1,4 +1,4 @@
-# Dev2 branch
+# CryptoArt
 
 ## Errors when compiling original CryptoArt.sol in truffle
 
