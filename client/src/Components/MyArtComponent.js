@@ -10,13 +10,14 @@ import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
 import * as util from 'util';
-
+import loader from '../images/loader.svg';
 const SHA256 = require('crypto-js/sha256');
 
 const S3 = require('aws-sdk/clients/s3');
 const AWS = require('aws-sdk');
 
 const path = require('path');
+
 
 
 
@@ -243,7 +244,8 @@ class MyItemComponent extends Component {
             artUrl: '',
             price: '',
             artHash: '',
-            nos: 0
+            nos: 0,
+            isLoading: false
         };
         this.toggleModal1 = this.toggleModal1.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -277,6 +279,7 @@ class MyItemComponent extends Component {
             .send({ from: this.props.accounts, gas: 2500000 });
                                                     
         console.log(res);
+        this.setState({isLoading : false});
 
         this.toggleModal1();
     };
@@ -313,6 +316,7 @@ class MyItemComponent extends Component {
         });
     };
     fileUploadHandler = (event) => {
+        this.setState({isLoading : true});
         this.fileAwsHandler(this.state.selectedFile,this.creatingItems);
     };
 
@@ -445,6 +449,7 @@ class MyItemComponent extends Component {
                                         onClick={this.fileUploadHandler}>
                                         Add
                                     </Button>
+                                    {this.state.isLoading ? <img src={loader} /> : <div></div>}
                                 </div>
                             </div>
                             <br />
