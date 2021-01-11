@@ -6,9 +6,9 @@ import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import AllItemComponent from './AllArtComponent';
 import MyItemComponent from './MyArtComponent';
+import CardComponent from './CardComponent';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './FooterComponent';
-
 
 //import HDWalletProvider from "@truffle/hdwallet-provider";
 
@@ -91,6 +91,16 @@ class Main extends Component {
                         path='/myart'
                         component={() => (
                             <MyItemComponent
+                                contract={this.state.contract}
+                                accounts={this.state.accounts}
+                            />
+                        )}
+                    />
+                    <Route
+                        exact
+                        path='/card'
+                        component={() => (
+                            <CardComponent
                                 contract={this.state.contract}
                                 accounts={this.state.accounts}
                             />
