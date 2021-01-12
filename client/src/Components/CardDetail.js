@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MarioImage from '../images/image 13.png';
 
-const CardComponent = () => {
+const CardDetail = ({ match }) => {
+    useEffect(() => {
+        console.log(match);
+    });
     return (
         <>
             <div className='container'>
@@ -14,8 +17,8 @@ const CardComponent = () => {
                         <img src={MarioImage} class='card-img' alt='...' />
                     </div>
                     <div className='information d-flex flex-column'>
-                        <a href='#'>Arcona Digital Land</a>
-                        <h1>Mario</h1>
+                        <a href='#'>{match.params.id}</a>
+                        <h1>{match.params.id}</h1>
                         <p>
                             Owned by <a href='#'>ABU01</a>
                         </p>
@@ -60,11 +63,21 @@ const CardComponent = () => {
                         <table className='table'>
                             <thead>
                                 <tr>
-                                    <th className="text-secondary" scope='col'>Event</th>
-                                    <th className="text-secondary" scope='col'>Price</th>
-                                    <th className="text-secondary" scope='col'>From</th>
-                                    <th className="text-secondary" scope='col'>To</th>
-                                    <th className="text-secondary" scope='col'>Date</th>
+                                    <th className='text-secondary' scope='col'>
+                                        Event
+                                    </th>
+                                    <th className='text-secondary' scope='col'>
+                                        Price
+                                    </th>
+                                    <th className='text-secondary' scope='col'>
+                                        From
+                                    </th>
+                                    <th className='text-secondary' scope='col'>
+                                        To
+                                    </th>
+                                    <th className='text-secondary' scope='col'>
+                                        Date
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -121,4 +134,4 @@ const CardComponent = () => {
     );
 };
 
-export default CardComponent;
+export default CardDetail;

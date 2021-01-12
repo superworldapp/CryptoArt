@@ -6,7 +6,7 @@ import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import AllItemComponent from './AllArtComponent';
 import MyItemComponent from './MyArtComponent';
-import CardComponent from './CardComponent';
+import CardDetail from './CardDetail';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './FooterComponent';
 
@@ -97,14 +97,8 @@ class Main extends Component {
                         )}
                     />
                     <Route
-                        exact
-                        path='/card'
-                        component={() => (
-                            <CardComponent
-                                contract={this.state.contract}
-                                accounts={this.state.accounts}
-                            />
-                        )}
+                        path='/card/:id'
+                        component={CardDetail}
                     />
 
                     <Redirect to='/home' />
