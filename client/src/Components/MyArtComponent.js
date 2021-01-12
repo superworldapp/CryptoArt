@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 //import moment from 'moment';
 import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody,CardText,Modal,ModalHeader,ModalBody} from 'reactstrap';
 import { BrowserRouter, NavLink } from 'react-router-dom';
@@ -129,14 +130,15 @@ class Allpatrender extends Component {
             : 'Start Auction';
         return (
             <Card className={this.props.art.auction.isBidding? buk:bak}>
-                <a href={this.props.art.imgurl} target='_blank'>
+                <Link to={`/card/${this.props.art.tokenIdentifier}`}>
+                {/* <a href={this.props.art.imgurl} target='_blank'> */}
                     <CardImg
                         top
                         width='100%'
                         src={this.props.art.imgurl}
                         alt='Card image'
                     />
-                </a>
+                {/* </a> */}
                 <CardBody>
                     <CardTitle>
                         Item Title : {this.props.art.tokenTitle}
@@ -226,6 +228,7 @@ class Allpatrender extends Component {
                         </Modal>
                     </Col>
                 </CardBody>
+                </Link>
             </Card>
         );
     }
