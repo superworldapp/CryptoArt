@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Card, CardBody, CardSubtitle, CardText, CardImg } from 'reactstrap';
 import image3 from '../images/image 6.png';
 import image4 from '../images/image 23.png';
 import image5 from '../images/image 25.png';
@@ -7,7 +8,7 @@ import image7 from '../images/image 29.png';
 import annonuser from '../images/user.png';
 import Web3 from 'web3';
 
-const CardDetail = ({art}) => {
+const CardDetail = ({ art }) => {
     // useEffect(() => {
     //     console.log(match);
     // });
@@ -96,11 +97,11 @@ const CardDetail = ({art}) => {
                             }}>
                             <p className='text-secondary'>Current price</p>
                             <h4>
-                            {Web3.utils.fromWei(
-                                art?.tokenPrice.toString(),
-                                'ether'
-                            )}{' '}
-                            ETH
+                                {Web3.utils.fromWei(
+                                    art?.tokenPrice.toString(),
+                                    'ether'
+                                )}{' '}
+                                ETH
                                 <small>
                                     <span className='text-secondary'>
                                         (246.99)
@@ -117,6 +118,64 @@ const CardDetail = ({art}) => {
                             </button>
                         </div>
                     </div>
+                </div>
+                <div className='rowImages my-5'>
+                    {cdata.map((item) => {
+                        return (
+                            <Card className='imageCards'>
+                                <CardImg
+                                    top
+                                    width='90%'
+                                    src={item.cImg}
+                                    alt='image3'></CardImg>
+                                <CardBody>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center'
+                                        }}>
+                                        <CardSubtitle>
+                                            <img
+                                                style={{
+                                                    marginRight: '30px'
+                                                }}
+                                                width='16px'
+                                                height='16px'
+                                                className='rounded-circle'
+                                                src={item.uimg}></img>
+                                        </CardSubtitle>
+                                        <CardSubtitle
+                                            style={{
+                                                fontFamily: 'Gibson',
+                                                fontSize: '14px',
+                                                color: '#5540C7'
+                                            }}>
+                                            {' '}
+                                            {item.uname}{' '}
+                                        </CardSubtitle>
+                                    </div>
+                                    <div className='ctext'>
+                                        <CardText
+                                            style={{
+                                                fontFamily: 'Gibson',
+                                                fontSize: '15px',
+                                                color: '#5540C7'
+                                            }}>
+                                            Alimation Creation
+                                        </CardText>
+                                        <CardText
+                                            style={{
+                                                fontFamily: 'Gibson',
+                                                fontSize: '12px',
+                                                color: 'black'
+                                            }}>
+                                            0.5ETH
+                                        </CardText>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        );
+                    })}
                 </div>
             </div>
         </>
