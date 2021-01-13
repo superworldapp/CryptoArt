@@ -64,20 +64,19 @@ class AllArt extends Component {
                 : 'visible';
         return (
             <Card className={this.props.art.auction.isBidding ? buk : bak}>
-                <a href={this.props.art.imgurl}>
-                    <CardImg
-                        top
-                        width='100%'
-                        src={this.props.art.imgurl}
-                        alt='Card image'
-                    />
-                </a>
+                
                 <Link
                     style={{
                         color: '#212529',
                         textDecoration: 'none'
                     }}
                     to={`/card/${this.props.art.tokenIdentifier}`}>
+                    <CardImg
+                        top
+                        width='100%'
+                        src={this.props.art.imgurl}
+                        alt='Card image'
+                    />
                     <CardBody>
                         <CardTitle>
                             Item Title : {this.props.art.tokenTitle}

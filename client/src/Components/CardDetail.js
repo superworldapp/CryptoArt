@@ -1,5 +1,13 @@
 import React, { useEffect } from 'react';
-import { Card, CardBody, CardSubtitle, CardText, CardImg } from 'reactstrap';
+import {
+    Card,
+    CardBody,
+    CardSubtitle,
+    CardText,
+    CardImg,
+    CardHeader,
+    Table
+} from 'reactstrap';
 import image3 from '../images/image 6.png';
 import image4 from '../images/image 23.png';
 import image5 from '../images/image 25.png';
@@ -82,7 +90,13 @@ const CardDetail = ({ art }) => {
                         style={{
                             width: '50%'
                         }}>
-                        <img src={art?.imgurl} className='card-img' alt='...' />
+                        <a href={art?.imgurl} target='_blank'>
+                            <img
+                                src={art?.imgurl}
+                                className='card-img'
+                                alt='...'
+                            />
+                        </a>
                     </div>
                     <div className='information d-flex flex-column'>
                         {/* <a href='#'>{match.params.id}</a>
@@ -119,63 +133,69 @@ const CardDetail = ({ art }) => {
                         </div>
                     </div>
                 </div>
-                <div className='rowImages my-5'>
-                    {cdata.map((item) => {
-                        return (
-                            <Card className='imageCards'>
-                                <CardImg
-                                    top
-                                    width='90%'
-                                    src={item.cImg}
-                                    alt='image3'></CardImg>
-                                <CardBody>
-                                    <div
-                                        style={{
-                                            display: 'flex',
-                                            justifyContent: 'center'
-                                        }}>
-                                        <CardSubtitle>
-                                            <img
+                <div className='my-5'>
+                    <Card
+                        className='card'
+                        style={{
+                            width: '100%',
+                        }}>
+                        <CardHeader className='text-left' style={{ 
+                            backgroundColor: '#fff'
+                        }}>
+                            <h4>
+                                <i class='fas fa-arrows-alt-v'></i> Trading
+                                History
+                            </h4>
+                        </CardHeader>
+                        {cdata.map((item) => {
+                            return (
+                                <React.Fragment key={item}>
+                                    <CardBody>
+                                        <Table>
+                                            <CardSubtitle>
+                                                <img
+                                                    style={{
+                                                        marginRight: '30px'
+                                                    }}
+                                                    width='16px'
+                                                    height='16px'
+                                                    className='rounded-circle'
+                                                    src={item.uimg}></img>
+                                            </CardSubtitle>
+                                            <CardSubtitle
                                                 style={{
-                                                    marginRight: '30px'
-                                                }}
-                                                width='16px'
-                                                height='16px'
-                                                className='rounded-circle'
-                                                src={item.uimg}></img>
-                                        </CardSubtitle>
-                                        <CardSubtitle
-                                            style={{
-                                                fontFamily: 'Gibson',
-                                                fontSize: '14px',
-                                                color: '#5540C7'
-                                            }}>
-                                            {' '}
-                                            {item.uname}{' '}
-                                        </CardSubtitle>
-                                    </div>
-                                    <div className='ctext'>
-                                        <CardText
-                                            style={{
-                                                fontFamily: 'Gibson',
-                                                fontSize: '15px',
-                                                color: '#5540C7'
-                                            }}>
-                                            Alimation Creation
-                                        </CardText>
-                                        <CardText
-                                            style={{
-                                                fontFamily: 'Gibson',
-                                                fontSize: '12px',
-                                                color: 'black'
-                                            }}>
-                                            0.5ETH
-                                        </CardText>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        );
-                    })}
+                                                    fontFamily: 'Gibson',
+                                                    fontSize: '1rem',
+                                                    color: '#5540C7'
+                                                }}>
+                                                {' '}
+                                                {item.uname}{' '}
+                                            </CardSubtitle>
+                                        
+                                        <div className='ctext'>
+                                            <CardText
+                                                style={{
+                                                    fontFamily: 'Gibson',
+                                                    fontSize: '15px',
+                                                    color: '#5540C7'
+                                                }}>
+                                                Alimation Creation
+                                            </CardText>
+                                            <CardText
+                                                style={{
+                                                    fontFamily: 'Gibson',
+                                                    fontSize: '12px',
+                                                    color: 'black'
+                                                }}>
+                                                0.5ETH
+                                            </CardText>
+                                        </div>
+                                        </Table>
+                                    </CardBody>
+                                </React.Fragment>
+                            );
+                        })}
+                    </Card>
                 </div>
             </div>
         </>
