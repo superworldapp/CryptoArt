@@ -1,5 +1,13 @@
 # CryptoArt
 
+## Versions of CrytpArt.sol
+
+- CryptoArt-v4.sol: New naming convention as per CryptoArt use case
+
+- CryptoArt-v3.sol: New contract trimmed from Cool.sol
+
+- CryptoArt-v2.sol: Latest CryptoArt contract shared by Swapnil
+
 ## Errors when compiling original CryptoArt.sol in truffle
 
 ```bash
