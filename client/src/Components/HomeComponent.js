@@ -145,7 +145,7 @@ class Home extends Component {
                             {cdata.map((item) => {
                                 return (
                                     <Card className="imageCards">
-                                        <CardImg top Width="90%" src={item.cImg} alt="image3"></CardImg>
+                                        <CardImg top width="90%" src={item.cImg} alt="image3"></CardImg>
                                         <CardBody>
                                             <div style={{
                                                 display: 'flex',
