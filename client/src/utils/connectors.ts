@@ -38,10 +38,10 @@ export const fortmatic = new FortmaticConnector({
   chainId: 1,
 });
 
-export const fortmatic_mainnet = new Fortmatic(
-  process.env.REACT_APP_FORTMATIC_MAINNET_API_KEY as string,
-  customNodeOptions
-);
+// export const fortmatic_mainnet = new Fortmatic(
+//   process.env.REACT_APP_FORTMATIC_MAINNET_API_KEY as string,
+//   customNodeOptions
+// );
 
 // PORTIS
 export const portis = new PortisConnector({
