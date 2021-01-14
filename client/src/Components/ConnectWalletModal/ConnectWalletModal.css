@@ -1,0 +1,224 @@
+:root {
+  --dark-purple: #5540c7;
+  --light-purple: #909af8;
+  --light-red: #f08778;
+  --light-blue: #5e9afc;
+  --light-grey: #828282;
+}
+
+.hidden {
+  display: none;
+}
+
+.connect-wallet__div {
+  width: 100%;
+  max-width: fit-content;
+  min-height: 550px;
+  /* border: 2px solid var(--light-purple); */
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: white;
+  z-index: 1000;
+}
+
+/* connect-wallet__closeBtn hover effect below */
+.connect-wallet__closeBtn {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  transform: translate(0%, 0%);
+  background: transparent;
+  border-color: transparent;
+  color: var(--dark-purple);
+  font-size: 1.5rem;
+  outline: none;
+}
+.connect-wallet__closeBtn:focus {
+  outline: transparent;
+}
+
+.connect-wallet__header {
+  width: 100%;
+  padding: 1rem 0.5rem;
+  color: black;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.connect-wallet__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1rem;
+  width: 100%;
+  min-height: 424px;
+}
+
+.connect-wallet__container {
+  margin: 0px 2em;
+}
+
+.connect-wallet__card {
+  padding: 0px 1em;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  width: 25vw;
+  max-width: 225px;
+  min-height: 359px;
+  border-radius: 10px;
+}
+
+.connect-wallet__cardPurple {
+  border: 2px solid var(--dark-purple);
+}
+
+.connect-wallet__cardRed {
+  border: 2px solid var(--light-red);
+  background: #ffffff;
+}
+
+.connect-wallet__cardRecommended {
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 42.5vh;
+  width: 25vw;
+  max-width: 225px;
+  min-height: 380px;
+}
+
+.connect-wallet__cardRecommendedRed {
+  border-top: 1px solid var(--light-red);
+  border-radius: 10px;
+  background: var(--light-red);
+}
+
+.connect-wallet__cardRecommendedText {
+  color: #ffffff;
+}
+
+.connect-wallet__cardImg {
+  width: 50%;
+}
+
+.connect-wallet__cardTitle {
+  flex: 0.2;
+  font-size: 2rem;
+}
+
+.connect-wallet__cardSubTitle {
+  flex: 0.2;
+  font-size: 1rem;
+}
+
+.connect-wallet__cardRedText {
+  color: var(--light-red);
+}
+
+.connect-wallet__cardBlueText {
+  color: var(--light-blue);
+}
+
+.connect-wallet__cardDescription {
+  flex: 0.4;
+  font-size: 0.75rem;
+  color: var(--light-grey);
+}
+
+.connect-wallet__cardBtns {
+  margin: 1em 0px;
+  padding: 1em 2em;
+  border-radius: 25px;
+  color: #ffffff;
+  font-family: 'Gibson';
+  border-color: transparent;
+  outline: transparent;
+  font-weight: 600;
+}
+
+.connect-wallet__redBtn {
+  background: var(--light-red);
+}
+
+.connect-wallet__purpleBtn {
+  background: var(--dark-purple);
+}
+
+.connect-wallet__redBtn:hover,
+.connect-wallet__purpleBtn:hover,
+.connect-wallet__closeBtn:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+.connect-wallet__footer {
+  padding: 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 600px) {
+  .connect-wallet__div {
+    width: 100%;
+  }
+  .connect-wallet__header {
+    font-size: 10px;
+  }
+  .connect-wallet__container {
+    margin: 0 1em;
+  }
+  .connect-wallet__cardTitle {
+    font-size: 1.25rem;
+  }
+  .connect-wallet__cardBtns {
+    margin: 1em 0px;
+    padding: 0px 1.5em;
+    font-weight: 600;
+    font-size: 0.5rem;
+  }
+}
+
+/* Can be implemented to shrink on screen height */
+/* @media (max-height: 720px) {
+  .connect-wallet__div {
+      width: 100%;
+      transform: translate(-50%, -50%) scale(0.75);
+  }
+  .connect-wallet__header {
+      font-size: 10px;
+  }
+  .connect-wallet__container {
+      margin: 0 1em;
+  }
+  .connect-wallet__cardTitle {
+      font-size: 1.25rem;
+  }
+  .connect-wallet__cardBtns {
+      margin: 1em 0px;
+      padding: 0px 1.5em;
+      font-weight: 600;
+      font-size: 0.5rem;
+  }
+} */
