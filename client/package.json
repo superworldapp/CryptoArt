@@ -26,6 +26,7 @@
         "react-router-dom": "^5.2.0",
         "react-scripts": "^3.2.0",
         "reactstrap": "^8.7.1",
+        "surge": "^0.21.7",
         "util": "^0.12.3",
         "uuid": "^8.3.2",
         "web3": "1.2.2"

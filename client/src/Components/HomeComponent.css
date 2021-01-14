@@ -1,15 +1,20 @@
 .hidden {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 .Home {
   display: flex;
   justify-content: space-around;
+}
+.upperView {
+  display: flex;
+  justify-content: space-between;
 }
 
 .col1 {
   width: 60%;
   float: left;
   display: flex;
+  margin-top: 4rem;
 }
 .col2 {
   width: 40%;

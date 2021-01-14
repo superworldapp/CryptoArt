@@ -13,6 +13,7 @@ import {
     Input
 } from 'reactstrap';
 import { Link, NavLink } from 'react-router-dom';
+import Identicon from 'identicon.js';
 import Web3 from 'web3';
 let util;
 let util1;
@@ -21,8 +22,10 @@ class Header extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { isNavOpen: false, value: '', isLoggedIn: false };
+        this.state = { isNavOpen: false, value: '', isLoggedIn: false  };
         this.toggleNav = this.toggleNav.bind(this);
+        this.getnewHash = this.getnewHash.bind(this);
+
     }
 
     toggleNav() {
@@ -43,6 +46,12 @@ class Header extends Component {
         this.setState({ isLoggedIn: !this.state.isLoggedIn });
     };
 
+    getnewHash = async() => {
+        let x = 1;
+        console.log(x);
+        //x= x.substring(1,10);
+        return x;
+    }
     signInIcon = () => {};
 
     render() {
@@ -246,7 +255,7 @@ class Header extends Component {
                                             width='38px'
                                             height='38px'
                                             className='rounded-circle'
-                                            src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg/220px-Ash_Tree_-_geograph.org.uk_-_590710.jpg'
+                                            src={`data:image/png;base64,${new Identicon(new Date().toString())}`}
                                             alt='profile'
                                         />
                                     </NavLink>
@@ -279,42 +288,7 @@ class Header extends Component {
                         </small>
                     </h6> */}
                 </Navbar>
-                <div
-                    style={{
-                        textAlign: 'left',
-                        height: '20%',
-                        fontSize: '.8rem',
-                        marginLeft: '150px',
-                        textDecoration: 'underline'
-                    }}>
-                    <Link
-                        to='#'
-                        style={{
-                            color: '#ccc',
-                            margin: '0 1rem',
-                            cursor: 'pointer'
-                        }}>
-                        Caozhibing
-                    </Link>
-                    <Link
-                        to='#'
-                        style={{
-                            color: '#ccc',
-                            margin: '0 1rem',
-                            cursor: 'pointer'
-                        }}>
-                        Northern Lights
-                    </Link>
-                    <Link
-                        to='#'
-                        style={{
-                            color: '#ccc',
-                            margin: '0 1rem',
-                            cursor: 'pointer'
-                        }}>
-                        Winter Jacket
-                    </Link>
-                </div>
+                
             </>
         );
     }

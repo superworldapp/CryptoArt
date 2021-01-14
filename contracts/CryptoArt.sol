@@ -1,8 +1,11 @@
-        pragma solidity ^0.6.0;
+        // pragma solidity ^0.6.0;
+        pragma solidity >=0.6.0; 
         pragma experimental ABIEncoderV2;
         
-        import "https://github.com/kole-swapnil/openzepkole/token/ERC721/ERC721.sol";
-        import "https://github.com/kole-swapnil/openzepkole/access/Ownable.sol";
+        //import "https://github.com/kole-swapnil/openzepkole/token/ERC721/ERC721.sol";
+        import "@openzeppelin/contracts/token/ERC721/ERC721.sol"; 
+        //import "https://github.com/kole-swapnil/openzepkole/access/Ownable.sol";
+        import "@openzeppelin/contracts/access/Ownable.sol"; 
         
         
         contract Cryptoart is ERC721,Ownable{
@@ -69,14 +72,15 @@
             }
             
             function batchCreator(string memory _tokenHash,string memory _tokenTitle,uint _tokenPrice,string memory _imgurl,uint _nos)public{
-                if(_nos > 1){
+                
                     batchcounter++;
                     batches[batchcounter] = _nos;
                     for(uint i=0;i<_nos;i++){
                     create(_tokenHash,_tokenTitle,_tokenPrice,_imgurl,batchcounter);
                     }
                         
-                }
+                
+          
             }
            function create(string memory _tokenHash,string memory _tokenTitle,uint _tokenPrice,string memory _imgurl,uint _batchid)public returns(uint){
                 tokenCount++;
@@ -95,7 +99,7 @@
                 createToken(msg.sender,tokenCount);
                 tokensByCreator[msg.sender].push(y);
                 tokensByOwner[msg.sender].push(y);
-                emit tokencreated(tokenCount,msg.sender,_tokenPrice,now,_batchid);
+                emit tokencreated(tokenCount,msg.sender,_tokenPrice,block.timestamp,_batchid);
                 return tokenCount;
             }
 
@@ -128,13 +132,13 @@
             function putForSale(uint256 _tokenId,uint _sellprice) public{
                 Arts[_tokenId].isSelling = true;
                 Arts[_tokenId].tokenSellPrice = _sellprice;
-                emit tokenputforsale(_tokenId,msg.sender,_sellprice,true,now);
+                emit tokenputforsale(_tokenId,msg.sender,_sellprice,true,block.timestamp);
                 
             }
             function deSale(uint256 _tokenId) public{
                 Arts[_tokenId].isSelling = false;
                 Arts[_tokenId].tokenSellPrice = 0;
-                emit tokenputforsale(_tokenId,msg.sender,0,false,now);
+                emit tokenputforsale(_tokenId,msg.sender,0,false,block.timestamp);
             }
             
             function giftToken(uint256 _tokenId,address payable addr) public payable returns(bool){
@@ -199,13 +203,13 @@
                tokensByOwner[seller] = z;
                tokensByOwner[addr].push(y);
                 
-               emit tokenbought(_tokenId,addr,seller,now);
+               emit tokenbought(_tokenId,addr,seller,block.timestamp);
                 return true;
             }
             
             function startbid(uint _tokenId) public {
                 Arts[_tokenId].auction.isBidding = true;    
-                emit tokenbid(_tokenId,msg.sender,true,0,now); 
+                emit tokenbid(_tokenId,msg.sender,true,0,block.timestamp); 
             }
             
             function addBid(uint _tokenId) public payable{
@@ -215,7 +219,7 @@
                     y.auction.bidder = msg.sender;
                     y.auction.bidprice = msg.value;
                     y.auction.isBidding = true;
-                    emit tokenbid(_tokenId,msg.sender,true,0,now);
+                    emit tokenbid(_tokenId,msg.sender,true,0,block.timestamp);
                     
                 }
                 else{
@@ -238,7 +242,7 @@
                 z.auction.bidder = address(0x0);
                 z.auction.bidprice = 0;
                 Arts[_tokenId] = z;
-                emit tokenbid(_tokenId,msg.sender,false,1,now);
+                emit tokenbid(_tokenId,msg.sender,false,1,block.timestamp);
             }
             
             function closeBid(uint _tokenId)public{
@@ -248,14 +252,14 @@
                  z.auction.bidder = address(0x0);
                  z.auction.bidprice = 0;
                  Arts[_tokenId] = z;
-                 emit tokenbid(_tokenId,msg.sender,false,2,now);
+                 emit tokenbid(_tokenId,msg.sender,false,2,block.timestamp);
             }
-            
+            /**
             function tokenURI(uint256 tokenId) public view override returns (string memory) {
                 string memory x = string(abi.encodePacked(metaUrl,tokenId));
                 return x;
             }
-            
+             */
             
             
             
@@ -268,5 +272,5 @@
                 (msg.sender).transfer(balance);
             }
         
-            
+           
         }
