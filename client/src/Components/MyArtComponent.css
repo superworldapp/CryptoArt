@@ -1,0 +1,57 @@
+.modal-title{
+    font-family: Gibson;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+.pl-5{
+    padding-left: 2.0rem !important;
+    padding-bottom: 0.2rem !important;
+}
+ .artCard{
+    height: 40%;
+    width: 100%;
+    border-top: none !important;
+} 
+.modal-content{
+    width: 80%  !important;
+}
+.modal-header{
+    border: hidden !important;
+}
+
+
+.abtn{
+    position: relative;
+    opacity: 0.9;
+    margin: 0 10px;
+    border-radius: 2em;
+    font-family: canada-type-gibson, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 0.375rem 1.5rem;
+    border: 2px solid #5540c7;
+    background-color: white;
+    color: black;
+}
+.abtn:hover {
+    background-color:  #5540c7;
+    border-color: white;
+    cursor: pointer;
+}
+
+.abtn:focus {
+    outline: 0px;
+    border: 0;
+}
+.artContainer{
+    padding: 5px;
+    margin-left: 5%;
+}
+
+.ctext1{
+    display: flex;
+    justify-content: center;
+}
+

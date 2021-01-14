@@ -288,42 +288,7 @@ class Header extends Component {
                         </small>
                     </h6> */}
                 </Navbar>
-                <div
-                    style={{
-                        textAlign: 'left',
-                        height: '20%',
-                        fontSize: '.8rem',
-                        marginLeft: '150px',
-                        textDecoration: 'underline'
-                    }}>
-                    <Link
-                        to='#'
-                        style={{
-                            color: '#ccc',
-                            margin: '0 1rem',
-                            cursor: 'pointer'
-                        }}>
-                        Caozhibing
-                    </Link>
-                    <Link
-                        to='#'
-                        style={{
-                            color: '#ccc',
-                            margin: '0 1rem',
-                            cursor: 'pointer'
-                        }}>
-                        Northern Lights
-                    </Link>
-                    <Link
-                        to='#'
-                        style={{
-                            color: '#ccc',
-                            margin: '0 1rem',
-                            cursor: 'pointer'
-                        }}>
-                        Winter Jacket
-                    </Link>
-                </div>
+                
             </>
         );
     }
