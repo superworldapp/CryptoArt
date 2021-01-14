@@ -61,10 +61,6 @@ class Header extends Component {
     );
   }
 
-  componentDidMount() {
-    console.log('Web3', this.props);
-  }
-
   toggleNav() {
     this.setState({ isNavOpen: !this.state.isNavOpen });
   }
