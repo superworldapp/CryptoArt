@@ -26,6 +26,7 @@
         mapping(uint256 => uint256) totalCreatedTokens; // Key -> Batch ID  : Value -> How many tokens are created in the same batch
         mapping(uint256 => uint256) totalMintedTokens; // Key -> Batch ID  : Value -> ERC721 tokens already minted under same batch
         mapping(uint256 => uint256) tokenBatchPrice; // Key -> ERC721 token : value ->token price
+        mapping(uint256 => string) imgUrl; // Key -> Batch ID : value ->imgUrl
         mapping(uint256 => uint256) royaltyLengthMemory; // Key -> Batch ID  : Value -> Number of royalty parties (ex. artist1, artist2, superworld)
         mapping(uint256 => uint256) royaltyMemory; // to check later
         mapping(uint256 => uint256) referenceTotokenBatch; // Key -> ERC Token Id : Value -> Batch Id
@@ -61,7 +62,7 @@
         event UpdateFeature(uint256 tokenBatchToUpdate, string newFeatures);
         event UpdatePrice(uint256 tokenBatchToUpdate, uint256 price);
 
-        function createtokenBatch(string memory _tokenHash, string memory _tokenType,  string memory _tokenBatchName, string memory _feature, uint256 _editionSize, uint256 _price, uint256 _royalty) public onlyOwner {
+        function createtokenBatch(string memory _tokenHash, string memory _tokenType,  string memory _tokenBatchName, string memory _feature, uint256 _editionSize, uint256 _price, uint256 _royalty, string memory _imgURL) public onlyOwner {
             tokenBatchIndex++ ;
             tokenBatch[tokenBatchIndex][1] = _tokenHash;
             tokenType[tokenBatchIndex][1] = _tokenType;        
@@ -71,6 +72,7 @@
             totalCreatedTokens[tokenBatchIndex] = 0;
             totalMintedTokens[tokenBatchIndex] = 0;
             tokenBatchPrice[tokenBatchIndex] = _price;
+            imgUrl[tokenBatchIndex] = _imgURL;
             royaltyMemory[tokenBatchIndex] = _royalty;
             emit NewtokenBatchCreated(_tokenHash, _tokenType, _tokenBatchName, _feature, _editionSize,  _price, _royalty, tokenBatchIndex);
         }
@@ -261,30 +263,31 @@
             sellPrices[_tokenId] = 0;
             //emit tokenputforsale(_tokenId,msg.sender,0,false,now);
         }
-/*        
-            function _buyToken(uint256 _tokenId,address payable addr,uint256 val) private returns(bool){
+        
+        function _buyToken(uint256 _tokenId,address payable addr,uint256 val) private returns(bool){
             //ArtToken memory y = Arts[_tokenId];
             require(isSellings[_tokenId]);
             require(val >= sellPrices[_tokenId]);
             uint fee;
             uint priceAfterFee;
-            uint creatorfee;
             bool firstPurchase = false;
+            address _seller = ownerOf(_tokenId);
             for (uint i=0; i < 5 ; i++){
                 if (tokenOwners[_tokenId] == royaltyAddressMemory[_tokenId][i]) {
                     firstPurchase = true;
                 }
             }
+            uint256 _batchId = referenceTotokenBatch[_tokenId];
+            uint256 _royalLength = royaltyLengthMemory[_batchId];
             if(firstPurchase){
                 fee = SafeMath.div(
                 SafeMath.mul(sellPrices[_tokenId], 10),
                 100
             );
             priceAfterFee = SafeMath.sub(sellPrices[_tokenId], fee);
-            uint256 _batchId = referenceTotokenBatch[_tokenId];
-            uint256 _royalLength = royaltyLengthMemory[_batchId];
-            for (uint i=0; i<5 ; i++){
-                royaltyAddressMemory[_batchId][i].transfer(priceAfterFee/_royalLength); 
+
+            for (uint i=0; i<_royalLength ; i++){
+                payable(royaltyAddressMemory[_batchId][i]).transfer(priceAfterFee/_royalLength); 
             }
             totalBalance += fee;
             }
@@ -293,71 +296,29 @@
                 SafeMath.mul(sellPrices[_tokenId],10),
                 100
             );
-            
             priceAfterFee = SafeMath.sub(sellPrices[_tokenId], fee);
-                y.tokenCreator.transfer(creatorfee);
-                y.tokenOwner.transfer(priceAfterFee);
-                totalBalance = SafeMath.add(SafeMath.div(
-                fee,2),totalbal);
-            }
-            uint index;
-            address seller = y.tokenOwner;
-            y.tokenOwner = addr;
-            y.isSelling = false;
-            y.tokenPrice = y.tokenSellPrice;
-            y.tokenSellPrice = 0;
-            y.auction.bidprice = 0;
-            y.auction.isBidding = false;
-            Arts[_tokenId] = y;
-            ArtToken[] storage z = tokensByOwner[seller];
-            for(uint i = 0;i < z.length;i++){
-                if(_tokenId == z[i].tokenIdentifier){
-                    index = i;
-                }     
-            }
-            delete z[index];
-            tokensByOwner[seller] = z;
-            tokensByOwner[addr].push(y);
+ 
+            for (uint i=0; i<_royalLength ; i++){
+                payable(royaltyAddressMemory[_batchId][i]).transfer((fee/2)/_royalLength); 
+            }            
             
-        address seller = _tokenOwners.get(tokenId);
-        // check selling
-        require(isSellings[tokenId] == true);
-        // check sell price > 0
-        require(sellPrices[tokenId] > 0);
-        // check offer price >= sell price
-        require(offerPrice >= sellPrices[tokenId]);
-        // check seller != buyer
-        require(msg.sender != seller);
+            payable(_seller).transfer(priceAfterFee);
+            totalBalance = SafeMath.add(SafeMath.div(fee,2),totalBalance);
+            }
 
-        // send percentage of cut to contract owner
-        uint256 fee = SafeMath.div(
-            SafeMath.mul(offerPrice, percentageCut),
-            100
-        );
-        uint256 priceAfterFee = SafeMath.sub(offerPrice, fee);
+        // check seller != buyer
+        require(msg.sender != _seller);
 
         // mark not selling
-        isSellings[tokenId] = false;
-
-        // send payment
-        address payable _seller = payable(seller);
-        if (!_seller.send(priceAfterFee)) {
-            // if failed to send, mark selling
-            isSellings[tokenId] = true;
-            return false;
-        }
+        isSellings[_tokenId] = false;
 
         // transfer token
         //removeTokenFrom(seller, tokenId);
         //addTokenTo(msg.sender, tokenId);
-        _holderTokens[seller].remove(tokenId);
-        _holderTokens[msg.sender].add(tokenId);
-        recordTransaction(tokenId, offerPrice);
-        sellPrices[tokenId] = offerPrice;
-        _tokenOwners.set(tokenId, msg.sender);
+        _holderTokens[_seller].remove(_tokenId);
+        _holderTokens[msg.sender].add(_tokenId);
         return true;
         
         }
-*/    
 
 }   
