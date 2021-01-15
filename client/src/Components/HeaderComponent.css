@@ -42,3 +42,15 @@
   background: #ffffff !important;
   color: #5540c7 !important;
 }
+
+a.nav-link,
+a.nav-link.active {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: black !important;
+  width: max-content !important;
+}
+
+li.nav-item {
+  margin-right: 2rem;
+}
