@@ -98,7 +98,7 @@ class AllArt extends Component {
                 </CardBody>
             </Card>
         );
-    }
+    } 
 }
 
 class AllItemComponent extends Component {
