@@ -132,9 +132,9 @@ class Header extends Component {
         >
           <NavbarToggler onClick={this.toggleNav} />
           <NavbarBrand className='mr-auto'>
-            <a target='blank' href='https://www.superworldapp.com/'>
+            <NavLink to='/home'>
               <img src={LogoImg} alt='Logo Image' height='60' width='60' />
-            </a>
+            </NavLink>
           </NavbarBrand>
           <InputGroup
             style={{
