@@ -64,20 +64,26 @@ class AllArt extends Component {
                 : 'visible';
         return (
             <Card className={this.props.art.auction.isBidding ? buk : bak}>
-                
-                <Link
-                    style={{
-                        color: '#212529',
-                        textDecoration: 'none'
-                    }}
-                    to={`/card/${this.props.art.tokenIdentifier}`}>
-                    <CardImg
-                        top
-                        width='100%'
-                        src={this.props.art.imgurl}
-                        alt='Card image'
-                    />
-                    <CardBody>
+              <Link
+                        style={{
+                            color: '#212529',
+                            textDecoration: 'none'
+                        }}
+                        to={`/card/${this.props.art.tokenIdentifier}`}>
+                <CardImg
+                    top
+                    width='100%'
+                    src={this.props.art.imgurl}
+                    alt='Card image'
+                />
+                </Link>
+                <CardBody>
+                    <Link
+                        style={{
+                            color: '#212529',
+                            textDecoration: 'none'
+                        }}
+                        to={`/card/${this.props.art.tokenIdentifier}`}>
                         <CardTitle>
                             Item Title : {this.props.art.tokenTitle}
                         </CardTitle>
@@ -101,26 +107,26 @@ class AllArt extends Component {
                                 ETH
                             </small>
                         </CardText>
-                        <Col sm={{ size: 12 }}>
-                            <Button
-                                className={but}
-                                size='sm'
-                                type='submit'
-                                color='primary'
-                                onClick={this.buyItem}>
-                                Buy Item
-                            </Button>
-                            {'   '}
-                            <Button
-                                className={bux}
-                                size='sm'
-                                type='submit'
-                                color='primary'>
-                                Place Offer
-                            </Button>
-                        </Col>
-                    </CardBody>
-                </Link>
+                    </Link>
+                    <Col sm={{ size: 12 }}>
+                        <Button
+                            className={but}
+                            size='sm'
+                            type='submit'
+                            color='primary'
+                            onClick={this.buyItem}>
+                            Buy Item
+                        </Button>
+                        {'   '}
+                        <Button
+                            className={bux}
+                            size='sm'
+                            type='submit'
+                            color='primary'>
+                            Place Offer
+                        </Button>
+                    </Col>
+                </CardBody>
             </Card>
         );
     }

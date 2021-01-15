@@ -16,7 +16,7 @@ import image7 from '../images/image 29.png';
 import annonuser from '../images/user.png';
 import Web3 from 'web3';
 
-const CardDetail = ({ art }) => {
+const CardDetail = ({ art, accounts, contract }) => {
     // useEffect(() => {
     //     console.log(match);
     // });
@@ -81,6 +81,17 @@ const CardDetail = ({ art }) => {
             price: '0.5ETH'
         }
     ];
+
+    //   const buyItem = async () => {
+    //         const res = await contract.methods
+    //             .buyToken(art.tokenIdentifier)
+    //             .send({
+    //                 from: accounts,
+    //                 value: art.tokenSellPrice,
+    //                 gas: 1000000
+    //             });
+    //         console.log(res);
+    //     };
     return (
         <>
             <div className='container'>
@@ -122,13 +133,41 @@ const CardDetail = ({ art }) => {
                                     </span>
                                 </small>
                             </h4>
+
                             <button
-                                className='btn btn-primary'
+                                className={
+                                    art.isSelling
+                                        ? 'visible btn-primary'
+                                        : 'invisible'
+                                }
+                                onClick={async () => {
+                                    const res = await contract.methods
+                                        .buyToken(art.tokenIdentifier)
+                                        .send({
+                                            from: accounts,
+                                            value: art.tokenSellPrice,
+                                            gas: 1000000
+                                        });
+                                    console.log(res);
+                                }}
                                 style={{
                                     width: '50%',
                                     alignSelf: 'center'
                                 }}>
-                                Buy Now
+                                Buy Item
+                            </button>
+                            <button
+                                className={
+                                    art.isSelling
+                                        ? 'invisible'
+                                        : 'visible btn-primary'
+                                }
+                                color='primary'
+                                style={{
+                                    width: '50%',
+                                    alignSelf: 'center'
+                                }}>
+                                Place Offer
                             </button>
                         </div>
                     </div>
@@ -137,11 +176,13 @@ const CardDetail = ({ art }) => {
                     <Card
                         className='card'
                         style={{
-                            width: '100%',
+                            width: '100%'
                         }}>
-                        <CardHeader className='text-left' style={{ 
-                            backgroundColor: '#fff'
-                        }}>
+                        <CardHeader
+                            className='text-left'
+                            style={{
+                                backgroundColor: '#fff'
+                            }}>
                             <h4>
                                 <i class='fas fa-arrows-alt-v'></i> Trading
                                 History
@@ -152,44 +193,42 @@ const CardDetail = ({ art }) => {
                                 <React.Fragment key={item}>
                                     <CardBody>
                                         <Table>
-                                            <CardSubtitle>
-                                                <img
-                                                    style={{
-                                                        marginRight: '30px'
-                                                    }}
-                                                    width='16px'
-                                                    height='16px'
-                                                    className='rounded-circle'
-                                                    src={item.uimg}></img>
-                                            </CardSubtitle>
-                                            <CardSubtitle
-                                                style={{
-                                                    fontFamily: 'Gibson',
-                                                    fontSize: '1rem',
-                                                    color: '#5540C7'
-                                                }}>
-                                                {' '}
-                                                {item.uname}{' '}
-                                            </CardSubtitle>
-                                        
-                                        <div className='ctext'>
-                                            <CardText
-                                                style={{
-                                                    fontFamily: 'Gibson',
-                                                    fontSize: '15px',
-                                                    color: '#5540C7'
-                                                }}>
-                                                Alimation Creation
-                                            </CardText>
-                                            <CardText
-                                                style={{
-                                                    fontFamily: 'Gibson',
-                                                    fontSize: '12px',
-                                                    color: 'black'
-                                                }}>
-                                                0.5ETH
-                                            </CardText>
-                                        </div>
+                                            <tbody>
+                                                <CardSubtitle>
+                                                    <img
+                                                        style={{
+                                                            marginRight: '30px'
+                                                        }}
+                                                        width='16px'
+                                                        height='16px'
+                                                        className='rounded-circle'
+                                                        src={
+                                                            item.uimg
+                                                        }></img>{' '}
+                                                    {item.uname}{' '}
+                                                </CardSubtitle>
+
+                                                <div className='ctext'>
+                                                    <CardText
+                                                        style={{
+                                                            fontFamily:
+                                                                'Gibson',
+                                                            fontSize: '15px',
+                                                            color: '#5540C7'
+                                                        }}>
+                                                        Alimation Creation
+                                                    </CardText>
+                                                    <CardText
+                                                        style={{
+                                                            fontFamily:
+                                                                'Gibson',
+                                                            fontSize: '12px',
+                                                            color: 'black'
+                                                        }}>
+                                                        0.5ETH
+                                                    </CardText>
+                                                </div>
+                                            </tbody>
                                         </Table>
                                     </CardBody>
                                 </React.Fragment>
