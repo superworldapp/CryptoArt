@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 //import moment from 'moment';
-import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody,CardText,Modal,ModalHeader,ModalBody} from 'reactstrap';
+import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody,
+ CardSubtitle, CardText,Modal,ModalHeader,ModalBody} from 'reactstrap';
 import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
 import axios from 'axios';
-
+import "./MyArtComponent.css";
 import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
 import * as util from 'util';
 import loader from '../images/loader.svg';
+import annonuser from "../images/user.png";
 const SHA256 = require('crypto-js/sha256');
+
 
 const S3 = require('aws-sdk/clients/s3');
 const AWS = require('aws-sdk');
@@ -111,7 +114,7 @@ class Allpatrender extends Component {
         console.log(res);
     }
     render() {
-        let but = this.props.art.isSelling ? 'visible' : 'invisible';
+        let but = this.props.art.isSelling ? ' ' : 'hidden';
         let bak = this.props.art.isSelling ? 'bg-success text-white' : '';
         let buk = this.props.art.auction.isBidding ? 'bg-warning' : '';
         console.log(this.props.art.imgUrl);
@@ -123,27 +126,93 @@ class Allpatrender extends Component {
                 ? 'invisible'
                 : 'visible';
         let reSellOrSell = this.props.art.isSelling
-            ? 'ReSell Item'
-            : 'Sell Item';
+            ? 'ReSell'
+            : 'Sell';
             let Auc = this.props.art.auction.isBidding
             ? 'End Auction'
-            : 'Start Auction';
+            : 'Auction';
         return (
-            <Card className={this.props.art.auction.isBidding? buk:bak}>
+            <Card className={this.props.art.auction.isBidding? buk:bak} className="displayCard" >
                 <Link to={`/card/${this.props.art.tokenIdentifier}`}>
-                {/* <a href={this.props.art.imgurl} target='_blank'> */}
+                <a href={this.props.art.imgurl} target='_blank'>
                     <CardImg
                         top
-                        width='100%'
+                        className="displayImage"
                         src={this.props.art.imgurl}
                         alt='Card image'
                     />
-                {/* </a> */}
-                <CardBody>
-                    <CardTitle>
+                </a>
+                <CardBody className="displayText">
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    }}>
+                    <CardTitle >
+                    <img
+                    style={{marginRight: '30px' }}
+                        width='16px'
+                        height='16px'
+                        className='rounded-circle'
+                        src={annonuser}
+                         ></img>
+                        </CardTitle>
+                        <CardTitle
+                            style={{
+                                fontFamily: 'Gibson',
+                                fontSize: '14px',
+                                color: '#5540C7',
+                                }}> Created by {this.props.art.tokenTitle} </CardTitle>
+                    </div>
+                    
+                    {/* <CardTitle className="ctext">
                         Item Title : {this.props.art.tokenTitle}
-                    </CardTitle>
-                    <CardText>
+                    </CardTitle> */}
+                    <div className="ctext" style={{padding:'2px'}}>
+                                    <CardSubtitle style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'#B3B3B3',   
+                                    }}> #Art #Rare 
+                                    </CardSubtitle>
+                                    <CardSubtitle
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'#B3B3B3',
+                                    }}
+                                    >
+                                        Price
+                                    </CardSubtitle>
+                                </div>
+                                <div className="ctext">
+                                    <CardText
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                    }}
+                                    >
+                                        {this.props.art.tokenTitle} 
+                                    </CardText>
+                                    <CardText
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                    }}
+                                    >
+                                    {Web3.utils.fromWei(
+                                this.props.art.tokenSellPrice.toString(),
+                                'ether'
+                            )}{' '}
+                            ETH
+                                    </CardText>
+                                </div>
+                    {/* <CardText>
                         <small>
                             Item Creator : {this.props.art.tokenCreator}
                         </small>
@@ -157,55 +226,99 @@ class Allpatrender extends Component {
                             )}{' '}
                             ETH
                         </small>
-                    </CardText>
-                    <Col sm={{ size: 12 }}>
-                        <Button
-                            className='visible'
-                            size='sm'
-                            type='submit'
-                            color='primary'
+                    </CardText> */}
+                    <div className="ctext">
+                        <button
+                            className='abtn'
+                            // color='primary'
                             onClick={this.toggleModal}>
                             {reSellOrSell}
-                        </Button>
-                        {'   '}
-                        <Button
+                        </button>
+                          {/* <Button
                             className={but}
-                            size='sm'
                             type='submit'
                             color='primary'
                             onClick={this.DeSale}>
                             DeSell Item
-                        </Button>
-                        <Button
-                            className='visible'
-                            size='sm'
+                        </Button>   */}
+                        <button
+                            className='abtn'
                             type='submit'
-                            color='primary'
+                            // color='primary'
                             onClick={this.props.art.auction.isBidding ? this.EndAuction : this.StartAuction }>
                             {Auc}
-                        </Button>
+                        </button>
                         <Modal
                             isOpen={this.state.isModalOpen}
                             toggle={this.toggleModal}
-                            className='modal-md'>
+                            className='modal_popup'>
                             <ModalHeader
                                 toggle={this.toggleModal}
                                 className='pl-5'>
                                 Put For Sale
                             </ModalHeader>
-                            <Card className='pb-5'>
+                            <Card className='artCard'>
                                 <CardImg
                                     top
-                                    width='100%'
+                                    style={{width:'100&', paddingRight:'10px',paddingLeft:'10px'}}
                                     src={this.props.art.imgurl}
                                     alt='Card image'
                                 />
-                                <p className='m-auto p-2'>
-                                    Art Title: {this.props.art.tokenTitle}
-                                </p>
-
-                                <div className='row m-auto pt-2'>
-                                    <p>Art Sell Price : </p>
+                                <CardBody
+                                >
+                                <div className="ctext" style={{padding:'2px'}}>
+                                    <CardSubtitle style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'#B3B3B3',
+                                        
+                                    }}>
+                                    #Art #Rare 
+                                    
+                                    </CardSubtitle>
+                                    <CardSubtitle
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'#B3B3B3',
+                                    }}
+                                    >
+                                        Price
+                                    </CardSubtitle>
+                                </div>
+                                <div className="ctext">
+                                    <CardText
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                    }}
+                                    >
+                                        {this.props.art.tokenTitle} 
+                                    </CardText>
+                                    <CardText
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                    }}
+                                    >
+                                        1.2ETH
+                                    </CardText>
+                                </div>
+                                <div className="ctext1">
+                                    <p
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                    }}
+                                    >Sell Price : </p>
                                     <p>
                                         {' '}
                                         <Input
@@ -217,19 +330,44 @@ class Allpatrender extends Component {
                                             }></Input>
                                     </p>
                                 </div>
-                                <p className='m-auto p-2'>
-                                    <Button
+                                <div className="ctext1">
+                                    <p
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                    }}
+                                    >Token : </p>
+                                    <p>
+                                        <Input
+                                            type='number'
+                                            id='nos'
+                                            name='nos'
+                                            onChange={this.handleInputChange}
+                                        />
+                                    </p>
+                                </div>
+                                <div>
+                                <button
+                                    className="abtn" style={{
+                                        left:'30%'
+                                    }}
                                         type='submit'
                                         onClick={this.putForSale}>
                                         Confirm
-                                    </Button>{' '}
-                                </p>
+                                    </button>{' '}
+                                </div>
+                                </CardBody>
+                                
+                                
                             </Card>
                         </Modal>
-                    </Col>
+                    </div>
                 </CardBody>
                 </Link>
             </Card>
+            
         );
     }
 }
@@ -367,14 +505,45 @@ class MyItemComponent extends Component {
 
         let ch = 'visible';
         return (
-            <div className='container'>
-                <h2>My Items</h2>
-                <Button
-                    color='success'
-                    className={ch}
+            <div className='artContainer'>
+                <div style={{
+
+                    marginLeft:'2px'
+                }} >
+                    
+                <p style={{fontFamily:'Gibson', fontSize:'30px', fontWeight:'bold', marginTop:'10px', textAlign:'left'}}>
+                    My Arts
+                </p>
+
+                <div  style={{ display:'flex', justifyContent:'space-between'}}>
+                <p
+                style={{  marginLeft:'2px', position:'relative' }}
+                >
+                <button className="abtn">All</button>
+                 <button className="abtn">Offer Made </button> 
+                <button className="abtn">Offer Received </button> 
+                <button className="abtn">My Creations </button> 
+                </p>
+                <p
+                style={{  marginLeft:'2px', position:'relative' }}
+                >
+                <button
+                    className='abtn' 
+                    style={{backgroundColor:'#5548C7', color:'white'}}
                     onClick={this.toggleModal1}>
-                    Add Art
-                </Button>
+                    + {''}Create ARTWORK
+                </button>
+
+                </p>
+                
+
+                </div> 
+                 
+
+                
+                
+                </div>
+
 
                 <Modal
                     isOpen={this.state.isModalOpen1}
@@ -467,6 +636,7 @@ class MyItemComponent extends Component {
                 <br />
                 <br />
                 <br />
+                <br/><br/><br/><br/><br/><br/><br/>
             </div>
         );
     }
