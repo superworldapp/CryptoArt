@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #5540c7;
+      }
+
+      .cls-2, .cls-3, .cls-5 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke: #707070;
+      }
+
+      .cls-3 {
+        stroke: #5540c7;
+        stroke-width: 2px;
+      }
+
+      .cls-4 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_513" data-name="Group 513" transform="translate(-1263 -31)">
+    <g id="Group_9" data-name="Group 9" transform="translate(1270.301 36.035)">
+      <path id="Icon_ionic-md-notifications" data-name="Icon ionic-md-notifications" class="cls-1" d="M16.455,29.239A2.575,2.575,0,0,0,19,26.653h-5.1A2.575,2.575,0,0,0,16.455,29.239Zm8.282-7.759V14.367A8.364,8.364,0,0,0,18.366,6.22V5.315a1.911,1.911,0,1,0-3.822,0V6.22a8.364,8.364,0,0,0-6.371,8.147V21.48L5.625,24.066V25.36h21.66V24.066Z" transform="translate(-5.625 -3.375)"/>
+      <path id="Path_2411" data-name="Path 2411" class="cls-2" d="M0,20.8" transform="translate(0 -0.733)"/>
+    </g>
+    <g id="Ellipse_153" data-name="Ellipse 153" class="cls-3" transform="translate(1263 31)">
+      <circle class="cls-4" cx="18" cy="18" r="18"/>
+      <circle class="cls-5" cx="18" cy="18" r="17"/>
+    </g>
+  </g>
+</svg>

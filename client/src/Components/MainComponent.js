@@ -6,11 +6,12 @@ import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import AllItemComponent from './AllArtComponent';
 import MyItemComponent from './MyArtComponent';
+import CardDetail from './CardDetail';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './FooterComponent';
 
-
 //import HDWalletProvider from "@truffle/hdwallet-provider";
+let allDocs = [];
 
 class Main extends Component {
     constructor(props) {
@@ -22,7 +23,8 @@ class Main extends Component {
             balance: 0,
             contract: null,
             res: null,
-            registered: 0
+            registered: 0,
+            art: null
         };
     }
 
@@ -49,6 +51,18 @@ class Main extends Component {
                 contract: instance,
                 balance
             });
+            let res = await this.state.contract?.methods.tokenCount().call();
+            console.log(res);
+
+            let response = [];
+            for (let i = 1; i <= res; i++) {
+                let rex = await this.state.contract?.methods.Arts(i).call();
+                response.push(rex);
+            }
+            allDocs = [];
+            allDocs = response;
+            console.log(response);
+            this.setState({ art: allDocs });
         } catch (error) {
             // Catch any errors for any of the above operations.
 
@@ -57,6 +71,20 @@ class Main extends Component {
     };
 
     render() {
+        const CardWithId = ({ match }) => {
+            return (
+                <CardDetail
+                    art={
+                        this.state.art?.filter(
+                            (singleart) =>
+                                singleart.tokenIdentifier === match.params.id
+                        )[0]
+                    }
+                    contract={this.state.contract}
+                    accounts={this.state.accounts}
+                />
+            );
+        };
         return (
             <div className='App'>
                 <Header
@@ -96,6 +124,20 @@ class Main extends Component {
                             />
                         )}
                     />
+                    <Route path='/card/:id' component={CardWithId} />
+                    {/* <Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } /> */}
+
+                    {/* <Route
+                        path='/card/:id'
+                        component={(props) => (
+                            <CardDetail
+                            
+                                contract={this.state.contract}
+                                accounts={this.state.accounts}
+                                art = {this.state.art}
+                            />
+                        )}
+                    /> */}
 
                     <Redirect to='/home' />
                 </Switch>
