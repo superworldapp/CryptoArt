@@ -34,6 +34,7 @@
     border: 2px solid #5540c7;
     background-color: white;
     color: black;
+    text-transform: uppercase;
 }
 .abtn:hover {
     background-color:  #5540c7;
@@ -53,5 +54,21 @@
 .ctext1{
     display: flex;
     justify-content: center;
+}
+
+.displayCard{
+    height: 110%;
+    width: 90%;
+    position: relative;
+}
+.displayImage{
+    position: relative;
+    height: 80%;
+    width: 100%;
+    padding:2%;
+}
+.displayText{
+    position: absolute;
+    top:60%;
 }
 

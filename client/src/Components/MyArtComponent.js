@@ -113,7 +113,7 @@ class Allpatrender extends Component {
         console.log(res);
     }
     render() {
-        let but = this.props.art.isSelling ? 'visible' : 'invisible';
+        let but = this.props.art.isSelling ? ' ' : 'hidden';
         let bak = this.props.art.isSelling ? 'bg-success text-white' : '';
         let buk = this.props.art.auction.isBidding ? 'bg-warning' : '';
         console.log(this.props.art.imgUrl);
@@ -132,19 +132,19 @@ class Allpatrender extends Component {
             : 'Auction';
         return (
             
-            <Card className={this.props.art.auction.isBidding? buk:bak} >
+            <Card className={this.props.art.auction.isBidding? buk:bak} className="displayCard" >
                 <a href={this.props.art.imgurl} target='_blank'>
                     <CardImg
                         top
-                        height='100%'
+                        className="displayImage"
                         src={this.props.art.imgurl}
                         alt='Card image'
                     />
                 </a>
-                <CardBody>
+                <CardBody className="displayText">
                 <div style={{
                     display: 'flex',
-                    justifyContent: 'flex-startr',
+                    justifyContent: 'flex-start',
                     }}>
                     <CardTitle >
                     <img
@@ -227,26 +227,26 @@ class Allpatrender extends Component {
                         </small>
                     </CardText> */}
                     <div className="ctext">
-                        <Button
+                        <button
                             className='abtn'
                             // color='primary'
                             onClick={this.toggleModal}>
                             {reSellOrSell}
-                        </Button>
-                        {/* <Button
+                        </button>
+                          {/* <Button
                             className={but}
                             type='submit'
                             color='primary'
                             onClick={this.DeSale}>
                             DeSell Item
-                        </Button> */}
-                        <Button
+                        </Button>   */}
+                        <button
                             className='abtn'
                             type='submit'
                             // color='primary'
                             onClick={this.props.art.auction.isBidding ? this.EndAuction : this.StartAuction }>
                             {Auc}
-                        </Button>
+                        </button>
                         <Modal
                             isOpen={this.state.isModalOpen}
                             toggle={this.toggleModal}
@@ -348,14 +348,14 @@ class Allpatrender extends Component {
                                     </p>
                                 </div>
                                 <div>
-                                <Button
+                                <button
                                     className="abtn" style={{
                                         left:'30%'
                                     }}
                                         type='submit'
                                         onClick={this.putForSale}>
                                         Confirm
-                                    </Button>{' '}
+                                    </button>{' '}
                                 </div>
                                 </CardBody>
                                 
@@ -505,28 +505,43 @@ class MyItemComponent extends Component {
         return (
             <div className='artContainer'>
                 <div style={{
-                    display:'flex',
-                    justifyContent:'flex-start',
+
                     marginLeft:'2px'
                 }} >
                     
-                <p style={{fontFamily:'Gibson', fontSize:'30px', fontWeight:'bold', marginTop:'10px', marginLeft:'3%'}}>
+                <p style={{fontFamily:'Gibson', fontSize:'30px', fontWeight:'bold', marginTop:'10px', textAlign:'left'}}>
                     My Arts
                 </p>
-                <div style={{ marginTop:'4%', marginLeft:'2px', position:'absolute'}}>
+
+                <div  style={{ display:'flex', justifyContent:'space-between'}}>
+                <p
+                style={{  marginLeft:'2px', position:'relative' }}
+                >
                 <button className="abtn">All</button>
-                <button className="abtn">Offer Made </button> 
+                 <button className="abtn">Offer Made </button> 
                 <button className="abtn">Offer Received </button> 
-                <button className="abtn">My Creations </button>
+                <button className="abtn">My Creations </button> 
+                </p>
+                <p
+                style={{  marginLeft:'2px', position:'relative' }}
+                >
+                <button
+                    className='abtn' 
+                    style={{backgroundColor:'#5548C7', color:'white'}}
+                    onClick={this.toggleModal1}>
+                    + {''}Create ARTWORK
+                </button>
+
+                </p>
+                
 
                 </div> 
-                  
+                 
+
+                
+                
                 </div>
-                <Button
-                    className='abtn'
-                    onClick={this.toggleModal1}>
-                    Create ARTW
-                </Button>
+
 
                 <Modal
                     isOpen={this.state.isModalOpen1}
@@ -619,6 +634,7 @@ class MyItemComponent extends Component {
                 <br />
                 <br />
                 <br />
+                <br/><br/><br/><br/><br/><br/><br/>
             </div>
         );
     }
