@@ -167,7 +167,7 @@ const CardDetail = ({ art, accounts, contract }) => {
                                     width: '50%',
                                     alignSelf: 'center'
                                 }}>
-                                Place Offer
+                                Place Bid
                             </button>
                         </div>
                     </div>

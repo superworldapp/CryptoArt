@@ -120,10 +120,13 @@ class AllArt extends Component {
                         {'   '}
                         <Button
                             className={bux}
-                            size='sm'
+                            size='md'
                             type='submit'
-                            color='primary'>
-                            Place Offer
+                            color='primary'
+                            style={
+                                {width: '50%'}
+                            }>
+                            Bid
                         </Button>
                     </Col>
                 </CardBody>
