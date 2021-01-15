@@ -121,8 +121,6 @@ class Header extends Component {
   };
 
   render() {
-            
-
     return (
       <>
         <Navbar
@@ -134,7 +132,9 @@ class Header extends Component {
         >
           <NavbarToggler onClick={this.toggleNav} />
           <NavbarBrand className='mr-auto'>
-            <img src={LogoImg} alt='Logo Image' height='60' width='60' />
+            <a target='blank' href='https://www.superworldapp.com/'>
+              <img src={LogoImg} alt='Logo Image' height='60' width='60' />
+            </a>
           </NavbarBrand>
           <InputGroup
             style={{
@@ -168,11 +168,11 @@ class Header extends Component {
               navbar
               className='m-auto d-flex align-items-center justify-content-end'
             >
-              <NavItem>
+              {/* <NavItem>
                 <NavLink className='nav-link' to='/home'>
                   Home
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <NavLink
                   className='nav-link'
@@ -185,7 +185,7 @@ class Header extends Component {
                 </NavLink>
               </NavItem>
 
-              <NavItem>
+              {/* <NavItem>
                 <NavLink className='nav-link' to='/myart'>
                   <i
                     style={{
@@ -195,7 +195,7 @@ class Header extends Component {
                   ></i>
                   My Collections
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
 
               {Auth.getAuth() ? (
                 <Grid
@@ -369,11 +369,10 @@ class Header extends Component {
                             )}
                         </small>
                     </h6> */}
-                </Navbar>
-                
-            </>
-        );
-    }
+        </Navbar>
+      </>
+    );
+  }
 }
 
 export default Header;
