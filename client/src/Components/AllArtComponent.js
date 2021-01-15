@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
-import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody,CardText,Modal,ModalHeader,
-ModalBody} from 'reactstrap';
+import { Link } from 'react-router-dom';
+import {
+    Button,
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    Col,
+    Card,
+    CardImg,
+    CardTitle,
+    CardBody,
+    CardText,
+    Modal,
+    ModalHeader,
+    ModalBody
+} from 'reactstrap';
 import Web3 from 'web3';
 let allDocs = [];
 class AllArt extends Component {
@@ -48,35 +63,51 @@ class AllArt extends Component {
                 ? 'invisible'
                 : 'visible';
         return (
-            <Card className={this.props.art.auction.isBidding? buk:bak}>
+            <Card className={this.props.art.auction.isBidding ? buk : bak}>
+              <Link
+                        style={{
+                            color: '#212529',
+                            textDecoration: 'none'
+                        }}
+                        to={`/card/${this.props.art.tokenIdentifier}`}>
                 <CardImg
                     top
                     width='100%'
                     src={this.props.art.imgurl}
                     alt='Card image'
                 />
+                </Link>
                 <CardBody>
-                    <CardTitle>
-                        Item Title : {this.props.art.tokenTitle}
-                    </CardTitle>
-                    <CardText>
-                        <small>
-                            Item Creator : {this.props.art.tokenCreator}
-                        </small>
-                    </CardText>
-                    <CardText>
-                        <small>Item Owner : {this.props.art.tokenOwner}</small>
-                    </CardText>
-                    <CardText className={but}>
-                        <small>
-                            Item Sell Price :{' '}
-                            {Web3.utils.fromWei(
-                                this.props.art.tokenSellPrice.toString(),
-                                'ether'
-                            )}{' '}
-                            ETH
-                        </small>
-                    </CardText>
+                    <Link
+                        style={{
+                            color: '#212529',
+                            textDecoration: 'none'
+                        }}
+                        to={`/card/${this.props.art.tokenIdentifier}`}>
+                        <CardTitle>
+                            Item Title : {this.props.art.tokenTitle}
+                        </CardTitle>
+                        <CardText>
+                            <small>
+                                Item Creator : {this.props.art.tokenCreator}
+                            </small>
+                        </CardText>
+                        <CardText>
+                            <small>
+                                Item Owner : {this.props.art.tokenOwner}
+                            </small>
+                        </CardText>
+                        <CardText className={but}>
+                            <small>
+                                Item Sell Price :{' '}
+                                {Web3.utils.fromWei(
+                                    this.props.art.tokenSellPrice.toString(),
+                                    'ether'
+                                )}{' '}
+                                ETH
+                            </small>
+                        </CardText>
+                    </Link>
                     <Col sm={{ size: 12 }}>
                         <Button
                             className={but}
@@ -89,10 +120,13 @@ class AllArt extends Component {
                         {'   '}
                         <Button
                             className={bux}
-                            size='sm'
+                            size='md'
                             type='submit'
-                            color='primary'>
-                            Place Offer
+                            color='primary'
+                            style={
+                                {width: '50%'}
+                            }>
+                            Bid
                         </Button>
                     </Col>
                 </CardBody>

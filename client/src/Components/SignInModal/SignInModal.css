@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'Gibson';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://s3.amazonaws.com/superworldapp.com/fonts/GibsonRegular.OTF');
+}
+
+@font-face {
+  font-family: 'GibsonItalic';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://s3.amazonaws.com/superworldapp.com/fonts/GibsonItalic.OTF');
+}
+
+@font-face {
+  font-family: 'GibsonSemiBold';
+  font-style: bold;
+  font-weight: 400;
+  src: url('https://s3.amazonaws.com/superworldapp.com/fonts/GibsonSemiBd.OTF');
+}
+
+.LoginButton {
+  background: #5540c7 !important;
+  border-radius: 50px !important;
+  border: 2px solid #5540c7 !important;
+  color: #ffffff !important;
+  height: 48px !important;
+  padding: 0 90px !important;
+  font-family: 'Gibson' !important;
+  /* text-transform: 'capitalize' !important; */
+}
+
+.LoginButton:disabled {
+  background: #ffffff !important;
+  border-radius: 50px !important;
+  border: 2px solid #b9b9b9 !important;
+  color: #b9b9b9 !important;
+  height: 48px !important;
+  padding: 0 90px !important;
+  font-family: 'Gibson' !important;
+  /* text-transform: 'capitalize' !important; */
+}
+
+.emailInput fieldset {
+  border-radius: 100px !important;
+  height: 40px;
+  margin: auto;
+  border: none;
+  font-family: 'Gibson';
+  font-size: '13pt';
+  padding: 20px;
+  /* width: 480px;
+  height: 40px; */
+}
+
+.emailInput {
+  -moz-transition: all 0.1s ease-in;
+  -o-transition: all 0.1s ease-in;
+  -webkit-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
+  background: #f5f5f5;
+  padding: 20px;
+}
+
+.LoginButton:hover {
+  background: #ffffff !important;
+  color: #5540c7 !important;
+}
