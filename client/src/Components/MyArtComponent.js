@@ -626,15 +626,10 @@ class MyItemComponent extends Component {
                         </Form>
                     </ModalBody>
                 </Modal>
-                <br />
-                <br />
-                <div className='row'>{Menu}</div>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br/><br/><br/><br/><br/><br/><br/>
+                
+                <div className='row'>{Menu}
+                </div>
+                
             </div>
         );
     }
