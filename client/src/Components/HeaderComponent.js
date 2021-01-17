@@ -52,7 +52,6 @@ class Header extends Component {
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.getnewHash = this.getnewHash.bind(this);
-    this.toggleSignIn = this.toggleSignIn.bind(this);
     this.openWalletModal = this.openWalletModal.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleNotifyDropDownClick = this.handleNotifyDropDownClick.bind(this);
@@ -63,13 +62,6 @@ class Header extends Component {
 
   toggleNav() {
     this.setState({ isNavOpen: !this.state.isNavOpen });
-  }
-
-  toggleSignIn() {
-    this.context.dispatch({
-      type: 'TOGGLE_SIGN_IN_MODAL',
-      payload: !this.context.state.signInModalIsOpen,
-    });
   }
 
   openWalletModal = () => {
@@ -196,7 +188,6 @@ class Header extends Component {
                   My Collections
                 </NavLink>
               </NavItem> */}
-
               {Auth.getAuth() ? (
                 <Grid
                   container
@@ -224,6 +215,7 @@ class Header extends Component {
                             <Grid item>Wallet Connected</Grid>
                             <Grid item>
                               <img
+                                id='green-dot'
                                 style={{ width: '10px' }}
                                 src={greenDot}
                                 alt=''
@@ -326,14 +318,13 @@ class Header extends Component {
                   </Grid>
                 </Grid>
               )}
-
-              <NavItem></NavItem>
               <NavItem>
                 <NavLink className='nav-link' to='/myart'>
                   <img
-                    width='38px'
-                    height='38px'
+                    width='30px'
+                    height='30px'
                     className='rounded-circle'
+                    id='profile'
                     src={`data:image/png;base64,${new Identicon(
                       new Date().toString()
                     )}`}
@@ -344,9 +335,10 @@ class Header extends Component {
               <NavItem>
                 <NavLink className='nav-link' to='#'>
                   <img
-                    width='24px'
+                    width='30px'
+                    height='30px'
                     className='rounded-circle'
-                    src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/1200px-Icon-round-Question_mark.svg.png'
+                    src={helpIcon}
                     alt='question-mark'
                   />
                 </NavLink>
