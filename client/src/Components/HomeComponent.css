@@ -205,3 +205,15 @@ a {
   margin-left: 7.5%;
   margin-top: 16%;
 }
+
+#root > div > div > div > div > div:nth-child(7) > div {
+  height: fit-content !important;
+}
+
+#root > div > div > div > div > div:nth-child(9) > div {
+  height: fit-content !important;
+}
+
+#root > div > div > div > div > div:nth-child(11) > div {
+  height: fit-content !important;
+}

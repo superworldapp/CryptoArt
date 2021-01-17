@@ -167,7 +167,7 @@ class Home extends Component {
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
-                  paddingTop: '10%',
+                  paddingTop: '7%',
                 }}
               >
                 <p
@@ -179,6 +179,598 @@ class Home extends Component {
                 >
                   {' '}
                   Trending
+                </p>
+                <a
+                  href=''
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontWeight: '550',
+                    fontSize: '18px',
+                  }}
+                >
+                  {' '}
+                  View more <img src={svg1} alt='svg1' />
+                </a>
+              </div>
+              <div className='rowImages'>
+                <Card className='imageCards'>
+                  <CardImg top width='100%' src={image3} alt='image3'></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '14px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        {' '}
+                        User Name{' '}
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '15px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        Alimation Creation
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '12px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg top width='100%' src={image4} alt='image3'></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '14px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        {' '}
+                        User Name{' '}
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '15px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        Alimation Creation
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '12px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg top width='100%' src={image5} alt='image3'></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '14px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        {' '}
+                        User Name{' '}
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '15px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        Alimation Creation
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '12px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg top width='100%' src={image6} alt='image3'></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '14px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        {' '}
+                        User Name{' '}
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '15px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        Alimation Creation
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '12px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg top width='100%' src={image7} alt='image3'></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '14px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        {' '}
+                        User Name{' '}
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '15px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        Alimation Creation
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '12px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                  </CardBody>
+                </Card>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  paddingTop: '7%',
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: '18px',
+                    fontFamily: 'Gibson',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {' '}
+                  Newest
+                </p>
+                <a
+                  href=''
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontWeight: '550',
+                    fontSize: '18px',
+                  }}
+                >
+                  {' '}
+                  View more <img src={svg1} alt='svg1' />
+                </a>
+              </div>
+              <div className='rowImages'>
+                <Card className='imageCards'>
+                  <CardImg top width='100%' src={image3} alt='image3'></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '14px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        {' '}
+                        User Name{' '}
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '15px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        Alimation Creation
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '12px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg top width='100%' src={image4} alt='image3'></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '14px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        {' '}
+                        User Name{' '}
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '15px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        Alimation Creation
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '12px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg top width='100%' src={image5} alt='image3'></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '14px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        {' '}
+                        User Name{' '}
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '15px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        Alimation Creation
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '12px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg top width='100%' src={image6} alt='image3'></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '14px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        {' '}
+                        User Name{' '}
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '15px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        Alimation Creation
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '12px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg top width='100%' src={image7} alt='image3'></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '14px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        {' '}
+                        User Name{' '}
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '15px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        Alimation Creation
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '12px',
+                          color: '#5540C7',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                  </CardBody>
+                </Card>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  paddingTop: '7%',
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: '18px',
+                    fontFamily: 'Gibson',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {' '}
+                  Popular in Real Estate Marketplace in SuperWorld
                 </p>
                 <a
                   href=''
