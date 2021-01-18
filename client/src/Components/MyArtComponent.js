@@ -542,12 +542,12 @@ class MyItemComponent extends Component {
                 <p
                 style={{  marginLeft:'2px', position:'relative' }}
                 >
-                <button
+                <Button
                     className='abtn' 
                     style={{backgroundColor:'#5548C7', color:'white'}}
                     onClick={this.toggleModal1}>
                     + {''}Create ARTWORK
-                </button>
+                </Button>
 
                 </p>
                 </div> 
