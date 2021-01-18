@@ -49,8 +49,22 @@ a.nav-link.active {
   text-transform: uppercase;
   color: black !important;
   width: max-content !important;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
-li.nav-item {
-  margin-right: 2rem;
+.MuiGrid-spacing-xs-2 > .MuiGrid-item {
+  padding: 0 !important;
+}
+
+#profile {
+  border: 2px solid #5540c7;
+}
+
+.navbar-collapse {
+  flex-grow: 0;
+}
+
+#green-dot {
+  display: flex;
 }

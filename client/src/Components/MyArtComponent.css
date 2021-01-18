@@ -1,3 +1,8 @@
+.hidden{
+    overflow-y: auto;
+}
+
+
 .modal-title{
     font-family: Gibson;
     font-size: 20px;
@@ -56,19 +61,45 @@
     justify-content: center;
 }
 
-.displayCard{
-    height: 110%;
-    width: 90%;
-    position: relative;
-}
+/* .displayCard{
+    height: 130% !important;
+    width: 100%;
+} */
 .displayImage{
     position: relative;
-    height: 80%;
+    height: 20rem;
     width: 100%;
-    padding:2%;
+    padding: 5% 15%;
+
 }
 .displayText{
     position: absolute;
-    top:60%;
 }
 
+.card{
+    height: 33rem !important;
+    width: 30rem !important;
+    display: flex;
+    flex-flow: column;
+}
+
+.a{
+    text-decoration: none;
+}
+h3{
+    font-family:Gibson;
+    font-size: 15px;
+    color:black;
+    text-transform: uppercase;
+    margin: 2% 0% 2% 2%;
+}
+.form-control{
+    display: flex;
+    border-radius: 2rem;
+    width: 70%;
+    margin-left: 0.5rem;
+
+}
+.form-group{
+    display: flex;
+}
