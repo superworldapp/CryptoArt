@@ -274,7 +274,7 @@ class Allpatrender extends Component {
                             <Card className='artCard'>
                                 <CardImg
                                     top
-                                    style={{width:'100&', paddingRight:'10px',paddingLeft:'10px'}}
+                                    className="displayImage"
                                     src={this.props.art.imgurl}
                                     alt='Card image'
                                 />
@@ -331,6 +331,7 @@ class Allpatrender extends Component {
                                         fontFamily:'Gibson',
                                         fontSize:'15px',
                                         color:'black',
+                                        marginTop:'2%'
                                     }}
                                     >Sell Price : </p>
                                     <p>
@@ -344,28 +345,10 @@ class Allpatrender extends Component {
                                             }></Input>
                                     </p>
                                 </div>
-                                <div className="ctext1">
-                                    <p
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                    }}
-                                    >Token : </p>
-                                    <p>
-                                        <Input
-                                            type='number'
-                                            id='nos'
-                                            name='nos'
-                                            onChange={this.handleInputChange}
-                                        />
-                                    </p>
-                                </div>
                                 <div>
                                 <button
                                     className="abtn" style={{
-                                        left:'30%'
+                                        left:'32%', color: 'white', backgroundColor:'#5540C7'
                                     }}
                                         type='submit'
                                         onClick={this.putForSale}>
