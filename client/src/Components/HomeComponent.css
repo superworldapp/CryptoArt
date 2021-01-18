@@ -1,144 +1,5 @@
 .hidden {
   overflow-x: hidden;
-<<<<<<< HEAD
-}
-.Home {
-  display: flex;
-  justify-content: space-around;
-}
-.upperView {
-  display: flex;
-  justify-content: space-between;
-}
-
-.col1 {
-  width: 60%;
-  float: left;
-  display: flex;
-  margin-top: 4rem;
-}
-.col2 {
-  width: 40%;
-  display: flex;
-}
-.upperView {
-  display: flex;
-  justify-content: space-between;
-}
-
-.img1 {
-  position: relative;
-  width: 421px;
-  height: 331px;
-  right: 130px;
-  padding: 20px;
-  top: 400px;
-}
-.img2 {
-  position: relative;
-  width: 500px;
-  height: 438px;
-  left: 5%;
-  margin-top: 2px;
-}
-
-a {
-  color: #5540c7;
-  text-decoration: underline;
-}
-
-#header {
-  margin-top: 5rem;
-  font-family: 'gibson', sans-serif;
-  font-weight: 600;
-  text-align: left;
-  width: 30rem;
-}
-
-.text1 {
-  font-family: 'gibson', sans-serif;
-  font-weight: bold;
-  color: #888888;
-  font-size: 17px;
-  margin: 2px;
-  margin-top: 2rem;
-  width: 100%;
-  /* position: relative; */
-  /* bottom: -2%; */
-  /* left: 12%; */
-  text-align: left;
-}
-=======
-}
-.Home {
-  display: flex;
-  justify-content: space-around;
-}
-.upperView {
-  display: flex;
-  justify-content: space-between;
-}
-
-.col1 {
-  width: 60%;
-  float: left;
-  display: flex;
-  margin-top: 4rem;
-}
-.col2 {
-  width: 40%;
-  display: flex;
-}
-.upperView {
-  display: flex;
-  justify-content: space-between;
-}
-
-.img1 {
-  position: relative;
-  width: 421px;
-  height: 331px;
-  right: 130px;
-  padding: 20px;
-  top: 400px;
-}
-.img2 {
-  position: relative;
-  width: 500px;
-  height: 438px;
-  left: 5%;
-  margin-top: 2px;
-}
-
-a {
-  color: #5540c7;
-  text-decoration: underline;
-}
-
-#header {
-  margin-top: 5rem;
-  font-family: 'gibson', sans-serif;
-  font-weight: 600;
-  text-align: left;
-  width: 30rem;
-}
-
-.text1 {
-  font-family: 'gibson', sans-serif;
-  font-weight: bold;
-  color: #888888;
-  font-size: 17px;
-  margin: 2px;
-  margin-top: 2rem;
-  width: 100%;
-  /* position: relative; */
-  /* bottom: -2%; */
-  /* left: 12%; */
-  text-align: left;
-}
->>>>>>> dev2
-.start-btn {
-  /* position: absolute; */
   opacity: 0.9;
   margin: 0 10px;
   border-radius: 2em;
@@ -195,10 +56,7 @@ a {
   display: flex;
   justify-content: space-between;
   padding: 5px;
-<<<<<<< HEAD
-=======
   height: 1.75rem;
->>>>>>> dev2
 }
 .ellispse {
   position: relative;
@@ -207,7 +65,6 @@ a {
   right: 50%;
   top: 1px;
 }
-
 /* Image Classes */
 /* #1 */
 .image11 {
@@ -279,8 +136,6 @@ a {
   margin-left: 7.5%;
   margin-top: 16%;
 }
-<<<<<<< HEAD
-=======
 
 #root > div > div > div > div > div:nth-child(7) > div {
   height: fit-content !important;
@@ -332,4 +187,3 @@ img.rounded-circle {
   flex-direction: column;
   justify-content: center;
 }
->>>>>>> dev2

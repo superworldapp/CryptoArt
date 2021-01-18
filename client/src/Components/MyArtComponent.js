@@ -1,27 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 //import moment from 'moment';
-<<<<<<< HEAD
-import {
-    Button,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Col,
-    Card,
-    CardImg,
-    CardTitle,
-    CardBody,
-    CardText,
-    Modal,
-    ModalHeader,
-    ModalBody
-} from 'reactstrap';
-=======
 import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody,
  CardSubtitle, CardText,Modal,ModalHeader,ModalBody} from 'reactstrap';
->>>>>>> dev2
 import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
@@ -139,24 +120,12 @@ class Allpatrender extends Component {
                 ? 'invisible'
                 : 'visible';
         let reSellOrSell = this.props.art.isSelling
-<<<<<<< HEAD
-            ? 'ReSell Item'
-            : 'Sell Item';
-        let Auc = this.props.art.auction.isBidding
-=======
             ? 'ReSell'
             : 'Sell';
             let Auc = this.props.art.auction.isBidding
->>>>>>> dev2
             ? 'End Auction'
             : 'Auction';
         return (
-<<<<<<< HEAD
-            <Card className={this.props.art.auction.isBidding ? buk : bak}>
-                <Link to={`/card/${this.props.art.tokenIdentifier}`}>
-                    {/* <a href={this.props.art.imgurl} target='_blank'> */}
-                    <CardImg
-=======
             <div class = "card-deck">
             <Card className={this.props.art.auction.isBidding? buk:bak}  >
                
@@ -164,44 +133,12 @@ class Allpatrender extends Component {
                    <div className="displayImage">
                    <Link to={`/card/${this.props.art.tokenIdentifier}`}>
                    <CardImg
->>>>>>> dev2
                         top
                         width="100%"
                         class="img-fluid"
                         src={this.props.art.imgurl}
                         alt='Card image'
                     />
-<<<<<<< HEAD
-                </Link>
-                {/* </a> */}
-                <CardBody>
-                    <Link to={`/card/${this.props.art.tokenIdentifier}`}>
-                        <CardTitle>
-                            Item Title : {this.props.art.tokenTitle}
-                        </CardTitle>
-                        <CardText>
-                            <small>
-                                Item Creator : {this.props.art.tokenCreator}
-                            </small>
-                        </CardText>
-                        <CardText className={pr}>
-                            <small>
-                                Item Sell Price :{' '}
-                                {Web3.utils.fromWei(
-                                    this.props.art.tokenSellPrice.toString(),
-                                    'ether'
-                                )}{' '}
-                                ETH
-                            </small>
-                        </CardText>
-                    </Link>
-                    <Col sm={{ size: 12 }}>
-                        <Button
-                            className='visible'
-                            size='sm'
-                            type='submit'
-                            color='primary'
-=======
                     </Link>
                    </div>
                     
@@ -301,7 +238,6 @@ class Allpatrender extends Component {
                         <button
                             className='abtn'
                             // color='primary'
->>>>>>> dev2
                             onClick={this.toggleModal}>
                             {reSellOrSell}
                         </button> 
@@ -315,22 +251,11 @@ class Allpatrender extends Component {
                         <button
                             className='abtn'
                             type='submit'
-<<<<<<< HEAD
-                            color='primary'
-                            onClick={
-                                this.props.art.auction.isBidding
-                                    ? this.EndAuction
-                                    : this.StartAuction
-                            }>
-                            {Auc}
-                        </Button>
-=======
                             // color='primary'
                             onClick={this.props.art.auction.isBidding ? this.EndAuction : this.StartAuction }>
                             {Auc} 
                         </button>
                         
->>>>>>> dev2
                         <Modal
                             isOpen={this.state.isModalOpen}
                             toggle={this.toggleModal}
@@ -448,11 +373,8 @@ class Allpatrender extends Component {
                         </Modal>
                     </div> 
                 </CardBody>
-<<<<<<< HEAD
-=======
                 {/* </Link> */}
               
->>>>>>> dev2
             </Card>
             </div>
         );
@@ -503,13 +425,8 @@ class MyItemComponent extends Component {
                 imgUrl,
                 nos
             )
-<<<<<<< HEAD
-            .send({ from: this.props.accounts, gas: 2500000 });
-
-=======
             .send({ from: this.props.accounts, gas: 1000000 });
                                                     
->>>>>>> dev2
         console.log(res);
         this.setState({ isLoading: false });
 
@@ -548,14 +465,9 @@ class MyItemComponent extends Component {
         });
     };
     fileUploadHandler = (event) => {
-<<<<<<< HEAD
-        this.setState({ isLoading: true });
-        this.fileAwsHandler(this.state.selectedFile, this.creatingItems);
-=======
         event.preventDefault();
         this.setState({isLoading : true});
         this.fileAwsHandler(this.state.selectedFile,this.creatingItems);
->>>>>>> dev2
     };
 
     fileAwsHandler = async (file, callback) => {
@@ -688,16 +600,12 @@ class MyItemComponent extends Component {
                             <div className='row pl-5 pr-5'>
                                 <div className='col-6'>
                                     <FormGroup>
-<<<<<<< HEAD
-                                        <Label htmlFor='nos' className='ml-3'>
-=======
                                         <Label
                                             htmlFor='nos'
                                             className='ml-3'  style={{ fontFamily:'Gibson',
                                             fontSize:'20px',
                                             color:'black',
                                             }}>
->>>>>>> dev2
                                             No. of Tokens
                                         </Label>
                                         <Input
@@ -733,20 +641,9 @@ class MyItemComponent extends Component {
                                         color='primary'
                                         onClick={this.fileUploadHandler}>
                                         Add
-<<<<<<< HEAD
-                                    </Button>
-                                    {this.state.isLoading ? (
-                                        <img src={loader} />
-                                    ) : (
-                                        <div></div>
-                                    )}
-                                </div>
-                            </div>
-=======
                                     </button>
                                     {this.state.isLoading ? <img src={loader} /> : <div></div>}
                                 
->>>>>>> dev2
                             <br />
                         </Form>
                     </ModalBody>

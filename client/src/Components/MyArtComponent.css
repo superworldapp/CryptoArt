@@ -1,11 +1,8 @@
-<<<<<<< HEAD
-=======
 .hidden{
     overflow-y: auto;
 }
 
 
->>>>>>> dev2
 .modal-title{
     font-family: Gibson;
     font-size: 20px;
@@ -64,24 +61,6 @@
     justify-content: center;
 }
 
-<<<<<<< HEAD
-.displayCard{
-    height: 110%;
-    width: 90%;
-    position: relative;
-}
-.displayImage{
-    position: relative;
-    height: 80%;
-    width: 100%;
-    padding:2%;
-}
-.displayText{
-    position: absolute;
-    top:60%;
-}
-
-=======
 /* .displayCard{
     height: 130% !important;
     width: 100%;
@@ -124,4 +103,3 @@ h3{
 .form-group{
     display: flex;
 }
->>>>>>> dev2

@@ -52,10 +52,6 @@ class Header extends Component {
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.getnewHash = this.getnewHash.bind(this);
-<<<<<<< HEAD
-    this.toggleSignIn = this.toggleSignIn.bind(this);
-=======
->>>>>>> dev2
     this.openWalletModal = this.openWalletModal.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleNotifyDropDownClick = this.handleNotifyDropDownClick.bind(this);
@@ -68,16 +64,6 @@ class Header extends Component {
     this.setState({ isNavOpen: !this.state.isNavOpen });
   }
 
-<<<<<<< HEAD
-  toggleSignIn() {
-    this.context.dispatch({
-      type: 'TOGGLE_SIGN_IN_MODAL',
-      payload: !this.context.state.signInModalIsOpen,
-    });
-  }
-
-=======
->>>>>>> dev2
   openWalletModal = () => {
     if (!this.state.account) {
       this.context.dispatch({
@@ -89,7 +75,6 @@ class Header extends Component {
   // loggedInOrLoggedOut = () => {
   //   this.setState({ isLoggedIn: !this.state.isLoggedIn });
   // };
-<<<<<<< HEAD
 
   conver = async (x) => {
     util = Web3.utils.toWei(x, 'milli');
@@ -128,48 +113,6 @@ class Header extends Component {
   };
 
   render() {
-            
-
-=======
-
-  conver = async (x) => {
-    util = Web3.utils.toWei(x, 'milli');
-  };
-  converb = async (x) => {
-    util1 = Web3.utils.fromWei(x, 'milli');
-  };
-
-  handleChange = (event) => {
-    this.setState({ value: event.target.value });
-  };
-
-  getnewHash = async () => {
-    let x = 1;
-    console.log(x);
-    //x= x.substring(1,10);
-    return x;
-  };
-  signInIcon = () => {};
-
-  handleClose = () => {
-    this.setState({
-      MyPropsAnchorEl: null,
-      myReferralsAnchorEl: null,
-      profileDropDownAnchorEl: null,
-    });
-  };
-
-  //Open Notification menu dropdown
-  handleNotifyDropDownClick = () => {
-    this.setState({ openNotifyDropDown: !this.state.openNotifyDropDown });
-  };
-
-  handleNotifyDropDownClickAway = () => {
-    this.setState({ openNotifyDropDown: false });
-  };
-
-  render() {
->>>>>>> dev2
     return (
       <>
         <Navbar
@@ -181,13 +124,9 @@ class Header extends Component {
         >
           <NavbarToggler onClick={this.toggleNav} />
           <NavbarBrand className='mr-auto'>
-<<<<<<< HEAD
-            <img src={LogoImg} alt='Logo Image' height='60' width='60' />
-=======
             <NavLink to='/home'>
               <img src={LogoImg} alt='Logo Image' height='60' width='60' />
             </NavLink>
->>>>>>> dev2
           </NavbarBrand>
           <InputGroup
             style={{
@@ -221,19 +160,11 @@ class Header extends Component {
               navbar
               className='m-auto d-flex align-items-center justify-content-end'
             >
-<<<<<<< HEAD
-              <NavItem>
-                <NavLink className='nav-link' to='/home'>
-                  Home
-                </NavLink>
-              </NavItem>
-=======
               {/* <NavItem>
                 <NavLink className='nav-link' to='/home'>
                   Home
                 </NavLink>
               </NavItem> */}
->>>>>>> dev2
               <NavItem>
                 <NavLink
                   className='nav-link'
@@ -246,11 +177,7 @@ class Header extends Component {
                 </NavLink>
               </NavItem>
 
-<<<<<<< HEAD
-              <NavItem>
-=======
               {/* <NavItem>
->>>>>>> dev2
                 <NavLink className='nav-link' to='/myart'>
                   <i
                     style={{
@@ -260,12 +187,7 @@ class Header extends Component {
                   ></i>
                   My Collections
                 </NavLink>
-<<<<<<< HEAD
-              </NavItem>
-
-=======
               </NavItem> */}
->>>>>>> dev2
               {Auth.getAuth() ? (
                 <Grid
                   container
@@ -293,10 +215,7 @@ class Header extends Component {
                             <Grid item>Wallet Connected</Grid>
                             <Grid item>
                               <img
-<<<<<<< HEAD
-=======
                                 id='green-dot'
->>>>>>> dev2
                                 style={{ width: '10px' }}
                                 src={greenDot}
                                 alt=''
@@ -399,16 +318,6 @@ class Header extends Component {
                   </Grid>
                 </Grid>
               )}
-<<<<<<< HEAD
-
-              <NavItem></NavItem>
-              <NavItem>
-                <NavLink className='nav-link' to='/myart'>
-                  <img
-                    width='38px'
-                    height='38px'
-                    className='rounded-circle'
-=======
               <NavItem>
                 <NavLink className='nav-link' to='/myart'>
                   <img
@@ -416,7 +325,6 @@ class Header extends Component {
                     height='30px'
                     className='rounded-circle'
                     id='profile'
->>>>>>> dev2
                     src={`data:image/png;base64,${new Identicon(
                       new Date().toString()
                     )}`}
@@ -427,16 +335,10 @@ class Header extends Component {
               <NavItem>
                 <NavLink className='nav-link' to='#'>
                   <img
-<<<<<<< HEAD
-                    width='24px'
-                    className='rounded-circle'
-                    src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/1200px-Icon-round-Question_mark.svg.png'
-=======
                     width='30px'
                     height='30px'
                     className='rounded-circle'
                     src={helpIcon}
->>>>>>> dev2
                     alt='question-mark'
                   />
                 </NavLink>
@@ -459,18 +361,10 @@ class Header extends Component {
                             )}
                         </small>
                     </h6> */}
-<<<<<<< HEAD
-                </Navbar>
-                
-            </>
-        );
-    }
-=======
         </Navbar>
       </>
     );
   }
->>>>>>> dev2
 }
 
 export default Header;

@@ -1,29 +1,9 @@
-<<<<<<< HEAD
-:root {
-  --dark-purple: #5540c7;
-  --light-purple: #909af8;
-  --light-red: #f08778;
-  --light-blue: #5e9afc;
-  --light-grey: #828282;
-}
-
-=======
->>>>>>> dev2
 .hidden {
   display: none;
 }
 
 .connect-wallet__div {
   width: 100%;
-<<<<<<< HEAD
-  max-width: fit-content;
-  min-height: 550px;
-  /* border: 2px solid var(--light-purple); */
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-=======
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
@@ -42,21 +22,14 @@
   justify-content: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
->>>>>>> dev2
   align-items: center;
   position: absolute;
   top: 50%;
   left: 50%;
-<<<<<<< HEAD
-  overflow-x: hidden;
-  overflow-y: auto;
-  transform: translate(-50%, -50%);
-=======
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   overflow-x: hidden;
   overflow-y: auto;
->>>>>>> dev2
   text-align: center;
   background-color: white;
   z-index: 1000;
@@ -67,15 +40,6 @@
   position: absolute;
   top: 0%;
   right: 0%;
-<<<<<<< HEAD
-  transform: translate(0%, 0%);
-  background: transparent;
-  border-color: transparent;
-  color: var(--dark-purple);
-  font-size: 1.5rem;
-  outline: none;
-}
-=======
   -webkit-transform: translate(0%, 0%);
   transform: translate(0%, 0%);
   background: transparent;
@@ -85,7 +49,6 @@
   outline: none;
 }
 
->>>>>>> dev2
 .connect-wallet__closeBtn:focus {
   outline: transparent;
 }
@@ -102,10 +65,6 @@ h2 {
 }
 
 .connect-wallet__content {
-<<<<<<< HEAD
-  display: flex;
-  justify-content: space-between;
-=======
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -118,7 +77,6 @@ h2 {
   justify-content: space-between;
   -webkit-box-align: end;
   -ms-flex-align: end;
->>>>>>> dev2
   align-items: flex-end;
   padding: 1rem;
   width: 100%;
@@ -131,15 +89,6 @@ h2 {
 
 .connect-wallet__card {
   padding: 0px 1em;
-<<<<<<< HEAD
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 40vh;
-  width: 25vw;
-=======
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -158,39 +107,22 @@ h2 {
   align-items: center;
   width: 25vw;
   height: 40vh;
->>>>>>> dev2
   max-width: 225px;
   min-height: 359px;
   border-radius: 10px;
 }
 
 .connect-wallet__cardPurple {
-<<<<<<< HEAD
-  border: 2px solid var(--dark-purple);
-}
-
-.connect-wallet__cardRed {
-  border: 2px solid var(--light-red);
-=======
   border: 2px solid #5540c7;
 }
 
 .connect-wallet__cardRed {
   border: 2px solid #f08778;
->>>>>>> dev2
   background: #ffffff;
 }
 
 .connect-wallet__cardRecommended {
   text-align: center;
-<<<<<<< HEAD
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 42.5vh;
-  width: 25vw;
-=======
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -206,21 +138,14 @@ h2 {
   align-items: center;
   width: 25vw;
   height: 42.5vh;
->>>>>>> dev2
   max-width: 225px;
   min-height: 380px;
 }
 
 .connect-wallet__cardRecommendedRed {
-<<<<<<< HEAD
-  border-top: 1px solid var(--light-red);
-  border-radius: 10px;
-  background: var(--light-red);
-=======
   border-top: 1px solid #f08778;
   border-radius: 10px;
   background: #f08778;
->>>>>>> dev2
 }
 
 .connect-wallet__cardRecommendedText {
@@ -228,47 +153,24 @@ h2 {
 }
 
 .connect-wallet__cardImg {
-<<<<<<< HEAD
-  width: 50%;
-}
-
-.connect-wallet__cardTitle {
-=======
   width: 40%;
 }
 
 .connect-wallet__cardTitle {
   -webkit-box-flex: 0.2;
   -ms-flex: 0.2;
->>>>>>> dev2
   flex: 0.2;
   font-size: 2rem;
 }
 
 .connect-wallet__cardSubTitle {
-<<<<<<< HEAD
-=======
   -webkit-box-flex: 0.2;
   -ms-flex: 0.2;
->>>>>>> dev2
   flex: 0.2;
   font-size: 1rem;
 }
 
 .connect-wallet__cardRedText {
-<<<<<<< HEAD
-  color: var(--light-red);
-}
-
-.connect-wallet__cardBlueText {
-  color: var(--light-blue);
-}
-
-.connect-wallet__cardDescription {
-  flex: 0.4;
-  font-size: 0.75rem;
-  color: var(--light-grey);
-=======
   color: #f08778;
 }
 
@@ -282,7 +184,6 @@ h2 {
   flex: 0.4;
   font-size: 0.75rem;
   color: #828282;
->>>>>>> dev2
 }
 
 .connect-wallet__cardBtns {
@@ -290,20 +191,6 @@ h2 {
   padding: 1em 2em;
   border-radius: 25px;
   color: #ffffff;
-<<<<<<< HEAD
-  font-family: 'Gibson';
-  border-color: transparent;
-  outline: transparent;
-  font-weight: 600;
-}
-
-.connect-wallet__redBtn {
-  background: var(--light-red);
-}
-
-.connect-wallet__purpleBtn {
-  background: var(--dark-purple);
-=======
   font-family: 'Gibson' !important;
   font-style: normal;
   font-weight: 600;
@@ -319,7 +206,6 @@ h2 {
 
 .connect-wallet__purpleBtn {
   background: #5540c7;
->>>>>>> dev2
 }
 
 .connect-wallet__redBtn:hover,
@@ -331,10 +217,6 @@ h2 {
 
 .connect-wallet__footer {
   padding: 1rem 0.5rem;
-<<<<<<< HEAD
-  display: flex;
-  flex-direction: column;
-=======
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -348,7 +230,6 @@ h2 {
   -webkit-box-align: initial;
   -ms-flex-align: initial;
   align-items: initial;
->>>>>>> dev2
   width: 40%;
   margin-left: auto;
   margin-right: auto;
@@ -357,14 +238,6 @@ h2 {
 @media (max-width: 600px) {
   .connect-wallet__div {
     width: 100%;
-<<<<<<< HEAD
-  }
-  .connect-wallet__header {
-    font-size: 10px;
-  }
-  .connect-wallet__container {
-    margin: 0 1em;
-=======
     max-height: 400px;
     max-width: 400px;
     border: 2px solid #909af8;
@@ -382,13 +255,10 @@ h2 {
   }
   .connect-wallet__card {
     padding: initial;
->>>>>>> dev2
   }
   .connect-wallet__cardTitle {
     font-size: 1.25rem;
   }
-<<<<<<< HEAD
-=======
   .connect-wallet__cardSubTitle {
     -webkit-transform: translateY(-4px);
     transform: translateY(-4px);
@@ -402,7 +272,6 @@ h2 {
     flex-grow: 2;
     padding: 0 0.25em;
   }
->>>>>>> dev2
   .connect-wallet__cardBtns {
     margin: 1em 0px;
     padding: 0px 1.5em;
@@ -411,8 +280,6 @@ h2 {
   }
 }
 
-<<<<<<< HEAD
-=======
 @media (max-width: 400px) {
   .connect-wallet__div {
     max-height: 420px;
@@ -512,7 +379,6 @@ h2 {
   }
 }
 
->>>>>>> dev2
 /* Can be implemented to shrink on screen height */
 /* @media (max-height: 720px) {
   .connect-wallet__div {
@@ -535,7 +401,4 @@ h2 {
       font-size: 0.5rem;
   }
 } */
-<<<<<<< HEAD
-=======
 /*# sourceMappingURL=ConnectWalletModal.css.map */
->>>>>>> dev2

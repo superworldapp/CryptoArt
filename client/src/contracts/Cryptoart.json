@@ -14997,11 +14997,7 @@
     "3": {
       "events": {},
       "links": {},
-<<<<<<< HEAD
-      "address": "0x61b9606b800B7CD78E704b09Bb955Fc2b996FC4E",
-=======
       "address": "0x597Af63a3C8D3c2c589025C94576eC93eD2aA0a9",
->>>>>>> dev2
       "transactionHash": "0xb689a956d4fdd21d4e68da1e6213f32c3285f06fb5c41a88f9952f0200c18406"
     },
     "5777": {
