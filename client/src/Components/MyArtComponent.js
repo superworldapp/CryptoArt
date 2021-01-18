@@ -540,7 +540,7 @@ class MyItemComponent extends Component {
                 >
                 <button
                     className='abtn' 
-                    style={{backgroundColor:'#5548C7', color:'white'}}
+                    style={{backgroundColor:'#5540C7', color:'white'}}
                     onClick={this.toggleModal1}>
                     + {''}Create ARTWORK
                 </button>
@@ -642,7 +642,7 @@ class MyItemComponent extends Component {
                             </div>
                             <br />
                                     <button
-                                    className="abtn" style={{ float:'right', color:'white', backgroundColor:'#5548C7', fontSize:'18px'}}
+                                    className="abtn" style={{ float:'right', color:'white', backgroundColor:'#5540C7', fontSize:'18px'}}
                                         color='primary'
                                         onClick={this.fileUploadHandler}>
                                         Add
