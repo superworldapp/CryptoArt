@@ -184,12 +184,14 @@ class Home extends Component {
                   href=''
                   style={{
                     fontFamily: 'Gibson',
-                    fontWeight: '550',
+                    fontWeight: 'bold',
                     fontSize: '18px',
+                    textDecoration: 'none',
+                    color: 'gray',
                   }}
                 >
                   {' '}
-                  View more <img src={svg1} alt='svg1' />
+                  View More <img src={svg1} alt='svg1' />
                 </a>
               </div>
               <div className='rowImages'>
@@ -549,12 +551,14 @@ class Home extends Component {
                   href=''
                   style={{
                     fontFamily: 'Gibson',
-                    fontWeight: '550',
+                    fontWeight: 'bold',
                     fontSize: '18px',
+                    textDecoration: 'none',
+                    color: 'gray',
                   }}
                 >
                   {' '}
-                  View more <img src={svg1} alt='svg1' />
+                  View More <img src={svg1} alt='svg1' />
                 </a>
               </div>
               <div className='rowImages'>
@@ -914,12 +918,14 @@ class Home extends Component {
                   href=''
                   style={{
                     fontFamily: 'Gibson',
-                    fontWeight: '550',
+                    fontWeight: 'bold',
                     fontSize: '18px',
+                    textDecoration: 'none',
+                    color: 'gray',
                   }}
                 >
                   {' '}
-                  View more <img src={svg1} alt='svg1' />
+                  View More <img src={svg1} alt='svg1' />
                 </a>
               </div>
               <div className='rowImages'>
