@@ -132,18 +132,23 @@ class Allpatrender extends Component {
             ? 'End Auction'
             : 'Auction';
         return (
-            <Card className={this.props.art.auction.isBidding? buk:bak} className="displayCard" >
+            <div class = "card-deck">
+            <Card className={this.props.art.auction.isBidding? buk:bak}  >
                 <Link to={`/card/${this.props.art.tokenIdentifier}`}>
                 <a href={this.props.art.imgurl} target='_blank'>
-                    <CardImg
+                   <div className="displayImage">
+                   <CardImg
                         top
-                        className="displayImage"
+                        width="100%"
+                        class="img-fluid"
                         src={this.props.art.imgurl}
                         alt='Card image'
                     />
+                   </div>
+                    
                 </a>
-                <CardBody className="displayText">
-                <div style={{
+                <CardBody style= {{borderTop:'1px solid', padding:'1.0rem'}}>
+                 <div style={{
                     display: 'flex',
                     justifyContent: 'flex-start',
                     }}>
@@ -159,20 +164,22 @@ class Allpatrender extends Component {
                         <CardTitle
                             style={{
                                 fontFamily: 'Gibson',
-                                fontSize: '14px',
+                                fontSize: '15px',
                                 color: '#5540C7',
-                                }}> Created by {this.props.art.tokenTitle} </CardTitle>
+                                textDecoration:'none'
+                                }}> Created by  </CardTitle>
                     </div>
                     
                     {/* <CardTitle className="ctext">
-                        Item Title : {this.props.art.tokenTitle}
+                        Item Title : {this.props.art.tokenTitle} {this.props.art.tokenCreator}
                     </CardTitle> */}
                     <div className="ctext" style={{padding:'2px'}}>
                                     <CardSubtitle style={{
                                         position:'relative',
                                         fontFamily:'Gibson',
                                         fontSize:'15px',
-                                        color:'#B3B3B3',   
+                                        color:'#B3B3B3',  
+                                        textDecoration:'none' 
                                     }}> #Art #Rare 
                                     </CardSubtitle>
                                     <CardSubtitle
@@ -181,6 +188,7 @@ class Allpatrender extends Component {
                                         fontFamily:'Gibson',
                                         fontSize:'15px',
                                         color:'#B3B3B3',
+                                        textDecoration:'none'
                                     }}
                                     >
                                         Price
@@ -193,6 +201,7 @@ class Allpatrender extends Component {
                                         fontFamily:'Gibson',
                                         fontSize:'15px',
                                         color:'black',
+                                        textDecoration:'none'
                                     }}
                                     >
                                         {this.props.art.tokenTitle} 
@@ -203,6 +212,7 @@ class Allpatrender extends Component {
                                         fontFamily:'Gibson',
                                         fontSize:'15px',
                                         color:'black',
+                                        textDecoration:'none'
                                     }}
                                     >
                                     {Web3.utils.fromWei(
@@ -211,7 +221,7 @@ class Allpatrender extends Component {
                             )}{' '}
                             ETH
                                     </CardText>
-                                </div>
+                                </div> 
                     {/* <CardText>
                         <small>
                             Item Creator : {this.props.art.tokenCreator}
@@ -227,27 +237,28 @@ class Allpatrender extends Component {
                             ETH
                         </small>
                     </CardText> */}
-                    <div className="ctext">
+                    <div className="ctext" style={{padding:'0px'}}>
                         <button
                             className='abtn'
                             // color='primary'
                             onClick={this.toggleModal}>
                             {reSellOrSell}
-                        </button>
-                          {/* <Button
+                        </button> 
+                        <button
                             className={but}
                             type='submit'
                             color='primary'
                             onClick={this.DeSale}>
                             DeSell Item
-                        </Button>   */}
+                        </button>   
                         <button
                             className='abtn'
                             type='submit'
                             // color='primary'
                             onClick={this.props.art.auction.isBidding ? this.EndAuction : this.StartAuction }>
-                            {Auc}
+                            {Auc} 
                         </button>
+                        
                         <Modal
                             isOpen={this.state.isModalOpen}
                             toggle={this.toggleModal}
@@ -363,11 +374,11 @@ class Allpatrender extends Component {
                                 
                             </Card>
                         </Modal>
-                    </div>
+                    </div> 
                 </CardBody>
                 </Link>
             </Card>
-            
+            </div>
         );
     }
 }
@@ -535,50 +546,58 @@ class MyItemComponent extends Component {
                 </button>
 
                 </p>
-                
-
                 </div> 
-                 
-
-                
-                
                 </div>
-
 
                 <Modal
                     isOpen={this.state.isModalOpen1}
                     toggle={this.toggleModal1}
                     className='modal-xl'>
                     <ModalHeader toggle={this.toggleModal1}>
-                        <h3>Add Artwork</h3>
+                    <p style={{fontFamily:'Gibson', fontSize:'25px', fontWeight:'800', marginTop:'10px', textAlign:'left', marginLeft:'7px', textTransform:'uppercase'}}>
+                    Add New Artwork
+                </p>
                     </ModalHeader>
                     <ModalBody>
                         <Form>
                             <div className='row pl-5 pr-5'>
                                 <div className='col-6'>
-                                    <FormGroup>
-                                        <Label htmlFor='title' className='ml-3'>
-                                            Token Title
+                                    <FormGroup >
+                                        
+                                        <Label htmlFor='title' className='ml-3'
+                                         style={{ fontFamily:'Gibson', fontSize:'20px',
+                                         color:'black',
+                                         }}> Title
                                         </Label>
                                         <Input
                                             type='text'
                                             id='title'
                                             name='title'
                                             onChange={this.handleInputChange}
-                                        />
+                                        />    
                                     </FormGroup>
                                 </div>
-                                <div className='col-6'>
-                                    <FormGroup>
-                                        <Label htmlFor='price' className='ml-3'>
-                                            Item Price
+                                <div className='col-6' style={{
+                                    display:'flex', justifyContent:'space-between'
+                                }}>
+                                    <FormGroup >
+                                        <Label htmlFor='price' className='ml-3' style={{ fontFamily:'Gibson',
+                                        fontSize:'20px',
+                                        color:'black',
+                                        }}> Sell Price
                                         </Label>
                                         <Input
+                                        style={{width:'50%'}}
                                             type='text'
                                             id='price'
                                             name='price'
                                             onChange={this.handleInputChange}
                                         />
+                                        <Label className='ml-3' style={{ fontFamily:'Gibson',
+                                        fontSize:'20px',
+                                        color:'black',
+                                        }}> ETH
+                                        </Label>
                                     </FormGroup>
                                 </div>
                             </div>
@@ -587,10 +606,14 @@ class MyItemComponent extends Component {
                                     <FormGroup>
                                         <Label
                                             htmlFor='nos'
-                                            className='ml-3'>
+                                            className='ml-3'  style={{ fontFamily:'Gibson',
+                                            fontSize:'20px',
+                                            color:'black',
+                                            }}>
                                             No. of Tokens
                                         </Label>
                                         <Input
+                                        style={{width:'30%'}}
                                             type='number'
                                             id='nos'
                                             name='nos'
@@ -602,10 +625,14 @@ class MyItemComponent extends Component {
                                     <FormGroup>
                                         <Label
                                             htmlFor='artHash'
-                                            className='ml-3'>
+                                            className='ml-4'  style={{ fontFamily:'Gibson',
+                                            fontSize:'20px',
+                                            color:'black',
+                                            }}>
                                             Art
                                         </Label>
                                         <Input
+                                        style={{marginLeft:'0.5rem'}}
                                             type='file'
                                             onChange={this.fileSelectHandler}
                                         />
@@ -614,29 +641,27 @@ class MyItemComponent extends Component {
                                 </div>
                             </div>
                             <br />
-                            <div className='row pl-5'>
-                                <div className='col-6'>
-                                    <Button
+                                    <button
+                                    className="abtn" style={{ float:'right', color:'white', backgroundColor:'#5548C7', fontSize:'18px'}}
                                         color='primary'
                                         onClick={this.fileUploadHandler}>
                                         Add
-                                    </Button>
+                                    </button>
                                     {this.state.isLoading ? <img src={loader} /> : <div></div>}
-                                </div>
-                            </div>
+                                
                             <br />
                         </Form>
                     </ModalBody>
                 </Modal>
-                <br />
-                <br />
-                <div className='row'>{Menu}</div>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br/><br/><br/><br/><br/><br/><br/>
+                
+                <div className='row'>{Menu}
+                </div>
+                
+                <br/><br/><br/><br/><br/><br/><br/><br/>
+
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/>
             </div>
         );
     }
