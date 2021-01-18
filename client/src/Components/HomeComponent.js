@@ -55,7 +55,7 @@ class Home extends Component {
         calt: 'img3',
         uimg: 'annonuser',
         uname: 'annon name',
-        ctitle: 'Alimation Creation',
+        ctitle: 'Alimation Character',
         price: '0.5ETH',
       },
       {
@@ -63,7 +63,7 @@ class Home extends Component {
         calt: 'img4',
         uimg: 'annonuser',
         uname: 'annon name',
-        ctitle: 'Alimation Creation',
+        ctitle: 'Alimation Character',
         price: '0.5ETH',
       },
 
@@ -72,7 +72,7 @@ class Home extends Component {
         calt: 'img5',
         uimg: 'annonuser',
         uname: 'annon name',
-        ctitle: 'Alimation Creation',
+        ctitle: 'Alimation Character',
         price: '0.5ETH',
       },
 
@@ -81,7 +81,7 @@ class Home extends Component {
         calt: 'img6',
         uimg: 'annonuser',
         uname: 'annon name',
-        ctitle: 'Alimation Creation',
+        ctitle: 'Alimation Character',
         price: '0.5ETH',
       },
       {
@@ -89,7 +89,7 @@ class Home extends Component {
         calt: 'img7',
         uimg: 'annonuser',
         uname: 'annon name',
-        ctitle: 'Alimation Creation',
+        ctitle: 'Alimation Character',
         price: '0.5ETH',
       },
     ];
@@ -199,7 +199,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -216,33 +215,49 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Caozhibing
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alimation Character
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        >
+                          1 day left to purchase
+                        </p>
+                      </div>
+                      <button className='buy-bid-btn'>Bid</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -252,7 +267,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -269,33 +283,47 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Amy000
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alimation Character
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        ></p>
+                      </div>
+                      <button className='buy-bid-btn'>Purchase</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -305,7 +333,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -322,33 +349,47 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Caozhibing
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alimation Character
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        ></p>
+                      </div>
+                      <button className='buy-bid-btn'>Purchase</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -358,7 +399,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -375,33 +415,49 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Behancehue
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alberto Seveso
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        >
+                          32 mins left to purchase
+                        </p>
+                      </div>
+                      <button className='buy-bid-btn'>Bid</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -411,7 +467,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -428,33 +483,47 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Behancehue
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alberto Seveso
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        ></p>
+                      </div>
+                      <button className='buy-bid-btn'>Purchase</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -495,7 +564,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -512,33 +580,49 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Caozhibing
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alimation Character
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        >
+                          1 day left to purchase
+                        </p>
+                      </div>
+                      <button className='buy-bid-btn'>Bid</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -548,7 +632,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -565,33 +648,47 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Amy000
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alimation Character
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        ></p>
+                      </div>
+                      <button className='buy-bid-btn'>Purchase</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -601,7 +698,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -618,33 +714,47 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Caozhibing
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alimation Character
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        ></p>
+                      </div>
+                      <button className='buy-bid-btn'>Purchase</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -654,7 +764,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -671,33 +780,49 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Behancehue
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alberto Seveso
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        >
+                          32 mins left to purchase
+                        </p>
+                      </div>
+                      <button className='buy-bid-btn'>Bid</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -707,7 +832,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -724,33 +848,47 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Behancehue
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alberto Seveso
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        ></p>
+                      </div>
+                      <button className='buy-bid-btn'>Purchase</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -791,7 +929,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -808,33 +945,49 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Caozhibing
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alimation Character
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        >
+                          1 day left to purchase
+                        </p>
+                      </div>
+                      <button className='buy-bid-btn'>Bid</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -844,7 +997,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -861,33 +1013,47 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Amy000
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alimation Character
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        ></p>
+                      </div>
+                      <button className='buy-bid-btn'>Purchase</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -897,7 +1063,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -914,33 +1079,47 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Caozhibing
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alimation Character
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        ></p>
+                      </div>
+                      <button className='buy-bid-btn'>Purchase</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -950,7 +1129,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -967,33 +1145,49 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Behancehue
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alberto Seveso
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        >
+                          32 mins left to purchase
+                        </p>
+                      </div>
+                      <button className='buy-bid-btn'>Bid</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -1003,7 +1197,6 @@ class Home extends Component {
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
                       }}
                     >
                       <CardSubtitle>
@@ -1020,33 +1213,47 @@ class Home extends Component {
                       <CardSubtitle
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '14px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: '#888888',
                         }}
                       >
-                        {' '}
-                        User Name{' '}
+                        Behancehue
                       </CardSubtitle>
                     </div>
                     <div className='ctext'>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
                         }}
                       >
-                        Alimation Creation
+                        Alberto Seveso
                       </CardText>
                       <CardText
                         style={{
                           fontFamily: 'Gibson',
-                          fontSize: '12px',
-                          color: '#5540C7',
+                          fontSize: '13px',
+                          color: 'black',
                         }}
                       >
                         0.5ETH
                       </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        ></p>
+                      </div>
+                      <button className='buy-bid-btn'>Purchase</button>
                     </div>
                   </CardBody>
                 </Card>
