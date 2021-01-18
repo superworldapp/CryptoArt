@@ -113,7 +113,7 @@ const CardDetail = ({ art, accounts, contract }) => {
                         {/* <a href='#'>{match.params.id}</a>
                         <h1>{match.params.id}</h1> */}
                         <p>
-                            Owned by <a href='#'>{art?.tokenCreator}</a>
+                            Owned by <span class="text-primary">{art?.tokenCreator}</span>
                         </p>
                         <div
                             className='card py-3'

@@ -69,7 +69,7 @@ class Allpatrender extends Component {
             .send({
                 from: this.props.accounts,
                 value: this.props.art.tokenSellPrice,
-                gas: 1000000
+                gas: 10000000
             });
         console.log(res);
     };
@@ -134,9 +134,10 @@ class Allpatrender extends Component {
         return (
             <div class = "card-deck">
             <Card className={this.props.art.auction.isBidding? buk:bak}  >
-                <Link to={`/card/${this.props.art.tokenIdentifier}`}>
-                <a href={this.props.art.imgurl} target='_blank'>
+               
+                {/* <a href={this.props.art.imgurl} target='_blank'> */}
                    <div className="displayImage">
+                   <Link to={`/card/${this.props.art.tokenIdentifier}`}>
                    <CardImg
                         top
                         width="100%"
@@ -144,9 +145,11 @@ class Allpatrender extends Component {
                         src={this.props.art.imgurl}
                         alt='Card image'
                     />
+                    </Link>
                    </div>
                     
-                </a>
+                {/* </a> */}
+                
                 <CardBody style= {{borderTop:'1px solid', padding:'1.0rem'}}>
                  <div style={{
                     display: 'flex',
@@ -376,7 +379,8 @@ class Allpatrender extends Component {
                         </Modal>
                     </div> 
                 </CardBody>
-                </Link>
+                {/* </Link> */}
+              
             </Card>
             </div>
         );
@@ -428,7 +432,7 @@ class MyItemComponent extends Component {
                 imgUrl,
                 nos
             )
-            .send({ from: this.props.accounts, gas: 2500000 });
+            .send({ from: this.props.accounts, gas: 10000000 });
                                                     
         console.log(res);
         this.setState({isLoading : false});
