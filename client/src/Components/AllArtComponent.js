@@ -18,21 +18,32 @@ import {
 } from 'reactstrap';
 import Web3 from 'web3';
 let allDocs = [];
+//let cre;
 class AllArt extends Component {
     constructor(props) {
         super(props);
-        this.state = { docCount: 0, art: [], isModalOpen: false, qty: 0 };
+        this.state = { docCount: 0, art: [], isModalOpen: false, qty: 0};
         this.toggleModal = this.toggleModal.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.buyItem = this.buyItem.bind(this);
     }
+    componentDidMount = async () => {
+       
+        let cre = await this.props.contract?.getPastEvents('tokencreated',{filter: {tokenId: this.props.art.tokenIdentifier},fromBlock : 0});
+                  //  // Using an array means OR: e.g. 20 or 23
+   
+        let tb = await this.props.contract?.getPastEvents('tokenbought',{filter: {tokenId: this.props.art.tokenIdentifier},fromBlock : 0});
+        let tfs = await this.props.contract?.getPastEvents('tokenputforsale',{filter: {tokenId: this.props.art.tokenIdentifier},fromBlock : 0});
+        console.log(this.props.art.tokenIdentifier,cre );
+    }
+
     buyItem = async () => {
         const res = await this.props.contract.methods
             .buyToken(this.props.art.tokenIdentifier)
             .send({
                 from: this.props.accounts,
                 value: this.props.art.tokenSellPrice,
-                gas: 1000000
+                gas: 5000000
             });
         console.log(res);
     };
@@ -64,14 +75,26 @@ class AllArt extends Component {
                 : 'visible';
         return (
             <Card className={this.props.art.auction.isBidding ? buk : bak}>
-                <Link to={`/card/${this.props.art.tokenIdentifier}`}>
-                    <CardImg
-                        top
-                        width='100%'
-                        src={this.props.art.imgurl}
-                        alt='Card image'
-                    />
-                    <CardBody>
+              <Link
+                        style={{
+                            color: '#212529',
+                            textDecoration: 'none'
+                        }}
+                        to={`/card/${this.props.art.tokenIdentifier}`}>
+                <CardImg
+                    top
+                    width='100%'
+                    src={this.props.art.imgurl}
+                    alt='Card image'
+                />
+                </Link>
+                <CardBody>
+                    <Link
+                        style={{
+                            color: '#212529',
+                            textDecoration: 'none'
+                        }}
+                        to={`/card/${this.props.art.tokenIdentifier}`}>
                         <CardTitle>
                             Item Title : {this.props.art.tokenTitle}
                         </CardTitle>
@@ -95,29 +118,32 @@ class AllArt extends Component {
                                 ETH
                             </small>
                         </CardText>
-                        <Col sm={{ size: 12 }}>
-                            <Button
-                                className={but}
-                                size='sm'
-                                type='submit'
-                                color='primary'
-                                onClick={this.buyItem}>
-                                Buy Item
-                            </Button>
-                            {'   '}
-                            <Button
-                                className={bux}
-                                size='sm'
-                                type='submit'
-                                color='primary'>
-                                Place Offer
-                            </Button>
-                        </Col>
-                    </CardBody>
-                </Link>
+                    </Link>
+                    <Col sm={{ size: 12 }}>
+                        <Button
+                            className={but}
+                            size='sm'
+                            type='submit'
+                            color='primary'
+                            onClick={this.buyItem}>
+                            Buy Item
+                        </Button>
+                        {'   '}
+                        <Button
+                            className={bux}
+                            size='md'
+                            type='submit'
+                            color='primary'
+                            style={
+                                {width: '50%'}
+                            }>
+                            Bid
+                        </Button>
+                    </Col>
+                </CardBody>
             </Card>
         );
-    }
+    } 
 }
 
 class AllItemComponent extends Component {
@@ -146,20 +172,7 @@ class AllItemComponent extends Component {
         });
     }
 
-    // creatingItems = async () => {
-    //     let tokenHash = this.state.artHash.toString();
-    //     let tokenTitle = this.state.title;
-    //     let tokenPrice = this.state.price;
-    //     let imgUrl = this.state.artUrl;
-    //     let perCut = this.state.perCut;
-    //     console.log(tokenHash, tokenTitle, tokenPrice, imgUrl, perCut);
-    //     const res = await this.props.contract.methods
-    //         .create(tokenHash, tokenTitle, tokenPrice, imgUrl, perCut)
-    //         .send({ from: this.props.accounts, gas: 1000000 });
-    //     console.log(res);
 
-    //     this.toggleModal1();
-    // };
 
     handleInputChange(event) {
         const target = event.target;

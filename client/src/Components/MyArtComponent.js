@@ -1,29 +1,47 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 //import moment from 'moment';
-import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody,CardText,Modal,ModalHeader,ModalBody} from 'reactstrap';
+<<<<<<< HEAD
+import {
+    Button,
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    Col,
+    Card,
+    CardImg,
+    CardTitle,
+    CardBody,
+    CardText,
+    Modal,
+    ModalHeader,
+    ModalBody
+} from 'reactstrap';
+=======
+import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody,
+ CardSubtitle, CardText,Modal,ModalHeader,ModalBody} from 'reactstrap';
+>>>>>>> dev2
 import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
 import axios from 'axios';
-
+import "./MyArtComponent.css";
 import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
 import * as util from 'util';
 import loader from '../images/loader.svg';
+import annonuser from "../images/user.png";
 const SHA256 = require('crypto-js/sha256');
+
 
 const S3 = require('aws-sdk/clients/s3');
 const AWS = require('aws-sdk');
 
 const path = require('path');
 
-
-
-
 const BUCKET_NAME = 'superworldapp';
-
 
 AWS.config.update({
     region: 'us-east-1',
@@ -57,8 +75,6 @@ class Allpatrender extends Component {
         this.DeSale = this.DeSale.bind(this);
         this.StartAuction = this.StartAuction.bind(this);
         this.EndAuction = this.EndAuction.bind(this);
-        
-        
     }
     buyItem = async () => {
         const res = await this.props.contract.methods
@@ -66,7 +82,7 @@ class Allpatrender extends Component {
             .send({
                 from: this.props.accounts,
                 value: this.props.art.tokenSellPrice,
-                gas: 1000000
+                gas: 10000000
             });
         console.log(res);
     };
@@ -109,9 +125,9 @@ class Allpatrender extends Component {
             .closeBidOwner(this.props.art.tokenIdentifier)
             .send({ from: this.props.accounts, gas: 1000000 });
         console.log(res);
-    }
+    };
     render() {
-        let but = this.props.art.isSelling ? 'visible' : 'invisible';
+        let but = this.props.art.isSelling ? ' ' : 'hidden';
         let bak = this.props.art.isSelling ? 'bg-success text-white' : '';
         let buk = this.props.art.auction.isBidding ? 'bg-warning' : '';
         console.log(this.props.art.imgUrl);
@@ -123,27 +139,150 @@ class Allpatrender extends Component {
                 ? 'invisible'
                 : 'visible';
         let reSellOrSell = this.props.art.isSelling
+<<<<<<< HEAD
             ? 'ReSell Item'
             : 'Sell Item';
+        let Auc = this.props.art.auction.isBidding
+=======
+            ? 'ReSell'
+            : 'Sell';
             let Auc = this.props.art.auction.isBidding
+>>>>>>> dev2
             ? 'End Auction'
-            : 'Start Auction';
+            : 'Auction';
         return (
-            <Card className={this.props.art.auction.isBidding? buk:bak}>
+<<<<<<< HEAD
+            <Card className={this.props.art.auction.isBidding ? buk : bak}>
                 <Link to={`/card/${this.props.art.tokenIdentifier}`}>
-                {/* <a href={this.props.art.imgurl} target='_blank'> */}
+                    {/* <a href={this.props.art.imgurl} target='_blank'> */}
                     <CardImg
+=======
+            <div class = "card-deck">
+            <Card className={this.props.art.auction.isBidding? buk:bak}  >
+               
+                {/* <a href={this.props.art.imgurl} target='_blank'> */}
+                   <div className="displayImage">
+                   <Link to={`/card/${this.props.art.tokenIdentifier}`}>
+                   <CardImg
+>>>>>>> dev2
                         top
-                        width='100%'
+                        width="100%"
+                        class="img-fluid"
                         src={this.props.art.imgurl}
                         alt='Card image'
                     />
+<<<<<<< HEAD
+                </Link>
                 {/* </a> */}
                 <CardBody>
-                    <CardTitle>
-                        Item Title : {this.props.art.tokenTitle}
-                    </CardTitle>
-                    <CardText>
+                    <Link to={`/card/${this.props.art.tokenIdentifier}`}>
+                        <CardTitle>
+                            Item Title : {this.props.art.tokenTitle}
+                        </CardTitle>
+                        <CardText>
+                            <small>
+                                Item Creator : {this.props.art.tokenCreator}
+                            </small>
+                        </CardText>
+                        <CardText className={pr}>
+                            <small>
+                                Item Sell Price :{' '}
+                                {Web3.utils.fromWei(
+                                    this.props.art.tokenSellPrice.toString(),
+                                    'ether'
+                                )}{' '}
+                                ETH
+                            </small>
+                        </CardText>
+                    </Link>
+                    <Col sm={{ size: 12 }}>
+                        <Button
+                            className='visible'
+                            size='sm'
+                            type='submit'
+                            color='primary'
+=======
+                    </Link>
+                   </div>
+                    
+                {/* </a> */}
+                
+                <CardBody style= {{borderTop:'1px solid', padding:'1.0rem'}}>
+                 <div style={{
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    }}>
+                    <CardTitle >
+                    <img
+                    style={{marginRight: '30px' }}
+                        width='16px'
+                        height='16px'
+                        className='rounded-circle'
+                        src={annonuser}
+                         ></img>
+                        </CardTitle>
+                        <CardTitle
+                            style={{
+                                fontFamily: 'Gibson',
+                                fontSize: '15px',
+                                color: '#5540C7',
+                                textDecoration:'none'
+                                }}> Created by  </CardTitle>
+                    </div>
+                    
+                    {/* <CardTitle className="ctext">
+                        Item Title : {this.props.art.tokenTitle} {this.props.art.tokenCreator}
+                    </CardTitle> */}
+                    <div className="ctext" style={{padding:'2px'}}>
+                                    <CardSubtitle style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'#B3B3B3',  
+                                        textDecoration:'none' 
+                                    }}> #Art #Rare 
+                                    </CardSubtitle>
+                                    <CardSubtitle
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'#B3B3B3',
+                                        textDecoration:'none'
+                                    }}
+                                    >
+                                        Price
+                                    </CardSubtitle>
+                                </div>
+                                <div className="ctext">
+                                    <CardText
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                        textDecoration:'none'
+                                    }}
+                                    >
+                                        {this.props.art.tokenTitle} 
+                                    </CardText>
+                                    <CardText
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                        textDecoration:'none'
+                                    }}
+                                    >
+                                    {Web3.utils.fromWei(
+                                this.props.art.tokenSellPrice.toString(),
+                                'ether'
+                            )}{' '}
+                            ETH
+                                    </CardText>
+                                </div> 
+                    {/* <CardText>
                         <small>
                             Item Creator : {this.props.art.tokenCreator}
                         </small>
@@ -157,55 +296,112 @@ class Allpatrender extends Component {
                             )}{' '}
                             ETH
                         </small>
-                    </CardText>
-                    <Col sm={{ size: 12 }}>
-                        <Button
-                            className='visible'
-                            size='sm'
-                            type='submit'
-                            color='primary'
+                    </CardText> */}
+                    <div className="ctext" style={{padding:'0px'}}>
+                        <button
+                            className='abtn'
+                            // color='primary'
+>>>>>>> dev2
                             onClick={this.toggleModal}>
                             {reSellOrSell}
-                        </Button>
-                        {'   '}
-                        <Button
+                        </button> 
+                        <button
                             className={but}
-                            size='sm'
                             type='submit'
                             color='primary'
                             onClick={this.DeSale}>
                             DeSell Item
-                        </Button>
-                        <Button
-                            className='visible'
-                            size='sm'
+                        </button>   
+                        <button
+                            className='abtn'
                             type='submit'
+<<<<<<< HEAD
                             color='primary'
-                            onClick={this.props.art.auction.isBidding ? this.EndAuction : this.StartAuction }>
+                            onClick={
+                                this.props.art.auction.isBidding
+                                    ? this.EndAuction
+                                    : this.StartAuction
+                            }>
                             {Auc}
                         </Button>
+=======
+                            // color='primary'
+                            onClick={this.props.art.auction.isBidding ? this.EndAuction : this.StartAuction }>
+                            {Auc} 
+                        </button>
+                        
+>>>>>>> dev2
                         <Modal
                             isOpen={this.state.isModalOpen}
                             toggle={this.toggleModal}
-                            className='modal-md'>
+                            className='modal_popup'>
                             <ModalHeader
                                 toggle={this.toggleModal}
                                 className='pl-5'>
                                 Put For Sale
                             </ModalHeader>
-                            <Card className='pb-5'>
+                            <Card className='artCard'>
                                 <CardImg
                                     top
-                                    width='100%'
+                                    style={{width:'100&', paddingRight:'10px',paddingLeft:'10px'}}
                                     src={this.props.art.imgurl}
                                     alt='Card image'
                                 />
-                                <p className='m-auto p-2'>
-                                    Art Title: {this.props.art.tokenTitle}
-                                </p>
-
-                                <div className='row m-auto pt-2'>
-                                    <p>Art Sell Price : </p>
+                                <CardBody
+                                >
+                                <div className="ctext" style={{padding:'2px'}}>
+                                    <CardSubtitle style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'#B3B3B3',
+                                        
+                                    }}>
+                                    #Art #Rare 
+                                    
+                                    </CardSubtitle>
+                                    <CardSubtitle
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'#B3B3B3',
+                                    }}
+                                    >
+                                        Price
+                                    </CardSubtitle>
+                                </div>
+                                <div className="ctext">
+                                    <CardText
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                    }}
+                                    >
+                                        {this.props.art.tokenTitle} 
+                                    </CardText>
+                                    <CardText
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                    }}
+                                    >
+                                        1.2ETH
+                                    </CardText>
+                                </div>
+                                <div className="ctext1">
+                                    <p
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                    }}
+                                    >Sell Price : </p>
                                     <p>
                                         {' '}
                                         <Input
@@ -217,19 +413,48 @@ class Allpatrender extends Component {
                                             }></Input>
                                     </p>
                                 </div>
-                                <p className='m-auto p-2'>
-                                    <Button
+                                <div className="ctext1">
+                                    <p
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                    }}
+                                    >Token : </p>
+                                    <p>
+                                        <Input
+                                            type='number'
+                                            id='nos'
+                                            name='nos'
+                                            onChange={this.handleInputChange}
+                                        />
+                                    </p>
+                                </div>
+                                <div>
+                                <button
+                                    className="abtn" style={{
+                                        left:'30%'
+                                    }}
                                         type='submit'
                                         onClick={this.putForSale}>
                                         Confirm
-                                    </Button>{' '}
-                                </p>
+                                    </button>{' '}
+                                </div>
+                                </CardBody>
+                                
+                                
                             </Card>
                         </Modal>
-                    </Col>
+                    </div> 
                 </CardBody>
-                </Link>
+<<<<<<< HEAD
+=======
+                {/* </Link> */}
+              
+>>>>>>> dev2
             </Card>
+            </div>
         );
     }
 }
@@ -255,7 +480,6 @@ class MyItemComponent extends Component {
         this.fileSelectHandler = this.fileSelectHandler.bind(this);
         this.fileUploadHandler = this.fileUploadHandler.bind(this);
         this.fileAwsHandler = this.fileAwsHandler.bind(this);
-
     }
 
     toggleModal1() {
@@ -279,10 +503,15 @@ class MyItemComponent extends Component {
                 imgUrl,
                 nos
             )
+<<<<<<< HEAD
             .send({ from: this.props.accounts, gas: 2500000 });
+
+=======
+            .send({ from: this.props.accounts, gas: 1000000 });
                                                     
+>>>>>>> dev2
         console.log(res);
-        this.setState({isLoading : false});
+        this.setState({ isLoading: false });
 
         this.toggleModal1();
     };
@@ -319,11 +548,15 @@ class MyItemComponent extends Component {
         });
     };
     fileUploadHandler = (event) => {
+<<<<<<< HEAD
+        this.setState({ isLoading: true });
+        this.fileAwsHandler(this.state.selectedFile, this.creatingItems);
+=======
+        event.preventDefault();
         this.setState({isLoading : true});
         this.fileAwsHandler(this.state.selectedFile,this.creatingItems);
+>>>>>>> dev2
     };
-
-
 
     fileAwsHandler = async (file, callback) => {
         console.log(file);
@@ -367,61 +600,108 @@ class MyItemComponent extends Component {
 
         let ch = 'visible';
         return (
-            <div className='container'>
-                <h2>My Items</h2>
+            <div className='artContainer'>
+                <div style={{
+
+                    marginLeft:'2px'
+                }} >
+                    
+                <p style={{fontFamily:'Gibson', fontSize:'30px', fontWeight:'bold', marginTop:'10px', textAlign:'left'}}>
+                    My Arts
+                </p>
+
+                <div  style={{ display:'flex', justifyContent:'space-between'}}>
+                <p
+                style={{  marginLeft:'2px', position:'relative' }}
+                >
+                <button className="abtn">All</button>
+                 <button className="abtn">Offer Made </button> 
+                <button className="abtn">Offer Received </button> 
+                <button className="abtn">My Creations </button> 
+                </p>
+                <p
+                style={{  marginLeft:'2px', position:'relative' }}
+                >
                 <Button
-                    color='success'
-                    className={ch}
+                    className='abtn' 
+                    style={{backgroundColor:'#5548C7', color:'white'}}
                     onClick={this.toggleModal1}>
-                    Add Art
+                    + {''}Create ARTWORK
                 </Button>
+
+                </p>
+                </div> 
+                </div>
 
                 <Modal
                     isOpen={this.state.isModalOpen1}
                     toggle={this.toggleModal1}
                     className='modal-xl'>
                     <ModalHeader toggle={this.toggleModal1}>
-                        <h3>Add Artwork</h3>
+                    <p style={{fontFamily:'Gibson', fontSize:'25px', fontWeight:'800', marginTop:'10px', textAlign:'left', marginLeft:'7px', textTransform:'uppercase'}}>
+                    Add New Artwork
+                </p>
                     </ModalHeader>
                     <ModalBody>
                         <Form>
                             <div className='row pl-5 pr-5'>
                                 <div className='col-6'>
-                                    <FormGroup>
-                                        <Label htmlFor='title' className='ml-3'>
-                                            Token Title
+                                    <FormGroup >
+                                        
+                                        <Label htmlFor='title' className='ml-3'
+                                         style={{ fontFamily:'Gibson', fontSize:'20px',
+                                         color:'black',
+                                         }}> Title
                                         </Label>
                                         <Input
                                             type='text'
                                             id='title'
                                             name='title'
                                             onChange={this.handleInputChange}
-                                        />
+                                        />    
                                     </FormGroup>
                                 </div>
-                                <div className='col-6'>
-                                    <FormGroup>
-                                        <Label htmlFor='price' className='ml-3'>
-                                            Item Price
+                                <div className='col-6' style={{
+                                    display:'flex', justifyContent:'space-between'
+                                }}>
+                                    <FormGroup >
+                                        <Label htmlFor='price' className='ml-3' style={{ fontFamily:'Gibson',
+                                        fontSize:'20px',
+                                        color:'black',
+                                        }}> Sell Price
                                         </Label>
                                         <Input
+                                        style={{width:'50%'}}
                                             type='text'
                                             id='price'
                                             name='price'
                                             onChange={this.handleInputChange}
                                         />
+                                        <Label className='ml-3' style={{ fontFamily:'Gibson',
+                                        fontSize:'20px',
+                                        color:'black',
+                                        }}> ETH
+                                        </Label>
                                     </FormGroup>
                                 </div>
                             </div>
                             <div className='row pl-5 pr-5'>
                                 <div className='col-6'>
                                     <FormGroup>
+<<<<<<< HEAD
+                                        <Label htmlFor='nos' className='ml-3'>
+=======
                                         <Label
                                             htmlFor='nos'
-                                            className='ml-3'>
+                                            className='ml-3'  style={{ fontFamily:'Gibson',
+                                            fontSize:'20px',
+                                            color:'black',
+                                            }}>
+>>>>>>> dev2
                                             No. of Tokens
                                         </Label>
                                         <Input
+                                        style={{width:'30%'}}
                                             type='number'
                                             id='nos'
                                             name='nos'
@@ -433,40 +713,53 @@ class MyItemComponent extends Component {
                                     <FormGroup>
                                         <Label
                                             htmlFor='artHash'
-                                            className='ml-3'>
+                                            className='ml-4'  style={{ fontFamily:'Gibson',
+                                            fontSize:'20px',
+                                            color:'black',
+                                            }}>
                                             Art
                                         </Label>
                                         <Input
+                                        style={{marginLeft:'0.5rem'}}
                                             type='file'
                                             onChange={this.fileSelectHandler}
                                         />
-                                        
                                     </FormGroup>
                                 </div>
                             </div>
                             <br />
-                            <div className='row pl-5'>
-                                <div className='col-6'>
-                                    <Button
+                                    <button
+                                    className="abtn" style={{ float:'right', color:'white', backgroundColor:'#5548C7', fontSize:'18px'}}
                                         color='primary'
                                         onClick={this.fileUploadHandler}>
                                         Add
+<<<<<<< HEAD
                                     </Button>
-                                    {this.state.isLoading ? <img src={loader} /> : <div></div>}
+                                    {this.state.isLoading ? (
+                                        <img src={loader} />
+                                    ) : (
+                                        <div></div>
+                                    )}
                                 </div>
                             </div>
+=======
+                                    </button>
+                                    {this.state.isLoading ? <img src={loader} /> : <div></div>}
+                                
+>>>>>>> dev2
                             <br />
                         </Form>
                     </ModalBody>
                 </Modal>
-                <br />
-                <br />
-                <div className='row'>{Menu}</div>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
+                
+                <div className='row'>{Menu}
+                </div>
+                
+                <br/><br/><br/><br/><br/><br/><br/><br/>
+
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/>
             </div>
         );
     }

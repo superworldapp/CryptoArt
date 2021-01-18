@@ -1,279 +1,451 @@
 import React, { Component } from 'react';
 import LogoImg from '../images/logo.svg';
 import {
-    Navbar,
-    NavbarBrand,
-    Nav,
-    NavbarToggler,
-    Collapse,
-    NavItem,
-    InputGroup,
-    InputGroupAddon,
-    InputGroupText,
-    Input
+  Navbar,
+  NavbarBrand,
+  Nav,
+  NavbarToggler,
+  Collapse,
+  NavItem,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Input,
 } from 'reactstrap';
 import { Link, NavLink } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import helpIcon from '../assets/svg/help.svg';
+import greenDot from '../assets/svg/green-dot.svg';
+import MenuItem from '@material-ui/core/MenuItem';
+import Axios from 'axios';
+import {
+  CircularProgress,
+  Grid,
+  IconButton,
+  Link as MLink,
+  Menu,
+  TextField,
+} from '@material-ui/core';
+import { LayoutContext } from '../state/Layout/context';
+import SignInModal from './SignInModal/SignInModal';
+import Auth from './Auth';
 import Identicon from 'identicon.js';
 import Web3 from 'web3';
+import './HeaderComponent.css';
+import dotenv from 'dotenv';
+const env = dotenv.config();
 let util;
 let util1;
 
 class Header extends Component {
-    constructor(props) {
-        super(props);
+  static contextType = LayoutContext;
 
-        this.state = { isNavOpen: false, value: '', isLoggedIn: false  };
-        this.toggleNav = this.toggleNav.bind(this);
-        this.getnewHash = this.getnewHash.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      isNavOpen: false,
+      value: '',
+      isLoggedIn: false,
+      MyPropsAnchorEl: null,
+      myReferralsAnchorEl: null,
+      openNotifyDropDown: false,
+    };
+    this.toggleNav = this.toggleNav.bind(this);
+    this.getnewHash = this.getnewHash.bind(this);
+<<<<<<< HEAD
+    this.toggleSignIn = this.toggleSignIn.bind(this);
+=======
+>>>>>>> dev2
+    this.openWalletModal = this.openWalletModal.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleNotifyDropDownClick = this.handleNotifyDropDownClick.bind(this);
+    this.handleNotifyDropDownClickAway = this.handleNotifyDropDownClickAway.bind(
+      this
+    );
+  }
 
+  toggleNav() {
+    this.setState({ isNavOpen: !this.state.isNavOpen });
+  }
+
+<<<<<<< HEAD
+  toggleSignIn() {
+    this.context.dispatch({
+      type: 'TOGGLE_SIGN_IN_MODAL',
+      payload: !this.context.state.signInModalIsOpen,
+    });
+  }
+
+=======
+>>>>>>> dev2
+  openWalletModal = () => {
+    if (!this.state.account) {
+      this.context.dispatch({
+        type: 'TOGGLE_SIGN_IN_MODAL',
+        payload: !this.context.state.signInModalIsOpen,
+      });
     }
+  };
+  // loggedInOrLoggedOut = () => {
+  //   this.setState({ isLoggedIn: !this.state.isLoggedIn });
+  // };
+<<<<<<< HEAD
 
-    toggleNav() {
-        this.setState({ isNavOpen: !this.state.isNavOpen });
-    }
-    conver = async (x) => {
-        util = Web3.utils.toWei(x, 'milli');
-    };
-    converb = async (x) => {
-        util1 = Web3.utils.fromWei(x, 'milli');
-    };
+  conver = async (x) => {
+    util = Web3.utils.toWei(x, 'milli');
+  };
+  converb = async (x) => {
+    util1 = Web3.utils.fromWei(x, 'milli');
+  };
 
-    handleChange = (event) => {
-        this.setState({ value: event.target.value });
-    };
+  handleChange = (event) => {
+    this.setState({ value: event.target.value });
+  };
 
-    loggedInOrLoggedOut = () => {
-        this.setState({ isLoggedIn: !this.state.isLoggedIn });
-    };
+  getnewHash = async () => {
+    let x = 1;
+    console.log(x);
+    //x= x.substring(1,10);
+    return x;
+  };
+  signInIcon = () => {};
 
-    getnewHash = async() => {
-        let x = 1;
-        console.log(x);
-        //x= x.substring(1,10);
-        return x;
-    }
-    signInIcon = () => {};
+  handleClose = () => {
+    this.setState({
+      MyPropsAnchorEl: null,
+      myReferralsAnchorEl: null,
+      profileDropDownAnchorEl: null,
+    });
+  };
 
-    render() {
-        // if (this.props.registered == 1 || this.props.registered == 2) {
-        //     return(
-        //     <React.Fragment>
-        //         <Navbar dark expand="md">
-        //             <div className="container justify-center">
+  //Open Notification menu dropdown
+  handleNotifyDropDownClick = () => {
+    this.setState({ openNotifyDropDown: !this.state.openNotifyDropDown });
+  };
 
-        //                 <NavbarToggler onClick={this.toggleNav}/>
-        //                 <NavbarBrand className="mr-auto" >BrimNet</NavbarBrand>
-        //                 <Collapse isOpen = {this.state.isNavOpen} navbar>
+  handleNotifyDropDownClickAway = () => {
+    this.setState({ openNotifyDropDown: false });
+  };
 
-        //                     <Nav navbar className="m-auto">
+  render() {
+            
 
-        //                     <NavItem>
-        //                         <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/home">Home</NavLink>
-        //                     </NavItem>
-        //                     <NavItem>
-        //                         <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/items">Items</NavLink>
-        //                     </NavItem>
-        //                     <NavItem>
-        //                         <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/shipment">Shipments</NavLink>
-        //                     </NavItem>
-        //                     <NavItem>
-        //                         <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/register">Register</NavLink>
-        //                     </NavItem>
+=======
 
-        //                     </Nav>
+  conver = async (x) => {
+    util = Web3.utils.toWei(x, 'milli');
+  };
+  converb = async (x) => {
+    util1 = Web3.utils.fromWei(x, 'milli');
+  };
 
-        //                 </Collapse>
-        //             </div>
-        //             <h6 style={{ color: "white"}}>Balance : {util1}</h6>
-        //         </Navbar>
+  handleChange = (event) => {
+    this.setState({ value: event.target.value });
+  };
 
-        //     </React.Fragment>
-        //     );
-        // }
-        // else if (this.props.registered == 3 || this.props.registered == 4) {
-        //     return(
-        //     <React.Fragment>
-        //         <Navbar dark expand="md">
-        //             <div className="container justify-center">
+  getnewHash = async () => {
+    let x = 1;
+    console.log(x);
+    //x= x.substring(1,10);
+    return x;
+  };
+  signInIcon = () => {};
 
-        //                 <NavbarToggler onClick={this.toggleNav}/>
-        //                 <NavbarBrand className="mr-auto" >BrimNet</NavbarBrand>
-        //                 <Collapse isOpen = {this.state.isNavOpen} navbar>
+  handleClose = () => {
+    this.setState({
+      MyPropsAnchorEl: null,
+      myReferralsAnchorEl: null,
+      profileDropDownAnchorEl: null,
+    });
+  };
 
-        //                     <Nav navbar className="m-auto">
+  //Open Notification menu dropdown
+  handleNotifyDropDownClick = () => {
+    this.setState({ openNotifyDropDown: !this.state.openNotifyDropDown });
+  };
 
-        //                     <NavItem>
-        //                         <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/home">Home</NavLink>
-        //                     </NavItem>
+  handleNotifyDropDownClickAway = () => {
+    this.setState({ openNotifyDropDown: false });
+  };
 
-        //                     <NavItem>
-        //                         <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/register">Register</NavLink>
-        //                     </NavItem>
+  render() {
+>>>>>>> dev2
+    return (
+      <>
+        <Navbar
+          light
+          expand='md'
+          style={{
+            marginBottom: '-1.8rem',
+          }}
+        >
+          <NavbarToggler onClick={this.toggleNav} />
+          <NavbarBrand className='mr-auto'>
+<<<<<<< HEAD
+            <img src={LogoImg} alt='Logo Image' height='60' width='60' />
+=======
+            <NavLink to='/home'>
+              <img src={LogoImg} alt='Logo Image' height='60' width='60' />
+            </NavLink>
+>>>>>>> dev2
+          </NavbarBrand>
+          <InputGroup
+            style={{
+              position: 'relative',
+              marginLeft: '2rem',
+            }}
+          >
+            <Input
+              placeholder='Search for Artist, Art name'
+              value={this.state.value}
+              onChange={this.handleChange}
+              style={{
+                padding: '0 2rem',
+                maxWidth: '400px',
+                borderRadius: '20px',
+              }}
+            />
+            <i
+              class='fas fa-search'
+              style={{
+                position: 'absolute',
+                left: '10px',
+                top: '25%',
+                color: '#ccc',
+                display: !this.state.value ? 'block' : 'none',
+              }}
+            ></i>
+          </InputGroup>
+          <Collapse isOpen={this.state.isNavOpen} navbar>
+            <Nav
+              navbar
+              className='m-auto d-flex align-items-center justify-content-end'
+            >
+<<<<<<< HEAD
+              <NavItem>
+                <NavLink className='nav-link' to='/home'>
+                  Home
+                </NavLink>
+              </NavItem>
+=======
+              {/* <NavItem>
+                <NavLink className='nav-link' to='/home'>
+                  Home
+                </NavLink>
+              </NavItem> */}
+>>>>>>> dev2
+              <NavItem>
+                <NavLink
+                  className='nav-link'
+                  style={{
+                    width: 200,
+                  }}
+                  to='/allart'
+                >
+                  Art Marketplace
+                </NavLink>
+              </NavItem>
 
-        //                     </Nav>
-
-        //                 </Collapse>
-        //             </div>
-        //             <h6 style={{ color: "white"}}>Balance : {util1}</h6>
-        //         </Navbar>
-        //     </React.Fragment>
-        //     );
-        // }
-        // else if (this.props.registered == 5) {
-        //     return(
-        //         <React.Fragment>
-        //         <Navbar dark expand="md">
-        //             <div className="container justify-center">
-
-        //                 <NavbarToggler onClick={this.toggleNav}/>
-        //                 <NavbarBrand className="mr-auto" >BrimNet</NavbarBrand>
-        //                 <Collapse isOpen = {this.state.isNavOpen} navbar>
-
-        //                     <Nav navbar className="m-auto">
-
-        //                     <NavItem>
-        //                         <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/home">Home</NavLink>
-        //                     </NavItem>
-        //                     <NavItem>
-        //                         <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/items">Items</NavLink>
-        //                     </NavItem>
-        //                     <NavItem>
-        //                         <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/shipment">Shipments</NavLink>
-        //                     </NavItem>
-        //                     <NavItem>
-        //                         <NavLink className="nav-link" style={{width:200,justifyContent:'space-around'}} to="/allmem">All Members</NavLink>
-        //                     </NavItem>
-
-        //                     </Nav>
-
-        //                 </Collapse>
-        //             </div>
-        //             <h6 style={{ color: "white"}}>Balance : {util1}</h6>
-        //         </Navbar>
-
-        //     </React.Fragment>
-        //     );
-        // }
-        return (
-            <>
-                <Navbar
-                    light
-                    expand='md'
+<<<<<<< HEAD
+              <NavItem>
+=======
+              {/* <NavItem>
+>>>>>>> dev2
+                <NavLink className='nav-link' to='/myart'>
+                  <i
                     style={{
-                        marginBottom: '-1.8rem'
-                    }}>
-                    
-                        <NavbarToggler onClick={this.toggleNav} />
-                        <NavbarBrand className='mr-auto'>
-                            <img src={LogoImg} alt='Logo Image' height='60' width='60'/>
-                        </NavbarBrand>
-                        <InputGroup
+                      color: '#5540C7',
+                      cursor: 'pointer',
+                    }}
+                  ></i>
+                  My Collections
+                </NavLink>
+<<<<<<< HEAD
+              </NavItem>
+
+=======
+              </NavItem> */}
+>>>>>>> dev2
+              {Auth.getAuth() ? (
+                <Grid
+                  container
+                  direction='row'
+                  justify='flex-end'
+                  alignItems='center'
+                  spacing={2}
+                >
+                  <Grid item>
+                    <Button
+                      className={
+                        this.props.accounts ? 'wallet-button' : 'not-connected'
+                      }
+                      disabled={false}
+                      onClick={this.openWalletModal}
+                    >
+                      <Grid
+                        container
+                        direction='row'
+                        justify='space-around'
+                        alignItems='center'
+                      >
+                        {this.props.accounts ? (
+                          <>
+                            <Grid item>Wallet Connected</Grid>
+                            <Grid item>
+                              <img
+<<<<<<< HEAD
+=======
+                                id='green-dot'
+>>>>>>> dev2
+                                style={{ width: '10px' }}
+                                src={greenDot}
+                                alt=''
+                              />{' '}
+                            </Grid>{' '}
+                          </>
+                        ) : (
+                          <Grid item>Connect Wallet</Grid>
+                        )}
+                      </Grid>
+                    </Button>
+                  </Grid>
+                  <Grid item spacing={2}></Grid>
+                  <Grid item spacing={2}>
+                    <Menu
+                      id='long-menu'
+                      anchorEl={this.state.profileDropDownAnchorEl}
+                      keepMounted
+                      getContentAnchorEl={null}
+                      open={this.state.profileDropDownAnchorEl}
+                      onClose={this.handleClose}
+                      PaperProps={{
+                        style: {
+                          // maxHeight: ITEM_HEIGHT * 4.5,
+                          // width: '300px',
+                          padding: '1px',
+                        },
+                      }}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                      }}
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                      }}
+                    >
+                      <MenuItem
+                        onClick={() => {
+                          Axios.defaults.headers = {
+                            Authorization: Auth.getToken(),
+                          };
+                          Axios.post(
+                            `${process.env.REACT_APP_API_URL}/user/logout`
+                          )
+                            .then(() => {
+                              // console.log('LOGGED OUT');
+                            })
+                            .catch((_e) => {
+                              // console.log('LOGGED OUT ERROR');
+                              console.log(_e);
+                            });
+                          Auth.logout();
+                          this.handleClose();
+                        }}
+                      >
+                        <span
+                          style={{
+                            display: 'flex',
+                            maxHeight: '10px',
+                            alignItems: 'center',
+                            whiteSpace: 'pre-line',
+                          }}
+                        >
+                          <p
                             style={{
-                                position: 'relative',
-                                marginLeft: '2rem'
-                            }}>
-                            <Input
-                                placeholder='Search for Artist, Art name'
-                                value={this.state.value}
-                                onChange={this.handleChange}
-                                style={{
-                                    padding: '0 2rem',
-                                    maxWidth: '400px',
-                                    borderRadius: '20px'
-                                }}
-                            />
-                            <i
-                                class='fas fa-search'
-                                style={{
-                                    position: 'absolute',
-                                    left: '10px',
-                                    top: '25%',
-                                    color: '#ccc',
-                                    display: !this.state.value
-                                        ? 'block'
-                                        : 'none'
-                                }}></i>
-                        </InputGroup>
-                        <Collapse isOpen={this.state.isNavOpen} navbar>
-                            <Nav
-                                navbar
-                                className='m-auto d-flex align-items-center justify-content-end'>
-                                <NavItem>
-                                    <NavLink
-                                        className='nav-link'
-                                        
-                                        to='/home'>
-                                        Home
-                                    </NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink
-                                        className='nav-link'
-                                        style={{
-                                            width: 200
-                                        }}
-                                        to='/allart'>
-                                        Art Marketplace
-                                    </NavLink>
-                                </NavItem>
-                                {this.state.isLoggedIn ? (
-                                    <NavItem>
-                                        <NavLink className='nav-link' to='/home' onClick={
-                                                    this.loggedInOrLoggedOut
-                                                }>
-                                            <i
-                                                
-                                                
-                                                style={{
-                                                    color: '#5540C7',
-                                                    cursor: 'pointer'
-                                                }}></i>
-                                                My Collections
-                                        </NavLink>
-                                    </NavItem>
-                                ) : (
-                                    <NavItem>
-                                        <NavLink className='nav-link' to='/myart' onClick={
-                                                    this.loggedInOrLoggedOut
-                                                }>
-                                        <button
-                                            className='align-center justify-center btn sign-in-btn'
-                                            onClick={this.loggedInOrLoggedOut}
-                                            style={{
-                                                color: '#fff',
-                                                width: 150,
-                                                borderRadius: '30px'
-                                            }}>
-                                            Sign In
-                                        </button>
-                                        </NavLink>
-                                    </NavItem>
-                                )}
-                                <NavItem>
-                                    <NavLink className='nav-link' to='/myart'>
-                                        <img
-                                            width='38px'
-                                            height='38px'
-                                            className='rounded-circle'
-                                            src={`data:image/png;base64,${new Identicon(new Date().toString())}`}
-                                            alt='profile'
-                                        />
-                                    </NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink className='nav-link' to='#'>
-                                        <img
-                                            width='24px'
-                                            className='rounded-circle'
-                                            src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/1200px-Icon-round-Question_mark.svg.png'
-                                            alt='question-mark'
-                                        />
-                                    </NavLink>
-                                </NavItem>
-                            </Nav>
-                        </Collapse>
-                   
-                    {/* <h6
+                              flex: '1',
+                              color: '#5540c7',
+                              fontFamily: 'Gibson',
+                              fontSize: '11px',
+                            }}
+                          >
+                            Log Out
+                          </p>
+                        </span>
+                      </MenuItem>
+                    </Menu>
+                  </Grid>
+                </Grid>
+              ) : (
+                <Grid
+                  container
+                  direction='row'
+                  justify='flex-end'
+                  alignItems='center'
+                  spacing={2}
+                >
+                  <Grid item spacing={2}>
+                    <Button
+                      className='LoginButton-header'
+                      onClick={() =>
+                        this.context.dispatch({
+                          type: 'TOGGLE_SIGN_IN_MODAL',
+                          payload: !this.context.state.signInModalIsOpen,
+                        })
+                      }
+                    >
+                      Sign In
+                    </Button>
+                  </Grid>
+                </Grid>
+              )}
+<<<<<<< HEAD
+
+              <NavItem></NavItem>
+              <NavItem>
+                <NavLink className='nav-link' to='/myart'>
+                  <img
+                    width='38px'
+                    height='38px'
+                    className='rounded-circle'
+=======
+              <NavItem>
+                <NavLink className='nav-link' to='/myart'>
+                  <img
+                    width='30px'
+                    height='30px'
+                    className='rounded-circle'
+                    id='profile'
+>>>>>>> dev2
+                    src={`data:image/png;base64,${new Identicon(
+                      new Date().toString()
+                    )}`}
+                    alt='profile'
+                  />
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className='nav-link' to='#'>
+                  <img
+<<<<<<< HEAD
+                    width='24px'
+                    className='rounded-circle'
+                    src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/1200px-Icon-round-Question_mark.svg.png'
+=======
+                    width='30px'
+                    height='30px'
+                    className='rounded-circle'
+                    src={helpIcon}
+>>>>>>> dev2
+                    alt='question-mark'
+                  />
+                </NavLink>
+              </NavItem>
+              <SignInModal initContracts={this.props.initContracts} />
+            </Nav>
+          </Collapse>
+
+          {/* <h6
                         style={{
                             fontWeight: 800
                         }}>
@@ -287,46 +459,18 @@ class Header extends Component {
                             )}
                         </small>
                     </h6> */}
+<<<<<<< HEAD
                 </Navbar>
-                <div
-                    style={{
-                        textAlign: 'left',
-                        height: '20%',
-                        fontSize: '.8rem',
-                        marginLeft: '150px',
-                        textDecoration: 'underline'
-                    }}>
-                    <Link
-                        to='#'
-                        style={{
-                            color: '#ccc',
-                            margin: '0 1rem',
-                            cursor: 'pointer'
-                        }}>
-                        Caozhibing
-                    </Link>
-                    <Link
-                        to='#'
-                        style={{
-                            color: '#ccc',
-                            margin: '0 1rem',
-                            cursor: 'pointer'
-                        }}>
-                        Northern Lights
-                    </Link>
-                    <Link
-                        to='#'
-                        style={{
-                            color: '#ccc',
-                            margin: '0 1rem',
-                            cursor: 'pointer'
-                        }}>
-                        Winter Jacket
-                    </Link>
-                </div>
+                
             </>
         );
     }
+=======
+        </Navbar>
+      </>
+    );
+  }
+>>>>>>> dev2
 }
 
 export default Header;

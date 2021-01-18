@@ -1,0 +1,127 @@
+<<<<<<< HEAD
+=======
+.hidden{
+    overflow-y: auto;
+}
+
+
+>>>>>>> dev2
+.modal-title{
+    font-family: Gibson;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+.pl-5{
+    padding-left: 2.0rem !important;
+    padding-bottom: 0.2rem !important;
+}
+ .artCard{
+    height: 40%;
+    width: 100%;
+    border-top: none !important;
+} 
+.modal-content{
+    width: 80%  !important;
+}
+.modal-header{
+    border: hidden !important;
+}
+
+
+.abtn{
+    position: relative;
+    opacity: 0.9;
+    margin: 0 10px;
+    border-radius: 2em;
+    font-family: canada-type-gibson, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 0.375rem 1.5rem;
+    border: 2px solid #5540c7;
+    background-color: white;
+    color: black;
+    text-transform: uppercase;
+}
+.abtn:hover {
+    background-color:  #5540c7;
+    border-color: white;
+    cursor: pointer;
+}
+
+.abtn:focus {
+    outline: 0px;
+    border: 0;
+}
+.artContainer{
+    padding: 5px;
+    margin-left: 5%;
+}
+
+.ctext1{
+    display: flex;
+    justify-content: center;
+}
+
+<<<<<<< HEAD
+.displayCard{
+    height: 110%;
+    width: 90%;
+    position: relative;
+}
+.displayImage{
+    position: relative;
+    height: 80%;
+    width: 100%;
+    padding:2%;
+}
+.displayText{
+    position: absolute;
+    top:60%;
+}
+
+=======
+/* .displayCard{
+    height: 130% !important;
+    width: 100%;
+} */
+.displayImage{
+    position: relative;
+    height: 20rem;
+    width: 100%;
+    padding: 5% 15%;
+
+}
+.displayText{
+    position: absolute;
+}
+
+.card{
+    height: 33rem !important;
+    width: 30rem !important;
+    display: flex;
+    flex-flow: column;
+}
+
+.a{
+    text-decoration: none;
+}
+h3{
+    font-family:Gibson;
+    font-size: 15px;
+    color:black;
+    text-transform: uppercase;
+    margin: 2% 0% 2% 2%;
+}
+.form-control{
+    display: flex;
+    border-radius: 2rem;
+    width: 70%;
+    margin-left: 0.5rem;
+
+}
+.form-group{
+    display: flex;
+}
+>>>>>>> dev2

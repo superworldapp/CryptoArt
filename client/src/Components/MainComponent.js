@@ -24,7 +24,7 @@ class Main extends Component {
             contract: null,
             res: null,
             registered: 0,
-            art : null,
+            art: null
         };
     }
 
@@ -53,7 +53,7 @@ class Main extends Component {
             });
             let res = await this.state.contract?.methods.tokenCount().call();
             console.log(res);
-    
+
             let response = [];
             for (let i = 1; i <= res; i++) {
                 let rex = await this.state.contract?.methods.Arts(i).call();
@@ -63,6 +63,7 @@ class Main extends Component {
             allDocs = response;
             console.log(response);
             this.setState({ art: allDocs });
+            
         } catch (error) {
             // Catch any errors for any of the above operations.
 
@@ -71,16 +72,20 @@ class Main extends Component {
     };
 
     render() {
-        const CardWithId = ({match}) => {
-            return(
-              <CardDetail
-                     art={this.state.art?.filter((singleart) => singleart.tokenIdentifier === match.params.id)[0]}   
-                     
-             />
-              
-              
+        const CardWithId = ({ match }) => {
+            return (
+                <CardDetail
+                    art={
+                        this.state.art?.filter(
+                            (singleart) =>
+                                singleart.tokenIdentifier === match.params.id
+                        )[0]
+                    }
+                    contract={this.state.contract}
+                    accounts={this.state.accounts}
+                />
             );
-          }
+        };
         return (
             <div className='App'>
                 <Header
@@ -120,7 +125,7 @@ class Main extends Component {
                             />
                         )}
                     />
-                     <Route path='/card/:id' component={CardWithId} />
+                    <Route path='/card/:id' component={CardWithId} />
                     {/* <Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } /> */}
 
                     {/* <Route

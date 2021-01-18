@@ -1,0 +1,73 @@
+.wallet-button {
+  position: flex;
+  text-align: end;
+  color: #5a45c9 !important;
+  background-color: #ffffff !important;
+  font-family: 'Gibson' !important;
+  /* font-weight: bolder !important; */
+  border-radius: 50px !important;
+  margin: 0px 10px;
+  width: 200px;
+  border: 2px solid #5540c7 !important;
+  height: 35px;
+}
+
+.not-connected {
+  background-color: #5a45c9 !important;
+  color: #ffffff !important;
+  position: flex;
+  text-align: end;
+  font-family: 'Gibson' !important;
+  /* font-weight: bolder !important; */
+  border-radius: 50px !important;
+  margin: 0px 10px;
+  width: 200px;
+  border: 2px solid #5540c7 !important;
+  height: 35px;
+}
+
+.LoginButton-header {
+  background: #5540c7 !important;
+  border-radius: 50px !important;
+  border: 2px solid #5540c7 !important;
+  color: #ffffff !important;
+  height: 40px !important;
+  padding: 0 35px !important;
+  font-family: 'Gibson' !important;
+  width: 10rem;
+  /* text-transform: 'capitalize' !important; */
+}
+
+.LoginButton-header:hover {
+  background: #ffffff !important;
+  color: #5540c7 !important;
+}
+<<<<<<< HEAD
+=======
+
+a.nav-link,
+a.nav-link.active {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: black !important;
+  width: max-content !important;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.MuiGrid-spacing-xs-2 > .MuiGrid-item {
+  padding: 0 !important;
+}
+
+#profile {
+  border: 2px solid #5540c7;
+}
+
+.navbar-collapse {
+  flex-grow: 0;
+}
+
+#green-dot {
+  display: flex;
+}
+>>>>>>> dev2
