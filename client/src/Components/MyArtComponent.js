@@ -69,7 +69,7 @@ class Allpatrender extends Component {
             .send({
                 from: this.props.accounts,
                 value: this.props.art.tokenSellPrice,
-                gas: 1000000
+                gas: 10000000
             });
         console.log(res);
     };
@@ -406,7 +406,7 @@ class MyItemComponent extends Component {
                 imgUrl,
                 nos
             )
-            .send({ from: this.props.accounts, gas: 2500000 });
+            .send({ from: this.props.accounts, gas: 10000000 });
                                                     
         console.log(res);
         this.setState({isLoading : false});
