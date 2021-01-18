@@ -43,7 +43,7 @@ class AllArt extends Component {
             .send({
                 from: this.props.accounts,
                 value: this.props.art.tokenSellPrice,
-                gas: 10000000
+                gas: 5000000
             });
         console.log(res);
     };

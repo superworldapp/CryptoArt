@@ -432,7 +432,7 @@ class MyItemComponent extends Component {
                 imgUrl,
                 nos
             )
-            .send({ from: this.props.accounts, gas: 10000000 });
+            .send({ from: this.props.accounts, gas: 1000000 });
                                                     
         console.log(res);
         this.setState({isLoading : false});
@@ -472,6 +472,7 @@ class MyItemComponent extends Component {
         });
     };
     fileUploadHandler = (event) => {
+        event.preventDefault();
         this.setState({isLoading : true});
         this.fileAwsHandler(this.state.selectedFile,this.creatingItems);
     };
