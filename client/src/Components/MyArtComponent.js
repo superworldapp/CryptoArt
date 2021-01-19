@@ -415,7 +415,7 @@ class MyItemComponent extends Component {
                 imgUrl,
                 nos
             )
-            .send({ from: this.props.accounts, gas: 10000000 });
+            .send({ from: this.props.accounts, gas: 1000000 });
                                                     
         console.log(res);
         this.setState({isLoading : false});
@@ -455,6 +455,7 @@ class MyItemComponent extends Component {
         });
     };
     fileUploadHandler = (event) => {
+        event.preventDefault();
         this.setState({isLoading : true});
         this.fileAwsHandler(this.state.selectedFile,this.creatingItems);
     };
@@ -525,12 +526,12 @@ class MyItemComponent extends Component {
                 <p
                 style={{  marginLeft:'2px', position:'relative' }}
                 >
-                <button
+                <Button
                     className='abtn' 
                     style={{backgroundColor:'#5540C7', color:'white'}}
                     onClick={this.toggleModal1}>
                     + {''}Create ARTWORK
-                </button>
+                </Button>
 
                 </p>
                 </div> 
