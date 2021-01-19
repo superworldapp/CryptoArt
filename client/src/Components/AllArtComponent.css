@@ -53,23 +53,23 @@
   width: fit-content !important;
 }
 
-#root > div > div > div > div.row > div > div {
+/* #root > div > div > div > div.row > div > div {
   height: 18rem !important;
   width: 15rem;
-}
+} */
 
-.card-img-top-all-art {
+/* .card-img-top-all-art {
   height: 12rem;
-}
+} */
 
-#root > div > div > div > div.row {
+/* #root > div > div > div > div.row {
   margin-left: -70px;
   margin-right: -60px;
-}
+} */
 
-#root > div > div > div > div.row > div {
+/* #root > div > div > div > div.row > div {
   max-width: 20%;
-}
+} */
 
 /* container with buttons */
 #root > div > div > div > div.row > div > div > a > div > div.col-sm-12 {
