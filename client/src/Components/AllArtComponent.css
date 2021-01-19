@@ -87,9 +87,13 @@ div.all-art-card.card {
 .landscape {
   width: 100%;
   height: auto;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .portrait {
   height: 100%;
   width: auto;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
