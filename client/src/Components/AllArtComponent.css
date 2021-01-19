@@ -1,10 +1,10 @@
 .card.all-art-card {
   box-shadow: 1px 5px 5px #888888;
-  height: 18rem !important;
 }
 
 div.all-art-card.card {
-  height: 260px !important;
+  height: 23rem !important;
+  width: 17rem !important;
 }
 
 /* #all-art-card {
@@ -81,19 +81,23 @@ div.all-art-card.card {
 }
 
 .card-img-top-all-art {
-  height: 10rem;
-}
-
-.landscape {
-  width: 100%;
-  height: auto;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  height: 17rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .portrait {
-  height: 100%;
-  width: auto;
+  max-height: 100%;
+  max-width: auto;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.landscape {
+  max-height: auto;
+  max-width: 100%;
   padding-top: 1rem;
   padding-bottom: 1rem;
 }

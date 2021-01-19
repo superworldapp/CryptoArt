@@ -86,13 +86,16 @@ class AllArt extends Component {
         : 'visible';
 
     const img = new Image();
-    let ratio = 0;
+    let orientation;
     img.onload = function () {
-      ratio = this.width / this.height;
+      let width = this.width;
+      let height = this.height;
+
+      orientation = width < height ? 'portrait' : 'landscape';
     };
     img.src = this.props.art.imgurl;
     img.onload();
-    console.log('ratio', ratio);
+
     return (
       <Card
         // height='300px'
@@ -110,7 +113,7 @@ class AllArt extends Component {
           <div className='card-img-top-all-art'>
             <CardImg
               // className='card-img-top-all-art'
-              className={ratio > 0 ? 'portrait' : 'landscape'}
+              className={orientation}
               top
               src={this.props.art.imgurl}
             ></CardImg>
