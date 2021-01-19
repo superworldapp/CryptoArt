@@ -83,6 +83,15 @@ class AllArt extends Component {
       Web3.utils.fromWei(this.props.art.tokenSellPrice.toString(), 'ether') == 0
         ? 'invisible'
         : 'visible';
+
+    const img = new Image();
+    let ratio = 0;
+    img.onload = function () {
+      ratio = this.width / this.height;
+    };
+    img.src = this.props.art.imgurl;
+    img.onload();
+    console.log('ratio', ratio);
     return (
       <Card
         // height='300px'
@@ -97,12 +106,14 @@ class AllArt extends Component {
           }}
           to={`/card/${this.props.art.tokenIdentifier}`}
         >
-          <CardImg
-            className='card-img-top-all-art'
-            top
-            width='100%'
-            src={this.props.art.imgurl}
-          ></CardImg>
+          <div className='card-img-top-all-art'>
+            <CardImg
+              // className='card-img-top-all-art'
+              className={ratio > 0 ? 'portrait' : 'landscape'}
+              top
+              src={this.props.art.imgurl}
+            ></CardImg>
+          </div>
           <CardBody className='all-art-body'>
             <div style={{ display: 'flex' }}>
               <CardSubtitle>
