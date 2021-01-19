@@ -197,7 +197,7 @@ class Home extends Component {
               <div className='rowImages'>
                 <Card className='imageCards'>
                   <CardImg top width='100%' src={image3} alt='image3'></CardImg>
-                  <CardBody>
+                  <CardBody className='card-body-home'>
                     <div
                       style={{
                         display: 'flex',
