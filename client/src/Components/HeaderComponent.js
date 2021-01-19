@@ -125,7 +125,13 @@ class Header extends Component {
           <NavbarToggler onClick={this.toggleNav} />
           <NavbarBrand className='mr-auto'>
             <NavLink to='/home'>
-              <img src={LogoImg} alt='Logo Image' height='60' width='60' />
+              <img
+                src={LogoImg}
+                alt='Logo Image'
+                id='logo-img'
+                height='60'
+                width='60'
+              />
             </NavLink>
           </NavbarBrand>
           <InputGroup
