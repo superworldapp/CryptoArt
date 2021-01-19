@@ -143,7 +143,7 @@ class AllArt extends Component {
                 style={{
                   fontFamily: 'Gibson',
                   fontSize: '13px',
-                  color: '#black',
+                  color: '#5540c7',
                 }}
               >
                 {Web3.utils.fromWei(
@@ -302,7 +302,11 @@ class AllItemComponent extends Component {
   render() {
     const menu = this.state.art.map((x) => {
       return (
-        <div key={x.tokenIdentifier} className='col-4 col-md-3'>
+        <div
+          key={x.tokenIdentifier}
+          className='col-4 col-md-3'
+          id='all-art-card'
+        >
           <AllArt
             art={x}
             contract={this.props.contract}
@@ -419,7 +423,7 @@ class AllItemComponent extends Component {
         </Modal>
         <br />
         <br />
-        <div className='row'>{menu}</div>
+        <div className='row-all-art'>{menu}</div>
         <br />
         <br />
         <br />
