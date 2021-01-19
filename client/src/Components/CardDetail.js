@@ -145,8 +145,8 @@ const CardDetail = ({ art, accounts, contract }) => {
                     {(
                       Web3.utils.fromWei(art?.tokenPrice.toString(), 'ether') *
                       ethPrice?.usd
-                    ).toFixed(2)}
-                    )
+                    ).toFixed(2)}{' '}
+                    USD)
                   </span>
                 </small>
               </h4>
