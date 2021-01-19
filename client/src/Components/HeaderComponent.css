@@ -68,3 +68,35 @@ a.nav-link.active {
 #green-dot {
   display: flex;
 }
+
+#logo-img {
+  margin-top: 0.5rem;
+}
+
+.fa-search:before {
+  padding-left: 0.5rem;
+}
+
+#root
+  > div
+  > div
+  > nav
+  > div.collapse.navbar-collapse
+  > ul
+  > li:nth-child(4)
+  > a {
+  padding: 0;
+  margin: 0;
+}
+
+#root
+  > div
+  > div
+  > nav
+  > div.collapse.navbar-collapse
+  > ul
+  > li:nth-child(3)
+  > a {
+  margin: 0;
+  margin-left: 1rem;
+}

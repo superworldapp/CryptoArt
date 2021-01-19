@@ -257,3 +257,7 @@ img.rounded-circle {
   flex-direction: column;
   justify-content: center;
 }
+
+#logo-img {
+  margin-top: 0.5rem;
+}
