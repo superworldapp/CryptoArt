@@ -1,3 +1,8 @@
+.card.all-art-card {
+  height: 90% !important;
+  box-shadow: 1px 5px 5px #888888;
+}
+
 .button-container {
   margin-top: 3rem;
   display: flex;
@@ -58,9 +63,9 @@
   width: 15rem;
 } */
 
-/* .card-img-top-all-art {
+.card-img-top-all-art {
   height: 12rem;
-} */
+}
 
 /* #root > div > div > div > div.row {
   margin-left: -70px;
@@ -80,7 +85,7 @@
   padding: 0;
 }
 
-/* price */
+/* price
 #root
   > div
   > div
@@ -93,9 +98,9 @@
   > div.ctext
   > p.visible.card-text {
   color: #5540c7 !important;
-}
+} */
 
-/* card  */
+/* card
 #root > div > div > div > div.row > div > div {
   box-shadow: 1px 5px 5px #888888;
-}
+} */

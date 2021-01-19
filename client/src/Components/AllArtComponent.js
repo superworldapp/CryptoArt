@@ -85,9 +85,10 @@ class AllArt extends Component {
         : 'visible';
     return (
       <Card
-        height='300px'
-        width='245px'
-        className={this.props.art.auction.isBidding ? buk : bak}
+        // height='300px'
+        // width='245px'
+        // className={this.props.art.auction.isBidding ? buk : bak}
+        className='all-art-card'
       >
         <Link
           style={{
