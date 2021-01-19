@@ -118,6 +118,8 @@ class AllArt extends Component {
                   fontFamily: 'Gibson',
                   fontSize: '13px',
                   color: '#888888',
+                  display: 'flex',
+                  alignItems: 'flex-end',
                 }}
               >
                 {this.props.art.tokenCreator.substring(0, 5)}
