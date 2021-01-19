@@ -145,27 +145,29 @@ class AllArt extends Component {
           </div>
 
           <Col sm={{ size: 12 }}>
-            <Button
-              className={but}
-              id='buy-bid-btn'
-              size='sm'
-              type='submit'
-              color='primary'
-              onClick={this.buyItem}
-            >
-              Buy Item
-            </Button>
-            {'   '}
-            <Button
-              className={bux}
-              id='buy-bid-btn'
-              size='md'
-              type='submit'
-              color='primary'
-              style={{ width: '50%' }}
-            >
-              Bid
-            </Button>
+            {but === 'visible' ? (
+              <Button
+                className={but}
+                id='buy-bid-btn'
+                size='sm'
+                type='submit'
+                color='primary'
+                onClick={this.buyItem}
+              >
+                Purchase
+              </Button>
+            ) : (
+              <Button
+                className={bux}
+                id='buy-bid-btn'
+                size='md'
+                type='submit'
+                color='primary'
+                style={{ width: '50%' }}
+              >
+                Bid
+              </Button>
+            )}
           </Col>
         </CardBody>
       </Card>

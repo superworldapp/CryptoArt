@@ -50,10 +50,11 @@
   text-transform: uppercase;
   background-color: #5540c7;
   color: white;
+  width: fit-content !important;
 }
 
 #root > div > div > div > div.row > div > div {
-  height: 20rem !important;
+  height: 16rem !important;
   width: 15rem;
 }
 
@@ -68,4 +69,25 @@
 
 #root > div > div > div > div.row > div {
   max-width: 20%;
+}
+
+#root > div > div > div > div.row > div > div > div > div.col-sm-12 {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div.row
+  > div
+  > div
+  > div
+  > div.ctext
+  > p.visible.card-text {
+  color: #5540c7 !important;
 }
