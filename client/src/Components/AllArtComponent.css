@@ -54,12 +54,12 @@
 }
 
 #root > div > div > div > div.row > div > div {
-  height: 16rem !important;
+  height: 18rem !important;
   width: 15rem;
 }
 
 .card-img-top-all-art {
-  height: 60%;
+  height: 12rem;
 }
 
 #root > div > div > div > div.row {
@@ -71,7 +71,8 @@
   max-width: 20%;
 }
 
-#root > div > div > div > div.row > div > div > div > div.col-sm-12 {
+/* container with buttons */
+#root > div > div > div > div.row > div > div > a > div > div.col-sm-12 {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -79,6 +80,7 @@
   padding: 0;
 }
 
+/* price */
 #root
   > div
   > div
@@ -86,8 +88,14 @@
   > div.row
   > div
   > div
+  > a
   > div
   > div.ctext
   > p.visible.card-text {
   color: #5540c7 !important;
+}
+
+/* card  */
+#root > div > div > div > div.row > div > div {
+  box-shadow: 1px 5px 5px #888888;
 }

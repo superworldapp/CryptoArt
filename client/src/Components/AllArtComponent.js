@@ -89,87 +89,95 @@ class AllArt extends Component {
         width='245px'
         className={this.props.art.auction.isBidding ? buk : bak}
       >
-        <CardImg
-          className='card-img-top-all-art'
-          top
-          width='100%'
-          src={this.props.art.imgurl}
-        ></CardImg>
-        <CardBody className='all-art-body'>
-          <div style={{ display: 'flex' }}>
-            <CardSubtitle>
-              <img
-                style={{ marginRight: '30px' }}
-                width='16px'
-                height='16px'
-                className='rounded-circle'
-                src={anonUser}
-              ></img>
-            </CardSubtitle>
-            <CardSubtitle
-              style={{
-                fontFamily: 'Gibson',
-                fontSize: '13px',
-                color: '#888888',
-              }}
-            >
-              {this.props.art.tokenCreator.substring(0, 5)}
-            </CardSubtitle>
-          </div>
+        <Link
+          style={{
+            color: '#212529',
+            textDecoration: 'none',
+          }}
+          to={`/card/${this.props.art.tokenIdentifier}`}
+        >
+          <CardImg
+            className='card-img-top-all-art'
+            top
+            width='100%'
+            src={this.props.art.imgurl}
+          ></CardImg>
+          <CardBody className='all-art-body'>
+            <div style={{ display: 'flex' }}>
+              <CardSubtitle>
+                <img
+                  style={{ marginRight: '30px' }}
+                  width='16px'
+                  height='16px'
+                  className='rounded-circle'
+                  src={anonUser}
+                ></img>
+              </CardSubtitle>
+              <CardSubtitle
+                style={{
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  color: '#888888',
+                }}
+              >
+                {this.props.art.tokenCreator.substring(0, 5)}
+              </CardSubtitle>
+            </div>
 
-          <div className='ctext'>
-            <CardText
-              style={{
-                fontFamily: 'Gibson',
-                fontSize: '13px',
-                color: 'black',
-                fontWeight: 'bold',
-              }}
-            >
-              {this.props.art.tokenTitle}
-            </CardText>
-            <CardText
-              className={but}
-              style={{
-                fontFamily: 'Gibson',
-                fontSize: '13px',
-                color: '#black',
-              }}
-            >
-              {Web3.utils.fromWei(
-                this.props.art.tokenSellPrice.toString(),
-                'ether'
-              )}{' '}
-              ETH
-            </CardText>
-          </div>
-
-          <Col sm={{ size: 12 }}>
-            {but === 'visible' ? (
-              <Button
+            <div className='ctext'>
+              <CardText
+                style={{
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  color: 'black',
+                  fontWeight: 'bold',
+                }}
+              >
+                {this.props.art.tokenTitle}
+              </CardText>
+              <CardText
                 className={but}
-                id='buy-bid-btn'
-                size='sm'
-                type='submit'
-                color='primary'
-                onClick={this.buyItem}
+                style={{
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  color: '#black',
+                }}
               >
-                Purchase
-              </Button>
-            ) : (
-              <Button
-                className={bux}
-                id='buy-bid-btn'
-                size='md'
-                type='submit'
-                color='primary'
-                style={{ width: '50%' }}
-              >
-                Bid
-              </Button>
-            )}
-          </Col>
-        </CardBody>
+                {Web3.utils.fromWei(
+                  this.props.art.tokenSellPrice.toString(),
+                  'ether'
+                )}{' '}
+                ETH
+              </CardText>
+            </div>
+
+            <Col sm={{ size: 12 }}>
+              {but === 'visible' ? (
+                <Button
+                  className={but}
+                  id='buy-bid-btn'
+                  size='sm'
+                  type='submit'
+                  color='primary'
+                  onClick={this.buyItem}
+                >
+                  Purchase
+                </Button>
+              ) : (
+                <Button
+                  className={bux}
+                  id='buy-bid-btn'
+                  size='md'
+                  type='submit'
+                  color='primary'
+                  style={{ width: '50%' }}
+                >
+                  Bid
+                </Button>
+              )}
+            </Col>
+          </CardBody>
+        </Link>
       </Card>
       /* <Link
           style={{
