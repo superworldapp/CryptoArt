@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 //import moment from 'moment';
-import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody,
+import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody, CardImgOverlay,
  CardSubtitle, CardText,Modal,ModalHeader,ModalBody} from 'reactstrap';
 import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
@@ -60,6 +60,7 @@ class Allpatrender extends Component {
         this.DeSale = this.DeSale.bind(this);
         this.StartAuction = this.StartAuction.bind(this);
         this.EndAuction = this.EndAuction.bind(this);
+        this.toggleAuction = this.toggleAuction.bind(this);
         
         
     }
@@ -73,9 +74,24 @@ class Allpatrender extends Component {
             });
         console.log(res);
     };
+
+    //  accUsername = async () => {
+    //     const res = await this.props.contract.methods
+    //         .buyToken(this.props.art.tokenIdentifier)
+    //         .send({
+    //              from: this.props.accounts,
+    //              value: this.props.art.tokenCreator,
+    //          });
+    //      console.log(res);
+    //  };
     toggleModal() {
         this.setState({
             isModalOpen: !this.state.isModalOpen
+        });
+    }
+    toggleAuction (){
+        this.setState({
+            isModalAucOpen: !this.state.isModalAucOpen
         });
     }
     handleInputChange(event) {
@@ -176,7 +192,7 @@ class Allpatrender extends Component {
                     {/* <CardTitle className="ctext">
                         Item Title : {this.props.art.tokenTitle} {this.props.art.tokenCreator}
                     </CardTitle> */}
-                    <div className="ctext" style={{padding:'2px'}}>
+                    <div className="ctext" style={{padding:'2px', height:'1rem'}}>
                                     <CardSubtitle style={{
                                         position:'relative',
                                         fontFamily:'Gibson',
@@ -197,7 +213,7 @@ class Allpatrender extends Component {
                                         Price
                                     </CardSubtitle>
                                 </div>
-                                <div className="ctext">
+                                <div className="ctext" style={{height:'2rem'}}>
                                     <CardText
                                     style={{
                                         position:'relative',
@@ -240,9 +256,9 @@ class Allpatrender extends Component {
                             ETH
                         </small>
                     </CardText> */}
-                    <div className="ctext" style={{padding:'0px'}}>
+                    <div className="ctext" style={{padding:'0px', height:'2rem', marginTop:'5%'}}>
                         <button
-                            className='abtn'
+                            className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
                             // color='primary'
                             onClick={this.toggleModal}>
                             {reSellOrSell}
@@ -250,7 +266,6 @@ class Allpatrender extends Component {
                         <button
                             className={but}
                             type='submit'
-                            color='primary'
                             onClick={this.DeSale}>
                             DeSell Item
                         </button>   
@@ -258,7 +273,9 @@ class Allpatrender extends Component {
                             className='abtn'
                             type='submit'
                             // color='primary'
-                            onClick={this.props.art.auction.isBidding ? this.EndAuction : this.StartAuction }>
+                             onClick={this.props.art.auction.isBidding ? this.EndAuction : this.StartAuction }
+                            onClick = {this.toggleAuction}
+                            >
                             {Auc} 
                         </button>
                         
@@ -360,6 +377,144 @@ class Allpatrender extends Component {
                                 
                             </Card>
                         </Modal>
+
+                        <Modal
+                            isOpen={this.state.isModalAucOpen}
+                            toggle={this.toggleAuction}
+                            className='modal_popup'>
+                            <ModalHeader
+                                toggle={this.toggleAuction}
+                                className='pl-5'>
+                                Start Auction
+                            </ModalHeader>
+                            <Card className='artCard' style={{height:'50%'}}>
+                                <CardImg
+                                    top
+                                    className="displayImage"
+                                    src={this.props.art.imgurl}
+                                    alt='Card image'
+                                />
+                                <CardBody
+                                >
+                                <div className="ctext" style={{padding:'5px', height:'1rem'}}>
+                                    <CardSubtitle style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'#B3B3B3',
+                                        
+                                    }}>
+                                    #Art #Rare 
+                                    
+                                    </CardSubtitle>
+                                    <CardSubtitle
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'#B3B3B3',
+                                    }}
+                                    >
+                                        Price
+                                    </CardSubtitle>
+                                </div>
+                                <div className="ctext" style={{ padding:'5px'}}>
+                                    <CardText
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                    }}
+                                    >
+                                        {this.props.art.tokenTitle} 
+                                    </CardText>
+                                    <CardText
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                    }}
+                                    >
+                                        1.2ETH
+                                    </CardText>
+                                </div>
+                                <div className="ctext1" style={{ padding:'2px'}}>
+                                    <p
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                        marginTop:'2%'
+                                    }}
+                                    >Start Bid : </p>
+                                    <p>
+                                        <Input
+                                        style= {{ width:'80%'}}
+                                            type='text'
+                                            id='bidPrice'
+                                            name='bidPrice'
+                                            onChange={
+                                                this.handleInputChange
+                                            }></Input>
+                                    </p>
+                                    <p
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                        marginTop:'2%'
+                                    }}
+                                    > ETH
+                                     </p>
+                                </div>
+                                <div className="ctext1">
+                                    <p
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                        marginTop:'2%'
+                                    }}
+                                    >Duration : </p>
+                                    <p>
+                                        
+                                        <Input
+                                        style= {{ width:'80%'}}
+                                            type='text'
+                                            id='bidPrice'
+                                            name='bidPrice'
+                                            onChange={
+                                                this.handleInputChange
+                                            }></Input>
+                                    </p>
+                                    <p
+                                    style={{
+                                        position:'relative',
+                                        fontFamily:'Gibson',
+                                        fontSize:'15px',
+                                        color:'black',
+                                        marginTop:'2%'
+                                    }}
+                                    >Days </p>
+                                </div>
+                                <div>
+                                <button
+                                    className="abtn" style={{
+                                        left:'32%', color: 'white', backgroundColor:'#5540C7'
+                                    }}
+                                        type='submit'
+                                        onClick={this.putForSale}>
+                                        Confirm
+                                    </button>{' '}
+                                </div>
+                                </CardBody>
+                            </Card>
+                        </Modal> 
                     </div> 
                 </CardBody>
                 {/* </Link> */}
@@ -630,7 +785,7 @@ class MyItemComponent extends Component {
                             </div>
                             <br />
                                     <button
-                                    className="abtn" style={{ float:'right', color:'white', backgroundColor:'#5540C7', fontSize:'18px'}}
+                                    className="abtn" style={{ float:'right', color:'white', backgroundColor:'#5540C7', fontSize:'18px', padding:'0.375rem 2.0rem'}}
                                         color='primary'
                                         onClick={this.fileUploadHandler}>
                                         Add

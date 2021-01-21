@@ -60,6 +60,7 @@ class AllArt extends Component {
       });
     console.log(res);
   };
+
   toggleModal() {
     this.setState({
       isModalOpen: !this.state.isModalOpen,
@@ -83,6 +84,18 @@ class AllArt extends Component {
       Web3.utils.fromWei(this.props.art.tokenSellPrice.toString(), 'ether') == 0
         ? 'invisible'
         : 'visible';
+
+    const img = new Image();
+    let orientation;
+    img.onload = function () {
+      let width = this.width;
+      let height = this.height;
+
+      orientation = width < height ? 'portrait' : 'landscape';
+    };
+    img.src = this.props.art.imgurl;
+    img.onload();
+
     return (
       <Card
         // height='300px'
@@ -97,12 +110,14 @@ class AllArt extends Component {
           }}
           to={`/card/${this.props.art.tokenIdentifier}`}
         >
-          <CardImg
-            className='card-img-top-all-art'
-            top
-            width='100%'
-            src={this.props.art.imgurl}
-          ></CardImg>
+          <div className='card-img-top-all-art'>
+            <CardImg
+              // className='card-img-top-all-art'
+              className={orientation}
+              top
+              src={this.props.art.imgurl}
+            ></CardImg>
+          </div>
           <CardBody className='all-art-body'>
             <div style={{ display: 'flex' }}>
               <CardSubtitle>
