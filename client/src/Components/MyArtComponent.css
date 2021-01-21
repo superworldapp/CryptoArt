@@ -1,5 +1,6 @@
 .hidden{
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .modal-title{
@@ -65,7 +66,7 @@
     height: 130% !important;
     width: 100%;
 } */
-.displayImage{
+/* .displayImage{
     position: relative;
     height: 22rem;
     width: 100%;
@@ -74,13 +75,13 @@
 }
 .displayText{
     position: absolute;
-}
+} */
 
-.card{
+/* .card{
     height: 33rem ;
     display: flex;
     flex-flow: column;
-}
+} */
 
 .a{
     text-decoration: none;
@@ -101,3 +102,15 @@ h3{
 .form-group{
     display: flex;
 }
+
+#card-art > div > a > div > div.col-sm-12 {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0;
+  }
+  
+.card-art-div {
+    padding: 0;
+  }

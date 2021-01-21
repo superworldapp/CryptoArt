@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 //import moment from 'moment';
-import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody, CardImgOverlay,
- CardSubtitle, CardText,Modal,ModalHeader,ModalBody} from 'reactstrap';
+import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody,CardImgOverlay,Badge,CardSubtitle, CardText,Modal,ModalHeader,ModalBody} from 'reactstrap';
 import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
@@ -38,6 +37,8 @@ const s3 = new S3();
 
 let allDocs = [];
 const ETHER = 1000000000000000000;
+
+
 
 class Allpatrender extends Component {
     // let day = moment.unix(art.dateofComp);
@@ -75,15 +76,7 @@ class Allpatrender extends Component {
         console.log(res);
     };
 
-    //  accUsername = async () => {
-    //     const res = await this.props.contract.methods
-    //         .buyToken(this.props.art.tokenIdentifier)
-    //         .send({
-    //              from: this.props.accounts,
-    //              value: this.props.art.tokenCreator,
-    //          });
-    //      console.log(res);
-    //  };
+    
     toggleModal() {
         this.setState({
             isModalOpen: !this.state.isModalOpen
@@ -129,7 +122,18 @@ class Allpatrender extends Component {
             .send({ from: this.props.accounts, gas: 1000000 });
         console.log(res);
     }
+
     render() {
+
+        const img = new Image();
+        let orientation;
+        img.onload = function () {
+            let width = this.width;
+            let height = this.height;
+            orientation = width < height ? 'portrait' : 'landscape';
+    };
+    img.src = this.props.art.imgurl;
+        img.onload();
         let but = this.props.art.isSelling ? ' ' : 'hidden';
         let bak = this.props.art.isSelling ? 'bg-success text-white' : '';
         let buk = this.props.art.auction.isBidding ? 'bg-warning' : '';
@@ -148,30 +152,27 @@ class Allpatrender extends Component {
             ? 'End Auction'
             : 'Auction';
         return (
-            <div class = "card-deck">
-            <Card className={this.props.art.auction.isBidding? buk:bak}  >
+            
+            <Card className='card-art'>
                
                 {/* <a href={this.props.art.imgurl} target='_blank'> */}
-                   <div className="displayImage">
+                   <div className="card-img-top-all-art">
                    <Link to={`/card/${this.props.art.tokenIdentifier}`}>
                    <CardImg
+                        className={orientation}
                         top
-                        width="100%"
-                        class="img-fluid"
                         src={this.props.art.imgurl}
-                        alt='Card image'
-                    />
+                        alt='Card image'></CardImg>
                     </Link>
                    </div>
                     
-                {/* </a> */}
                 
-                <CardBody style= {{borderTop:'1px solid', padding:'1.0rem'}}>
+                <CardBody className='all-art-body'>
                  <div style={{
                     display: 'flex',
-                    justifyContent: 'flex-start',
+                   // justifyContent: 'flex-start',
                     }}>
-                    <CardTitle >
+                    <CardSubtitle >
                     <img
                     style={{marginRight: '30px' }}
                         width='16px'
@@ -179,46 +180,47 @@ class Allpatrender extends Component {
                         className='rounded-circle'
                         src={annonuser}
                          ></img>
-                        </CardTitle>
-                        <CardTitle
+                        </CardSubtitle>
+                        <CardSubtitle
                             style={{
                                 fontFamily: 'Gibson',
-                                fontSize: '15px',
+                                fontSize: '13px',
                                 color: '#5540C7',
-                                textDecoration:'none'
-                                }}> Created by  </CardTitle>
+                                display:'flex',
+                                alignItems:'flex-end'
+                                }}> Created by  </CardSubtitle>
                     </div>
                     
                     {/* <CardTitle className="ctext">
                         Item Title : {this.props.art.tokenTitle} {this.props.art.tokenCreator}
                     </CardTitle> */}
-                    <div className="ctext" style={{padding:'2px', height:'1rem'}}>
-                                    <CardSubtitle style={{
+                    <div className="ctext">
+                                    <CardText style={{
                                         position:'relative',
                                         fontFamily:'Gibson',
-                                        fontSize:'15px',
+                                        fontSize:'13px',
                                         color:'#B3B3B3',  
-                                        textDecoration:'none' 
-                                    }}> #Art #Rare 
-                                    </CardSubtitle>
-                                    <CardSubtitle
+                                        fontWeight:'bold'
+                                    }}> Title
+                                    </CardText>
+                                    <CardText
                                     style={{
                                         position:'relative',
                                         fontFamily:'Gibson',
-                                        fontSize:'15px',
+                                        fontSize:'13px',
                                         color:'#B3B3B3',
-                                        textDecoration:'none'
+                                        fontWeight:'bold'
                                     }}
                                     >
                                         Price
-                                    </CardSubtitle>
+                                    </CardText>
                                 </div>
                                 <div className="ctext" style={{height:'2rem'}}>
                                     <CardText
                                     style={{
                                         position:'relative',
                                         fontFamily:'Gibson',
-                                        fontSize:'15px',
+                                        fontSize:'13px',
                                         color:'black',
                                         textDecoration:'none'
                                     }}
@@ -229,7 +231,7 @@ class Allpatrender extends Component {
                                     style={{
                                         position:'relative',
                                         fontFamily:'Gibson',
-                                        fontSize:'15px',
+                                        fontSize:'13px',
                                         color:'black',
                                         textDecoration:'none'
                                     }}
@@ -291,7 +293,6 @@ class Allpatrender extends Component {
                             <Card className='artCard'>
                                 <CardImg
                                     top
-                                    className="displayImage"
                                     src={this.props.art.imgurl}
                                     alt='Card image'
                                 />
@@ -305,8 +306,7 @@ class Allpatrender extends Component {
                                         color:'#B3B3B3',
                                         
                                     }}>
-                                    #Art #Rare 
-                                    
+                                    Title
                                     </CardSubtitle>
                                     <CardSubtitle
                                     style={{
@@ -319,7 +319,7 @@ class Allpatrender extends Component {
                                         Price
                                     </CardSubtitle>
                                 </div>
-                                <div className="ctext">
+                                <div className="ctext" style={{padding:'2px'}}>
                                     <CardText
                                     style={{
                                         position:'relative',
@@ -404,8 +404,7 @@ class Allpatrender extends Component {
                                         color:'#B3B3B3',
                                         
                                     }}>
-                                    #Art #Rare 
-                                    
+                                    Title
                                     </CardSubtitle>
                                     <CardSubtitle
                                     style={{
@@ -520,7 +519,7 @@ class Allpatrender extends Component {
                 {/* </Link> */}
               
             </Card>
-            </div>
+            
         );
     }
 }
@@ -645,7 +644,7 @@ class MyItemComponent extends Component {
     render() {
         const Menu = this.state.art.map((x) => {
             return (
-                <div key={x.tokenIdentifier} className='col-4 col-md-3'>
+                <div key={x.tokenIdentifier} className='col-4 col-md-3' >
                     <Allpatrender
                         art={x}
                         contract={this.props.contract}
@@ -797,13 +796,10 @@ class MyItemComponent extends Component {
                     </ModalBody>
                 </Modal>
                 
-                <div className='row'>{Menu}
-                </div>
+                <div className='row-all-art'>{Menu}</div>
                 
                 <br/><br/><br/><br/><br/><br/><br/><br/>
 
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/>
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/>
             </div>
         );
