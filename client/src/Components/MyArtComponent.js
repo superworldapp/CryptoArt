@@ -235,7 +235,7 @@ class Allpatrender extends Component {
                                     }}
                                     >
                                     {Web3.utils.fromWei(
-                                this.props.art.tokenSellPrice.toString(),
+                                this.props.art.tokenPrice.toString(),
                                 'ether'
                             )}{' '}
                             ETH
@@ -570,7 +570,7 @@ class MyItemComponent extends Component {
                 imgUrl,
                 nos
             )
-            .send({ from: this.props.accounts, gas: 1000000 });
+            .send({ from: this.props.accounts, gas: 5000000 });
                                                     
         console.log(res);
         this.setState({isLoading : false});
