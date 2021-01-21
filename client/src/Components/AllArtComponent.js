@@ -56,10 +56,11 @@ class AllArt extends Component {
       .send({
         from: this.props.accounts,
         value: this.props.art.tokenSellPrice,
-        gas: 10000000,
+        gas: 5000000,
       });
     console.log(res);
   };
+
   toggleModal() {
     this.setState({
       isModalOpen: !this.state.isModalOpen,
@@ -83,6 +84,18 @@ class AllArt extends Component {
       Web3.utils.fromWei(this.props.art.tokenSellPrice.toString(), 'ether') == 0
         ? 'invisible'
         : 'visible';
+
+    const img = new Image();
+    let orientation;
+    img.onload = function () {
+      let width = this.width;
+      let height = this.height;
+
+      orientation = width < height ? 'portrait' : 'landscape';
+    };
+    img.src = this.props.art.imgurl;
+    img.onload();
+
     return (
       <Card
         // height='300px'
@@ -97,12 +110,14 @@ class AllArt extends Component {
           }}
           to={`/card/${this.props.art.tokenIdentifier}`}
         >
-          <CardImg
-            className='card-img-top-all-art'
-            top
-            width='100%'
-            src={this.props.art.imgurl}
-          ></CardImg>
+          <div className='card-img-top-all-art'>
+            <CardImg
+              // className='card-img-top-all-art'
+              className={orientation}
+              top
+              src={this.props.art.imgurl}
+            ></CardImg>
+          </div>
           <CardBody className='all-art-body'>
             <div style={{ display: 'flex' }}>
               <CardSubtitle>
@@ -143,7 +158,7 @@ class AllArt extends Component {
                 style={{
                   fontFamily: 'Gibson',
                   fontSize: '13px',
-                  color: '#black',
+                  color: '#5540c7',
                 }}
               >
                 {Web3.utils.fromWei(
@@ -302,7 +317,11 @@ class AllItemComponent extends Component {
   render() {
     const menu = this.state.art.map((x) => {
       return (
-        <div key={x.tokenIdentifier} className='col-4 col-md-3'>
+        <div
+          key={x.tokenIdentifier}
+          className='col-4 col-md-3'
+          id='all-art-card'
+        >
           <AllArt
             art={x}
             contract={this.props.contract}
@@ -419,7 +438,7 @@ class AllItemComponent extends Component {
         </Modal>
         <br />
         <br />
-        <div className='row'>{menu}</div>
+        <div className='row-all-art'>{menu}</div>
         <br />
         <br />
         <br />

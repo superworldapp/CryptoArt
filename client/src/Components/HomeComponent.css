@@ -106,8 +106,9 @@ a {
   display: flex;
   justify-content: space-around;
 }
-.imageCards {
-  height: 300px;
+
+div.imageCards {
+  height: 300px !important;
   width: 245px;
 }
 .text2 {
@@ -207,17 +208,17 @@ a {
   margin-top: 16%;
 }
 
-#root > div > div > div > div > div:nth-child(7) > div {
+/* #root > div > div > div > div > div:nth-child(7) > div {
   height: fit-content !important;
 }
 
 #root > div > div > div > div > div:nth-child(9) > div {
   height: fit-content !important;
-}
+} */
 
-#root > div > div > div > div > div:nth-child(11) > div {
+/* #root > div > div > div > div > div:nth-child(11) > div {
   height: fit-content !important;
-}
+} */
 
 .card-body {
   padding: 0.5rem;

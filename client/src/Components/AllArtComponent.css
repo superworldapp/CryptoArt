@@ -1,8 +1,15 @@
 .card.all-art-card {
-  height: 90% !important;
   box-shadow: 1px 5px 5px #888888;
 }
 
+div.all-art-card.card {
+  height: 23rem !important;
+  width: 17rem !important;
+}
+
+/* #all-art-card {
+  height: 20rem !important;
+} */
 .button-container {
   margin-top: 3rem;
   display: flex;
@@ -43,6 +50,8 @@
   flex-wrap: wrap;
   margin-left: -4rem;
   margin-right: -4rem;
+  margin-left: -70px;
+  margin-right: -60px;
 }
 
 #buy-bid-btn {
@@ -58,26 +67,8 @@
   width: fit-content !important;
 }
 
-/* #root > div > div > div > div.row > div > div {
-  height: 18rem !important;
-  width: 15rem;
-} */
-
-.card-img-top-all-art {
-  height: 12rem;
-}
-
-/* #root > div > div > div > div.row {
-  margin-left: -70px;
-  margin-right: -60px;
-} */
-
-/* #root > div > div > div > div.row > div {
-  max-width: 20%;
-} */
-
 /* container with buttons */
-#root > div > div > div > div.row > div > div > a > div > div.col-sm-12 {
+#all-art-card > div > a > div > div.col-sm-12 {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -85,22 +76,28 @@
   padding: 0;
 }
 
-/* price
-#root
-  > div
-  > div
-  > div
-  > div.row
-  > div
-  > div
-  > a
-  > div
-  > div.ctext
-  > p.visible.card-text {
-  color: #5540c7 !important;
-} */
+.all-art-div {
+  padding: 0;
+}
 
-/* card
-#root > div > div > div > div.row > div > div {
-  box-shadow: 1px 5px 5px #888888;
-} */
+.card-img-top-all-art {
+  height: 17rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.portrait {
+  max-height: 100%;
+  max-width: auto;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.landscape {
+  max-height: auto;
+  max-width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
