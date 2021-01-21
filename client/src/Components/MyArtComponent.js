@@ -268,7 +268,7 @@ class Allpatrender extends Component {
                             <Card className='artCard'>
                                 <CardImg
                                     top
-                                    style={{width:'100&', paddingRight:'10px',paddingLeft:'10px'}}
+                                    className="displayImage"
                                     src={this.props.art.imgurl}
                                     alt='Card image'
                                 />
@@ -325,6 +325,7 @@ class Allpatrender extends Component {
                                         fontFamily:'Gibson',
                                         fontSize:'15px',
                                         color:'black',
+                                        marginTop:'2%'
                                     }}
                                     >Sell Price : </p>
                                     <p>
@@ -338,28 +339,10 @@ class Allpatrender extends Component {
                                             }></Input>
                                     </p>
                                 </div>
-                                <div className="ctext1">
-                                    <p
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                    }}
-                                    >Token : </p>
-                                    <p>
-                                        <Input
-                                            type='number'
-                                            id='nos'
-                                            name='nos'
-                                            onChange={this.handleInputChange}
-                                        />
-                                    </p>
-                                </div>
                                 <div>
                                 <button
                                     className="abtn" style={{
-                                        left:'30%'
+                                        left:'32%', color: 'white', backgroundColor:'#5540C7'
                                     }}
                                         type='submit'
                                         onClick={this.putForSale}>
@@ -536,7 +519,7 @@ class MyItemComponent extends Component {
                 >
                 <Button
                     className='abtn' 
-                    style={{backgroundColor:'#5548C7', color:'white'}}
+                    style={{backgroundColor:'#5540C7', color:'white'}}
                     onClick={this.toggleModal1}>
                     + {''}Create ARTWORK
                 </Button>
@@ -637,7 +620,7 @@ class MyItemComponent extends Component {
                             </div>
                             <br />
                                     <button
-                                    className="abtn" style={{ float:'right', color:'white', backgroundColor:'#5548C7', fontSize:'18px'}}
+                                    className="abtn" style={{ float:'right', color:'white', backgroundColor:'#5540C7', fontSize:'18px'}}
                                         color='primary'
                                         onClick={this.fileUploadHandler}>
                                         Add

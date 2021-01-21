@@ -69,7 +69,7 @@ a {
 }
 .start-btn {
   /* position: absolute; */
-  opacity: 0.9;
+  /* opacity: 0.9; */
   margin: 0 10px;
   border-radius: 2em;
   font-family: 'gibson', sans-serif;
@@ -234,7 +234,6 @@ img.rounded-circle {
 }
 
 .buy-bid-btn {
-  opacity: 0.9;
   border-radius: 2em;
   font-family: 'gibson', sans-serif;
   font-style: normal;

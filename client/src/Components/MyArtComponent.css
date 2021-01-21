@@ -19,7 +19,7 @@
     border-top: none !important;
 } 
 .modal-content{
-    width: 80%  !important;
+    width: 90% !important;
 }
 .modal-header{
     border: hidden !important;
@@ -28,7 +28,7 @@
 
 .abtn{
     position: relative;
-    opacity: 0.9;
+    opacity: 1.0;
     margin: 0 10px;
     border-radius: 2em;
     font-family: canada-type-gibson, sans-serif;
@@ -78,7 +78,6 @@
 
 .card{
     height: 33rem !important;
-    width: 30rem !important;
     display: flex;
     flex-flow: column;
 }
@@ -96,7 +95,6 @@ h3{
 .form-control{
     display: flex;
     border-radius: 2rem;
-    width: 70%;
     margin-left: 0.5rem;
 
 }
