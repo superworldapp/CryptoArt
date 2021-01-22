@@ -1,103 +1,133 @@
-.hidden{
-    overflow-y: auto;
+.hidden {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.modal-title{
-    font-family: Gibson;
-    font-size: 20px;
-    font-weight: bold;
+.modal-title {
+  font-family: Gibson;
+  font-size: 20px;
+  font-weight: bold;
+}
+.pl-5 {
+  padding-left: 2rem !important;
+  padding-bottom: 0.2rem !important;
+}
+.artCard {
+  height: 40%;
+  width: 100%;
+  border-top: none !important;
+}
+.modal-content {
+  width: 90% !important;
+  height: auto;
+}
+.modal-header {
+  border: hidden !important;
+}
 
-}
-.pl-5{
-    padding-left: 2.0rem !important;
-    padding-bottom: 0.2rem !important;
-}
- .artCard{
-    height: 40%;
-    width: 100%;
-    border-top: none !important;
-} 
-.modal-content{
-    width: 90% !important;
-    height: auto;
-}
-.modal-header{
-    border: hidden !important;
-}
-
-
-.abtn{
-    position: relative;
-    opacity: 1.0;
-    margin: 0 10px;
-    border-radius: 2em;
-    font-family: canada-type-gibson, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    padding: 0.375rem 1.5rem;
-    border: 2px solid #5540c7;
-    background-color: white;
-    color: black;
-    text-transform: uppercase;
+.abtn {
+  position: relative;
+  opacity: 1;
+  margin: 0 10px;
+  border-radius: 2em;
+  font-family: canada-type-gibson, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  padding: 0.375rem 1.5rem;
+  border: 2px solid #5540c7;
+  background-color: white;
+  color: black;
+  text-transform: uppercase;
 }
 .abtn:hover {
-    background-color:  #5540c7;
-    border-color: white;
-    cursor: pointer;
+  background-color: #5540c7;
+  border-color: white;
+  cursor: pointer;
 }
 
 .abtn:focus {
-    outline: 0px;
-    border: 0;
+  outline: 0px;
+  border: 0;
 }
-.artContainer{
-    padding: 5px;
-    margin-left: 5%;
-}
-
-.ctext1{
-    display: flex;
-    justify-content: center;
+.artContainer {
+  padding: 5px;
+  margin-left: 5%;
 }
 
-/* .displayCard{
+.ctext1 {
+  display: flex;
+  justify-content: center;
+}
+
+.displayCard{
     height: 130% !important;
     width: 100%;
-} */
-.displayImage{
+} 
+ .displayImage{
     position: relative;
-    height: 22rem;
-    width: 100%;
-    padding: 5% 15%;
 
 }
 .displayText{
     position: absolute;
+} 
+
+.card {
+  height: fit-content;
+  
+  box-shadow: 1px 5px 5px #888888;
+  display: flex;
+  flex-flow: column;
+} 
+
+.row {
+  margin-top: 1rem;
+  margin-left: 5rem;
+  margin-right: 15rem;
 }
 
-.card{
-    height: 33rem ;
-    display: flex;
-    flex-flow: column;
+.a {
+  text-decoration: none;
+}
+h3 {
+  font-family: Gibson;
+  font-size: 15px;
+  color: black;
+  text-transform: uppercase;
+  margin: 2% 0% 2% 2%;
+}
+.form-control {
+  display: flex;
+  border-radius: 2rem;
+  margin-left: 0.5rem;
+}
+.form-group {
+  display: flex;
 }
 
-.a{
-    text-decoration: none;
+.card-artcard {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  height: 27rem;
+  width: 17rem;
 }
-h3{
-    font-family:Gibson;
-    font-size: 15px;
-    color:black;
-    text-transform: uppercase;
-    margin: 2% 0% 2% 2%;
-}
-.form-control{
-    display: flex;
-    border-radius: 2rem;
-    margin-left: 0.5rem;
 
+.card-art-div {
+  padding: 0;
 }
-.form-group{
-    display: flex;
+
+.card-img-overlay{
+  padding: 0rem;
+  right: auto;
+}
+
+.badge-pill{
+  border-radius: 0rem 0rem 1rem 0rem;
+  padding: 0rem 1.2rem 0rem 0rem;
+}
+.badge{
+  font-size: 15px;
 }
