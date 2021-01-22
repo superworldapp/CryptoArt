@@ -560,6 +560,7 @@ class MyItemComponent extends Component {
       artHash: '',
       nos: 0,
       isLoading: false,
+      loadingError: false,
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -581,20 +582,24 @@ class MyItemComponent extends Component {
     let imgUrl = x;
     let nos = this.state.nos;
     console.log(tokenHash, tokenTitle, tokenPrice, imgUrl, nos);
-    const res = await this.props.contract.methods
-      .batchCreator(
-        tokenHash,
-        tokenTitle,
-        (this.state.price * ETHER).toString(),
-        imgUrl,
-        nos
-      )
-      .send({ from: this.props.accounts, gas: 1000000 });
+    try {
+      const res = await this.props.contract.methods
+        .batchCreator(
+          tokenHash,
+          tokenTitle,
+          (this.state.price * ETHER).toString(),
+          imgUrl,
+          nos
+        )
+        .send({ from: this.props.accounts, gas: 1000000 });
 
-    console.log(res);
+      console.log(res);
+
+      this.toggleModal1();
+    } catch (err) {
+      this.setState({ loadingError: true });
+    }
     this.setState({ isLoading: false });
-
-    this.toggleModal1();
   };
 
   handleInputChange(event) {
@@ -630,7 +635,7 @@ class MyItemComponent extends Component {
   };
   fileUploadHandler = (event) => {
     event.preventDefault();
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true, loadingError: false });
     this.fileAwsHandler(this.state.selectedFile, this.creatingItems);
   };
 
@@ -859,7 +864,13 @@ class MyItemComponent extends Component {
                 Add
               </button>
               {this.state.isLoading ? <img src={loader} /> : <div></div>}
-
+              {this.state.loadingError ? (
+                <div style={{ color: 'red' }}>
+                  There was an upload/processing error. Please try again.
+                </div>
+              ) : (
+                <div></div>
+              )}
               <br />
             </Form>
           </ModalBody>
