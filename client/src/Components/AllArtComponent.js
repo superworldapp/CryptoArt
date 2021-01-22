@@ -77,7 +77,7 @@ class AllArt extends Component {
 
   render() {
     let but = this.props.art.isSelling ? 'visible' : 'invisible';
-    let bux = this.props.art.isSelling ? 'invisible' : 'visible';
+    let bux = this.props.art.isBidding ? 'visible' : 'invisible';
     let bak = this.props.art.isSelling ? 'bg-success text-white' : '';
     let buk = this.props.art.auction.isBidding ? 'bg-warning' : '';
     let pr =
@@ -182,6 +182,9 @@ class AllArt extends Component {
                   Purchase
                 </Button>
               ) : (
+                <div></div>
+              )}
+              {bux === 'visible' ? (
                 <Button
                   className={bux}
                   id='buy-bid-btn'
@@ -192,6 +195,8 @@ class AllArt extends Component {
                 >
                   Bid
                 </Button>
+              ) : (
+                <div></div>
               )}
             </Col>
           </CardBody>

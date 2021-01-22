@@ -118,3 +118,16 @@ h3 {
 .card-art-div {
   padding: 0;
 }
+
+.card-img-overlay{
+  padding: 0rem;
+  right: auto;
+}
+
+.badge-pill{
+  border-radius: 0rem 0rem 1rem 0rem;
+  padding: 0rem 1.2rem 0rem 0rem;
+}
+.badge{
+  font-size: 15px;
+}
