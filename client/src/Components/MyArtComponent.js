@@ -174,8 +174,8 @@ class Allpatrender extends Component {
         }   
 
         return (
-            // <div class = "card-deck">
-            <Card className='card-art'>
+             ///<div class = "card-deck">
+            <Card className={this.props.art.auction.isBidding? buk:bak} className="card-artcard">
                
                 {/* <a href={this.props.art.imgurl} target='_blank'> */}
                    <div className="card-img-top-all-art">
@@ -187,8 +187,6 @@ class Allpatrender extends Component {
                         alt='Card image'></CardImg>
                     </Link>
                    </div>
-                    
-                
                 <CardBody className='all-art-body'>
                  <div style={{
                     display: 'flex',
@@ -700,13 +698,13 @@ class MyItemComponent extends Component {
                 <button className="abtn">My Creations </button> 
                 </p>
                 <p
-                style={{  marginLeft:'2px', position:'relative' }}
+                style={{  marginRight:'4%', position:'relative' }}
                 >
                 <Button
                     className='abtn' 
                     style={{backgroundColor:'#5540C7', color:'white'}}
                     onClick={this.toggleModal1}>
-                    + {''}Create ARTWORK
+                    + {''}Upload
                 </Button>
 
                 </p>
@@ -818,7 +816,7 @@ class MyItemComponent extends Component {
                     </ModalBody>
                 </Modal>
                 
-                <div className='row-all-art'>{Menu}</div>
+                <div className='row'>{Menu}</div>
                 
                 <br/><br/><br/><br/><br/><br/><br/><br/>
 
