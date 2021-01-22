@@ -77,7 +77,7 @@ class AllArt extends Component {
 
   render() {
     let but = this.props.art.isSelling ? 'visible' : 'invisible';
-    let bux = this.props.art.isBidding ? 'visible' : 'invisible';
+    let bux = this.props.art.auction.isBidding ? 'visible' : 'invisible';
     let bak = this.props.art.isSelling ? 'bg-success text-white' : '';
     let buk = this.props.art.auction.isBidding ? 'bg-warning' : '';
     let pr =
@@ -167,6 +167,20 @@ class AllArt extends Component {
                 )}{' '}
                 ETH
               </CardText>
+              <CardText
+                className={bux}
+                style={{
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  color: '#5540c7',
+                }}
+              >
+                {Web3.utils.fromWei(
+                  this.props.art.tokenSellPrice.toString(),
+                  'ether'
+                )}{' '}
+                ETH
+              </CardText>
             </div>
 
             <Col sm={{ size: 12 }}>
@@ -185,16 +199,29 @@ class AllArt extends Component {
                 <div></div>
               )}
               {bux === 'visible' ? (
-                <Button
-                  className={bux}
-                  id='buy-bid-btn'
-                  size='md'
-                  type='submit'
-                  color='primary'
-                  style={{ width: '50%' }}
-                >
-                  Bid
-                </Button>
+                <div className='bid-btn-container'>
+                  <div
+                    style={{
+                      color: 'red',
+                      fontSize: '12px',
+                      alignSelf: 'center',
+                      marginLeft: '0.4rem',
+                      fontFamily: 'Gibson',
+                    }}
+                  >
+                    time remaining
+                  </div>
+                  <Button
+                    className={bux}
+                    id='buy-bid-btn'
+                    size='md'
+                    type='submit'
+                    color='primary'
+                    style={{ width: '50%' }}
+                  >
+                    Bid
+                  </Button>
+                </div>
               ) : (
                 <div></div>
               )}

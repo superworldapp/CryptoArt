@@ -101,3 +101,9 @@ div.all-art-card.card {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+
+.bid-btn-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
