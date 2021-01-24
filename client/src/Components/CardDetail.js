@@ -33,10 +33,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
         // return <span>{ethPrice.usd}</span>;
     };
 
-    useEffect(async () => {
-        getEthDollarPrice();
-        // console.log(matchId)
-        // console.log('Header', myProperties);
+    const getCreData = async () => {
         let cre = await contract?.getPastEvents('tokencreated', {
             filter: { tokenId: art.tokenIdentifier },
             fromBlock: 0
@@ -50,16 +47,34 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
             filter: { tokenId: art.tokenIdentifier },
             fromBlock: 0
         });
-        for(let property in cre) {
+        for (let property in cre) {
             creValue.push(cre[property]);
         }
-        for(let property in tb) {
+        for (let property in tb) {
             creValue.push(tb[property]);
         }
-        for(let property in tfs) {
+        for (let property in tfs) {
             creValue.push(tfs[property]);
         }
-        console.log(creValue)
+        
+        creValue.sort((a, b) => {
+            return Number(b.returnValues.times) - Number(a.returnValues.times);
+        });
+        
+        creValue.forEach(item => {
+            let firstChar = item.event.charAt(0).toUpperCase()
+            let restOfStr = item.event.slice(1)
+            item.event = firstChar + restOfStr
+        })
+
+        console.log(creValue);
+    };
+
+    useEffect(() => {
+        getEthDollarPrice();
+        // console.log(matchId)
+        // console.log('Header', myProperties);
+        getCreData();
     }, []);
 
     //   const buyItem = async () => {
@@ -166,7 +181,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
                     <Card
                         className='card'
                         style={{
-                            width: '100%'
+                            overflow: 'auto'
                         }}>
                         <CardHeader
                             className='text-left'
@@ -185,14 +200,6 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
                                         width: '100%'
                                     }}>
                                     <thead>
-                                        <tr>
-                                            <th>
-                                                <h4>
-                                                    <i className='fas fa-arrows-alt-v'></i>{' '}
-                                                    Trading History
-                                                </h4>
-                                            </th>
-                                        </tr>
                                         <tr className='text-secondary'>
                                             <th>Event</th>
                                             <th>Price</th>
@@ -202,15 +209,49 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope='row'>
-                                                {creValue[0]?.event}
-                                            </th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
+                                        {creValue.map((item) => {
+                                            return (
+                                                <React.Fragment>
+                                                    <tr key={item.id}>
+                                                        <th scope='row'>
+                                                            {item?.event}
+                                                        </th>
+                                                        <td>
+                                                            {item?.returnValues
+                                                                .tokenPrice
+                                                                ? `${Web3.utils.fromWei(
+                                                                      Number(
+                                                                          item
+                                                                              ?.returnValues
+                                                                              .tokenPrice
+                                                                      ).toString(),
+                                                                      'ether'
+                                                                  )} ETH`
+                                                                : ''}
+                                                        </td>
+                                                        <td>
+                                                            {item?.returnValues
+                                                                .tokenCreator
+                                                                ? item
+                                                                      ?.returnValues
+                                                                      .tokenCreator
+                                                                : item
+                                                                      ?.returnValues
+                                                                      .seller}
+                                                        </td>
+                                                        <td>
+                                                            {item?.returnValues
+                                                                .newowner
+                                                                ? item
+                                                                      ?.returnValues
+                                                                      .newowner
+                                                                : ''}
+                                                        </td>
+                                                        <td>
+                                                            {Math.round(((Date.now() - item?.returnValues.times) / 1000) / 60)} ago
+                                                        </td>
+                                                    </tr>
+                                                    {/* <tr>
                                             <th scope='row'>
                                                 {creValue[1]?.event}
                                             </th>
@@ -225,7 +266,10 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
                                             <td>Larry</td>
                                             <td>the Bird</td>
                                             <td>@twitter</td>
-                                        </tr>
+                                        </tr> */}
+                                                </React.Fragment>
+                                            );
+                                        })}
                                     </tbody>
                                 </Table>
                             </CardBody>
