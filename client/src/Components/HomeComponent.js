@@ -993,7 +993,7 @@ class Home extends Component {
                           1 day left to purchase
                         </p>
                       </div>
-                      <button className='buy-bid-btn'>Bid</button>
+                      <button className='buy-bid-btn'>Purchase</button>
                     </div>
                   </CardBody>
                 </Card>
@@ -1193,7 +1193,7 @@ class Home extends Component {
                           32 mins left to purchase
                         </p>
                       </div>
-                      <button className='buy-bid-btn'>Bid</button>
+                      <button className='buy-bid-btn'>Purchase</button>
                     </div>
                   </CardBody>
                 </Card>
