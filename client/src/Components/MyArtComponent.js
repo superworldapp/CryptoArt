@@ -1,8 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 //import moment from 'moment';
-import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody, CardImgOverlay,
- CardSubtitle, CardText,Modal,ModalHeader,ModalBody} from 'reactstrap';
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Col,
+  Card,
+  CardImg,
+  CardTitle,
+  CardBody,
+  CardImgOverlay,
+  CardSubtitle,
+  CardText,
+  Modal,
+  ModalHeader,
+  ModalBody,
+} from 'reactstrap';
 import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
@@ -408,6 +424,7 @@ class MyItemComponent extends Component {
       artHash: '',
       nos: 0,
       isLoading: false,
+      loadingError: false,
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -429,35 +446,39 @@ class MyItemComponent extends Component {
     let imgUrl = x;
     let nos = this.state.nos;
     console.log(tokenHash, tokenTitle, tokenPrice, imgUrl, nos);
-    const res = await this.props.contract.methods
-      .batchCreator(
-        tokenHash,
-        tokenTitle,
-        (this.state.price * ETHER).toString(),
-        imgUrl,
-        nos
-      )
-      .send({ from: this.props.accounts, gas: 5000000 });
 
-    console.log('res', res);
-    var x = await res.events.tokencreated.returnValues.tokenId.toString(); 
+    try {
+      const res = await this.props.contract.methods
+        .batchCreator(
+          tokenHash,
+          tokenTitle,
+          (this.state.price * ETHER).toString(),
+          imgUrl,
+          nos
+        )
+        .send({ from: this.props.accounts, gas: 5000000 });
 
-    const data = {
-      tokenId: x,
-      description: 'A unique piece of art',
-      image: imgUrl,
-      name: tokenTitle,
-      blockchain: 'e',
-      networkId: 4,
-      price: tokenPrice,
-    };
+      console.log('res', res);
+      var x = await res.events.tokencreated.returnValues.tokenId.toString();
 
-    console.log('data', data);
+      const data = {
+        tokenId: x,
+        description: 'A unique piece of art',
+        image: imgUrl,
+        name: tokenTitle,
+        blockchain: 'e',
+        networkId: 4,
+        price: tokenPrice,
+      };
 
-    await Axios.post(`http://geo.superworldapp.com/api/json/token/add`, data);
+      await Axios.post(`http://geo.superworldapp.com/api/json/token/add`, data);
+
+      this.toggleModal1();
+    } catch (err) {
+      this.setState({ loadingError: true });
+      console.error(err.message);
+    }
     this.setState({ isLoading: false });
-
-    this.toggleModal1();
   };
 
   handleInputChange(event) {
@@ -493,7 +514,7 @@ class MyItemComponent extends Component {
   };
   fileUploadHandler = (event) => {
     event.preventDefault();
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true, loadingError: false });
     this.fileAwsHandler(this.state.selectedFile, this.creatingItems);
   };
 
@@ -721,7 +742,13 @@ class MyItemComponent extends Component {
                 Add
               </button>
               {this.state.isLoading ? <img src={loader} /> : <div></div>}
-
+              {this.state.loadingError ? (
+                <div style={{ color: 'red', fontFamily: 'Gibson' }}>
+                  There was a transaction/processing error. Please try again.
+                </div>
+              ) : (
+                <div></div>
+              )}
               <br />
             </Form>
           </ModalBody>
