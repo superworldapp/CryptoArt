@@ -153,34 +153,37 @@ class AllArt extends Component {
               >
                 {this.props.art.tokenTitle}
               </CardText>
-              <CardText
-                className={but}
-                style={{
-                  fontFamily: 'Gibson',
-                  fontSize: '13px',
-                  color: '#5540c7',
-                }}
-              >
-                {Web3.utils.fromWei(
-                  this.props.art.tokenSellPrice.toString(),
-                  'ether'
-                )}{' '}
-                ETH
-              </CardText>
-              <CardText
-                className={bux}
-                style={{
-                  fontFamily: 'Gibson',
-                  fontSize: '13px',
-                  color: '#5540c7',
-                }}
-              >
-                {Web3.utils.fromWei(
-                  this.props.art.tokenSellPrice.toString(),
-                  'ether'
-                )}{' '}
-                ETH
-              </CardText>
+              {but === 'visible' ? (
+                <CardText
+                  className={but}
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontSize: '13px',
+                    color: '#5540c7',
+                  }}
+                >
+                  {Web3.utils.fromWei(
+                    this.props.art.tokenSellPrice.toString(),
+                    'ether'
+                  )}{' '}
+                  ETH
+                </CardText>
+              ) : (
+                <CardText
+                  className={bux}
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontSize: '13px',
+                    color: '#5540c7',
+                  }}
+                >
+                  {Web3.utils.fromWei(
+                    this.props.art.tokenSellPrice.toString(),
+                    'ether'
+                  )}{' '}
+                  ETH
+                </CardText>
+              )}
             </div>
 
             <Col sm={{ size: 12 }}>
