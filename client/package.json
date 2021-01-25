@@ -31,6 +31,7 @@
     "bootstrap-social": "^5.1.1",
     "crypto-js": "^4.0.0",
     "d3-ease": "^2.0.0",
+    "file-to-sha256": "0.0.1",
     "font-awesome": "^4.7.0",
     "fortmatic": "^2.2.1",
     "fs": "0.0.1-security",
