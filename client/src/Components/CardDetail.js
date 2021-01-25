@@ -56,16 +56,16 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
         for (let property in tfs) {
             creValue.push(tfs[property]);
         }
-        
+
         creValue.sort((a, b) => {
             return Number(b.returnValues.times) - Number(a.returnValues.times);
         });
-        
-        creValue.forEach(item => {
-            let firstChar = item.event.charAt(0).toUpperCase()
-            let restOfStr = item.event.slice(1)
-            item.event = firstChar + restOfStr
-        })
+
+        creValue.forEach((item) => {
+            let firstChar = item.event.charAt(0).toUpperCase();
+            let restOfStr = item.event.slice(1);
+            item.event = firstChar + restOfStr;
+        });
 
         console.log(creValue);
     };
@@ -245,10 +245,11 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
                                                                 ? item
                                                                       ?.returnValues
                                                                       .newowner
-                                                                : ''}
+                                                                : 'null'}
                                                         </td>
                                                         <td>
-                                                            {Math.round(((Date.now() - item?.returnValues.times) / 1000) / 60)} ago
+                                                            {Math.round(
+                                                                (Date.now() / 1000 - item.returnValues.times) /  60)} minutes ago
                                                         </td>
                                                     </tr>
                                                     {/* <tr>

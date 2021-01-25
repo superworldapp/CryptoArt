@@ -151,7 +151,7 @@ class Header extends Component {
               }}
             />
             <i
-              class='fas fa-search'
+              className='fas fa-search'
               style={{
                 position: 'absolute',
                 left: '10px',
