@@ -30,7 +30,7 @@ import * as fs from 'fs';
 import * as util from 'util';
 import loader from '../images/loader.svg';
 import annonuser from '../images/user.png';
-import { blobToSHA256 } from 'file-to-sha256';
+// import { blobToSHA256 } from 'file-to-sha256';
 
 const SHA256 = require('crypto-js/sha256');
 
@@ -122,6 +122,18 @@ class Allpatrender extends Component {
     const res = await this.props.contract.methods
       .closeBidOwner(this.props.art.tokenIdentifier)
       .send({ from: this.props.accounts, gas: 1000000 });
+    console.log(res);
+  };
+  AddBid = async () => {
+    const res = await this.props.contract.methods
+      .addBid(this.props.art.tokenIdentifier)
+      .send({ from: this.props.accounts, gas: 1000000, value: pay });
+    console.log(res);
+  };
+  CloseBid = async () => {
+    const res = await this.props.contract.methods
+      .closBid(this.props.art.tokenIdentifier)
+      .send({ from: this.props.accounts, gas: 1000000});
     console.log(res);
   };
   render() {
@@ -515,7 +527,8 @@ class MyItemComponent extends Component {
   };
   fileUploadHandler = async (event) => {
     event.preventDefault();
-    const hash = await blobToSHA256(this.state.selectedFile);
+   // const hash = await blobToSHA256(this.state.selectedFile);
+   let hash = '';
     this.setState({ isLoading: true, loadingError: false, artHash: hash });
     this.fileAwsHandler(this.state.selectedFile, this.creatingItems);
   };
