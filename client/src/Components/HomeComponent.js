@@ -25,6 +25,11 @@ import image12 from '../images/image 11.png';
 import image13 from '../images/image 12.png';
 import image14 from '../images/image 13.png';
 import image15 from '../images/image 17.png';
+import goldenTemple from '../images/goldenTemple.jpg';
+import arcDeTriomphe from '../images/arcDeTriomphe.jpeg';
+import neuschwansteinCastle from '../images/neuschwansteinCastle.jpg';
+import theColosseum from '../images/theColosseum.jpg';
+import greatPyramidOfGiza from '../images/greatPyramidOfGiza.jpeg';
 import Auth from './Auth';
 import SignInModal from './SignInModal/SignInModal';
 import { LayoutContext } from '../state/Layout/context';
@@ -930,7 +935,13 @@ class Home extends Component {
               </div>
               <div className='rowImages'>
                 <Card className='imageCards'>
-                  <CardImg top width='100%' src={image3} alt='image3'></CardImg>
+                  <CardImg
+                    top
+                    width='100%'
+                    height='65%'
+                    src={arcDeTriomphe}
+                    alt='image3'
+                  ></CardImg>
                   <CardBody>
                     <div
                       style={{
@@ -967,7 +978,7 @@ class Home extends Component {
                           fontWeight: 'bold',
                         }}
                       >
-                        Alimation Character
+                        Arc de Triomphe
                       </CardText>
                       <CardText
                         style={{
@@ -998,7 +1009,13 @@ class Home extends Component {
                   </CardBody>
                 </Card>
                 <Card className='imageCards'>
-                  <CardImg top width='100%' src={image4} alt='image3'></CardImg>
+                  <CardImg
+                    top
+                    width='100%'
+                    height='65%'
+                    src={greatPyramidOfGiza}
+                    alt='image3'
+                  ></CardImg>
                   <CardBody>
                     <div
                       style={{
@@ -1035,7 +1052,7 @@ class Home extends Component {
                           fontWeight: 'bold',
                         }}
                       >
-                        Alimation Character
+                        The Great Pyramid of Giza
                       </CardText>
                       <CardText
                         style={{
@@ -1064,7 +1081,13 @@ class Home extends Component {
                   </CardBody>
                 </Card>
                 <Card className='imageCards'>
-                  <CardImg top width='100%' src={image5} alt='image3'></CardImg>
+                  <CardImg
+                    top
+                    width='100%'
+                    height='65%'
+                    src={theColosseum}
+                    alt='image3'
+                  ></CardImg>
                   <CardBody>
                     <div
                       style={{
@@ -1101,7 +1124,7 @@ class Home extends Component {
                           fontWeight: 'bold',
                         }}
                       >
-                        Alimation Character
+                        The Colosseum
                       </CardText>
                       <CardText
                         style={{
@@ -1130,7 +1153,13 @@ class Home extends Component {
                   </CardBody>
                 </Card>
                 <Card className='imageCards'>
-                  <CardImg top width='100%' src={image6} alt='image3'></CardImg>
+                  <CardImg
+                    top
+                    width='100%'
+                    height='65%'
+                    src={neuschwansteinCastle}
+                    alt='image3'
+                  ></CardImg>
                   <CardBody>
                     <div
                       style={{
@@ -1167,7 +1196,7 @@ class Home extends Component {
                           fontWeight: 'bold',
                         }}
                       >
-                        Alberto Seveso
+                        Neuschwanstein Castle
                       </CardText>
                       <CardText
                         style={{
@@ -1198,7 +1227,13 @@ class Home extends Component {
                   </CardBody>
                 </Card>
                 <Card className='imageCards'>
-                  <CardImg top width='100%' src={image7} alt='image3'></CardImg>
+                  <CardImg
+                    top
+                    width='100%'
+                    height='65%'
+                    src={goldenTemple}
+                    alt='image3'
+                  ></CardImg>
                   <CardBody>
                     <div
                       style={{
@@ -1235,7 +1270,7 @@ class Home extends Component {
                           fontWeight: 'bold',
                         }}
                       >
-                        Alberto Seveso
+                        Golden Temple
                       </CardText>
                       <CardText
                         style={{
