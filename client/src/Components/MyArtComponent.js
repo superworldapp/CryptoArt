@@ -30,8 +30,10 @@ import * as fs from 'fs';
 import * as util from 'util';
 import loader from '../images/loader.svg';
 import annonuser from '../images/user.png';
+import { blobToSHA256 } from 'file-to-sha256';
+
 const SHA256 = require('crypto-js/sha256');
-// const sha256 = require('sha256');
+
 const S3 = require('aws-sdk/clients/s3');
 const AWS = require('aws-sdk');
 
@@ -472,7 +474,6 @@ class MyItemComponent extends Component {
       };
 
       await Axios.post(`http://geo.superworldapp.com/api/json/token/add`, data);
-
       this.toggleModal1();
     } catch (err) {
       this.setState({ loadingError: true });
@@ -512,9 +513,10 @@ class MyItemComponent extends Component {
       selectedFile: event.target.files[0],
     });
   };
-  fileUploadHandler = (event) => {
+  fileUploadHandler = async (event) => {
     event.preventDefault();
-    this.setState({ isLoading: true, loadingError: false });
+    const hash = await blobToSHA256(this.state.selectedFile);
+    this.setState({ isLoading: true, loadingError: false, artHash: hash });
     this.fileAwsHandler(this.state.selectedFile, this.creatingItems);
   };
 
