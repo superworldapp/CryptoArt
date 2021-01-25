@@ -115,7 +115,7 @@ class Home extends Component {
 
   render() {
     if (this.state.loggedIn && this.state.startClicked) {
-      return <Redirect to='/myart' />;
+      return <Redirect to='/allart' />;
     } else {
       return (
         <>
@@ -917,7 +917,7 @@ class Home extends Component {
                   }}
                 >
                   {' '}
-                  Popular in Real Estate Marketplace in SuperWorld
+                  Popular in Real Estate
                 </p>
                 <a
                   href=''
@@ -991,19 +991,7 @@ class Home extends Component {
                       </CardText>
                     </div>
                     <div className='buy-bid-btn-div'>
-                      <div className='time-div'>
-                        <p
-                          style={{
-                            fontFamily: 'Gibson',
-                            fontSize: '9px',
-                            color: 'gray',
-                            marginLeft: '0.35rem',
-                            marginBottom: '0rem',
-                          }}
-                        >
-                          1 day left to purchase
-                        </p>
-                      </div>
+                      <div className='time-div'></div>
                       <button className='buy-bid-btn'>Purchase</button>
                     </div>
                   </CardBody>
@@ -1209,19 +1197,7 @@ class Home extends Component {
                       </CardText>
                     </div>
                     <div className='buy-bid-btn-div'>
-                      <div className='time-div'>
-                        <p
-                          style={{
-                            fontFamily: 'Gibson',
-                            fontSize: '9px',
-                            color: 'gray',
-                            marginLeft: '0.35rem',
-                            marginBottom: '0rem',
-                          }}
-                        >
-                          32 mins left to purchase
-                        </p>
-                      </div>
+                      <div className='time-div'></div>
                       <button className='buy-bid-btn'>Purchase</button>
                     </div>
                   </CardBody>
