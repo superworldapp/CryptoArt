@@ -115,7 +115,7 @@ class Home extends Component {
 
   render() {
     if (this.state.loggedIn && this.state.startClicked) {
-      return <Redirect to='/myart' />;
+      return <Redirect to='/allart' />;
     } else {
       return (
         <>
