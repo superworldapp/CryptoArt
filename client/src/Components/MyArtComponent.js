@@ -30,7 +30,7 @@ import * as fs from 'fs';
 import * as util from 'util';
 import loader from '../images/loader.svg';
 import annonuser from '../images/user.png';
-import { blobToSHA256 } from 'file-to-sha256';
+// import { blobToSHA256 } from 'file-to-sha256';
 
 const SHA256 = require('crypto-js/sha256');
 
@@ -461,19 +461,20 @@ class MyItemComponent extends Component {
         .send({ from: this.props.accounts, gas: 5000000 });
 
       console.log('res', res);
-      var x = await res.events.tokencreated.returnValues.tokenId.toString();
 
-      const data = {
-        tokenId: x,
-        description: 'A unique piece of art',
-        image: imgUrl,
-        name: tokenTitle,
-        blockchain: 'e',
-        networkId: 4,
-        price: tokenPrice,
-      };
+      const data = await res.events.tokencreated.map((token) =>
+        Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
+          tokenId: token.returnValues.tokenId.toString(),
+          description: 'A unique piece of art',
+          image: imgUrl,
+          name: tokenTitle,
+          blockchain: 'e',
+          networkId: 4,
+          price: tokenPrice,
+        })
+      );
 
-      await Axios.post(`http://geo.superworldapp.com/api/json/token/add`, data);
+      console.log('data', data);
       this.toggleModal1();
     } catch (err) {
       this.setState({ loadingError: true });
@@ -515,7 +516,8 @@ class MyItemComponent extends Component {
   };
   fileUploadHandler = async (event) => {
     event.preventDefault();
-    const hash = await blobToSHA256(this.state.selectedFile);
+    // const hash = await blobToSHA256(this.state.selectedFile);
+    let hash = '';
     this.setState({ isLoading: true, loadingError: false, artHash: hash });
     this.fileAwsHandler(this.state.selectedFile, this.creatingItems);
   };
