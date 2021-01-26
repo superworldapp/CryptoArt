@@ -12,7 +12,7 @@ import {
   InputGroupText,
   Input,
 } from 'reactstrap';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import helpIcon from '../assets/svg/help.svg';
@@ -439,6 +439,7 @@ class Header extends Component {
                 >
                   <Grid item spacing={2}>
                     <Button
+                      style={{ margin: '0.5rem' }}
                       className='LoginButton-header'
                       onClick={() =>
                         this.context.dispatch({
@@ -456,6 +457,7 @@ class Header extends Component {
                 <Grid item spacing={2}>
                   <IconButton onClick={(e) => this.handleClick(e, 3)}>
                     <img
+                      className='rounded-circle'
                       src={`data:image/png;base64,${new Identicon(
                         new Date().toString()
                       )}`}
@@ -912,18 +914,17 @@ class Header extends Component {
                       >
                         <li
                           style={{
-                            color: '#FFFFFF',
                             fontFamily: 'Gibson',
                             fontSize: '15px',
                             fontWeight: 600,
-                            color: 'red',
+                            color: 'gray',
                           }}
                         >
                           Hello, {this.state.currentUser.username}
                         </li>
                         <li
                           style={{
-                            color: '#FFFFFF',
+                            color: 'gray',
                             fontFamily: 'Gibson',
                             fontSize: '13px',
                           }}
@@ -931,6 +932,19 @@ class Header extends Component {
                           {this.state.currentUser.email}
                         </li>
                       </div>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link
+                        style={{
+                          color: 'gray',
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          textDecoration: 'none',
+                        }}
+                        to='/myart'
+                      >
+                        My Collections
+                      </Link>
                     </MenuItem>
                     <MenuItem
                       onClick={this.changeUsernameHandleClick}
@@ -1014,6 +1028,7 @@ class Header extends Component {
                       >
                         <p
                           style={{
+                            marginTop: '0.5rem',
                             flex: '1',
                             color: '#5540c7',
                             fontFamily: 'Gibson',
