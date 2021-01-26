@@ -2,10 +2,10 @@
         pragma solidity >=0.6.0; 
         pragma experimental ABIEncoderV2;
         
-        //import "https://github.com/kole-swapnil/openzepkole/token/ERC721/ERC721.sol";
-        import "@openzeppelin/contracts/token/ERC721/ERC721.sol"; 
-        //import "https://github.com/kole-swapnil/openzepkole/access/Ownable.sol";
-        import "@openzeppelin/contracts/access/Ownable.sol"; 
+        import "https://github.com/kole-swapnil/openzepkole/token/ERC721/ERC721.sol";
+       // import "@openzeppelin/contracts/token/ERC721/ERC721.sol"; 
+        import "https://github.com/kole-swapnil/openzepkole/access/Ownable.sol";
+        //import "@openzeppelin/contracts/access/Ownable.sol"; 
         
         
         contract Cryptoart is ERC721,Ownable{
@@ -22,9 +22,10 @@
             }
             
             event tokencreated(uint indexed tokenId,address indexed tokenCreator,uint tokenPrice,uint times,uint batchId);
-            event tokenbought(uint indexed tokenId,address indexed newowner,address indexed seller,uint times);
+            event tokenbought(uint indexed tokenId,address indexed newowner,address indexed seller,uint times,uint tokenPrice);
             event tokenputforsale(uint indexed tokenId,address indexed seller,uint sellPrice,bool isListed,uint times);
             event tokenbid(uint indexed tokenId,address indexed stcl,bool isBid,uint close,uint times);
+            event bidstarted(uint indexed tokenId,address indexed stcl,uint times);
             struct Panel{
                     uint memcount;
                     address[] allmem;
@@ -158,6 +159,7 @@
                uint fee;
                uint priceAfterFee;
                uint creatorfee;
+               uint onlyprice = y.tokenSellPrice;
                if(y.tokenOwner == y.tokenCreator){
                     fee = SafeMath.div(
                     SafeMath.mul(y.tokenSellPrice, percentageCut),
@@ -202,8 +204,10 @@
                delete z[index];
                tokensByOwner[seller] = z;
                tokensByOwner[addr].push(y);
+                _holderTokens[seller].remove(_tokenId);
+                _holderTokens[addr].add(_tokenId);
                 
-               emit tokenbought(_tokenId,addr,seller,block.timestamp);
+               emit tokenbought(_tokenId,addr,seller,block.timestamp,onlyprice);
                 return true;
             }
             
@@ -219,13 +223,14 @@
                     y.auction.bidder = msg.sender;
                     y.auction.bidprice = msg.value;
                     y.auction.isBidding = true;
-                    emit tokenbid(_tokenId,msg.sender,true,0,block.timestamp);
+                    emit bidstarted(_tokenId,msg.sender,msg.value);
                     
                 }
                 else{
                     (y.auction.bidder).transfer(y.auction.bidprice);
                     y.auction.bidder = msg.sender;
                     y.auction.bidprice = msg.value;
+                    emit bidstarted(_tokenId,msg.sender,msg.value);
                 }
                 Arts[_tokenId] = y;
                 
@@ -254,14 +259,34 @@
                  Arts[_tokenId] = z;
                  emit tokenbid(_tokenId,msg.sender,false,2,block.timestamp);
             }
-            /**
+            
             function tokenURI(uint256 tokenId) public view override returns (string memory) {
-                string memory x = string(abi.encodePacked(metaUrl,tokenId));
-                return x;
+                return string(abi.encodePacked(metaUrl,integerToString(tokenId)));
+            
             }
-             */
             
-            
+            function integerToString(uint _i) internal pure returns (string memory) {
+        if (_i == 0) {
+            return "0";
+        }
+        
+        uint j = _i;
+        uint len;
+      
+        while (j != 0) {
+            len++;
+            j /= 10;
+        }
+      
+        bytes memory bstr = new bytes(len);
+        uint k = len - 1;
+      
+        while (_i != 0) {
+            bstr[k--] = byte(uint8(48 + _i % 10));
+            _i /= 10;
+        }
+      return string(bstr);
+    }    
             
             function withdrawBalance() public payable onlyOwner() {
                 (msg.sender).transfer(totalbal);
