@@ -645,20 +645,24 @@ class MyItemComponent extends Component {
 
       console.log('res', res);
 
-      const data = await res.events.tokencreated.map((token) =>
-        Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
-          tokenId: token.returnValues.tokenId.toString(),
-          description: 'A unique piece of art',
-          image: imgUrl,
-          name: tokenTitle,
-          blockchain: 'e',
-          networkId: 4,
-          price: tokenPrice,
-        })
-      );
+      var x = await res.events.tokencreated.returnValues.tokenId.toString(); 
 
+      const data = {
+        tokenId: x,
+        description: 'A unique piece of art',
+        image: imgUrl,
+        name: tokenTitle,
+        blockchain: 'e',
+        networkId: 4,
+        price: tokenPrice,
+      };
+  
       console.log('data', data);
+  
+      await Axios.post(`http://geo.superworldapp.com/api/json/token/add`, data);
       this.toggleModal1();
+      this.setState({ isLoading: false });
+
     } catch (err) {
       this.setState({ loadingError: true });
       console.error(err.message);
@@ -685,6 +689,7 @@ class MyItemComponent extends Component {
       if (rex.tokenOwner == this.props.accounts) {
         response.push(rex);
       }
+      //else if(rex.tokenCreator == this.props.accounts)
     }
     allDocs = [];
     allDocs = response;
@@ -952,16 +957,6 @@ class MyItemComponent extends Component {
         <br />
         <br />
 
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <br />
         <br />
         <br />
