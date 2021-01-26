@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import TableBody from './TableBody'
 import {
     Card,
     CardBody,
@@ -208,70 +209,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
                                             <th>Date</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        {creValue.map((item) => {
-                                            return (
-                                                <React.Fragment>
-                                                    <tr key={item.id}>
-                                                        <th scope='row'>
-                                                            {item?.event}
-                                                        </th>
-                                                        <td>
-                                                            {item?.returnValues
-                                                                .tokenPrice
-                                                                ? `${Web3.utils.fromWei(
-                                                                      Number(
-                                                                          item
-                                                                              ?.returnValues
-                                                                              .tokenPrice
-                                                                      ).toString(),
-                                                                      'ether'
-                                                                  )} ETH`
-                                                                : ''}
-                                                        </td>
-                                                        <td>
-                                                            {item?.returnValues
-                                                                .tokenCreator
-                                                                ? item
-                                                                      ?.returnValues
-                                                                      .tokenCreator
-                                                                : item
-                                                                      ?.returnValues
-                                                                      .seller}
-                                                        </td>
-                                                        <td>
-                                                            {item?.returnValues
-                                                                .newowner
-                                                                ? item
-                                                                      ?.returnValues
-                                                                      .newowner
-                                                                : 'null'}
-                                                        </td>
-                                                        <td>
-                                                            {Math.round(
-                                                                (Date.now() / 1000 - item.returnValues.times) /  60)} minutes ago
-                                                        </td>
-                                                    </tr>
-                                                    {/* <tr>
-                                            <th scope='row'>
-                                                {creValue[1]?.event}
-                                            </th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope='row'>
-                                                {creValue[2]?.event}
-                                            </th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr> */}
-                                                </React.Fragment>
-                                            );
-                                        })}
-                                    </tbody>
+                                    <TableBody cre={creValue} />
                                 </Table>
                             </CardBody>
                         </React.Fragment>

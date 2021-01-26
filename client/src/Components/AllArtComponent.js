@@ -32,13 +32,14 @@ class AllArt extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.buyItem = this.buyItem.bind(this);
   }
-  componentDidMount = async () => {
+
+  creData = async () => {
     let cre = await this.props.contract?.getPastEvents('tokencreated', {
       filter: { tokenId: this.props.art.tokenIdentifier },
       fromBlock: 0,
     });
     //  // Using an array means OR: e.g. 20 or 23
-
+  
     let tb = await this.props.contract?.getPastEvents('tokenbought', {
       filter: { tokenId: this.props.art.tokenIdentifier },
       fromBlock: 0,
@@ -48,6 +49,9 @@ class AllArt extends Component {
       fromBlock: 0,
     });
     console.log(this.props.art.tokenIdentifier, cre);
+  }
+  componentDidMount = () => {
+    this.creData()
   };
 
   buyItem = async () => {

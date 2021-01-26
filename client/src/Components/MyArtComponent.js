@@ -440,7 +440,7 @@ class MyItemComponent extends Component {
       .send({ from: this.props.accounts, gas: 5000000 });
 
     console.log('res', res);
-    var x = await res.events.tokencreated.returnValues.tokenId.toString(); 
+    var x = await res?.events.tokencreated.returnValues.tokenId.toString(); 
 
     const data = {
       tokenId: x,
