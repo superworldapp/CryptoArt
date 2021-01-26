@@ -351,21 +351,18 @@ class Header extends Component {
               navbar
               className='m-auto d-flex align-items-center justify-content-end'
             >
-              {Auth.getAuth() ? (
-                <NavItem>
-                  <NavLink
-                    className='nav-link'
-                    style={{
-                      width: 200,
-                    }}
-                    to='/allart'
-                  >
-                    Art Marketplace
-                  </NavLink>
-                </NavItem>
-              ) : (
-                <div></div>
-              )}
+              <NavItem>
+                <NavLink
+                  className='nav-link'
+                  style={{
+                    width: 200,
+                  }}
+                  to='/allart'
+                >
+                  Art Marketplace
+                </NavLink>
+              </NavItem>
+
               {/* <NavItem>
                 <NavLink className='nav-link' to='/home'>
                   Home

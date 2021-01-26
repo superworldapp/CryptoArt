@@ -103,7 +103,7 @@ class Main extends Component {
               />
             )}
           />
-          <ProtectedRoute
+          <Route
             exact
             path='/allart'
             component={() => (
@@ -113,7 +113,7 @@ class Main extends Component {
               />
             )}
           />
-          <ProtectedRoute
+          <Route
             exact
             path='/myart'
             component={() => (
