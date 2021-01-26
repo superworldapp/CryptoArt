@@ -392,7 +392,10 @@ class Header extends Component {
                     alignItems='center'
                     spacing={2}
                   >
-                    <Grid item>
+                    <Grid
+                      item
+                      style={{ marginRight: '2.5rem', marginLeft: '2rem' }}
+                    >
                       <Button
                         className={
                           this.props.accounts
@@ -458,10 +461,13 @@ class Header extends Component {
                   <IconButton onClick={(e) => this.handleClick(e, 3)}>
                     <img
                       className='rounded-circle'
+                      id='profile'
                       src={`data:image/png;base64,${new Identicon(
                         new Date().toString()
                       )}`}
-                      style={{ maxWidth: '30px' }}
+                      style={{
+                        maxWidth: '30px',
+                      }}
                       alt='My Profile Settings'
                     ></img>
                   </IconButton>
@@ -940,6 +946,8 @@ class Header extends Component {
                           fontFamily: 'Gibson',
                           fontSize: '13px',
                           textDecoration: 'none',
+                          marginLeft: '-0.2rem',
+                          marginBottom: '0.75rem',
                         }}
                         to='/myart'
                       >
@@ -1021,18 +1029,20 @@ class Header extends Component {
                       <span
                         style={{
                           display: 'flex',
-                          maxHeight: '10px',
+                          maxHeight: '23px',
                           alignItems: 'center',
                           whiteSpace: 'pre-line',
                         }}
                       >
                         <p
                           style={{
-                            marginTop: '0.5rem',
+                            marginTop: '1.5rem',
+                            marginLeft: '-0.12rem',
+                            marginBottom: '1rem',
                             flex: '1',
                             color: '#5540c7',
                             fontFamily: 'Gibson',
-                            fontSize: '11px',
+                            fontSize: '13px',
                           }}
                         >
                           Log Out
