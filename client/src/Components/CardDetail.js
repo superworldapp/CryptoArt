@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TableBody from './TableBody'
+import TableBody from './TableBody';
 import {
     Card,
     CardBody,
@@ -71,6 +71,43 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
         console.log(creValue);
     };
 
+    const buyOrSell = () => {
+        if (art.isSelling) {
+            return (
+                <button
+                className="btn btn-primary"
+                    onClick={async () => {
+                        const res = await contract.methods
+                            .buyToken(art.tokenIdentifier)
+                            .send({
+                                from: accounts,
+                                value: art.tokenSellPrice,
+                                gas: 1000000
+                            });
+                        console.log(res);
+                    }}
+                    style={{
+                        width: '50%',
+                        alignSelf: 'center'
+                    }}>
+                    Buy Item
+                </button>
+            );
+        }
+        else if (art.auction.isBidding) {
+            return (
+                <button className="btn-primary"
+                    color='primary'
+                    style={{
+                        width: '50%',
+                        alignSelf: 'center'
+                    }}>
+                    Place Bid
+                </button>
+            );
+        }
+    };
+
     useEffect(() => {
         getCreData();
         getEthDollarPrice();
@@ -140,41 +177,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
                                 </small>
                             </h4>
 
-                            <button
-                                className={
-                                    art.isSelling
-                                        ? 'visible btn-primary'
-                                        : 'invisible'
-                                }
-                                onClick={async () => {
-                                    const res = await contract.methods
-                                        .buyToken(art.tokenIdentifier)
-                                        .send({
-                                            from: accounts,
-                                            value: art.tokenSellPrice,
-                                            gas: 1000000
-                                        });
-                                    console.log(res);
-                                }}
-                                style={{
-                                    width: '50%',
-                                    alignSelf: 'center'
-                                }}>
-                                Buy Item
-                            </button>
-                            <button
-                                className={
-                                    art.isSelling
-                                        ? 'invisible'
-                                        : 'visible btn-primary'
-                                }
-                                color='primary'
-                                style={{
-                                    width: '50%',
-                                    alignSelf: 'center'
-                                }}>
-                                Place Bid
-                            </button>
+                            {buyOrSell()}
                         </div>
                     </div>
                 </div>
