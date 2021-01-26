@@ -9,7 +9,7 @@ import MyItemComponent from './MyArtComponent';
 import CardDetail from './CardDetail';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './FooterComponent';
-
+import ProtectedRoute from './ProtectedRoute';
 //import HDWalletProvider from "@truffle/hdwallet-provider";
 let allDocs = [];
 
@@ -24,33 +24,44 @@ class Main extends Component {
             contract: null,
             res: null,
             registered: 0,
-            art: null
+            art: null,
+            creValue: []
         };
     }
 
-    componentDidMount = async () => {
-        try {
-            // Get network provider and web3 instance.
-            const web3 = await getWeb3();
+  componentDidMount = async () => {
+    try {
+      // Get network provider and web3 instance.
+      const web3 = await getWeb3();
 
-            // Use web3 to get the user's accounts.
-            const accounts = await web3.eth.getAccounts();
-            const balance = await web3.eth.getBalance(accounts[0]);
-            // Get the contract instance.
-            const networkId = await web3.eth.net.getId();
-            const deployedNetwork = BNContract.networks[networkId];
-            const instance = new web3.eth.Contract(
-                BNContract.abi,
-                deployedNetwork && deployedNetwork.address
-            );
+      // Use web3 to get the user's accounts.
+      const accounts = await web3.eth.getAccounts();
+      const balance = await web3.eth.getBalance(accounts[0]);
+      // Get the contract instance.
+      const networkId = await web3.eth.net.getId();
+      const deployedNetwork = BNContract.networks[networkId];
+      const instance = new web3.eth.Contract(
+        BNContract.abi,
+        deployedNetwork && deployedNetwork.address
+      );
+      console.log("contract",instance);
 
-            console.log(instance);
+            let cre = await instance.getPastEvents('tokencreated', {
+                fromBlock: 0
+            });
+            let newArr = [];
+            for (let i = 0; i < cre.length; i++) {
+                newArr.push(cre[i]);
+                console.log(cre[i]);
+            }
             this.setState({
                 web3,
                 accounts: accounts[0],
                 contract: instance,
-                balance
+                balance,
+                creValue: newArr
             });
+            console.log(this.state.creValue);
             let res = await this.state.contract?.methods.tokenCount().call();
             console.log(res);
 
@@ -63,13 +74,12 @@ class Main extends Component {
             allDocs = response;
             console.log(response);
             this.setState({ art: allDocs });
-            
         } catch (error) {
             // Catch any errors for any of the above operations.
 
-            console.error(error);
-        }
-    };
+      console.error(error);
+    }
+  };
 
     render() {
         const CardWithId = ({ match }) => {
@@ -83,6 +93,8 @@ class Main extends Component {
                     }
                     contract={this.state.contract}
                     accounts={this.state.accounts}
+                    cre={this.state.creValue}
+                    matchId={match.params.id}
                 />
             );
         };
@@ -117,7 +129,7 @@ class Main extends Component {
                     />
                     <Route
                         exact
-                        path='/myart'
+                        path='/mycreations'
                         component={() => (
                             <MyItemComponent
                                 contract={this.state.contract}
@@ -128,11 +140,11 @@ class Main extends Component {
                     <Route path='/card/:id' component={CardWithId} />
                     {/* <Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } /> */}
 
-                    {/* <Route
+          {/* <Route
                         path='/card/:id'
                         component={(props) => (
                             <CardDetail
-                            
+
                                 contract={this.state.contract}
                                 accounts={this.state.accounts}
                                 art = {this.state.art}
@@ -140,11 +152,11 @@ class Main extends Component {
                         )}
                     /> */}
 
-                    <Redirect to='/home' />
-                </Switch>
-                <Footer />
-            </div>
-        );
-    }
+          <Redirect to='/home' />
+        </Switch>
+        <Footer />
+      </div>
+    );
+  }
 }
 export default Main;
