@@ -127,7 +127,7 @@ class Allpatrender extends Component {
   AddBid = async () => {
     const res = await this.props.contract.methods
       .addBid(this.props.art.tokenIdentifier)
-      .send({ from: this.props.accounts, gas: 1000000, value: pay });
+      .send({ from: this.props.accounts, gas: 1000000, value: 1000000 });
     console.log(res);
   };
   CloseBid = async () => {
@@ -473,19 +473,20 @@ class MyItemComponent extends Component {
         .send({ from: this.props.accounts, gas: 5000000 });
 
       console.log('res', res);
-      var x = await res.events.tokencreated.returnValues.tokenId.toString();
 
-      const data = {
-        tokenId: x,
-        description: 'A unique piece of art',
-        image: imgUrl,
-        name: tokenTitle,
-        blockchain: 'e',
-        networkId: 4,
-        price: tokenPrice,
-      };
+      const data = await res.events.tokencreated.map((token) =>
+        Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
+          tokenId: token.returnValues.tokenId.toString(),
+          description: 'A unique piece of art',
+          image: imgUrl,
+          name: tokenTitle,
+          blockchain: 'e',
+          networkId: 4,
+          price: tokenPrice,
+        })
+      );
 
-      await Axios.post(`http://geo.superworldapp.com/api/json/token/add`, data);
+      console.log('data', data);
       this.toggleModal1();
     } catch (err) {
       this.setState({ loadingError: true });

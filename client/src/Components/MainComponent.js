@@ -9,7 +9,7 @@ import MyItemComponent from './MyArtComponent';
 import CardDetail from './CardDetail';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './FooterComponent';
-
+import ProtectedRoute from './ProtectedRoute';
 //import HDWalletProvider from "@truffle/hdwallet-provider";
 let allDocs = [];
 
@@ -29,21 +29,21 @@ class Main extends Component {
         };
     }
 
-    componentDidMount = async () => {
-        try {
-            // Get network provider and web3 instance.
-            const web3 = await getWeb3();
+  componentDidMount = async () => {
+    try {
+      // Get network provider and web3 instance.
+      const web3 = await getWeb3();
 
-            // Use web3 to get the user's accounts.
-            const accounts = await web3.eth.getAccounts();
-            const balance = await web3.eth.getBalance(accounts[0]);
-            // Get the contract instance.
-            const networkId = await web3.eth.net.getId();
-            const deployedNetwork = BNContract.networks[networkId];
-            const instance = new web3.eth.Contract(
-                BNContract.abi,
-                deployedNetwork && deployedNetwork.address
-            );
+      // Use web3 to get the user's accounts.
+      const accounts = await web3.eth.getAccounts();
+      const balance = await web3.eth.getBalance(accounts[0]);
+      // Get the contract instance.
+      const networkId = await web3.eth.net.getId();
+      const deployedNetwork = BNContract.networks[networkId];
+      const instance = new web3.eth.Contract(
+        BNContract.abi,
+        deployedNetwork && deployedNetwork.address
+      );
 
             let cre = await instance.getPastEvents('tokencreated', {
                 fromBlock: 0
@@ -76,9 +76,9 @@ class Main extends Component {
         } catch (error) {
             // Catch any errors for any of the above operations.
 
-            console.error(error);
-        }
-    };
+      console.error(error);
+    }
+  };
 
     render() {
         const CardWithId = ({ match }) => {
@@ -139,11 +139,11 @@ class Main extends Component {
                     <Route path='/card/:id' component={CardWithId} />
                     {/* <Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } /> */}
 
-                    {/* <Route
+          {/* <Route
                         path='/card/:id'
                         component={(props) => (
                             <CardDetail
-                            
+
                                 contract={this.state.contract}
                                 accounts={this.state.accounts}
                                 art = {this.state.art}
@@ -151,11 +151,11 @@ class Main extends Component {
                         )}
                     /> */}
 
-                    <Redirect to='/home' />
-                </Switch>
-                <Footer />
-            </div>
-        );
-    }
+          <Redirect to='/home' />
+        </Switch>
+        <Footer />
+      </div>
+    );
+  }
 }
 export default Main;
