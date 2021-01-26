@@ -7,7 +7,10 @@ import {
     CardText,
     CardImg,
     CardHeader,
-    Table
+    Table,
+    Input,
+    Modal,
+    ModalHeader
 } from 'reactstrap';
 import image3 from '../images/image 6.png';
 import image4 from '../images/image 23.png';
@@ -23,6 +26,11 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
 
     const [ethPrice, setEthPrice] = useState(null);
     const [creValue, setCreValue] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [handleInput, setHandleInput] = useState('');
+    const [pay, setPay] = useState(0);
+
+    const ETHER = 1000000000000000000;
 
     const getEthDollarPrice = () => {
         Axios.get(
@@ -32,6 +40,23 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
             setEthPrice(res.data.ethereum);
         });
         // return <span>{ethPrice.usd}</span>;
+    };
+
+    const handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        setHandleInput(value);
+        console.log(handleInput);
+    };
+
+    const AddBid = async () => {
+        const res = await contract.methods.addBid(art.tokenIdentifier).send({
+            from: accounts,
+            gas: 1000000,
+            value: (handleInput * ETHER).toString()
+        });
+        console.log(res);
     };
 
     const getCreData = async () => {
@@ -71,11 +96,15 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
         console.log(creValue);
     };
 
+    const isToggleModal = () => {
+        setModalOpen(!modalOpen);
+    };
+
     const buyOrSell = () => {
         if (art.isSelling) {
             return (
                 <button
-                className="btn btn-primary"
+                    className='btn btn-primary'
                     onClick={async () => {
                         const res = await contract.methods
                             .buyToken(art.tokenIdentifier)
@@ -93,17 +122,165 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
                     Buy Item
                 </button>
             );
-        }
-        else if (art.auction.isBidding) {
+        } else if (art.auction.isBidding) {
             return (
-                <button className="btn-primary"
-                    color='primary'
-                    style={{
-                        width: '50%',
-                        alignSelf: 'center'
-                    }}>
-                    Place Bid
-                </button>
+                <React.Fragment>
+                    <Input type='text' />
+                    <Input
+                        type='text'
+                        id='sellPrice'
+                        name='sellPrice'
+                        onChange={handleInputChange}></Input>
+                    <button
+                        className='btn-primary'
+                        color='primary'
+                        onClick={AddBid}
+                        style={{
+                            width: '50%',
+                            alignSelf: 'center'
+                        }}>
+                        Place Bid
+                    </button>
+                    {/* <Modal
+                        isOpen={modalOpen}
+                        toggle={isToggleModal}
+                        className='modal_popup'>
+                        <ModalHeader toggle={isToggleModal} className='pl-5'>
+                            Start Auction
+                        </ModalHeader>
+                        <Card className='artCard' style={{ height: '50%' }}>
+                            <CardImg
+                                top
+                                className='displayImage'
+                                src={art.imgurl}
+                                alt='Card image'
+                            />
+                            <CardBody>
+                                <div
+                                    className='ctext'
+                                    style={{ padding: '5px', height: '1rem' }}>
+                                    <CardSubtitle
+                                        style={{
+                                            position: 'relative',
+                                            fontFamily: 'Gibson',
+                                            fontSize: '15px',
+                                            color: '#B3B3B3'
+                                        }}>
+                                        Title
+                                    </CardSubtitle>
+                                    <CardSubtitle
+                                        style={{
+                                            position: 'relative',
+                                            fontFamily: 'Gibson',
+                                            fontSize: '15px',
+                                            color: '#B3B3B3'
+                                        }}>
+                                        Price
+                                    </CardSubtitle>
+                                </div>
+                                <div
+                                    className='ctext'
+                                    style={{ padding: '5px' }}>
+                                    <CardText
+                                        style={{
+                                            position: 'relative',
+                                            fontFamily: 'Gibson',
+                                            fontSize: '15px',
+                                            color: 'black'
+                                        }}>
+                                        {art.tokenTitle}
+                                    </CardText>
+                                    <CardText
+                                        style={{
+                                            position: 'relative',
+                                            fontFamily: 'Gibson',
+                                            fontSize: '15px',
+                                            color: 'black'
+                                        }}>
+                                        {Web3.utils.fromWei(
+                                            art.tokenSellPrice.toString(),
+                                            'ether'
+                                        )}{' '}
+                                        ETH
+                                    </CardText>
+                                </div>
+                                <div
+                                    className='ctext1'
+                                    style={{ padding: '2px' }}>
+                                    <p
+                                        style={{
+                                            position: 'relative',
+                                            fontFamily: 'Gibson',
+                                            fontSize: '15px',
+                                            color: 'black',
+                                            marginTop: '2%'
+                                        }}>
+                                        Start Bid :{' '}
+                                    </p>
+                                    <p>
+                                        <Input
+                                            style={{ width: '80%' }}
+                                            type='text'
+                                            id='bidPrice'
+                                            name='bidPrice'></Input>
+                                    </p>
+                                    <p
+                                        style={{
+                                            position: 'relative',
+                                            fontFamily: 'Gibson',
+                                            fontSize: '15px',
+                                            color: 'black',
+                                            marginTop: '2%'
+                                        }}>
+                                        {' '}
+                                        ETH
+                                    </p>
+                                </div>
+                                <div className='ctext1'>
+                                    <p
+                                        style={{
+                                            position: 'relative',
+                                            fontFamily: 'Gibson',
+                                            fontSize: '15px',
+                                            color: 'black',
+                                            marginTop: '2%'
+                                        }}>
+                                        Duration :{' '}
+                                    </p>
+                                    <p>
+                                        <Input
+                                            style={{ width: '80%' }}
+                                            type='text'
+                                            id='bidPrice'
+                                            name='bidPrice'></Input>
+                                    </p>
+                                    <p
+                                        style={{
+                                            position: 'relative',
+                                            fontFamily: 'Gibson',
+                                            fontSize: '15px',
+                                            color: 'black',
+                                            marginTop: '2%'
+                                        }}>
+                                        Days{' '}
+                                    </p>
+                                </div>
+                                <div>
+                                    <button
+                                        className='abtn'
+                                        style={{
+                                            left: '32%',
+                                            color: 'white',
+                                            backgroundColor: '#5540C7'
+                                        }}
+                                        type='submit'>
+                                        Confirm
+                                    </button>{' '}
+                                </div>
+                            </CardBody>
+                        </Card>
+                    </Modal> */}
+                </React.Fragment>
             );
         }
     };
