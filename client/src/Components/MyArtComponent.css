@@ -132,3 +132,16 @@ h3 {
 .badge{
   font-size: 17px;
 }
+
+.class1{
+  background-color: #3454DC;
+  color: white;
+}
+.class2{
+  background-color: #267627;
+  color: white;
+}
+.class3{
+  background-color: #F08778;
+  color:white ;
+}
