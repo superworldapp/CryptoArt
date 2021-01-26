@@ -80,7 +80,7 @@ class Allpatrender extends Component {
     this.DeSale = this.DeSale.bind(this);
     this.StartAuction = this.StartAuction.bind(this);
     this.EndAuction = this.EndAuction.bind(this);
-    this.toggleAuction = this.toggleAuction.bind(this);
+    //this.toggleAuction = this.toggleAuction.bind(this);
   }
   buyItem = async () => {
     const res = await this.props.contract.methods
@@ -327,7 +327,7 @@ let x = colorpills();
                             type='submit'
                             // color='primary'
                              onClick={this.props.art.auction.isBidding ? this.EndAuction : this.StartAuction }
-                            onClick = {this.toggleAuction}
+                            //onClick = {this.toggleAuction}
                             >
                             {Auc} 
                         </button>
@@ -432,7 +432,7 @@ let x = colorpills();
                             </Card>
                         </Modal>
 
-                        <Modal
+                        {/* <Modal
                             isOpen={this.state.isModalAucOpen}
                             toggle={this.toggleAuction}
                             className='modal_popup'>
@@ -528,7 +528,7 @@ let x = colorpills();
                                     > ETH
                                      </p>
                                 </div>
-                                {/* <div className="ctext1">
+                                 <div className="ctext1">
                                     <p
                                     style={{
                                         position:'relative',
@@ -558,7 +558,7 @@ let x = colorpills();
                                         marginTop:'2%'
                                     }}
                                     >Days </p>
-                                </div> */}
+                                </div> 
                                 <div>
                                 <button
                                     className="abtn" style={{
@@ -571,10 +571,10 @@ let x = colorpills();
                                 </div>
                                 </CardBody>
                             </Card>
-                        </Modal> 
+                        </Modal>  */}
                     </div> 
                 </CardBody>
-                {/* </Link> */}
+                
               
             </Card>
           
