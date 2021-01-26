@@ -18,7 +18,7 @@
   border-top: none !important;
 }
 .modal-content {
-  width: 90% !important;
+  width: 80% ;
   height: auto;
 }
 .modal-header {
@@ -66,6 +66,7 @@
 } 
  .displayImage{
     position: relative;
+    padding: 0% 5%;
 
 }
 .displayText{
@@ -126,8 +127,8 @@ h3 {
 
 .badge-pill{
   border-radius: 0rem 0rem 1rem 0rem;
-  padding: 0rem 1.2rem 0rem 0rem;
+  padding: 0rem 1.5rem 0rem 0rem;
 }
 .badge{
-  font-size: 15px;
+  font-size: 17px;
 }
