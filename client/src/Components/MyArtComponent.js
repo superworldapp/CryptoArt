@@ -124,6 +124,18 @@ class Allpatrender extends Component {
       .send({ from: this.props.accounts, gas: 1000000 });
     console.log(res);
   };
+  AddBid = async () => {
+    const res = await this.props.contract.methods
+      .addBid(this.props.art.tokenIdentifier)
+      .send({ from: this.props.accounts, gas: 1000000, value: 1000000 });
+    console.log(res);
+  };
+  CloseBid = async () => {
+    const res = await this.props.contract.methods
+      .closBid(this.props.art.tokenIdentifier)
+      .send({ from: this.props.accounts, gas: 1000000});
+    console.log(res);
+  };
   render() {
     let but = this.props.art.isSelling ? ' ' : 'hidden';
     let bak = this.props.art.isSelling ? 'bg-success text-white' : '';
@@ -516,8 +528,8 @@ class MyItemComponent extends Component {
   };
   fileUploadHandler = async (event) => {
     event.preventDefault();
-    // const hash = await blobToSHA256(this.state.selectedFile);
-    let hash = '';
+   // const hash = await blobToSHA256(this.state.selectedFile);
+   let hash = '';
     this.setState({ isLoading: true, loadingError: false, artHash: hash });
     this.fileAwsHandler(this.state.selectedFile, this.creatingItems);
   };

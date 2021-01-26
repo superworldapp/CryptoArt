@@ -25,6 +25,7 @@ class Main extends Component {
       res: null,
       registered: 0,
       art: null,
+      creValue: [],
     };
   }
 
@@ -44,13 +45,22 @@ class Main extends Component {
         deployedNetwork && deployedNetwork.address
       );
 
-      console.log(instance);
+      let cre = await instance.getPastEvents('tokencreated', {
+        fromBlock: 0,
+      });
+      let newArr = [];
+      for (let i = 0; i < cre.length; i++) {
+        newArr.push(cre[i]);
+        console.log(cre[i]);
+      }
       this.setState({
         web3,
         accounts: accounts[0],
         contract: instance,
         balance,
+        creValue: newArr,
       });
+      console.log(this.state.creValue);
       let res = await this.state.contract?.methods.tokenCount().call();
       console.log(res);
 
@@ -81,6 +91,8 @@ class Main extends Component {
           }
           contract={this.state.contract}
           accounts={this.state.accounts}
+          cre={this.state.creValue}
+          matchId={match.params.id}
         />
       );
     };
