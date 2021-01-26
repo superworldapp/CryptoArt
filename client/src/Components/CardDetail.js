@@ -72,10 +72,10 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
     };
 
     useEffect(() => {
+        getCreData();
         getEthDollarPrice();
         // console.log(matchId)
         // console.log('Header', myProperties);
-        getCreData();
     }, []);
 
     //   const buyItem = async () => {

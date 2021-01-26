@@ -27,14 +27,14 @@ const TableBody = ({cre}) => {
                                     : 'null'}
                             </td>
                             <td>
-                                {item?.returnValues.newowner
-                                    ? item?.returnValues.newowner
-                                    : 'null'}
-                            </td>
-                            <td>
                                 {item?.returnValues.tokenCreator
                                     ? item?.returnValues.tokenCreator
                                     : item?.returnValues.seller}
+                            </td>
+                            <td>
+                                {item?.returnValues.newowner
+                                    ? item?.returnValues.newowner
+                                    : 'null'}
                             </td>
                             <td>
                                 {Math.round(
