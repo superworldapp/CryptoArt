@@ -347,12 +347,12 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
             >
               <p className='text-secondary'>Current price</p>
               <h4>
-                {Web3.utils.fromWei(art?.tokenPrice.toString(), 'ether')} ETH
+                {Web3.utils.fromWei(art?.tokenSellPrice.toString(), 'ether')} ETH
                 <small>
                   <span className='text-secondary'>
                     (
                     {(
-                      Web3.utils.fromWei(art?.tokenPrice.toString(), 'ether') *
+                      Web3.utils.fromWei(art?.tokenSellPrice.toString(), 'ether') *
                       ethPrice?.usd
                     ).toFixed(2)}{' '}
                     USD)
