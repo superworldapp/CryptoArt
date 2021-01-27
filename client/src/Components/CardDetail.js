@@ -436,7 +436,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
             <p style={{ textAlign: 'center', color: 'gray', fontSize: '12px' }}>
               You have successfully made the purchase
             </p>
-            <Link to='/mycreations' style={{ alignSelf: 'center' }}>
+            <Link to='/mycollections' style={{ alignSelf: 'center' }}>
               <button className='upload-more-btn'>VIEW MY COLLECTIONS</button>
             </Link>
           </ModalBody>
