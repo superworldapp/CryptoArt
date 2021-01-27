@@ -212,16 +212,17 @@ class AllArt extends Component {
 
             <Col sm={{ size: 12 }}>
               {but === 'visible' ? (
-                <Button
-                  className={but}
-                  id='buy-bid-btn'
-                  size='sm'
-                  type='submit'
-                  color='primary'
-                  onClick={this.buyItem}
-                >
-                  Purchase
-                </Button>
+                <Link to={`/card/${this.props.art.tokenIdentifier}`}>
+                  <Button
+                    className={but}
+                    id='buy-bid-btn'
+                    size='sm'
+                    type='submit'
+                    color='primary'
+                  >
+                    Purchase
+                  </Button>
+                </Link>
               ) : (
                 <div></div>
               )}
