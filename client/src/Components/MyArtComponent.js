@@ -90,6 +90,7 @@ class Allpatrender extends Component {
       isModalOpen: false,
       sellPrice: 0,
       auctionLoading: false,
+      putForSaleLoading: false,
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -130,12 +131,15 @@ class Allpatrender extends Component {
     });
   }
   putForSale = async () => {
+    this.setState({ putForSaleLoading: true });
     const res = await this.props.contract.methods
       .putForSale(
         this.props.art.tokenIdentifier,
         (this.state.sellPrice * ETHER).toString()
       )
       .send({ from: this.props.accounts, gas: 1000000 });
+    this.setState({ putForSaleLoading: false });
+    this.toggleModal();
     console.log(res);
   };
   DeSale = async () => {
@@ -407,8 +411,8 @@ class Allpatrender extends Component {
             ) : (
               <div></div>
             )}
-
             {this.state.auctionLoading ? <img src={loader} /> : <div></div>}
+
             <Modal
               isOpen={this.state.isModalOpen}
               toggle={this.toggleModal}
@@ -496,18 +500,29 @@ class Allpatrender extends Component {
                     </p>
                   </div>
                   <div>
-                    <button
-                      className='abtn'
-                      style={{
-                        left: '32%',
-                        color: 'white',
-                        backgroundColor: '#5540C7',
-                      }}
-                      type='submit'
-                      onClick={this.putForSale}
+                    <div>
+                      <button
+                        className='abtn'
+                        style={{
+                          left: '32%',
+                          color: 'white',
+                          backgroundColor: '#5540C7',
+                        }}
+                        type='submit'
+                        onClick={this.putForSale}
+                      >
+                        Confirm
+                      </button>{' '}
+                    </div>
+                    <div
+                      style={{ display: 'flex', justifyContent: 'flex-end' }}
                     >
-                      Confirm
-                    </button>{' '}
+                      {this.state.putForSaleLoading ? (
+                        <img src={loader} />
+                      ) : (
+                        <div></div>
+                      )}
+                    </div>
                   </div>
                 </CardBody>
               </Card>
