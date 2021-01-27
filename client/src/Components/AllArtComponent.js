@@ -380,6 +380,12 @@ class AllItemComponent extends Component {
       let rex = await this.props.contract?.methods.Arts(i).call();
       response.push(rex);
     }
+
+    allDocs = [];
+    allDocs = response;
+    console.log(response);
+    this.setState({ art: allDocs });
+    console.log(this.state.art)
   }
     allBtn = () => {
         this.setState({art: allDocs})
