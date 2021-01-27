@@ -91,6 +91,7 @@ class Allpatrender extends Component {
       sellPrice: 0,
       auctionLoading: false,
       putForSaleLoading: false,
+      delistLoading: false,
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -143,9 +144,11 @@ class Allpatrender extends Component {
     console.log(res);
   };
   DeSale = async () => {
+    this.setState({ delistLoading: true });
     const res = await this.props.contract.methods
       .deSale(this.props.art.tokenIdentifier)
       .send({ from: this.props.accounts, gas: 1000000 });
+    this.setState({ delistLoading: false });
     console.log(res);
   };
   StartAuction = async () => {
@@ -370,6 +373,7 @@ class Allpatrender extends Component {
             >
               Delist
             </button>
+            {this.state.delistLoading ? <img src={loader} /> : <div></div>}
             {forAuc === 'visible' ? (
               <button
                 style={{
