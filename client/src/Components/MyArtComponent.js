@@ -1,8 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 //import moment from 'moment';
-import {Button,Form,FormGroup,Label,Input,Col,Card,CardImg,CardTitle,CardBody, CardImgOverlay, Badge,
- CardSubtitle, CardText,Modal,ModalHeader,ModalBody} from 'reactstrap';
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Col,
+  Card,
+  CardImg,
+  CardTitle,
+  CardBody,
+  CardImgOverlay,
+  Badge,
+  CardSubtitle,
+  CardText,
+  Modal,
+  ModalHeader,
+  ModalBody,
+} from 'reactstrap';
 import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
@@ -15,7 +32,7 @@ import * as util from 'util';
 import loader from '../images/loader.svg';
 import annonuser from '../images/user.png';
 // import { blobToSHA256 } from 'file-to-sha256';
-
+import checkmark from '../images/svg/checkmark.svg';
 const SHA256 = require('crypto-js/sha256');
 
 const S3 = require('aws-sdk/clients/s3');
@@ -36,30 +53,28 @@ const s3 = new S3();
 let allDocs = [];
 const ETHER = 1000000000000000000;
 
-
 const cardpills = [
-    {
-      title:'Ready For Sale',
-      class:'class1'
-    },
-    {
-      title:'Listing For Sale',
-      class:'class2'
-    },
-    {
-      title:'Biding',
-      class:'class2'
-    },
-    {
-      title:'Auction Ongoing',
-      class:'class2'
-    },
-    {
-      title:'Owned by',
-      class:'class3'
-    }
-
-  ];
+  {
+    title: 'Ready For Sale',
+    class: 'class1',
+  },
+  {
+    title: 'Listing For Sale',
+    class: 'class2',
+  },
+  {
+    title: 'Biding',
+    class: 'class2',
+  },
+  {
+    title: 'Auction Ongoing',
+    class: 'class2',
+  },
+  {
+    title: 'Owned by',
+    class: 'class3',
+  },
+];
 
 class Allpatrender extends Component {
   // let day = moment.unix(art.dateofComp);
@@ -74,6 +89,9 @@ class Allpatrender extends Component {
       art: [],
       isModalOpen: false,
       sellPrice: 0,
+      auctionLoading: false,
+      putForSaleLoading: false,
+      delistLoading: false,
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -99,11 +117,11 @@ class Allpatrender extends Component {
       isModalOpen: !this.state.isModalOpen,
     });
   }
-  toggleAuction (){
+  toggleAuction() {
     this.setState({
-        isModalAucOpen: !this.state.isModalAucOpen
+      isModalAucOpen: !this.state.isModalAucOpen,
     });
-}
+  }
 
   handleInputChange(event) {
     const target = event.target;
@@ -114,24 +132,31 @@ class Allpatrender extends Component {
     });
   }
   putForSale = async () => {
+    this.setState({ putForSaleLoading: true });
     const res = await this.props.contract.methods
       .putForSale(
         this.props.art.tokenIdentifier,
         (this.state.sellPrice * ETHER).toString()
       )
       .send({ from: this.props.accounts, gas: 1000000 });
+    this.setState({ putForSaleLoading: false });
+    this.toggleModal();
     console.log(res);
   };
   DeSale = async () => {
+    this.setState({ delistLoading: true });
     const res = await this.props.contract.methods
       .deSale(this.props.art.tokenIdentifier)
       .send({ from: this.props.accounts, gas: 1000000 });
+    this.setState({ delistLoading: false });
     console.log(res);
   };
   StartAuction = async () => {
+    this.setState({ auctionLoading: true });
     const res = await this.props.contract.methods
       .startbid(this.props.art.tokenIdentifier)
       .send({ from: this.props.accounts, gas: 1000000 });
+    this.setState({ auctionLoading: false });
     console.log(res);
   };
   EndAuction = async () => {
@@ -149,7 +174,7 @@ class Allpatrender extends Component {
   CloseBid = async () => {
     const res = await this.props.contract.methods
       .closBid(this.props.art.tokenIdentifier)
-      .send({ from: this.props.accounts, gas: 1000000});
+      .send({ from: this.props.accounts, gas: 1000000 });
     console.log(res);
   };
   render() {
@@ -158,152 +183,161 @@ class Allpatrender extends Component {
     let buk = this.props.art.auction.isBidding ? 'bg-warning' : '';
     let b = this.props.art.isSelling ? 'hidden' : 'abtn';
     let but1 = this.props.art.isSelling ? 'abtn' : 'hidden';
+    let auc1 = this.props.art.auction.isBidding ? 'hidden' : 'abtn';
+    let forAuc = this.props.art.auction.isBidding ? 'visible' : 'invisible';
     console.log(this.props.art.imgUrl);
     let pr =
       Web3.utils.fromWei(this.props.art.tokenSellPrice.toString(), 'ether') == 0
         ? 'invisible'
         : 'visible';
-    let reSellOrSell = this.props.art.isSelling ? 'ReSell' : 'Sell';
+    let reSellOrSell = this.props.art.isSelling ? 'Relist' : 'Sell';
     let Auc = this.props.art.auction.isBidding ? 'End Auction' : 'Auction';
-    let accNum = this.props.art.tokenCreator
+    let accNum = this.props.art.tokenCreator;
 
-        const accUsername = ()=>{
-            if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
-            return  "@Chitra"
-            else if (accNum === '0x0d5567345D3Cb1114471BC07c396Cc32C7CF92ec')
-            return  "@Arianna"
-            else if (accNum === '0xABD82c9B735F2C89f2e62152A9884F4A92414F20')
-            return "@CJMain"
-            else if (accNum === '0x63611F92FA2d7B7e6625a97E6474b7fA16DbD89F')
-            return "@CJ Test"
-            else if (accNum === '0x4271AC6Bb565D120e2Ac1C3fb855aE5Dad6aE8ff')
-            return "@Swapnil"
-            else
-            return  "@Annonymous"
-        }; 
-        const colorpills = ()=>{
-          if (this.props.art.isSelling )
-          return cardpills[1]
-          else if (this.props.art.auction.isBidding)
-          return cardpills[3]
-          else 
-          return cardpills[0]
-        };
-let x = colorpills();
+    const accUsername = () => {
+      if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
+        return '@Chitra';
+      else if (accNum === '0x0d5567345D3Cb1114471BC07c396Cc32C7CF92ec')
+        return '@Arianna';
+      else if (accNum === '0xABD82c9B735F2C89f2e62152A9884F4A92414F20')
+        return '@CJMain';
+      else if (accNum === '0x63611F92FA2d7B7e6625a97E6474b7fA16DbD89F')
+        return '@CJ Test';
+      else if (accNum === '0x4271AC6Bb565D120e2Ac1C3fb855aE5Dad6aE8ff')
+        return '@Swapnil';
+      else return '@Annonymous';
+    };
+    const colorpills = () => {
+      if (this.props.art.isSelling) return cardpills[1];
+      else if (this.props.art.auction.isBidding) return cardpills[3];
+      else return cardpills[0];
+    };
+    let x = colorpills();
 
-        const img = new Image();
-        let orientation;
-        img.onload = function () {
-            let width = this.width;
-            let height = this.height;
-            orientation = width < height ? 'portrait' : 'landscape';
-          };
-        img.src = this.props.art.imgurl;
-        img.onload();  
-        
-        
+    const img = new Image();
+    let orientation;
+    img.onload = function () {
+      let width = this.width;
+      let height = this.height;
+      orientation = width < height ? 'portrait' : 'landscape';
+    };
+    img.src = this.props.art.imgurl;
+    img.onload();
 
-
-        
     return (
       // <div>
       // {cardpills.map((item) => {
-      //   return ( 
-      <Card className={this.props.art.auction.isBidding? buk:bak} className="card-artcard">    
-                {/* <a href={this.props.art.imgurl} target='_blank'> */}
-                   <div className="card-img-top-all-art">
-                   <Link to={`/card/${this.props.art.tokenIdentifier}`}>
-                   <CardImg
-                        className={orientation}
-                        top
-                        src={this.props.art.imgurl}
-                        alt='Card image'></CardImg>
-                        </Link>
-                        <CardImgOverlay>
-                            <Badge pill className={x.class}>{x.title}</Badge>
-                      </CardImgOverlay> 
-                      </div>
-                   
-                
-                   
-                <CardBody className='all-art-body'>
-                 <div style={{
-                    display: 'flex',
-                   // justifyContent: 'flex-start',
-                    }}>
-                    <CardSubtitle >
-                    <img
-                    style={{marginRight: '30px' }}
-                        width='16px'
-                        height='16px'
-                        className='rounded-circle'
-                        src={annonuser}
-                         ></img>
-                        </CardSubtitle>
-                        <CardSubtitle
-                            style={{
-                                fontFamily: 'Gibson',
-                                fontSize: '13px',
-                                fontWeight:'bold',
-                                color: '#5540C7',
-                                display:'flex',
-                                alignItems:'flex-end'
-                                }}> Created by {accUsername()} </CardSubtitle>
-                    </div>
-                    
-                    {/* <CardTitle className="ctext">
+      //   return (
+      <Card
+        className={this.props.art.auction.isBidding ? buk : bak}
+        className='card-artcard'
+      >
+        {/* <a href={this.props.art.imgurl} target='_blank'> */}
+        <div className='card-img-top-all-art'>
+          <Link to={`/card/${this.props.art.tokenIdentifier}`}>
+            <CardImg
+              className={orientation}
+              top
+              src={this.props.art.imgurl}
+              alt='Card image'
+            ></CardImg>
+          </Link>
+          <CardImgOverlay>
+            <Badge pill className={x.class}>
+              {x.title}
+            </Badge>
+          </CardImgOverlay>
+        </div>
+
+        <CardBody className='all-art-body'>
+          <div>
+            <div
+              style={{
+                display: 'flex',
+                // justifyContent: 'flex-start',
+              }}
+            >
+              <CardSubtitle>
+                <img
+                  style={{ marginRight: '30px' }}
+                  width='16px'
+                  height='16px'
+                  className='rounded-circle'
+                  src={annonuser}
+                ></img>
+              </CardSubtitle>
+              <CardSubtitle
+                style={{
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  fontWeight: 'bold',
+                  color: '#888888',
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                }}
+              >
+                {' '}
+                Created by <div className='token-creator'>{accUsername()} </div>
+              </CardSubtitle>
+            </div>
+
+            {/* <CardTitle className="ctext">
                         Item Title : {this.props.art.tokenTitle} {this.props.art.tokenCreator}
                     </CardTitle> */}
-                    <div className="ctext">
-                                    <CardText style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'13px',
-                                        color:'#B3B3B3',  
-                                        fontWeight:'bold'
-                                    }}> Title
-                                    </CardText>
-                                    <CardText
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'13px',
-                                        color:'#B3B3B3',
-                                        fontWeight:'bold'
-                                    }}
-                                    >
-                                        Price
-                                    </CardText>
-                                </div>
-                                <div className="ctext" style={{height:'2rem'}}>
-                                    <CardText
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'13px',
-                                        color:'black',
-                                        textDecoration:'none'
-                                    }}
-                                    >
-                                        {this.props.art.tokenTitle} 
-                                    </CardText>
-                                    <CardText
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'13px',
-                                        color:'black',
-                                        textDecoration:'none'
-                                    }}
-                                    >
-                                    {Web3.utils.fromWei(
-                                this.props.art.tokenSellPrice.toString(),
-                                'ether'
-                            )}{' '}
-                            ETH
-                                    </CardText>
-                                </div> 
-                    {/* <CardText>
+            <div className='ctext'>
+              <CardText
+                style={{
+                  position: 'relative',
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  color: '#B3B3B3',
+                  fontWeight: 'bold',
+                }}
+              >
+                {' '}
+                Title
+              </CardText>
+              <CardText
+                style={{
+                  position: 'relative',
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  color: '#B3B3B3',
+                  fontWeight: 'bold',
+                }}
+              >
+                Price
+              </CardText>
+            </div>
+            <div className='ctext' style={{ height: '2rem' }}>
+              <CardText
+                style={{
+                  position: 'relative',
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  color: 'black',
+                  textDecoration: 'none',
+                }}
+              >
+                {this.props.art.tokenTitle}
+              </CardText>
+              <CardText
+                style={{
+                  position: 'relative',
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  color: 'black',
+                  textDecoration: 'none',
+                }}
+              >
+                {Web3.utils.fromWei(
+                  this.props.art.tokenSellPrice.toString(),
+                  'ether'
+                )}{' '}
+                ETH
+              </CardText>
+            </div>
+            {/* <CardText>
                         <small>
                             Item Creator : {this.props.art.tokenCreator}
                         </small>
@@ -318,132 +352,187 @@ let x = colorpills();
                             ETH
                         </small>
                     </CardText> */}
-                    <div className="ctext" style={{padding:'0px', height:'2rem', marginTop:'5%'}}>
-                        <button
-                            className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
-                            // color='primary'
-                            onClick={this.toggleModal}>
-                            {reSellOrSell}
-                        </button> 
-                        <button
-                            className={but1}
-                            //className='abtn'
-                            type='submit'
-                            onClick={this.DeSale}>
-                            DeSell 
-                        </button>   
-                        <button
-                        className={b}
-                            //className='abtn'
-                            type='submit'
-                            // color='primary'
-                             onClick={this.props.art.auction.isBidding ? this.EndAuction : this.StartAuction }
-                            //onClick = {this.toggleAuction}
-                            >
-                            {Auc} 
-                        </button>
-                        
-                        <Modal
-                            isOpen={this.state.isModalOpen}
-                            toggle={this.toggleModal}
-                            className='modal_popup'>
-                            <ModalHeader
-                                toggle={this.toggleModal}
-                                className='pl-5'>
-                                Put For Sale
-                            </ModalHeader>
-                            <Card className='artCard' style={{height:'50%'}}>
-                                <CardImg
-                                    top
-                                    className='displayImage'
-                                    src={this.props.art.imgurl}
-                                    alt='Card image'
-                                />
-                                <CardBody
-                                >
-                                <div className="ctext" style={{padding:'2px'}}>
-                                    <CardSubtitle style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'#B3B3B3',
-                                        
-                                    }}>
-                                    Title
-                                    </CardSubtitle>
-                                    <CardSubtitle
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'#B3B3B3',
-                                    }}
-                                    >
-                                        Price
-                                    </CardSubtitle>
-                                </div>
-                                <div className="ctext" style={{padding:'2px'}}>
-                                    <CardText
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                    }}
-                                    >
-                                        {this.props.art.tokenTitle} 
-                                    </CardText>
-                                    <CardText
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                    }}
-                                    >
-                                        {Web3.utils.fromWei(
-                                this.props.art.tokenPrice.toString(),
-                                'ether'
-                                )}{' '}
-                                ETH
-                                    </CardText>
-                                </div>
-                                <div className="ctext1">
-                                    <p
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                        marginTop:'2%'
-                                    }}
-                                    >Sell Price : </p>
-                                    <p>
-                                        {' '}
-                                        <Input
-                                            type='text'
-                                            id='sellPrice'
-                                            name='sellPrice'
-                                            onChange={
-                                                this.handleInputChange
-                                            }></Input>
-                                    </p>
-                                </div>
-                                <div>
-                                <button
-                                    className="abtn" style={{
-                                        left:'32%', color: 'white', backgroundColor:'#5540C7'
-                                    }}
-                                        type='submit'
-                                        onClick={this.putForSale}>
-                                        Confirm
-                                    </button>{' '}
-                                </div>
-                                </CardBody>    
-                            </Card>
-                        </Modal>
+          </div>
+          <div
+            className='ctext'
+            style={{ padding: '0px', height: '2rem', marginTop: '5%' }}
+          >
+            <button
+              className={auc1}
+              //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
+              // color='primary'
+              onClick={this.toggleModal}
+            >
+              {reSellOrSell}
+            </button>
+            <button
+              className={but1}
+              //className='abtn'
+              type='submit'
+              onClick={this.DeSale}
+            >
+              Delist
+            </button>
+            {this.state.delistLoading ? <img src={loader} /> : <div></div>}
+            {forAuc === 'visible' ? (
+              <button
+                style={{
+                  color: 'white',
+                  border: 'none',
+                  backgroundColor: 'white',
+                }}
+              >
+                but
+              </button>
+            ) : (
+              <div></div>
+            )}
+            <button
+              className={b}
+              //className={auc1}
+              //className='abtn'
+              type='submit'
+              // color='primary'
+              onClick={
+                this.props.art.auction.isBidding
+                  ? this.EndAuction
+                  : this.StartAuction
+              }
+              //onClick = {this.toggleAuction}
+            >
+              {Auc}
+            </button>
+            {forAuc === 'visible' ? (
+              <button
+                style={{
+                  color: 'white',
+                  border: 'none',
+                  backgroundColor: 'white',
+                }}
+              >
+                but
+              </button>
+            ) : (
+              <div></div>
+            )}
+            {this.state.auctionLoading ? <img src={loader} /> : <div></div>}
 
-                        {/* <Modal
+            <Modal
+              isOpen={this.state.isModalOpen}
+              toggle={this.toggleModal}
+              className='modal_popup'
+            >
+              <ModalHeader toggle={this.toggleModal} className='pl-5'>
+                Put For Sale
+              </ModalHeader>
+              <Card className='artCard' style={{ height: '50%' }}>
+                <CardImg
+                  top
+                  className='displayImage'
+                  src={this.props.art.imgurl}
+                  alt='Card image'
+                />
+                <CardBody>
+                  <div className='ctext' style={{ padding: '2px' }}>
+                    <CardSubtitle
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: '#B3B3B3',
+                      }}
+                    >
+                      Title
+                    </CardSubtitle>
+                    <CardSubtitle
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: '#B3B3B3',
+                      }}
+                    >
+                      Price
+                    </CardSubtitle>
+                  </div>
+                  <div className='ctext' style={{ padding: '2px' }}>
+                    <CardText
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: 'black',
+                      }}
+                    >
+                      {this.props.art.tokenTitle}
+                    </CardText>
+                    <CardText
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: 'black',
+                      }}
+                    >
+                      {Web3.utils.fromWei(
+                        this.props.art.tokenSellPrice.toString(),
+                        'ether'
+                      )}{' '}
+                      ETH
+                    </CardText>
+                  </div>
+                  <div className='ctext1'>
+                    <p
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: 'black',
+                        marginTop: '2%',
+                      }}
+                    >
+                      Sell Price :{' '}
+                    </p>
+                    <p>
+                      {' '}
+                      <Input
+                        type='text'
+                        id='sellPrice'
+                        name='sellPrice'
+                        onChange={this.handleInputChange}
+                      ></Input>
+                    </p>
+                  </div>
+                  <div>
+                    <div>
+                      <button
+                        className='abtn'
+                        style={{
+                          left: '32%',
+                          color: 'white',
+                          backgroundColor: '#5540C7',
+                        }}
+                        type='submit'
+                        onClick={this.putForSale}
+                      >
+                        Confirm
+                      </button>{' '}
+                    </div>
+                    <div
+                      style={{ display: 'flex', justifyContent: 'flex-end' }}
+                    >
+                      {this.state.putForSaleLoading ? (
+                        <img src={loader} />
+                      ) : (
+                        <div></div>
+                      )}
+                    </div>
+                  </div>
+                </CardBody>
+              </Card>
+            </Modal>
+
+            {/* <Modal
                             isOpen={this.state.isModalAucOpen}
                             toggle={this.toggleAuction}
                             className='modal_popup'>
@@ -455,7 +544,7 @@ let x = colorpills();
                             <Card className='artCard' style={{height:'50%'}}>
                                 <CardImg
                                     top
-                                    className="displayImage" 
+                                    className="displayImage"
                                     src={this.props.art.imgurl}
                                     alt='Card image'
                                 />
@@ -467,7 +556,7 @@ let x = colorpills();
                                         fontFamily:'Gibson',
                                         fontSize:'15px',
                                         color:'#B3B3B3',
-                                        
+
                                     }}>
                                     Title
                                     </CardSubtitle>
@@ -491,7 +580,7 @@ let x = colorpills();
                                         color:'black',
                                     }}
                                     >
-                                        {this.props.art.tokenTitle} 
+                                        {this.props.art.tokenTitle}
                                     </CardText>
                                     <CardText
                                     style={{
@@ -550,7 +639,7 @@ let x = colorpills();
                                     }}
                                     >Duration : </p>
                                     <p>
-                                        
+
                                         <Input
                                         style= {{ width:'80%'}}
                                             type='text'
@@ -569,7 +658,7 @@ let x = colorpills();
                                         marginTop:'2%'
                                     }}
                                     >Days </p>
-                                </div> 
+                                </div>
                                 <div>
                                 <button
                                     className="abtn" style={{
@@ -583,14 +672,10 @@ let x = colorpills();
                                 </CardBody>
                             </Card>
                         </Modal>  */}
-                    </div> 
-                </CardBody>
-                
-              
-            </Card>
-          
+          </div>
+        </CardBody>
+      </Card>
     );
-  
   }
 }
 
@@ -610,8 +695,11 @@ class MyItemComponent extends Component {
       nos: 0,
       isLoading: false,
       loadingError: false,
+      uploadSuccess: false,
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
+    this.toggleModal2 = this.toggleModal2.bind(this);
+    this.handleUploadMore = this.handleUploadMore.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.fileSelectHandler = this.fileSelectHandler.bind(this);
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
@@ -624,6 +712,16 @@ class MyItemComponent extends Component {
     });
   }
 
+  toggleModal2() {
+    this.setState({
+      uploadSuccess: !this.state.uploadSuccess,
+    });
+  }
+
+  handleUploadMore() {
+    this.toggleModal2();
+    this.toggleModal1();
+  }
   creatingItems = async (x) => {
     let tokenHash = this.state.artHash.toString();
     let tokenTitle = this.state.title;
@@ -644,25 +742,38 @@ class MyItemComponent extends Component {
         .send({ from: this.props.accounts, gas: 5000000 });
 
       console.log('res', res);
+      let data;
 
-      var x = await res.events.tokencreated.returnValues.tokenId.toString(); 
+      if (Array.isArray(res.events.tokencreated)) {
+        data = await res.events.tokencreated.map((token) =>
+          Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
+            tokenId: token.returnValues.tokenId.toString(),
+            description: 'A unique piece of art',
+            image: imgUrl,
+            name: tokenTitle,
+            blockchain: 'e',
+            networkId: 4,
+            price: tokenPrice,
+          })
+        );
+      } else {
+        data = await Axios.post(
+          `http://geo.superworldapp.com/api/json/token/add`,
+          {
+            tokenId: res.events.tokencreated.returnValues.tokenId.toString(),
+            description: 'A unique piece of art',
+            image: imgUrl,
+            name: tokenTitle,
+            blockchain: 'e',
+            networkId: 4,
+            price: tokenPrice,
+          }
+        );
+      }
 
-      const data = {
-        tokenId: x,
-        description: 'A unique piece of art',
-        image: imgUrl,
-        name: tokenTitle,
-        blockchain: 'e',
-        networkId: 4,
-        price: tokenPrice,
-      };
-  
       console.log('data', data);
-  
-      await Axios.post(`http://geo.superworldapp.com/api/json/token/add`, data);
       this.toggleModal1();
-      this.setState({ isLoading: false });
-
+      this.setState({ isLoading: false, uploadSuccess: true });
     } catch (err) {
       this.setState({ loadingError: true });
       console.error(err.message);
@@ -704,8 +815,8 @@ class MyItemComponent extends Component {
   };
   fileUploadHandler = async (event) => {
     event.preventDefault();
-   // const hash = await blobToSHA256(this.state.selectedFile);
-   let hash = '';
+    // const hash = await blobToSHA256(this.state.selectedFile);
+    let hash = '';
     this.setState({ isLoading: true, loadingError: false, artHash: hash });
     this.fileAwsHandler(this.state.selectedFile, this.creatingItems);
   };
@@ -912,7 +1023,7 @@ class MyItemComponent extends Component {
                       Art
                     </Label>
                     <Input
-                      style={{ marginLeft: '0.5rem' }}
+                      style={{ marginLeft: '1.0rem' }}
                       type='file'
                       onChange={this.fileSelectHandler}
                     />
@@ -943,6 +1054,44 @@ class MyItemComponent extends Component {
               )}
               <br />
             </Form>
+          </ModalBody>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.uploadSuccess}
+          toggle={this.toggleModal2}
+          className='modal-xl'
+        >
+          <ModalHeader toggle={this.toggleModal2}>
+            <div></div>
+          </ModalHeader>
+          <ModalBody
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              font: 'Gibson',
+              height: '20rem',
+              paddingBottom: '5rem',
+            }}
+          >
+            <img src={checkmark} />
+            <p
+              style={{
+                textAlign: 'center',
+                fontSize: '1.25rem',
+                fontWeight: '450',
+                marginTop: '1rem',
+              }}
+            >
+              Hi , your upload was successful!
+            </p>
+            <p style={{ textAlign: 'center', color: 'gray', fontSize: '12px' }}>
+              You can view your recent upload file under “MY COLLECTIONS”
+            </p>
+            <button className='upload-more-btn' onClick={this.handleUploadMore}>
+              Upload More
+            </button>
           </ModalBody>
         </Modal>
 

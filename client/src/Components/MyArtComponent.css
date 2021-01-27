@@ -18,7 +18,7 @@
   border-top: none !important;
 }
 .modal-content {
-  width: 80% ;
+  width: 80%;
   height: auto;
 }
 .modal-header {
@@ -33,7 +33,7 @@
   font-family: canada-type-gibson, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 10px;
+  font-size: 11px;
   padding: 0.375rem 1.5rem;
   border: 2px solid #5540c7;
   background-color: white;
@@ -60,31 +60,27 @@
   justify-content: center;
 }
 
-.displayCard{
-    height: 130% !important;
-    width: 100%;
-} 
- .displayImage{
-    position: relative;
-    padding: 0% 5%;
-
+.displayCard {
+  height: 130% !important;
+  width: 100%;
 }
-.displayText{
-    position: absolute;
-} 
+.displayImage {
+  position: relative;
+  padding: 0% 5%;
+}
 
 .card {
   height: fit-content;
-  
+
   box-shadow: 1px 5px 5px #888888;
   display: flex;
   flex-flow: column;
-} 
+}
 
 .row {
   margin-top: 1rem;
   margin-left: 5rem;
-  margin-right: 15rem;
+  margin-right: 1.5rem;
 }
 
 .a {
@@ -120,28 +116,47 @@ h3 {
   padding: 0;
 }
 
-.card-img-overlay{
+.card-img-overlay {
   padding: 0rem;
   right: auto;
 }
 
-.badge-pill{
+.badge-pill {
   border-radius: 0rem 0rem 1rem 0rem;
   padding: 0rem 1.5rem 0rem 0rem;
 }
-.badge{
+
+.upload-more-btn {
+  border-radius: 2em;
+  font-family: 'gibson', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  border: 2px solid #5540c7;
+  text-transform: uppercase;
+  background-color: #5540c7;
+  color: white;
+  align-self: center;
+  width: fit-content;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.badge {
   font-size: 17px;
 }
 
-.class1{
-  background-color: #3454DC;
+.class1 {
+  background-color: #3454dc;
   color: white;
 }
-.class2{
+.class2 {
   background-color: #267627;
   color: white;
 }
-.class3{
-  background-color: #F08778;
-  color:white ;
+.class3 {
+  background-color: #f08778;
+  color: white;
 }

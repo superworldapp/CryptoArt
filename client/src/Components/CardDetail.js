@@ -106,7 +106,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
                 <button
                     className='btn btn-primary'
                     onClick={async () => {
-                        const res = await contract.methods
+                        const res = await contract?.methods
                             .buyToken(art.tokenIdentifier)
                             .send({
                                 from: accounts,
@@ -125,7 +125,6 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
         } else if (art.auction.isBidding) {
             return (
                 <React.Fragment>
-                    <Input type='text' />
                     <Input
                         type='text'
                         id='sellPrice'
@@ -336,7 +335,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
                             <p className='text-secondary'>Current price</p>
                             <h4>
                                 {Web3.utils.fromWei(
-                                    art?.tokenPrice.toString(),
+                                    art?.tokenSellPrice.toString(),
                                     'ether'
                                 )}{' '}
                                 ETH
@@ -345,7 +344,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
                                         (
                                         {(
                                             Web3.utils.fromWei(
-                                                art?.tokenPrice.toString(),
+                                                art?.tokenSellPrice.toString(),
                                                 'ether'
                                             ) * ethPrice?.usd
                                         ).toFixed(2)}{' '}

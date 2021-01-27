@@ -39,7 +39,7 @@ const TableBody = ({cre}) => {
                             <td>
                                 {Math.round(
                                     (Date.now() / 1000 -
-                                        item.returnValues.times) /
+                                        item?.returnValues.times) /
                                         60
                                 )}{' '}
                                 minutes ago

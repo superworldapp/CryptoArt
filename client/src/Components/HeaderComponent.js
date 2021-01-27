@@ -936,21 +936,43 @@ class Header extends Component {
                         </li>
                       </div>
                     </MenuItem>
-                    <MenuItem>
-                      <Link
-                        style={{
-                          color: 'gray',
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          textDecoration: 'none',
-                          marginLeft: '-0.2rem',
-                          marginBottom: '0.75rem',
-                        }}
-                        to='/mycreations'
-                      >
-                        My Collections
-                      </Link>
-                    </MenuItem>
+
+                    <NavLink
+                      style={{
+                        color: 'gray',
+                        fontFamily: 'Gibson',
+                        fontSize: '13px',
+                        textDecoration: 'none',
+                        // marginLeft: '-0.2rem',
+                        // marginBottom: '0.75rem',
+                      }}
+                      to='/mycollections'
+                    >
+                      <MenuItem disableGutters>
+                        <span
+                          style={{
+                            display: 'flex',
+                            maxHeight: '10px',
+                            alignItems: 'center',
+                            whiteSpace: 'pre-line',
+                            marginLeft: '10px',
+                            padding: '10px 3px 5px 3px',
+                          }}
+                        >
+                          <p
+                            style={{
+                              flex: '1',
+                              color: '#888888',
+                              fontFamily: 'Gibson',
+                              fontSize: '13px',
+                              margin: '5px 0',
+                            }}
+                          >
+                            My Collections
+                          </p>
+                        </span>
+                      </MenuItem>
+                    </NavLink>
                     <MenuItem
                       onClick={this.changeUsernameHandleClick}
                       disableGutters
@@ -971,6 +993,7 @@ class Header extends Component {
                             color: '#888888',
                             fontFamily: 'Gibson',
                             fontSize: '13px',
+                            margin: '5px 0',
                           }}
                         >
                           Change username
