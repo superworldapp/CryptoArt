@@ -60,25 +60,24 @@
   justify-content: center;
 }
 
-.displayCard{
-    height: 130% !important;
-    width: 100%;
-} 
- .displayImage{
-    position: relative;
-
+.displayCard {
+  height: 130% !important;
+  width: 100%;
 }
-.displayText{
-    position: absolute;
-} 
+.displayImage {
+  position: relative;
+}
+.displayText {
+  position: absolute;
+}
 
 .card {
   height: fit-content;
-  
+
   box-shadow: 1px 5px 5px #888888;
   display: flex;
   flex-flow: column;
-} 
+}
 
 .row {
   margin-top: 1rem;
@@ -119,15 +118,33 @@ h3 {
   padding: 0;
 }
 
-.card-img-overlay{
+.card-img-overlay {
   padding: 0rem;
   right: auto;
 }
 
-.badge-pill{
+.badge-pill {
   border-radius: 0rem 0rem 1rem 0rem;
   padding: 0rem 1.2rem 0rem 0rem;
 }
-.badge{
+.badge {
   font-size: 15px;
+}
+
+.upload-more-btn {
+  border-radius: 2em;
+  font-family: 'gibson', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  border: 2px solid #5540c7;
+  text-transform: uppercase;
+  background-color: #5540c7;
+  color: white;
+  align-self: center;
+  width: fit-content;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }

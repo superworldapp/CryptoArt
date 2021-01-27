@@ -31,7 +31,7 @@ import * as util from 'util';
 import loader from '../images/loader.svg';
 import annonuser from '../images/user.png';
 // import { blobToSHA256 } from 'file-to-sha256';
-
+import checkmark from '../images/svg/checkmark.svg';
 const SHA256 = require('crypto-js/sha256');
 
 const S3 = require('aws-sdk/clients/s3');
@@ -133,7 +133,7 @@ class Allpatrender extends Component {
   CloseBid = async () => {
     const res = await this.props.contract.methods
       .closBid(this.props.art.tokenIdentifier)
-      .send({ from: this.props.accounts, gas: 1000000});
+      .send({ from: this.props.accounts, gas: 1000000 });
     console.log(res);
   };
   render() {
@@ -432,6 +432,7 @@ class MyItemComponent extends Component {
       cust: [],
       manuf: [],
       isModalOpen1: false,
+      isModalOpen2: false,
       title: '',
       artUrl: '',
       price: '',
@@ -439,8 +440,10 @@ class MyItemComponent extends Component {
       nos: 0,
       isLoading: false,
       loadingError: false,
+      uploadSuccess: false,
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
+    this.toggleModal2 = this.toggleModal2.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.fileSelectHandler = this.fileSelectHandler.bind(this);
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
@@ -450,6 +453,12 @@ class MyItemComponent extends Component {
   toggleModal1() {
     this.setState({
       isModalOpen1: !this.state.isModalOpen1,
+    });
+  }
+
+  toggleModal2() {
+    this.setState({
+      uploadSuccess: !this.state.uploadSuccess,
     });
   }
 
@@ -473,21 +482,38 @@ class MyItemComponent extends Component {
         .send({ from: this.props.accounts, gas: 5000000 });
 
       console.log('res', res);
+      let data;
 
-      const data = await res.events.tokencreated.map((token) =>
-        Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
-          tokenId: token.returnValues.tokenId.toString(),
-          description: 'A unique piece of art',
-          image: imgUrl,
-          name: tokenTitle,
-          blockchain: 'e',
-          networkId: 4,
-          price: tokenPrice,
-        })
-      );
+      if (Array.isArray(res.events.tokencreated)) {
+        data = await res.events.tokencreated.map((token) =>
+          Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
+            tokenId: token.returnValues.tokenId.toString(),
+            description: 'A unique piece of art',
+            image: imgUrl,
+            name: tokenTitle,
+            blockchain: 'e',
+            networkId: 4,
+            price: tokenPrice,
+          })
+        );
+      } else {
+        data = await Axios.post(
+          `http://geo.superworldapp.com/api/json/token/add`,
+          {
+            tokenId: res.events.tokencreated.returnValues.tokenId.toString(),
+            description: 'A unique piece of art',
+            image: imgUrl,
+            name: tokenTitle,
+            blockchain: 'e',
+            networkId: 4,
+            price: tokenPrice,
+          }
+        );
+      }
 
       console.log('data', data);
       this.toggleModal1();
+      this.setState({ uploadSuccess: true });
     } catch (err) {
       this.setState({ loadingError: true });
       console.error(err.message);
@@ -528,8 +554,8 @@ class MyItemComponent extends Component {
   };
   fileUploadHandler = async (event) => {
     event.preventDefault();
-   // const hash = await blobToSHA256(this.state.selectedFile);
-   let hash = '';
+    // const hash = await blobToSHA256(this.state.selectedFile);
+    let hash = '';
     this.setState({ isLoading: true, loadingError: false, artHash: hash });
     this.fileAwsHandler(this.state.selectedFile, this.creatingItems);
   };
@@ -767,6 +793,42 @@ class MyItemComponent extends Component {
               )}
               <br />
             </Form>
+          </ModalBody>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.uploadSuccess}
+          toggle={this.toggleModal2}
+          className='modal-xl'
+        >
+          <ModalHeader toggle={this.toggleModal2}>
+            <div></div>
+          </ModalHeader>
+          <ModalBody
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              font: 'Gibson',
+              height: '20rem',
+              paddingBottom: '5rem',
+            }}
+          >
+            <img src={checkmark} />
+            <p
+              style={{
+                textAlign: 'center',
+                fontSize: '1.25rem',
+                fontWeight: '450',
+                marginTop: '1rem',
+              }}
+            >
+              Hi , your upload was successful!
+            </p>
+            <p style={{ textAlign: 'center', color: 'gray', fontSize: '12px' }}>
+              You can view your recent upload file under “MY COLLECTIONS”
+            </p>
+            <button className='upload-more-btn'>Upload More</button>
           </ModalBody>
         </Modal>
 
