@@ -128,7 +128,7 @@ class Main extends Component {
           />
           <ProtectedRoute
             exact
-            path='/mycreations'
+            path='/mycollections'
             component={() => (
               <MyItemComponent
                 contract={this.state.contract}

@@ -946,7 +946,7 @@ class Header extends Component {
                         // marginLeft: '-0.2rem',
                         // marginBottom: '0.75rem',
                       }}
-                      to='/mycreations'
+                      to='/mycollections'
                     >
                       <MenuItem disableGutters>
                         <span
