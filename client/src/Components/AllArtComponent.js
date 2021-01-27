@@ -351,7 +351,9 @@ class AllItemComponent extends Component {
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    //this.com = this.com.bind(this);
+    this.onAuctionBtn = this.onAuctionBtn.bind(this);
+    this.hasSoldBtn = this.hasSoldBtn.bind(this);
+    this.allBtn = this.allBtn.bind(this);
   }
 
   toggleModal1() {
@@ -378,8 +380,8 @@ class AllItemComponent extends Component {
       let rex = await this.props.contract?.methods.Arts(i).call();
       response.push(rex);
     }
-
-        allBtn = () => {
+  }
+    allBtn = () => {
         this.setState({art: allDocs})
         console.log(allDocs)
     }
@@ -394,7 +396,7 @@ class AllItemComponent extends Component {
         let soldDocs = allDocs.filter((art) => art.isSelling);
         this.setState({art: soldDocs})
     }
-  }
+  
 
     render(){
         
