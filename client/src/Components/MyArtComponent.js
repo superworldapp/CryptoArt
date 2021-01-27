@@ -308,6 +308,8 @@ let x = colorpills();
                             ETH
                         </small>
                     </CardText> */}
+                    </CardBody>
+                    <CardBody>
                     <div className="ctext" style={{padding:'0px', height:'2rem', marginTop:'5%'}}>
                         <button
                         className={auc1}
