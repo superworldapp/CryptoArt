@@ -89,6 +89,7 @@ class Allpatrender extends Component {
       art: [],
       isModalOpen: false,
       sellPrice: 0,
+      auctionLoading: false,
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -144,9 +145,11 @@ class Allpatrender extends Component {
     console.log(res);
   };
   StartAuction = async () => {
+    this.setState({ auctionLoading: true });
     const res = await this.props.contract.methods
       .startbid(this.props.art.tokenIdentifier)
       .send({ from: this.props.accounts, gas: 1000000 });
+    this.setState({ auctionLoading: false });
     console.log(res);
   };
   EndAuction = async () => {
@@ -174,6 +177,7 @@ class Allpatrender extends Component {
     let b = this.props.art.isSelling ? 'hidden' : 'abtn';
     let but1 = this.props.art.isSelling ? 'abtn' : 'hidden';
     let auc1 = this.props.art.auction.isBidding ? 'hidden' : 'abtn';
+    let forAuc = this.props.art.auction.isBidding ? 'visible' : 'invisible';
     console.log(this.props.art.imgUrl);
     let pr =
       Web3.utils.fromWei(this.props.art.tokenSellPrice.toString(), 'ether') == 0
@@ -239,93 +243,94 @@ class Allpatrender extends Component {
         </div>
 
         <CardBody className='all-art-body'>
-          <div
-            style={{
-              display: 'flex',
-              // justifyContent: 'flex-start',
-            }}
-          >
-            <CardSubtitle>
-              <img
-                style={{ marginRight: '30px' }}
-                width='16px'
-                height='16px'
-                className='rounded-circle'
-                src={annonuser}
-              ></img>
-            </CardSubtitle>
-            <CardSubtitle
+          <div>
+            <div
               style={{
-                fontFamily: 'Gibson',
-                fontSize: '13px',
-                fontWeight: 'bold',
-                color: '#888888',
                 display: 'flex',
-                alignItems: 'flex-end',
+                // justifyContent: 'flex-start',
               }}
             >
-              {' '}
-              Created by <div className='token-creator'>{accUsername()} </div>
-            </CardSubtitle>
-          </div>
+              <CardSubtitle>
+                <img
+                  style={{ marginRight: '30px' }}
+                  width='16px'
+                  height='16px'
+                  className='rounded-circle'
+                  src={annonuser}
+                ></img>
+              </CardSubtitle>
+              <CardSubtitle
+                style={{
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  fontWeight: 'bold',
+                  color: '#888888',
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                }}
+              >
+                {' '}
+                Created by <div className='token-creator'>{accUsername()} </div>
+              </CardSubtitle>
+            </div>
 
-          {/* <CardTitle className="ctext">
+            {/* <CardTitle className="ctext">
                         Item Title : {this.props.art.tokenTitle} {this.props.art.tokenCreator}
                     </CardTitle> */}
-          <div className='ctext'>
-            <CardText
-              style={{
-                position: 'relative',
-                fontFamily: 'Gibson',
-                fontSize: '13px',
-                color: '#B3B3B3',
-                fontWeight: 'bold',
-              }}
-            >
-              {' '}
-              Title
-            </CardText>
-            <CardText
-              style={{
-                position: 'relative',
-                fontFamily: 'Gibson',
-                fontSize: '13px',
-                color: '#B3B3B3',
-                fontWeight: 'bold',
-              }}
-            >
-              Price
-            </CardText>
-          </div>
-          <div className='ctext' style={{ height: '2rem' }}>
-            <CardText
-              style={{
-                position: 'relative',
-                fontFamily: 'Gibson',
-                fontSize: '13px',
-                color: 'black',
-                textDecoration: 'none',
-              }}
-            >
-              {this.props.art.tokenTitle}
-            </CardText>
-            <CardText
-              style={{
-                position: 'relative',
-                fontFamily: 'Gibson',
-                fontSize: '13px',
-                color: 'black',
-                textDecoration: 'none',
-              }}
-            >
-              {Web3.utils.fromWei(
-                this.props.art.tokenSellPrice.toString(),
-                'ether'
-              )}{' '}
-              ETH
-            </CardText>
-          </div>
-          {/* <CardText>
+            <div className='ctext'>
+              <CardText
+                style={{
+                  position: 'relative',
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  color: '#B3B3B3',
+                  fontWeight: 'bold',
+                }}
+              >
+                {' '}
+                Title
+              </CardText>
+              <CardText
+                style={{
+                  position: 'relative',
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  color: '#B3B3B3',
+                  fontWeight: 'bold',
+                }}
+              >
+                Price
+              </CardText>
+            </div>
+            <div className='ctext' style={{ height: '2rem' }}>
+              <CardText
+                style={{
+                  position: 'relative',
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  color: 'black',
+                  textDecoration: 'none',
+                }}
+              >
+                {this.props.art.tokenTitle}
+              </CardText>
+              <CardText
+                style={{
+                  position: 'relative',
+                  fontFamily: 'Gibson',
+                  fontSize: '13px',
+                  color: 'black',
+                  textDecoration: 'none',
+                }}
+              >
+                {Web3.utils.fromWei(
+                  this.props.art.tokenSellPrice.toString(),
+                  'ether'
+                )}{' '}
+                ETH
+              </CardText>
+            </div>
+            {/* <CardText>
                         <small>
                             Item Creator : {this.props.art.tokenCreator}
                         </small>
@@ -340,6 +345,7 @@ class Allpatrender extends Component {
                             ETH
                         </small>
                     </CardText> */}
+          </div>
           <div
             className='ctext'
             style={{ padding: '0px', height: '2rem', marginTop: '5%' }}
@@ -360,6 +366,19 @@ class Allpatrender extends Component {
             >
               Delist
             </button>
+            {forAuc === 'visible' ? (
+              <button
+                style={{
+                  color: 'white',
+                  border: 'none',
+                  backgroundColor: 'white',
+                }}
+              >
+                but
+              </button>
+            ) : (
+              <div></div>
+            )}
             <button
               className={b}
               //className={auc1}
@@ -375,7 +394,21 @@ class Allpatrender extends Component {
             >
               {Auc}
             </button>
+            {forAuc === 'visible' ? (
+              <button
+                style={{
+                  color: 'white',
+                  border: 'none',
+                  backgroundColor: 'white',
+                }}
+              >
+                but
+              </button>
+            ) : (
+              <div></div>
+            )}
 
+            {this.state.auctionLoading ? <img src={loader} /> : <div></div>}
             <Modal
               isOpen={this.state.isModalOpen}
               toggle={this.toggleModal}
@@ -1043,7 +1076,7 @@ class MyItemComponent extends Component {
           </ModalBody>
         </Modal>
 
-        <div className='row1'>{Menu}</div>
+        <div className='row'>{Menu}</div>
 
         <br />
         <br />
