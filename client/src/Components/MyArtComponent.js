@@ -634,7 +634,6 @@ class MyItemComponent extends Component {
       cust: [],
       manuf: [],
       isModalOpen1: false,
-      isModalOpen2: false,
       title: '',
       artUrl: '',
       price: '',
@@ -646,6 +645,7 @@ class MyItemComponent extends Component {
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.toggleModal2 = this.toggleModal2.bind(this);
+    this.handleUploadMore = this.handleUploadMore.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.fileSelectHandler = this.fileSelectHandler.bind(this);
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
@@ -664,6 +664,10 @@ class MyItemComponent extends Component {
     });
   }
 
+  handleUploadMore() {
+    this.toggleModal2();
+    this.toggleModal1();
+  }
   creatingItems = async (x) => {
     let tokenHash = this.state.artHash.toString();
     let tokenTitle = this.state.title;
@@ -1031,7 +1035,9 @@ class MyItemComponent extends Component {
             <p style={{ textAlign: 'center', color: 'gray', fontSize: '12px' }}>
               You can view your recent upload file under “MY COLLECTIONS”
             </p>
-            <button className='upload-more-btn'>Upload More</button>
+            <button className='upload-more-btn' onClick={this.handleUploadMore}>
+              Upload More
+            </button>
           </ModalBody>
         </Modal>
 
