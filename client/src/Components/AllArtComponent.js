@@ -38,6 +38,16 @@ class AllArt extends Component {
             filter: { tokenId: this.props.art.tokenIdentifier },
             fromBlock: 0
         });
+        let tokenBid = await this.props.contract?.getPastEvents('tokenbid', {
+            filter: { tokenId: this.props.art.tokenIdentifier },
+            fromBlock: 0
+        });
+
+        console.log(tokenBid)
+        // let bidStarted = await this.props.contract?.getPastEvents('bidstarted', {
+        //     filter: { tokenId: this.props.art.tokenIdentifier },
+        //     fromBlock: 0
+        // });
         //  // Using an array means OR: e.g. 20 or 23
 
         let tb = await this.props.contract?.getPastEvents('tokenbought', {
