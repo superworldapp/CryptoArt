@@ -107,3 +107,8 @@ div.all-art-card.card {
   justify-content: space-between;
   width: 100%;
 }
+
+.token-creator {
+  color: #5540c7 !important;
+  padding-left: 0.2rem;
+}

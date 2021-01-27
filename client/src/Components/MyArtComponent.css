@@ -77,10 +77,9 @@
   flex-flow: column;
 }
 
-.row {
-  margin-top: 1rem;
-  margin-left: 5rem;
-  margin-right: 15rem;
+.row1 {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .a {

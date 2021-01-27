@@ -259,13 +259,13 @@ class Allpatrender extends Component {
                 fontFamily: 'Gibson',
                 fontSize: '13px',
                 fontWeight: 'bold',
-                color: '#5540C7',
+                color: '#888888',
                 display: 'flex',
                 alignItems: 'flex-end',
               }}
             >
               {' '}
-              Created by {accUsername()}{' '}
+              Created by <div className='token-creator'>{accUsername()} </div>
             </CardSubtitle>
           </div>
 
@@ -340,132 +340,145 @@ class Allpatrender extends Component {
                             ETH
                         </small>
                     </CardText> */}
-                    <div className="ctext" style={{padding:'0px', height:'2rem', marginTop:'5%'}}>
-                        <button
-                        className={auc1}
-                            //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
-                            // color='primary'
-                            onClick={this.toggleModal}>
-                            {reSellOrSell}
-                        </button> 
-                        <button
-                            className={but1}
-                            //className='abtn'
-                            type='submit'
-                            onClick={this.DeSale}>
-                            Delist 
-                        </button>   
-                        <button
-                        className={b}
-                        //className={auc1}
-                            //className='abtn'
-                            type='submit'
-                            // color='primary'
-                             onClick={this.props.art.auction.isBidding ? this.EndAuction : this.StartAuction }
-                            //onClick = {this.toggleAuction}
-                            >
-                            {Auc} 
-                        </button>
-                        
-                        <Modal
-                            isOpen={this.state.isModalOpen}
-                            toggle={this.toggleModal}
-                            className='modal_popup'>
-                            <ModalHeader
-                                toggle={this.toggleModal}
-                                className='pl-5'>
-                                Put For Sale
-                            </ModalHeader>
-                            <Card className='artCard' style={{height:'50%'}}>
-                                <CardImg
-                                    top
-                                    className='displayImage'
-                                    src={this.props.art.imgurl}
-                                    alt='Card image'
-                                />
-                                <CardBody
-                                >
-                                <div className="ctext" style={{padding:'2px'}}>
-                                    <CardSubtitle style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'#B3B3B3',
-                                        
-                                    }}>
-                                    Title
-                                    </CardSubtitle>
-                                    <CardSubtitle
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'#B3B3B3',
-                                    }}
-                                    >
-                                        Price
-                                    </CardSubtitle>
-                                </div>
-                                <div className="ctext" style={{padding:'2px'}}>
-                                    <CardText
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                    }}
-                                    >
-                                        {this.props.art.tokenTitle} 
-                                    </CardText>
-                                    <CardText
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                    }}
-                                    >
-                                        {Web3.utils.fromWei(
-                                this.props.art.tokenSellPrice.toString(),
-                                'ether'
-                                )}{' '}
-                                ETH
-                                    </CardText>
-                                </div>
-                                <div className="ctext1">
-                                    <p
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                        marginTop:'2%'
-                                    }}
-                                    >Sell Price : </p>
-                                    <p>
-                                        {' '}
-                                        <Input
-                                            type='text'
-                                            id='sellPrice'
-                                            name='sellPrice'
-                                            onChange={
-                                                this.handleInputChange
-                                            }></Input>
-                                    </p>
-                                </div>
-                                <div>
-                                <button
-                                    className="abtn" style={{
-                                        left:'32%', color: 'white', backgroundColor:'#5540C7'
-                                    }}
-                                        type='submit'
-                                        onClick={this.putForSale}>
-                                        Confirm
-                                    </button>{' '}
-                                </div>
-                                </CardBody>    
-                            </Card>
-                        </Modal>
+          <div
+            className='ctext'
+            style={{ padding: '0px', height: '2rem', marginTop: '5%' }}
+          >
+            <button
+              className={auc1}
+              //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
+              // color='primary'
+              onClick={this.toggleModal}
+            >
+              {reSellOrSell}
+            </button>
+            <button
+              className={but1}
+              //className='abtn'
+              type='submit'
+              onClick={this.DeSale}
+            >
+              Delist
+            </button>
+            <button
+              className={b}
+              //className={auc1}
+              //className='abtn'
+              type='submit'
+              // color='primary'
+              onClick={
+                this.props.art.auction.isBidding
+                  ? this.EndAuction
+                  : this.StartAuction
+              }
+              //onClick = {this.toggleAuction}
+            >
+              {Auc}
+            </button>
+
+            <Modal
+              isOpen={this.state.isModalOpen}
+              toggle={this.toggleModal}
+              className='modal_popup'
+            >
+              <ModalHeader toggle={this.toggleModal} className='pl-5'>
+                Put For Sale
+              </ModalHeader>
+              <Card className='artCard' style={{ height: '50%' }}>
+                <CardImg
+                  top
+                  className='displayImage'
+                  src={this.props.art.imgurl}
+                  alt='Card image'
+                />
+                <CardBody>
+                  <div className='ctext' style={{ padding: '2px' }}>
+                    <CardSubtitle
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: '#B3B3B3',
+                      }}
+                    >
+                      Title
+                    </CardSubtitle>
+                    <CardSubtitle
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: '#B3B3B3',
+                      }}
+                    >
+                      Price
+                    </CardSubtitle>
+                  </div>
+                  <div className='ctext' style={{ padding: '2px' }}>
+                    <CardText
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: 'black',
+                      }}
+                    >
+                      {this.props.art.tokenTitle}
+                    </CardText>
+                    <CardText
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: 'black',
+                      }}
+                    >
+                      {Web3.utils.fromWei(
+                        this.props.art.tokenSellPrice.toString(),
+                        'ether'
+                      )}{' '}
+                      ETH
+                    </CardText>
+                  </div>
+                  <div className='ctext1'>
+                    <p
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: 'black',
+                        marginTop: '2%',
+                      }}
+                    >
+                      Sell Price :{' '}
+                    </p>
+                    <p>
+                      {' '}
+                      <Input
+                        type='text'
+                        id='sellPrice'
+                        name='sellPrice'
+                        onChange={this.handleInputChange}
+                      ></Input>
+                    </p>
+                  </div>
+                  <div>
+                    <button
+                      className='abtn'
+                      style={{
+                        left: '32%',
+                        color: 'white',
+                        backgroundColor: '#5540C7',
+                      }}
+                      type='submit'
+                      onClick={this.putForSale}
+                    >
+                      Confirm
+                    </button>{' '}
+                  </div>
+                </CardBody>
+              </Card>
+            </Modal>
 
             {/* <Modal
                             isOpen={this.state.isModalAucOpen}
@@ -1030,7 +1043,7 @@ class MyItemComponent extends Component {
           </ModalBody>
         </Modal>
 
-        <div className='row'>{Menu}</div>
+        <div className='row1'>{Menu}</div>
 
         <br />
         <br />
