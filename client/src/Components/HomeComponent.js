@@ -25,6 +25,11 @@ import image12 from '../images/image 11.png';
 import image13 from '../images/image 12.png';
 import image14 from '../images/image 13.png';
 import image15 from '../images/image 17.png';
+import Nate1 from '../images/Nate1.jpg';
+import Nate2 from '../images/Nate2.jpg';
+import Nate3 from '../images/Nate3.jpg';
+import Nate4 from '../images/Nate4.jpg';
+
 import Auth from './Auth';
 import SignInModal from './SignInModal/SignInModal';
 import { LayoutContext } from '../state/Layout/context';
@@ -140,16 +145,16 @@ class Home extends Component {
                 <div className='col1'>
                   {/* <img className='img1' src={image1} alt='image1' /> */}
                   {/* <img className='ellispse' src={p1} alt='ellipse' /> */}
-                  <img className='image8' src={image13} alt='img' />
-                  <img className='image9' src={image13} alt='img' />
+                  <img className='image8' src={Nate1} alt='img' />
+                  <img className='image9' src={Nate2} alt='img' />
                   <img className='image10' src={image13} alt='img' />
                   <div>
                     <img className='image11' src={image13} alt='img' />
                   </div>
-                  <img className='image12' src={image13} alt='img' />
+                  <img className='image12' src={Nate3} alt='img' />
                   <img className='image13' src={image13} alt='img' />
                   <img className='image14' src={image13} alt='img' />
-                  <img className='image15' src={image13} alt='img' />
+                  <img className='image15' src={Nate4} alt='img' />
                 </div>
                 <div className='col2'>
                   <Grid
@@ -167,7 +172,7 @@ class Home extends Component {
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
-                  paddingTop: '7%',
+                  paddingTop: '14%',
                 }}
               >
                 <p

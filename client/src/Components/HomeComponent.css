@@ -158,9 +158,9 @@ div.imageCards {
 /* #3 */
 .image15 {
   position: absolute;
-  width: 80px;
+  width: 140px;
   height: 80px;
-  margin-left: 30%;
+  margin-left: 28.5%;
   margin-top: 6%;
 }
 
@@ -195,15 +195,15 @@ div.imageCards {
 .image12 {
   position: absolute;
   width: 130px;
-  height: 130px;
+  height: 150px;
   margin-left: 27%;
   margin-top: 19%;
 }
 
 .image8 {
   position: absolute;
-  width: 140px;
-  height: 140px;
+  width: 180px;
+  height: 200px;
   margin-left: 7.5%;
   margin-top: 16%;
 }
