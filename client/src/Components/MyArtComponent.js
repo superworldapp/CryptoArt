@@ -147,12 +147,13 @@ class Allpatrender extends Component {
     let buk = this.props.art.auction.isBidding ? 'bg-warning' : '';
     let b = this.props.art.isSelling ? 'hidden' : 'abtn';
     let but1 = this.props.art.isSelling ? 'abtn' : 'hidden';
+    let auc1 = this.props.art.auction.isBidding ? 'hidden' : 'abtn';
     console.log(this.props.art.imgUrl);
     let pr =
       Web3.utils.fromWei(this.props.art.tokenSellPrice.toString(), 'ether') == 0
         ? 'invisible'
         : 'visible';
-    let reSellOrSell = this.props.art.isSelling ? 'ReSell' : 'Sell';
+    let reSellOrSell = this.props.art.isSelling ? 'Relist' : 'Sell';
     let Auc = this.props.art.auction.isBidding ? 'End Auction' : 'Auction';
     let accNum = this.props.art.tokenCreator
 
@@ -309,7 +310,8 @@ let x = colorpills();
                     </CardText> */}
                     <div className="ctext" style={{padding:'0px', height:'2rem', marginTop:'5%'}}>
                         <button
-                            className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
+                        className={auc1}
+                            //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
                             // color='primary'
                             onClick={this.toggleModal}>
                             {reSellOrSell}
@@ -319,10 +321,11 @@ let x = colorpills();
                             //className='abtn'
                             type='submit'
                             onClick={this.DeSale}>
-                            DeSell 
+                            Delist 
                         </button>   
                         <button
                         className={b}
+                        //className={auc1}
                             //className='abtn'
                             type='submit'
                             // color='primary'
@@ -889,7 +892,7 @@ class MyItemComponent extends Component {
                       Art
                     </Label>
                     <Input
-                      style={{ marginLeft: '0.5rem' }}
+                      style={{ marginLeft: '1.0rem' }}
                       type='file'
                       onChange={this.fileSelectHandler}
                     />

@@ -325,7 +325,7 @@ class Header extends Component {
                 </Grid>
               )}
               <NavItem>
-                <NavLink className='nav-link' to='/mycreations'>
+                <NavLink className='nav-link' to='/mycollections'>
                   <img
                     width='30px'
                     height='30px'

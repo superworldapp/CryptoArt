@@ -117,7 +117,7 @@ class Main extends Component {
                     />
                     <Route
                         exact
-                        path='/mycreations'
+                        path='/mycollections'
                         component={() => (
                             <MyItemComponent
                                 contract={this.state.contract}
