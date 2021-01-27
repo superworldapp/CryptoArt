@@ -34,12 +34,22 @@ class AllArt extends Component {
     this.accUsername = this.accUsername.bind(this);
   }
 
-  creData = async () => {
-    let cre = await this.props.contract?.getPastEvents('tokencreated', {
-      filter: { tokenId: this.props.art.tokenIdentifier },
-      fromBlock: 0,
-    });
-    //  // Using an array means OR: e.g. 20 or 23
+    creData = async () => {
+        let cre = await this.props.contract?.getPastEvents('tokencreated', {
+            filter: { tokenId: this.props.art.tokenIdentifier },
+            fromBlock: 0
+        });
+        let tokenBid = await this.props.contract?.getPastEvents('tokenbid', {
+            filter: { tokenId: this.props.art.tokenIdentifier },
+            fromBlock: 0
+        });
+
+        console.log(tokenBid)
+        // let bidStarted = await this.props.contract?.getPastEvents('bidstarted', {
+        //     filter: { tokenId: this.props.art.tokenIdentifier },
+        //     fromBlock: 0
+        // });
+        //  // Using an array means OR: e.g. 20 or 23
 
     let tb = await this.props.contract?.getPastEvents('tokenbought', {
       filter: { tokenId: this.props.art.tokenIdentifier },
@@ -368,145 +378,163 @@ class AllItemComponent extends Component {
       let rex = await this.props.contract?.methods.Arts(i).call();
       response.push(rex);
     }
-    allDocs = [];
-    allDocs = response;
-    console.log(response);
-    this.setState({ art: allDocs });
-    console.log(this.state.art);
+
+        allBtn = () => {
+        this.setState({art: allDocs})
+        console.log(allDocs)
+    }
+
+    onAuctionBtn = () => {
+        let auctionDocs = allDocs.filter(art => art.auction.isBidding)
+
+        this.setState({art: auctionDocs})
+    }
+
+    hasSoldBtn = () => {
+        let soldDocs = allDocs.filter((art) => art.isSelling);
+        this.setState({art: soldDocs})
+    }
   }
-  render() {
-    const menu = this.state.art.map((x) => {
-      return (
-        <div
-          key={x.tokenIdentifier}
-          className='col-4 col-md-3'
-          id='all-art-card'
-        >
-          <AllArt
-            art={x}
-            contract={this.props.contract}
-            accounts={this.props.accounts}
-          />
-          <br />
-          <br />
-        </div>
+
+    render(){
+        
+        const menu = this.state.art.map((x) => {
+            return (
+              <div
+              key={x.tokenIdentifier}
+              className='col-4 col-md-3'
+              id='all-art-card'>
+              <AllArt
+                  art={x}
+                  contract={this.props.contract}
+                  accounts={this.props.accounts}
+              />
+              <br />
+              <br />
+          </div>
+            );
+        });
+        return (
+          <div className='container'>
+              <div className='button-container'>
+                  <button onClick={this.allBtn} className='bbtn'>All</button>
+                  <button className='bbtn'>New</button>
+                  <button onClick={this.onAuctionBtn} className='bbtn'>On Auction</button>
+                  <button className='bbtn'>Has Offer</button>
+                  <button onClick={this.hasSoldBtn} className='bbtn'>Has Sold</button>
+              </div>
+              <Modal
+                  isOpen={this.state.isModalOpen1}
+                  toggle={this.toggleModal1}
+                  className='modal-xl'>
+                  <ModalHeader toggle={this.toggleModal1}>
+                      <h3>Add Artwork</h3>
+                  </ModalHeader>
+                  <ModalBody>
+                      <Form>
+                          <div className='row pl-5 pr-5'>
+                              <div className='col-6'>
+                                  <FormGroup>
+                                      <Label htmlFor='title' className='ml-3'>
+                                          Token Title
+                                      </Label>
+                                      <Input
+                                          type='text'
+                                          id='title'
+                                          name='title'
+                                          onChange={this.handleInputChange}
+                                      />
+                                  </FormGroup>
+                              </div>
+                              <div className='col-6'>
+                                  <FormGroup>
+                                      <Label htmlFor='price' className='ml-3'>
+                                          Item Price
+                                      </Label>
+                                      <Input
+                                          type='text'
+                                          id='price'
+                                          name='price'
+                                          onChange={this.handleInputChange}
+                                      />
+                                  </FormGroup>
+                              </div>
+                          </div>
+                          <div className='row pl-5 pr-5'>
+                              <div className='col-12'>
+                                  <FormGroup>
+                                      <Label
+                                          htmlFor='artHash'
+                                          className='ml-3'>
+                                          Art Hash
+                                      </Label>
+                                      <Input
+                                          type='text'
+                                          id='artHash'
+                                          name='artHash'
+                                          onChange={this.handleInputChange}
+                                      />
+                                  </FormGroup>
+                              </div>
+                          </div>
+
+                          <div className='row pl-5 pr-5'>
+                              <div className='col-6'>
+                                  <FormGroup>
+                                      <Label htmlFor='desc' className='ml-3'>
+                                          Art URL
+                                      </Label>
+                                      <Input
+                                          type='text'
+                                          id='artUrl'
+                                          name='artUrl'
+                                          onChange={this.handleInputChange}
+                                      />
+                                  </FormGroup>
+                              </div>
+                              <div className='col-6'>
+                                  <FormGroup>
+                                      <Label
+                                          htmlFor='perCut'
+                                          className='ml-3'>
+                                          Percentage Cut
+                                      </Label>
+                                      <Input
+                                          type='number'
+                                          id='perCut'
+                                          name='perCut'
+                                          onChange={this.handleInputChange}
+                                      />
+                                  </FormGroup>
+                              </div>
+                          </div>
+                          <br />
+                          <div className='row pl-5'>
+                              <div className='col-6'>
+                                  <Button
+                                      color='primary'
+                                      onClick={this.creatingItems}>
+                                      Add
+                                  </Button>
+                              </div>
+                          </div>
+                          <br />
+                      </Form>
+                  </ModalBody>
+              </Modal>
+              <br />
+              <br />
+              <div className='row-all-art'>{menu}</div>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+          </div>
       );
-    });
-
-    return (
-      <div className='container'>
-        <div className='button-container'>
-          <button className='bbtn'>All</button>
-          <button className='bbtn'>New</button>
-          <button className='bbtn'>On Auction</button>
-          <button className='bbtn'>Has Offer</button>
-          <button className='bbtn'>Has Sold</button>
-        </div>
-        <Modal
-          isOpen={this.state.isModalOpen1}
-          toggle={this.toggleModal1}
-          className='modal-xl'
-        >
-          <ModalHeader toggle={this.toggleModal1}>
-            <h3>Add Artwork</h3>
-          </ModalHeader>
-          <ModalBody>
-            <Form>
-              <div className='row pl-5 pr-5'>
-                <div className='col-6'>
-                  <FormGroup>
-                    <Label htmlFor='title' className='ml-3'>
-                      Token Title
-                    </Label>
-                    <Input
-                      type='text'
-                      id='title'
-                      name='title'
-                      onChange={this.handleInputChange}
-                    />
-                  </FormGroup>
-                </div>
-                <div className='col-6'>
-                  <FormGroup>
-                    <Label htmlFor='price' className='ml-3'>
-                      Item Price
-                    </Label>
-                    <Input
-                      type='text'
-                      id='price'
-                      name='price'
-                      onChange={this.handleInputChange}
-                    />
-                  </FormGroup>
-                </div>
-              </div>
-              <div className='row pl-5 pr-5'>
-                <div className='col-12'>
-                  <FormGroup>
-                    <Label htmlFor='artHash' className='ml-3'>
-                      Art Hash
-                    </Label>
-                    <Input
-                      type='text'
-                      id='artHash'
-                      name='artHash'
-                      onChange={this.handleInputChange}
-                    />
-                  </FormGroup>
-                </div>
-              </div>
-
-              <div className='row pl-5 pr-5'>
-                <div className='col-6'>
-                  <FormGroup>
-                    <Label htmlFor='desc' className='ml-3'>
-                      Art URL
-                    </Label>
-                    <Input
-                      type='text'
-                      id='artUrl'
-                      name='artUrl'
-                      onChange={this.handleInputChange}
-                    />
-                  </FormGroup>
-                </div>
-                <div className='col-6'>
-                  <FormGroup>
-                    <Label htmlFor='perCut' className='ml-3'>
-                      Percentage Cut
-                    </Label>
-                    <Input
-                      type='number'
-                      id='perCut'
-                      name='perCut'
-                      onChange={this.handleInputChange}
-                    />
-                  </FormGroup>
-                </div>
-              </div>
-              <br />
-              <div className='row pl-5'>
-                <div className='col-6'>
-                  <Button color='primary' onClick={this.creatingItems}>
-                    Add
-                  </Button>
-                </div>
-              </div>
-              <br />
-            </Form>
-          </ModalBody>
-        </Modal>
-        <br />
-        <br />
-        <div className='row-all-art'>{menu}</div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-      </div>
-    );
   }
 }
+
+
 
 export default AllItemComponent;
