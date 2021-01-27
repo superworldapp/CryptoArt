@@ -4,7 +4,7 @@ import Web3 from 'web3';
 const TableBody = ({cre}) => {
     return (
         <tbody>
-            {cre.map((item) => {
+            {cre?.map((item) => {
                 return (
                     <React.Fragment>
                         <tr key={item.id}>

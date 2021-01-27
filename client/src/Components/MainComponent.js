@@ -44,6 +44,7 @@ class Main extends Component {
         BNContract.abi,
         deployedNetwork && deployedNetwork.address
       );
+      console.log('contract', instance);
 
       let cre = await instance.getPastEvents('tokencreated', {
         fromBlock: 0,
@@ -127,7 +128,7 @@ class Main extends Component {
           />
           <ProtectedRoute
             exact
-            path='/myart'
+            path='/mycreations'
             component={() => (
               <MyItemComponent
                 contract={this.state.contract}

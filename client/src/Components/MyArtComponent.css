@@ -18,7 +18,7 @@
   border-top: none !important;
 }
 .modal-content {
-  width: 90% !important;
+  width: 80%;
   height: auto;
 }
 .modal-header {
@@ -33,7 +33,7 @@
   font-family: canada-type-gibson, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 10px;
   padding: 0.375rem 1.5rem;
   border: 2px solid #5540c7;
   background-color: white;
@@ -66,9 +66,7 @@
 }
 .displayImage {
   position: relative;
-}
-.displayText {
-  position: absolute;
+  padding: 0% 5%;
 }
 
 .card {
@@ -125,10 +123,7 @@ h3 {
 
 .badge-pill {
   border-radius: 0rem 0rem 1rem 0rem;
-  padding: 0rem 1.2rem 0rem 0rem;
-}
-.badge {
-  font-size: 15px;
+  padding: 0rem 1.5rem 0rem 0rem;
 }
 
 .upload-more-btn {
@@ -147,4 +142,21 @@ h3 {
   padding-right: 2rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
+}
+
+.badge {
+  font-size: 17px;
+}
+
+.class1 {
+  background-color: #3454dc;
+  color: white;
+}
+.class2 {
+  background-color: #267627;
+  color: white;
+}
+.class3 {
+  background-color: #f08778;
+  color: white;
 }

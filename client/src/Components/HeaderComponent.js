@@ -946,7 +946,7 @@ class Header extends Component {
                         // marginLeft: '-0.2rem',
                         // marginBottom: '0.75rem',
                       }}
-                      to='/myart'
+                      to='/mycreations'
                     >
                       <MenuItem disableGutters>
                         <span
@@ -1074,9 +1074,8 @@ class Header extends Component {
               ) : (
                 <div></div>
               )}
-
               {/* <NavItem>
-                <NavLink className='nav-link' to='/myart'>
+                <NavLink className='nav-link' to='/mycreations'>
                   <img
                     width='30px'
                     height='30px'
@@ -1088,7 +1087,7 @@ class Header extends Component {
                     alt='profile'
                   />
                 </NavLink>
-              </NavItem> */}
+              </NavItem>  */}
               <NavItem>
                 <NavLink className='nav-link' to='#'>
                   <img
