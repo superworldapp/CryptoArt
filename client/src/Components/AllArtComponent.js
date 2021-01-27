@@ -343,7 +343,25 @@ class AllItemComponent extends Component {
         this.setState({ art: allDocs });
         console.log(this.state.art)
     }
+
+        allBtn = () => {
+        this.setState({art: allDocs})
+        console.log(allDocs)
+    }
+
+    onAuctionBtn = () => {
+        let auctionDocs = allDocs.filter(art => art.auction.isBidding)
+
+        this.setState({art: auctionDocs})
+    }
+
+    hasSoldBtn = () => {
+        let soldDocs = allDocs.filter((art) => art.isSelling);
+        this.setState({art: soldDocs})
+    }
+
     render() {
+        
         const menu = this.state.art.map((x) => {
             return (
                 <div
@@ -364,11 +382,11 @@ class AllItemComponent extends Component {
         return (
             <div className='container'>
                 <div className='button-container'>
-                    <button className='bbtn'>All</button>
+                    <button onClick={this.allBtn} className='bbtn'>All</button>
                     <button className='bbtn'>New</button>
-                    <button className='bbtn'>On Auction</button>
+                    <button onClick={this.onAuctionBtn} className='bbtn'>On Auction</button>
                     <button className='bbtn'>Has Offer</button>
-                    <button className='bbtn'>Has Sold</button>
+                    <button onClick={this.hasSoldBtn} className='bbtn'>Has Sold</button>
                 </div>
                 <Modal
                     isOpen={this.state.isModalOpen1}

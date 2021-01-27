@@ -106,7 +106,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
                 <button
                     className='btn btn-primary'
                     onClick={async () => {
-                        const res = await contract.methods
+                        const res = await contract?.methods
                             .buyToken(art.tokenIdentifier)
                             .send({
                                 from: accounts,
@@ -125,7 +125,6 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
         } else if (art.auction.isBidding) {
             return (
                 <React.Fragment>
-                    <Input type='text' />
                     <Input
                         type='text'
                         id='sellPrice'
