@@ -94,10 +94,13 @@ class Allpatrender extends Component {
       delistLoading: false,
       listForAuctionSuccess: false,
       listForSaleSuccess: false,
+      endAuctionLoading: false,
+      endAuctionSuccess: false,
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.toggleListForAuction = this.toggleListForAuction.bind(this);
     this.toggleListForSale = this.toggleListForSale.bind(this);
+    this.toggleEndAuction = this.toggleEndAuction.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.buyItem = this.buyItem.bind(this);
     this.putForSale = this.putForSale.bind(this);
@@ -133,6 +136,10 @@ class Allpatrender extends Component {
 
   toggleListForSale() {
     this.setState({ listForSaleSuccess: !this.state.listForSaleSuccess });
+  }
+
+  toggleEndAuction() {
+    this.setState({ endAuctionSuccess: !this.state.endAuctionSuccess });
   }
 
   handleInputChange(event) {
@@ -172,9 +179,11 @@ class Allpatrender extends Component {
     console.log(res);
   };
   EndAuction = async () => {
+    this.setState({ endAuctionLoading: true });
     const res = await this.props.contract.methods
       .closeBidOwner(this.props.art.tokenIdentifier)
       .send({ from: this.props.accounts, gas: 1000000 });
+    this.setState({ endAuctionLoading: false, endAuctionSuccess: true });
     console.log(res);
   };
   AddBid = async () => {
@@ -416,6 +425,7 @@ class Allpatrender extends Component {
             >
               {Auc}
             </button>
+            {this.state.endAuctionLoading ? <img src={loader} /> : <div></div>}
             {forAuc === 'visible' ? (
               <button
                 style={{
@@ -635,6 +645,54 @@ class Allpatrender extends Component {
                 <button
                   className='upload-more-btn'
                   onClick={this.toggleListForSale}
+                >
+                  BACK TO MY COLLECTIONS
+                </button>
+              </ModalBody>
+            </Modal>
+
+            {/* END AUCTION MODAL */}
+            <Modal
+              isOpen={this.state.endAuctionSuccess}
+              toggle={this.toggleEndAuction}
+              className='modal-xl'
+            >
+              <ModalHeader toggle={this.toggleEndAuction}>
+                <div></div>
+              </ModalHeader>
+              <ModalBody
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  font: 'Gibson',
+                  height: '20rem',
+                  paddingBottom: '5rem',
+                }}
+              >
+                <p
+                  style={{
+                    textAlign: 'center',
+                    fontSize: '1.25rem',
+                    fontWeight: '450',
+                    marginTop: '1rem',
+                  }}
+                >
+                  Done!
+                </p>
+                <img src={checkmark} />
+                <p
+                  style={{
+                    textAlign: 'center',
+                    color: 'gray',
+                    fontSize: '12px',
+                  }}
+                >
+                  You have ended the auction for your item.
+                </p>
+                <button
+                  className='upload-more-btn'
+                  onClick={this.toggleListForAuction}
                 >
                   BACK TO MY COLLECTIONS
                 </button>
