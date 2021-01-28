@@ -92,8 +92,12 @@ class Allpatrender extends Component {
       auctionLoading: false,
       putForSaleLoading: false,
       delistLoading: false,
+      listForAuctionSuccess: false,
+      listForSaleSuccess: false,
     };
     this.toggleModal = this.toggleModal.bind(this);
+    this.toggleListForAuction = this.toggleListForAuction.bind(this);
+    this.toggleListForSale = this.toggleListForSale.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.buyItem = this.buyItem.bind(this);
     this.putForSale = this.putForSale.bind(this);
@@ -123,6 +127,14 @@ class Allpatrender extends Component {
     });
   }
 
+  toggleListForAuction() {
+    this.setState({ listForAuctionSuccess: !this.state.listForAuctionSuccess });
+  }
+
+  toggleListForSale() {
+    this.setState({ listForSaleSuccess: !this.state.listForSaleSuccess });
+  }
+
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -139,7 +151,7 @@ class Allpatrender extends Component {
         (this.state.sellPrice * ETHER).toString()
       )
       .send({ from: this.props.accounts, gas: 1000000 });
-    this.setState({ putForSaleLoading: false });
+    this.setState({ putForSaleLoading: false, listForSaleSuccess: true });
     this.toggleModal();
     console.log(res);
   };
@@ -156,7 +168,7 @@ class Allpatrender extends Component {
     const res = await this.props.contract.methods
       .startbid(this.props.art.tokenIdentifier)
       .send({ from: this.props.accounts, gas: 1000000 });
-    this.setState({ auctionLoading: false });
+    this.setState({ auctionLoading: false, listForAuctionSuccess: true });
     console.log(res);
   };
   EndAuction = async () => {
@@ -373,7 +385,6 @@ class Allpatrender extends Component {
             >
               Delist
             </button>
-            {this.state.delistLoading ? <img src={loader} /> : <div></div>}
             {forAuc === 'visible' ? (
               <button
                 style={{
@@ -387,6 +398,7 @@ class Allpatrender extends Component {
             ) : (
               <div></div>
             )}
+
             <button
               className={b}
               //className={auc1}
@@ -415,7 +427,6 @@ class Allpatrender extends Component {
             ) : (
               <div></div>
             )}
-            {this.state.auctionLoading ? <img src={loader} /> : <div></div>}
 
             <Modal
               isOpen={this.state.isModalOpen}
@@ -532,6 +543,101 @@ class Allpatrender extends Component {
               </Card>
             </Modal>
 
+            {/* LIST FOR AUCTION MODAL */}
+            <Modal
+              isOpen={this.state.listForAuctionSuccess}
+              toggle={this.toggleListForAuction}
+              className='modal-xl'
+            >
+              <ModalHeader toggle={this.toggleListForAuction}>
+                <div></div>
+              </ModalHeader>
+              <ModalBody
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  font: 'Gibson',
+                  height: '20rem',
+                  paddingBottom: '5rem',
+                }}
+              >
+                <p
+                  style={{
+                    textAlign: 'center',
+                    fontSize: '1.25rem',
+                    fontWeight: '450',
+                    marginTop: '1rem',
+                  }}
+                >
+                  Congratulations!
+                </p>
+                <img src={checkmark} />
+                <p
+                  style={{
+                    textAlign: 'center',
+                    color: 'gray',
+                    fontSize: '12px',
+                  }}
+                >
+                  Your item has been listed for auction in the marketplace!
+                </p>
+                <button
+                  className='upload-more-btn'
+                  onClick={this.toggleListForAuction}
+                >
+                  BACK TO MY COLLECTIONS
+                </button>
+              </ModalBody>
+            </Modal>
+
+            {/* LIST FOR SALE MODAL */}
+            <Modal
+              isOpen={this.state.listForSaleSuccess}
+              toggle={this.toggleListForSale}
+              className='modal-xl'
+            >
+              <ModalHeader toggle={this.toggleListForSale}>
+                <div></div>
+              </ModalHeader>
+              <ModalBody
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  font: 'Gibson',
+                  height: '20rem',
+                  paddingBottom: '5rem',
+                }}
+              >
+                <p
+                  style={{
+                    textAlign: 'center',
+                    fontSize: '1.25rem',
+                    fontWeight: '450',
+                    marginTop: '1rem',
+                  }}
+                >
+                  Congratulations!
+                </p>
+                <img src={checkmark} />
+                <p
+                  style={{
+                    textAlign: 'center',
+                    color: 'gray',
+                    fontSize: '12px',
+                  }}
+                >
+                  Your item has been listed for sale in the marketplace!
+                </p>
+                <button
+                  className='upload-more-btn'
+                  onClick={this.toggleListForSale}
+                >
+                  BACK TO MY COLLECTIONS
+                </button>
+              </ModalBody>
+            </Modal>
             {/* <Modal
                             isOpen={this.state.isModalAucOpen}
                             toggle={this.toggleAuction}
@@ -672,6 +778,18 @@ class Allpatrender extends Component {
                                 </CardBody>
                             </Card>
                         </Modal>  */}
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {this.state.delistLoading ? (
+              <img height='35' src={loader} />
+            ) : (
+              <div></div>
+            )}
+            {this.state.auctionLoading ? (
+              <img height='35' src={loader} />
+            ) : (
+              <div></div>
+            )}
           </div>
         </CardBody>
       </Card>
@@ -878,7 +996,7 @@ class MyItemComponent extends Component {
               textAlign: 'left',
             }}
           >
-            My Arts
+            My Collections
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -1057,6 +1175,7 @@ class MyItemComponent extends Component {
           </ModalBody>
         </Modal>
 
+        {/* UPLOAD SUCCESS MODAL */}
         <Modal
           isOpen={this.state.uploadSuccess}
           toggle={this.toggleModal2}
@@ -1084,7 +1203,7 @@ class MyItemComponent extends Component {
                 marginTop: '1rem',
               }}
             >
-              Hi , your upload was successful!
+              Hi, your upload was successful!
             </p>
             <p style={{ textAlign: 'center', color: 'gray', fontSize: '12px' }}>
               You can view your recent upload file under “MY COLLECTIONS”
