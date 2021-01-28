@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/CryptoArt/static/css/main.975e71c0.chunk.css",
-    "main.js": "/CryptoArt/static/js/main.12c84b6d.chunk.js",
-    "main.js.map": "/CryptoArt/static/js/main.12c84b6d.chunk.js.map",
+    "main.js": "/CryptoArt/static/js/main.983b073a.chunk.js",
+    "main.js.map": "/CryptoArt/static/js/main.983b073a.chunk.js.map",
     "runtime-main.js": "/CryptoArt/static/js/runtime-main.0ccadf13.js",
     "runtime-main.js.map": "/CryptoArt/static/js/runtime-main.0ccadf13.js.map",
     "static/css/2.634cdb47.chunk.css": "/CryptoArt/static/css/2.634cdb47.chunk.css",
-    "static/js/2.5251181b.chunk.js": "/CryptoArt/static/js/2.5251181b.chunk.js",
-    "static/js/2.5251181b.chunk.js.map": "/CryptoArt/static/js/2.5251181b.chunk.js.map",
+    "static/js/2.cf78ba4d.chunk.js": "/CryptoArt/static/js/2.cf78ba4d.chunk.js",
+    "static/js/2.cf78ba4d.chunk.js.map": "/CryptoArt/static/js/2.cf78ba4d.chunk.js.map",
     "static/js/3.7ee471cc.chunk.js": "/CryptoArt/static/js/3.7ee471cc.chunk.js",
     "static/js/3.7ee471cc.chunk.js.map": "/CryptoArt/static/js/3.7ee471cc.chunk.js.map",
     "static/js/4.a2613f7a.chunk.js": "/CryptoArt/static/js/4.a2613f7a.chunk.js",
     "static/js/4.a2613f7a.chunk.js.map": "/CryptoArt/static/js/4.a2613f7a.chunk.js.map",
     "index.html": "/CryptoArt/index.html",
-    "precache-manifest.5a9082378e2f5f18609a5a03b974ef0f.js": "/CryptoArt/precache-manifest.5a9082378e2f5f18609a5a03b974ef0f.js",
+    "precache-manifest.33b8b01c09e3a933ff98d98742b6f3ef.js": "/CryptoArt/precache-manifest.33b8b01c09e3a933ff98d98742b6f3ef.js",
     "service-worker.js": "/CryptoArt/service-worker.js",
     "static/css/2.634cdb47.chunk.css.map": "/CryptoArt/static/css/2.634cdb47.chunk.css.map",
     "static/css/main.975e71c0.chunk.css.map": "/CryptoArt/static/css/main.975e71c0.chunk.css.map",
-    "static/js/2.5251181b.chunk.js.LICENSE.txt": "/CryptoArt/static/js/2.5251181b.chunk.js.LICENSE.txt",
+    "static/js/2.cf78ba4d.chunk.js.LICENSE.txt": "/CryptoArt/static/js/2.cf78ba4d.chunk.js.LICENSE.txt",
     "static/js/3.7ee471cc.chunk.js.LICENSE.txt": "/CryptoArt/static/js/3.7ee471cc.chunk.js.LICENSE.txt",
     "static/media/MetaMask.png": "/CryptoArt/static/media/MetaMask.ec5f1578.png",
     "static/media/Nate1.jpg": "/CryptoArt/static/media/Nate1.8f1a4941.jpg",
@@ -62,8 +62,8 @@
   "entrypoints": [
     "static/js/runtime-main.0ccadf13.js",
     "static/css/2.634cdb47.chunk.css",
-    "static/js/2.5251181b.chunk.js",
+    "static/js/2.cf78ba4d.chunk.js",
     "static/css/main.975e71c0.chunk.css",
-    "static/js/main.12c84b6d.chunk.js"
+    "static/js/main.983b073a.chunk.js"
   ]
 }
