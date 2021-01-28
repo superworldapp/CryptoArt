@@ -14,6 +14,7 @@ import {
   ModalHeader,
   ModalBody,
 } from 'reactstrap';
+import loader from '../images/loader.svg';
 import image3 from '../images/image 6.png';
 import image4 from '../images/image 23.png';
 import image5 from '../images/image 25.png';
@@ -32,7 +33,10 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [handleInput, setHandleInput] = useState('');
   const [pay, setPay] = useState(0);
+  const [loadingPurchase, setLoadingPurchase] = useState(false);
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
+  const [loadingPlaceBid, setLoadingPlaceBid] = useState(false);
+  const [bidSuccess, setBidSuccess] = useState(false);
 
   const ETHER = 1000000000000000000;
 
@@ -71,11 +75,13 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
   };
 
   const AddBid = async () => {
+    setLoadingPlaceBid(true);
     const res = await contract.methods.addBid(art.tokenIdentifier).send({
       from: accounts,
       gas: 1000000,
       value: (handleInput * ETHER).toString(),
     });
+    setLoadingPlaceBid(false);
     console.log(res);
   };
 
@@ -121,11 +127,13 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
   };
 
   const handlePurchase = async () => {
+    setLoadingPurchase(true);
     const res = await contract?.methods.buyToken(art.tokenIdentifier).send({
       from: accounts,
       value: art.tokenSellPrice,
       gas: 1000000,
     });
+    setLoadingPurchase(false);
     setPurchaseSuccess(true);
     console.log(res);
   };
@@ -134,19 +142,26 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
     setPurchaseSuccess(!purchaseSuccess);
   };
 
+  const toggleBidSuccess = () => {
+    setBidSuccess(!bidSuccess);
+  };
+
   const buyOrSell = () => {
     if (art.isSelling) {
       return (
-        <button
-          className='btn btn-primary'
-          onClick={handlePurchase}
-          style={{
-            width: '50%',
-            alignSelf: 'center',
-          }}
-        >
-          Buy Item
-        </button>
+        <div>
+          <button
+            className='btn btn-primary'
+            onClick={handlePurchase}
+            style={{
+              width: '50%',
+              alignSelf: 'center',
+            }}
+          >
+            Buy Item
+          </button>
+          {loadingPurchase ? <img src={loader} /> : <div></div>}
+        </div>
       );
     } else if (art.auction.isBidding) {
       return (
@@ -158,17 +173,20 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
             style={{ width: '50%', alignSelf: 'center' }}
             onChange={handleInputChange}
           ></Input>
-          <button
-            className='btn-primary'
-            color='primary'
-            onClick={AddBid}
-            style={{
-              width: '50%',
-              alignSelf: 'center',
-            }}
-          >
-            Place Bid
-          </button>
+          <div>
+            <button
+              className='btn-primary'
+              color='primary'
+              onClick={AddBid}
+              style={{
+                width: '50%',
+                alignSelf: 'center',
+              }}
+            >
+              Place Bid
+            </button>
+            {loadingPlaceBid ? <img src={loader} /> : <div></div>}
+          </div>
           {/* <Modal
                         isOpen={modalOpen}
                         toggle={isToggleModal}
@@ -456,6 +474,50 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
               style={{ display: 'flex', justifyContent: 'center' }}
             >
               <button className='upload-more-btn'>VIEW MY COLLECTIONS</button>
+            </Link>
+          </ModalBody>
+        </Modal>
+
+        <Modal
+          isOpen={bidSuccess}
+          toggle={toggleBidSuccess}
+          className='modal-xl'
+        >
+          <ModalHeader toggle={toggleBidSuccess}>
+            <div></div>
+          </ModalHeader>
+          <ModalBody
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              font: 'Gibson',
+              height: '20rem',
+              paddingBottom: '5rem',
+            }}
+          >
+            <p
+              style={{
+                textAlign: 'center',
+                fontSize: '1.25rem',
+                fontWeight: '450',
+                marginTop: '1rem',
+              }}
+            >
+              Congratulations!
+            </p>
+            <img src={checkmark} />
+
+            <p style={{ textAlign: 'center', color: 'gray', fontSize: '12px' }}>
+              You have successfully placed a bid!
+            </p>
+            <Link
+              to='/myart'
+              style={{ display: 'flex', justifyContent: 'center' }}
+            >
+              <button className='upload-more-btn'>
+                GO BACK TO ART MARKETPLACE
+              </button>
             </Link>
           </ModalBody>
         </Modal>

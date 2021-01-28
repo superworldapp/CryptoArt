@@ -1208,7 +1208,7 @@ class MyItemComponent extends Component {
               Hi, your upload was successful!
             </p>
             <p style={{ textAlign: 'center', color: 'gray', fontSize: '12px' }}>
-              You can view your recent upload file under “MY COLLECTIONS”
+              You can view your recent uploaded file under “MY COLLECTIONS”
             </p>
             <button className='upload-more-btn' onClick={this.handleUploadMore}>
               Upload More
