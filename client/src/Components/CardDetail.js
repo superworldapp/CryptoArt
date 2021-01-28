@@ -36,6 +36,22 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
 
   const ETHER = 1000000000000000000;
 
+  const accUsername = (accNum) => {
+    if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
+      return '@Chitra';
+    else if (accNum === '0x0d5567345D3Cb1114471BC07c396Cc32C7CF92ec')
+      return '@Arianna';
+    else if (accNum === '0xABD82c9B735F2C89f2e62152A9884F4A92414F20')
+      return '@CJMain';
+    else if (accNum === '0x63611F92FA2d7B7e6625a97E6474b7fA16DbD89F')
+      return '@CJ Test';
+    else if (accNum === '0x4271AC6Bb565D120e2Ac1C3fb855aE5Dad6aE8ff')
+      return '@Swapnil';
+    else if (accNum === '0x81B2362F55Ea93f71990d7F446dca80BdD94C6e7')
+      return '@SwapnilTest';
+    else return '@Annonymous';
+  };
+
   const getEthDollarPrice = () => {
     Axios.get(
       `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_24hr_change=true`
@@ -66,16 +82,16 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
   const getCreData = async () => {
     let cre = await contract?.getPastEvents('tokencreated', {
       filter: { tokenId: art.tokenIdentifier },
-      fromBlock: 0,
+      fromBlock: 7970334,
     });
     //  // Using an array means OR: e.g. 20 or 23
     let tb = await contract?.getPastEvents('tokenbought', {
       filter: { tokenId: art.tokenIdentifier },
-      fromBlock: 0,
+      fromBlock: 7970334,
     });
     let tfs = await contract?.getPastEvents('tokenputforsale', {
       filter: { tokenId: art.tokenIdentifier },
-      fromBlock: 0,
+      fromBlock: 7970334,
     });
     for (let property in cre) {
       creValue.push(cre[property]);
@@ -105,10 +121,10 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
   };
 
   const handlePurchase = async () => {
-    const res = await contract?.methods.buyToken(art.tokenIdentifier).send({
+    const res = await contract?.methods.buyToken(art?.tokenIdentifier).send({
       from: accounts,
-      value: art.tokenSellPrice,
-      gas: 1000000,
+      value: art?.tokenSellPrice.toString(),
+      gas: 7000000,
     });
     setPurchaseSuccess(true);
     console.log(res);
@@ -139,6 +155,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
             type='text'
             id='sellPrice'
             name='sellPrice'
+            style={{ width: '50%', alignSelf: 'center' }}
             onChange={handleInputChange}
           ></Input>
           <button
@@ -331,7 +348,8 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
             {/* <a href='#'>{match.params.id}</a>
                         <h1>{match.params.id}</h1> */}
             <p>
-              Owned by <span class='text-primary'>{art?.tokenCreator}</span>
+              Owned by{' '}
+              <span class='text-primary'>{accUsername(art?.tokenCreator)}</span>
             </p>
             <div
               className='card py-3'

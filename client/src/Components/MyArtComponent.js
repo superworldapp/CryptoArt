@@ -174,7 +174,7 @@ class Allpatrender extends Component {
   EndAuction = async () => {
     const res = await this.props.contract.methods
       .closeBidOwner(this.props.art.tokenIdentifier)
-      .send({ from: this.props.accounts, gas: 1000000 });
+      .send({ from: this.props.accounts, gas: 7000000 });
     console.log(res);
   };
   AddBid = async () => {
@@ -186,7 +186,7 @@ class Allpatrender extends Component {
   CloseBid = async () => {
     const res = await this.props.contract.methods
       .closBid(this.props.art.tokenIdentifier)
-      .send({ from: this.props.accounts, gas: 1000000 });
+      .send({ from: this.props.accounts, gas: 7000000 });
     console.log(res);
   };
   render() {
@@ -217,6 +217,8 @@ class Allpatrender extends Component {
         return '@CJ Test';
       else if (accNum === '0x4271AC6Bb565D120e2Ac1C3fb855aE5Dad6aE8ff')
         return '@Swapnil';
+      else if (accNum === '0x81B2362F55Ea93f71990d7F446dca80BdD94C6e7')
+        return '@SwapnilTest';
       else return '@Annonymous';
     };
     const colorpills = () => {
@@ -864,7 +866,7 @@ class MyItemComponent extends Component {
 
       if (Array.isArray(res.events.tokencreated)) {
         data = await res.events.tokencreated.map((token) =>
-          Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
+          Axios.post(`https://geo.superworldapp.com/api/json/token/add`, {
             tokenId: token.returnValues.tokenId.toString(),
             description: 'A unique piece of art',
             image: imgUrl,
@@ -876,7 +878,7 @@ class MyItemComponent extends Component {
         );
       } else {
         data = await Axios.post(
-          `http://geo.superworldapp.com/api/json/token/add`,
+          `https://geo.superworldapp.com/api/json/token/add`,
           {
             tokenId: res.events.tokencreated.returnValues.tokenId.toString(),
             description: 'A unique piece of art',

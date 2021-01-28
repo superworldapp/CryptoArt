@@ -47,7 +47,7 @@ class Main extends Component {
       console.log('contract', instance);
 
       let cre = await instance.getPastEvents('tokencreated', {
-        fromBlock: 0,
+        fromBlock: 7970334,
       });
       let newArr = [];
       for (let i = 0; i < cre.length; i++) {
