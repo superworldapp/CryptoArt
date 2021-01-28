@@ -24,7 +24,7 @@ const TableBody = ({ cre }) => {
         return (
           <React.Fragment>
             <tr key={item.id}>
-              <th scope='row'>{item?.event}</th>
+              <th scope='row'>{item?.event == 'Tokenbid'?'AuctionStarted':((item.event == 'Bidstarted')?'BidPlaced':item.event)}</th>
               <td>
                 {item?.returnValues.tokenPrice
                   ? `${Web3.utils.fromWei(
