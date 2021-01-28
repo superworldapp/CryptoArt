@@ -585,28 +585,7 @@ class Home extends Component {
                       style={{
                         display: 'flex',
                       }}
-                    >
-                      <CardSubtitle>
-                        <img
-                          style={{
-                            marginRight: '30px',
-                          }}
-                          width='16px'
-                          height='16px'
-                          className='rounded-circle'
-                          src={anonUser}
-                        ></img>
-                      </CardSubtitle>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#888888',
-                        }}
-                      >
-                        Caozhibing
-                      </CardSubtitle>
-                    </div>
+                    ></div>
                     <div className='ctext'>
                       <CardText
                         style={{
@@ -625,12 +604,16 @@ class Home extends Component {
                           color: 'black',
                         }}
                       >
-                        0.5ETH
+                        0.1ETH
                       </CardText>
                     </div>
                     <div className='buy-bid-btn-div'>
                       <div className='time-div'></div>
-                      <a target='blank' href='https://map.superworldapp.com/'>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                        style={{ marginTop: '0.85rem' }}
+                      >
                         <button className='buy-bid-btn'>Purchase</button>
                       </a>
                     </div>
@@ -649,28 +632,7 @@ class Home extends Component {
                       style={{
                         display: 'flex',
                       }}
-                    >
-                      <CardSubtitle>
-                        <img
-                          style={{
-                            marginRight: '30px',
-                          }}
-                          width='16px'
-                          height='16px'
-                          className='rounded-circle'
-                          src={anonUser}
-                        ></img>
-                      </CardSubtitle>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#888888',
-                        }}
-                      >
-                        Amy000
-                      </CardSubtitle>
-                    </div>
+                    ></div>
                     <div className='ctext'>
                       <CardText
                         style={{
@@ -689,7 +651,7 @@ class Home extends Component {
                           color: '#black',
                         }}
                       >
-                        0.5ETH
+                        0.1ETH
                       </CardText>
                     </div>
                     <div className='buy-bid-btn-div'>
@@ -704,7 +666,11 @@ class Home extends Component {
                           }}
                         ></p>
                       </div>
-                      <a target='blank' href='https://map.superworldapp.com/'>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                        style={{ marginTop: '0.85rem' }}
+                      >
                         <button className='buy-bid-btn'>Purchase</button>
                       </a>
                     </div>
@@ -723,28 +689,7 @@ class Home extends Component {
                       style={{
                         display: 'flex',
                       }}
-                    >
-                      <CardSubtitle>
-                        <img
-                          style={{
-                            marginRight: '30px',
-                          }}
-                          width='16px'
-                          height='16px'
-                          className='rounded-circle'
-                          src={anonUser}
-                        ></img>
-                      </CardSubtitle>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#888888',
-                        }}
-                      >
-                        Caozhibing
-                      </CardSubtitle>
-                    </div>
+                    ></div>
                     <div className='ctext'>
                       <CardText
                         style={{
@@ -763,7 +708,7 @@ class Home extends Component {
                           color: 'black',
                         }}
                       >
-                        0.5ETH
+                        0.1ETH
                       </CardText>
                     </div>
                     <div className='buy-bid-btn-div'>
@@ -778,7 +723,11 @@ class Home extends Component {
                           }}
                         ></p>
                       </div>
-                      <a target='blank' href='https://map.superworldapp.com/'>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                        style={{ marginTop: '0.85rem' }}
+                      >
                         <button className='buy-bid-btn'>Purchase</button>
                       </a>
                     </div>
@@ -797,28 +746,7 @@ class Home extends Component {
                       style={{
                         display: 'flex',
                       }}
-                    >
-                      <CardSubtitle>
-                        <img
-                          style={{
-                            marginRight: '30px',
-                          }}
-                          width='16px'
-                          height='16px'
-                          className='rounded-circle'
-                          src={anonUser}
-                        ></img>
-                      </CardSubtitle>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#888888',
-                        }}
-                      >
-                        Behancehue
-                      </CardSubtitle>
-                    </div>
+                    ></div>
                     <div className='ctext'>
                       <CardText
                         style={{
@@ -837,12 +765,16 @@ class Home extends Component {
                           color: 'black',
                         }}
                       >
-                        0.5ETH
+                        0.1ETH
                       </CardText>
                     </div>
                     <div className='buy-bid-btn-div'>
                       <div className='time-div'></div>
-                      <a target='blank' href='https://map.superworldapp.com/'>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                        style={{ marginTop: '0.85rem' }}
+                      >
                         <button className='buy-bid-btn'>Purchase</button>
                       </a>
                     </div>
@@ -861,28 +793,7 @@ class Home extends Component {
                       style={{
                         display: 'flex',
                       }}
-                    >
-                      <CardSubtitle>
-                        <img
-                          style={{
-                            marginRight: '30px',
-                          }}
-                          width='16px'
-                          height='16px'
-                          className='rounded-circle'
-                          src={anonUser}
-                        ></img>
-                      </CardSubtitle>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#888888',
-                        }}
-                      >
-                        Behancehue
-                      </CardSubtitle>
-                    </div>
+                    ></div>
                     <div className='ctext'>
                       <CardText
                         style={{
@@ -901,7 +812,7 @@ class Home extends Component {
                           color: 'black',
                         }}
                       >
-                        0.5ETH
+                        0.1ETH
                       </CardText>
                     </div>
                     <div className='buy-bid-btn-div'>
@@ -916,7 +827,11 @@ class Home extends Component {
                           }}
                         ></p>
                       </div>
-                      <a target='blank' href='https://map.superworldapp.com/'>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                        style={{ marginTop: '0.85rem' }}
+                      >
                         <button className='buy-bid-btn'>Purchase</button>
                       </a>
                     </div>
