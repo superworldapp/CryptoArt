@@ -66,16 +66,16 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
   const getCreData = async () => {
     let cre = await contract?.getPastEvents('tokencreated', {
       filter: { tokenId: art.tokenIdentifier },
-      fromBlock: 0,
+      fromBlock: 7970334,
     });
     //  // Using an array means OR: e.g. 20 or 23
     let tb = await contract?.getPastEvents('tokenbought', {
       filter: { tokenId: art.tokenIdentifier },
-      fromBlock: 0,
+      fromBlock: 7970334,
     });
     let tfs = await contract?.getPastEvents('tokenputforsale', {
       filter: { tokenId: art.tokenIdentifier },
-      fromBlock: 0,
+      fromBlock: 7970334,
     });
     for (let property in cre) {
       creValue.push(cre[property]);
@@ -105,10 +105,10 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
   };
 
   const handlePurchase = async () => {
-    const res = await contract?.methods.buyToken(art.tokenIdentifier).send({
+    const res = await contract?.methods.buyToken(art?.tokenIdentifier).send({
       from: accounts,
-      value: art.tokenSellPrice,
-      gas: 1000000,
+      value: art?.tokenSellPrice.toString(),
+      gas: 7000000,
     });
     setPurchaseSuccess(true);
     console.log(res);

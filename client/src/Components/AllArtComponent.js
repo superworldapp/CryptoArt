@@ -38,11 +38,11 @@ class AllArt extends Component {
   creData = async () => {
     let cre = await this.props.contract?.getPastEvents('tokencreated', {
       filter: { tokenId: this.props.art.tokenIdentifier },
-      fromBlock: 0,
+      fromBlock: 7970334,
     });
     let tokenBid = await this.props.contract?.getPastEvents('tokenbid', {
       filter: { tokenId: this.props.art.tokenIdentifier },
-      fromBlock: 0,
+      fromBlock: 7970334,
     });
 
     console.log(tokenBid);
@@ -54,11 +54,11 @@ class AllArt extends Component {
 
     let tb = await this.props.contract?.getPastEvents('tokenbought', {
       filter: { tokenId: this.props.art.tokenIdentifier },
-      fromBlock: 0,
+      fromBlock: 7970334,
     });
     let tfs = await this.props.contract?.getPastEvents('tokenputforsale', {
       filter: { tokenId: this.props.art.tokenIdentifier },
-      fromBlock: 0,
+      fromBlock: 7970334,
     });
     console.log(this.props.art.tokenIdentifier, cre);
   };

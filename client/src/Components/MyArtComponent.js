@@ -174,7 +174,7 @@ class Allpatrender extends Component {
   EndAuction = async () => {
     const res = await this.props.contract.methods
       .closeBidOwner(this.props.art.tokenIdentifier)
-      .send({ from: this.props.accounts, gas: 1000000 });
+      .send({ from: this.props.accounts, gas: 7000000 });
     console.log(res);
   };
   AddBid = async () => {
@@ -864,7 +864,7 @@ class MyItemComponent extends Component {
 
       if (Array.isArray(res.events.tokencreated)) {
         data = await res.events.tokencreated.map((token) =>
-          Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
+          Axios.post(`https://geo.superworldapp.com/api/json/token/add`, {
             tokenId: token.returnValues.tokenId.toString(),
             description: 'A unique piece of art',
             image: imgUrl,
@@ -876,7 +876,7 @@ class MyItemComponent extends Component {
         );
       } else {
         data = await Axios.post(
-          `http://geo.superworldapp.com/api/json/token/add`,
+          `https://geo.superworldapp.com/api/json/token/add`,
           {
             tokenId: res.events.tokencreated.returnValues.tokenId.toString(),
             description: 'A unique piece of art',
