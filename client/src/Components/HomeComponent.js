@@ -43,7 +43,7 @@ import anonUser from '../images/user.png';
 import p1 from '../images/p1.png';
 import svg1 from '../images/svg/angle.svg';
 import './HomeComponent.css';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 class Home extends Component {
   static contextType = LayoutContext;
@@ -540,6 +540,393 @@ class Home extends Component {
                   </CardBody>
                 </Card>
               </div>
+              
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  paddingTop: '7%',
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: '18px',
+                    fontFamily: 'Gibson',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {' '}
+                  Popular in Real Estate
+                </p>
+                <a
+                  href=''
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontWeight: 'bold',
+                    fontSize: '18px',
+                    textDecoration: 'none',
+                    color: 'gray',
+                  }}
+                >
+                  {' '}
+                  View More <img src={svg1} alt='svg1' />
+                </a>
+              </div>
+              <div className='rowImages'>
+                <Card className='imageCards'>
+                  <CardImg
+                    top
+                    width='100%'
+                    height='65%'
+                    src={arcDeTriomphe}
+                    alt='image3'
+                  ></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: '#888888',
+                        }}
+                      >
+                        Caozhibing
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        Arc de Triomphe
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: 'black',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'></div>
+                      <a href = 'https://map.superworldapp.com/'>
+                      <button className='buy-bid-btn'>Purchase</button>
+                      </a>
+                      
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg
+                    top
+                    width='100%'
+                    height='65%'
+                    src={greatPyramidOfGiza}
+                    alt='image3'
+                  ></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: '#888888',
+                        }}
+                      >
+                        Amy000
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        The Great Pyramid of Giza
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: '#black',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        ></p>
+                      </div>
+                      <a href = 'https://map.superworldapp.com/'>
+                      <button className='buy-bid-btn'>Purchase</button>
+                      </a>
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg
+                    top
+                    width='100%'
+                    height='65%'
+                    src={theColosseum}
+                    alt='image3'
+                  ></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: '#888888',
+                        }}
+                      >
+                        Caozhibing
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        The Colosseum
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: 'black',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        ></p>
+                      </div>
+                      <a href = 'https://map.superworldapp.com/'>
+                      <button className='buy-bid-btn'>Purchase</button>
+                      </a>
+                      
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg
+                    top
+                    width='100%'
+                    height='65%'
+                    src={neuschwansteinCastle}
+                    alt='image3'
+                  ></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: '#888888',
+                        }}
+                      >
+                        Behancehue
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        Neuschwanstein Castle
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: 'black',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'></div>
+                      <a href = 'https://map.superworldapp.com/'>
+                      <button className='buy-bid-btn'>Purchase</button>
+                      </a>
+                      
+                    </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg
+                    top
+                    width='100%'
+                    height='65%'
+                    src={goldenTemple}
+                    alt='image3'
+                  ></CardImg>
+                  <CardBody>
+                    <div
+                      style={{
+                        display: 'flex',
+                      }}
+                    >
+                      <CardSubtitle>
+                        <img
+                          style={{
+                            marginRight: '30px',
+                          }}
+                          width='16px'
+                          height='16px'
+                          className='rounded-circle'
+                          src={anonUser}
+                        ></img>
+                      </CardSubtitle>
+                      <CardSubtitle
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: '#888888',
+                        }}
+                      >
+                        Behancehue
+                      </CardSubtitle>
+                    </div>
+                    <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        Golden Temple
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: 'black',
+                        }}
+                      >
+                        0.5ETH
+                      </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'>
+                        <p
+                          style={{
+                            fontFamily: 'Gibson',
+                            fontSize: '9px',
+                            color: 'gray',
+                            marginLeft: '0.35rem',
+                            marginBottom: '0rem',
+                          }}
+                        ></p>
+                      </div>
+                      <a href = 'https://map.superworldapp.com/'>
+                      <button className='buy-bid-btn'>Purchase</button>
+                      </a>
+                    </div>
+                  </CardBody>
+                </Card>
+              </div>
               <div
                 style={{
                   display: 'flex',
@@ -879,379 +1266,6 @@ class Home extends Component {
                         }}
                       >
                         Alberto Seveso
-                      </CardText>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                        }}
-                      >
-                        0.5ETH
-                      </CardText>
-                    </div>
-                    <div className='buy-bid-btn-div'>
-                      <div className='time-div'>
-                        <p
-                          style={{
-                            fontFamily: 'Gibson',
-                            fontSize: '9px',
-                            color: 'gray',
-                            marginLeft: '0.35rem',
-                            marginBottom: '0rem',
-                          }}
-                        ></p>
-                      </div>
-                      <button className='buy-bid-btn'>Purchase</button>
-                    </div>
-                  </CardBody>
-                </Card>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  paddingTop: '7%',
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: '18px',
-                    fontFamily: 'Gibson',
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {' '}
-                  Popular in Real Estate
-                </p>
-                <a
-                  href=''
-                  style={{
-                    fontFamily: 'Gibson',
-                    fontWeight: 'bold',
-                    fontSize: '18px',
-                    textDecoration: 'none',
-                    color: 'gray',
-                  }}
-                >
-                  {' '}
-                  View More <img src={svg1} alt='svg1' />
-                </a>
-              </div>
-              <div className='rowImages'>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    width='100%'
-                    height='65%'
-                    src={arcDeTriomphe}
-                    alt='image3'
-                  ></CardImg>
-                  <CardBody>
-                    <div
-                      style={{
-                        display: 'flex',
-                      }}
-                    >
-                      <CardSubtitle>
-                        <img
-                          style={{
-                            marginRight: '30px',
-                          }}
-                          width='16px'
-                          height='16px'
-                          className='rounded-circle'
-                          src={anonUser}
-                        ></img>
-                      </CardSubtitle>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#888888',
-                        }}
-                      >
-                        Caozhibing
-                      </CardSubtitle>
-                    </div>
-                    <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        Arc de Triomphe
-                      </CardText>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                        }}
-                      >
-                        0.5ETH
-                      </CardText>
-                    </div>
-                    <div className='buy-bid-btn-div'>
-                      <div className='time-div'></div>
-                      <button className='buy-bid-btn'>Purchase</button>
-                    </div>
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    width='100%'
-                    height='65%'
-                    src={greatPyramidOfGiza}
-                    alt='image3'
-                  ></CardImg>
-                  <CardBody>
-                    <div
-                      style={{
-                        display: 'flex',
-                      }}
-                    >
-                      <CardSubtitle>
-                        <img
-                          style={{
-                            marginRight: '30px',
-                          }}
-                          width='16px'
-                          height='16px'
-                          className='rounded-circle'
-                          src={anonUser}
-                        ></img>
-                      </CardSubtitle>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#888888',
-                        }}
-                      >
-                        Amy000
-                      </CardSubtitle>
-                    </div>
-                    <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        The Great Pyramid of Giza
-                      </CardText>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#black',
-                        }}
-                      >
-                        0.5ETH
-                      </CardText>
-                    </div>
-                    <div className='buy-bid-btn-div'>
-                      <div className='time-div'>
-                        <p
-                          style={{
-                            fontFamily: 'Gibson',
-                            fontSize: '9px',
-                            color: 'gray',
-                            marginLeft: '0.35rem',
-                            marginBottom: '0rem',
-                          }}
-                        ></p>
-                      </div>
-                      <button className='buy-bid-btn'>Purchase</button>
-                    </div>
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    width='100%'
-                    height='65%'
-                    src={theColosseum}
-                    alt='image3'
-                  ></CardImg>
-                  <CardBody>
-                    <div
-                      style={{
-                        display: 'flex',
-                      }}
-                    >
-                      <CardSubtitle>
-                        <img
-                          style={{
-                            marginRight: '30px',
-                          }}
-                          width='16px'
-                          height='16px'
-                          className='rounded-circle'
-                          src={anonUser}
-                        ></img>
-                      </CardSubtitle>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#888888',
-                        }}
-                      >
-                        Caozhibing
-                      </CardSubtitle>
-                    </div>
-                    <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        The Colosseum
-                      </CardText>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                        }}
-                      >
-                        0.5ETH
-                      </CardText>
-                    </div>
-                    <div className='buy-bid-btn-div'>
-                      <div className='time-div'>
-                        <p
-                          style={{
-                            fontFamily: 'Gibson',
-                            fontSize: '9px',
-                            color: 'gray',
-                            marginLeft: '0.35rem',
-                            marginBottom: '0rem',
-                          }}
-                        ></p>
-                      </div>
-                      <button className='buy-bid-btn'>Purchase</button>
-                    </div>
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    width='100%'
-                    height='65%'
-                    src={neuschwansteinCastle}
-                    alt='image3'
-                  ></CardImg>
-                  <CardBody>
-                    <div
-                      style={{
-                        display: 'flex',
-                      }}
-                    >
-                      <CardSubtitle>
-                        <img
-                          style={{
-                            marginRight: '30px',
-                          }}
-                          width='16px'
-                          height='16px'
-                          className='rounded-circle'
-                          src={anonUser}
-                        ></img>
-                      </CardSubtitle>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#888888',
-                        }}
-                      >
-                        Behancehue
-                      </CardSubtitle>
-                    </div>
-                    <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        Neuschwanstein Castle
-                      </CardText>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                        }}
-                      >
-                        0.5ETH
-                      </CardText>
-                    </div>
-                    <div className='buy-bid-btn-div'>
-                      <div className='time-div'></div>
-                      <button className='buy-bid-btn'>Purchase</button>
-                    </div>
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    width='100%'
-                    height='65%'
-                    src={goldenTemple}
-                    alt='image3'
-                  ></CardImg>
-                  <CardBody>
-                    <div
-                      style={{
-                        display: 'flex',
-                      }}
-                    >
-                      <CardSubtitle>
-                        <img
-                          style={{
-                            marginRight: '30px',
-                          }}
-                          width='16px'
-                          height='16px'
-                          className='rounded-circle'
-                          src={anonUser}
-                        ></img>
-                      </CardSubtitle>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#888888',
-                        }}
-                      >
-                        Behancehue
-                      </CardSubtitle>
-                    </div>
-                    <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        Golden Temple
                       </CardText>
                       <CardText
                         style={{

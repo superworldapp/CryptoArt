@@ -878,7 +878,7 @@ class MyItemComponent extends Component {
               textAlign: 'left',
             }}
           >
-            My Arts
+            My Collections
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
