@@ -160,7 +160,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
           >
             Buy Item
           </button>
-          {loadingPurchase ? <img src={loader} /> : <div></div>}
+          <div>{loadingPurchase ? <img src={loader} /> : <div></div>}</div>
         </div>
       );
     } else if (art.auction.isBidding) {
@@ -185,7 +185,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
             >
               Place Bid
             </button>
-            {loadingPlaceBid ? <img src={loader} /> : <div></div>}
+            <div>{loadingPlaceBid ? <img src={loader} /> : <div></div>}</div>
           </div>
           {/* <Modal
                         isOpen={modalOpen}
