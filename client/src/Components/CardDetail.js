@@ -82,6 +82,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
       value: (handleInput * ETHER).toString(),
     });
     setLoadingPlaceBid(false);
+    setBidSuccess(true);
     console.log(res);
   };
 
@@ -512,7 +513,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
               You have successfully placed a bid!
             </p>
             <Link
-              to='/myart'
+              to='/allart'
               style={{ display: 'flex', justifyContent: 'center' }}
             >
               <button className='upload-more-btn'>
