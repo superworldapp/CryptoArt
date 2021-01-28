@@ -1,4 +1,4 @@
-{
+{ "homepage": "https://kole-swapnil.github.io/CryptoArt",
   "name": "client",
   "version": "0.1.0",
   "private": true,
@@ -35,6 +35,7 @@
     "font-awesome": "^4.7.0",
     "fortmatic": "^2.2.1",
     "fs": "0.0.1-security",
+    "gh-pages": "^3.1.0",
     "i": "^0.3.6",
     "identicon": "^3.0.1",
     "identicon.js": "^2.3.3",
@@ -59,6 +60,8 @@
     "web3-react": "^5.0.5"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
