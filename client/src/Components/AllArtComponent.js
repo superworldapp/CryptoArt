@@ -19,6 +19,7 @@ import {
 } from 'reactstrap';
 import Web3 from 'web3';
 import './AllArtComponent.css';
+import checkmark from '../images/svg/checkmark.svg';
 import anonUser from '../images/user.png';
 import image3 from '../images/image 6.png';
 
