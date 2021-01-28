@@ -186,7 +186,7 @@ class Allpatrender extends Component {
   CloseBid = async () => {
     const res = await this.props.contract.methods
       .closBid(this.props.art.tokenIdentifier)
-      .send({ from: this.props.accounts, gas: 1000000 });
+      .send({ from: this.props.accounts, gas: 7000000 });
     console.log(res);
   };
   render() {
