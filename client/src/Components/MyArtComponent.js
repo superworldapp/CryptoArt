@@ -255,12 +255,12 @@ class Allpatrender extends Component {
               src={this.props.art.imgurl}
               alt='Card image'
             ></CardImg>
+            <CardImgOverlay>
+              <Badge pill className={x.class}>
+                {x.title}
+              </Badge>
+            </CardImgOverlay>
           </Link>
-          <CardImgOverlay>
-            <Badge pill className={x.class}>
-              {x.title}
-            </Badge>
-          </CardImgOverlay>
         </div>
 
         <CardBody className='all-art-body'>
