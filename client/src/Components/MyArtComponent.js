@@ -217,6 +217,8 @@ class Allpatrender extends Component {
         return '@CJ Test';
       else if (accNum === '0x4271AC6Bb565D120e2Ac1C3fb855aE5Dad6aE8ff')
         return '@Swapnil';
+      else if (accNum === '0x81B2362F55Ea93f71990d7F446dca80BdD94C6e7')
+        return '@SwapnilTest';
       else return '@Annonymous';
     };
     const colorpills = () => {
