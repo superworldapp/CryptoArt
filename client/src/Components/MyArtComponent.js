@@ -385,7 +385,6 @@ class Allpatrender extends Component {
             >
               Delist
             </button>
-            {this.state.delistLoading ? <img src={loader} /> : <div></div>}
             {forAuc === 'visible' ? (
               <button
                 style={{
@@ -399,6 +398,7 @@ class Allpatrender extends Component {
             ) : (
               <div></div>
             )}
+
             <button
               className={b}
               //className={auc1}
@@ -427,7 +427,6 @@ class Allpatrender extends Component {
             ) : (
               <div></div>
             )}
-            {this.state.auctionLoading ? <img src={loader} /> : <div></div>}
 
             <Modal
               isOpen={this.state.isModalOpen}
@@ -779,6 +778,18 @@ class Allpatrender extends Component {
                                 </CardBody>
                             </Card>
                         </Modal>  */}
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {this.state.delistLoading ? (
+              <img height='35' src={loader} />
+            ) : (
+              <div></div>
+            )}
+            {this.state.auctionLoading ? (
+              <img height='35' src={loader} />
+            ) : (
+              <div></div>
+            )}
           </div>
         </CardBody>
       </Card>
@@ -1192,7 +1203,7 @@ class MyItemComponent extends Component {
                 marginTop: '1rem',
               }}
             >
-              Hi , your upload was successful!
+              Hi, your upload was successful!
             </p>
             <p style={{ textAlign: 'center', color: 'gray', fontSize: '12px' }}>
               You can view your recent upload file under “MY COLLECTIONS”
