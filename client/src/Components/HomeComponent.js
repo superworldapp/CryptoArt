@@ -540,7 +540,6 @@ class Home extends Component {
                   </CardBody>
                 </Card>
               </div>
-              
               <div
                 style={{
                   display: 'flex',
@@ -631,10 +630,9 @@ class Home extends Component {
                     </div>
                     <div className='buy-bid-btn-div'>
                       <div className='time-div'></div>
-                      <a href = 'https://map.superworldapp.com/'>
-                      <button className='buy-bid-btn'>Purchase</button>
+                      <a target='blank' href='https://map.superworldapp.com/'>
+                        <button className='buy-bid-btn'>Purchase</button>
                       </a>
-                      
                     </div>
                   </CardBody>
                 </Card>
@@ -706,8 +704,8 @@ class Home extends Component {
                           }}
                         ></p>
                       </div>
-                      <a href = 'https://map.superworldapp.com/'>
-                      <button className='buy-bid-btn'>Purchase</button>
+                      <a target='blank' href='https://map.superworldapp.com/'>
+                        <button className='buy-bid-btn'>Purchase</button>
                       </a>
                     </div>
                   </CardBody>
@@ -780,10 +778,9 @@ class Home extends Component {
                           }}
                         ></p>
                       </div>
-                      <a href = 'https://map.superworldapp.com/'>
-                      <button className='buy-bid-btn'>Purchase</button>
+                      <a target='blank' href='https://map.superworldapp.com/'>
+                        <button className='buy-bid-btn'>Purchase</button>
                       </a>
-                      
                     </div>
                   </CardBody>
                 </Card>
@@ -845,10 +842,9 @@ class Home extends Component {
                     </div>
                     <div className='buy-bid-btn-div'>
                       <div className='time-div'></div>
-                      <a href = 'https://map.superworldapp.com/'>
-                      <button className='buy-bid-btn'>Purchase</button>
+                      <a target='blank' href='https://map.superworldapp.com/'>
+                        <button className='buy-bid-btn'>Purchase</button>
                       </a>
-                      
                     </div>
                   </CardBody>
                 </Card>
@@ -920,8 +916,8 @@ class Home extends Component {
                           }}
                         ></p>
                       </div>
-                      <a href = 'https://map.superworldapp.com/'>
-                      <button className='buy-bid-btn'>Purchase</button>
+                      <a target='blank' href='https://map.superworldapp.com/'>
+                        <button className='buy-bid-btn'>Purchase</button>
                       </a>
                     </div>
                   </CardBody>
