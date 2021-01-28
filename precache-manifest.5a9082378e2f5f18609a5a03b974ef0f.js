@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "256bee35a001a3a0eca00cc99e01a782",
+    "revision": "e4a1d73d953f1b53bb635f6af789dcc7",
     "url": "/CryptoArt/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/CryptoArt/static/css/2.634cdb47.chunk.css"
   },
   {
-    "revision": "e9167f7dc787e83f4dba",
+    "revision": "2e7f1e7608d78b665d10",
     "url": "/CryptoArt/static/css/main.975e71c0.chunk.css"
   },
   {
@@ -32,8 +32,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/CryptoArt/static/js/4.a2613f7a.chunk.js"
   },
   {
-    "revision": "e9167f7dc787e83f4dba",
-    "url": "/CryptoArt/static/js/main.642fb350.chunk.js"
+    "revision": "2e7f1e7608d78b665d10",
+    "url": "/CryptoArt/static/js/main.12c84b6d.chunk.js"
   },
   {
     "revision": "1adfd000aa3d331e5c35",
