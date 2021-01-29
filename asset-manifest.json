@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/CryptoArt/static/css/main.975e71c0.chunk.css",
-    "main.js": "/CryptoArt/static/js/main.983b073a.chunk.js",
-    "main.js.map": "/CryptoArt/static/js/main.983b073a.chunk.js.map",
+    "main.js": "/CryptoArt/static/js/main.a7d7489e.chunk.js",
+    "main.js.map": "/CryptoArt/static/js/main.a7d7489e.chunk.js.map",
     "runtime-main.js": "/CryptoArt/static/js/runtime-main.0ccadf13.js",
     "runtime-main.js.map": "/CryptoArt/static/js/runtime-main.0ccadf13.js.map",
     "static/css/2.634cdb47.chunk.css": "/CryptoArt/static/css/2.634cdb47.chunk.css",
@@ -13,7 +13,7 @@
     "static/js/4.a2613f7a.chunk.js": "/CryptoArt/static/js/4.a2613f7a.chunk.js",
     "static/js/4.a2613f7a.chunk.js.map": "/CryptoArt/static/js/4.a2613f7a.chunk.js.map",
     "index.html": "/CryptoArt/index.html",
-    "precache-manifest.33b8b01c09e3a933ff98d98742b6f3ef.js": "/CryptoArt/precache-manifest.33b8b01c09e3a933ff98d98742b6f3ef.js",
+    "precache-manifest.957ccbd62b4fd29afde43bfa0572197a.js": "/CryptoArt/precache-manifest.957ccbd62b4fd29afde43bfa0572197a.js",
     "service-worker.js": "/CryptoArt/service-worker.js",
     "static/css/2.634cdb47.chunk.css.map": "/CryptoArt/static/css/2.634cdb47.chunk.css.map",
     "static/css/main.975e71c0.chunk.css.map": "/CryptoArt/static/css/main.975e71c0.chunk.css.map",
@@ -64,6 +64,6 @@
     "static/css/2.634cdb47.chunk.css",
     "static/js/2.cf78ba4d.chunk.js",
     "static/css/main.975e71c0.chunk.css",
-    "static/js/main.983b073a.chunk.js"
+    "static/js/main.a7d7489e.chunk.js"
   ]
 }
