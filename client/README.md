@@ -1,3 +1,7 @@
+"homepage": "https://kole-swapnil.github.io/CryptoArt"
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
