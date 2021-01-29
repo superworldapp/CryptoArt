@@ -182,7 +182,7 @@ class Allpatrender extends Component {
     this.setState({ endAuctionLoading: true });
     const res = await this.props.contract.methods
       .closeBidOwner(this.props.art.tokenIdentifier)
-      .send({ from: this.props.accounts, gas: 1000000 });
+      .send({ from: this.props.accounts, gas: 7000000 });
     this.setState({ endAuctionLoading: false, endAuctionSuccess: true });
     console.log(res);
   };
