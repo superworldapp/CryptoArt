@@ -951,6 +951,7 @@ class MyItemComponent extends Component {
 
       console.log('data', data);
       this.toggleModal1();
+      window.location.reload(false);
       this.setState({ isLoading: false, uploadSuccess: true });
     } catch (err) {
       this.setState({ loadingError: true });
