@@ -83,6 +83,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
     });
     setLoadingPlaceBid(false);
     setBidSuccess(true);
+    window.location.reload();
     console.log(res);
   };
 
@@ -101,13 +102,13 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
       fromBlock: 7970334,
     });
     let tokenBid = await contract?.getPastEvents('tokenbid', {
-        filter: { tokenId: art.tokenIdentifier },
-        fromBlock: 7970334,
-      });
-      let bidStarted = await contract?.getPastEvents('bidstarted', {
-            filter: { tokenId: art.tokenIdentifier },
-            fromBlock: 7970334,
-        });
+      filter: { tokenId: art.tokenIdentifier },
+      fromBlock: 7970334,
+    });
+    let bidStarted = await contract?.getPastEvents('bidstarted', {
+      filter: { tokenId: art.tokenIdentifier },
+      fromBlock: 7970334,
+    });
     for (let property in cre) {
       creValue.push(cre[property]);
     }
@@ -119,13 +120,12 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
     }
     //if(tokenBid?.length == 0){
     for (let property in tokenBid) {
-        creValue.push(tokenBid[property]);
-      }
-      for (let property in bidStarted) {
-        creValue.push(bidStarted[property]);
-      }
+      creValue.push(tokenBid[property]);
+    }
+    for (let property in bidStarted) {
+      creValue.push(bidStarted[property]);
+    }
 
-    
     creValue.sort((a, b) => {
       return Number(b.returnValues.times) - Number(a.returnValues.times);
     });

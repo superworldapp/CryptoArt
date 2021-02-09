@@ -160,6 +160,7 @@ class Allpatrender extends Component {
       .send({ from: this.props.accounts, gas: 1000000 });
     this.setState({ putForSaleLoading: false, listForSaleSuccess: true });
     this.toggleModal();
+    window.location.reload();
     console.log(res);
   };
   DeSale = async () => {
@@ -168,6 +169,7 @@ class Allpatrender extends Component {
       .deSale(this.props.art.tokenIdentifier)
       .send({ from: this.props.accounts, gas: 1000000 });
     this.setState({ delistLoading: false });
+    window.location.reload();
     console.log(res);
   };
   StartAuction = async () => {
@@ -176,6 +178,7 @@ class Allpatrender extends Component {
       .startbid(this.props.art.tokenIdentifier)
       .send({ from: this.props.accounts, gas: 1000000 });
     this.setState({ auctionLoading: false, listForAuctionSuccess: true });
+    window.location.reload();
     console.log(res);
   };
   EndAuction = async () => {
@@ -184,12 +187,14 @@ class Allpatrender extends Component {
       .closeBidOwner(this.props.art.tokenIdentifier)
       .send({ from: this.props.accounts, gas: 7000000 });
     this.setState({ endAuctionLoading: false, endAuctionSuccess: true });
+    window.location.reload();
     console.log(res);
   };
   AddBid = async () => {
     const res = await this.props.contract.methods
       .addBid(this.props.art.tokenIdentifier)
       .send({ from: this.props.accounts, gas: 1000000, value: 1000000 });
+    // window.location.reload();
     console.log(res);
   };
   CloseBid = async () => {
@@ -951,7 +956,7 @@ class MyItemComponent extends Component {
 
       console.log('data', data);
       this.toggleModal1();
-      window.location.reload(false);
+      window.location.reload();
       this.setState({ isLoading: false, uploadSuccess: true });
     } catch (err) {
       this.setState({ loadingError: true });
