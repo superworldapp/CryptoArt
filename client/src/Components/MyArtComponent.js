@@ -973,13 +973,17 @@ class MyItemComponent extends Component {
     console.log(res);
 
     let response = [];
+    let createrToken = [];
     for (let i = 1; i <= res; i++) {
       let rex = await this.props.contract?.methods.Arts(i).call();
       if (rex.tokenOwner == this.props.accounts) {
         response.push(rex);
       }
-      //else if(rex.tokenCreator == this.props.accounts)
+      else if(rex.tokenCreator == this.props.accounts){
+        createrToken.push(rex);
+      }
     }
+    console.log(createrToken);
     allDocs = [];
     allDocs = response;
     console.log(response);
