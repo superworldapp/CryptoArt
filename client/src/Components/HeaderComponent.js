@@ -111,7 +111,6 @@ class Header extends Component {
       changeUsernameSuccessDialogOpen: false,
       changePasswordSuccessDialogOpen: false,
       changePasswordErrorMessage: '',
-      redirect: false,
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.getnewHash = this.getnewHash.bind(this);
@@ -1045,7 +1044,7 @@ class Header extends Component {
                           });
                         Auth.logout();
                         this.handleClose();
-                        this.setState({ redirect: true });
+                        window.location.reload();
                       }}
                     >
                       <span
@@ -1119,7 +1118,6 @@ class Header extends Component {
                             )}
                         </small>
                     </h6> */}
-          {this.state.redirect ? <Redirect to='/home' /> : <div></div>}
         </Navbar>
       </>
     );
