@@ -208,16 +208,18 @@ class Allpatrender extends Component {
     let bak = this.props.art.isSelling ? 'bg-success text-white' : '';
     let buk = this.props.art.auction.isBidding ? 'bg-warning' : '';
     let b = this.props.art.isSelling ? 'hidden' : 'abtn';
-    let but1 = this.props.art.isSelling ? 'abtn' : 'hidden';
+    let b1 = this.props.art.isSelling ? 'hidden' : 'abtn1';
+    let but1 = this.props.art.isSelling ? 'abtn1' : 'hidden';
     let auc1 = this.props.art.auction.isBidding ? 'hidden' : 'abtn';
+    let auc2 = this.props.art.auction.isBidding ? 'hidden' : 'abtn1';
     let forAuc = this.props.art.auction.isBidding ? 'visible' : 'invisible';
     console.log(this.props.art.imgUrl);
     let pr =
       Web3.utils.fromWei(this.props.art.tokenSellPrice.toString(), 'ether') == 0
         ? 'invisible'
         : 'visible';
-    let reSellOrSell = this.props.art.isSelling ? 'Relist' : 'Sell';
-    let Auc = this.props.art.auction.isBidding ? 'End Auction' : 'Auction';
+    let reSellOrSell = this.props.art.isSelling ;
+    let Auc = this.props.art.auction.isBidding ;
     let accNum = this.props.art.tokenCreator;
 
     const accUsername = () => {
@@ -385,14 +387,33 @@ class Allpatrender extends Component {
             className='ctext'
             style={{ padding: '0px', height: '2rem', marginTop: '5%' }}
           >
-            <button
+            {reSellOrSell ? (
+              <button
+              className={auc2}
+              //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
+              // color='primary'
+              onClick={this.toggleModal}
+            >
+              Relist
+            </button>
+            ) :(
+              <button
+              className={auc1}
+              //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
+              // color='primary'
+              onClick={this.toggleModal}
+            >
+              Sell
+            </button>
+            )}
+            {/* <button
               className={auc1}
               //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
               // color='primary'
               onClick={this.toggleModal}
             >
               {reSellOrSell}
-            </button>
+            </button> */}
             <button
               className={but1}
               //className='abtn'
@@ -414,8 +435,42 @@ class Allpatrender extends Component {
             ) : (
               <div></div>
             )}
+            {Auc ? (
+              <button
+              className={b1}
+              //className={auc1}
+              //className='abtn'
+              type='submit'
+              // color='primary'
+              onClick={
+                this.props.art.auction.isBidding
+                  ? this.EndAuction
+                  : this.StartAuction
+              }
+              //onClick = {this.toggleAuction}
+            >
+              End Auction
+            </button>
+            ) :(
+              <button
+              className={b}
+              //className={auc1}
+              //className='abtn'
+              type='submit'
+              // color='primary'
+              onClick={
+                this.props.art.auction.isBidding
+                  ? this.EndAuction
+                  : this.StartAuction
+              }
+              //onClick = {this.toggleAuction}
+            >
+              Auction
+            </button>
+            )}
 
-            <button
+
+            {/* <button
               className={b}
               //className={auc1}
               //className='abtn'
@@ -429,7 +484,7 @@ class Allpatrender extends Component {
               //onClick = {this.toggleAuction}
             >
               {Auc}
-            </button>
+            </button> */}
             {this.state.endAuctionLoading ? <img src={loader} /> : <div></div>}
             {forAuc === 'visible' ? (
               <button
@@ -979,13 +1034,17 @@ class MyItemComponent extends Component {
     console.log(res);
 
     let response = [];
+    let createrToken = [];
     for (let i = 1; i <= res; i++) {
       let rex = await this.props.contract?.methods.Arts(i).call();
       if (rex.tokenOwner == this.props.accounts) {
         response.push(rex);
       }
-      //else if(rex.tokenCreator == this.props.accounts)
+      else if(rex.tokenCreator == this.props.accounts){
+        createrToken.push(rex);
+      }
     }
+    console.log(createrToken);
     allDocs = [];
     allDocs = response;
     console.log(response);
