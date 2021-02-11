@@ -13,6 +13,10 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from 'reactstrap';
 import loader from '../images/loader.svg';
 import image3 from '../images/image 6.png';
@@ -28,7 +32,7 @@ import Axios from 'axios';
 const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
   console.log(art);
 
-  const [ethPrice, setEthPrice] = useState(null);
+  const [ethPrice, setEthPrice] = useState({});
   const [creValue, setCreValue] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [handleInput, setHandleInput] = useState('');
@@ -37,6 +41,14 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
   const [loadingPlaceBid, setLoadingPlaceBid] = useState(false);
   const [bidSuccess, setBidSuccess] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownValue, setDropdownValue] = useState('');
+
+  const changeValue = (e) => {
+    setDropdownValue(e.currentTarget.textContent);
+  };
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   const ETHER = 1000000000000000000;
 
@@ -57,12 +69,16 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
   };
 
   const getEthDollarPrice = () => {
-    Axios.get(
-      `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_24hr_change=true`
-    ).then((res) => {
-      // console.log(typeof res.data.ethereum.usd_24h_change);
-      setEthPrice(res.data.ethereum);
-    });
+    try {
+      Axios.get(
+        `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,btc,eur,gpb&include_24hr_change=false`
+      ).then((res) => {
+        // console.log(typeof res.data.ethereum.usd_24h_change);
+        setEthPrice(res.data.ethereum);
+      });
+    } catch {
+      console.log('could not get the request');
+    }
     // return <span>{ethPrice.usd}</span>;
   };
 
@@ -365,6 +381,7 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
   //             });
   //         console.log(res);
   //     };
+  console.log(ethPrice);
   return (
     <>
       <div className='container'>
@@ -407,11 +424,23 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
                       Web3.utils.fromWei(
                         art?.tokenSellPrice.toString(),
                         'ether'
-                      ) * ethPrice?.usd
+                      ) * ethPrice[dropdownValue]
                     ).toFixed(2)}{' '}
-                    USD)
+                    )
                   </span>
                 </small>
+                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                  <DropdownToggle caret>Choose your currency</DropdownToggle>
+                  <DropdownMenu>
+                    {Object.keys(ethPrice).map((keyName, idx) => {
+                      return (
+                        <DropdownItem onClick={changeValue} key={idx}>
+                          {keyName}
+                        </DropdownItem>
+                      );
+                    })}
+                  </DropdownMenu>
+                </Dropdown>
               </h4>
 
               {buyOrSell()}
@@ -487,12 +516,21 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
             </p>
             <img src={checkmark} />
 
-            <p style={{ textAlign: 'center', color: 'gray', fontSize: '12px' }}>
+            <p
+              style={{
+                textAlign: 'center',
+                color: 'gray',
+                fontSize: '12px',
+              }}
+            >
               You have successfully made the purchase!
             </p>
             <Link
               to='/mycollections'
-              style={{ display: 'flex', justifyContent: 'center' }}
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+              }}
             >
               <button className='upload-more-btn'>VIEW MY COLLECTIONS</button>
             </Link>
@@ -529,12 +567,21 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
             </p>
             <img src={checkmark} />
 
-            <p style={{ textAlign: 'center', color: 'gray', fontSize: '12px' }}>
+            <p
+              style={{
+                textAlign: 'center',
+                color: 'gray',
+                fontSize: '12px',
+              }}
+            >
               You have successfully placed a bid!
             </p>
             <Link
               to='/allart'
-              style={{ display: 'flex', justifyContent: 'center' }}
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+              }}
             >
               <button className='upload-more-btn'>
                 GO BACK TO ART MARKETPLACE
