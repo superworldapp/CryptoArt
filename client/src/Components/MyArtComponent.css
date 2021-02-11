@@ -41,12 +41,42 @@
   text-transform: uppercase;
 }
 .abtn:hover {
-  background-color: #5540c7;
+  background-color:#3454dc;
   border-color: white;
   cursor: pointer;
+  color: white;
 }
 
 .abtn:focus {
+  outline: 0px;
+  border: 0;
+}
+
+
+
+.abtn1 {
+  position: relative;
+  opacity: 1;
+  margin: 0 10px;
+  border-radius: 2em;
+  font-family: canada-type-gibson, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  padding: 0.375rem 1.5rem;
+  border: 2px solid #5540c7;
+  background-color: white;
+  color: black;
+  text-transform: uppercase;
+}
+.abtn1:hover {
+  background-color: #267627;
+  border-color: white;
+  cursor: pointer;
+  color: white;
+}
+
+.abtn1:focus {
   outline: 0px;
   border: 0;
 }

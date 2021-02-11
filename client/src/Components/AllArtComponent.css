@@ -107,8 +107,8 @@ div.all-art-card.card {
 .landscape {
     max-height: auto;
     max-width: 100%;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
 }
 
 .bid-btn-container {
