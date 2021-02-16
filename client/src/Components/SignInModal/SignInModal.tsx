@@ -101,7 +101,7 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
     setLoading(true);
     try {
       const res = await axios.post(
-        `http://api.superworldapp.com/api/json/user/connect`,
+        `${process.env.REACT_APP_SW_API_URL}/user/connect`,
         {
           authType: 'e',
           authId: email,
