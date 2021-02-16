@@ -136,10 +136,13 @@ class Header extends Component {
     Axios.defaults.headers = {
       Authorization: Auth.getToken(),
     };
-
-    return Axios.get(`${process.env.REACT_APP_API_URL}/user/get`)
+    const { userId } = Auth.getToken();
+    return Axios.post(`${process.env.REACT_APP_SW_API_URL}/user/get`, {
+      userId: userId,
+    })
       .then((res) => {
-        this.setState({ currentUser: res.data });
+        console.log('res.data', res.data.data.username);
+        this.setState({ currentUser: res.data.data });
       })
       .catch((e) => {
         console.log(e);

@@ -106,6 +106,7 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
           authType: 'e',
           authId: email,
           authToken: password,
+          username,
         }
       );
       // Cookies.set('uid', res.data.user._id);
@@ -113,7 +114,7 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
       // Cookies.set('Authorization', 'Bearer ' + res.data.tk, {
       //   path: '',
       // });
-      // console.log('res in handleUserSign in', res);
+      console.log('res in handleUserSign in', res);
       Cookies.set('session', res.data.data.session);
       Cookies.set('userId', res.data.data.userId);
       // console.log('Cookies', Cookies.get());
@@ -138,17 +139,19 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
     setLoading(true);
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/create/user`, {
+      .post(`${process.env.REACT_APP_SW_API_URL}/user/connect`, {
         username: username,
-        email: email,
-        password: password,
       })
       .then((res) => {
+        console.log('res in signup', res);
         // Cookies.set('uid', res.data.user._id);
-        Cookies.set('Authorization', 'Bearer ' + res.data.tk, { path: '' });
+        // Cookies.set('Authorization', 'Bearer ' + res.data.tk, { path: '' });
+
+        Cookies.set('session', res.data.data.session);
+        Cookies.set('userId', res.data.data.userId);
         setLoggedIn(true);
         Auth.authenticate();
-        Auth.setUser(res.data.user);
+        // Auth.setUser(res.data.user);
         setLoading(false);
         setNewSignUp(true);
       })
