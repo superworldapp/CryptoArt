@@ -5,27 +5,32 @@ const Auth = {
   isAuthenticated: false,
   user: null,
   getToken() {
-    const cookie = Cookies.get('Authorization');
-    // console.log("GET TOKEN");
-    return cookie;
+    const session = Cookies.get('session');
+    const userId = Cookies.get('userId');
+    // const cookie = Cookies.get('Authorization');
+    return { session, userId };
   },
   authenticate() {
     try {
       const tk = this.getToken();
-      if (tk) {
-        const decoded = decode(tk);
-        // console.log("AUTH TEST");
-        // console.log(tk);
-        if (decoded.iat < Date.now() / 1000) {
-          this.isAuthenticated = true;
-        }
+      // if (tk) {
+      //   const decoded = decode(tk);
+      //   // console.log("AUTH TEST");
+      //   // console.log(tk);
+      //   if (decoded.iat < Date.now() / 1000) {
+      //     this.isAuthenticated = true;
+      //   }
+      // }
+      if (tk.session && tk.userId) {
+        this.isAuthenticated = true;
       }
     } catch (error) {
       this.isAuthenticated = false;
     }
   },
   logout() {
-    Cookies.remove('Authorization');
+    // Cookies.remove('Authorization');
+    Cookies.remove('session', 'userId');
     this.isAuthenticated = false;
   },
   getAuth() {

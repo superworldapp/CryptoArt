@@ -28,7 +28,10 @@ interface IHeader {
   initContracts: () => void;
 }
 
-const SignInModal = ({ initContracts }: IHeader) => {
+interface Props {
+  login: () => void;
+}
+const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
   const history = useHistory();
   const { state, dispatch } = useContext(LayoutContext);
   // const { activate, account } = useWeb3React<Web3Provider>();
@@ -98,17 +101,25 @@ const SignInModal = ({ initContracts }: IHeader) => {
     setLoading(true);
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/user/login`,
+        `http://api.superworldapp.com/api/json/user/connect`,
         {
-          email,
-          password,
+          authType: 'e',
+          authId: email,
+          authToken: password,
         }
       );
       // Cookies.set('uid', res.data.user._id);
-      Cookies.set('Authorization', 'Bearer ' + res.data.tk, { path: '' });
+      //NEED A BEARER TOKEN
+      // Cookies.set('Authorization', 'Bearer ' + res.data.tk, {
+      //   path: '',
+      // });
+      // console.log('res in handleUserSign in', res);
+      Cookies.set('session', res.data.data.session);
+      Cookies.set('userId', res.data.data.userId);
+      // console.log('Cookies', Cookies.get());
       setLoggedIn(true);
       Auth.authenticate();
-      Auth.setUser(res.data.user);
+      // Auth.setUser(res.data.user);
       setLoading(false);
     } catch (error) {
       setOpenError(true);
