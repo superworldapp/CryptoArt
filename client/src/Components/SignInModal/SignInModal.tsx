@@ -122,6 +122,7 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
       // Auth.setUser(res.data.user);
       setLoading(false);
     } catch (error) {
+      console.log('login error');
       setOpenError(true);
       setNotificationMessage(
         <Alert variant='filled' severity='error'>
