@@ -155,7 +155,6 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
       // Cookies.set('Authorization', 'Bearer ' + res.data.tk, {
       //   path: '',
       // });
-      console.log('res in handleUserSign in', res);
       Cookies.set('session', res.data.data.session);
       Cookies.set('userId', res.data.data.userId);
       // console.log('Cookies', Cookies.get());

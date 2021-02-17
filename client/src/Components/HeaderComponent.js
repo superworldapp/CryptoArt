@@ -141,7 +141,6 @@ class Header extends Component {
       userId: userId,
     })
       .then((res) => {
-        console.log('res.data', res.data.data.username);
         this.setState({ currentUser: res.data.data });
       })
       .catch((e) => {
