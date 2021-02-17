@@ -35,6 +35,7 @@ import Identicon from 'identicon.js';
 import Web3 from 'web3';
 import './HeaderComponent.css';
 import dotenv from 'dotenv';
+
 const env = dotenv.config();
 let util;
 let util1;
@@ -135,10 +136,13 @@ class Header extends Component {
     Axios.defaults.headers = {
       Authorization: Auth.getToken(),
     };
-
-    return Axios.get(`${process.env.REACT_APP_API_URL}/user/get`)
+    const { userId } = Auth.getToken();
+    return Axios.post(`${process.env.REACT_APP_SW_API_URL}/user/get`, {
+      userId: userId,
+    })
       .then((res) => {
-        this.setState({ currentUser: res.data });
+        console.log('res.data', res.data.data.username);
+        this.setState({ currentUser: res.data.data });
       })
       .catch((e) => {
         console.log(e);
@@ -239,12 +243,20 @@ class Header extends Component {
     Axios.defaults.headers = {
       Authorization: Auth.getToken(),
     };
-    Axios.post(`${process.env.REACT_APP_API_URL}/user/changeUsername`, {
-      username: this.state.credentials.newUsername,
-    })
+    const tk = Auth.getToken();
+    const { userId, session } = tk;
+    Axios.post(
+      `${process.env.REACT_APP_SW_API_URL}/user/update/${userId}/${session}`,
+      {
+        username: this.state.credentials.newUsername,
+      }
+    )
       .then((response) => {
         this.setState({ changeUsernameSuccessDialogOpen: true });
         this.setState({ changeUsernamePressed: false });
+        this.setState({
+          newUsernameToDisplay: this.state.credentials.newUsername,
+        });
         this.setState({
           credentials: {
             ...this.state.credentials,
@@ -262,9 +274,12 @@ class Header extends Component {
     Axios.defaults.headers = {
       Authorization: Auth.getToken(),
     };
-    Axios.post(`${process.env.REACT_APP_API_URL}/user/changePassword`, {
-      currentPassword: this.state.credentials.currentPassword,
-      password: this.state.credentials.newPassword,
+    const tk = Auth.getToken();
+    Axios.post(`${process.env.REACT_APP_SW_API_URL}/password/reset`, {
+      authType: 'e',
+      authId: this.state.currentUser.email,
+      // currentPassword: this.state.credentials.currentPassword,
+      // password: this.state.credentials.newPassword,
     })
       .then((response) => {
         if (response.data.status === 's') {
@@ -575,7 +590,9 @@ class Header extends Component {
                               maxHeight: '10px',
                             }}
                           >
-                            {this.state.currentUser.username}
+                            {this.state.newUsernameToDisplay
+                              ? this.state.newUsernameToDisplay
+                              : this.state.currentUser.username}
                           </p>
                         </div>
                       </MenuItem>
@@ -923,7 +940,10 @@ class Header extends Component {
                             color: 'gray',
                           }}
                         >
-                          Hello, {this.state.currentUser.username}
+                          Hello,
+                          {this.state.credentials.newUsername
+                            ? this.state.credentials.newUsername
+                            : this.state.currentUser.username}
                         </li>
                         <li
                           style={{
@@ -1000,7 +1020,7 @@ class Header extends Component {
                         </p>
                       </span>
                     </MenuItem>
-                    <MenuItem
+                    {/* <MenuItem
                       onClick={this.changePasswordHandleClick}
                       disableGutters
                     >
@@ -1026,7 +1046,7 @@ class Header extends Component {
                           Change password
                         </p>
                       </span>
-                    </MenuItem>
+                    </MenuItem> */}
                     <MenuItem
                       onClick={() => {
                         Axios.defaults.headers = {

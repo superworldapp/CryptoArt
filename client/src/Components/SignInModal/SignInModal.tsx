@@ -28,7 +28,10 @@ interface IHeader {
   initContracts: () => void;
 }
 
-const SignInModal = ({ initContracts }: IHeader) => {
+interface Props {
+  login: () => void;
+}
+const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
   const history = useHistory();
   const { state, dispatch } = useContext(LayoutContext);
   // const { activate, account } = useWeb3React<Web3Provider>();
@@ -39,6 +42,9 @@ const SignInModal = ({ initContracts }: IHeader) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(Auth.getAuth());
   const [newSignUp, setNewSignUp] = useState<boolean>(false);
   const [forgotPass, setForgotPass] = useState<boolean>(false);
+  const [resetPass, setResetPass] = useState<boolean>(false);
+  const [resetCode, setResetCode] = useState<string>('');
+  const [newPassword, setNewPassword] = useState<string>('');
   const [notificationMessage, setNotificationMessage] = useState<any>(null);
   // const [open, setOpen] = React.useState(false);
   // const [passwordStrength, setPasswordStrength] = useState<number>(0);
@@ -72,15 +78,14 @@ const SignInModal = ({ initContracts }: IHeader) => {
   const forgotPassword = async (e: any) => {
     e.preventDefault();
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/password/forgot`, {
-        email,
-        username,
+      await axios.post(`${process.env.REACT_APP_SW_API_URL}/password/forgot`, {
+        authType: 'e',
+        authId: email,
       });
       setOpenError(true);
       setNotificationMessage(
         <Alert variant='filled' severity='success'>
-          If your email matches your username, you will receive a new reset
-          password
+          Please check your email for the code to reset your password.
         </Alert>
       );
     } catch (error) {
@@ -93,24 +98,73 @@ const SignInModal = ({ initContracts }: IHeader) => {
     }
   };
 
+  const resetPassword = async (e: any) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_SW_API_URL}/password/reset`,
+        {
+          authType: 'e',
+          authId: email,
+          authToken: newPassword,
+          authCode: resetCode,
+        }
+      );
+      setOpenError(true);
+      if (res.data.r === 's') {
+        setPassword(newPassword);
+        setNotificationMessage(
+          <Alert variant='filled' severity='success'>
+            Your password has been reset!
+          </Alert>
+        );
+      } else {
+        setNotificationMessage(
+          <Alert variant='filled' severity='error'>
+            ERROR: Could not reset password. Invalid reset code.
+          </Alert>
+        );
+      }
+      setResetCode('');
+      setNewPassword('');
+    } catch (error) {
+      setOpenError(true);
+      setNotificationMessage(
+        <Alert variant='filled' severity='error'>
+          ERROR: Could not reset password. Invalid reset code.
+        </Alert>
+      );
+    }
+  };
+
   const handleUserSignIn = async (e: any) => {
     e.preventDefault();
     setLoading(true);
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/user/login`,
+        `${process.env.REACT_APP_SW_API_URL}/user/connect`,
         {
-          email,
-          password,
+          authType: 'e',
+          authId: email,
+          authToken: password,
+          username,
         }
       );
       // Cookies.set('uid', res.data.user._id);
-      Cookies.set('Authorization', 'Bearer ' + res.data.tk, { path: '' });
+      //NEED A BEARER TOKEN
+      // Cookies.set('Authorization', 'Bearer ' + res.data.tk, {
+      //   path: '',
+      // });
+      console.log('res in handleUserSign in', res);
+      Cookies.set('session', res.data.data.session);
+      Cookies.set('userId', res.data.data.userId);
+      // console.log('Cookies', Cookies.get());
       setLoggedIn(true);
       Auth.authenticate();
-      Auth.setUser(res.data.user);
+      // Auth.setUser(res.data.user);
       setLoading(false);
     } catch (error) {
+      console.log('login error');
       setOpenError(true);
       setNotificationMessage(
         <Alert variant='filled' severity='error'>
@@ -126,17 +180,19 @@ const SignInModal = ({ initContracts }: IHeader) => {
     setLoading(true);
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/create/user`, {
+      .post(`${process.env.REACT_APP_SW_API_URL}/user/connect`, {
         username: username,
-        email: email,
-        password: password,
       })
       .then((res) => {
+        console.log('res in signup', res);
         // Cookies.set('uid', res.data.user._id);
-        Cookies.set('Authorization', 'Bearer ' + res.data.tk, { path: '' });
+        // Cookies.set('Authorization', 'Bearer ' + res.data.tk, { path: '' });
+
+        Cookies.set('session', res.data.data.session);
+        Cookies.set('userId', res.data.data.userId);
         setLoggedIn(true);
         Auth.authenticate();
-        Auth.setUser(res.data.user);
+        // Auth.setUser(res.data.user);
         setLoading(false);
         setNewSignUp(true);
       })
@@ -595,13 +651,154 @@ const SignInModal = ({ initContracts }: IHeader) => {
                     fullWidth
                   />
                 </Box>
-                <Box my={1} mx={4}>
+                {/* <Box my={1} mx={4}>
                   <TextField
                     onChange={(e: any) => {
                       setUsername(e.target.value);
                     }}
                     value={username}
                     label='Username'
+                    variant='outlined'
+                    className='emailInput'
+                    style={{
+                      borderRadius: '100px',
+                    }}
+                    fullWidth
+                  />
+                </Box> */}
+              </Grid>
+              <DialogActions>
+                <Grid
+                  container
+                  direction='column'
+                  justify='center'
+                  alignItems='center'
+                  spacing={2}
+                >
+                  <Grid item xs={12}>
+                    <>
+                      {loading && (
+                        <CircularProgress size={24} className='progress' />
+                      )}
+                      <Button
+                        type='submit'
+                        disabled={loading}
+                        className='LoginButton-header'
+                        onClick={() => setResetPass(true)}
+                      >
+                        Reset Password
+                      </Button>
+                    </>
+                  </Grid>
+                </Grid>
+                <Typography>
+                  Go Back to Login
+                  <Link
+                    onClick={() => {
+                      setForgotPass(false);
+                      // console.log('TEST');
+                      setSignIn(!signIn);
+                      setUsername('');
+                      setPassword('');
+                      setEmail('');
+                      setSignIn(!signIn);
+                    }}
+                  >
+                    {' '}
+                    Click Here
+                  </Link>
+                </Typography>
+              </DialogActions>
+            </form>
+          </Grid>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+
+  const resetPasswordModal = (
+    <>
+      <Dialog
+        fullWidth
+        maxWidth='sm'
+        open={state.signInModalIsOpen}
+        keepMounted
+        PaperProps={{
+          style: {
+            // maxHeight: ITEM_HEIGHT * 20,
+            padding: '30px',
+            borderRadius: '10px',
+          },
+        }}
+        onClose={() =>
+          dispatch({
+            type: 'TOGGLE_SIGN_IN_MODAL',
+            payload: !state.signInModalIsOpen,
+          })
+        }
+        aria-labelledby='alert-dialog-slide-title'
+        aria-describedby='alert-dialog-slide-description'
+      >
+        <Snackbar
+          open={openError}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+        >
+          {notificationMessage}
+        </Snackbar>
+        <Box mx='auto'>
+          <DialogTitle
+            disableTypography
+            id='responsive-dialog-title'
+            style={{
+              fontSize: '1.6rem',
+              fontFamily: 'Gibson',
+              fontWeight: 500,
+              lineHeight: 1.6,
+              letterSpacing: ' 0.0075rem',
+              textAlign: 'center',
+            }}
+          >
+            Please enter reset code and your new password.
+          </DialogTitle>
+        </Box>
+        <DialogContent>
+          <Grid
+            container
+            direction='column'
+            justify='center'
+            alignItems='center'
+          >
+            <form
+              onSubmit={(e) => {
+                resetPassword(e);
+                setResetPass(false);
+              }}
+            >
+              <Grid item xs={12} spacing={4}>
+                <Box my={1} mx={4}>
+                  <TextField
+                    onChange={(e: any) => {
+                      setResetCode(e.target.value);
+                    }}
+                    value={resetCode}
+                    label='Reset Code'
+                    variant='outlined'
+                    className='emailInput'
+                    style={{
+                      borderRadius: '100px',
+                    }}
+                    fullWidth
+                  />
+                </Box>
+                <Box my={1} mx={4}>
+                  <TextField
+                    onChange={(e: any) => {
+                      setNewPassword(e.target.value);
+                    }}
+                    label='New Password'
+                    value={newPassword}
+                    type='password'
                     variant='outlined'
                     className='emailInput'
                     style={{
@@ -634,23 +831,6 @@ const SignInModal = ({ initContracts }: IHeader) => {
                     </>
                   </Grid>
                 </Grid>
-                <Typography>
-                  Go Back to Login
-                  <Link
-                    onClick={() => {
-                      setForgotPass(false);
-                      // console.log('TEST');
-                      setSignIn(!signIn);
-                      setUsername('');
-                      setPassword('');
-                      setEmail('');
-                      setSignIn(!signIn);
-                    }}
-                  >
-                    {' '}
-                    Click Here
-                  </Link>
-                </Typography>
               </DialogActions>
             </form>
           </Grid>
@@ -784,6 +964,9 @@ const SignInModal = ({ initContracts }: IHeader) => {
   );
   if (forgotPass) {
     return forgotPasswordModal;
+  }
+  if (resetPass) {
+    return resetPasswordModal;
   }
   if (newSignUp) {
     return signUpSuccess;
