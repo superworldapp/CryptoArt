@@ -275,14 +275,12 @@ class Header extends Component {
       Authorization: Auth.getToken(),
     };
     const tk = Auth.getToken();
-    const { userId, session } = tk;
-    Axios.post(
-      `${process.env.REACT_APP_SW_API_URL}/user/update/${userId}/${session}`,
-      {
-        currentPassword: this.state.credentials.currentPassword,
-        password: this.state.credentials.newPassword,
-      }
-    )
+    Axios.post(`${process.env.REACT_APP_SW_API_URL}/password/reset`, {
+      authType: 'e',
+      authId: this.state.currentUser.email,
+      // currentPassword: this.state.credentials.currentPassword,
+      // password: this.state.credentials.newPassword,
+    })
       .then((response) => {
         if (response.data.status === 's') {
           this.setState({ changePasswordErrorMessage: '' });
@@ -1022,7 +1020,7 @@ class Header extends Component {
                         </p>
                       </span>
                     </MenuItem>
-                    <MenuItem
+                    {/* <MenuItem
                       onClick={this.changePasswordHandleClick}
                       disableGutters
                     >
@@ -1048,7 +1046,7 @@ class Header extends Component {
                           Change password
                         </p>
                       </span>
-                    </MenuItem>
+                    </MenuItem> */}
                     <MenuItem
                       onClick={() => {
                         Axios.defaults.headers = {

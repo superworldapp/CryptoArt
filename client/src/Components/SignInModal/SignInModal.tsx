@@ -42,6 +42,9 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(Auth.getAuth());
   const [newSignUp, setNewSignUp] = useState<boolean>(false);
   const [forgotPass, setForgotPass] = useState<boolean>(false);
+  const [resetPass, setResetPass] = useState<boolean>(false);
+  const [resetCode, setResetCode] = useState<string>('');
+  const [newPassword, setNewPassword] = useState<string>('');
   const [notificationMessage, setNotificationMessage] = useState<any>(null);
   // const [open, setOpen] = React.useState(false);
   // const [passwordStrength, setPasswordStrength] = useState<number>(0);
@@ -75,15 +78,14 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
   const forgotPassword = async (e: any) => {
     e.preventDefault();
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/password/forgot`, {
-        email,
-        username,
+      await axios.post(`${process.env.REACT_APP_SW_API_URL}/password/forgot`, {
+        authType: 'e',
+        authId: email,
       });
       setOpenError(true);
       setNotificationMessage(
         <Alert variant='filled' severity='success'>
-          If your email matches your username, you will receive a new reset
-          password
+          Please check your email for the code to reset your password.
         </Alert>
       );
     } catch (error) {
@@ -91,6 +93,45 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
       setNotificationMessage(
         <Alert variant='filled' severity='success'>
           ERROR: Could not find a matching email or matching username
+        </Alert>
+      );
+    }
+  };
+
+  const resetPassword = async (e: any) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_SW_API_URL}/password/reset`,
+        {
+          authType: 'e',
+          authId: email,
+          authToken: newPassword,
+          authCode: resetCode,
+        }
+      );
+      setOpenError(true);
+      if (res.data.r === 's') {
+        setPassword(newPassword);
+        setNotificationMessage(
+          <Alert variant='filled' severity='success'>
+            Your password has been reset!
+          </Alert>
+        );
+      } else {
+        setNotificationMessage(
+          <Alert variant='filled' severity='error'>
+            ERROR: Could not reset password. Invalid reset code.
+          </Alert>
+        );
+      }
+      setResetCode('');
+      setNewPassword('');
+    } catch (error) {
+      setOpenError(true);
+      setNotificationMessage(
+        <Alert variant='filled' severity='error'>
+          ERROR: Could not reset password. Invalid reset code.
         </Alert>
       );
     }
@@ -610,13 +651,154 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
                     fullWidth
                   />
                 </Box>
-                <Box my={1} mx={4}>
+                {/* <Box my={1} mx={4}>
                   <TextField
                     onChange={(e: any) => {
                       setUsername(e.target.value);
                     }}
                     value={username}
                     label='Username'
+                    variant='outlined'
+                    className='emailInput'
+                    style={{
+                      borderRadius: '100px',
+                    }}
+                    fullWidth
+                  />
+                </Box> */}
+              </Grid>
+              <DialogActions>
+                <Grid
+                  container
+                  direction='column'
+                  justify='center'
+                  alignItems='center'
+                  spacing={2}
+                >
+                  <Grid item xs={12}>
+                    <>
+                      {loading && (
+                        <CircularProgress size={24} className='progress' />
+                      )}
+                      <Button
+                        type='submit'
+                        disabled={loading}
+                        className='LoginButton-header'
+                        onClick={() => setResetPass(true)}
+                      >
+                        Reset Password
+                      </Button>
+                    </>
+                  </Grid>
+                </Grid>
+                <Typography>
+                  Go Back to Login
+                  <Link
+                    onClick={() => {
+                      setForgotPass(false);
+                      // console.log('TEST');
+                      setSignIn(!signIn);
+                      setUsername('');
+                      setPassword('');
+                      setEmail('');
+                      setSignIn(!signIn);
+                    }}
+                  >
+                    {' '}
+                    Click Here
+                  </Link>
+                </Typography>
+              </DialogActions>
+            </form>
+          </Grid>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+
+  const resetPasswordModal = (
+    <>
+      <Dialog
+        fullWidth
+        maxWidth='sm'
+        open={state.signInModalIsOpen}
+        keepMounted
+        PaperProps={{
+          style: {
+            // maxHeight: ITEM_HEIGHT * 20,
+            padding: '30px',
+            borderRadius: '10px',
+          },
+        }}
+        onClose={() =>
+          dispatch({
+            type: 'TOGGLE_SIGN_IN_MODAL',
+            payload: !state.signInModalIsOpen,
+          })
+        }
+        aria-labelledby='alert-dialog-slide-title'
+        aria-describedby='alert-dialog-slide-description'
+      >
+        <Snackbar
+          open={openError}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+        >
+          {notificationMessage}
+        </Snackbar>
+        <Box mx='auto'>
+          <DialogTitle
+            disableTypography
+            id='responsive-dialog-title'
+            style={{
+              fontSize: '1.6rem',
+              fontFamily: 'Gibson',
+              fontWeight: 500,
+              lineHeight: 1.6,
+              letterSpacing: ' 0.0075rem',
+              textAlign: 'center',
+            }}
+          >
+            Please enter reset code and your new password.
+          </DialogTitle>
+        </Box>
+        <DialogContent>
+          <Grid
+            container
+            direction='column'
+            justify='center'
+            alignItems='center'
+          >
+            <form
+              onSubmit={(e) => {
+                resetPassword(e);
+                setResetPass(false);
+              }}
+            >
+              <Grid item xs={12} spacing={4}>
+                <Box my={1} mx={4}>
+                  <TextField
+                    onChange={(e: any) => {
+                      setResetCode(e.target.value);
+                    }}
+                    value={resetCode}
+                    label='Reset Code'
+                    variant='outlined'
+                    className='emailInput'
+                    style={{
+                      borderRadius: '100px',
+                    }}
+                    fullWidth
+                  />
+                </Box>
+                <Box my={1} mx={4}>
+                  <TextField
+                    onChange={(e: any) => {
+                      setNewPassword(e.target.value);
+                    }}
+                    label='New Password'
+                    value={newPassword}
+                    type='password'
                     variant='outlined'
                     className='emailInput'
                     style={{
@@ -649,23 +831,6 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
                     </>
                   </Grid>
                 </Grid>
-                <Typography>
-                  Go Back to Login
-                  <Link
-                    onClick={() => {
-                      setForgotPass(false);
-                      // console.log('TEST');
-                      setSignIn(!signIn);
-                      setUsername('');
-                      setPassword('');
-                      setEmail('');
-                      setSignIn(!signIn);
-                    }}
-                  >
-                    {' '}
-                    Click Here
-                  </Link>
-                </Typography>
               </DialogActions>
             </form>
           </Grid>
@@ -799,6 +964,9 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
   );
   if (forgotPass) {
     return forgotPasswordModal;
+  }
+  if (resetPass) {
+    return resetPasswordModal;
   }
   if (newSignUp) {
     return signUpSuccess;
