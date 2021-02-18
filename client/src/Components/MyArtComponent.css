@@ -125,7 +125,7 @@ h3 {
 }
 .form-control {
   display: flex;
-  border-radius: 2rem;
+  border-radius: 1rem;
   margin-left: 0.5rem;
 }
 .form-group {
@@ -189,4 +189,15 @@ h3 {
 .class3 {
   background-color: #f08778;
   color: white;
+}
+.uploadpopup{
+  max-width: 38rem !important;
+  height: auto;
+}
+.uploadlabel{
+  width: 50%;
+  margin-left: 1rem;
+}
+.uploadinput{
+  margin-left: 1rem;
 }
