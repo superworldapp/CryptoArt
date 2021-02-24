@@ -958,6 +958,7 @@ class MyItemComponent extends Component {
   }
 
   refreshMyArt() {
+    console.log('this.state in refreshMyArt', this.state);
     if (!this.state.isModalOpen1 && !this.state.uploadSuccess)
       window.location.reload();
   }
@@ -1150,6 +1151,7 @@ class MyItemComponent extends Component {
         <Modal
           isOpen={this.state.isModalOpen1}
           toggle={this.toggleModal1}
+          onClosed={this.refreshMyArt}
           className='modal-xl'
         >
           <ModalHeader toggle={this.toggleModal1}>
