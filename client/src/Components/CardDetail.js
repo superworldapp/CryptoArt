@@ -99,7 +99,6 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
     });
     setLoadingPlaceBid(false);
     setBidSuccess(true);
-    window.location.reload();
     console.log(res);
   };
 
