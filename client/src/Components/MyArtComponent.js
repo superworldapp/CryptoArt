@@ -1152,7 +1152,7 @@ class MyItemComponent extends Component {
           isOpen={this.state.isModalOpen1}
           toggle={this.toggleModal1}
           onClosed={this.refreshMyArt}
-          className='modal-xl'
+          className='uploadpopup'
         >
           <ModalHeader toggle={this.toggleModal1}>
             <p
@@ -1163,135 +1163,148 @@ class MyItemComponent extends Component {
                 marginTop: '10px',
                 textAlign: 'left',
                 marginLeft: '7px',
+                marginBottom: '0rem',
                 textTransform: 'uppercase',
               }}
             >
-              Add New Artwork
+              Upload New Item
+            </p>
+            <p
+              style={{
+                fontFamily: 'Gibson',
+                fontSize: '15px',
+                fontWeight: '800',
+                textAlign: 'left',
+                marginLeft: '7px',
+              }}
+            >
+              Image, Video, Audio or 3D Model
             </p>
           </ModalHeader>
           <ModalBody>
             <Form>
-              <div className='row pl-5 pr-5'>
-                <div className='col-6'>
-                  <FormGroup>
-                    <Label
-                      htmlFor='title'
-                      className='ml-3'
-                      style={{
-                        fontFamily: 'Gibson',
-                        fontSize: '20px',
-                        color: 'black',
-                      }}
-                    >
-                      {' '}
-                      Title
-                    </Label>
-                    <Input
-                      type='text'
-                      id='title'
-                      name='title'
-                      onChange={this.handleInputChange}
-                    />
-                  </FormGroup>
-                </div>
-                <div
-                  className='col-6'
+              <FormGroup>
+                <Label
+                  htmlFor='artHash'
+                  className='uploadlabel'
                   style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
+                    fontFamily: 'Gibson',
+                    fontSize: '20px',
+                    color: 'black',
                   }}
                 >
-                  <FormGroup>
-                    <Label
-                      htmlFor='price'
-                      className='ml-3'
-                      style={{
-                        fontFamily: 'Gibson',
-                        fontSize: '20px',
-                        color: 'black',
-                      }}
-                    >
-                      {' '}
-                      Sell Price
-                    </Label>
-                    <Input
-                      style={{ width: '50%' }}
-                      type='text'
-                      id='price'
-                      name='price'
-                      onChange={this.handleInputChange}
-                    />
-                    <Label
-                      className='ml-3'
-                      style={{
-                        fontFamily: 'Gibson',
-                        fontSize: '20px',
-                        color: 'black',
-                      }}
-                    >
-                      {' '}
-                      ETH
-                    </Label>
-                  </FormGroup>
-                </div>
-              </div>
-              <div className='row pl-5 pr-5'>
-                <div className='col-6'>
-                  <FormGroup>
-                    <Label
-                      htmlFor='nos'
-                      className='ml-3'
-                      style={{
-                        fontFamily: 'Gibson',
-                        fontSize: '20px',
-                        color: 'black',
-                      }}
-                    >
-                      No. of Tokens
-                    </Label>
-                    <Input
-                      style={{ width: '30%' }}
-                      type='number'
-                      id='nos'
-                      name='nos'
-                      onChange={this.handleInputChange}
-                    />
-                  </FormGroup>
-                </div>
-                <div className='col-6'>
-                  <FormGroup>
-                    <Label
-                      htmlFor='artHash'
-                      className='ml-4'
-                      style={{
-                        fontFamily: 'Gibson',
-                        fontSize: '20px',
-                        color: 'black',
-                      }}
-                    >
-                      Art
-                    </Label>
-                    <Input
-                      style={{ marginLeft: '1.0rem' }}
-                      type='file'
-                      onChange={this.fileSelectHandler}
-                    />
-                  </FormGroup>
-                </div>
-              </div>
+                  File to Upload
+                </Label>
+                <Input
+                  //style={{ marginLeft: '1.0rem' }}
+                  type='file'
+                  onChange={this.fileSelectHandler}
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <Label
+                  htmlFor='title'
+                  className='uploadlabel'
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontSize: '20px',
+                    color: 'black',
+                  }}
+                >
+                  Name*
+                </Label>
+                <Input
+                  type='text'
+                  id='title'
+                  name='title'
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label
+                  htmlFor='title'
+                  className='uploadlabel'
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontSize: '20px',
+                    color: 'black',
+                  }}
+                >
+                  Description
+                </Label>
+                <Input
+                  type='textarea'
+                  id='des'
+                  name='des'
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label
+                  htmlFor='price'
+                  className='uploadlabel'
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontSize: '20px',
+                    color: 'black',
+                  }}
+                >
+                  Token Price
+                </Label>
+                <Input
+                  style={{ width: '50%' }}
+                  type='text'
+                  id='price'
+                  name='price'
+                  onChange={this.handleInputChange}
+                />
+                <Label
+                  className='uploadlabel'
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontSize: '20px',
+                    color: 'black',
+                  }}
+                >
+                  {' '}
+                  ETH
+                </Label>
+              </FormGroup>
+              <FormGroup>
+                <Label
+                  htmlFor='nos'
+                  className='uploadlabel'
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontSize: '20px',
+                    color: 'black',
+                  }}
+                >
+                  No. of Tokens
+                </Label>
+                <Input
+                  style={{ width: '40%', marginRight: '11rem' }}
+                  placeholder='1'
+                  type='number'
+                  id='nos'
+                  name='nos'
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
               <br />
               <button
                 className='abtn'
                 style={{
-                  float: 'right',
                   color: 'white',
+                  left: '9rem',
                   backgroundColor: '#5548C7',
                   fontSize: '18px',
                 }}
-                color='primary'
+                //color='primary'
                 onClick={this.fileUploadHandler}
               >
-                Add
+                Upload
               </button>
               {this.state.isLoading ? <img src={loader} /> : <div></div>}
               {this.state.loadingError ? (
