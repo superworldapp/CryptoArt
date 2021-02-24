@@ -1306,7 +1306,14 @@ class MyItemComponent extends Component {
               >
                 Upload
               </button>
-              {this.state.isLoading ? <img src={loader} /> : <div></div>}
+              {this.state.isLoading ? (
+                <img
+                  style={{ display: 'flex', verticalAlign: 'none' }}
+                  src={loader}
+                />
+              ) : (
+                <div></div>
+              )}
               {this.state.loadingError ? (
                 <div style={{ color: 'red', fontFamily: 'Gibson' }}>
                   There was a transaction/processing error. Please try again.
