@@ -107,6 +107,8 @@ class Allpatrender extends Component {
     this.DeSale = this.DeSale.bind(this);
     this.StartAuction = this.StartAuction.bind(this);
     this.EndAuction = this.EndAuction.bind(this);
+    this.refreshMyArt = this.refreshMyArt.bind(this);
+
     //this.toggleAuction = this.toggleAuction.bind(this);
   }
   buyItem = async () => {
@@ -143,6 +145,14 @@ class Allpatrender extends Component {
     this.setState({ endAuctionSuccess: !this.state.endAuctionSuccess });
   }
 
+  refreshMyArt() {
+    if (
+      (!this.state.toggleListForSale && !this.state.listForSaleSuccess) ||
+      (!this.state.toggleListForAuction && !this.state.listForAuctionSuccess)
+    )
+      window.location.reload();
+  }
+
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -161,7 +171,6 @@ class Allpatrender extends Component {
       .send({ from: this.props.accounts, gas: 1000000 });
     this.setState({ putForSaleLoading: false, listForSaleSuccess: true });
     this.toggleModal();
-    window.location.reload();
     console.log(res);
   };
   DeSale = async () => {
@@ -179,7 +188,6 @@ class Allpatrender extends Component {
       .startbid(this.props.art.tokenIdentifier)
       .send({ from: this.props.accounts, gas: 1000000 });
     this.setState({ auctionLoading: false, listForAuctionSuccess: true });
-    window.location.reload();
     console.log(res);
   };
   EndAuction = async () => {
@@ -188,7 +196,6 @@ class Allpatrender extends Component {
       .closeBidOwner(this.props.art.tokenIdentifier)
       .send({ from: this.props.accounts, gas: 7000000 });
     this.setState({ endAuctionLoading: false, endAuctionSuccess: true });
-    window.location.reload();
     console.log(res);
   };
   AddBid = async () => {
@@ -619,6 +626,7 @@ class Allpatrender extends Component {
             <Modal
               isOpen={this.state.listForAuctionSuccess}
               toggle={this.toggleListForAuction}
+              onClosed={this.refreshMyArt}
               className='modal-xl'
             >
               <ModalHeader toggle={this.toggleListForAuction}>
@@ -667,6 +675,7 @@ class Allpatrender extends Component {
             <Modal
               isOpen={this.state.listForSaleSuccess}
               toggle={this.toggleListForSale}
+              onClosed={this.refreshMyArt}
               className='modal-xl'
             >
               <ModalHeader toggle={this.toggleListForSale}>
@@ -715,6 +724,7 @@ class Allpatrender extends Component {
             <Modal
               isOpen={this.state.endAuctionSuccess}
               toggle={this.toggleEndAuction}
+              onClosed={this.refreshMyArt}
               className='modal-xl'
             >
               <ModalHeader toggle={this.toggleEndAuction}>
@@ -752,7 +762,7 @@ class Allpatrender extends Component {
                 </p>
                 <button
                   className='upload-more-btn'
-                  onClick={this.toggleListForAuction}
+                  onClick={this.toggleEndAuction}
                 >
                   BACK TO MY COLLECTIONS
                 </button>
@@ -958,7 +968,6 @@ class MyItemComponent extends Component {
   }
 
   refreshMyArt() {
-    console.log('this.state in refreshMyArt', this.state);
     if (!this.state.isModalOpen1 && !this.state.uploadSuccess)
       window.location.reload();
   }
