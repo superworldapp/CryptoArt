@@ -958,7 +958,8 @@ class MyItemComponent extends Component {
   }
 
   refreshMyArt() {
-    if (!this.state.isModalOpen1) window.location.reload();
+    if (!this.state.isModalOpen1 && !this.state.uploadSuccess)
+      window.location.reload();
   }
 
   handleUploadMore() {
