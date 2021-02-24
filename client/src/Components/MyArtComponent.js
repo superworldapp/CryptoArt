@@ -124,6 +124,7 @@ class Allpatrender extends Component {
       isModalOpen: !this.state.isModalOpen,
     });
   }
+
   toggleAuction() {
     this.setState({
       isModalAucOpen: !this.state.isModalAucOpen,
@@ -218,8 +219,8 @@ class Allpatrender extends Component {
       Web3.utils.fromWei(this.props.art.tokenSellPrice.toString(), 'ether') == 0
         ? 'invisible'
         : 'visible';
-    let reSellOrSell = this.props.art.isSelling ;
-    let Auc = this.props.art.auction.isBidding ;
+    let reSellOrSell = this.props.art.isSelling;
+    let Auc = this.props.art.auction.isBidding;
     let accNum = this.props.art.tokenCreator;
 
     const accUsername = () => {
@@ -389,22 +390,22 @@ class Allpatrender extends Component {
           >
             {reSellOrSell ? (
               <button
-              className={auc2}
-              //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
-              // color='primary'
-              onClick={this.toggleModal}
-            >
-              Relist
-            </button>
-            ) :(
+                className={auc2}
+                //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
+                // color='primary'
+                onClick={this.toggleModal}
+              >
+                Relist
+              </button>
+            ) : (
               <button
-              className={auc1}
-              //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
-              // color='primary'
-              onClick={this.toggleModal}
-            >
-              Sell
-            </button>
+                className={auc1}
+                //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
+                // color='primary'
+                onClick={this.toggleModal}
+              >
+                Sell
+              </button>
             )}
             {/* <button
               className={auc1}
@@ -437,38 +438,37 @@ class Allpatrender extends Component {
             )}
             {Auc ? (
               <button
-              className={b1}
-              //className={auc1}
-              //className='abtn'
-              type='submit'
-              // color='primary'
-              onClick={
-                this.props.art.auction.isBidding
-                  ? this.EndAuction
-                  : this.StartAuction
-              }
-              //onClick = {this.toggleAuction}
-            >
-              End Auction
-            </button>
-            ) :(
+                className={b1}
+                //className={auc1}
+                //className='abtn'
+                type='submit'
+                // color='primary'
+                onClick={
+                  this.props.art.auction.isBidding
+                    ? this.EndAuction
+                    : this.StartAuction
+                }
+                //onClick = {this.toggleAuction}
+              >
+                End Auction
+              </button>
+            ) : (
               <button
-              className={b}
-              //className={auc1}
-              //className='abtn'
-              type='submit'
-              // color='primary'
-              onClick={
-                this.props.art.auction.isBidding
-                  ? this.EndAuction
-                  : this.StartAuction
-              }
-              //onClick = {this.toggleAuction}
-            >
-              Auction
-            </button>
+                className={b}
+                //className={auc1}
+                //className='abtn'
+                type='submit'
+                // color='primary'
+                onClick={
+                  this.props.art.auction.isBidding
+                    ? this.EndAuction
+                    : this.StartAuction
+                }
+                //onClick = {this.toggleAuction}
+              >
+                Auction
+              </button>
             )}
-
 
             {/* <button
               className={b}
@@ -942,6 +942,7 @@ class MyItemComponent extends Component {
     this.fileSelectHandler = this.fileSelectHandler.bind(this);
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
     this.fileAwsHandler = this.fileAwsHandler.bind(this);
+    this.refreshMyArt = this.refreshMyArt.bind(this);
   }
 
   toggleModal1() {
@@ -954,6 +955,10 @@ class MyItemComponent extends Component {
     this.setState({
       uploadSuccess: !this.state.uploadSuccess,
     });
+  }
+
+  refreshMyArt() {
+    if (!this.state.isModalOpen1) window.location.reload();
   }
 
   handleUploadMore() {
@@ -1011,7 +1016,6 @@ class MyItemComponent extends Component {
 
       console.log('data', data);
       this.toggleModal1();
-      window.location.reload();
       this.setState({ isLoading: false, uploadSuccess: true });
     } catch (err) {
       this.setState({ loadingError: true });
@@ -1039,8 +1043,7 @@ class MyItemComponent extends Component {
       let rex = await this.props.contract?.methods.Arts(i).call();
       if (rex.tokenOwner == this.props.accounts) {
         response.push(rex);
-      }
-      else if(rex.tokenCreator == this.props.accounts){
+      } else if (rex.tokenCreator == this.props.accounts) {
         createrToken.push(rex);
       }
     }
@@ -1301,8 +1304,10 @@ class MyItemComponent extends Component {
         </Modal>
 
         {/* UPLOAD SUCCESS MODAL */}
+
         <Modal
           isOpen={this.state.uploadSuccess}
+          onClosed={this.refreshMyArt}
           toggle={this.toggleModal2}
           className='modal-xl'
         >
