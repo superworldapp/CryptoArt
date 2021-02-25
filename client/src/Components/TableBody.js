@@ -2,6 +2,35 @@ import React from 'react';
 import Web3 from 'web3';
 
 const TableBody = ({ cre }) => {
+  const calcTime = (timeCreated) => {
+    let totalTime = '';
+    const currentTime = Date.now() / 1000;
+
+    let milliseconds = Math.abs(currentTime - timeCreated);
+
+    const days = Math.floor(milliseconds / 86400);
+    milliseconds -= days * 86400;
+
+    const hours = Math.floor(milliseconds / 3600) % 24;
+    milliseconds -= hours * 3600;
+
+    const minutes = Math.floor(milliseconds / 60) % 60;
+    milliseconds -= minutes * 60;
+
+    if (days > 0) {
+      totalTime += days === 1 ? `${days} day ` : `${days} days `;
+    }
+
+    totalTime +=
+      hours === 0 || hours === 1 ? `${hours} hour ` : `${hours} hours `;
+
+    totalTime +=
+      minutes === 0 || hours === 1
+        ? `${minutes} minutes`
+        : `${minutes} minutes`;
+    return totalTime;
+  };
+
   const accUsername = (accNum) => {
     if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
       return '@Chitra';
@@ -24,7 +53,13 @@ const TableBody = ({ cre }) => {
         return (
           <React.Fragment>
             <tr key={item.id}>
-              <th scope='row'>{item?.event == 'Tokenbid'?'AuctionStarted':((item.event == 'Bidstarted')?'BidPlaced':item.event)}</th>
+              <th scope='row'>
+                {item?.event == 'Tokenbid'
+                  ? 'AuctionStarted'
+                  : item.event == 'Bidstarted'
+                  ? 'BidPlaced'
+                  : item.event}
+              </th>
               <td>
                 {item?.returnValues.tokenPrice
                   ? `${Web3.utils.fromWei(
@@ -48,12 +83,7 @@ const TableBody = ({ cre }) => {
                   ? accUsername(item?.returnValues.newowner)
                   : 'null'}
               </td>
-              <td>
-                {Math.round(
-                  (Date.now() / 1000 - item?.returnValues.times) / 60
-                )}{' '}
-                minutes ago
-              </td>
+              <td>{calcTime(item?.returnValues.times)}</td>
             </tr>
           </React.Fragment>
         );
