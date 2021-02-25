@@ -21,8 +21,11 @@ const TableBody = ({ cre }) => {
       totalTime += days === 1 ? `${days} day ` : `${days} days `;
     }
 
-    totalTime +=
-      hours === 0 || hours === 1 ? `${hours} hour ` : `${hours} hours `;
+    if (hours > 1) {
+      totalTime += `${hours} hours `;
+    } else if (hours === 1) {
+      totalTime += `${hours} hour `;
+    }
 
     totalTime +=
       minutes === 0 || hours === 1
