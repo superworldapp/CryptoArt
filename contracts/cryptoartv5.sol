@@ -7,6 +7,7 @@ import "https://github.com/kole-swapnil/openzepkole/access/Ownable.sol";
 contract SuperArt is ERC721, Ownable {
     using SafeMath for uint256;  
     uint totalBalance  = 0;
+    uint public buyId = 0;
     address payable public SuperWorldWallet;
     
     constructor() ERC721("SuperArt", "SUPERART") public { // Constructor ("SuperArt", "SUPERART")
@@ -16,18 +17,33 @@ contract SuperArt is ERC721, Ownable {
             
         } 
         
-    
+    //Batch Start
     uint256 tokenBatchIndex; //Batch ID
     mapping(uint256 => string) public tokenBatch; // Key -> Batch ID  : Value -> Batch Hash
     mapping(uint256 => string) public tokenBatchName; // Key -> Batch ID  : Value -> Batch Title
     mapping(uint256 => uint256) public tokenBatchEditionSize; // Key -> Batch ID  : Value -> how many tokens can we mint in the same batch (group)
     mapping(uint256 => uint256) public totalMintedTokens; // Key -> Batch ID  : Value -> ERC721 tokens already minted under same batch
+    mapping(uint256 => address) public tokenCreator; // Key -> Batch ID : value ->address of creator
     mapping(uint256 => string) public imgUrl; // Key -> Batch ID : value ->imgUrl
     mapping(uint256 => address[5]) public royaltyAddressMemory; // Key -> Batch ID  : Value -> creator (artist) address
     mapping(uint256 => uint256[5]) public royaltyPercentageMemory;  // Key -> Batch ID  : Value -> percentage cut  for artist and owner
     mapping(uint256 => uint256) public royaltyLengthMemory; // Key -> Batch ID  : Value -> Number of royalty parties (ex. artist1, artist2, superworld)
     mapping(uint256 => bool) public openminting; // Key -> Batch ID  : Value -> minting open or not
     mapping(uint256 => uint256) tokenBatchPrice; // Key -> Batch ID  : Value -> price of Batch
+    //Batch end
+    
+    //Token
+    mapping(uint256 => address) tokenOwner;
+    mapping(uint256 => bool) public isSellings;
+    mapping(uint256 => uint256) public sellPrices;
+    mapping(uint256 => uint256) public tokenEditionNumber;
+    mapping(uint256 => uint256) public referenceTotokenBatch;
+    mapping(uint256 => uint256) public buyIds;         
+    
+    //Token end
+    
+    
+    
     //   struct Panel{
     //                 uint memcount;
     //                 address[] allmem;
@@ -49,12 +65,20 @@ contract SuperArt is ERC721, Ownable {
     //             uint batchId;
     //         }
     
-    event NewtokenBatchCreated(string tokenHash, string tokenBatchName,  uint256 editionSize,uint256 price, uint256 tokenBatchIndex);
+    
+    //Event
+    event NewtokenBatchCreated(string tokenHash, string tokenBatchName,  uint256 editionSize,uint256 price, uint256 tokenBatchIndex, address creator);
     event AddtokenBatchRoyalties(uint256 tokenBatchId, uint256 count);
     event ClearRoyalties(uint256 tokenBatchId);
     event mintingstatus(uint256 tokenBatchToUpdate, uint256 price,bool isopenminting);
     
-    function createtokenBatch(string memory _tokenHash,  string memory _tokenBatchName,  uint256 _editionSize, uint256 _price, string memory _imgURL) public onlyOwner {
+    //Event
+    
+    modifier ownertoken(uint256 tokenBatchId){
+        require(tokenCreator[tokenBatchId] == msg.sender);
+        _;
+    }    
+    function createtokenBatch(string memory _tokenHash,  string memory _tokenBatchName,  uint256 _editionSize, uint256 _price, string memory _imgURL) public {
             tokenBatchIndex++ ;
             tokenBatch[tokenBatchIndex] = _tokenHash;
             tokenBatchName[tokenBatchIndex] = _tokenBatchName;
@@ -62,16 +86,17 @@ contract SuperArt is ERC721, Ownable {
             totalMintedTokens[tokenBatchIndex] = 0;
             tokenBatchPrice[tokenBatchIndex] = _price;
             imgUrl[tokenBatchIndex] = _imgURL;
-            emit NewtokenBatchCreated(_tokenHash, _tokenBatchName, _editionSize, _price, tokenBatchIndex);
+            tokenCreator[tokenBatchIndex] = msg.sender; 
+            emit NewtokenBatchCreated(_tokenHash, _tokenBatchName, _editionSize, _price, tokenBatchIndex,msg.sender);
         }
         
-    function openCloseMint(uint256 tokenBatchToUpdate, uint256 _price,bool _open) public onlyOwner{
+    function openCloseMint(uint256 tokenBatchToUpdate, uint256 _price,bool _open) public ownertoken(tokenBatchToUpdate){
             openminting[tokenBatchToUpdate] = _open;
             tokenBatchPrice[tokenBatchToUpdate] = _price;
             emit mintingstatus(tokenBatchToUpdate, _price/10**18,_open);
         }
         
-    function addTokenBatchRoyalties(uint256 tokenBatchId, address[] memory _royaltyAddresses, uint256[] memory _royaltyPercentage) public onlyOwner {
+    function addTokenBatchRoyalties(uint256 tokenBatchId, address[] memory _royaltyAddresses, uint256[] memory _royaltyPercentage) public ownertoken(tokenBatchId){
             require(_royaltyAddresses.length == _royaltyPercentage.length);
             require(_royaltyAddresses.length <= 5);
             
@@ -94,7 +119,7 @@ contract SuperArt is ERC721, Ownable {
             }    
         }
         
-    function clearRoyalties(uint256 tokenBatchId) public onlyOwner {
+    function clearRoyalties(uint256 tokenBatchId) public ownertoken(tokenBatchId) {
             for(uint256 i=0; i<royaltyLengthMemory[tokenBatchId]; i++){
                 royaltyAddressMemory[tokenBatchId][i] = 0x0000000000000000000000000000000000000000;
                 royaltyPercentageMemory[tokenBatchId][i] = 0;
@@ -105,31 +130,36 @@ contract SuperArt is ERC721, Ownable {
             emit ClearRoyalties(tokenBatchId);
         }
     
-    // function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) public onlyOwner {
-    //         if(openminting[tokenBatchId]){
-    //         require(totalMintedTokens[tokenBatchId] + amountToMint <= tokenBatchEditionSize[tokenBatchId]);
-    //         for(uint256 i=totalMintedTokens[tokenBatchId]; i<amountToMint + totalMintedTokens[tokenBatchId]; i++) {
-    //             uint256 tokenId = totalSupply() + 1;
-    //             referenceTotokenBatch[tokenId] = tokenBatchId;
-    //             tokenEditionNumber[tokenId] = i + 1;
-    //             _safeMint(msg.sender, tokenId);
-    //             totalMintedTokens[tokenBatchId]++;
-    //             tokenOffset[tokenId] = totalMintedTokens[tokenBatchId];
-    //         }
-    //         }
-    //         else{
-    //             require(totalMintedTokens[tokenBatchId] + amountToMint <= tokenBatchEditionSize[tokenBatchId]);
-    //         for(uint256 i=totalMintedTokens[tokenBatchId]; i<amountToMint + totalMintedTokens[tokenBatchId]; i++) {
-    //             uint256 tokenId = totalSupply() + 1;
-    //             referenceTotokenBatch[tokenId] = tokenBatchId;
-    //             tokenEditionNumber[tokenId] = i + 1;
-    //             _safeMint(msg.sender, tokenId);
-    //             totalMintedTokens[tokenBatchId]++;
-    //             tokenOffset[tokenId] = totalMintedTokens[tokenBatchId];
-    //         }
+    function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) public  {
+            if(openminting[tokenBatchId]){
+            require(totalMintedTokens[tokenBatchId] + amountToMint <= tokenBatchEditionSize[tokenBatchId]);
+            for(uint256 i=totalMintedTokens[tokenBatchId]; i<amountToMint + totalMintedTokens[tokenBatchId]; i++) {
+                  uint256 tokenId = totalSupply() + 1;
+                _safeMint(msg.sender, tokenId);
+                tokenOwner[tokenId] = msg.sender;
+                referenceTotokenBatch[tokenId] = tokenBatchId;
+                tokenEditionNumber[tokenId] = i + 1;
+                totalMintedTokens[tokenBatchId]++;
+                buyIds[tokenId]++;
+               
+            }
+            }
+            else{
+                require(tokenCreator[tokenBatchId] == msg.sender);
+                require(totalMintedTokens[tokenBatchId] + amountToMint <= tokenBatchEditionSize[tokenBatchId]);
+            for(uint256 i=totalMintedTokens[tokenBatchId]; i<amountToMint + totalMintedTokens[tokenBatchId]; i++) {
+                uint256 tokenId = totalSupply() + 1;
+                _safeMint(msg.sender, tokenId);
+                tokenOwner[tokenId] = msg.sender;
+                referenceTotokenBatch[tokenId] = tokenBatchId;
+                tokenEditionNumber[tokenId] = i + 1;
+                totalMintedTokens[tokenBatchId]++;
+                buyIds[tokenId]++;
+               
+            }
                 
-    //         }
-    //     }
+            }
+        }
     
     
     
