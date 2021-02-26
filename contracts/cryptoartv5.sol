@@ -71,6 +71,8 @@ contract SuperArt is ERC721, Ownable {
     event AddtokenBatchRoyalties(uint256 tokenBatchId, uint256 count);
     event ClearRoyalties(uint256 tokenBatchId);
     event mintingstatus(uint256 tokenBatchToUpdate, uint256 price,bool isopenminting);
+    event tokenputforsale(uint indexed tokenId,address indexed seller,uint sellPrice,bool isListed,uint times);
+    
     
     //Event
     
@@ -160,6 +162,42 @@ contract SuperArt is ERC721, Ownable {
                 
             }
         }
+        
+    function Sale(uint256 _tokenId,uint _sellprice,bool isListed) public{
+            uint256 x = referenceTotokenBatch[_tokenId];
+            require(tokenCreator[x] == msg.sender);
+            isSellings[_tokenId] = isListed;
+            sellPrices[_tokenId] = _sellprice;
+            emit tokenputforsale(_tokenId,msg.sender,_sellprice,true,now);
+        }
+        
+    function getTokenBatchData(uint256 tokenBatchId) public view returns (string memory _tokenHash, string memory _tokenBatchName, uint256 _unmintedEditions,address _tokenCreator,string memory _imgurl) {
+            _tokenHash = tokenBatch[tokenBatchId];
+            _tokenBatchName = tokenBatchName[tokenBatchId];
+            _unmintedEditions = tokenBatchEditionSize[tokenBatchId] - totalMintedTokens[tokenBatchId];
+            _tokenCreator = tokenCreator[tokenBatchId];
+            _imgurl = imgUrl[tokenBatchId];
+            
+        }
+    
+    function getTokenDataBatch(uint256 tokenId) public view returns (string memory _tokenHash, string memory _tokenBatchName,address _tokenCreator,string memory _imgurl) {
+            require(_exists(tokenId), "Token does not exist.");
+            uint256 tokenBatchRef = referenceTotokenBatch[tokenId];
+            
+            _tokenHash = tokenBatch[tokenBatchRef];
+            _tokenBatchName = tokenBatchName[tokenBatchRef];
+            _tokenCreator = tokenCreator[tokenBatchRef];
+            _imgurl = imgUrl[tokenBatchRef];
+            
+        }
+    
+    function getTokenData(uint256 tokenId) public view returns(address _tokenOwner,bool _isSellings,uint _sellprice,uint _refbatch){
+            _tokenOwner = tokenOwner[tokenId];
+            _isSellings = isSellings[tokenId];
+            _sellprice = sellPrices[tokenId];
+            _refbatch = referenceTotokenBatch[tokenId];
+        }
+
     
     
     
