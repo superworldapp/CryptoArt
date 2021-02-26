@@ -1,0 +1,159 @@
+pragma solidity ^0.6.0;
+pragma experimental ABIEncoderV2;
+
+import "https://github.com/kole-swapnil/openzepkole/token/ERC721/ERC721.sol";
+import "https://github.com/kole-swapnil/openzepkole/access/Ownable.sol";
+
+contract SuperArt is ERC721, Ownable {
+    using SafeMath for uint256;  
+    uint totalBalance  = 0;
+    address payable public SuperWorldWallet;
+    
+    constructor() ERC721("SuperArt", "SUPERART") public { // Constructor ("SuperArt", "SUPERART")
+            //updateURI("https://joyworld.azurewebsites.net/api/HttpTrigger?id="); // for each ERC721 token id
+            //updatetokenBatchURI("https://joyworldmulti.azurewebsites.net/api/HttpTrigger?id=", "&tokenIndex="); // for each ERC721 token id with batch details with offset
+            SuperWorldWallet = 0x9aE048c47aef066E03593D5Edb230E3fa80c3f17;
+            
+        } 
+        
+    
+    uint256 tokenBatchIndex; //Batch ID
+    mapping(uint256 => string) public tokenBatch; // Key -> Batch ID  : Value -> Batch Hash
+    mapping(uint256 => string) public tokenBatchName; // Key -> Batch ID  : Value -> Batch Title
+    mapping(uint256 => uint256) public tokenBatchEditionSize; // Key -> Batch ID  : Value -> how many tokens can we mint in the same batch (group)
+    mapping(uint256 => uint256) public totalMintedTokens; // Key -> Batch ID  : Value -> ERC721 tokens already minted under same batch
+    mapping(uint256 => string) public imgUrl; // Key -> Batch ID : value ->imgUrl
+    mapping(uint256 => address[5]) public royaltyAddressMemory; // Key -> Batch ID  : Value -> creator (artist) address
+    mapping(uint256 => uint256[5]) public royaltyPercentageMemory;  // Key -> Batch ID  : Value -> percentage cut  for artist and owner
+    mapping(uint256 => uint256) public royaltyLengthMemory; // Key -> Batch ID  : Value -> Number of royalty parties (ex. artist1, artist2, superworld)
+    mapping(uint256 => bool) public openminting; // Key -> Batch ID  : Value -> minting open or not
+    mapping(uint256 => uint256) tokenBatchPrice; // Key -> Batch ID  : Value -> price of Batch
+    //   struct Panel{
+    //                 uint memcount;
+    //                 address[] allmem;
+    //                 uint panelprice;
+    //                 uint countcritic;
+    //         }
+    //   struct Auction{
+    //             address payable bidder;
+    //             uint bidprice;
+    //             bool isBidding;
+    //         }
+    //   struct ArtToken{
+    //             uint tokenIdentifier;
+    //             address payable tokenOwner;
+    //             bool isSelling;
+    //             uint tokenSellPrice;
+    //             Panel panel;
+    //             Auction auction;
+    //             uint batchId;
+    //         }
+    
+    event NewtokenBatchCreated(string tokenHash, string tokenBatchName,  uint256 editionSize,uint256 price, uint256 tokenBatchIndex);
+    event AddtokenBatchRoyalties(uint256 tokenBatchId, uint256 count);
+    event ClearRoyalties(uint256 tokenBatchId);
+    event mintingstatus(uint256 tokenBatchToUpdate, uint256 price,bool isopenminting);
+    
+    function createtokenBatch(string memory _tokenHash,  string memory _tokenBatchName,  uint256 _editionSize, uint256 _price, string memory _imgURL) public onlyOwner {
+            tokenBatchIndex++ ;
+            tokenBatch[tokenBatchIndex] = _tokenHash;
+            tokenBatchName[tokenBatchIndex] = _tokenBatchName;
+            tokenBatchEditionSize[tokenBatchIndex] = _editionSize;
+            totalMintedTokens[tokenBatchIndex] = 0;
+            tokenBatchPrice[tokenBatchIndex] = _price;
+            imgUrl[tokenBatchIndex] = _imgURL;
+            emit NewtokenBatchCreated(_tokenHash, _tokenBatchName, _editionSize, _price, tokenBatchIndex);
+        }
+        
+    function openCloseMint(uint256 tokenBatchToUpdate, uint256 _price,bool _open) public onlyOwner{
+            openminting[tokenBatchToUpdate] = _open;
+            tokenBatchPrice[tokenBatchToUpdate] = _price;
+            emit mintingstatus(tokenBatchToUpdate, _price/10**18,_open);
+        }
+        
+    function addTokenBatchRoyalties(uint256 tokenBatchId, address[] memory _royaltyAddresses, uint256[] memory _royaltyPercentage) public onlyOwner {
+            require(_royaltyAddresses.length == _royaltyPercentage.length);
+            require(_royaltyAddresses.length <= 5);
+            
+            uint256 totalCollaboratorRoyalties;
+            for(uint256 i=0; i<_royaltyAddresses.length; i++){
+                royaltyAddressMemory[tokenBatchId][i] = _royaltyAddresses[i];
+                royaltyPercentageMemory[tokenBatchId][i] = _royaltyPercentage[i];
+                totalCollaboratorRoyalties += _royaltyPercentage[i];
+            }
+            
+            royaltyLengthMemory[tokenBatchId] = _royaltyAddresses.length;
+            
+            emit AddtokenBatchRoyalties(tokenBatchId, _royaltyAddresses.length);
+        }
+        
+    function getRoyalties(uint256 tokenBatchId) public view returns (address[5] memory addresses, uint256[5] memory percentages) {
+            for(uint256 i=0; i<royaltyLengthMemory[tokenBatchId]; i++){
+                addresses[i] = royaltyAddressMemory[tokenBatchId][i];
+                percentages[i] = royaltyPercentageMemory[tokenBatchId][i];
+            }    
+        }
+        
+    function clearRoyalties(uint256 tokenBatchId) public onlyOwner {
+            for(uint256 i=0; i<royaltyLengthMemory[tokenBatchId]; i++){
+                royaltyAddressMemory[tokenBatchId][i] = 0x0000000000000000000000000000000000000000;
+                royaltyPercentageMemory[tokenBatchId][i] = 0;
+            }
+            
+            royaltyLengthMemory[tokenBatchId] = 0;
+            
+            emit ClearRoyalties(tokenBatchId);
+        }
+    
+    // function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) public onlyOwner {
+    //         if(openminting[tokenBatchId]){
+    //         require(totalMintedTokens[tokenBatchId] + amountToMint <= tokenBatchEditionSize[tokenBatchId]);
+    //         for(uint256 i=totalMintedTokens[tokenBatchId]; i<amountToMint + totalMintedTokens[tokenBatchId]; i++) {
+    //             uint256 tokenId = totalSupply() + 1;
+    //             referenceTotokenBatch[tokenId] = tokenBatchId;
+    //             tokenEditionNumber[tokenId] = i + 1;
+    //             _safeMint(msg.sender, tokenId);
+    //             totalMintedTokens[tokenBatchId]++;
+    //             tokenOffset[tokenId] = totalMintedTokens[tokenBatchId];
+    //         }
+    //         }
+    //         else{
+    //             require(totalMintedTokens[tokenBatchId] + amountToMint <= tokenBatchEditionSize[tokenBatchId]);
+    //         for(uint256 i=totalMintedTokens[tokenBatchId]; i<amountToMint + totalMintedTokens[tokenBatchId]; i++) {
+    //             uint256 tokenId = totalSupply() + 1;
+    //             referenceTotokenBatch[tokenId] = tokenBatchId;
+    //             tokenEditionNumber[tokenId] = i + 1;
+    //             _safeMint(msg.sender, tokenId);
+    //             totalMintedTokens[tokenBatchId]++;
+    //             tokenOffset[tokenId] = totalMintedTokens[tokenBatchId];
+    //         }
+                
+    //         }
+    //     }
+    
+    
+    
+    function integerToString(uint _i) internal pure returns (string memory) {
+            if (_i == 0) {
+                return "0";
+            }
+            
+            uint j = _i;
+            uint len;
+        
+            while (j != 0) {
+                len++;
+                j /= 10;
+            }
+        
+            bytes memory bstr = new bytes(len);
+            uint k = len - 1;
+        
+            while (_i != 0) {
+                bstr[k--] = byte(uint8(48 + _i % 10));
+                _i /= 10;
+            }
+        return string(bstr);
+        }
+    
+}
