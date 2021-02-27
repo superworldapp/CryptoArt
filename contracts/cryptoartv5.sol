@@ -8,15 +8,25 @@ contract SuperArt is ERC721, Ownable {
     using SafeMath for uint256;  
     uint totalBalance  = 0;
     uint public buyId = 0;
+    string public metaUrl; 
+    uint256 public percentageCut;
     address payable public SuperWorldWallet;
     
-    constructor() ERC721("SuperArt", "SUPERART") public { // Constructor ("SuperArt", "SUPERART")
-            //updateURI("https://joyworld.azurewebsites.net/api/HttpTrigger?id="); // for each ERC721 token id
-            //updatetokenBatchURI("https://joyworldmulti.azurewebsites.net/api/HttpTrigger?id=", "&tokenIndex="); // for each ERC721 token id with batch details with offset
+    constructor(uint _percentageCut,string memory _metaurl) ERC721("SuperArt", "SUPERART") public { // Constructor ("SuperArt", "SUPERART")
+            percentageCut = _percentageCut;
+            metaUrl = _metaurl;
             SuperWorldWallet = 0x9aE048c47aef066E03593D5Edb230E3fa80c3f17;
             
         } 
         
+    function setPercentCut(uint _percent) public {
+                percentageCut = _percent;
+        }
+    
+    function setMetaUrl(string memory _url) public {
+                metaUrl = _url;
+        }
+    
     //Batch Start
     uint256 tokenBatchIndex; //Batch ID
     mapping(uint256 => string) public tokenBatch; // Key -> Batch ID  : Value -> Batch Hash
@@ -25,9 +35,9 @@ contract SuperArt is ERC721, Ownable {
     mapping(uint256 => uint256) public totalMintedTokens; // Key -> Batch ID  : Value -> ERC721 tokens already minted under same batch
     mapping(uint256 => address) public tokenCreator; // Key -> Batch ID : value ->address of creator
     mapping(uint256 => string) public imgUrl; // Key -> Batch ID : value ->imgUrl
-    mapping(uint256 => address[5]) public royaltyAddressMemory; // Key -> Batch ID  : Value -> creator (artist) address
+    mapping(uint256 => address payable [5]) public royaltyAddressMemory; // Key -> Batch ID  : Value -> creator (artist) address
     mapping(uint256 => uint256[5]) public royaltyPercentageMemory;  // Key -> Batch ID  : Value -> percentage cut  for artist and owner
-    mapping(uint256 => uint256) public royaltyLengthMemory; // Key -> Batch ID  : Value -> Number of royalty parties (ex. artist1, artist2, superworld)
+    mapping(uint256 => uint256) public royaltyLengthMemory; // Key -> Batch ID  : Value -> Number of royalty parties (ex. artist1, artist2)
     mapping(uint256 => bool) public openminting; // Key -> Batch ID  : Value -> minting open or not
     mapping(uint256 => uint256) tokenBatchPrice; // Key -> Batch ID  : Value -> price of Batch
     //Batch end
@@ -38,33 +48,16 @@ contract SuperArt is ERC721, Ownable {
     mapping(uint256 => uint256) public sellPrices;
     mapping(uint256 => uint256) public tokenEditionNumber;
     mapping(uint256 => uint256) public referenceTotokenBatch;
-    mapping(uint256 => uint256) public buyIds;         
-    
+    mapping(uint256 => Auction) public auctions;
     //Token end
     
     
-    
-    //   struct Panel{
-    //                 uint memcount;
-    //                 address[] allmem;
-    //                 uint panelprice;
-    //                 uint countcritic;
-    //         }
-    //   struct Auction{
-    //             address payable bidder;
-    //             uint bidprice;
-    //             bool isBidding;
-    //         }
-    //   struct ArtToken{
-    //             uint tokenIdentifier;
-    //             address payable tokenOwner;
-    //             bool isSelling;
-    //             uint tokenSellPrice;
-    //             Panel panel;
-    //             Auction auction;
-    //             uint batchId;
-    //         }
-    
+      struct Auction{
+                address payable bidder;
+                uint bidprice;
+                bool isBidding;
+            }
+
     
     //Event
     event NewtokenBatchCreated(string tokenHash, string tokenBatchName,  uint256 editionSize,uint256 price, uint256 tokenBatchIndex, address creator);
@@ -72,8 +65,9 @@ contract SuperArt is ERC721, Ownable {
     event ClearRoyalties(uint256 tokenBatchId);
     event mintingstatus(uint256 tokenBatchToUpdate, uint256 price,bool isopenminting);
     event tokenputforsale(uint indexed tokenId,address indexed seller,uint sellPrice,bool isListed,uint times);
-    
-    
+    event tokenbid(uint indexed tokenId,address indexed stcl,bool isBid,uint close,uint times);
+    event bidstarted(uint indexed tokenId,address indexed stcl,uint tokenPrice,uint times);
+    event tokenbought(uint indexed tokenId,address indexed newowner,address indexed seller,uint times,uint tokenPrice);
     //Event
     
     modifier ownertoken(uint256 tokenBatchId){
@@ -104,7 +98,7 @@ contract SuperArt is ERC721, Ownable {
             
             uint256 totalCollaboratorRoyalties;
             for(uint256 i=0; i<_royaltyAddresses.length; i++){
-                royaltyAddressMemory[tokenBatchId][i] = _royaltyAddresses[i];
+                royaltyAddressMemory[tokenBatchId][i] = payable(_royaltyAddresses[i]);
                 royaltyPercentageMemory[tokenBatchId][i] = _royaltyPercentage[i];
                 totalCollaboratorRoyalties += _royaltyPercentage[i];
             }
@@ -142,7 +136,6 @@ contract SuperArt is ERC721, Ownable {
                 referenceTotokenBatch[tokenId] = tokenBatchId;
                 tokenEditionNumber[tokenId] = i + 1;
                 totalMintedTokens[tokenBatchId]++;
-                buyIds[tokenId]++;
                
             }
             }
@@ -156,7 +149,6 @@ contract SuperArt is ERC721, Ownable {
                 referenceTotokenBatch[tokenId] = tokenBatchId;
                 tokenEditionNumber[tokenId] = i + 1;
                 totalMintedTokens[tokenBatchId]++;
-                buyIds[tokenId]++;
                
             }
                 
@@ -168,7 +160,7 @@ contract SuperArt is ERC721, Ownable {
             require(tokenCreator[x] == msg.sender);
             isSellings[_tokenId] = isListed;
             sellPrices[_tokenId] = _sellprice;
-            emit tokenputforsale(_tokenId,msg.sender,_sellprice,true,now);
+            emit tokenputforsale(_tokenId,msg.sender,_sellprice,isListed,now);
         }
         
     function getTokenBatchData(uint256 tokenBatchId) public view returns (string memory _tokenHash, string memory _tokenBatchName, uint256 _unmintedEditions,address _tokenCreator,string memory _imgurl) {
@@ -191,16 +183,120 @@ contract SuperArt is ERC721, Ownable {
             
         }
     
-    function getTokenData(uint256 tokenId) public view returns(address _tokenOwner,bool _isSellings,uint _sellprice,uint _refbatch){
+    function getTokenData(uint256 tokenId) public view returns(address _tokenOwner,bool _isSellings,uint _sellprice,uint _refbatch,address _tokenbidder,bool _isBidding,uint _bidprice){
             _tokenOwner = tokenOwner[tokenId];
             _isSellings = isSellings[tokenId];
             _sellprice = sellPrices[tokenId];
             _refbatch = referenceTotokenBatch[tokenId];
+            Auction memory y = auctions[tokenId];
+            _tokenbidder = y.bidder;
+            _isBidding = y.isBidding;
+            _bidprice = y.bidprice;
+            
         }
-
+     function startbid(uint _tokenId,uint256 _startprice) public {
+                auctions[_tokenId].isBidding = true;
+                auctions[_tokenId].bidprice = _startprice;
+                emit tokenbid(_tokenId,msg.sender,true,1,block.timestamp); 
+            }
+            
+    function addBid(uint _tokenId) public payable{
+                require(auctions[_tokenId].isBidding);
+                require(msg.value>auctions[_tokenId].bidprice);
+                if(auctions[_tokenId].bidder == address(0x0)){
+                    auctions[_tokenId].bidder = msg.sender;
+                    auctions[_tokenId].bidprice = msg.value;
+                    auctions[_tokenId].isBidding = true;
+                    emit bidstarted(_tokenId,msg.sender,msg.value,now);
+                    
+                }
+                else{
+                    (auctions[_tokenId].bidder).transfer(auctions[_tokenId].bidprice);
+                    auctions[_tokenId].bidder = msg.sender;
+                    auctions[_tokenId].bidprice = msg.value;
+                    emit bidstarted(_tokenId,msg.sender,msg.value,now);
+                }
+                
+        }
     
+    function closeBid(uint _tokenId)public{
+                 require(auctions[_tokenId].bidder == msg.sender);
+                 auctions[_tokenId].bidder.transfer(auctions[_tokenId].bidprice);
+                 auctions[_tokenId].bidder = address(0x0);
+                 auctions[_tokenId].bidprice = 0;
+                 emit tokenbid(_tokenId,msg.sender,false,2,block.timestamp);
+            }
     
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+                return string(abi.encodePacked(metaUrl,integerToString(tokenId)));
+            
+            }
+            
+    function buyToken(uint256 _tokenId) public payable returns(bool){
+                require(isSellings[_tokenId]);
+                require(msg.value >= sellPrices[_tokenId]);
+                return _buyToken(_tokenId,msg.sender,msg.value,1);
+            }
+            
+            
+    function _buyToken(uint256 _tokenId,address payable addr,uint256 val,uint8 _type) private returns(bool){
+               uint256 totalmoney = val;
+               address payable royaltyperson;
+               uint256 royaltyper;
+               uint256 x;
+               uint8 typebuy = _type;
+               uint256 batchId = referenceTotokenBatch[_tokenId];
+               for(uint256 i=0; i<royaltyLengthMemory[batchId]; i++){
+                royaltyperson = royaltyAddressMemory[batchId][i];
+                royaltyper = royaltyPercentageMemory[batchId][i];
+                x = SafeMath.div(
+                    SafeMath.mul(val,royaltyper),
+                    100
+                );
+                totalmoney = SafeMath.sub(totalmoney, x);
+                royaltyperson.transfer(x);
+                }
+                uint fee = SafeMath.div(
+                    SafeMath.mul(val, percentageCut),
+                    100
+                );
+                totalmoney = SafeMath.sub(totalmoney, fee);
+                totalBalance += fee;
+                address payable seller = payable(tokenOwner[_tokenId]);
+                seller.transfer(totalmoney);
+                tokenOwner[_tokenId] = addr;
+                isSellings[_tokenId] = false;
+                sellPrices[_tokenId] = 0;
+                if(typebuy == 1){
+                    emit tokenputforsale(_tokenId,seller,0,false,now);
+                }
+                auctions[_tokenId].isBidding = false;
+                auctions[_tokenId].bidder = address(0x0);
+                auctions[_tokenId].bidprice = 0;
+                if(typebuy == 2){
+                    emit tokenbid(_tokenId,seller,true,2,block.timestamp); 
+                }
+                _holderTokens[seller].remove(_tokenId);
+                _holderTokens[addr].add(_tokenId);
+                emit tokenbought(_tokenId,addr,seller,block.timestamp,val);
+                return true;
+            }
     
+    function closeBidOwner(uint _tokenId)public returns(bool){
+                require(auctions[_tokenId].isBidding);
+                return _buyToken(_tokenId,auctions[_tokenId].bidder,auctions[_tokenId].bidprice,2);
+            }
+    
+    function withdrawBalance() public payable onlyOwner() {
+                (msg.sender).transfer(totalBalance);
+            }
+            
+    function FinalWithdrawBal() public payable onlyOwner() {
+                uint256 balance = address(this).balance;
+                (msg.sender).transfer(balance);
+            }
+        
+            
     function integerToString(uint _i) internal pure returns (string memory) {
             if (_i == 0) {
                 return "0";
