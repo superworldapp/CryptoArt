@@ -29,7 +29,18 @@ import checkmark from '../images/svg/checkmark.svg';
 import Web3 from 'web3';
 import Axios from 'axios';
 
-const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
+const CardDetail = ({
+  art,
+  accounts,
+  contract,
+  cre,
+  matchId,
+  tokenCreated,
+  tokenPutForSale,
+  tokenBought,
+  tokenBid,
+  tokenBidStarted,
+}) => {
   console.log(art);
 
   const [ethPrice, setEthPrice] = useState({});
@@ -43,7 +54,6 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
   const [bidSuccess, setBidSuccess] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownValue, setDropdownValue] = useState('');
-
   const changeValue = (e) => {
     setDropdownValue(e.currentTarget.textContent);
   };
@@ -103,63 +113,34 @@ const CardDetail = ({ art, accounts, contract, cre, matchId }) => {
   };
 
   const getCreData = async () => {
-    // let cre = await contract?.getPastEvents('tokencreated', {
-    //   filter: { tokenId: art.tokenIdentifier },
-    //   fromBlock: 7970334,
-    // });
+    console.log('tokenCreated in getCreData', tokenCreated);
+    console.log('tokenPutForSale in getCreData', tokenPutForSale);
+    console.log('tokenBought in getCreData', tokenBought);
+    console.log('tokenBid in getCreData', tokenBid);
 
-    let tokenData = await Axios.get(
-      `${process.env.REACT_APP_TOKEN_API_URL}/tokencreated/4/get/`
-    );
-    let cre = tokenData.data.data.data.filter(
-      (item) => item.returnValues.tokenId === art.tokenIdentifier
-    );
-    setCreValue(cre);
-    console.log('cre in CardDetail', cre);
+    let cre = tokenCreated;
+    let tfs = tokenPutForSale;
+    let tBought = tokenBought;
+    let tBid = tokenBid;
+    let bidStarted = tokenBidStarted;
 
-    let tfs = await Axios.get(
-      `${process.env.REACT_APP_TOKEN_API_URL}/tokenputforsale/4/get`
-    );
-    console.log(
-      'tfs.data.data',
-      tfs.data.data.data.filter(
-        (token) => token.returnValues.tokenId === art.tokenIdentifier
-      )
-    );
-
-    //  // Using an array means OR: e.g. 20 or 23
-    // let tb = await contract?.getPastEvents('tokenbought', {
-    //   filter: { tokenId: art.tokenIdentifier },
-    //   fromBlock: 7970334,
-    // });
-    // let tfs = await contract?.getPastEvents('tokenputforsale', {
-    //   filter: { tokenId: art.tokenIdentifier },
-    //   fromBlock: 7970334,
-    // });
-    // let tokenBid = await contract?.getPastEvents('tokenbid', {
-    //   filter: { tokenId: art.tokenIdentifier },
-    //   fromBlock: 7970334,
-    // });
-    // let bidStarted = await contract?.getPastEvents('bidstarted', {
-    //   filter: { tokenId: art.tokenIdentifier },
-    //   fromBlock: 7970334,
-    // });
-    // for (let property in cre) {
-    //   creValue.push(cre[property]);
-    // }
-    // for (let property in tb) {
-    //   creValue.push(tb[property]);
-    // }
-    // for (let property in tfs) {
-    //   creValue.push(tfs[property]);
-    // }
-    //if(tokenBid?.length == 0){
-    // for (let property in tokenBid) {
-    //   creValue.push(tokenBid[property]);
-    // }
-    // for (let property in bidStarted) {
-    //   creValue.push(bidStarted[property]);
-    // }
+    for (let property in cre) {
+      creValue.push(cre[property]);
+    }
+    for (let property in tBought) {
+      creValue.push(tBought[property]);
+    }
+    for (let property in tfs) {
+      creValue.push(tfs[property]);
+    }
+    if (tBid?.length !== 0) {
+      for (let property in tBid) {
+        creValue.push(tBid[property]);
+      }
+    }
+    for (let property in bidStarted) {
+      creValue.push(bidStarted[property]);
+    }
 
     creValue.sort((a, b) => {
       return Number(b.returnValues.times) - Number(a.returnValues.times);

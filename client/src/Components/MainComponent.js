@@ -10,6 +10,7 @@ import CardDetail from './CardDetail';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './FooterComponent';
 import ProtectedRoute from './ProtectedRoute';
+import Axios from 'axios';
 //import HDWalletProvider from "@truffle/hdwallet-provider";
 let allDocs = [];
 
@@ -26,6 +27,10 @@ class Main extends Component {
       registered: 0,
       art: null,
       creValue: [],
+      tokensCreated: [],
+      tokensBought: [],
+      tokensBid: [],
+      tokensBidStarted: [],
     };
   }
 
@@ -61,7 +66,7 @@ class Main extends Component {
         balance,
         creValue: newArr,
       });
-      console.log(this.state.creValue);
+      console.log('this.state.creValue', this.state.creValue);
       let res = await this.state.contract?.methods.tokenCount().call();
       console.log(res);
 
@@ -74,6 +79,35 @@ class Main extends Component {
       allDocs = response;
       console.log(response);
       this.setState({ art: allDocs });
+
+      let allCreatedTokens = await Axios.get(
+        `${process.env.REACT_APP_TOKEN_API_URL}/tokencreated/4/get/`
+      );
+      this.setState({ tokensCreated: allCreatedTokens.data.data.data });
+
+      //token listed for sale
+      let allTokensPutForSale = await Axios.get(
+        `${process.env.REACT_APP_TOKEN_API_URL}/tokenputforsale/4/get/`
+      );
+      this.setState({ tokensPutForSale: allTokensPutForSale.data.data.data });
+
+      //tokens bought
+      let allTokensBought = await Axios.get(
+        `${process.env.REACT_APP_TOKEN_API_URL}/tokenbought/4/get/`
+      );
+      this.setState({ tokensBought: allTokensBought.data.data.data });
+
+      //tokens listed for auction
+      let allTokensBid = await Axios.get(
+        `${process.env.REACT_APP_TOKEN_API_URL}/tokenbid/4/get/`
+      );
+      this.setState({ tokensBid: allTokensBid.data.data.data });
+
+      //tokens bid
+      let allTokensBidStarted = await Axios.get(
+        `${process.env.REACT_APP_TOKEN_API_URL}/bidstarted/4/get/`
+      );
+      this.setState({ tokensBidStarted: allTokensBidStarted.data.data.data });
     } catch (error) {
       // Catch any errors for any of the above operations.
 
@@ -85,6 +119,21 @@ class Main extends Component {
     const CardWithId = ({ match }) => {
       return (
         <CardDetail
+          tokenCreated={this.state.tokensCreated.filter(
+            (token) => token.returnValues.tokenId === match.params.id
+          )}
+          tokenPutForSale={this.state.tokensPutForSale.filter(
+            (token) => token.returnValues.tokenId === match.params.id
+          )}
+          tokenBought={this.state.tokensBought.filter(
+            (token) => token.returnValues.tokenId === match.params.id
+          )}
+          tokenBid={this.state.tokensBid.filter(
+            (token) => token.returnValues.tokenId === match.params.id
+          )}
+          tokenBidStarted={this.state.tokensBidStarted.filter(
+            (token) => token.returnValues.tokenId === match.params.id
+          )}
           art={
             this.state.art?.filter(
               (singleart) => singleart.tokenIdentifier === match.params.id

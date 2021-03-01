@@ -59,9 +59,13 @@ const TableBody = ({ cre }) => {
             <tr key={item.id}>
               <th scope='row'>
                 {item?.event == 'Tokenbid'
-                  ? 'AuctionStarted'
+                  ? 'Auction Started'
                   : item.event == 'Bidstarted'
-                  ? 'BidPlaced'
+                  ? 'Bid Placed'
+                  : item.event == 'Tokenputforsale'
+                  ? 'Token Listed For Sale'
+                  : item.event == 'Tokencreated'
+                  ? 'Token Created'
                   : item.event}
               </th>
               <td>
