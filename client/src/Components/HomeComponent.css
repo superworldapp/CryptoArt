@@ -1,6 +1,7 @@
 .hidden {
   overflow-x: hidden;
 }
+
 .Home {
   display: flex;
   justify-content: space-around;
@@ -8,22 +9,26 @@
 .upperView {
   display: flex;
   justify-content: space-between;
+  padding-bottom: 2rem;
 }
 
 .col1 {
-  width: 60%;
-  float: left;
+  margin-right: 5rem;
   display: flex;
   margin-top: 4rem;
 }
 .col2 {
-  width: 40%;
-  display: flex;
+  margin-left: 1rem;
+  /* display: flex; */
 }
-.upperView {
+.middleView {
   display: flex;
   justify-content: space-between;
-}
+  margin-top: 1rem;
+  background-color: white;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+} 
 
 .img1 {
   position: relative;
@@ -62,9 +67,6 @@ a {
   margin: 2px;
   margin-top: 2rem;
   width: 100%;
-  /* position: relative; */
-  /* bottom: -2%; */
-  /* left: 12%; */
   text-align: left;
 }
 .start-btn {
@@ -105,11 +107,13 @@ a {
 .rowImages {
   display: flex;
   justify-content: space-around;
+  margin: 0rem 1.5rem 0rem 1.5rem;
 }
 
 div.imageCards {
-  height: 280px !important;
-  width: 245px;
+  height: 270px !important;
+  width: 220px;
+  border-radius: 1rem;
 }
 .text2 {
   font-family: Gibson;
@@ -135,77 +139,31 @@ div.imageCards {
   right: 50%;
   top: 1px;
 }
-/* Image Classes */
-/* #1 */
-.image11 {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  margin-left: 37%;
-  margin-top: 0%;
+.card-image{
+  height: 12rem;
 }
-
+.card-imgTitle{
+  right: 0 !important;
+  color: white;
+  text-align: center;
+  position: relative;
+  top: 56.5%;
+  opacity: 0.95;
+  backdrop-filter: blur(60px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.068) 0%, rgba(0, 0, 0, 0.075) 100%);
+}
+.imgOverlay{
+  right: 0 !important;
+}
+/* Image Classes */
 /* #2 */
 .image10 {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  margin-left: 25%;
-  margin-top: 1%;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 0.5rem;
 }
 
-/* #3 */
-.image15 {
-  position: absolute;
-  width: 140px;
-  height: 80px;
-  margin-left: 28.5%;
-  margin-top: 6%;
-}
 
-/* #4 */
-.image13 {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  margin-left: 36%;
-  margin-top: 13%;
-}
-
-/* #5 */
-.image9 {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  margin-left: 13%;
-  margin-top: 3%;
-}
-
-/* #6 */
-.image14 {
-  position: absolute;
-  width: 115px;
-  height: 115px;
-  margin-left: 20%;
-  margin-top: 10.5%;
-}
-
-/* #7 */
-.image12 {
-  position: absolute;
-  width: 130px;
-  height: 150px;
-  margin-left: 27%;
-  margin-top: 19%;
-}
-
-.image8 {
-  position: absolute;
-  width: 180px;
-  height: 200px;
-  margin-left: 7.5%;
-  margin-top: 16%;
-}
 
 /* #root > div > div > div > div > div:nth-child(7) > div {
   height: fit-content !important;
@@ -248,11 +206,55 @@ img.rounded-circle {
 
 .buy-bid-btn-div {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  margin-top: 0.5rem;
 }
 
-.time-div {
+/* .time-div {
   display: flex;
   flex-direction: column;
   justify-content: center;
+} */
+.topimage{
+  width: 20rem;
+  height: 20rem;
+  border-radius: 2%;
+}
+
+.sectionText1{
+  margin-left: 2rem;
+}
+.sectionText2{
+  margin-right: 0rem;
+  /* padding-left: 2rem; */
+}
+.bottomView{
+  background-color: white;
+  padding-bottom: 5rem;
+}
+.gridRow1{
+  margin-top: 0.5rem !important;
+  margin-left: 0rem !important;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+}
+.gridCol1{
+  margin-top: 0rem !important;
+  display: flex;
+  justify-content: space-evenly;
+}
+.gridRow2{
+  margin-top: 1.8rem !important;
+  margin-left: 0rem !important;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+}
+.gridRow3{
+  margin-top: 1.8rem !important;
+  margin-left: 0rem !important;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
 }

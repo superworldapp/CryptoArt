@@ -320,13 +320,13 @@ class Header extends Component {
               />
             </NavLink>
           </NavbarBrand>
-          <InputGroup
+          {/*<InputGroup
             style={{
               position: 'relative',
               marginLeft: '2rem',
             }}
           >
-            <Input
+             <Input
               placeholder='Search for Artist, Art name'
               value={this.state.value}
               onChange={this.handleChange}
@@ -346,7 +346,7 @@ class Header extends Component {
                 display: !this.state.value ? 'block' : 'none',
               }}
             ></i>
-          </InputGroup>
+          </InputGroup> */}
           <Collapse isOpen={this.state.isNavOpen} navbar>
             <Nav
               navbar
@@ -360,7 +360,29 @@ class Header extends Component {
                   }}
                   to='/allart'
                 >
-                  Art Marketplace
+                Marketplace
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className='nav-link'
+                  style={{
+                    width: 200,
+                  }}
+                  to='/allart'
+                >
+                Picks
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className='nav-link'
+                  style={{
+                    width: 200,
+                  }}
+                  to='/allart'
+                >
+                Help
                 </NavLink>
               </NavItem>
 
@@ -1090,7 +1112,7 @@ class Header extends Component {
                   />
                 </NavLink>
               </NavItem>  */}
-              <NavItem>
+              {/* <NavItem>
                 <NavLink className='nav-link' to='#'>
                   <img
                     width='30px'
@@ -1100,7 +1122,7 @@ class Header extends Component {
                     alt='question-mark'
                   />
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               <SignInModal initContracts={this.props.initContracts} />
             </Nav>
           </Collapse>

@@ -27,12 +27,12 @@
 }
 
 .LoginButton-header {
-  background: #5540c7 !important;
+  background: white !important;
   border-radius: 50px !important;
-  border: 2px solid #5540c7 !important;
-  color: #ffffff !important;
+  /* border: 2px solid #5540c7 !important; */
+  color: #5540c7 !important;
   height: 40px !important;
-  padding: 0 35px !important;
+  /* padding: 0 35px !important; */
   font-family: 'Gibson' !important;
   width: 10rem;
   /* text-transform: 'capitalize' !important; */
