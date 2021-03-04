@@ -1,5 +1,6 @@
 import React from 'react';
 import Web3 from 'web3';
+import axios from 'axios';
 
 const TableBody = ({ cre }) => {
   const calcTime = (timeCreated) => {
@@ -49,7 +50,7 @@ const TableBody = ({ cre }) => {
       return '@SwapnilTest';
     else return '@Annonymous';
   };
-
+  console.log('item in return', cre);
   return (
     <tbody>
       {cre?.map((item) => {
@@ -58,9 +59,13 @@ const TableBody = ({ cre }) => {
             <tr key={item.id}>
               <th scope='row'>
                 {item?.event == 'Tokenbid'
-                  ? 'AuctionStarted'
+                  ? 'Auction Started'
                   : item.event == 'Bidstarted'
-                  ? 'BidPlaced'
+                  ? 'Bid Placed'
+                  : item.event == 'Tokenputforsale'
+                  ? 'Token Listed For Sale'
+                  : item.event == 'Tokencreated'
+                  ? 'Token Created'
                   : item.event}
               </th>
               <td>
