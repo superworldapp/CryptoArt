@@ -27,19 +27,20 @@
 }
 
 .LoginButton-header {
-  background: white !important;
-  border-radius: 50px !important;
+  /*background: white !important;*/
+  /* border-radius: 50px !important; */
   /* border: 2px solid #5540c7 !important; */
   color: #5540c7 !important;
   height: 40px !important;
   /* padding: 0 35px !important; */
   font-family: 'Gibson' !important;
-  width: 10rem;
+  font-size: 20px !important;
+  width: 10rem ;
   /* text-transform: 'capitalize' !important; */
 }
 
 .LoginButton-header:hover {
-  background: #ffffff !important;
+  /*background: #ffffff !important;*/
   color: #5540c7 !important;
 }
 

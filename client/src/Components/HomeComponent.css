@@ -1,11 +1,11 @@
 .hidden {
   overflow-x: hidden;
 }
-
+/* 
 .Home {
   display: flex;
   justify-content: space-around;
-}
+} */
 .upperView {
   display: flex;
   justify-content: space-between;
@@ -62,8 +62,8 @@ a {
 .text1 {
   font-family: 'gibson', sans-serif;
   font-weight: bold;
-  color: #888888;
-  font-size: 17px;
+  color: #5540c6;
+  font-size: 1.25rem;
   margin: 2px;
   margin-top: 2rem;
   width: 100%;
@@ -81,7 +81,7 @@ a {
   padding: 0.375rem 1.5rem;
   border: 2px solid #5540c7;
   text-transform: uppercase;
-  background-color: #5540c7;
+  background-color: #5540c6;
   color: white;
   bottom: 15%;
   right: 20%;
@@ -107,13 +107,14 @@ a {
 .rowImages {
   display: flex;
   justify-content: space-around;
-  margin: 0rem 1.5rem 0rem 1.5rem;
+  margin: 0rem 2.5rem 0rem 2.5rem;
 }
 
 div.imageCards {
   height: 270px !important;
-  width: 220px;
+  width: 250px;
   border-radius: 1rem;
+  margin-right: 1rem;
 }
 .text2 {
   font-family: Gibson;
@@ -145,9 +146,11 @@ div.imageCards {
 .card-imgTitle{
   right: 0 !important;
   color: white;
+  font-weight: 600;
+  font-family: 'Gibson';
   text-align: center;
   position: relative;
-  top: 56.5%;
+  top: 44%;
   opacity: 0.95;
   backdrop-filter: blur(60px);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.068) 0%, rgba(0, 0, 0, 0.075) 100%);
@@ -197,11 +200,12 @@ img.rounded-circle {
   font-family: 'gibson', sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 10px;
-  border: 2px solid #5540c7;
+  font-size: 12px;
+  border: 2px solid #5540c6;
   text-transform: uppercase;
-  background-color: #5540c7;
+  background-color: #5540c6;
   color: white;
+  padding: 0.2rem 0.5rem;
 }
 
 .buy-bid-btn-div {
@@ -257,4 +261,15 @@ img.rounded-circle {
   display: flex;
   justify-content: space-around;
   flex-wrap: nowrap;
+}
+.sw-overlay{
+  backdrop-filter: blur(60px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.068) 0%, rgba(0, 0, 0, 0.075) 100%);
+  margin-left: -6rem;
+  margin-top: 0rem;
+  border-radius: 0rem 0rem 1rem 1rem !important; 
+  padding: 0rem 0.5rem 0.5rem 0rem !important;
+}
+.userimg{
+  border-radius: 50%;
 }

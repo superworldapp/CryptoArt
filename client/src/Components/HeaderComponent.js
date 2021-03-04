@@ -306,6 +306,8 @@ class Header extends Component {
           expand='md'
           style={{
             marginBottom: '-1.8rem',
+            backgroundColor:'#d5d7fa',
+            height:'85px'
           }}
         >
           <NavbarToggler onClick={this.toggleNav} />
@@ -357,6 +359,8 @@ class Header extends Component {
                   className='nav-link'
                   style={{
                     width: 200,
+                    fontFamily:'Gibson',
+                    fontSize:'17px',
                   }}
                   to='/allart'
                 >
@@ -368,6 +372,8 @@ class Header extends Component {
                   className='nav-link'
                   style={{
                     width: 200,
+                    fontFamily:'Gibson',
+                    fontSize:'17px',
                   }}
                   to='/allart'
                 >
@@ -379,6 +385,8 @@ class Header extends Component {
                   className='nav-link'
                   style={{
                     width: 200,
+                    fontFamily:'Gibson',
+                    fontSize:'17px',
                   }}
                   to='/allart'
                 >

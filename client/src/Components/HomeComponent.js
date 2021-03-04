@@ -12,6 +12,7 @@ import {
   Row,
   Col,
   CardTitle,
+  Badge,
 } from 'reactstrap';
 import { Grid } from '@material-ui/core';
 import image1 from '../images/image 166.png';
@@ -44,6 +45,7 @@ import SignInModal from './SignInModal/SignInModal';
 import { LayoutContext } from '../state/Layout/context';
 
 import anonUser from '../images/user.png';
+import swicon from  "../images/Group 220.png";
 import p1 from '../images/p1.png';
 import svg1 from '../images/svg/angle.svg';
 import './HomeComponent.css';
@@ -155,12 +157,13 @@ class Home extends Component {
                 <img className='topimage' src={image1} alt='img' />
                 </div>
               </div>
+              </Container>
               <br/>
 
-              <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
+              <div style={{height: '1.5rem', backgroundColor:' #D5D7FA',}}></div>
               <br/>
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
-              
+              <Container>
               <div className='middleView'>
               <div className="col2">
               <Row around="xs" className= "gridRow1">
@@ -202,7 +205,7 @@ class Home extends Component {
                   <p className='text1'>
                     
                     Each day brings something new, 
-                    view yuor ever changing 
+                    view your ever changing 
                     <br/>
                     gallery of NFT's from a wide range 
                     
@@ -249,11 +252,12 @@ class Home extends Component {
                 </div>
               </div> */}
               </div>
+              </Container>
               <br /> 
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
               <br/>
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
-              
+              <Container>
               <div className ="bottomView">
               <div
                 style={{
@@ -297,9 +301,18 @@ class Home extends Component {
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
+                  width='20px'
+                  height='20px'
+                  className="userimg"
+                  src={anonUser}
+                ></img>
+              </Badge>
                     <CardTitle className="card-imgTitle" >
                       Octo
-                    </CardTitle>
+                    </CardTitle> 
                   </CardImgOverlay>
                   <CardBody>
                     <div
@@ -312,6 +325,7 @@ class Home extends Component {
                           fontFamily: 'Gibson',
                           fontSize: '13px',
                           color: '#888888',
+                          fontWeight:'600',
                         }}
                       >
                         Created by Cjsmith
@@ -350,8 +364,17 @@ class Home extends Component {
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
+                  width='20px'
+                  height='20px'
+                  className="userimg"
+                  src={anonUser}
+                ></img>
+              </Badge>
                     <CardTitle className="card-imgTitle" >
-                      New Planet PitShop
+                      New Planet PitStop
                     </CardTitle>
                   </CardImgOverlay>
                   <CardBody>
@@ -365,6 +388,7 @@ class Home extends Component {
                           fontFamily: 'Gibson',
                           fontSize: '13px',
                           color: '#888888',
+                          fontWeight:'600',
                         }}
                       >
                         Created by SaraViz
@@ -403,6 +427,15 @@ class Home extends Component {
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
+                  width='20px'
+                  height='20px'
+                  className="userimg"
+                  src={anonUser}
+                ></img>
+              </Badge>
                     <CardTitle className="card-imgTitle" >
                       Break Free
                     </CardTitle>
@@ -418,6 +451,7 @@ class Home extends Component {
                           fontFamily: 'Gibson',
                           fontSize: '13px',
                           color: '#888888',
+                          fontWeight:'600',
                         }}
                       >
                         Created by Olivia
@@ -473,6 +507,15 @@ class Home extends Component {
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
+                  width='20px'
+                  height='20px'
+                  className="userimg"
+                  src={anonUser}
+                ></img>
+              </Badge>
                     <CardTitle className="card-imgTitle" >
                       Look
                     </CardTitle>
@@ -488,6 +531,7 @@ class Home extends Component {
                           fontFamily: 'Gibson',
                           fontSize: '13px',
                           color: '#888888',
+                          fontWeight:'600',
                         }}
                       >
                         Created by Mai
@@ -543,6 +587,15 @@ class Home extends Component {
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
+                  width='20px'
+                  height='20px'
+                  className="userimg"
+                  src={anonUser}
+                ></img>
+              </Badge>
                     <CardTitle className="card-imgTitle" >
                       Faces
                     </CardTitle>
@@ -558,6 +611,7 @@ class Home extends Component {
                           fontFamily: 'Gibson',
                           fontSize: '13px',
                           color: '#888888',
+                          fontWeight:'600',
                         }}
                       >
                         Created by kyliehart
@@ -630,8 +684,18 @@ class Home extends Component {
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
+                  width='20px'
+                  height='20px'
+                  
+                  src={swicon}
+                ></img>
+              </Badge>
+                  
                     <CardTitle className="card-imgTitle" >
-                      Ankor Wat
+                      Angkor Wat
                     </CardTitle>
                   </CardImgOverlay>
                   <CardBody>
@@ -645,6 +709,7 @@ class Home extends Component {
                           fontFamily: 'Gibson',
                           fontSize: '13px',
                           color: '#888888',
+                          fontWeight:'600',
                         }}
                       >
                         Created by SuperWorld
@@ -715,6 +780,15 @@ class Home extends Component {
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
+                  width='20px'
+                  height='20px'
+                  
+                  src={swicon}
+                ></img>
+              </Badge>
                     <CardTitle className="card-imgTitle" >
                       Blue Domes of Oia
                     </CardTitle>
@@ -730,6 +804,7 @@ class Home extends Component {
                           fontFamily: 'Gibson',
                           fontSize: '13px',
                           color: '#888888',
+                          fontWeight:'600',
                         }}
                       >
                         Created by SuperWorld
@@ -809,8 +884,16 @@ class Home extends Component {
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
+                  width='20px'
+                  height='20px'
+                  src={swicon}
+                ></img>
+              </Badge>
                     <CardTitle className="card-imgTitle" >
-                      Great Walls
+                      Great Wall
                     </CardTitle>
                   </CardImgOverlay>
                   <CardBody>
@@ -824,6 +907,7 @@ class Home extends Component {
                           fontFamily: 'Gibson',
                           fontSize: '13px',
                           color: '#888888',
+                          fontWeight:'600',
                         }}
                       >
                         Created by SuperWorld
@@ -904,6 +988,15 @@ class Home extends Component {
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
+                  width='20px'
+                  height='20px'
+                  
+                  src={swicon}
+                ></img>
+              </Badge>
                     <CardTitle className="card-imgTitle" >
                       Downtown Toronto
                     </CardTitle>
@@ -919,6 +1012,7 @@ class Home extends Component {
                           fontFamily: 'Gibson',
                           fontSize: '13px',
                           color: '#888888',
+                          fontWeight:'600',
                         }}
                       >
                         Created by SuperWorld
@@ -988,7 +1082,17 @@ class Home extends Component {
                     src={Timesquare}
                     alt='image3'
                   ></CardImg>
-                  <CardImgOverlay className="imgOverlay">
+                 <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
+                  width='20px'
+                  height='20px'
+                  
+                  src={swicon}
+                ></img>
+              </Badge>
+                  
                     <CardTitle className="card-imgTitle" >
                       Times Square
                     </CardTitle>
@@ -1004,6 +1108,7 @@ class Home extends Component {
                           fontFamily: 'Gibson',
                           fontSize: '13px',
                           color: '#888888',
+                          fontWeight:'600',
                         }}
                       >
                         Created by SuperWorld
