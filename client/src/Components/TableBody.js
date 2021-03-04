@@ -63,9 +63,11 @@ const TableBody = ({ cre }) => {
                   : item.event == 'Bidstarted'
                   ? 'Bid Placed'
                   : item.event == 'Tokenputforsale'
-                  ? 'Token Listed For Sale'
+                  ? 'Listed For Sale'
                   : item.event == 'Tokencreated'
                   ? 'Token Created'
+                  : item.event == 'Tokenbought'
+                  ? 'Purchased'
                   : item.event}
               </th>
               <td>

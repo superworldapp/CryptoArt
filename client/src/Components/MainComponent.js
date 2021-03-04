@@ -54,6 +54,7 @@ class Main extends Component {
       let cre = await instance.getPastEvents('tokencreated', {
         fromBlock: 7970334,
       });
+
       let newArr = [];
       for (let i = 0; i < cre.length; i++) {
         newArr.push(cre[i]);
@@ -92,10 +93,15 @@ class Main extends Component {
       this.setState({ tokensPutForSale: allTokensPutForSale.data.data.data });
 
       //tokens bought
-      let allTokensBought = await Axios.get(
-        `${process.env.REACT_APP_TOKEN_API_URL}/tokenbought/4/get/`
-      );
-      this.setState({ tokensBought: allTokensBought.data.data.data });
+      // let allTokensBought = await Axios.get(
+      //   `${process.env.REACT_APP_TOKEN_API_URL}/tokenbought/4/get/`
+      // );
+      // this.setState({ tokensBought: allTokensBought.data.data.data });
+
+      let allTokensBought = await instance.getPastEvents('tokenbought', {
+        fromBlock: 7970334,
+      });
+      this.setState({ tokensBought: allTokensBought });
 
       //tokens listed for auction
       let allTokensBid = await Axios.get(
@@ -104,10 +110,15 @@ class Main extends Component {
       this.setState({ tokensBid: allTokensBid.data.data.data });
 
       //tokens bid
-      let allTokensBidStarted = await Axios.get(
-        `${process.env.REACT_APP_TOKEN_API_URL}/bidstarted/4/get/`
-      );
-      this.setState({ tokensBidStarted: allTokensBidStarted.data.data.data });
+      // let allTokensBidStarted = await Axios.get(
+      //   `${process.env.REACT_APP_TOKEN_API_URL}/bidstarted/4/get/`
+      // );
+      // this.setState({ tokensBidStarted: allTokensBidStarted.data.data.data });
+
+      let allTokensBidStarted = await instance.getPastEvents('bidstarted', {
+        fromBlock: 7970334,
+      });
+      this.setState({ tokensBidStarted: allTokensBidStarted });
     } catch (error) {
       // Catch any errors for any of the above operations.
 
