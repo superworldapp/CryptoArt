@@ -208,7 +208,6 @@ class Home extends Component {
                     view your ever changing 
                     <br/>
                     gallery of NFT's from a wide range 
-                    
                     of salon creators
                     <br />
                     {/* And share it in your{' '}
@@ -295,17 +294,14 @@ class Home extends Component {
               <Card className='imageCards'>
                   <CardImg
                     top
-                    width='100%'
-                    height='65%'
+                    
+                    className="Cardimg"
                     src={image11}
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
                   <Badge pill className= "sw-overlay">
                   <img
-                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
-                  width='20px'
-                  height='20px'
                   className="userimg"
                   src={anonUser}
                 ></img>
@@ -324,7 +320,7 @@ class Home extends Component {
                         style={{
                           fontFamily: 'Gibson',
                           fontSize: '13px',
-                          color: '#888888',
+                          color: '#5540c7',
                           fontWeight:'600',
                         }}
                       >
@@ -358,17 +354,13 @@ class Home extends Component {
                 <Card className='imageCards'>
                   <CardImg
                     top
-                    width='100%'
-                    height='65%'
+                    className="Cardimg"
                     src={image12}
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
                   <Badge pill className= "sw-overlay">
                   <img
-                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
-                  width='20px'
-                  height='20px'
                   className="userimg"
                   src={anonUser}
                 ></img>
@@ -387,7 +379,7 @@ class Home extends Component {
                         style={{
                           fontFamily: 'Gibson',
                           fontSize: '13px',
-                          color: '#888888',
+                          color: '#5540c7',
                           fontWeight:'600',
                         }}
                       >
@@ -421,17 +413,13 @@ class Home extends Component {
                 <Card className='imageCards'>
                   <CardImg
                     top
-                    width='100%'
-                    height='65%'
+                    className="Cardimg"
                     src={image13}
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
                   <Badge pill className= "sw-overlay">
                   <img
-                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
-                  width='20px'
-                  height='20px'
                   className="userimg"
                   src={anonUser}
                 ></img>
@@ -450,7 +438,7 @@ class Home extends Component {
                         style={{
                           fontFamily: 'Gibson',
                           fontSize: '13px',
-                          color: '#888888',
+                          color: '#5540c7',
                           fontWeight:'600',
                         }}
                       >
@@ -501,17 +489,13 @@ class Home extends Component {
                 <Card className='imageCards'>
                   <CardImg
                     top
-                    width='100%'
-                    height='65%'
+                    className="Cardimg"
                     src={image14}
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
                   <Badge pill className= "sw-overlay">
                   <img
-                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
-                  width='20px'
-                  height='20px'
                   className="userimg"
                   src={anonUser}
                 ></img>
@@ -530,7 +514,7 @@ class Home extends Component {
                         style={{
                           fontFamily: 'Gibson',
                           fontSize: '13px',
-                          color: '#888888',
+                          color: '#5540c7',
                           fontWeight:'600',
                         }}
                       >
@@ -581,17 +565,13 @@ class Home extends Component {
                 <Card className='imageCards'>
                   <CardImg
                     top
-                    width='100%'
-                    height='65%'
+                    className="Cardimg"
                     src={image15}
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
                   <Badge pill className= "sw-overlay">
                   <img
-                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
-                  width='20px'
-                  height='20px'
                   className="userimg"
                   src={anonUser}
                 ></img>
@@ -610,7 +590,7 @@ class Home extends Component {
                         style={{
                           fontFamily: 'Gibson',
                           fontSize: '13px',
-                          color: '#888888',
+                          color: '#5540c7',
                           fontWeight:'600',
                         }}
                       >
@@ -678,22 +658,17 @@ class Home extends Component {
                 <Card className='imageCards'>
                   <CardImg
                     top
-                    width='100%'
-                    height='65%'
+                    className="Cardimg"
                     src={AnkorWat}
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
                   <Badge pill className= "sw-overlay">
                   <img
-                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
-                  width='20px'
-                  height='20px'
-                  
+                  className="userimg"
                   src={swicon}
                 ></img>
               </Badge>
-                  
                     <CardTitle className="card-imgTitle" >
                       Angkor Wat
                     </CardTitle>
@@ -708,7 +683,7 @@ class Home extends Component {
                         style={{
                           fontFamily: 'Gibson',
                           fontSize: '13px',
-                          color: '#888888',
+                          color: '#5540c7',
                           fontWeight:'600',
                         }}
                       >
@@ -774,18 +749,14 @@ class Home extends Component {
                 <Card className='imageCards'>
                   <CardImg
                     top
-                    width='100%'
-                    height='65%'
+                    className="Cardimg"
                     src={Bluedomesofoia}
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
                   <Badge pill className= "sw-overlay">
                   <img
-                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
-                  width='20px'
-                  height='20px'
-                  
+                  className="userimg"
                   src={swicon}
                 ></img>
               </Badge>
@@ -803,7 +774,7 @@ class Home extends Component {
                         style={{
                           fontFamily: 'Gibson',
                           fontSize: '13px',
-                          color: '#888888',
+                          color: '#5540c7',
                           fontWeight:'600',
                         }}
                       >
@@ -878,17 +849,14 @@ class Home extends Component {
                 <Card className='imageCards'>
                   <CardImg
                     top
-                    width='100%'
-                    height='65%'
+                    className="Cardimg"
                     src={Greatwalls}
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
                   <Badge pill className= "sw-overlay">
                   <img
-                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
-                  width='20px'
-                  height='20px'
+                  className="userimg"
                   src={swicon}
                 ></img>
               </Badge>
@@ -906,7 +874,7 @@ class Home extends Component {
                         style={{
                           fontFamily: 'Gibson',
                           fontSize: '13px',
-                          color: '#888888',
+                          color: '#5540c7',
                           fontWeight:'600',
                         }}
                       >
@@ -982,18 +950,14 @@ class Home extends Component {
                 <Card className='imageCards'>
                   <CardImg
                     top
-                    width='100%'
-                    height='65%'
+                    className="Cardimg"
                     src={Downtowntoronto}
                     alt='image3'
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
                   <Badge pill className= "sw-overlay">
                   <img
-                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
-                  width='20px'
-                  height='20px'
-                  
+                  className="userimg"
                   src={swicon}
                 ></img>
               </Badge>
@@ -1011,7 +975,7 @@ class Home extends Component {
                         style={{
                           fontFamily: 'Gibson',
                           fontSize: '13px',
-                          color: '#888888',
+                          color: '#5540c7',
                           fontWeight:'600',
                         }}
                       >
@@ -1077,18 +1041,14 @@ class Home extends Component {
                 <Card className='imageCards'>
                   <CardImg
                     top
-                    width='100%'
-                    height='65%'
+                    className="Cardimg"
                     src={Timesquare}
                     alt='image3'
                   ></CardImg>
                  <CardImgOverlay className="imgOverlay">
                   <Badge pill className= "sw-overlay">
                   <img
-                  style={{ marginLeft:'0.5rem', marginTop:'0.2rem',  }}
-                  width='20px'
-                  height='20px'
-                  
+                  className="userimg"
                   src={swicon}
                 ></img>
               </Badge>
@@ -1107,7 +1067,7 @@ class Home extends Component {
                         style={{
                           fontFamily: 'Gibson',
                           fontSize: '13px',
-                          color: '#888888',
+                          color: '#5540c7',
                           fontWeight:'600',
                         }}
                       >
