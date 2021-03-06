@@ -147,8 +147,10 @@ contract SuperArt is ERC721, Ownable {
     // Use : Minting new tokens from batch   
     // Input : Token Batch ID, minting amount
     // Output : minted token(s)
-    function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) public  {
+    function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) public payable {
+            uint price = tokenBatchPrice[tokenBatchId] * amountToMint;
             if(openminting[tokenBatchId]){
+            require(msg.value >= price);
             require(totalMintedTokens[tokenBatchId] + amountToMint <= tokenBatchEditionSize[tokenBatchId]);
             for(uint256 i=totalMintedTokens[tokenBatchId]; i<amountToMint + totalMintedTokens[tokenBatchId]; i++) {
                   uint256 tokenId = totalSupply() + 1;
@@ -157,8 +159,9 @@ contract SuperArt is ERC721, Ownable {
                 referenceTotokenBatch[tokenId] = tokenBatchId;
                 tokenEditionNumber[tokenId] = i + 1;
                 totalMintedTokens[tokenBatchId]++;
-               
-            }
+                }
+            address payable a = payable(tokenCreator[tokenBatchId]);
+            a.transfer(msg.value);
             }
             else{
                 require(tokenCreator[tokenBatchId] == msg.sender);
