@@ -56,6 +56,7 @@ contract SuperArt is ERC721, Ownable {
                 address payable bidder;
                 uint bidprice;
                 bool isBidding;
+                uint bidend;
             }
 
     
@@ -186,6 +187,13 @@ contract SuperArt is ERC721, Ownable {
             emit tokenputforsale(_tokenId,msg.sender,_sellprice,isListed,now);
         }
     
+    
+    function MoreSale(uint256[] memory _tokens,uint _sellprice,bool _isListed) public {
+        for(uint i=0;i<_tokens.length;i++){
+            Sale(_tokens[i],_sellprice,_isListed);
+        }
+    }
+        
     // Use : Gets all information about the batch from the Token Batch ID
     // Input : Token Batch ID
     // Output : Token hash, token batch name, token batch edition size, token creator, and image URL      
@@ -230,7 +238,8 @@ contract SuperArt is ERC721, Ownable {
     // Use : Start a bid 
     // Input : Token ID and start price 
     // Output : Calls tokenbid event by giving token ID, address, setting event to true, 1(represents the creator), and time stamp
-     function startbid(uint _tokenId,uint256 _startprice) public {
+     function startbid(uint _tokenId,uint256 _startprice,uint _times) public {
+                auctions[_tokenId].bidend = _times;
                 auctions[_tokenId].isBidding = true;
                 auctions[_tokenId].bidprice = _startprice;
                 emit tokenbid(_tokenId,msg.sender,true,1,block.timestamp); 
@@ -262,6 +271,7 @@ contract SuperArt is ERC721, Ownable {
     // Input : Token ID 
     // Output : Calls tokenbid event by giving token ID, adress, sets bidding to false, 2(represents Super World) and, timestamp 
     function closeBid(uint _tokenId)public{
+                 require(auctions[_tokenId].bidend < now);
                  require(auctions[_tokenId].bidder == msg.sender);
                  auctions[_tokenId].bidder.transfer(auctions[_tokenId].bidprice);
                  auctions[_tokenId].bidder = address(0x0);
@@ -337,6 +347,7 @@ contract SuperArt is ERC721, Ownable {
     // Input : Token ID
     // Output : Calls _buytoken event by giving Token ID, bidder,bid price, and 2(triggers a two in _buytoken function)
     function closeBidOwner(uint _tokenId)public returns(bool){
+                require(auctions[_tokenId].bidend < now);
                 require(auctions[_tokenId].isBidding);
                 return _buyToken(_tokenId,auctions[_tokenId].bidder,auctions[_tokenId].bidprice,2);
             }
