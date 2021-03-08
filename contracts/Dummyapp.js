@@ -7,7 +7,7 @@ Mount = async () => {
     const provider = new Web3.providers.HttpProvider(
         "http://127.0.0.1:7545"
       );
-    console.log(CryptoArtContract);
+    //console.log(CryptoArtContract);
 
      const web3 = new Web3(provider);
      web3.eth.getAccounts((err, accounts) => { currentAccount = accounts[0]})
@@ -19,27 +19,147 @@ Mount = async () => {
      deployedNetwork && deployedNetwork.address,
     );
 
-    console.log("instance",instance);
-    console.log("accounts",networkId);
+    //console.log("instance",instance);
+    //console.log("accounts",currentAccount);
 
-aer();
+//aer();
+//setMetaUrl();
+//createtokenBatch()
+//openCloseMint()
+//addTokenBatchRoyalties() //Not working
+//getRoyalties()
+//clearRoyalties() // Not working
+mintTokenBatch() // Not working
 }
-
 
 Mount();
 
 aer = async() => {
     const res = await instance.methods.percentageCut().call();
     console.log(res);
+    console.log(accounts)
 }
-// addingManufacturer = async(name,pinc) => {
-//     const res = await instance.methods.addManufacturer(name,pinc).send({from: accounts[1],gas : 1000000});
-//     console.log(res);
+
+setMetaUrl = async() => {
+    const res = await instance.methods.setMetaUrl("nftsalon/").send({from: currentAccount,gas : 1000000});
+    console.log(res)
+}
+
+createtokenBatch = async() => {
+    // const res = await instance.methods.createtokenBatch().send();
+    // console.log(res)
+    let tokenHash = "OX30" //this.state.artHash.toString();
+    let tokenTitle = "Test" //this.state.title;
+    let editionSize = 5
+    let tokenPrice = 10//(this.state.price * ETHER).toString();
+    let imgUrl = "//" //x;
+    //let nos = "abc"//this.state.nos;
+    console.log(tokenHash, tokenTitle, tokenPrice, imgUrl);
+    
+    try {
+    //function createtokenBatch(string memory _tokenHash,  string memory _tokenBatchName,  uint256 _editionSize, uint256 _price, string memory _imgURL)
+      const res = await instance.methods
+        .createtokenBatch(
+          tokenHash,
+          tokenTitle,
+          editionSize,
+          tokenPrice,//(this.state.price * ETHER).toString(),
+          imgUrl,
+          //nos
+        )
+        .send({ from: currentAccount, gas: 5000000 });
+
+      console.log('res', res);
+      let data;
+    } catch(error){
+        console.error(error)
+    }
+}
+
+openCloseMint = async() => {
+    let tokenBatchToUpdate = 1
+    let price = 5 
+    let open = true
+
+    try {
+     //function openCloseMint(uint256 tokenBatchToUpdate, uint256 _price,bool _open) public ownertoken(tokenBatchToUpdate){
+      const res = await instance.methods
+        .openCloseMint(
+          tokenBatchToUpdate,
+          price,
+          open,
+        )
+        .send({ from: currentAccount, gas: 5000000 });
+
+      console.log('res', res);
+      let data;
+    } catch(error){
+        console.error(error)
+    }
+}
+
+// addTokenBatchRoyalties = async() => {
+//     let tokenBatchId = 1
+//     let royaltyAddresses = 0xb8d99b112fB6FFff82db081Cb581cd4aE7766548
+//     let royaltyPercentage = 10
+//     try {
+//      //function addTokenBatchRoyalties(uint256 tokenBatchId, address[] memory _royaltyAddresses, uint256[] memory _royaltyPercentage)
+//       const res = await instance.methods
+//         .addTokenBatchRoyalties(
+//           tokenBatchId,
+//           royaltyAddresses,
+//           royaltyPercentage,
+//         )
+//         .send({ from: currentAccount, gas: 5000000 });
+//       console.log('res', res);
+//       let data;
+//     } catch(error){
+//         console.error(error)
+//     }
 // }
-// updatingManufacturer = async(name,pinc) => {
-//     const res = await instance.methods.updateManufacturer(name,pinc).send({from: accounts[1],gas : 1000000});
-//     console.log(res);
-// }
+
+getRoyalties = async() => {
+  const res = await instance.methods.getRoyalties().call();
+  console.log(res);
+}
+
+// clearRoyalties = async() => {
+//       let tokenBatchId = 123
+//       try {
+//         const res = await instance.methods
+//           .clearRoyalties(
+//             tokenBatchId
+//           )
+//           .send({ from: currentAccount, gas: 5000000 });
+//         console.log('res', res);
+//         let data;
+//       } catch(error){
+//           console.error(error)
+//       }
+//   }
+
+mintTokenBatch = async() => {
+  // const res = await instance.methods.createtokenBatch().send();
+  // console.log(res)
+  let tokenBatchId = 123//this.state.artHash.toString();
+  let amountToMint = 5 //this.state.title;
+  
+  try {
+  //function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) 
+    const res = await instance.methods
+      .mintTokenBatch(
+        tokenBatchId,
+        amountToMint,
+    
+      )
+      .send({ from: currentAccount, gas: 5000000 });
+
+    console.log('res', res);
+    let data;
+  } catch(error){
+      console.error(error)
+  }
+}
 
 // addingCustomer = async(name,pinc) => {
 //     const res = await instance.methods.addCustomer(name,pinc).send({from: accounts[1],gas : 1000000});
