@@ -35,6 +35,7 @@ contract SuperArt is ERC721, Ownable {
     mapping(uint256 => uint256) public totalMintedTokens; // Key -> Batch ID  : Value -> ERC721 tokens already minted under same batch
     mapping(uint256 => address) public tokenCreator; // Key -> Batch ID : value ->address of creator
     mapping(uint256 => string) public imgUrl; // Key -> Batch ID : value ->imgUrl
+    mapping(uint256 => string) public thumbnail; // Key -> Batch ID : value ->thumbnail url
     mapping(uint256 => address payable [5]) public royaltyAddressMemory; // Key -> Batch ID  : Value -> creator (artist) address
     mapping(uint256 => uint256[5]) public royaltyPercentageMemory;  // Key -> Batch ID  : Value -> percentage cut  for artist and owner
     mapping(uint256 => uint256) public royaltyLengthMemory; // Key -> Batch ID  : Value -> Number of royalty parties (ex. artist1, artist2)
@@ -147,10 +148,8 @@ contract SuperArt is ERC721, Ownable {
     // Use : Minting new tokens from batch   
     // Input : Token Batch ID, minting amount
     // Output : minted token(s)
-    function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) public payable {
-            uint price = tokenBatchPrice[tokenBatchId] * amountToMint;
+    function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) public  {
             if(openminting[tokenBatchId]){
-            require(msg.value >= price);
             require(totalMintedTokens[tokenBatchId] + amountToMint <= tokenBatchEditionSize[tokenBatchId]);
             for(uint256 i=totalMintedTokens[tokenBatchId]; i<amountToMint + totalMintedTokens[tokenBatchId]; i++) {
                   uint256 tokenId = totalSupply() + 1;
@@ -159,9 +158,8 @@ contract SuperArt is ERC721, Ownable {
                 referenceTotokenBatch[tokenId] = tokenBatchId;
                 tokenEditionNumber[tokenId] = i + 1;
                 totalMintedTokens[tokenBatchId]++;
-                }
-            address payable a = payable(tokenCreator[tokenBatchId]);
-            a.transfer(msg.value);
+               
+            }
             }
             else{
                 require(tokenCreator[tokenBatchId] == msg.sender);
