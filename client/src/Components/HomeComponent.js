@@ -138,9 +138,16 @@ class Home extends Component {
                   <h1 id='header'>WELCOME TO THE <br/> NFT SALON</h1>
                   <p className='text1'>
                     {' '}
-                    BUY and SELL NFT's here
+                    BUY 
+                    <span className= "text2">
+                      and
+                    </span>
+                     SELL
+                    <span className ="text2">
+                    {' '}NFT's here
                     <br />
                     to help you curate your{' '}
+                    </span>
                     <a target='blank' href='https://www.superworldapp.com/'>
                       SuperWorld
                     </a>
@@ -320,37 +327,19 @@ class Home extends Component {
                     </CardTitle> 
                   </CardImgOverlay>
                   <CardBody>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent:'center'
-                      }}>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          fontWeight:'600',
-                        }}
-                      >
-                        Created by Cjsmith
+                  <div className="cardImg-body">
+                      <CardSubtitle className= "createdby">
+                        Created by 
+                      </CardSubtitle>
+                      &nbsp;
+                      <CardSubtitle className = "cardsubtitleName">
+                       Cjsmith
                       </CardSubtitle>
                     </div>                    
                      <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          marginTop:'0.5rem',
-                        }}
-                      >
+                      <CardText className = "price">
                         0.5ETH
-                        <p style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '10px',
-                          color: '#5540c7',
-                        }}>
+                        <p className = "USD-price">
                         ($985.56 USD)
                           </p>
                       </CardText>
@@ -379,37 +368,19 @@ class Home extends Component {
                     </CardTitle>
                   </CardImgOverlay>
                   <CardBody>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent:'center'
-                      }}>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          fontWeight:'600',
-                        }}
-                      >
-                        Created by SaraViz
+                  <div className="cardImg-body">
+                      <CardSubtitle className= "createdby">
+                        Created by 
+                      </CardSubtitle>
+                      &nbsp;
+                      <CardSubtitle className = "cardsubtitleName">
+                       SaraViz
                       </CardSubtitle>
                     </div>                    
                      <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          marginTop:'0.5rem',
-                        }}
-                      >
+                      <CardText className = "price">
                         0.5ETH
-                        <p style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '10px',
-                          color: '#5540c7',
-                        }}>
+                        <p className = "USD-price">
                         ($985.56 USD)
                           </p>
                       </CardText>
@@ -438,37 +409,19 @@ class Home extends Component {
                     </CardTitle>
                   </CardImgOverlay>
                   <CardBody>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent:'center'
-                      }}>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          fontWeight:'600',
-                        }}
-                      >
-                        Created by Olivia
+                    <div className="cardImg-body">
+                      <CardSubtitle className="createdby">
+                        Created by 
+                      </CardSubtitle>
+                      &nbsp;
+                      <CardSubtitle className = "cardsubtitleName">
+                       Olivia
                       </CardSubtitle>
                     </div>                    
                      <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          marginTop:'0.5rem',
-                        }}
-                      >
+                      <CardText className="price">
                         0.5ETH
-                        <p style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '10px',
-                          color: '#5540c7',
-                        }}>
+                        <p className= "USD-price">
                         ($985.56 USD)
                           </p>
                       </CardText>
@@ -477,21 +430,9 @@ class Home extends Component {
                       </div>
                     </div> 
                     <div className='buy-bid-btn-div'>
-                      <div className='time-div'>
-                        <p
-                          style={{
-                            fontFamily: 'Gibson',
-                            fontSize: '12px',
-                            color: '#888888',
-                            marginLeft: '0.35rem',
-                            marginBottom: '0rem',
-                            marginTop:'0.5rem',
-
-                          }}
-                        >
+                        <p className="time-div">
                           26 hrs 42 mins remaining
                         </p>
-                      </div>
                       </div>
                   </CardBody>
                 </Card>
@@ -514,37 +455,19 @@ class Home extends Component {
                     </CardTitle>
                   </CardImgOverlay>
                   <CardBody>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent:'center'
-                      }}>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          fontWeight:'600',
-                        }}
-                      >
-                        Created by Mai
+                    <div className="cardImg-body">
+                      <CardSubtitle className= "createdby">
+                        Created by 
+                      </CardSubtitle>
+                      &nbsp;
+                      <CardSubtitle className="cardsubtitleName">
+                       Mai
                       </CardSubtitle>
                     </div>                    
                      <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          marginTop:'0.5rem',
-                        }}
-                      >
+                      <CardText className="price">
                         0.5ETH
-                        <p style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '10px',
-                          color: '#5540c7',
-                        }}>
+                        <p className="USD-price">
                         ($985.56 USD)
                           </p>
                       </CardText>
@@ -553,21 +476,10 @@ class Home extends Component {
                       </div>
                     </div> 
                     <div className='buy-bid-btn-div'>
-                      <div className='time-div'>
-                        <p
-                          style={{
-                            fontFamily: 'Gibson',
-                            fontSize: '12px',
-                            color: '#888888',
-                            marginLeft: '0.35rem',
-                            marginBottom: '0rem',
-                            marginTop:'0.5rem',
-
-                          }}
-                        >
+                      
+                        <p className='time-div'>
                         26 hrs 42 mins remaining
                         </p>
-                      </div>
                       </div>
                   </CardBody>
                 </Card>
@@ -590,37 +502,19 @@ class Home extends Component {
                     </CardTitle>
                   </CardImgOverlay>
                   <CardBody>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent:'center'
-                      }}>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          fontWeight:'600',
-                        }}
-                      >
-                        Created by kyliehart
+                  <div className="cardImg-body">
+                      <CardSubtitle className= "createdby">
+                        Created by 
+                      </CardSubtitle>
+                      &nbsp;
+                      <CardSubtitle className = "cardsubtitleName">
+                       kyliehart
                       </CardSubtitle>
                     </div>                    
                      <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          marginTop:'0.5rem',
-                        }}
-                      >
+                      <CardText className = "price">
                         0.5ETH
-                        <p style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '10px',
-                          color: '#5540c7',
-                        }}>
+                        <p className = "USD-price">
                         ($985.56 USD)
                           </p>
                       </CardText>
@@ -683,20 +577,13 @@ class Home extends Component {
                     </CardTitle>
                   </CardImgOverlay>
                   <CardBody>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent:'center'
-                      }}>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          fontWeight:'600',
-                        }}
-                      >
-                        Created by SuperWorld
+                  <div className="cardImg-body">
+                      <CardSubtitle className= "createdby">
+                        Created by 
+                      </CardSubtitle>
+                      &nbsp;
+                      <CardSubtitle className = "cardsubtitleName">
+                       SuperWorld
                       </CardSubtitle>
                     </div>
                     {/* <div className='ctext'>
@@ -732,20 +619,9 @@ class Home extends Component {
                     </div>
                      */}
                      <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          marginTop:'0.5rem',
-                        }}
-                      >
+                      <CardText className = "price">
                         0.1ETH
-                        <p style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '10px',
-                          color: '#5540c7',
-                        }}>
+                        <p className = "USD-price">
                         ($176.61 USD)
                           </p>
                       </CardText>
@@ -774,20 +650,14 @@ class Home extends Component {
                     </CardTitle>
                   </CardImgOverlay>
                   <CardBody>
-                  <div
-                      style={{
-                        display: 'flex',
-                        justifyContent:'center'
-                      }}>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          fontWeight:'600',
-                        }}
-                      >
-                        Created by SuperWorld
+                  <div className="cardImg-body">
+                      <CardSubtitle className= "createdby">
+                        Created by 
+                      </CardSubtitle>
+                      &nbsp;
+                      <CardSubtitle className = "cardsubtitleName">
+                      
+                       SuperWorld
                       </CardSubtitle>
                     </div>
                     {/* <div className='ctext'>
@@ -832,20 +702,9 @@ class Home extends Component {
                       </a>
                     </div> */}
                     <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          marginTop:'0.5rem',
-                        }}
-                      >
+                      <CardText className = "price">
                         0.1ETH
-                        <p style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '10px',
-                          color: '#5540c7',
-                        }}>
+                        <p className = "USD-price">
                         ($176.61 USD)
                           </p>
                       </CardText>
@@ -874,22 +733,15 @@ class Home extends Component {
                     </CardTitle>
                   </CardImgOverlay>
                   <CardBody>
-                  <div
-                      style={{
-                        display: 'flex',
-                        justifyContent:'center'
-                      }}>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          fontWeight:'600',
-                        }}
-                      >
-                        Created by SuperWorld
+                  <div className="cardImg-body">
+                      <CardSubtitle className= "createdby">
+                        Created by 
                       </CardSubtitle>
-                    </div>
+                      &nbsp;
+                      <CardSubtitle className = "cardsubtitleName">
+                       SuperWorld
+                      </CardSubtitle>                    
+                      </div>
                     {/* <div className='ctext'>
                       <CardText
                         style={{
@@ -932,20 +784,9 @@ class Home extends Component {
                       </a>
                     </div> */}
                     <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          marginTop:'0.5rem',
-                        }}
-                      >
+                      <CardText className = "price" >
                         0.1ETH
-                        <p style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '10px',
-                          color: '#5540c7',
-                        }}>
+                        <p className = "USD-price">
                         ($176.61 USD)
                           </p>
 
@@ -975,21 +816,15 @@ class Home extends Component {
                     </CardTitle>
                   </CardImgOverlay>
                   <CardBody>
-                  <div
-                      style={{
-                        display: 'flex',
-                        justifyContent:'center'
-                      }}>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          fontWeight:'600',
-                        }}
-                      >
-                        Created by SuperWorld
+                  <div className="cardImg-body">
+                      <CardSubtitle className= "createdby">
+                        Created by 
                       </CardSubtitle>
+                      &nbsp;
+                      <CardSubtitle className = "cardsubtitleName">
+                       SuperWorld
+                      </CardSubtitle>
+
                     </div>
                     {/* <div className='ctext'>
                       <CardText
@@ -1023,20 +858,9 @@ class Home extends Component {
                       </a>
                     </div> */}
                     <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          marginTop:'0.5rem',
-                        }}
-                      >
+                      <CardText className = "price">
                         0.1ETH
-                        <p style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '10px',
-                          color: '#5540c7',
-                        }}>
+                        <p className = "USD-price">
                         ($176.61 USD)
                           </p>
                       </CardText>
@@ -1067,20 +891,13 @@ class Home extends Component {
                     </CardTitle>
                   </CardImgOverlay>
                   <CardBody>
-                  <div
-                      style={{
-                        display: 'flex',
-                        justifyContent:'center'
-                      }}>
-                      <CardSubtitle
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          fontWeight:'600',
-                        }}
-                      >
-                        Created by SuperWorld
+                  <div className="cardImg-body">
+                      <CardSubtitle className= "createdby">
+                        Created by 
+                      </CardSubtitle>
+                      &nbsp;
+                      <CardSubtitle className = "cardsubtitleName">
+                       SuperWorld
                       </CardSubtitle>
                     </div>
                     {/* <div className='ctext'>
@@ -1125,20 +942,9 @@ class Home extends Component {
                       </a>
                     </div> */}
                     <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: '#5540c7',
-                          marginTop:'0.5rem',
-                        }}
-                      >
+                      <CardText className = "price">
                         0.1ETH
-                        <p style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '10px',
-                          color: '#5540c7',
-                        }}>
+                        <p className = "USD-price">
                         ($176.61 USD)
                           </p>
                       </CardText>

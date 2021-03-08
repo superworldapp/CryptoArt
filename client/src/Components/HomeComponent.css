@@ -225,14 +225,14 @@ div.imageCards {
   position: relative;
   top: 40%;
   opacity: 0.95;
-  backdrop-filter: blur(60px);
+  backdrop-filter: blur(7px);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.068) 0%, rgba(0, 0, 0, 0.075) 100%);
 }
 .imgOverlay{
   right: 0 !important;
 }
 .Cardimg{
-  border-radius: 1rem;
+  border-radius: 1rem 1rem 0rem 0rem;
   height: 65%;
   width: 100%;
 }
@@ -288,14 +288,46 @@ img.rounded-circle {
   height: 20px;
   width: 20px;
 }
-/* .time-div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-} */
+ .time-div {
+  font-family: Gibson;
+  font-size: 12px;
+  color: #888888;
+  margin-left: 0.35rem;
+  margin-bottom: 1.5rem;
+  margin-top:0.3rem;
+} 
 
 
 .bottomView{
   background-color: white;
   padding-bottom: 5rem;
+}
+
+.cardImg-body{
+  display : flex;
+  justify-content: center;
+}
+.createdby{
+  font-family: Gibson;
+  font-size: 13px;
+  color: #888888;
+  font-weight: normal;
+}
+.cardsubtitleName{
+  font-family: Gibson;
+  font-size: 13px;
+  color: #5540c7;
+  font-weight: 600;
+}
+.price{
+  font-family: Gibson;
+  font-size: 13px;
+  color: #5540c7;
+  margin-top:0rem;
+}
+.USD-price{
+  font-family: Gibson;
+  font-size: 10px;
+  color: #5540c7;
+  margin-bottom: 1.5rem !important;
 }
