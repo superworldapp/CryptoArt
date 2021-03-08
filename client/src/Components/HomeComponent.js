@@ -14,6 +14,7 @@ import {
   CardTitle,
   Badge,
 } from 'reactstrap';
+//import Identicon from 'identicon.js';
 import { Grid } from '@material-ui/core';
 import image1 from '../images/image 166.png';
 import image2 from '../images/image 167.png';
@@ -202,10 +203,10 @@ class Home extends Component {
                 </div> 
                 <div className ="sectionText2">
                   <h1 id='header'>FEATURED NFT's <br/> OF THE DAY</h1>
-                  <p className='text1'>
+                  <p className='text2'>
                     
                     Each day brings something new, 
-                    view your ever changing 
+                    view our ever changing 
                     <br/>
                     gallery of NFT's from a wide range 
                     of salon creators
@@ -283,7 +284,7 @@ class Home extends Component {
                     fontWeight: 'bold',
                     fontSize: '18px',
                     textDecoration: 'none',
-                    color: 'gray',
+                    color: '#B3B3B3',
                   }}
                 >
                   {' '}
@@ -301,10 +302,18 @@ class Home extends Component {
                   ></CardImg>
                   <CardImgOverlay className="imgOverlay">
                   <Badge pill className= "sw-overlay">
-                  <img
+                   {/* <img
+                  className="userimg"
+                  id='profile'
+                      src={`data:image/png;base64,${new Identicon(
+                        new Date().toString()
+                      )}`}
+                  alt='profile'
+                > </img>  */}
+                <img
                   className="userimg"
                   src={anonUser}
-                ></img>
+                ></img> 
               </Badge>
                     <CardTitle className="card-imgTitle" >
                       Octo
@@ -647,7 +656,7 @@ class Home extends Component {
                     fontWeight: 'bold',
                     fontSize: '18px',
                     textDecoration: 'none',
-                    color: 'gray',
+                    color: '#B3B3B3',
                   }}
                 >
                   {' '}

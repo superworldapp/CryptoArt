@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LogoImg from '../images/logo.svg';
+import LogoImg from '../images/icon_color.png';
 import {
   Navbar,
   NavbarBrand,
@@ -471,7 +471,7 @@ class Header extends Component {
                   <Grid item spacing={2}>
                     <Button
                       style={{ margin: '0.5rem' }}
-                      className='LoginButton-header'
+                      className='Signinbutton-header'
                       onClick={() =>
                         this.context.dispatch({
                           type: 'TOGGLE_SIGN_IN_MODAL',

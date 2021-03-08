@@ -76,6 +76,8 @@
   width: 8rem;
   height: 8rem;
   border-radius: 1rem;
+  border-bottom-left-radius:1.5rem ;
+  border-bottom-right-radius: 1.5rem;
 }
 /* .img1 {
   position: relative;
@@ -110,6 +112,16 @@ a {
   font-family: 'gibson', sans-serif;
   font-weight: bold;
   color: #5540c6;
+  font-size: 1.25rem;
+  margin: 2px;
+  margin-top: 2rem;
+  width: 100%;
+  text-align: left;
+}
+.text2{
+  font-family: 'gibson', sans-serif;
+  font-weight: bold;
+  color: #888888;
   font-size: 1.25rem;
   margin: 2px;
   margin-top: 2rem;
@@ -182,6 +194,7 @@ div.imageCards {
   width: 250px;
   border-radius: 1rem;
   margin-right: 1rem;
+  opacity: 0.95;
 }
 /* .text2 {
   font-family: Gibson;
