@@ -935,21 +935,31 @@ class Allpatrender extends Component {
 class SortCollection extends Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     dropdownOpen
-        // }
+        this.state = {
+            dropdownOpen: false,
+        }
+        // this.dropdownToggle = this.dropdownToggle.bind(this)
     }
 
-    // const [dropdownOpen, setDropdownOpen] = useState(false);
+    // toggle(prevState){
+    //     this.setState({!prevState.dropdownOpen,})
+    // }
 
-    // const toggle = () => setDropdownOpen(prevState => !prevState);
+    // dropdownToggle(prevState) {
+    //     // setDropdownOpen(prevState => !prevState);
+    //     this.setState({
+    //         dropdownOpen: !this.state.dropdownOpen,
+    //     })
+    // }
 
     render() {
         return (
             <div className='sort-container'>
-                <p style={{ fontWeight: 'bold' }}>SORT BY:</p>
-                {/* <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                <DropdownToggle caret>
+                <p style={{ fontWeight: '900', fontSize: '18px' }}>SORT BY:</p>
+                <p style={{ fontSize: '24px' }}>New</p>
+                <div className='test-line'></div>
+                {/* <Dropdown isOpen={this.dropdownToggle} toggle={toggle}>
+                <DropdownToggle caret className='dropdown-button'>
                     New
                 </DropdownToggle>
                 <DropdownMenu>
@@ -964,10 +974,11 @@ class SortCollection extends Component {
                 </DropdownMenu>
                 </Dropdown> */}
                 <br />
-                <p style={{ fontWeight: 'bold' }}>GALLERIES:</p>
-                <p>Abstract</p>
-                <p>Nature</p>
-
+                <br />
+                <p style={{ fontWeight: '900', fontSize: '18px'}}>GALLERIES:</p>
+                <p style={{fontSize:'24px', marginTop:'-15px'}}>Abstract</p>
+                <p style={{fontSize:'24px'}}>Nature</p>
+                <a style={{fontSize: '18px', color: '#5540C7'}}>+ Add</a>
                  
             </div>
         )
@@ -1193,7 +1204,7 @@ class MyCollectionsComponent extends Component {
             color: '#5540C7'
             }}
         >
-                172 NFT's
+            172  NFT's
         </p>
 
           {/* <div style={{ display: 'flex', justifyContent: 'space-between' }}>
