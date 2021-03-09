@@ -284,11 +284,11 @@ class Allpatrender extends Component {
               src={this.props.art.imgurl}
               alt='Card image'
             ></CardImg>
-            <CardImgOverlay>
+            {/* <CardImgOverlay>
               <Badge pill className={x.class}>
                 {x.title}
               </Badge>
-            </CardImgOverlay>
+            </CardImgOverlay> */}
           </Link>
         </div>
 
@@ -300,7 +300,7 @@ class Allpatrender extends Component {
                 // justifyContent: 'flex-start',
               }}
             >
-              <CardSubtitle>
+              {/* <CardSubtitle>
                 <img
                   style={{ marginRight: '30px' }}
                   width='16px'
@@ -308,8 +308,8 @@ class Allpatrender extends Component {
                   className='rounded-circle'
                   src={annonuser}
                 ></img>
-              </CardSubtitle>
-              <CardSubtitle
+              </CardSubtitle> */}
+              {/* <CardSubtitle
                 style={{
                   fontFamily: 'Gibson',
                   fontSize: '13px',
@@ -321,13 +321,13 @@ class Allpatrender extends Component {
               >
                 {' '}
                 Created by <div className='token-creator'>{accUsername()} </div>
-              </CardSubtitle>
+              </CardSubtitle> */}
             </div>
 
             {/* <CardTitle className="ctext">
                         Item Title : {this.props.art.tokenTitle} {this.props.art.tokenCreator}
                     </CardTitle> */}
-            <div className='ctext'>
+            {/* <div className='ctext'>
               <CardText
                 style={{
                   position: 'relative',
@@ -351,8 +351,8 @@ class Allpatrender extends Component {
               >
                 Price
               </CardText>
-            </div>
-            <div className='ctext' style={{ height: '2rem' }}>
+            </div> */}
+            {/* <div className='ctext' style={{ height: '2rem' }}>
               <CardText
                 style={{
                   position: 'relative',
@@ -379,7 +379,7 @@ class Allpatrender extends Component {
                 )}{' '}
                 ETH
               </CardText>
-            </div>
+            </div> */}
             {/* <CardText>
                         <small>
                             Item Creator : {this.props.art.tokenCreator}
@@ -400,7 +400,7 @@ class Allpatrender extends Component {
             className='ctext'
             style={{ padding: '0px', height: '2rem', marginTop: '5%' }}
           >
-            {reSellOrSell ? (
+            {/* {reSellOrSell ? (
               <button
                 className={auc2}
                 //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
@@ -418,7 +418,7 @@ class Allpatrender extends Component {
               >
                 Sell
               </button>
-            )}
+            )} */}
             {/* <button
               className={auc1}
               //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
@@ -427,7 +427,7 @@ class Allpatrender extends Component {
             >
               {reSellOrSell}
             </button> */}
-            <button
+            {/* <button
               className={but1}
               //className='abtn'
               type='submit'
@@ -447,8 +447,8 @@ class Allpatrender extends Component {
               </button>
             ) : (
               <div></div>
-            )}
-            {Auc ? (
+            )} */}
+            {/* {Auc ? (
               <button
                 className={b1}
                 //className={auc1}
@@ -480,7 +480,7 @@ class Allpatrender extends Component {
               >
                 Auction
               </button>
-            )}
+            )} */}
 
             {/* <button
               className={b}

@@ -105,6 +105,8 @@
   box-shadow: 1px 5px 5px #888888;
   display: flex;
   flex-flow: column;
+  height: 16.75rem;
+  width: 17.5rem;
 }
 
 .row {
@@ -134,12 +136,10 @@ h3 {
 
 .card-artcard {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   padding: 0;
-  height: 28rem;
-  width: 17rem;
 }
 
 .card-art-div {
