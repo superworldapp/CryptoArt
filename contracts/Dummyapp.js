@@ -29,7 +29,19 @@ Mount = async () => {
 //addTokenBatchRoyalties() //Not working
 //getRoyalties()
 //clearRoyalties() // Not working
-mintTokenBatch() // Not working
+//mintTokenBatch() // Not working
+//Sale() // Not working
+//getTokenBatchData()
+//getTokenDataBatch() //Need working ID
+//getTokenData()
+//startbid()
+//addBid() //Need working ID
+//closeBid() //Need working ID
+//tokenURI()
+//buyToken() //Need working ID
+//closeBidOwner()
+//withdrawBalance() // Caller not owner
+//FinalWithdrawBal() // Caller not owner
 }
 
 Mount();
@@ -123,20 +135,20 @@ getRoyalties = async() => {
   console.log(res);
 }
 
-// clearRoyalties = async() => {
-//       let tokenBatchId = 123
-//       try {
-//         const res = await instance.methods
-//           .clearRoyalties(
-//             tokenBatchId
-//           )
-//           .send({ from: currentAccount, gas: 5000000 });
-//         console.log('res', res);
-//         let data;
-//       } catch(error){
-//           console.error(error)
-//       }
-//   }
+clearRoyalties = async() => {
+      let tokenBatchId = 1
+      try {
+        const res = await instance.methods
+          .clearRoyalties(
+            tokenBatchId
+          )
+          .send({ from: currentAccount, gas: 5000000 });
+        console.log('res', res);
+        let data;
+      } catch(error){
+          console.error(error)
+      }
+  }
 
 mintTokenBatch = async() => {
   // const res = await instance.methods.createtokenBatch().send();
@@ -159,6 +171,139 @@ mintTokenBatch = async() => {
   } catch(error){
       console.error(error)
   }
+}
+
+Sale = async() => {
+  let tokenId = 1 
+  let sellprice = 10 
+  let isListed = true
+
+  try {
+  //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+    const res = await instance.methods
+      .Sale(
+        tokenId,
+        sellprice,
+        isListed,
+      )
+      .send({ from: currentAccount, gas: 5000000 });
+
+    console.log('res', res);
+    let data;
+  } catch(error){
+      console.error(error)
+  }
+}
+
+getTokenBatchData = async() => {
+  const res = await instance.methods.getTokenBatchData(1).call();
+  console.log(res);
+}
+
+getTokenDataBatch = async() => {
+  const res = await instance.methods.getTokenDataBatch(1).call();
+  console.log(res);
+}
+
+getTokenData = async() => {
+  const res = await instance.methods.getTokenData(1).call();
+  console.log(res);
+}
+
+startbid = async() => {
+  // const res = await instance.methods.createtokenBatch().send();
+  // console.log(res)
+  let tokenId = 1
+  let startprice = 10 
+  
+  try {
+  // function startbid(uint _tokenId,uint256 _startprice) public
+    const res = await instance.methods
+      .startbid(
+        tokenId,
+        startprice,
+      )
+      .send({ from: currentAccount, gas: 5000000 });
+    console.log('res', res);
+    let data;
+  } catch(error){
+      console.error(error)
+  }
+}
+
+addBid = async() => {
+  let tokenId = 1 
+  try {
+    const res = await instance.methods
+      .addBid(
+        tokenId,
+      )
+      .send({ from: currentAccount, gas: 5000000 });
+    console.log('res', res);
+    let data;
+  } catch(error){
+      console.error(error)
+  }
+}
+
+closeBid = async() => {
+  let tokenId = 1 
+  try {
+    const res = await instance.methods
+      .closeBid(
+        tokenId,
+      )
+      .send({ from: currentAccount, gas: 5000000 });
+    console.log('res', res);
+    let data;
+  } catch(error){
+      console.error(error)
+  }
+}
+
+tokenURI = async() => {
+  const res = await instance.methods.tokenURI(1).call();
+  console.log(res);
+}
+
+buyToken = async() => {
+  let tokenId = 1 
+  try {
+  //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+    const res = await instance.methods
+      .buyToken(
+        tokenId,
+      )
+      .send({ from: currentAccount, gas: 5000000 });
+    console.log('res', res);
+    let data;
+  } catch(error){
+      console.error(error)
+  }
+}
+
+closeBidOwner = async() => {
+  let tokenId = 1
+  try {
+    const res = await instance.methods
+      .closeBidOwner(
+        tokenId
+      )
+      .send({ from: currentAccount, gas: 5000000 });
+    console.log('res', res);
+    let data;
+  } catch(error){
+      console.error(error)
+  }
+}
+
+withdrawBalance = async() => {
+  const res = await instance.methods.withdrawBalance().send({from: currentAccount,gas : 1000000});
+  console.log(res)
+}
+FinalWithdrawBal = async() => {
+  const res = await instance.methods.FinalWithdrawBal().send({from: currentAccount,gas : 1000000});
+  console.log(res)
 }
 
 // addingCustomer = async(name,pinc) => {
