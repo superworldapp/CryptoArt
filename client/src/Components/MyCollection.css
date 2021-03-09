@@ -1,0 +1,20 @@
+.mycollection-second-row {
+  display: flex;
+}
+
+.mycollection-menu-container {
+  margin-left: 2%;
+}
+
+.sort-container {
+  border: 1px solid black;
+  height: 300px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sort-container p:not(:first-child) {
+  margin-top: -10px;
+}

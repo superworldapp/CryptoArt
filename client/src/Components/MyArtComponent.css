@@ -41,7 +41,7 @@
   text-transform: uppercase;
 }
 .abtn:hover {
-  background-color:#3454dc;
+  background-color: #3454dc;
   border-color: white;
   cursor: pointer;
   color: white;
@@ -51,8 +51,6 @@
   outline: 0px;
   border: 0;
 }
-
-
 
 .abtn1 {
   position: relative;
@@ -82,7 +80,9 @@
 }
 .artContainer {
   padding: 5px;
-  margin-left: 5%;
+  /* margin-left: 5%; */
+  margin-left: 2%;
+  /* border: 1px solid black; */
 }
 
 .ctext1 {
@@ -158,7 +158,7 @@ h3 {
 
 .upload-more-btn {
   border-radius: 2em;
-  font-family: 'gibson', sans-serif;
+  font-family: "gibson", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 13px;
@@ -190,14 +190,14 @@ h3 {
   background-color: #f08778;
   color: white;
 }
-.uploadpopup{
+.uploadpopup {
   max-width: 38rem !important;
   height: auto;
 }
-.uploadlabel{
+.uploadlabel {
   width: 50%;
   margin-left: 1rem;
 }
-.uploadinput{
+.uploadinput {
   margin-left: 1rem;
 }
