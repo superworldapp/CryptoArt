@@ -961,8 +961,7 @@ class SortCollection extends Component {
                 <p style={{ fontWeight: '900', fontSize: '18px'}}>GALLERIES:</p>
                 <p style={{fontSize:'24px', marginTop:'-15px'}}>Abstract</p>
                 <p style={{fontSize:'24px'}}>Nature</p>
-                <a style={{fontSize: '18px', color: '#5540C7'}}>+ Add</a>
-                 
+                <a href='http://www.google.com' className='add-button'>+ Add</a>
             </div>
         )
     }

@@ -39,3 +39,14 @@
 option {
   background-color: white;
 }
+
+.add-button {
+  font-size: "18px";
+  color: "#5540C7";
+  text-decoration: none;
+}
+
+.add-button:hover,
+.add-button:active {
+  text-decoration: none;
+}
