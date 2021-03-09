@@ -936,43 +936,26 @@ class SortCollection extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dropdownOpen: false,
+            selectedGallery: '',
         }
-        // this.dropdownToggle = this.dropdownToggle.bind(this)
+        this.dropdown = this.dropdown.bind(this)
     }
 
-    // toggle(prevState){
-    //     this.setState({!prevState.dropdownOpen,})
-    // }
-
-    // dropdownToggle(prevState) {
-    //     // setDropdownOpen(prevState => !prevState);
-    //     this.setState({
-    //         dropdownOpen: !this.state.dropdownOpen,
-    //     })
-    // }
+    dropdown(e) {
+        this.setState({selectGallery: e.target.value})
+    }
 
     render() {
         return (
             <div className='sort-container'>
                 <p style={{ fontWeight: '900', fontSize: '18px' }}>SORT BY:</p>
-                <p style={{ fontSize: '24px' }}>New</p>
-                <div className='test-line'></div>
-                {/* <Dropdown isOpen={this.dropdownToggle} toggle={toggle}>
-                <DropdownToggle caret className='dropdown-button'>
-                    New
-                </DropdownToggle>
-                <DropdownMenu>
-                    <DropdownItem header>Header</DropdownItem>
-                    <DropdownItem>Some Action</DropdownItem>
-                    <DropdownItem text>Dropdown Item Text</DropdownItem>
-                    <DropdownItem disabled>Action (disabled)</DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>Foo Action</DropdownItem>
-                    <DropdownItem>Bar Action</DropdownItem>
-                    <DropdownItem>Quo Action</DropdownItem>
-                </DropdownMenu>
-                </Dropdown> */}
+                <select id="dropdown" onChange={this.dropdown} className='dropdown-button'>
+                    <option value="" className="option-selected">New</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
                 <br />
                 <br />
                 <p style={{ fontWeight: '900', fontSize: '18px'}}>GALLERIES:</p>

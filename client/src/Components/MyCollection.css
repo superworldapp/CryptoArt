@@ -25,9 +25,17 @@
   margin-top: -10px;
 }
 
-.test-line {
-  margin-top: -20px;
-  height: 2px;
-  background-color: black;
+.dropdown-button {
+  border: none;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 14.531rem;
+  font-size: 18px;
+}
+
+option {
+  background-color: white;
 }

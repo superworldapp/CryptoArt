@@ -187,7 +187,7 @@ class Main extends Component {
               />
             )}
           />
-          {/* <ProtectedRoute
+          <ProtectedRoute
             exact
             path='/mycollections'
             component={() => (
@@ -196,7 +196,7 @@ class Main extends Component {
                 accounts={this.state.accounts}
               />
             )}
-          /> */}
+          />
            <ProtectedRoute
             exact
             path='/mycollections2'
