@@ -1,5 +1,5 @@
 .my-collection-container {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 100vh;
 }
 
@@ -13,6 +13,8 @@
     font-family: Gibson;
     font-weight: 400px;
     padding-left: 2%;
+    margin-top: 3%;
+    margin-bottom: 3%;
 }
 
 .my-collection-header h1 {
@@ -22,4 +24,71 @@
 .my-collection-header p {
     font-size: 28px;
     color: #5540C7;
+}
+
+.my-collection-row {
+    /* border: 1px solid black; */
+    margin-left: 2%;
+    display: flex;
+}
+
+.my-collection-filter-container {
+    /* border: 1px solid black; */
+    height: 400px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.my-collection-filter-container p, 
+.my-collection-filter-container a {
+    font-family: Gibson;
+}
+  
+.my-collection-filter-container p:not(:first-child) {
+    margin-top: -10px;
+}
+  
+.dropdown-button {
+    border: none;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 14.531rem;
+    font-size: 18px;
+}
+  
+.add-button {
+    font-size: "18px";
+    color: "#5540C7";
+    text-decoration: none;
+}
+  
+.add-button:hover,
+.add-button:active {
+    text-decoration: none;
+}
+
+.my-collection-art-container {
+    display: flex;
+}
+  
+.my-collection-art-img-box {
+    height: 268px;
+    width: 280px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15%;
+}
+
+.my-collection-art-img-box img {
+    width: 207px;
+    height: 217px;
 }

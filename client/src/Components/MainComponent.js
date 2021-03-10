@@ -10,7 +10,6 @@ import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import AllItemComponent from './AllArtComponent';
 import MyItemComponent from './MyArtComponent';
-import MyCollectionsComponent from './MyCollection';
 import CardDetail from './CardDetail';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './FooterComponent';
@@ -203,17 +202,7 @@ class Main extends Component {
               />
             )}
           />
-           <ProtectedRoute
-            exact
-            path='/mycollections2'
-            component={() => (
-              <MyCollectionsComponent
-                contract={this.state.contract}
-                accounts={this.state.accounts}
-              />
-            )}
-          />
-          <Route exact path='/mycollections3' component={() => (
+          <Route exact path='/mycollections2' component={() => (
             <MyCollection1 />
           )} />
           <Route path='/card/:id' component={CardWithId} />
