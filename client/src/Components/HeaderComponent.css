@@ -26,6 +26,21 @@
   height: 35px;
 }
 
+.Signinbutton-header{
+  color: #5540c7 !important;
+  height: 40px !important;
+   padding: 0 35px !important; 
+  font-family: 'Gibson' !important;
+  font-size: 17px !important;
+  width: 10rem ;
+  /* text-transform: 'capitalize' !important; */
+
+}
+.Signinbutton-header:hover{
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
 .LoginButton-header {
   background: #5540c7 !important;
   border-radius: 50px !important;
@@ -42,7 +57,6 @@
   background: #ffffff !important;
   color: #5540c7 !important;
 }
-
 a.nav-link,
 a.nav-link.active {
   text-decoration: none;

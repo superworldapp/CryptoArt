@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LogoImg from '../images/logo.svg';
+import LogoImg from '../images/icon_color.png';
 import {
   Navbar,
   NavbarBrand,
@@ -319,6 +319,8 @@ class Header extends Component {
           expand='md'
           style={{
             marginBottom: '-1.8rem',
+            backgroundColor:'#d5d7fa',
+            height:'85px'
           }}
         >
           <NavbarToggler onClick={this.toggleNav} />
@@ -333,13 +335,13 @@ class Header extends Component {
               />
             </NavLink>
           </NavbarBrand>
-          <InputGroup
+          {/*<InputGroup
             style={{
               position: 'relative',
               marginLeft: '2rem',
             }}
           >
-            <Input
+             <Input
               placeholder='Search for Artist, Art name'
               value={this.state.value}
               onChange={this.handleChange}
@@ -359,7 +361,7 @@ class Header extends Component {
                 display: !this.state.value ? 'block' : 'none',
               }}
             ></i>
-          </InputGroup>
+          </InputGroup> */}
           <Collapse isOpen={this.state.isNavOpen} navbar>
             <Nav
               navbar
@@ -370,10 +372,38 @@ class Header extends Component {
                   className='nav-link'
                   style={{
                     width: 200,
+                    fontFamily:'Gibson',
+                    fontSize:'17px',
                   }}
                   to='/allart'
                 >
-                  Art Marketplace
+                Marketplace
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className='nav-link'
+                  style={{
+                    width: 200,
+                    fontFamily:'Gibson',
+                    fontSize:'17px',
+                  }}
+                  to='/allart'
+                >
+                Picks
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className='nav-link'
+                  style={{
+                    width: 200,
+                    fontFamily:'Gibson',
+                    fontSize:'17px',
+                  }}
+                  to='/allart'
+                >
+                Help
                 </NavLink>
               </NavItem>
 
@@ -454,7 +484,7 @@ class Header extends Component {
                   <Grid item spacing={2}>
                     <Button
                       style={{ margin: '0.5rem' }}
-                      className='LoginButton-header'
+                      className='Signinbutton-header'
                       onClick={() =>
                         this.context.dispatch({
                           type: 'TOGGLE_SIGN_IN_MODAL',
@@ -1108,7 +1138,7 @@ class Header extends Component {
                   />
                 </NavLink>
               </NavItem>  */}
-              <NavItem>
+              {/* <NavItem>
                 <NavLink className='nav-link' to='#'>
                   <img
                     width='30px'
@@ -1118,7 +1148,7 @@ class Header extends Component {
                     alt='question-mark'
                   />
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               <SignInModal initContracts={this.props.initContracts} />
             </Nav>
           </Collapse>
