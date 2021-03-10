@@ -37,9 +37,9 @@
 .mystore-art-container {
     /* border: 1px solid black; */
     height: 500px;
-    width: 700px;
+    width: 70%;
     margin-top: 80px;
-    margin-left: 150px;
+    margin-left: 20px;
     font-family: Gibson;
 }
 
@@ -58,10 +58,11 @@
 
 .mystore-art-pieces {
     /* border: 1px solid black; */
-    margin-top: 10px;
+    margin-top: 30px;
     display: flex;
     align-items: flex-start;
     /* height: 300px; */
+    /* width: 800px; */
 }
 
 .mystore-art-piece {
@@ -113,4 +114,40 @@
     height: 40px;
     width: 125px;
     margin-top: 5px;
+}
+
+.mystore-upload-art {
+    width: 280px;
+    height: 268px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    position: relative;
+    right: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mystore-upload-btn {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: #5540C7;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.mystore-upload-add {
+    width: 43px;
+    height: 50px;
+    font-family: Gibson;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 48px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    position: relative;
+    top: 4px;
+    left: 2px;
 }

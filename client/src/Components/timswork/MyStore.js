@@ -30,6 +30,11 @@ class MyStore1 extends Component {
                                     <button className='mystore-list-btn'>List</button>
                                 </div>
                             </div>
+                            <div className='mystore-upload-art'>
+                                <button className='mystore-upload-btn'>
+                                    <div className='mystore-upload-add'>+</div>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 {/* </Row> */}
