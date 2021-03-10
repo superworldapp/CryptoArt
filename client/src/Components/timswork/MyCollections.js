@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './MyCollections.css'
+import { Link } from 'react-router-dom';
 import {Row, Col, Modal} from 'reactstrap'
 import test1img from '../../images/image 25.png'
 import test2img from '../../images/image 11.png'
@@ -68,7 +69,7 @@ class MyCollection1 extends Component {
                                  <div className='model-price-info'>
                                     <span><p>Purchased For</p><p>55ETH</p></span>
                                     <span><p>Owner #</p><p>3</p><a href='http://www.google.com'>View trading history</a></span>
-                                    <button className='model-sell-btn'>Sell</button>
+                                   <Link to='/mystore'><button className='model-sell-btn'>Sell</button></Link>
                                  </div>
                              </div>
                          </div>
