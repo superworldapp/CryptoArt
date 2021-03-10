@@ -1,0 +1,25 @@
+.my-collection-container {
+    border: 1px solid black;
+    height: 100vh;
+}
+
+.my-collection-header {
+    /* border: 1px solid black; */
+    height: 8rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: Gibson;
+    font-weight: 400px;
+    padding-left: 2%;
+}
+
+.my-collection-header h1 {
+    font-size: 64px;
+}
+
+.my-collection-header p {
+    font-size: 28px;
+    color: #5540C7;
+}
