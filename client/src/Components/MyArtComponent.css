@@ -18,8 +18,8 @@
   border-top: none !important;
 }
 .modal-content {
-  width: 80%;
-  height: auto;
+  /* width: 80%; */
+  /* height: auto; */
 }
 .modal-header {
   border: hidden !important;
