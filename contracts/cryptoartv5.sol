@@ -1,9 +1,7 @@
-pragma solidity ^0.6.0;
+	pragma solidity ^0.6.0;
 pragma experimental ABIEncoderV2;
-
 import "https://github.com/kole-swapnil/openzepkole/token/ERC721/ERC721.sol";
 import "https://github.com/kole-swapnil/openzepkole/access/Ownable.sol";
-
 contract SuperArt is ERC721, Ownable {
     using SafeMath for uint256;  
     uint totalBalance  = 0;
@@ -35,6 +33,7 @@ contract SuperArt is ERC721, Ownable {
     mapping(uint256 => uint256) public totalMintedTokens; // Key -> Batch ID  : Value -> ERC721 tokens already minted under same batch
     mapping(uint256 => address) public tokenCreator; // Key -> Batch ID : value ->address of creator
     mapping(uint256 => string) public imgUrl; // Key -> Batch ID : value ->imgUrl
+    mapping(uint256 => string) public thumbnail; // Key -> Batch ID : value ->thumbnail url
     mapping(uint256 => address payable [5]) public royaltyAddressMemory; // Key -> Batch ID  : Value -> creator (artist) address
     mapping(uint256 => uint256[5]) public royaltyPercentageMemory;  // Key -> Batch ID  : Value -> percentage cut  for artist and owner
     mapping(uint256 => uint256) public royaltyLengthMemory; // Key -> Batch ID  : Value -> Number of royalty parties (ex. artist1, artist2)
@@ -56,8 +55,8 @@ contract SuperArt is ERC721, Ownable {
                 address payable bidder;
                 uint bidprice;
                 bool isBidding;
+                uint bidend;
             }
-
     
     //Event
     event NewtokenBatchCreated(string tokenHash, string tokenBatchName,  uint256 editionSize,uint256 price, uint256 tokenBatchIndex, address creator);
@@ -73,48 +72,63 @@ contract SuperArt is ERC721, Ownable {
     modifier ownertoken(uint256 tokenBatchId){
         require(tokenCreator[tokenBatchId] == msg.sender);
         _;
-    }    
-    function createtokenBatch(string memory _tokenHash,  string memory _tokenBatchName,  uint256 _editionSize, uint256 _price, string memory _imgURL) public {
+    } 
+	// **
+	// Use : Creates a token batch
+    // Input : token hash, batch name, edition size, price, and imageURL
+    // Output : New token batch with hash, name, size, price, and imageUrl
+    function createtokenBatch(string memory _tokenHash,  string memory _tokenBatchName,  uint256 _editionSize, uint256 _price, string memory _imgURL, string memory __imgThumbnail) public {
             tokenBatchIndex++ ;
-            tokenBatch[tokenBatchIndex] = _tokenHash;
-            tokenBatchName[tokenBatchIndex] = _tokenBatchName;
+            tokenBatch[tokenBatchIndex] = _tokenHash; 
+            tokenBatchName[tokenBatchIndex] = _tokenBatchName; 
             tokenBatchEditionSize[tokenBatchIndex] = _editionSize;
-            totalMintedTokens[tokenBatchIndex] = 0;
-            tokenBatchPrice[tokenBatchIndex] = _price;
-            imgUrl[tokenBatchIndex] = _imgURL;
+            totalMintedTokens[tokenBatchIndex] = 0; 
+            tokenBatchPrice[tokenBatchIndex] = _price; 
+            imgUrl[tokenBatchIndex] = _imgURL; 
+            thumbnail[tokenBatchIndex] = _imgThumbnail;
             tokenCreator[tokenBatchIndex] = msg.sender; 
             emit NewtokenBatchCreated(_tokenHash, _tokenBatchName, _editionSize, _price, tokenBatchIndex,msg.sender);
         }
-        
+     
+    // Used for Opening/Closing a minting session
+    // Input : toke price, bool (True Opening minting session/False = Closing minting session)
+    // Output : Mintting status 
     function openCloseMint(uint256 tokenBatchToUpdate, uint256 _price,bool _open) public ownertoken(tokenBatchToUpdate){
-            openminting[tokenBatchToUpdate] = _open;
-            tokenBatchPrice[tokenBatchToUpdate] = _price;
-            emit mintingstatus(tokenBatchToUpdate, _price/10**18,_open);
+            openminting[tokenBatchToUpdate] = _open; 
+            tokenBatchPrice[tokenBatchToUpdate] = _price; 
+            emit mintingstatus(tokenBatchToUpdate, _price/10**18,_open); 
         }
-        
+     
+    // Use : Adds up to finve addresses to recieve royalty percentages
+    // Input : Token Batch Id, array of adresses, array of percentages
+    // Output :  Added royalties and there percentages 
     function addTokenBatchRoyalties(uint256 tokenBatchId, address[] memory _royaltyAddresses, uint256[] memory _royaltyPercentage) public ownertoken(tokenBatchId){
-            require(_royaltyAddresses.length == _royaltyPercentage.length);
-            require(_royaltyAddresses.length <= 5);
+            require(_royaltyAddresses.length == _royaltyPercentage.length); 
+            require(_royaltyAddresses.length <= 5); 
             
-            uint256 totalCollaboratorRoyalties;
-            for(uint256 i=0; i<_royaltyAddresses.length; i++){
-                royaltyAddressMemory[tokenBatchId][i] = payable(_royaltyAddresses[i]);
-                royaltyPercentageMemory[tokenBatchId][i] = _royaltyPercentage[i];
-                totalCollaboratorRoyalties += _royaltyPercentage[i];
+            uint256 totalCollaboratorRoyalties;	
+            for(uint256 i=0; i<_royaltyAddresses.length; i++){ 
+                royaltyAddressMemory[tokenBatchId][i] = payable(_royaltyAddresses[i]); 
+                royaltyPercentageMemory[tokenBatchId][i] = _royaltyPercentage[i]; 
+                totalCollaboratorRoyalties += _royaltyPercentage[i]; 
             }
             
             royaltyLengthMemory[tokenBatchId] = _royaltyAddresses.length;
             
             emit AddtokenBatchRoyalties(tokenBatchId, _royaltyAddresses.length);
         }
-        
+    // Use : Getter function for royalty addresses and proyalty percerntages 
+	// Input : Token Batch ID
+    // Output : Puts royalty adresses and royalty percentages into two seperate arrays 
     function getRoyalties(uint256 tokenBatchId) public view returns (address[5] memory addresses, uint256[5] memory percentages) {
             for(uint256 i=0; i<royaltyLengthMemory[tokenBatchId]; i++){
-                addresses[i] = royaltyAddressMemory[tokenBatchId][i];
-                percentages[i] = royaltyPercentageMemory[tokenBatchId][i];
+                addresses[i] = royaltyAddressMemory[tokenBatchId][i]; 
+                percentages[i] = royaltyPercentageMemory[tokenBatchId][i]; 
             }    
         }
-        
+    // Use : Removes royalties only owner of the batch can do this  
+    // Input : Token Batch ID
+    // Output : Removes all royalty adresses 
     function clearRoyalties(uint256 tokenBatchId) public ownertoken(tokenBatchId) {
             for(uint256 i=0; i<royaltyLengthMemory[tokenBatchId]; i++){
                 royaltyAddressMemory[tokenBatchId][i] = 0x0000000000000000000000000000000000000000;
@@ -126,6 +140,9 @@ contract SuperArt is ERC721, Ownable {
             emit ClearRoyalties(tokenBatchId);
         }
     
+    // Use : Minting new tokens from batch   
+    // Input : Token Batch ID, minting amount
+    // Output : minted token(s)
     function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) public  {
             if(openminting[tokenBatchId]){
             require(totalMintedTokens[tokenBatchId] + amountToMint <= tokenBatchEditionSize[tokenBatchId]);
@@ -155,6 +172,9 @@ contract SuperArt is ERC721, Ownable {
             }
         }
         
+    // Use : List token for sell (It you want to resell you re-list)
+    // Input : Token ID, selling price, is lisred should be true
+    // Output : Token ID, sellprice, if it is listed, timestamp     
     function Sale(uint256 _tokenId,uint _sellprice,bool isListed) public{
             uint256 x = referenceTotokenBatch[_tokenId];
             require(tokenCreator[x] == msg.sender);
@@ -162,16 +182,32 @@ contract SuperArt is ERC721, Ownable {
             sellPrices[_tokenId] = _sellprice;
             emit tokenputforsale(_tokenId,msg.sender,_sellprice,isListed,now);
         }
+    
+    
+    function MoreSale(uint256[] memory _tokens,uint _sellprice,bool _isListed) public {
+        for(uint i=0;i<_tokens.length;i++){
+            Sale(_tokens[i],_sellprice,_isListed);
+        }
+    }
         
-    function getTokenBatchData(uint256 tokenBatchId) public view returns (string memory _tokenHash, string memory _tokenBatchName, uint256 _unmintedEditions,address _tokenCreator,string memory _imgurl) {
+    // **
+    // Use : Gets all information about the batch from the Token Batch ID
+    // Input : Token Batch ID
+    // Output : Token hash, token batch name, token batch edition size, token creator, and image URL      
+    function getTokenBatchData(uint256 tokenBatchId) public view returns (string memory _tokenHash, string memory _tokenBatchName, uint256 _unmintedEditions,address _tokenCreator,string memory _imgurl, string memory _imgThumbnail) {
             _tokenHash = tokenBatch[tokenBatchId];
             _tokenBatchName = tokenBatchName[tokenBatchId];
             _unmintedEditions = tokenBatchEditionSize[tokenBatchId] - totalMintedTokens[tokenBatchId];
             _tokenCreator = tokenCreator[tokenBatchId];
             _imgurl = imgUrl[tokenBatchId];
+            _imgThumbnail = thumbnail[tokenBatchId];
             
         }
     
+    // **
+    // Use : Gets all information about the batch from the Token ID
+    // Input : Token id 
+    // Output : Token hash, token batch name, token batch edition size, token creator, and image URL   
     function getTokenDataBatch(uint256 tokenId) public view returns (string memory _tokenHash, string memory _tokenBatchName,address _tokenCreator,string memory _imgurl) {
             require(_exists(tokenId), "Token does not exist.");
             uint256 tokenBatchRef = referenceTotokenBatch[tokenId];
@@ -180,9 +216,13 @@ contract SuperArt is ERC721, Ownable {
             _tokenBatchName = tokenBatchName[tokenBatchRef];
             _tokenCreator = tokenCreator[tokenBatchRef];
             _imgurl = imgUrl[tokenBatchRef];
+            _imgThumbnail = thumbnail[tokenBatchRef];
             
         }
     
+    // Use : Gets all information about a token from the Token ID
+    // Input : Token ID
+    // Output : Token owner, if it is currently for sale, sell price, referefence to its token batch, auctions, token bidder, if it is bidding, and bid price
     function getTokenData(uint256 tokenId) public view returns(address _tokenOwner,bool _isSellings,uint _sellprice,uint _refbatch,address _tokenbidder,bool _isBidding,uint _bidprice){
             _tokenOwner = tokenOwner[tokenId];
             _isSellings = isSellings[tokenId];
@@ -194,12 +234,19 @@ contract SuperArt is ERC721, Ownable {
             _bidprice = y.bidprice;
             
         }
-     function startbid(uint _tokenId,uint256 _startprice) public {
+    // Use : Start a bid 
+    // Input : Token ID and start price 
+    // Output : Calls tokenbid event by giving token ID, address, setting event to true, 1(represents the creator), and time stamp
+     function startbid(uint _tokenId,uint256 _startprice,uint _times) public {
+                auctions[_tokenId].bidend = _times;
                 auctions[_tokenId].isBidding = true;
                 auctions[_tokenId].bidprice = _startprice;
                 emit tokenbid(_tokenId,msg.sender,true,1,block.timestamp); 
             }
-            
+    
+    // Use : Add a bid to auction
+    // Input : Token ID 
+    // Output : Calls bidstarted event by giving token id, bidder adress, bid ammount, and timestamp     
     function addBid(uint _tokenId) public payable{
                 require(auctions[_tokenId].isBidding);
                 require(msg.value>auctions[_tokenId].bidprice);
@@ -219,7 +266,11 @@ contract SuperArt is ERC721, Ownable {
                 
         }
     
+    // Use : Allows super world to close a bid
+    // Input : Token ID 
+    // Output : Calls tokenbid event by giving token ID, adress, sets bidding to false, 2(represents Super World) and, timestamp 
     function closeBid(uint _tokenId)public{
+                 require(auctions[_tokenId].bidend < now);
                  require(auctions[_tokenId].bidder == msg.sender);
                  auctions[_tokenId].bidder.transfer(auctions[_tokenId].bidprice);
                  auctions[_tokenId].bidder = address(0x0);
@@ -227,18 +278,27 @@ contract SuperArt is ERC721, Ownable {
                  emit tokenbid(_tokenId,msg.sender,false,2,block.timestamp);
             }
     
+    // Use : Getter function for token URL
+    // Input : Token Id
+    // Output : Striong URL  
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
                 return string(abi.encodePacked(metaUrl,integerToString(tokenId)));
             
             }
-            
+     
+    // Use : Buy a token
+    // Input : Token ID
+    // Output : Calls _buyToken event by giving Token ID, address, buy amount, and 1(represents the creator)          
     function buyToken(uint256 _tokenId) public payable returns(bool){
                 require(isSellings[_tokenId]);
                 require(msg.value >= sellPrices[_tokenId]);
                 return _buyToken(_tokenId,msg.sender,msg.value,1);
             }
             
-            
+     
+    // Use : Buy a token
+    // Input : Token ID, address that will be paid, cost amount, and 1(represents the creator)
+    // Output : Boolean          
     function _buyToken(uint256 _tokenId,address payable addr,uint256 val,uint8 _type) private returns(bool){
                uint256 totalmoney = val;
                address payable royaltyperson;
@@ -282,21 +342,33 @@ contract SuperArt is ERC721, Ownable {
                 return true;
             }
     
+    // Use : Close bid by owner
+    // Input : Token ID
+    // Output : Calls _buytoken event by giving Token ID, bidder,bid price, and 2(triggers a two in _buytoken function)
     function closeBidOwner(uint _tokenId)public returns(bool){
+                require(auctions[_tokenId].bidend < now);
                 require(auctions[_tokenId].isBidding);
                 return _buyToken(_tokenId,auctions[_tokenId].bidder,auctions[_tokenId].bidprice,2);
             }
     
+    // Use : Withdrawal funds from buyer 
+    // Input : None
+    // Output : Transfer iniated 
     function withdrawBalance() public payable onlyOwner() {
                 (msg.sender).transfer(totalBalance);
             }
-            
+     
+    // Use : Withdrawal funds from Super World
+    // Input : None
+    // Output : Transfer iniated          
     function FinalWithdrawBal() public payable onlyOwner() {
                 uint256 balance = address(this).balance;
                 (msg.sender).transfer(balance);
             }
         
-            
+    // Use : Converts an integer to a string
+    // Input : Integer 
+    // Output : String         
     function integerToString(uint _i) internal pure returns (string memory) {
             if (_i == 0) {
                 return "0";
@@ -319,5 +391,4 @@ contract SuperArt is ERC721, Ownable {
             }
         return string(bstr);
         }
-    
 }
