@@ -41,7 +41,7 @@
   text-transform: uppercase;
 }
 .abtn:hover {
-  background-color: #3454dc;
+  background-color:#3454dc;
   border-color: white;
   cursor: pointer;
   color: white;
@@ -51,6 +51,8 @@
   outline: 0px;
   border: 0;
 }
+
+
 
 .abtn1 {
   position: relative;
@@ -80,9 +82,7 @@
 }
 .artContainer {
   padding: 5px;
-  /* margin-left: 5%; */
-  margin-left: 2%;
-  /* border: 1px solid black; */
+  margin-left: 5%;
 }
 
 .ctext1 {
@@ -105,8 +105,6 @@
   box-shadow: 1px 5px 5px #888888;
   display: flex;
   flex-flow: column;
-  height: 16.75rem;
-  width: 17.5rem;
 }
 
 .row {
@@ -136,10 +134,12 @@ h3 {
 
 .card-artcard {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   align-items: center;
   padding: 0;
+  height: 28rem;
+  width: 17rem;
 }
 
 .card-art-div {
@@ -158,7 +158,7 @@ h3 {
 
 .upload-more-btn {
   border-radius: 2em;
-  font-family: "gibson", sans-serif;
+  font-family: 'gibson', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 13px;
@@ -190,14 +190,14 @@ h3 {
   background-color: #f08778;
   color: white;
 }
-.uploadpopup {
+.uploadpopup{
   max-width: 38rem !important;
   height: auto;
 }
-.uploadlabel {
+.uploadlabel{
   width: 50%;
   margin-left: 1rem;
 }
-.uploadinput {
+.uploadinput{
   margin-left: 1rem;
 }
