@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import BNContract from '../contracts/Cryptoart.json';
 import getWeb3 from '../getWeb3';
 import '../App.css';
+
+import Header1 from './timswork/HeaderComponent'
+import MyCollection1 from './timswork/MyCollections'
+
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import AllItemComponent from './AllArtComponent';
@@ -14,6 +18,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Axios from 'axios';
 //import HDWalletProvider from "@truffle/hdwallet-provider";
 let allDocs = [];
+
 
 class Main extends Component {
   constructor(props) {
@@ -166,6 +171,7 @@ class Main extends Component {
           balance={this.state.balance}
           web3={this.state.web3}
         />
+        <Header1 />
         <Switch>
           <Route
             exact
@@ -207,6 +213,9 @@ class Main extends Component {
               />
             )}
           />
+          <Route exact path='/mycollections3' component={() => (
+            <MyCollection1 />
+          )} />
           <Route path='/card/:id' component={CardWithId} />
           {/* <Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } /> */}
 
