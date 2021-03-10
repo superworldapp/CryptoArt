@@ -1,0 +1,116 @@
+.mystore-container {
+    /* border: 1px solid black; */
+    height: 100vh;
+    display: flex;
+}
+
+.mystore-header {
+    /* border: 1px solid black; */
+    height: 10rem;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: Gibson;
+    font-weight: 400px;
+    padding-left: 2%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.mystore-header h1 {
+    font-size: 64px;
+}
+
+.mystore-header span {
+    /* border: 1px solid black; */
+    height: 25px;
+    width: 165px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mystore-header p {
+    font-size: 18px;
+}
+
+.mystore-art-container {
+    /* border: 1px solid black; */
+    height: 500px;
+    width: 700px;
+    margin-top: 80px;
+    margin-left: 150px;
+    font-family: Gibson;
+}
+
+.mystore-art-container-header {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* .mystore-art-container-header:nth-child(1) {
+    text-decoration: underline;
+} */
+
+.mystore-active {
+    text-decoration: underline;
+}
+
+.mystore-art-pieces {
+    /* border: 1px solid black; */
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-start;
+    /* height: 300px; */
+}
+
+.mystore-art-piece {
+    height: 400px;
+    width: 280px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15%;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+}
+
+.mystore-art-piece img {
+    /* border: 1px solid black; */
+    margin-top: 50px;
+    height: 175px;
+    width: 280px;
+}
+
+.mystore-art-caption {
+    /* border: 1px solid black; */
+    /* background: linear-gradient(to top, #FFFFFF, #000000); */
+    background: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
+    margin-top: 55px;
+    height: 120px;
+    width: 280px
+}
+
+.mystore-art-caption h2 {
+    margin-top: 10px;
+    font-family: Gibson;
+    font-size: 28px;
+}
+
+.mystore-list-btn {
+    border: none;
+    border-radius: 10px;
+    background-color: #5A45C7;
+    color: white;
+    font-size: 24px;
+    font-family: Gibson;
+    font-weight: 500;
+    height: 40px;
+    width: 125px;
+    margin-top: 5px;
+}
