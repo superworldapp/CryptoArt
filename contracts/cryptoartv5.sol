@@ -1,9 +1,7 @@
-pragma solidity ^0.6.0;
+	pragma solidity ^0.6.0;
 pragma experimental ABIEncoderV2;
-
 import "https://github.com/kole-swapnil/openzepkole/token/ERC721/ERC721.sol";
 import "https://github.com/kole-swapnil/openzepkole/access/Ownable.sol";
-
 contract SuperArt is ERC721, Ownable {
     using SafeMath for uint256;  
     uint totalBalance  = 0;
@@ -59,7 +57,6 @@ contract SuperArt is ERC721, Ownable {
                 bool isBidding;
                 uint bidend;
             }
-
     
     //Event
     event NewtokenBatchCreated(string tokenHash, string tokenBatchName,  uint256 editionSize,uint256 price, uint256 tokenBatchIndex, address creator);
@@ -76,12 +73,11 @@ contract SuperArt is ERC721, Ownable {
         require(tokenCreator[tokenBatchId] == msg.sender);
         _;
     } 
-
-
+	// **
 	// Use : Creates a token batch
     // Input : token hash, batch name, edition size, price, and imageURL
     // Output : New token batch with hash, name, size, price, and imageUrl
-    function createtokenBatch(string memory _tokenHash,  string memory _tokenBatchName,  uint256 _editionSize, uint256 _price, string memory _imgURL) public {
+    function createtokenBatch(string memory _tokenHash,  string memory _tokenBatchName,  uint256 _editionSize, uint256 _price, string memory _imgURL, string memory __imgThumbnail) public {
             tokenBatchIndex++ ;
             tokenBatch[tokenBatchIndex] = _tokenHash; 
             tokenBatchName[tokenBatchIndex] = _tokenBatchName; 
@@ -89,6 +85,7 @@ contract SuperArt is ERC721, Ownable {
             totalMintedTokens[tokenBatchIndex] = 0; 
             tokenBatchPrice[tokenBatchIndex] = _price; 
             imgUrl[tokenBatchIndex] = _imgURL; 
+            thumbnail[tokenBatchIndex] = _imgThumbnail;
             tokenCreator[tokenBatchIndex] = msg.sender; 
             emit NewtokenBatchCreated(_tokenHash, _tokenBatchName, _editionSize, _price, tokenBatchIndex,msg.sender);
         }
@@ -120,7 +117,6 @@ contract SuperArt is ERC721, Ownable {
             
             emit AddtokenBatchRoyalties(tokenBatchId, _royaltyAddresses.length);
         }
-
     // Use : Getter function for royalty addresses and proyalty percerntages 
 	// Input : Token Batch ID
     // Output : Puts royalty adresses and royalty percentages into two seperate arrays 
@@ -130,7 +126,6 @@ contract SuperArt is ERC721, Ownable {
                 percentages[i] = royaltyPercentageMemory[tokenBatchId][i]; 
             }    
         }
-
     // Use : Removes royalties only owner of the batch can do this  
     // Input : Token Batch ID
     // Output : Removes all royalty adresses 
@@ -195,18 +190,21 @@ contract SuperArt is ERC721, Ownable {
         }
     }
         
+    // **
     // Use : Gets all information about the batch from the Token Batch ID
     // Input : Token Batch ID
     // Output : Token hash, token batch name, token batch edition size, token creator, and image URL      
-    function getTokenBatchData(uint256 tokenBatchId) public view returns (string memory _tokenHash, string memory _tokenBatchName, uint256 _unmintedEditions,address _tokenCreator,string memory _imgurl) {
+    function getTokenBatchData(uint256 tokenBatchId) public view returns (string memory _tokenHash, string memory _tokenBatchName, uint256 _unmintedEditions,address _tokenCreator,string memory _imgurl, string memory _imgThumbnail) {
             _tokenHash = tokenBatch[tokenBatchId];
             _tokenBatchName = tokenBatchName[tokenBatchId];
             _unmintedEditions = tokenBatchEditionSize[tokenBatchId] - totalMintedTokens[tokenBatchId];
             _tokenCreator = tokenCreator[tokenBatchId];
             _imgurl = imgUrl[tokenBatchId];
+            _imgThumbnail = thumbnail[tokenBatchId];
             
         }
     
+    // **
     // Use : Gets all information about the batch from the Token ID
     // Input : Token id 
     // Output : Token hash, token batch name, token batch edition size, token creator, and image URL   
@@ -218,6 +216,7 @@ contract SuperArt is ERC721, Ownable {
             _tokenBatchName = tokenBatchName[tokenBatchRef];
             _tokenCreator = tokenCreator[tokenBatchRef];
             _imgurl = imgUrl[tokenBatchRef];
+            _imgThumbnail = thumbnail[tokenBatchRef];
             
         }
     
@@ -235,7 +234,6 @@ contract SuperArt is ERC721, Ownable {
             _bidprice = y.bidprice;
             
         }
-
     // Use : Start a bid 
     // Input : Token ID and start price 
     // Output : Calls tokenbid event by giving token ID, address, setting event to true, 1(represents the creator), and time stamp
@@ -393,5 +391,4 @@ contract SuperArt is ERC721, Ownable {
             }
         return string(bstr);
         }
-    
 }
