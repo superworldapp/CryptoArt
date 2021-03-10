@@ -165,12 +165,12 @@ class Main extends Component {
     };
     return (
       <div className='App'>
-        <Header
+        {/* <Header
           contract={this.state.contract}
           accounts={this.state.accounts}
           balance={this.state.balance}
           web3={this.state.web3}
-        />
+        /> */}
         <Header1 />
         <Switch>
           <Route
