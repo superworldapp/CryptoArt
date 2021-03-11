@@ -12,6 +12,7 @@ Mount = async () => {
      const web3 = new Web3(provider);
      web3.eth.getAccounts((err, accounts) => { currentAccount = accounts[0]})
      const accounts = await web3.eth.getAccounts();
+     //console.log(accounts)
      const networkId = await web3.eth.net.getId();
      const deployedNetwork = CryptoArtContract.networks[networkId];
      instance = new web3.eth.Contract(
@@ -24,24 +25,28 @@ Mount = async () => {
 
 //aer();
 //setMetaUrl();
+//getMetaUrl()
 //createtokenBatch()
+//numberofBatch()
 //openCloseMint()
-//addTokenBatchRoyalties() //Not working
-//getRoyalties()
-//clearRoyalties() // Not working
-//mintTokenBatch() // Not working
-//Sale() // Not working
+//addTokenBatchRoyalties() 
+//getRoyalties(1)
+//clearRoyalties(1) 
+//mintTokenBatch() // works 
+//mintToken()
+//Sale() // works 
 //getTokenBatchData()
-//getTokenDataBatch() //Need working ID
+//getTokenDataBatch() //works 
 //getTokenData()
-//startbid()
+//startbid() // works
 //addBid() //Need working ID
 //closeBid() //Need working ID
 //tokenURI()
 //buyToken() //Need working ID
-//closeBidOwner()
-//withdrawBalance() // Caller not owner
-//FinalWithdrawBal() // Caller not owner
+closeBidOwner()
+//withdrawBalance() // 
+//FinalWithdrawBal() // 
+//totalSupply()
 }
 
 Mount();
@@ -52,19 +57,37 @@ aer = async() => {
     console.log(accounts)
 }
 
+totalSupply = async() => {
+  const res = await instance.methods.totalSupply().call();
+  console.log(res);
+  console.log(accounts)
+}
+
 setMetaUrl = async() => {
     const res = await instance.methods.setMetaUrl("nftsalon/").send({from: currentAccount,gas : 1000000});
     console.log(res)
 }
+getMetaUrl = async() => {
+  const res = await instance.methods.metaUrl().call();
+  console.log(res);
+  console.log(accounts)
+}
+numberofBatch = async() => {
+  const res = await instance.methods.tokenBatchIndex().call();
+  console.log(res);
+  console.log(accounts)
+}
 
 createtokenBatch = async() => {
+  //createtokenBatch(string memory _tokenHash,  string memory _tokenBatchName,  uint256 _editionSize, uint256 _price, string memory _imgURL, string memory _imgThumbnail)
     // const res = await instance.methods.createtokenBatch().send();
     // console.log(res)
-    let tokenHash = "OX30" //this.state.artHash.toString();
+    let tokenHash = "OX60" //this.state.artHash.toString();
     let tokenTitle = "Test" //this.state.title;
     let editionSize = 5
     let tokenPrice = 10//(this.state.price * ETHER).toString();
     let imgUrl = "//" //x;
+    let imgThumbnail = "//"
     //let nos = "abc"//this.state.nos;
     console.log(tokenHash, tokenTitle, tokenPrice, imgUrl);
     
@@ -75,8 +98,9 @@ createtokenBatch = async() => {
           tokenHash,
           tokenTitle,
           editionSize,
-          tokenPrice,//(this.state.price * ETHER).toString(),
+          tokenPrice,
           imgUrl,
+          imgThumbnail
           //nos
         )
         .send({ from: currentAccount, gas: 5000000 });
@@ -110,33 +134,33 @@ openCloseMint = async() => {
     }
 }
 
-// addTokenBatchRoyalties = async() => {
-//     let tokenBatchId = 1
-//     let royaltyAddresses = 0xb8d99b112fB6FFff82db081Cb581cd4aE7766548
-//     let royaltyPercentage = 10
-//     try {
-//      //function addTokenBatchRoyalties(uint256 tokenBatchId, address[] memory _royaltyAddresses, uint256[] memory _royaltyPercentage)
-//       const res = await instance.methods
-//         .addTokenBatchRoyalties(
-//           tokenBatchId,
-//           royaltyAddresses,
-//           royaltyPercentage,
-//         )
-//         .send({ from: currentAccount, gas: 5000000 });
-//       console.log('res', res);
-//       let data;
-//     } catch(error){
-//         console.error(error)
-//     }
-// }
+addTokenBatchRoyalties = async() => {
+    let tokenBatchId = 1
+    let royaltyAddresses = ["0xb8d99b112fB6FFff82db081Cb581cd4aE7766548", "0x0b087e53380ed39609464c02E86ADE5090b9f9dF"]
+    let royaltyPercentage = [10,5]
+    try {
+     //function addTokenBatchRoyalties(uint256 tokenBatchId, address[] memory _royaltyAddresses, uint256[] memory _royaltyPercentage)
+      const res = await instance.methods
+        .addTokenBatchRoyalties(
+          tokenBatchId,
+          royaltyAddresses,
+          royaltyPercentage,
+        )
+        .send({ from: currentAccount, gas: 5000000 });
+      console.log('res', res);
+      let data;
+    } catch(error){
+        console.error(error)
+    }
+}
 
-getRoyalties = async() => {
-  const res = await instance.methods.getRoyalties().call();
+getRoyalties = async(n) => {
+  const res = await instance.methods.getRoyalties(n).call();
   console.log(res);
 }
 
-clearRoyalties = async() => {
-      let tokenBatchId = 1
+clearRoyalties = async(n) => {
+      let tokenBatchId = n
       try {
         const res = await instance.methods
           .clearRoyalties(
@@ -153,8 +177,8 @@ clearRoyalties = async() => {
 mintTokenBatch = async() => {
   // const res = await instance.methods.createtokenBatch().send();
   // console.log(res)
-  let tokenBatchId = 123//this.state.artHash.toString();
-  let amountToMint = 5 //this.state.title;
+  let tokenBatchId = 1//this.state.artHash.toString();
+  let amountToMint = 1 //this.state.title;
   
   try {
   //function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) 
@@ -173,11 +197,28 @@ mintTokenBatch = async() => {
   }
 }
 
+mintToken = async() => {
+  let tokenBatchId = 1//this.state.artHash.toString();
+  
+  try {
+  //function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) 
+    const res = await instance.methods
+      .mintToken(
+        tokenBatchId,
+      )
+      .send({ from: currentAccount, gas: 5000000 });
+
+    console.log('res', res);
+    let data;
+  } catch(error){
+      console.error(error)
+  }
+}
+
 Sale = async() => {
   let tokenId = 1 
-  let sellprice = 10 
+  let sellprice = "1000000000000000000" 
   let isListed = true
-
   try {
   //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
     const res = await instance.methods
@@ -211,10 +252,9 @@ getTokenData = async() => {
 }
 
 startbid = async() => {
-  // const res = await instance.methods.createtokenBatch().send();
-  // console.log(res)
   let tokenId = 1
-  let startprice = 10 
+  let startprice = "1000000000000000000"  
+  let times = 1615401942 //bid end time 7 days
   
   try {
   // function startbid(uint _tokenId,uint256 _startprice) public
@@ -222,6 +262,7 @@ startbid = async() => {
       .startbid(
         tokenId,
         startprice,
+        times
       )
       .send({ from: currentAccount, gas: 5000000 });
     console.log('res', res);
@@ -230,15 +271,15 @@ startbid = async() => {
       console.error(error)
   }
 }
-
+//function addBid(uint _tokenId) public payable
 addBid = async() => {
-  let tokenId = 1 
+  let tokenId = 1
   try {
     const res = await instance.methods
       .addBid(
         tokenId,
       )
-      .send({ from: currentAccount, gas: 5000000 });
+      .send({ from: currentAccount, gas: 5000000, value: "1200000000000000000" });
     console.log('res', res);
     let data;
   } catch(error){
