@@ -5,7 +5,6 @@ import {Row, Col, Modal} from 'reactstrap'
 import test1img from '../../images/image 25.png'
 import test2img from '../../images/image 11.png'
 import test3img from '../../images/Nate3.jpg'
-import test4img from '../../images/image 8.png'
 
 
 class MyCollection1 extends Component {
@@ -75,7 +74,7 @@ class MyCollection1 extends Component {
                          </div>
                      </Modal>
 
-                    <div className='my-collection-art-container col-4 col-md-3'>
+                    <div className='my-collection-art-container'>
                         <button onClick={this.toggleModal} className='my-collection-art-img-box'>
                             <img src={test1img } />
                         </button>
@@ -84,9 +83,6 @@ class MyCollection1 extends Component {
                         </button>
                         <button onClick={this.toggleModal} className='my-collection-art-img-box'>
                             <img src={test3img } />
-                        </button>
-                        <button onClick={this.toggleModal} className='my-collection-art-img-box'>
-                            <img src={test4img } />
                         </button>
                     </div>
                 </div>

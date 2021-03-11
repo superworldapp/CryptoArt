@@ -73,7 +73,11 @@
 }
 
 .my-collection-art-container {
+    /* border: 1px solid black; */
+    width: 70%;
     display: flex;
+    justify-content: space-evenly;
+    /* margin-left: 2%; */
 }
   
 .my-collection-art-img-box {
@@ -85,7 +89,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 15%;
     border: none;
 }
 
