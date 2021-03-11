@@ -38,7 +38,7 @@ class Main extends Component {
     try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
-
+      console.log('web3 in main', web3);
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
       const balance = await web3.eth.getBalance(accounts[0]);
