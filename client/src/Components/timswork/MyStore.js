@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import './MyStore.css'
-import {Row} from 'reactstrap'
+import {Row, Modal, Input} from 'reactstrap'
 import test1img from '../../images/image 25.png'
 
 
 class MyStore1 extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isModalOpen: false,
+        }
+        this.toggleModal = this.toggleModal.bind(this);
+    }
+
+    toggleModal() {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen,
+        });
+    }
+
     render() {
         return (
         <div>
@@ -27,7 +41,7 @@ class MyStore1 extends Component {
                                 <img src={test1img } />
                                 <div className='mystore-art-caption'>
                                     <h2>Back Country Fishing</h2>
-                                    <button className='mystore-list-btn'>List</button>
+                                    <button onClick={this.toggleModal} className='mystore-list-btn'>List</button>
                                 </div>
                             </div>
                             <div className='mystore-upload-art'>
@@ -39,6 +53,23 @@ class MyStore1 extends Component {
                     </div>
                 {/* </Row> */}
             </div>
+
+            <Modal
+            isOpen={this.state.isModalOpen}
+            toggle={this.toggleModal}
+            className='mystore-modal-box'
+            >
+                <div className='mystore-modal-headers'>
+                    <h2>NFT RESALE</h2>
+                    <p>Image, Video, Audio or 3D Model</p>
+                </div>
+                <div className='mystore-modal-body'>
+                    <span className='mystore-modal-body-1'><h3>File</h3><p>BackCountry...png</p></span>
+                    <span className='mystore-modal-body-2'><h3>Auction</h3><Input type='checkbox' className='modal-input' /></span>
+                    <span className='mystore-modal-body-2'><h3>Buy Now</h3><Input type='checkbox' className='modal-input' /></span>
+                </div>
+            </Modal>
+
         </div>
         )
     }
