@@ -221,7 +221,7 @@
     height: 100vh;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.9);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -231,8 +231,8 @@
 
 .mystore-modal {
     background-color: white;
-    width: 30%;
-    height: 30%;
+    width: 480px;
+    height: 510px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -249,3 +249,131 @@
       opacity: 1;
     }
   }
+
+.mystore-resale-container {
+    /* border: 1px solid black; */
+    height: 480px;
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.mystore-resale-container h3 {
+    font-family: Gibson;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.mystore-resale-description{
+    position: relative;
+    top: -5px;
+    left: 9px;
+    font-size: 12px;
+}
+
+.mystore-body-container {
+    /* border: 1px solid black; */
+    height: 300px;
+    width: 385px;
+    position: relative;
+    top: 15px;
+    left: 9px;
+}
+
+.mystore-body-line-1 , 
+.mystore-body-line-2, 
+.mystore-body-line-3, 
+.mystore-body-line-4,
+.mystore-body-line-5 {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.mystore-body-container h4 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.mystore-body-line-1-p {
+    color: gray;
+    position: relative;
+    top: 4px;
+    left: 125px;
+}
+
+.mystore-body-line-2-checkbox {
+    height: 23px;
+    width: 23px;
+    position: relative;
+    top: 3px;
+    left: 25px;
+}
+
+.mystore-body-line-3-checkbox {
+    height: 23px;
+    width: 23px;
+    position: relative;
+    top: 3px;
+    left: 12px;
+}
+
+.mystore-token-price {
+    height: 40px;
+    width: 100px;
+    border-radius: 15px;
+    position: relative;
+    top: -5px;
+    left: 35px;
+}
+
+.mystore-token-type, .mystore-token-usd {
+    position: relative;
+    left: 45px;
+}
+
+.mystore-body-line-4 {
+    justify-content: space-between;
+}
+
+.mystore-body-line-4-subtitle {
+    color: gray;
+    position: relative;
+    right: 130px;
+    bottom: 30px;
+}
+
+
+.mystore-body-line-5 {
+    margin-top: -15px;
+}
+
+.mystore-token-days {
+    height: 40px;
+    width: 100px;
+    border-radius: 15px;
+    border-color: gray;
+    position: relative;
+    top: -5px;
+    left: 65px;
+}
+
+.mystore-token-duration-subtitle {
+    position: relative;
+    top: 5px;
+    left: 80px;
+}
+
+.mystore-resale-btn {
+    border: none;
+    border-radius: 10px;
+    background-color: #5A45C7;
+    color: white;
+    font-size: 24px;
+    font-family: Gibson;
+    font-weight: 500;
+    height: 50px;
+    width: 200px;
+    margin-top: 10px;
+}

@@ -56,13 +56,24 @@ class MyStore1 extends Component {
 
             {/* Modal */}
                 {
-                    this.state.isModalOpen && (
+                    !this.state.isModalOpen && (
                         <div>
                             {/* <button onClick={this.toggleModal}> */}
-                                <div class='mystore-modal-bg'>
-                                    <div class='mystore-modal secondIt'>
-                                        <h2>Subscribe</h2>
-                                        <button onClick={this.toggleModal}>X</button>
+                                <div className='mystore-modal-bg'>
+                                    <div className='mystore-modal'>
+                                        <div className='mystore-resale-container'>
+                                            <h3>NFT RESALE</h3>
+                                            <p className='mystore-resale-description'>Image, Video, Audio or 3D Model</p>
+                                            <div className='mystore-body-container'>
+                                                <span className='mystore-body-line-1'><h4>File</h4><p className='mystore-body-line-1-p'>BackCountry...png</p></span>
+                                                <span className='mystore-body-line-2'><h4>Auction</h4><input type='checkbox' className='mystore-body-line-2-checkbox'></input></span>
+                                                <span className='mystore-body-line-3'><h4>Buy Now</h4><input type='checkbox' className='mystore-body-line-3-checkbox'></input></span>
+                                                <span className='mystore-body-line-4'><h4>Token Price*</h4><input className='mystore-token-price'></input><p className='mystore-token-type'>ETH &nbsp;</p><p className='mystore-token-usd'>($1,580.10 USD)</p></span>
+                                                <p className='mystore-body-line-4-subtitle'>(State Price if Auction)</p>
+                                                <span className='mystore-body-line-5'><h4>Duration*</h4><input className='mystore-token-days'></input><p className='mystore-token-duration-subtitle'>Days</p></span>
+                                                <button className='mystore-resale-btn'>Confirm</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             {/* </button> */}
