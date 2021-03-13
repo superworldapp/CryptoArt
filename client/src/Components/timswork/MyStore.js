@@ -62,6 +62,7 @@ class MyStore1 extends Component {
                                 <div className='mystore-modal-bg'>
                                     <div className='mystore-modal'>
                                         <div className='mystore-resale-container'>
+                                            <button onClick={this.toggleModal} className='mystore-resale-close'>X</button>
                                             <h3>NFT RESALE</h3>
                                             <p className='mystore-resale-description'>Image, Video, Audio or 3D Model</p>
                                             <div className='mystore-body-container'>

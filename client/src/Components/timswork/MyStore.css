@@ -377,3 +377,12 @@
     width: 200px;
     margin-top: 10px;
 }
+
+.mystore-resale-close {
+    border: none;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 130px;
+    right: 510px;
+    font-size: 20px;
+}
