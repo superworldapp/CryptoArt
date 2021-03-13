@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import metaMask from '../../images/MetaMask.png';
 import portis from '../../images/Portis.png';
 import fortmatic from '../../images/Fortmatic.png';
+import Fortmatic from 'fortmatic';
+import Web3 from 'web3';
 import { injected } from '../../utils/connectors';
 import { LayoutContext } from '../../state/Layout/context';
 import { useWeb3React } from '@web3-react/core';
@@ -27,32 +29,19 @@ const ConnectWalletModal = (props: any) => {
   // };
 
   const handleWalletSignIn = () => {
-    // setLoading(true);
     try {
       activate(injected).then(() => {
-        // console.log(window.location.href);
-        // console.log(window.location.pathname);
-        if (window.location.pathname === '/guided-tour') {
-          history.push('/');
-          window.location.reload();
-        } else {
-          window.location.reload();
-        }
+        window.location.reload();
       });
-      // initContracts();
-      //   else if (walletType === 'portis') activate(portis);
-      //   else if (walletType === 'fortmatic') activate(fortmatic);
     } catch (error) {
       console.error(error);
     }
     if (account) {
-      // setLoading(false);
       dispatch({
         type: 'TOGGLE_SIGN_IN_MODAL',
         payload: !state.signInModalIsOpen,
       });
     }
-    // window.location.reload();
   };
 
   return (
@@ -62,9 +51,6 @@ const ConnectWalletModal = (props: any) => {
           className={`connect-wallet__div ${props.divClass}`}
           style={props.style}
         >
-          {/* <button className="connect-wallet__closeBtn" onClick={exitHandler}>
-                        <CloseIcon />
-                    </button> */}
           <header className={`connect-wallet__header ${props.headerClass}`}>
             <h2>Connect a Wallet to Start Buying</h2>
           </header>
@@ -101,7 +87,6 @@ const ConnectWalletModal = (props: any) => {
                   >
                     CONNECT NOW
                   </button>
-                  {/* button functionality needs to be implemented */}
                 </div>
               </div>
             </div>
@@ -131,7 +116,6 @@ const ConnectWalletModal = (props: any) => {
                 >
                   CONNECT NOW
                 </button>
-                {/* button functionality needs to be implemented */}
               </div>
             </div>
             <div className='connect-wallet__container'>
@@ -156,11 +140,9 @@ const ConnectWalletModal = (props: any) => {
                     localStorage.setItem('walletType', 'fortmatic');
                     window.location.reload();
                   }}
-                  // disabled={true}
                 >
                   CONNECT NOW
                 </button>
-                {/* button functionality needs to be implemented */}
               </div>
             </div>
           </div>
