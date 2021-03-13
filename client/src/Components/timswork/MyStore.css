@@ -214,3 +214,38 @@
     left: 10%;
     margin-top: 4%;
 }
+
+.mystore-modal-bg {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation:modalSlide 0.3s ease-in-out;
+}
+
+.mystore-modal {
+    background-color: white;
+    width: 30%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Gibson;
+}
+
+@keyframes modalSlide {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }

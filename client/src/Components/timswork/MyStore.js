@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './MyStore.css'
-import {Row, Modal, Input} from 'reactstrap'
+import {Row} from 'reactstrap'
 import test1img from '../../images/image 25.png'
 
 
@@ -54,22 +54,24 @@ class MyStore1 extends Component {
                 {/* </Row> */}
             </div>
 
-            <Modal
-            isOpen={this.state.isModalOpen}
-            toggle={this.toggleModal}
-            className='mystore-modal-box'
-            >
-                <div className='mystore-modal-headers'>
-                    <h2>NFT RESALE</h2>
-                    <p>Image, Video, Audio or 3D Model</p>
-                </div>
-                <div className='mystore-modal-body'>
-                    <span className='mystore-modal-body-1'><h3>File</h3><p>BackCountry...png</p></span>
-                    <span className='mystore-modal-body-2'><h3>Auction</h3><Input type='checkbox' className='modal-input' /></span>
-                    <span className='mystore-modal-body-2'><h3>Buy Now</h3><Input type='checkbox' className='modal-input' /></span>
-                </div>
-            </Modal>
+            {/* Modal */}
+                {
+                    this.state.isModalOpen && (
+                        <div>
+                            {/* <button onClick={this.toggleModal}> */}
+                                <div class='mystore-modal-bg'>
+                                    <div class='mystore-modal secondIt'>
+                                        <h2>Subscribe</h2>
+                                        <button onClick={this.toggleModal}>X</button>
+                                    </div>
+                                </div>
+                            {/* </button> */}
+                        </div>
+                    )
+                }
+            {/* */}
 
+           
         </div>
         )
     }
