@@ -85,7 +85,9 @@ const ConnectWalletModal = (props: any) => {
                       handleWalletSignIn();
                     }}
                   >
-                    CONNECT NOW
+                    {localStorage.getItem('walletType') === 'metamask'
+                      ? 'CONNECTED'
+                      : 'CONNECT NOW'}
                   </button>
                 </div>
               </div>
@@ -114,7 +116,9 @@ const ConnectWalletModal = (props: any) => {
                   }}
                   // disabled={true}
                 >
-                  CONNECT NOW
+                  {localStorage.getItem('walletType') === 'portis'
+                    ? 'CONNECTED'
+                    : 'CONNECT NOW'}
                 </button>
               </div>
             </div>
@@ -141,7 +145,9 @@ const ConnectWalletModal = (props: any) => {
                     window.location.reload();
                   }}
                 >
-                  CONNECT NOW
+                  {localStorage.getItem('walletType') === 'fortmatic'
+                    ? 'CONNECTED'
+                    : 'CONNECT NOW'}
                 </button>
               </div>
             </div>

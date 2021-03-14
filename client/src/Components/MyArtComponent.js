@@ -1000,7 +1000,7 @@ class MyItemComponent extends Component {
 
       if (Array.isArray(res.events.tokencreated)) {
         data = await res.events.tokencreated.map((token) =>
-          Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
+          Axios.post(`https://geo.superworldapp.com/api/json/token/add`, {
             tokenId: token.returnValues.tokenId.toString(),
             description: 'A unique piece of art',
             image: imgUrl,
@@ -1012,7 +1012,7 @@ class MyItemComponent extends Component {
         );
       } else {
         data = await Axios.post(
-          `http://geo.superworldapp.com/api/json/token/add`,
+          `https://geo.superworldapp.com/api/json/token/add`,
           {
             tokenId: res.events.tokencreated.returnValues.tokenId.toString(),
             description: 'A unique piece of art',
