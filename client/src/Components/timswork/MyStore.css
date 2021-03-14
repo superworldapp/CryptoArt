@@ -386,3 +386,114 @@
     right: 510px;
     font-size: 20px;
 }
+
+.upload-modal {
+    background-color: #FFFFFF;
+    height: 525px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-modal-container {
+    /* border: 1px solid black; */
+    height: 475px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.upload-modal-container h3 {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: Gibson;
+    position: relative;
+    right: 10px;
+}
+
+.upload-modal-container p {
+    font-size: 14px;
+    position: relative;
+    bottom: 5px;
+}
+
+.upload-modal-line1, 
+.upload-modal-line2,
+.upload-modal-line3,
+.upload-modal-line4 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.upload-modal-line1 h4, 
+.upload-modal-line2 h4,
+.upload-modal-line3 h4,
+.upload-modal-line4 h4{
+    font-weight: 400;
+}
+
+.upload-modal-line1 button {
+    border-radius: 10px;
+    width: 125px;
+    background-color: rgb(155, 155, 155);
+    border: none;
+    height: 30px;
+    position: relative;
+    top: 2px;
+}
+
+.upload-modal-line1 p {
+    color: gray;
+    position: relative;
+    top: 5px;
+    right: 10px;
+}
+
+.upload-modal-line2 input {
+    position: relative;
+    right: 5px;
+    width: 220px;
+    border-radius: 10px;
+}
+
+.upload-modal-line3 input {
+    position: relative;
+    right: 5px;
+    height: 75px;
+    width: 220px;
+    border-radius: 10px;
+}
+
+.upload-modal-line4 input {
+    position: relative;
+    right: 125px;
+    height: 30px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+.upload-modal-btn {
+    margin-right: 5px;
+    background: #5540C6;
+    color: #FFFFFF;
+    border-radius: 5px;
+    width: 200px;
+    height: 40px;
+    border: none;
+    position: relative;
+    top: 35px;
+    left: 100px;
+}
+
+.upload-modal-close-btn {
+    position: absolute;
+    top: 125px;
+    left: 900px;
+    border: none;
+    background-color: #FFFFFF;
+}

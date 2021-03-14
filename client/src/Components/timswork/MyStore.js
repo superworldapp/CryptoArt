@@ -9,8 +9,17 @@ class MyStore1 extends Component {
         super(props);
         this.state = {
             isModalOpen: false,
+            isListModalOpen: false,
         }
         this.toggleModal = this.toggleModal.bind(this);
+        this.listToggleModal = this.listToggleModal.bind(this);
+
+    }
+
+    listToggleModal() {
+        this.setState({
+            isListModalOpen: !this.state.isListModalOpen,
+        });
     }
 
     toggleModal() {
@@ -45,7 +54,7 @@ class MyStore1 extends Component {
                                 </div>
                             </div>
                             <div className='mystore-upload-art'>
-                                <button className='mystore-upload-btn'>
+                                <button onClick={this.listToggleModal} className='mystore-upload-btn'>
                                     <div className='mystore-upload-add'>+</div>
                                 </button>
                             </div>
@@ -54,7 +63,7 @@ class MyStore1 extends Component {
                 {/* </Row> */}
             </div>
 
-            {/* Modal */}
+            {/* List Modal */}
                 {
                     this.state.isModalOpen && (
                         <div>
@@ -82,6 +91,23 @@ class MyStore1 extends Component {
                     )
                 }
             {/* */}
+                {!this.state.isListModalOpen && (
+                    <div className='mystore-modal-bg'>
+                        <div className='upload-modal'>
+                            <div className='upload-modal-container'>
+                            <button onClick={this.listToggleModal} className='upload-modal-close-btn'>X</button>
+                            <h3>UPLOAD TO MYSTORE</h3>
+                            <p>Image, Video, Audio or 3D Model</p>
+                            <span className='upload-modal-line1'><h4>File to Upload*</h4><button>Browse...</button><p>Leopard.png</p></span>
+                            <span className='upload-modal-line2'><h4>Name*</h4><input type='text' placeholder='Leopard'/></span>
+                            <span className='upload-modal-line3'><h4>Description</h4><input type='text' placeholder='Leopard'/></span>
+                            <span className='upload-modal-line4'><h4>No. of Tokens</h4><input type='text' placeholder='Leopard'/></span>
+                            <button className='upload-modal-btn'>Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            {/* Upload Modal */}
 
            
         </div>
