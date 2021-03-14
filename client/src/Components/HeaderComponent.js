@@ -1109,7 +1109,7 @@ class Header extends Component {
                       </span>
                     </MenuItem> */}
 
-                    <MenuItem
+                    {/* <MenuItem
                       onClick={() => console.log('change password clicked')}
                       disableGutters
                     >
@@ -1135,7 +1135,7 @@ class Header extends Component {
                           Change Password
                         </p>
                       </span>
-                    </MenuItem>
+                    </MenuItem> */}
 
                     <MenuItem
                       onClick={() => {
