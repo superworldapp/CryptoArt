@@ -5,6 +5,8 @@ import {Row} from 'reactstrap'
 import test1img from '../../images/image 25.png'
 import test2img from '../../images/image 11.png'
 import test3img from '../../images/Nate3.jpg'
+import test4img from '../../images/image 29.png'
+
 
 
 class MyCollection1 extends Component {
@@ -13,14 +15,22 @@ class MyCollection1 extends Component {
         this.state = {
             selectedGallery: '',
             isModalOpen: false,
+            isGalleryModalOpen: false,
         }
         this.dropdown = this.dropdown.bind(this)
         this.toggleModal = this.toggleModal.bind(this);
+        this.toggleGalleryModal = this.toggleGalleryModal.bind(this)
     }
 
     toggleModal() {
         this.setState({
             isModalOpen: !this.state.isModalOpen,
+        });
+    }
+
+    toggleGalleryModal() {
+        this.setState({
+            isGalleryModalOpen: !this.state.isGalleryModalOpen,
         });
     }
 
@@ -50,32 +60,12 @@ class MyCollection1 extends Component {
                         <p style={{ fontWeight: '900', fontSize: '18px'}}>GALLERIES:</p>
                         <p style={{fontSize:'24px', marginTop:'-15px'}}>Abstract</p>
                         <p style={{fontSize:'24px'}}>Nature</p>
-                        <a href='http://www.google.com' className='add-button'>+ Add</a>
+                        <button onClick={this.toggleGalleryModal} className='add-button'>+ Add</button>
                     </div>
 
-                    {/* <Modal
-                        isOpen={this.state.isModalOpen}
-                        toggle={this.toggleModal}
-                        className='modal-box'
-                     >
-                         <div className='modal-container'>
-                            <img src={test1img } className='model-img' />
-                             <div className='model-text-container'>
-                                 <h3>Back Country Fishing</h3>
-                                 <h4>Created by: <span>Username</span></h4>
-                                 <h5>Back Country Fishing was Inspired by my regular weekend trips to the mountains. 
-                                 Max, my dog, would love to sit by the fire as I cast my line to try and catch our dinner.</h5>
-                                 <div className='model-price-info'>
-                                    <span><p>Purchased For</p><p>55ETH</p></span>
-                                    <span><p>Owner #</p><p>3</p><a href='http://www.google.com'>View trading history</a></span>
-                                   <Link to='/mystore'><button className='model-sell-btn'>Sell</button></Link>
-                                 </div>
-                             </div>
-                         </div>
-                     </Modal> */}
 
-                     {/* Modal */}
-                        {!this.state.isModalOpen && (
+                     {/* Art Modal */}
+                        {this.state.isModalOpen && (
                             <div className='my-collection-modal-bg'>
                             <div className='my-collection-modal-art-img-container'>
                                 <img src={test1img } className='my-collection-modal-art-img' />
@@ -88,9 +78,32 @@ class MyCollection1 extends Component {
                                 Max, my dog, would love to sit by the fire as I cast my line to try and catch our dinner.</p>
                                 <span className='my-collection-modal-art-description-line4'><p>Purchased For</p><p className='my-collection-modal-art-price'>55 ETH</p></span>
                                 <span className='my-collection-modal-art-description-line5'><p>Owner #</p><p className='my-collection-modal-art-owner-count'>3</p><p className='my-collection-modal-art-trading-history'>View Trading History</p></span>
-                                <button className='my-collection-sell-btn'>Sell</button>
+                                <Link to='/mystore'><button className='my-collection-sell-btn'>Sell</button></Link>
                             </div>
                         </div>
+                        )}
+                     {/* */}
+
+                     {/* Gallery Modal */}
+                        {this.state.isGalleryModalOpen && (
+                            <div className='my-collection-modal-bg my-collection-gallery-modal '>
+                                <h1 className='my-collection-gallery-modal-heading'>Enter Title</h1>
+                                <span className='my-collection-gallery-modal-span'><input type='text' className='my-collection-gallery-input' placeholder='Search MyCollection' /><button className='my-collection-gallery-done-btn'>Done</button><button onClick={this.toggleGalleryModal} className='my-collection-gallery-cancel-btn'>Cancel</button></span>
+                                <div className='my-collection-gallery-modal-art-container'>
+                                    <div className='my-collection-gallery-modal-art-img-container'>
+                                        <img src={test1img } />
+                                    </div>
+                                    <div className='my-collection-gallery-modal-art-img-container'>
+                                        <img src={test2img } />
+                                    </div>
+                                    <div className='my-collection-gallery-modal-art-img-container'>
+                                        <img src={test3img } />
+                                    </div>
+                                    <div className='my-collection-gallery-modal-art-img-container'>
+                                        <img src={test4img } />
+                                    </div>
+                                </div>
+                            </div>   
                         )}
                      {/* */}
 
