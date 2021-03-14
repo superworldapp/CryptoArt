@@ -75,13 +75,20 @@ class MyCollection1 extends Component {
                      </Modal> */}
 
                      {/* Modal */}
-                        {this.state.isModalOpen && (
+                        {!this.state.isModalOpen && (
                             <div className='my-collection-modal-bg'>
                             <div className='my-collection-modal-art-img-container'>
                                 <img src={test1img } className='my-collection-modal-art-img' />
                             </div>
                             <div className='my-collection-modal-art-description-container'>
-
+                                <button className='my-collection-modal-close-btn' onClick={this.toggleModal}>X</button>
+                                <h3>Back Country Fishing</h3>
+                                <span className='my-collection-modal-art-description-line2'><h5 className='my-collection-modal-created'>Created by:</h5><h className='my-collection-modal-user'>Username</h></span>
+                                <p className='my-collection-modal-art-description-line3'>Back Country Fishing was Inspired by my regular weekend trips to the mountains. 
+                                Max, my dog, would love to sit by the fire as I cast my line to try and catch our dinner.</p>
+                                <span className='my-collection-modal-art-description-line4'><p>Purchased For</p><p className='my-collection-modal-art-price'>55 ETH</p></span>
+                                <span className='my-collection-modal-art-description-line5'><p>Owner #</p><p className='my-collection-modal-art-owner-count'>3</p><p className='my-collection-modal-art-trading-history'>View Trading History</p></span>
+                                <button className='my-collection-sell-btn'>Sell</button>
                             </div>
                         </div>
                         )}
