@@ -56,7 +56,7 @@ class MyStore1 extends Component {
 
             {/* Modal */}
                 {
-                    !this.state.isModalOpen && (
+                    this.state.isModalOpen && (
                         <div>
                             {/* <button onClick={this.toggleModal}> */}
                                 <div className='mystore-modal-bg'>

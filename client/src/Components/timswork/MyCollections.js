@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './MyCollections.css'
 import { Link } from 'react-router-dom';
-import {Row, Col, Modal} from 'reactstrap'
+import {Row} from 'reactstrap'
 import test1img from '../../images/image 25.png'
 import test2img from '../../images/image 11.png'
 import test3img from '../../images/Nate3.jpg'
@@ -53,7 +53,7 @@ class MyCollection1 extends Component {
                         <a href='http://www.google.com' className='add-button'>+ Add</a>
                     </div>
 
-                    <Modal
+                    {/* <Modal
                         isOpen={this.state.isModalOpen}
                         toggle={this.toggleModal}
                         className='modal-box'
@@ -72,7 +72,20 @@ class MyCollection1 extends Component {
                                  </div>
                              </div>
                          </div>
-                     </Modal>
+                     </Modal> */}
+
+                     {/* Modal */}
+                        {this.state.isModalOpen && (
+                            <div className='my-collection-modal-bg'>
+                            <div className='my-collection-modal-art-img-container'>
+                                <img src={test1img } className='my-collection-modal-art-img' />
+                            </div>
+                            <div className='my-collection-modal-art-description-container'>
+
+                            </div>
+                        </div>
+                        )}
+                     {/* */}
 
                     <div className='my-collection-art-container'>
                         <button onClick={this.toggleModal} className='my-collection-art-img-box'>
