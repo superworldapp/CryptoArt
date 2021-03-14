@@ -150,6 +150,7 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
           username,
         }
       );
+      Cookies.set('email', email);
       // Cookies.set('uid', res.data.user._id);
       //NEED A BEARER TOKEN
       // Cookies.set('Authorization', 'Bearer ' + res.data.tk, {
@@ -157,7 +158,6 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
       // });
       Cookies.set('session', res.data.data.session);
       Cookies.set('userId', res.data.data.userId);
-      // console.log('Cookies', Cookies.get());
       setLoggedIn(true);
       Auth.authenticate();
       // Auth.setUser(res.data.user);

@@ -19,6 +19,7 @@ import helpIcon from '../assets/svg/help.svg';
 import greenDot from '../assets/svg/green-dot.svg';
 import MenuItem from '@material-ui/core/MenuItem';
 import Axios from 'axios';
+import Cookies from 'js-cookie';
 import {
   CircularProgress,
   Grid,
@@ -312,6 +313,8 @@ class Header extends Component {
   };
 
   render() {
+    console.log('this.state.currentUser', this.state.currentUser);
+
     return (
       <>
         <Navbar
@@ -319,8 +322,8 @@ class Header extends Component {
           expand='md'
           style={{
             marginBottom: '-1.8rem',
-            backgroundColor:'#d5d7fa',
-            height:'85px'
+            backgroundColor: '#d5d7fa',
+            height: '85px',
           }}
         >
           <NavbarToggler onClick={this.toggleNav} />
@@ -372,12 +375,12 @@ class Header extends Component {
                   className='nav-link'
                   style={{
                     width: 200,
-                    fontFamily:'Gibson',
-                    fontSize:'17px',
+                    fontFamily: 'Gibson',
+                    fontSize: '17px',
                   }}
                   to='/allart'
                 >
-                Marketplace
+                  Marketplace
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -385,12 +388,12 @@ class Header extends Component {
                   className='nav-link'
                   style={{
                     width: 200,
-                    fontFamily:'Gibson',
-                    fontSize:'17px',
+                    fontFamily: 'Gibson',
+                    fontSize: '17px',
                   }}
                   to='/allart'
                 >
-                Picks
+                  Picks
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -398,12 +401,12 @@ class Header extends Component {
                   className='nav-link'
                   style={{
                     width: 200,
-                    fontFamily:'Gibson',
-                    fontSize:'17px',
+                    fontFamily: 'Gibson',
+                    fontSize: '17px',
                   }}
                   to='/allart'
                 >
-                Help
+                  Help
                 </NavLink>
               </NavItem>
 
@@ -981,7 +984,7 @@ class Header extends Component {
                             fontSize: '13px',
                           }}
                         >
-                          {this.state.currentUser.email}
+                          {Cookies.get('email')}
                         </li>
                       </div>
                     </MenuItem>
@@ -1017,11 +1020,40 @@ class Header extends Component {
                               margin: '5px 0',
                             }}
                           >
-                            My Collections
+                            My Collection
                           </p>
                         </span>
                       </MenuItem>
                     </NavLink>
+
+                    <MenuItem
+                      onClick={() => console.log('my store clicked')}
+                      disableGutters
+                    >
+                      <span
+                        style={{
+                          display: 'flex',
+                          maxHeight: '10px',
+                          alignItems: 'center',
+                          whiteSpace: 'pre-line',
+                          marginLeft: '10px',
+                          padding: '10px 3px 5px 3px',
+                        }}
+                      >
+                        <p
+                          style={{
+                            flex: '1',
+                            color: '#888888',
+                            fontFamily: 'Gibson',
+                            fontSize: '13px',
+                            margin: '5px 0',
+                          }}
+                        >
+                          My Store
+                        </p>
+                      </span>
+                    </MenuItem>
+
                     <MenuItem
                       onClick={this.changeUsernameHandleClick}
                       disableGutters
@@ -1045,7 +1077,7 @@ class Header extends Component {
                             margin: '5px 0',
                           }}
                         >
-                          Change username
+                          Change Username
                         </p>
                       </span>
                     </MenuItem>
@@ -1076,6 +1108,35 @@ class Header extends Component {
                         </p>
                       </span>
                     </MenuItem> */}
+
+                    <MenuItem
+                      onClick={() => console.log('change password clicked')}
+                      disableGutters
+                    >
+                      <span
+                        style={{
+                          display: 'flex',
+                          maxHeight: '10px',
+                          alignItems: 'center',
+                          whiteSpace: 'pre-line',
+                          marginLeft: '10px',
+                          padding: '10px 3px 5px 3px',
+                        }}
+                      >
+                        <p
+                          style={{
+                            flex: '1',
+                            color: '#888888',
+                            fontFamily: 'Gibson',
+                            fontSize: '13px',
+                            margin: '5px 0',
+                          }}
+                        >
+                          Change Password
+                        </p>
+                      </span>
+                    </MenuItem>
+
                     <MenuItem
                       onClick={() => {
                         Axios.defaults.headers = {
