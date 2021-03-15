@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './MyStore.css'
 import {Row} from 'reactstrap'
 import test1img from '../../images/image 25.png'
+import test2img from '../../images/image 29.png'
 
 
 class MyStore1 extends Component {
@@ -10,10 +11,19 @@ class MyStore1 extends Component {
         this.state = {
             isModalOpen: false,
             isListModalOpen: false,
+            artStatus: 'Active',
         }
         this.toggleModal = this.toggleModal.bind(this);
         this.listToggleModal = this.listToggleModal.bind(this);
+        this.storeQueue = this.storeQueue.bind(this)
+        this.storeActive = this.storeActive.bind(this);
 
+    }
+
+    toggleModal() {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen,
+        });
     }
 
     listToggleModal() {
@@ -22,10 +32,16 @@ class MyStore1 extends Component {
         });
     }
 
-    toggleModal() {
+    storeQueue() {
         this.setState({
-            isModalOpen: !this.state.isModalOpen,
-        });
+            artStatus: 'Queue',
+        })
+    }
+
+    storeActive() {
+        this.setState({
+            artStatus: 'Active',
+        })
     }
 
     render() {
@@ -40,25 +56,40 @@ class MyStore1 extends Component {
                     </div>
                     <div className='mystore-art-container'>
                         <div className='mystore-art-container-header'>
-                            <h2 className="mystore-active">QUEUE (1)</h2>
-                            <h2>ACTIVE</h2>
-                            <h2>ENDED</h2>
-                            <h2>OFFERS</h2>
+                            <button onClick={this.storeQueue}><h2 className="mystore-active">QUEUE (1)</h2></button>
+                            <button onClick={this.storeActive}><h2>ACTIVE</h2></button>
+                            <button><h2>ENDED</h2></button>
+                            <button><h2>OFFERS</h2></button>
                         </div>
-                        <div className='mystore-art-pieces'>
-                            <div className='mystore-art-piece'>
-                                <img src={test1img } />
-                                <div className='mystore-art-caption'>
-                                    <h2>Back Country Fishing</h2>
-                                    <button onClick={this.toggleModal} className='mystore-list-btn'>List</button>
+                        {this.state.artStatus === 'Queue' && (
+                            <div className='mystore-art-pieces'>
+                                <div className='mystore-art-piece'>
+                                    <img src={test1img } alt='art-1'/>
+                                    <div className='mystore-art-caption'>
+                                        <h2>Back Country Fishing</h2>
+                                        <button onClick={this.toggleModal} className='mystore-list-btn'>List</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className='mystore-upload-art'>
-                                <button onClick={this.listToggleModal} className='mystore-upload-btn'>
-                                    <div className='mystore-upload-add'>+</div>
-                                </button>
-                            </div>
-                        </div>
+                                <div className='mystore-upload-art'>
+                                    <button onClick={this.listToggleModal} className='mystore-upload-btn'>
+                                        <div className='mystore-upload-add'>+</div>
+                                    </button>
+                                </div>
+                            </div>    
+                        )}
+
+                        {this.state.artStatus === 'Active' && (
+                            <div className='mystore-art-pieces'>
+                                <div className='mystore-art-piece'>
+                                    <img src={test2img } alt='art-1'/>
+                                    <div className='mystore-art-caption'>
+                                        <h2>Leopard</h2>
+                                        <span className='mystore-art-caption-line2'><p>1.00 ETH</p><button onClick={this.toggleModal} className='mystore-edit-btn'>Edit</button></span>
+                                        <p className='mystore-art-caption-usd'>($1,580.10 USD)</p>
+                                    </div>
+                                </div>
+                            </div>  
+                        )}
                     </div>
                 {/* </Row> */}
             </div>
@@ -91,7 +122,7 @@ class MyStore1 extends Component {
                     )
                 }
             {/* */}
-                {!this.state.isListModalOpen && (
+                {this.state.isListModalOpen && (
                     <div className='mystore-modal-bg'>
                         <div className='upload-modal'>
                             <div className='upload-modal-container'>

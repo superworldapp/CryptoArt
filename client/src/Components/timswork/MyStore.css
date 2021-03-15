@@ -48,9 +48,10 @@
     justify-content: space-evenly;
 }
 
-/* .mystore-art-container-header:nth-child(1) {
-    text-decoration: underline;
-} */
+.mystore-art-container-header button {
+    border: none;
+    background-color: #FFFFFF;
+}
 
 .mystore-active {
     text-decoration: underline;
@@ -101,6 +102,39 @@
     margin-top: 10px;
     font-family: Gibson;
     font-size: 28px;
+}
+
+.mystore-art-caption-line2 {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+
+.mystore-art-caption-line2 p {
+    color: #5A45C7;
+    font-size: 18px;
+}
+
+.mystore-edit-btn {
+    border: none;
+    border-radius: 10px;
+    background-color: #5A45C7;
+    color: white;
+    font-size: 24px;
+    font-family: Gibson;
+    font-weight: 500;
+    height: 40px;
+    width: 115px;
+    position: relative;
+    left: 10px;
+}
+
+.mystore-art-caption-usd {
+    position: absolute;
+    top: 628px;
+    left: 320px;
+    color: #5A45C7;
 }
 
 .mystore-list-btn {
@@ -497,3 +531,4 @@
     border: none;
     background-color: #FFFFFF;
 }
+
