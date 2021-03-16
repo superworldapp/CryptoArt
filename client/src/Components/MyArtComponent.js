@@ -119,7 +119,6 @@ class Allpatrender extends Component {
         value: this.props.art.tokenSellPrice,
         gas: 10000000,
       });
-    console.log('res buy item', res);
   };
   toggleModal() {
     this.setState({
@@ -166,20 +165,29 @@ class Allpatrender extends Component {
     let updated;
     if (event === 'tokenputforsale') {
       updated = {
-        tokenId: this.props.art.tokenIdentifier.toString(),
-        latestEvent: event,
-        latestPrice: res.events.tokenputforsale.returnValues.sellPrice.toString(),
-        latestStatus: res.events.tokenputforsale.returnValues.isListed,
+        tokenId: res.events[event].returnValues.tokenId,
+        latestEvent: res.events[event].event,
+        returnValues: {
+          seller: res.events[event].returnValues.seller,
+          price: res.events[event].returnValues.sellPrice,
+          isActiveEvent: res.events[event].returnValues.isListed,
+          times: res.events[event].returnValues.times,
+        },
       };
     } else if (event === 'tokenbid') {
       updated = {
-        tokenId: this.props.art.tokenIdentifier.toString(),
-        latestEvent: event,
-        latestPrice: res.events.tokenbid.returnValues.close.toString(),
-        latestStatus: res.events.tokenbid.returnValues.isBid,
+        tokenId: res.events[event].returnValues.tokenId,
+        latestEvent: res.events[event].event,
+        returnValues: {
+          seller: res.events[event].returnValues.stcl,
+          price: res.events[event].returnValues.close,
+          isActiveEvent: res.events[event].returnValues.isBid,
+          times: res.events[event].returnValues.times,
+        },
       };
     }
 
+    console.log('updated', updated);
     const updateToken = await Axios.post(
       `http://geo.superworldapp.com/api/json/token/update`,
       updated
@@ -1056,7 +1064,12 @@ class MyItemComponent extends Component {
             blockchain: 'e',
             networkId: 4,
             price: tokenPrice,
-            latestPrice: 0,
+            returnValues: {
+              seller: '',
+              price: 0,
+              isActiveEvent: false,
+              times: '',
+            },
           })
         );
       } else {
@@ -1069,8 +1082,13 @@ class MyItemComponent extends Component {
             name: tokenTitle,
             blockchain: 'e',
             networkId: 4,
-            price: tokenPrice,
-            latestPrice: 0,
+            price: 0,
+            returnValues: {
+              seller: '',
+              price: tokenPrice,
+              isActiveEvent: false,
+              times: '',
+            },
           }
         );
       }

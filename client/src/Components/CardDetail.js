@@ -160,13 +160,36 @@ const CardDetail = ({
     setModalOpen(!modalOpen);
   };
 
+  const updateToken = async (res, eventName) => {
+    const updateToken = await Axios.post(
+      `http://geo.superworldapp.com/api/json/token/update`,
+      {
+        tokenId: res.events[eventName].returnValues.tokenId,
+        latestEvent: eventName,
+        returnValues: {
+          seller: res.events[eventName].returnValues.stcl,
+          price: res.events[eventName].returnValues.tokenPrice,
+          isActiveEvent: true,
+          times: res.events[eventName].returnValues.times,
+        },
+      }
+    );
+  };
+
   const handlePurchase = async () => {
     setLoadingPurchase(true);
-    const res = await contract?.methods.buyToken(art.tokenIdentifier).send({
-      from: accounts,
-      value: art?.tokenSellPrice.toString(),
-      gas: 7000000,
-    });
+    let res;
+    try {
+      res = await contract?.methods.buyToken(art.tokenIdentifier).send({
+        from: accounts,
+        value: art?.tokenSellPrice.toString(),
+        gas: 7000000,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    let eventName = Object.keys(res.events)[0];
+    updateToken(res, eventName);
     setLoadingPurchase(false);
     setPurchaseSuccess(true);
     console.log(res);

@@ -46,7 +46,7 @@ class AllArt extends Component {
       fromBlock: 7970334,
     });
 
-    console.log(tokenBid);
+    // console.log(tokenBid);
     // let bidStarted = await this.props.contract?.getPastEvents('bidstarted', {
     //     filter: { tokenId: this.props.art.tokenIdentifier },
     //     fromBlock: 0
@@ -61,7 +61,7 @@ class AllArt extends Component {
       filter: { tokenId: this.props.art.tokenId },
       fromBlock: 7970334,
     });
-    console.log(this.props.art.tokenId, cre);
+    // console.log(this.props.art.tokenId, cre);
   };
   componentDidMount = () => {
     this.creData();
@@ -75,7 +75,6 @@ class AllArt extends Component {
         value: this.props.art.tokenSellPrice,
         gas: 5000000,
       });
-    console.log(res);
   };
 
   toggleModal() {
@@ -112,28 +111,31 @@ class AllArt extends Component {
     this.creData();
     let but =
       this.props.art.latestEvent === 'tokenputforsale' &&
-      this.props.art.latestStatus === true
+      this.props.art.returnValues.isActiveEvent
         ? 'visible'
         : 'invisible';
     let bux =
       this.props.art.latestEvent === 'tokenbid' &&
-      this.props.art.latestStatus === true
+      this.props.art.returnValues.isActiveEvent
         ? 'visible'
         : 'invisible';
     let bak =
       this.props.art.latestEvent === 'tokenputforsale' &&
-      this.props.art.latestStatus === true
+      this.props.art.returnValues.isActiveEvent
         ? 'bg-success text-white'
         : '';
     let buk =
       this.props.art.latestEvent === 'tokenbid' &&
-      this.props.art.latestStatus === true
+      this.props.art.returnValues.isActiveEvent
         ? 'bg-warning'
         : '';
-    let pr =
-      Web3.utils.fromWei(this.props.art.latestPrice.toString(), 'ether') == 0
-        ? 'invisible'
-        : 'visible';
+    // let pr =
+    //   Web3.utils.fromWei(
+    //     this.props.art.returnValues.sellPrice.toString(),
+    //     'ether'
+    //   ) == 0
+    //     ? 'invisible'
+    //     : 'visible';
 
     const img = new Image();
     let orientation;
@@ -205,10 +207,10 @@ class AllArt extends Component {
                   fontWeight: 'bold',
                 }}
               >
-                {this.props.art.tokenTitle}
+                {this.props.art.name}
               </CardText>
               {this.props.art.latestEvent === 'tokenputforsale' &&
-              this.props.art.latestStatus === true ? (
+              this.props.art.returnValues.isActiveEvent ? (
                 <CardText
                   className={but}
                   style={{
@@ -217,11 +219,11 @@ class AllArt extends Component {
                     color: '#5540c7',
                   }}
                 >
-                  {Web3.utils.fromWei(
-                    this.props.art.latestPrice.toString(),
+                  {/* {Web3.utils.fromWei(
+                    this.props.art.returnValues.price.toString(),
                     'ether'
                   )}{' '}
-                  ETH
+                  ETH */}
                 </CardText>
               ) : (
                 <CardText
@@ -232,10 +234,10 @@ class AllArt extends Component {
                     color: '#5540c7',
                   }}
                 >
-                  {Web3.utils.fromWei(
-                    this.props.art.latestPrice.toString(),
+                  {/* {Web3.utils.fromWei(
+                    this.props.art.returnValues.price.toString(),
                     'ether'
-                  )}{' '}
+                  )}{' '} */}
                   ETH
                 </CardText>
               )}
@@ -404,18 +406,19 @@ class AllItemComponent extends Component {
 
     console.log('res', res.data.data);
 
-    allDocs = [res.data.data[0], res.data.data[1], res.data.data[34]];
+    allDocs = res.data.data;
+
     this.setState({ art: allDocs });
-    console.log(this.state.art);
+    // console.log(this.state.art);
   }
   allBtn = () => {
     this.setState({ art: allDocs });
-    console.log(allDocs);
+    // console.log(allDocs);
   };
 
   onAuctionBtn = () => {
     let auctionDocs = allDocs.filter(
-      (art) => art.latestEvent === 'tokenbid' && art.latestStatus === true
+      (art) => art.latestEvent === 'tokenbid' && art.returnValues.isActiveEvent
     );
 
     this.setState({ art: auctionDocs });
@@ -424,7 +427,7 @@ class AllItemComponent extends Component {
   hasSoldBtn = () => {
     let soldDocs = allDocs.filter(
       (art) =>
-        art.latestEvent === 'tokenputforsale' && art.latestStatus === true
+        art.latestEvent === 'tokenputforsale' && art.returnValues.isActiveEvent
     );
     this.setState({ art: soldDocs });
   };
