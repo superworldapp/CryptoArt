@@ -927,7 +927,7 @@ class Allpatrender extends Component {
   }
 }
 
-class MyItemComponent2 extends Component {
+class MyCollections extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -1409,4 +1409,491 @@ class MyItemComponent2 extends Component {
   }
 }
 
-export default MyItemComponent2;
+export default MyCollections;
+
+
+
+export class MyStore extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      docCount: 0,
+      art: [],
+      cust: [],
+      manuf: [],
+      isModalOpen1: false,
+      title: '',
+      artUrl: '',
+      price: '',
+      artHash: '',
+      nos: 0,
+      isLoading: false,
+      loadingError: false,
+      uploadSuccess: false,
+    };
+    this.toggleModal1 = this.toggleModal1.bind(this);
+    this.toggleModal2 = this.toggleModal2.bind(this);
+    this.handleUploadMore = this.handleUploadMore.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.fileSelectHandler = this.fileSelectHandler.bind(this);
+    this.fileUploadHandler = this.fileUploadHandler.bind(this);
+    this.fileAwsHandler = this.fileAwsHandler.bind(this);
+    this.refreshMyArt = this.refreshMyArt.bind(this);
+  }
+
+  toggleModal1() {
+    this.setState({
+      isModalOpen1: !this.state.isModalOpen1,
+    });
+  }
+
+  toggleModal2() {
+    this.setState({
+      uploadSuccess: !this.state.uploadSuccess,
+    });
+  }
+
+  refreshMyArt() {
+    if (!this.state.isModalOpen1 && !this.state.uploadSuccess)
+      window.location.reload();
+  }
+
+  handleUploadMore() {
+    this.toggleModal2();
+    this.toggleModal1();
+  }
+  creatingItems = async (x) => {
+    let tokenHash = this.state.artHash.toString();
+    let tokenTitle = this.state.title;
+    let tokenPrice = (this.state.price * ETHER).toString();
+    let imgUrl = x;
+    let nos = this.state.nos;
+    console.log(tokenHash, tokenTitle, tokenPrice, imgUrl, nos);
+
+    try {
+      const res = await this.props.contract.methods
+        .batchCreator(
+          tokenHash,
+          tokenTitle,
+          (this.state.price * ETHER).toString(),
+          imgUrl,
+          nos
+        )
+        .send({ from: this.props.accounts, gas: 5000000 });
+
+      console.log('res', res);
+      let data;
+
+      if (Array.isArray(res.events.tokencreated)) {
+        data = await res.events.tokencreated.map((token) =>
+          Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
+            tokenId: token.returnValues.tokenId.toString(),
+            description: 'A unique piece of art',
+            image: imgUrl,
+            name: tokenTitle,
+            blockchain: 'e',
+            networkId: 4,
+            price: tokenPrice,
+          })
+        );
+      } else {
+        data = await Axios.post(
+          `http://geo.superworldapp.com/api/json/token/add`,
+          {
+            tokenId: res.events.tokencreated.returnValues.tokenId.toString(),
+            description: 'A unique piece of art',
+            image: imgUrl,
+            name: tokenTitle,
+            blockchain: 'e',
+            networkId: 4,
+            price: tokenPrice,
+          }
+        );
+      }
+
+      console.log('data', data);
+      this.toggleModal1();
+      this.setState({ isLoading: false, uploadSuccess: true });
+    } catch (err) {
+      this.setState({ loadingError: true });
+      console.error(err.message);
+    }
+    this.setState({ isLoading: false });
+  };
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  async componentDidMount() {
+    let res = await this.props.contract?.methods.tokenCount().call();
+    console.log(res);
+
+    let response = [];
+    let createrToken = [];
+    for (let i = 1; i <= res; i++) {
+      let rex = await this.props.contract?.methods.Arts(i).call();
+      if (rex.tokenOwner == this.props.accounts) {
+        response.push(rex);
+      } else if (rex.tokenCreator == this.props.accounts) {
+        createrToken.push(rex);
+      }
+    }
+    console.log(createrToken);
+    allDocs = [];
+    allDocs = response;
+    console.log(response);
+    this.setState({ art: allDocs });
+  }
+  fileSelectHandler = (event) => {
+    console.log(event.target.files);
+    this.setState({
+      selectedFile: event.target.files[0],
+    });
+  };
+  fileUploadHandler = async (event) => {
+    event.preventDefault();
+    // const hash = await blobToSHA256(this.state.selectedFile);
+    let hash = '';
+    this.setState({ isLoading: true, loadingError: false, artHash: hash });
+    this.fileAwsHandler(this.state.selectedFile, this.creatingItems);
+  };
+
+  fileAwsHandler = async (file, callback) => {
+    console.log(file);
+    let newfilename = `image_${Date.now()}${path
+      .extname(file.name)
+      .toLowerCase()}`;
+    console.log(newfilename);
+    let params = {
+      ACL: 'public-read',
+      Bucket: BUCKET_NAME,
+      Key: 'marketplace/' + newfilename,
+      ContentType: file.type,
+      Body: file,
+    };
+
+    s3.putObject(params, function (err, data) {
+      if (err) {
+        console.log('error :', err);
+      } else {
+        callback(
+          `https://superworldapp.s3.amazonaws.com/marketplace/${newfilename}`
+        );
+      }
+    });
+  };
+
+  render() {
+    const Menu = this.state.art.map((x) => {
+      return (
+        <div key={x.tokenIdentifier} className='col-4 col-md-3'>
+          <Allpatrender
+            art={x}
+            contract={this.props.contract}
+            accounts={this.props.accounts}
+          />
+          <br />
+          <br />
+        </div>
+      );
+    });
+
+    let ch = 'visible';
+    return (
+      <div className='artContainer'>
+        <div
+          style={{
+            marginLeft: '2px',
+          }}
+        >
+          <p
+            style={{
+              fontFamily: 'Gibson',
+              fontSize: '30px',
+              fontWeight: 'bold',
+              marginTop: '10px',
+              textAlign: 'left',
+            }}
+          >
+            My Collections
+          </p>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <p style={{ marginLeft: '2px', position: 'relative' }}>
+              <button className='abtn'>Alll</button>
+              <button className='abtn'>Offer Made </button>
+              <button className='abtn'>Offer Received </button>
+              <button className='abtn'>My Creations </button>
+            </p>
+            <p style={{ marginLeft: '2px', position: 'relative' }}>
+              <Button
+                className='abtn'
+                style={{ backgroundColor: '#5548C7', color: 'white' }}
+                onClick={this.toggleModal1}
+              >
+                + {''}UPLOAD
+              </Button>
+            </p>
+          </div>
+        </div>
+
+        <Modal
+          isOpen={this.state.isModalOpen1}
+          toggle={this.toggleModal1}
+          onClosed={this.refreshMyArt}
+          className='uploadpopup'
+        >
+          <ModalHeader toggle={this.toggleModal1}>
+            <p
+              style={{
+                fontFamily: 'Gibson',
+                fontSize: '25px',
+                fontWeight: '800',
+                marginTop: '10px',
+                textAlign: 'left',
+                marginLeft: '7px',
+                marginBottom: '0rem',
+                textTransform: 'uppercase',
+              }}
+            >
+              Upload New Item
+            </p>
+            <p
+              style={{
+                fontFamily: 'Gibson',
+                fontSize: '15px',
+                fontWeight: '800',
+                textAlign: 'left',
+                marginLeft: '7px',
+              }}
+            >
+              Image, Video, Audio or 3D Model
+            </p>
+          </ModalHeader>
+          <ModalBody>
+            <Form>
+              <FormGroup>
+                <Label
+                  htmlFor='artHash'
+                  className='uploadlabel'
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontSize: '20px',
+                    color: 'black',
+                  }}
+                >
+                  File to Upload
+                </Label>
+                <Input
+                  //style={{ marginLeft: '1.0rem' }}
+                  type='file'
+                  onChange={this.fileSelectHandler}
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <Label
+                  htmlFor='title'
+                  className='uploadlabel'
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontSize: '20px',
+                    color: 'black',
+                  }}
+                >
+                  Name*
+                </Label>
+                <Input
+                  type='text'
+                  id='title'
+                  name='title'
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label
+                  htmlFor='title'
+                  className='uploadlabel'
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontSize: '20px',
+                    color: 'black',
+                  }}
+                >
+                  Description
+                </Label>
+                <Input
+                  type='textarea'
+                  id='des'
+                  name='des'
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label
+                  htmlFor='price'
+                  className='uploadlabel'
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontSize: '20px',
+                    color: 'black',
+                  }}
+                >
+                  Token Price
+                </Label>
+                <Input
+                  style={{ width: '50%' }}
+                  type='text'
+                  id='price'
+                  name='price'
+                  onChange={this.handleInputChange}
+                />
+                <Label
+                  className='uploadlabel'
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontSize: '20px',
+                    color: 'black',
+                  }}
+                >
+                  {' '}
+                  ETH
+                </Label>
+              </FormGroup>
+              <FormGroup>
+                <Label
+                  htmlFor='nos'
+                  className='uploadlabel'
+                  style={{
+                    fontFamily: 'Gibson',
+                    fontSize: '20px',
+                    color: 'black',
+                  }}
+                >
+                  No. of Tokens
+                </Label>
+                <Input
+                  style={{ width: '40%', marginRight: '11rem' }}
+                  placeholder='1'
+                  type='number'
+                  id='nos'
+                  name='nos'
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
+              <br />
+              <button
+                className='abtn'
+                style={{
+                  color: 'white',
+                  left: '9rem',
+                  backgroundColor: '#5548C7',
+                  fontSize: '18px',
+                }}
+                //color='primary'
+                onClick={this.fileUploadHandler}
+              >
+                Upload
+              </button>
+              {this.state.isLoading ? (
+                <img
+                  style={{ display: 'flex', verticalAlign: 'none' }}
+                  src={loader}
+                />
+              ) : (
+                <div></div>
+              )}
+              {this.state.loadingError ? (
+                <div style={{ color: 'red', fontFamily: 'Gibson' }}>
+                  There was a transaction/processing error. Please try again.
+                </div>
+              ) : (
+                <div></div>
+              )}
+              <br />
+            </Form>
+          </ModalBody>
+        </Modal>
+
+        {/* UPLOAD SUCCESS MODAL */}
+
+        <Modal
+          isOpen={this.state.uploadSuccess}
+          onClosed={this.refreshMyArt}
+          toggle={this.toggleModal2}
+          className='modal-xl'
+        >
+          <ModalHeader toggle={this.toggleModal2}>
+            <div></div>
+          </ModalHeader>
+          <ModalBody
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              font: 'Gibson',
+              height: '20rem',
+              paddingBottom: '5rem',
+            }}
+          >
+            <img src={checkmark} />
+            <p
+              style={{
+                textAlign: 'center',
+                fontSize: '1.25rem',
+                fontWeight: '450',
+                marginTop: '1rem',
+              }}
+            >
+              Hi, your upload was successful!
+            </p>
+            <p style={{ textAlign: 'center', color: 'gray', fontSize: '12px' }}>
+              You can view your recent uploaded file under “MY COLLECTIONS”
+            </p>
+            <button className='upload-more-btn' onClick={this.handleUploadMore}>
+              Upload More
+            </button>
+          </ModalBody>
+        </Modal>
+
+        <div className='row'>{Menu}</div>
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+      </div>
+    );
+  }
+}
+
+
+
