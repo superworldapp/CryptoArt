@@ -313,8 +313,6 @@ class Header extends Component {
   };
 
   render() {
-    console.log('this.state.currentUser', this.state.currentUser);
-
     return (
       <>
         <Navbar
@@ -1210,7 +1208,10 @@ class Header extends Component {
                   />
                 </NavLink>
               </NavItem> */}
-              <SignInModal initContracts={this.props.initContracts} />
+              <SignInModal
+                initContracts={this.props.initContracts}
+                accounts={this.props.accounts}
+              />
             </Nav>
           </Collapse>
 

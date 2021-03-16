@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 // import CloseIcon from '@material-ui/icons/Close';
 import metaMask from '../../images/MetaMask.png';
@@ -28,12 +28,13 @@ const ConnectWalletModal = (props: any) => {
   //     });
   // };
 
-  const handleWalletSignIn = () => {
+  const handleWalletSignIn = async () => {
     try {
-      activate(injected).then(() => {
-        window.location.reload();
-      });
+      const connected = await activate(injected)
+        .then(() => localStorage.setItem('walletConnected', 'true'))
+        .then(() => window.location.reload());
     } catch (error) {
+      localStorage.setItem('walletConnected', 'false');
       console.error(error);
     }
     if (account) {
@@ -85,7 +86,8 @@ const ConnectWalletModal = (props: any) => {
                       handleWalletSignIn();
                     }}
                   >
-                    {localStorage.getItem('walletType') === 'metamask'
+                    {localStorage.getItem('walletConnected') === 'true' &&
+                    localStorage.getItem('walletType') === 'metamask'
                       ? 'CONNECTED'
                       : 'CONNECT NOW'}
                   </button>
@@ -116,7 +118,8 @@ const ConnectWalletModal = (props: any) => {
                   }}
                   // disabled={true}
                 >
-                  {localStorage.getItem('walletType') === 'portis'
+                  {localStorage.getItem('walletConnected') === 'true' &&
+                  localStorage.getItem('walletType') === 'portis'
                     ? 'CONNECTED'
                     : 'CONNECT NOW'}
                 </button>
@@ -145,7 +148,8 @@ const ConnectWalletModal = (props: any) => {
                     window.location.reload();
                   }}
                 >
-                  {localStorage.getItem('walletType') === 'fortmatic'
+                  {localStorage.getItem('walletConnected') === 'true' &&
+                  localStorage.getItem('walletType') === 'fortmatic'
                     ? 'CONNECTED'
                     : 'CONNECT NOW'}
                 </button>

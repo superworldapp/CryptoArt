@@ -31,6 +31,7 @@ interface IHeader {
 interface Props {
   login: () => void;
 }
+
 const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
   const history = useHistory();
   const { state, dispatch } = useContext(LayoutContext);
@@ -51,7 +52,6 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
   const [openError, setOpenError] = useState(false);
   const [walletSignin, setWalletSignin] = useState(false);
   const [signIn, setSignIn] = useState<boolean>(true);
-
   const resendVerification = async () => {
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/resend/verification`, {

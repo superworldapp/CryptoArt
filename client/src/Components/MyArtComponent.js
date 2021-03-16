@@ -108,7 +108,7 @@ class Allpatrender extends Component {
     this.StartAuction = this.StartAuction.bind(this);
     this.EndAuction = this.EndAuction.bind(this);
     this.refreshMyArt = this.refreshMyArt.bind(this);
-
+    this.updateToken = this.updateToken.bind(this);
     //this.toggleAuction = this.toggleAuction.bind(this);
   }
   buyItem = async () => {
@@ -119,7 +119,7 @@ class Allpatrender extends Component {
         value: this.props.art.tokenSellPrice,
         gas: 10000000,
       });
-    console.log(res);
+    console.log('res buy item', res);
   };
   toggleModal() {
     this.setState({
@@ -161,40 +161,88 @@ class Allpatrender extends Component {
       [name]: value,
     });
   }
+
+  async updateToken(res, event) {
+    let updated;
+    if (event === 'tokenputforsale') {
+      updated = {
+        tokenId: this.props.art.tokenIdentifier.toString(),
+        latestEvent: event,
+        latestPrice: res.events.tokenputforsale.returnValues.sellPrice.toString(),
+        latestStatus: res.events.tokenputforsale.returnValues.isListed,
+      };
+    } else if (event === 'tokenbid') {
+      updated = {
+        tokenId: this.props.art.tokenIdentifier.toString(),
+        latestEvent: event,
+        latestPrice: res.events.tokenbid.returnValues.close.toString(),
+        latestStatus: res.events.tokenbid.returnValues.isBid,
+      };
+    }
+
+    const updateToken = await Axios.post(
+      `http://geo.superworldapp.com/api/json/token/update`,
+      updated
+    );
+  }
   putForSale = async () => {
     this.setState({ putForSaleLoading: true });
-    const res = await this.props.contract.methods
-      .putForSale(
-        this.props.art.tokenIdentifier,
-        (this.state.sellPrice * ETHER).toString()
-      )
-      .send({ from: this.props.accounts, gas: 1000000 });
+    let res;
+    try {
+      res = await this.props.contract.methods
+        .putForSale(
+          this.props.art.tokenIdentifier,
+          (this.state.sellPrice * ETHER).toString()
+        )
+        .send({ from: this.props.accounts, gas: 1000000 });
+    } catch (err) {
+      console.error(err.message);
+    }
+    this.updateToken(res, Object.keys(res.events)[0]);
     this.setState({ putForSaleLoading: false, listForSaleSuccess: true });
     this.toggleModal();
     console.log(res);
   };
   DeSale = async () => {
     this.setState({ delistLoading: true });
-    const res = await this.props.contract.methods
-      .deSale(this.props.art.tokenIdentifier)
-      .send({ from: this.props.accounts, gas: 1000000 });
+    let res;
+    try {
+      res = await this.props.contract.methods
+        .deSale(this.props.art.tokenIdentifier)
+        .send({ from: this.props.accounts, gas: 1000000 });
+    } catch (err) {
+      console.error(err);
+    }
+    this.updateToken(res, Object.keys(res.events)[0]);
     this.setState({ delistLoading: false });
     window.location.reload();
     console.log(res);
   };
   StartAuction = async () => {
     this.setState({ auctionLoading: true });
-    const res = await this.props.contract.methods
-      .startbid(this.props.art.tokenIdentifier)
-      .send({ from: this.props.accounts, gas: 1000000 });
+    let res;
+    try {
+      res = await this.props.contract.methods
+        .startbid(this.props.art.tokenIdentifier)
+        .send({ from: this.props.accounts, gas: 1000000 });
+    } catch (err) {
+      console.error(err);
+    }
+    this.updateToken(res, Object.keys(res.events)[0]);
     this.setState({ auctionLoading: false, listForAuctionSuccess: true });
     console.log(res);
   };
   EndAuction = async () => {
     this.setState({ endAuctionLoading: true });
-    const res = await this.props.contract.methods
-      .closeBidOwner(this.props.art.tokenIdentifier)
-      .send({ from: this.props.accounts, gas: 7000000 });
+    let res;
+    try {
+      res = await this.props.contract.methods
+        .closeBidOwner(this.props.art.tokenIdentifier)
+        .send({ from: this.props.accounts, gas: 7000000 });
+    } catch (err) {
+      console.error(err);
+    }
+    this.updateToken(res, Object.keys(res.events)[0]);
     this.setState({ endAuctionLoading: false, endAuctionSuccess: true });
     console.log(res);
   };
@@ -1008,6 +1056,7 @@ class MyItemComponent extends Component {
             blockchain: 'e',
             networkId: 4,
             price: tokenPrice,
+            latestPrice: 0,
           })
         );
       } else {
@@ -1021,6 +1070,7 @@ class MyItemComponent extends Component {
             blockchain: 'e',
             networkId: 4,
             price: tokenPrice,
+            latestPrice: 0,
           }
         );
       }
