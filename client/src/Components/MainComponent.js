@@ -4,14 +4,13 @@ import getWeb3 from '../getWeb3';
 import '../App.css';
 
 import NewHeader from './NewHeaderComponent'
-import MyCollections from './NewMyArtComponent'
-import {MyStore} from './NewMyArtComponent'
+import MyCollections from './MyArtComponent'
+import {MyStore} from './MyArtComponent'
 
 
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import AllItemComponent from './AllArtComponent';
-import MyItemComponent from './MyArtComponent';
 import CardDetail from './CardDetail';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './FooterComponent';
