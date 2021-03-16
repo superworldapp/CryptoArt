@@ -6,6 +6,7 @@ import '../App.css';
 import Header1 from './timswork/HeaderComponent'
 import MyCollection1 from './timswork/MyCollections'
 import MyStore1 from './timswork/MyStore'
+import MyItemComponent2 from './timswork/ArtComponent'
 
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
@@ -203,12 +204,27 @@ class Main extends Component {
               />
             )}
           />
+
+
           <Route exact path='/mycollections2' component={() => (
             <MyCollection1 />
           )} />
            <Route exact path='/mystore' component={() => (
             <MyStore1 />
           )} />
+
+
+        <ProtectedRoute
+            exact
+            path='/mycollections3'
+            component={() => (
+              <MyItemComponent2
+                contract={this.state.contract}
+                accounts={this.state.accounts}
+              />
+            )}
+          />
+
           <Route path='/card/:id' component={CardWithId} />
           {/* <Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } /> */}
 
