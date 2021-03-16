@@ -26,6 +26,7 @@ import { render } from 'react-dom';
 import Axios from 'axios';
 import './ArtComponent.css';
 import './MyCollections.css'
+import './MyStore.css'
 import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
@@ -817,6 +818,7 @@ export class MyStore extends Component {
       isLoading: false,
       loadingError: false,
       uploadSuccess: false,
+      artStatus: 'Queue',
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.toggleModal2 = this.toggleModal2.bind(this);
@@ -826,6 +828,8 @@ export class MyStore extends Component {
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
     this.fileAwsHandler = this.fileAwsHandler.bind(this);
     this.refreshMyArt = this.refreshMyArt.bind(this);
+    this.storeQueue = this.storeQueue.bind(this)
+    this.storeActive = this.storeActive.bind(this);
   }
 
   toggleModal1() {
@@ -838,6 +842,18 @@ export class MyStore extends Component {
     this.setState({
       uploadSuccess: !this.state.uploadSuccess,
     });
+  }
+
+  storeQueue() {
+    this.setState({
+        artStatus: 'Queue',
+    })
+  }
+
+  storeActive() {
+      this.setState({
+          artStatus: 'Active',
+      })
   }
 
   refreshMyArt() {
@@ -977,57 +993,53 @@ export class MyStore extends Component {
   };
 
   render() {
-    const Menu = this.state.art.map((x) => {
-      return (
-        <div key={x.tokenIdentifier} className='col-4 col-md-3'>
-          <Allpatrender
-            art={x}
-            contract={this.props.contract}
-            accounts={this.props.accounts}
-          />
-          <br />
-          <br />
-        </div>
-      );
-    });
+
 
     let ch = 'visible';
     return (
-      <div className='artContainer'>
-        <div
-          style={{
-            marginLeft: '2px',
-          }}
-        >
-          <p
-            style={{
-              fontFamily: 'Gibson',
-              fontSize: '30px',
-              fontWeight: 'bold',
-              marginTop: '10px',
-              textAlign: 'left',
-            }}
-          >
-            My Collections
-          </p>
-
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <p style={{ marginLeft: '2px', position: 'relative' }}>
-              <button className='abtn'>Alll</button>
-              <button className='abtn'>Offer Made </button>
-              <button className='abtn'>Offer Received </button>
-              <button className='abtn'>My Creations </button>
-            </p>
-            <p style={{ marginLeft: '2px', position: 'relative' }}>
-              <Button
-                className='abtn'
-                style={{ backgroundColor: '#5548C7', color: 'white' }}
-                onClick={this.toggleModal1}
-              >
-                + {''}UPLOAD
-              </Button>
-            </p>
+      <div className='mystore-container'>
+        <div className='mystore-header'>
+              <h1>MyStore</h1>
+              <span><p>NFT'S LISTED</p><p>0</p></span>
+              <span><p>NFT'S SOLD</p><p>0</p></span>
           </div>
+
+          <div className='mystore-art-container'>
+            <div className='mystore-art-container-header'>
+                <button onClick={this.storeQueue}><h2 className="mystore-active">QUEUE (1)</h2></button>
+                <button onClick={this.storeActive}><h2>ACTIVE</h2></button>
+                <button><h2>ENDED</h2></button>
+                <button><h2>OFFERS</h2></button>
+            </div>
+            {this.state.artStatus === 'Queue' && (
+                <div className='mystore-art-pieces'>
+                    <div className='mystore-art-piece'>
+                        <img src={test1img } alt='art-1'/>
+                        <div className='mystore-art-caption'>
+                            <h2>Back Country Fishing</h2>
+                            <button onClick={this.toggleModal} className='mystore-list-btn'>List</button>
+                        </div>
+                    </div>
+                    <div className='mystore-upload-art'>
+                        <button onClick={this.listToggleModal} className='mystore-upload-btn'>
+                            <div className='mystore-upload-add'>+</div>
+                        </button>
+                    </div>
+                </div>    
+            )}
+
+            {this.state.artStatus === 'Active' && (
+                <div className='mystore-art-pieces'>
+                    <div className='mystore-art-piece'>
+                        <img src={test2img } alt='art-1'/>
+                        <div className='mystore-art-caption'>
+                            <h2>Leopard</h2>
+                            <span className='mystore-art-caption-line2'><p>1.00 ETH</p><button onClick={this.editToggleModal} className='mystore-edit-btn'>Edit</button></span>
+                            <p className='mystore-art-caption-usd'>($1,580.10 USD)</p>
+                        </div>
+                    </div>
+                </div>  
+            )}
         </div>
 
         <Modal
@@ -1249,34 +1261,7 @@ export class MyStore extends Component {
           </ModalBody>
         </Modal>
 
-        <div className='row'>{Menu}</div>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        
       </div>
     );
   }
