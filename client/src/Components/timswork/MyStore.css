@@ -282,6 +282,11 @@
     height: 600px;
 }
 
+.mystore-edit-modal-header {
+    display: flex;
+    width: 100%;
+}
+
 @keyframes modalSlide {
     from {
       opacity: 0;
@@ -311,18 +316,24 @@
 }
 
 .mystore-edit-close-btn {
-    position: absolute;
-    top: 100px;
-    left: 890px;
+    position: relative;
+    left: 205px;
     border: none;
     background-color: #FFFFFF;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .mystore-resale-container h3 {
     font-family: Gibson;
     font-size: 30px;
     font-weight: bold;
+}
+
+.mystore-resale-header {
+    /* border: 1px solid black; */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .mystore-resale-description{
@@ -453,9 +464,9 @@
 .mystore-resale-close {
     border: none;
     background-color: #FFFFFF;
-    position: absolute;
-    top: 130px;
-    right: 510px;
+    position: relative;
+    top: 3px;
+    right: 3px;
     font-size: 20px;
 }
 
@@ -476,6 +487,12 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.upload-modal-header {
+    /* border: 1px solid black; */
+    width: 100%;
+    display: flex;
 }
 
 .upload-modal-container h3 {
@@ -563,10 +580,11 @@
 }
 
 .upload-modal-close-btn {
-    position: absolute;
-    top: 125px;
-    left: 900px;
+    position: relative;
+    top: 2px;
+    left: 135px;
     border: none;
+    font-size: 18px;
     background-color: #FFFFFF;
 }
 

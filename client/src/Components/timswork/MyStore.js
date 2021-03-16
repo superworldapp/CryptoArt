@@ -110,8 +110,11 @@ class MyStore1 extends Component {
                                 <div className='mystore-modal-bg'>
                                     <div className='mystore-modal'>
                                         <div className='mystore-resale-container'>
-                                            <button onClick={this.toggleModal} className='mystore-resale-close'>X</button>
+                                        <span className='mystore-resale-header'>
                                             <h3>NFT RESALE</h3>
+                                            <button onClick={this.toggleModal} className='mystore-resale-close'>X</button>
+                                        </span>
+                                            
                                             <p className='mystore-resale-description'>Image, Video, Audio or 3D Model</p>
                                             <div className='mystore-body-container'>
                                                 <span className='mystore-body-line-1'><h4>File</h4><p className='mystore-body-line-1-p'>BackCountry...png</p></span>
@@ -136,8 +139,10 @@ class MyStore1 extends Component {
                     <div className='mystore-modal-bg'>
                         <div className='upload-modal'>
                             <div className='upload-modal-container'>
-                                <button onClick={this.listToggleModal} className='upload-modal-close-btn'>X</button>
-                                <h3>UPLOAD TO MYSTORE</h3>
+                                <span className='upload-modal-header'>
+                                    <h3>UPLOAD TO MYSTORE</h3>
+                                    <button onClick={this.listToggleModal} className='upload-modal-close-btn'>X</button>
+                                </span>
                                 <p>Image, Video, Audio or 3D Model</p>
                                 <span className='upload-modal-line1'><h4>File to Upload*</h4><button>Browse...</button><p>Leopard.png</p></span>
                                 <span className='upload-modal-line2'><h4>Name*</h4><input type='text' placeholder='Leopard'/></span>
@@ -155,8 +160,10 @@ class MyStore1 extends Component {
                     <div className='mystore-modal-bg'>
                     <div className='mystore-modal edit-modal'>
                         <div className='mystore-resale-container edit-modal-container'>
-                                <button onClick={this.editToggleModal} className='mystore-edit-close-btn'>X</button>
-                                <h3>EDIT LISTING</h3>
+                                <span className='mystore-edit-modal-header'>
+                                    <h3>EDIT LISTING</h3>
+                                    <button onClick={this.editToggleModal} className='mystore-edit-close-btn'>X</button>
+                                </span>
                                 <p className='mystore-resale-description'>Image, Video, Audio or 3D Model</p>
                                 <div className='mystore-body-container'>
                                     <span className='mystore-body-line-1'><h4>File</h4><p className='mystore-body-line-1-p'>BackCountry...png</p></span>

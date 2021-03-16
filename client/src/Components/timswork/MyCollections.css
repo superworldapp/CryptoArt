@@ -142,8 +142,19 @@
     font-weight: 700;
 }
 
+.my-collection-modal-art-description-line1, 
 .my-collection-modal-art-description-line2 {
     display: flex;
+}
+
+.my-collection-modal-art-description-line1 {
+    width: 100%;
+    justify-content: center;
+}
+
+.my-collection-modal-art-description-line1 h3{
+    position: relative; 
+    top: 8px;
 }
 
 .my-collection-modal-created {
@@ -210,9 +221,10 @@
 }
 
 .my-collection-modal-close-btn {
-    position: absolute;
-    top: 447px;
-    left: 945px;
+    position: relative;
+    top: 8px;
+    left: 90px;
+    font-size: 18px;
     border: none;
     background-color: #FFFFFF;
 }

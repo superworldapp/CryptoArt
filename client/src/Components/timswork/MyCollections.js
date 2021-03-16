@@ -71,8 +71,7 @@ class MyCollection1 extends Component {
                                 <img src={test1img } className='my-collection-modal-art-img' />
                             </div>
                             <div className='my-collection-modal-art-description-container'>
-                                <button className='my-collection-modal-close-btn' onClick={this.toggleModal}>X</button>
-                                <h3>Back Country Fishing</h3>
+                                <span className='my-collection-modal-art-description-line1'><h3>Back Country Fishing</h3><button className='my-collection-modal-close-btn' onClick={this.toggleModal}>X</button></span>
                                 <span className='my-collection-modal-art-description-line2'><h5 className='my-collection-modal-created'>Created by:</h5><h className='my-collection-modal-user'>Username</h></span>
                                 <p className='my-collection-modal-art-description-line3'>Back Country Fishing was Inspired by my regular weekend trips to the mountains. 
                                 Max, my dog, would love to sit by the fire as I cast my line to try and catch our dinner.</p>
