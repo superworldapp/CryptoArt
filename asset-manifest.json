@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/CryptoArt/static/css/main.ad43c198.chunk.css",
-    "main.js": "/CryptoArt/static/js/main.a63540e9.chunk.js",
-    "main.js.map": "/CryptoArt/static/js/main.a63540e9.chunk.js.map",
+    "main.js": "/CryptoArt/static/js/main.1d4a30f1.chunk.js",
+    "main.js.map": "/CryptoArt/static/js/main.1d4a30f1.chunk.js.map",
     "runtime-main.js": "/CryptoArt/static/js/runtime-main.9af5e94f.js",
     "runtime-main.js.map": "/CryptoArt/static/js/runtime-main.9af5e94f.js.map",
     "static/css/2.634cdb47.chunk.css": "/CryptoArt/static/css/2.634cdb47.chunk.css",
-    "static/js/2.acbb7621.chunk.js": "/CryptoArt/static/js/2.acbb7621.chunk.js",
-    "static/js/2.acbb7621.chunk.js.map": "/CryptoArt/static/js/2.acbb7621.chunk.js.map",
+    "static/js/2.5110a6cb.chunk.js": "/CryptoArt/static/js/2.5110a6cb.chunk.js",
+    "static/js/2.5110a6cb.chunk.js.map": "/CryptoArt/static/js/2.5110a6cb.chunk.js.map",
     "static/js/3.363e8c98.chunk.js": "/CryptoArt/static/js/3.363e8c98.chunk.js",
     "static/js/3.363e8c98.chunk.js.map": "/CryptoArt/static/js/3.363e8c98.chunk.js.map",
     "index.html": "/CryptoArt/index.html",
-    "precache-manifest.c0197b7253c61269633d9e32042f34f9.js": "/CryptoArt/precache-manifest.c0197b7253c61269633d9e32042f34f9.js",
+    "precache-manifest.e1ac2f57e8736efc3774380693d8c0d2.js": "/CryptoArt/precache-manifest.e1ac2f57e8736efc3774380693d8c0d2.js",
     "service-worker.js": "/CryptoArt/service-worker.js",
     "static/css/2.634cdb47.chunk.css.map": "/CryptoArt/static/css/2.634cdb47.chunk.css.map",
     "static/css/main.ad43c198.chunk.css.map": "/CryptoArt/static/css/main.ad43c198.chunk.css.map",
-    "static/js/2.acbb7621.chunk.js.LICENSE.txt": "/CryptoArt/static/js/2.acbb7621.chunk.js.LICENSE.txt",
+    "static/js/2.5110a6cb.chunk.js.LICENSE.txt": "/CryptoArt/static/js/2.5110a6cb.chunk.js.LICENSE.txt",
     "static/media/Mask Group-1.png": "/CryptoArt/static/media/Mask Group-1.1258a707.png",
     "static/media/Mask Group-2.png": "/CryptoArt/static/media/Mask Group-2.7139bd8e.png",
     "static/media/Mask Group.png": "/CryptoArt/static/media/Mask Group.35f8cd87.png",
@@ -62,8 +62,8 @@
   "entrypoints": [
     "static/js/runtime-main.9af5e94f.js",
     "static/css/2.634cdb47.chunk.css",
-    "static/js/2.acbb7621.chunk.js",
+    "static/js/2.5110a6cb.chunk.js",
     "static/css/main.ad43c198.chunk.css",
-    "static/js/main.a63540e9.chunk.js"
+    "static/js/main.1d4a30f1.chunk.js"
   ]
 }
