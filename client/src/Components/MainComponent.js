@@ -196,29 +196,10 @@ class Main extends Component {
               />
             )}
           />
-          <ProtectedRoute
-            exact
-            path='/mycollections'
-            component={() => (
-              <MyItemComponent
-                contract={this.state.contract}
-                accounts={this.state.accounts}
-              />
-            )}
-          />
-
-
-          <Route exact path='/mycollections2' component={() => (
-            <MyCollection1 />
-          )} />
-           <Route exact path='/mystore' component={() => (
-            <MyStore1 />
-          )} />
-
 
         <ProtectedRoute
             exact
-            path='/mycollections3'
+            path='/mycollections'
             component={() => (
               <MyCollections
                 contract={this.state.contract}
@@ -226,6 +207,11 @@ class Main extends Component {
               />
             )}
           />
+    
+
+           <Route exact path='/mystore' component={() => (
+            <MyStore1 />
+          )} />
 
         <ProtectedRoute
             exact
