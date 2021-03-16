@@ -1,0 +1,590 @@
+* {
+    font-family: Gibson;
+}
+
+.mystore-container {
+    /* border: 1px solid black; */
+    height: 100vh;
+    display: flex;
+}
+
+.mystore-header {
+    /* border: 1px solid black; */
+    height: 10rem;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: Gibson;
+    font-weight: 400px;
+    padding-left: 2%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.mystore-header h1 {
+    font-size: 64px;
+}
+
+.mystore-header span {
+    /* border: 1px solid black; */
+    height: 25px;
+    width: 165px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mystore-header p {
+    font-size: 18px;
+}
+
+.mystore-art-container {
+    /* border: 1px solid black; */
+    height: 500px;
+    width: 70%;
+    margin-top: 80px;
+    margin-left: 20px;
+    font-family: Gibson;
+}
+
+.mystore-art-container-header {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.mystore-art-container-header button {
+    border: none;
+    background-color: #FFFFFF;
+}
+
+.mystore-active {
+    text-decoration: underline;
+}
+
+.mystore-art-pieces {
+    /* border: 1px solid black; */
+    margin-top: 30px;
+    display: flex;
+    align-items: flex-start;
+    /* height: 300px; */
+    /* width: 800px; */
+}
+
+.mystore-art-piece {
+    height: 400px;
+    width: 280px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15%;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+}
+
+.mystore-art-piece img {
+    /* border: 1px solid black; */
+    margin-top: 50px;
+    height: 175px;
+    width: 280px;
+}
+
+.mystore-art-caption {
+    /* border: 1px solid black; */
+    /* background: linear-gradient(to top, #FFFFFF, #000000); */
+    background: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
+    margin-top: 55px;
+    height: 120px;
+    width: 280px
+}
+
+.mystore-art-caption h2 {
+    margin-top: 10px;
+    font-family: Gibson;
+    font-size: 28px;
+}
+
+.mystore-art-caption-line2 {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+}
+
+.mystore-art-caption-line2 p {
+    color: #5A45C7;
+    font-size: 18px;
+}
+
+.mystore-edit-btn {
+    border: none;
+    border-radius: 10px;
+    background-color: #5A45C7;
+    color: white;
+    font-size: 24px;
+    font-family: Gibson;
+    font-weight: 500;
+    height: 40px;
+    width: 115px;
+    position: relative;
+    left: 10px;
+}
+
+.mystore-art-caption-usd {
+    position: absolute;
+    top: 630px;
+    left: 320px;
+    color: #5A45C7;
+}
+
+.mystore-list-btn {
+    border: none;
+    border-radius: 10px;
+    background-color: #5A45C7;
+    color: white;
+    font-size: 24px;
+    font-family: Gibson;
+    font-weight: 500;
+    height: 40px;
+    width: 125px;
+    margin-top: 5px;
+}
+
+.mystore-upload-art {
+    width: 280px;
+    height: 268px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    position: relative;
+    right: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mystore-upload-btn {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: #5540C7;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.mystore-upload-add {
+    width: 43px;
+    height: 50px;
+    font-family: Gibson;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 48px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    position: relative;
+    top: 4px;
+    left: 2px;
+}
+
+.mystore-modal-box {
+    margin-top: 8%;
+    /* border: 1px solid black; */
+    background-color: #FFFFFF;
+    width: 480px;
+    height: 510px;
+    padding-left: 2%;
+}
+
+.mystore-modal-headers {
+    margin-top: 5%;
+    background-color: #FFFFFF;
+    font-family: Gibson;
+}
+
+.mystore-modal-body {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.mystore-modal-body-1 {
+    /* border: 1px solid black; */
+    width: 70%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.mystore-modal-body h3{
+    font-family: Gibson;
+    font-size: 20px;
+}
+
+.mystore-modal-body p {
+    color: gray;
+    position: relative;
+    top: 3px;
+}
+
+.mystore-modal-body-2, 
+.mystore-modal-body-3 {
+    /* border: 1px solid black; */
+    width: 60%;
+    display: flex;
+} 
+
+.mystore-modal-body-2 p, 
+.mystore-modal-body-3 p {
+    margin-left: 10px;
+}
+
+.mystore-modal-body h3{
+    text-transform: capitalize;
+}
+
+.modal-input {
+    position: relative;
+    left: 10%;
+    margin-top: 4%;
+}
+
+.mystore-modal-bg {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation:modalSlide 0.3s ease-in-out;
+}
+
+.mystore-modal {
+    background-color: white;
+    width: 480px;
+    height: 510px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Gibson;
+}
+
+.edit-modal {
+    height: 600px;
+}
+
+.mystore-edit-modal-header {
+    display: flex;
+    width: 100%;
+}
+
+@keyframes modalSlide {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+
+.mystore-resale-container {
+    /* border: 1px solid black; */
+    height: 480px;
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.edit-modal-container {
+    margin-top: -50px;
+}
+
+.edit-modal-container h3 {
+    font-weight: 900 !important;
+}
+
+.mystore-edit-close-btn {
+    position: relative;
+    left: 205px;
+    border: none;
+    background-color: #FFFFFF;
+    font-size: 20px;
+}
+
+.mystore-resale-container h3 {
+    font-family: Gibson;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.mystore-resale-header {
+    /* border: 1px solid black; */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mystore-resale-description{
+    position: relative;
+    top: -5px;
+    left: 9px;
+    font-size: 12px;
+}
+
+.mystore-body-container {
+    /* border: 1px solid black; */
+    height: 300px;
+    width: 385px;
+    position: relative;
+    top: 15px;
+    left: 9px;
+}
+
+.mystore-body-line-1 , 
+.mystore-body-line-2, 
+.mystore-body-line-3, 
+.mystore-body-line-4,
+.mystore-body-line-5 {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.mystore-body-container h4 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.mystore-body-line-1-p {
+    color: gray;
+    position: relative;
+    top: 4px;
+    left: 125px;
+}
+
+.mystore-body-line-2-checkbox {
+    height: 23px;
+    width: 23px;
+    position: relative;
+    top: 3px;
+    left: 25px;
+}
+
+.mystore-body-line-3-checkbox {
+    height: 23px;
+    width: 23px;
+    position: relative;
+    top: 3px;
+    left: 12px;
+}
+
+.mystore-token-price {
+    height: 40px;
+    width: 100px;
+    border-radius: 15px;
+    position: relative;
+    top: -5px;
+    left: 35px;
+}
+
+.mystore-token-type, .mystore-token-usd {
+    position: relative;
+    left: 45px;
+}
+
+.mystore-body-line-4 {
+    justify-content: space-between;
+}
+
+.mystore-body-line-4-subtitle {
+    color: gray;
+    position: relative;
+    right: 130px;
+    bottom: 30px;
+}
+
+
+.mystore-body-line-5 {
+    margin-top: -15px;
+}
+
+.mystore-token-days {
+    height: 40px;
+    width: 100px;
+    border-radius: 15px;
+    border-color: gray;
+    position: relative;
+    top: -5px;
+    left: 65px;
+}
+
+.mystore-token-duration-subtitle {
+    position: relative;
+    top: 5px;
+    left: 80px;
+}
+
+.mystore-resale-btn, .mystore-relist-btn {
+    border: none;
+    border-radius: 10px;
+    background-color: #5A45C7;
+    color: white;
+    font-size: 24px;
+    font-family: Gibson;
+    font-weight: 500;
+    height: 50px;
+    width: 220px;
+    margin-top: 10px;
+}
+
+.mystore-takedown-btn {
+    border-color: #5A45C7;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    color: #5A45C7;
+    font-size: 24px;
+    font-family: Gibson;
+    font-weight: 500;
+    height: 50px;
+    width: 220px;
+    margin-top: 20px;
+}
+
+.mystore-resale-close {
+    border: none;
+    background-color: #FFFFFF;
+    position: relative;
+    top: 3px;
+    right: 3px;
+    font-size: 20px;
+}
+
+.upload-modal {
+    background-color: #FFFFFF;
+    height: 525px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-modal-container {
+    /* border: 1px solid black; */
+    height: 475px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.upload-modal-header {
+    /* border: 1px solid black; */
+    width: 100%;
+    display: flex;
+}
+
+.upload-modal-container h3 {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: Gibson;
+    position: relative;
+    right: 10px;
+}
+
+.upload-modal-container p {
+    font-size: 14px;
+    position: relative;
+    bottom: 5px;
+}
+
+.upload-modal-line1, 
+.upload-modal-line2,
+.upload-modal-line3,
+.upload-modal-line4 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.upload-modal-line1 h4, 
+.upload-modal-line2 h4,
+.upload-modal-line3 h4,
+.upload-modal-line4 h4{
+    font-weight: 400;
+}
+
+.upload-modal-line1 button {
+    border-radius: 10px;
+    width: 125px;
+    background-color: rgb(155, 155, 155);
+    border: none;
+    height: 30px;
+    position: relative;
+    top: 2px;
+}
+
+.upload-modal-line1 p {
+    color: gray;
+    position: relative;
+    top: 5px;
+    right: 10px;
+}
+
+.upload-modal-line2 input {
+    position: relative;
+    right: 5px;
+    width: 220px;
+    border-radius: 10px;
+}
+
+.upload-modal-line3 input {
+    position: relative;
+    right: 5px;
+    height: 75px;
+    width: 220px;
+    border-radius: 10px;
+}
+
+.upload-modal-line4 input {
+    position: relative;
+    right: 125px;
+    height: 30px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+.upload-modal-btn {
+    margin-right: 5px;
+    background: #5540C6;
+    color: #FFFFFF;
+    border-radius: 5px;
+    width: 200px;
+    height: 40px;
+    border: none;
+    position: relative;
+    top: 35px;
+    left: 100px;
+}
+
+.upload-modal-close-btn {
+    position: relative;
+    top: 2px;
+    left: 135px;
+    border: none;
+    font-size: 18px;
+    background-color: #FFFFFF;
+}
+

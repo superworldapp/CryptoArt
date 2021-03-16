@@ -24,21 +24,21 @@ import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
 import Axios from 'axios';
-import './ArtComponent.css';
+import './NewMyArtComponent.css';
 import './MyCollections.css'
 import './MyStore.css'
 import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
 import * as util from 'util';
-import test1img from '../../images/image 25.png'
-import test2img from '../../images/image 11.png'
-import test3img from '../../images/Nate3.jpg'
-import test4img from '../../images/image 29.png'
-import loader from '../../images/loader.svg';
-import annonuser from '../../images/user.png';
+import test1img from '../images/image 25.png'
+import test2img from '../images/image 11.png'
+import test3img from '../images/Nate3.jpg'
+import test4img from '../images/image 29.png'
+import loader from '../images/loader.svg';
+import annonuser from '../images/user.png';
 // import { blobToSHA256 } from 'file-to-sha256';
-import checkmark from '../../images/svg/checkmark.svg';
+import checkmark from '../images/svg/checkmark.svg';
 const SHA256 = require('crypto-js/sha256');
 
 const S3 = require('aws-sdk/clients/s3');
@@ -819,6 +819,9 @@ export class MyStore extends Component {
       loadingError: false,
       uploadSuccess: false,
       artStatus: 'Queue',
+      isListModalOpen: false,
+      isUploadModalOpen: false,
+      isEditModalOpen: false,
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.toggleModal2 = this.toggleModal2.bind(this);
@@ -830,6 +833,9 @@ export class MyStore extends Component {
     this.refreshMyArt = this.refreshMyArt.bind(this);
     this.storeQueue = this.storeQueue.bind(this)
     this.storeActive = this.storeActive.bind(this);
+    this.listToggleModal = this.listToggleModal.bind(this);
+    this.uploadToggleModal = this.uploadToggleModal.bind(this);
+    this.editToggleModal = this.editToggleModal.bind(this);
   }
 
   toggleModal1() {
@@ -841,6 +847,24 @@ export class MyStore extends Component {
   toggleModal2() {
     this.setState({
       uploadSuccess: !this.state.uploadSuccess,
+    });
+  }
+
+  listToggleModal() {
+    this.setState({
+      isListModalOpen: !this.state.isListModalOpen,
+    });
+  }
+
+  uploadToggleModal() {
+    this.setState({
+        isUploadModalOpen: !this.state.isUploadModalOpen,
+    });
+  }
+
+  editToggleModal() {
+    this.setState({
+        isEditModalOpen: !this.state.isEditModalOpen,
     });
   }
 
@@ -1017,11 +1041,11 @@ export class MyStore extends Component {
                         <img src={test1img } alt='art-1'/>
                         <div className='mystore-art-caption'>
                             <h2>Back Country Fishing</h2>
-                            <button onClick={this.toggleModal} className='mystore-list-btn'>List</button>
+                            <button onClick={this.listToggleModal} className='mystore-list-btn'>List</button>
                         </div>
                     </div>
                     <div className='mystore-upload-art'>
-                        <button onClick={this.listToggleModal} className='mystore-upload-btn'>
+                        <button onClick={this.uploadToggleModal} className='mystore-upload-btn'>
                             <div className='mystore-upload-add'>+</div>
                         </button>
                     </div>
@@ -1041,6 +1065,82 @@ export class MyStore extends Component {
                 </div>  
             )}
         </div>
+
+        {/* List Modal */}
+        {this.state.isListModalOpen && (
+                <div>
+                  <div className='mystore-modal-bg'>
+                      <div className='mystore-modal'>
+                          <div className='mystore-resale-container'>
+                          <span className='mystore-resale-header'>
+                              <h3>NFT RESALE</h3>
+                              <button onClick={this.listToggleModal} className='mystore-resale-close'>X</button>
+                          </span>
+                              
+                              <p className='mystore-resale-description'>Image, Video, Audio or 3D Model</p>
+                              <div className='mystore-body-container'>
+                                  <span className='mystore-body-line-1'><h4>File</h4><p className='mystore-body-line-1-p'>BackCountry...png</p></span>
+                                  <span className='mystore-body-line-2'><h4>Auction</h4><input type='checkbox' className='mystore-body-line-2-checkbox'></input></span>
+                                  <span className='mystore-body-line-3'><h4>Buy Now</h4><input type='checkbox' className='mystore-body-line-3-checkbox'></input></span>
+                                  <span className='mystore-body-line-4'><h4>Token Price*</h4><input className='mystore-token-price'></input><p className='mystore-token-type'>ETH &nbsp;</p><p className='mystore-token-usd'>($1,580.10 USD)</p></span>
+                                  <p className='mystore-body-line-4-subtitle'>(State Price if Auction)</p>
+                                  <span className='mystore-body-line-5'><h4>Duration*</h4><input className='mystore-token-days'></input><p className='mystore-token-duration-subtitle'>Days</p></span>
+                                  <button className='mystore-resale-btn'>Confirm</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+          </div>
+            )}
+        {/* */}
+
+          {/* Upload Modal */}
+          {this.state.isUploadModalOpen && (
+                <div className='mystore-modal-bg'>
+                    <div className='upload-modal'>
+                        <div className='upload-modal-container'>
+                            <span className='upload-modal-header'>
+                                <h3>UPLOAD TO MYSTORE</h3>
+                                <button onClick={this.uploadToggleModal} className='upload-modal-close-btn'>X</button>
+                            </span>
+                            <p>Image, Video, Audio or 3D Model</p>
+                            <span className='upload-modal-line1'><h4>File to Upload*</h4><button>Browse...</button><p>Leopard.png</p></span>
+                            <span className='upload-modal-line2'><h4>Name*</h4><input type='text' placeholder='Leopard'/></span>
+                            <span className='upload-modal-line3'><h4>Description</h4><input type='text' placeholder='Leopard'/></span>
+                            <span className='upload-modal-line4'><h4>No. of Tokens</h4><input type='text' placeholder='Leopard'/></span>
+                            <button className='upload-modal-btn'>Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        {/* */}
+
+
+         {/* Edit Modal */}
+         {this.state.isEditModalOpen && (
+              <div className='mystore-modal-bg'>
+              <div className='mystore-modal edit-modal'>
+                  <div className='mystore-resale-container edit-modal-container'>
+                          <span className='mystore-edit-modal-header'>
+                              <h3>EDIT LISTING</h3>
+                              <button onClick={this.editToggleModal} className='mystore-edit-close-btn'>X</button>
+                          </span>
+                          <p className='mystore-resale-description'>Image, Video, Audio or 3D Model</p>
+                          <div className='mystore-body-container'>
+                              <span className='mystore-body-line-1'><h4>File</h4><p className='mystore-body-line-1-p'>BackCountry...png</p></span>
+                              <span className='mystore-body-line-2'><h4>Auction</h4><input type='checkbox' className='mystore-body-line-2-checkbox'></input></span>
+                              <span className='mystore-body-line-3'><h4>Buy Now</h4><input type='checkbox' className='mystore-body-line-3-checkbox'></input></span>
+                              <span className='mystore-body-line-4'><h4>Token Price*</h4><input className='mystore-token-price'></input><p className='mystore-token-type'>ETH &nbsp;</p><p className='mystore-token-usd'>($1,580.10 USD)</p></span>
+                              <p className='mystore-body-line-4-subtitle'>(State Price if Auction)</p>
+                              <span className='mystore-body-line-5'><h4>Duration*</h4><input className='mystore-token-days'></input><p className='mystore-token-duration-subtitle'>Days</p></span>
+                              <button className='mystore-relist-btn'>Relist</button>
+                              <button className='mystore-takedown-btn'>Take Down</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          )}
+          {/* */}
 
         <Modal
           isOpen={this.state.isModalOpen1}

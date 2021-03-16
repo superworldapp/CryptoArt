@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './HeaderComponent.css'
-import LogoImg from '../../images/logo.svg'
-import UserIcon from '../../images/user.png'
+import './NewHeaderComponent.css'
+import LogoImg from '../images/logo.svg'
+import UserIcon from '../images/user.png'
 import {Navbar, NavLink} from 'reactstrap'
 
 
-class Header1 extends Component {
+class NewHeader extends Component {
     render() {
         return (
         <div>
@@ -13,11 +13,11 @@ class Header1 extends Component {
                 <NavLink to='/home'>
                     <img
                     src={LogoImg}
-                    alt='Logo Image'
+                    alt='Logo Pic'
                     id='logo-img'
                     height='80'
                     width='80'
-                    className='navbar-logo'        
+                    className='navbar-logo'  
                     />
                 </NavLink>
                 <div className='header-nav-links'>
@@ -48,4 +48,4 @@ class Header1 extends Component {
     }
 }
 
-export default Header1;
+export default NewHeader;

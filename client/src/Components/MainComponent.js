@@ -3,10 +3,9 @@ import BNContract from '../contracts/Cryptoart.json';
 import getWeb3 from '../getWeb3';
 import '../App.css';
 
-import Header1 from './timswork/HeaderComponent'
-import MyStore1 from './timswork/MyStore'
-import MyCollections from './timswork/ArtComponent'
-import {MyStore} from './timswork/ArtComponent'
+import NewHeader from './NewHeaderComponent'
+import MyCollections from './NewMyArtComponent'
+import {MyStore} from './NewMyArtComponent'
 
 
 import Header from './HeaderComponent';
@@ -173,7 +172,7 @@ class Main extends Component {
           balance={this.state.balance}
           web3={this.state.web3}
         /> */}
-        <Header1 />
+        <NewHeader />
         <Switch>
           <Route
             exact
@@ -206,14 +205,10 @@ class Main extends Component {
               />
             )}
           />
-    
-          <Route exact path='/mystore' component={() => (
-          <MyStore1 />
-        )} />
 
         <ProtectedRoute
             exact
-            path='/mystore2'
+            path='/mystore'
             component={() => (
               <MyStore
                 contract={this.state.contract}
