@@ -291,7 +291,7 @@ class Allpatrender extends Component {
         {this.state.isArtModalOpen && (
             <div className='my-collection-modal-bg'>
             <div className='my-collection-modal-art-img-container'>
-                <img src={test1img } className='my-collection-modal-art-img' alt='my-collection-art' />
+                <img src={this.props.art.imgurl} className='my-collection-modal-art-img' alt='my-collection-art' />
             </div>
             <div className='my-collection-modal-art-description-container'>
                 <span className='my-collection-modal-art-description-line1'><h3>Back Country Fishing</h3><button className='my-collection-modal-close-btn' onClick={this.toggleArtModal}>X</button></span>

@@ -4,7 +4,6 @@ import getWeb3 from '../getWeb3';
 import '../App.css';
 
 import Header1 from './timswork/HeaderComponent'
-import MyCollection1 from './timswork/MyCollections'
 import MyStore1 from './timswork/MyStore'
 import MyCollections from './timswork/ArtComponent'
 import {MyStore} from './timswork/ArtComponent'
@@ -208,10 +207,9 @@ class Main extends Component {
             )}
           />
     
-
-           <Route exact path='/mystore' component={() => (
-            <MyStore1 />
-          )} />
+          <Route exact path='/mystore' component={() => (
+          <MyStore1 />
+        )} />
 
         <ProtectedRoute
             exact
