@@ -25,10 +25,15 @@ import Web3 from 'web3';
 import { render } from 'react-dom';
 import Axios from 'axios';
 import './ArtComponent.css';
+import './MyCollections.css'
 import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
 import * as util from 'util';
+import test1img from '../../images/image 25.png'
+import test2img from '../../images/image 11.png'
+import test3img from '../../images/Nate3.jpg'
+import test4img from '../../images/image 29.png'
 import loader from '../../images/loader.svg';
 import annonuser from '../../images/user.png';
 // import { blobToSHA256 } from 'file-to-sha256';
@@ -944,6 +949,9 @@ class MyCollections extends Component {
       isLoading: false,
       loadingError: false,
       uploadSuccess: false,
+      selectedGallery: '',
+      isModalOpen: false,
+      isGalleryModalOpen: false,
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.toggleModal2 = this.toggleModal2.bind(this);
@@ -953,6 +961,9 @@ class MyCollections extends Component {
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
     this.fileAwsHandler = this.fileAwsHandler.bind(this);
     this.refreshMyArt = this.refreshMyArt.bind(this);
+    this.dropdown = this.dropdown.bind(this)
+    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleGalleryModal = this.toggleGalleryModal.bind(this)
   }
 
   toggleModal1() {
@@ -1103,6 +1114,22 @@ class MyCollections extends Component {
     });
   };
 
+  toggleModal() {
+    this.setState({
+        isModalOpen: !this.state.isModalOpen,
+    });
+  }
+
+  toggleGalleryModal() {
+      this.setState({
+          isGalleryModalOpen: !this.state.isGalleryModalOpen,
+      });
+  }
+
+  dropdown(e) {
+      this.setState({selectGallery: e.target.value})
+  }
+
   render() {
     const Menu = this.state.art.map((x) => {
       return (
@@ -1120,42 +1147,33 @@ class MyCollections extends Component {
 
     let ch = 'visible';
     return (
-      <div className='artContainer'>
-        <div
-          style={{
-            marginLeft: '2px',
-          }}
-        >
-          <p
-            style={{
-              fontFamily: 'Gibson',
-              fontSize: '30px',
-              fontWeight: 'bold',
-              marginTop: '10px',
-              textAlign: 'left',
-            }}
-          >
-            My Collections
-          </p>
+      <div className='my-collection-container'>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <p style={{ marginLeft: '2px', position: 'relative' }}>
-              <button className='abtn'>All</button>
-              <button className='abtn'>Offer Made </button>
-              <button className='abtn'>Offer Received </button>
-              <button className='abtn'>My Creations </button>
-            </p>
-            <p style={{ marginLeft: '2px', position: 'relative' }}>
-              <Button
-                className='abtn'
-                style={{ backgroundColor: '#5548C7', color: 'white' }}
-                onClick={this.toggleModal1}
-              >
-                + {''}UPLOAD
-              </Button>
-            </p>
-          </div>
+        <div className='my-collection-header'>
+            <h1>MyCollection</h1>
+            <p>172 &nbsp; NFT's</p>
         </div>
+
+        <div className='my-collection-row'>
+          <div className='my-collection-filter-container'>
+            <p style={{ fontWeight: '900', fontSize: '18px' }}>SORT BY:</p>
+            <select id="dropdown" onChange={this.dropdown} className='dropdown-button'>
+                <option value="" className="option-selected">New</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <br />
+            <br />
+            <p style={{ fontWeight: '900', fontSize: '18px'}}>GALLERIES:</p>
+            <p style={{fontSize:'24px', marginTop:'-15px'}}>Abstract</p>
+            <p style={{fontSize:'24px'}}>Nature</p>
+            <button onClick={this.toggleGalleryModal} className='add-button'>+ Add</button>
+        </div>
+
+
+      <div className='my-collection-art-container'>{Menu}</div>
 
         <Modal
           isOpen={this.state.isModalOpen1}
@@ -1376,34 +1394,31 @@ class MyCollections extends Component {
           </ModalBody>
         </Modal>
 
-        <div className='row'>{Menu}</div>
+        {/* Gallery Modal */}
+        {this.state.isGalleryModalOpen && (
+              <div className='my-collection-modal-bg my-collection-gallery-modal '>
+                  <h1 className='my-collection-gallery-modal-heading'>Enter Title</h1>
+                  <span className='my-collection-gallery-modal-span'><input type='text' className='my-collection-gallery-input' placeholder='Search MyCollection' /><button className='my-collection-gallery-done-btn'>Done</button><button onClick={this.toggleGalleryModal} className='my-collection-gallery-cancel-btn'>Cancel</button></span>
+                  <div className='my-collection-gallery-modal-art-container'>
+                      <div className='my-collection-gallery-modal-art-img-container'>
+                          <img src={test1img } />
+                      </div>
+                      <div className='my-collection-gallery-modal-art-img-container'>
+                          <img src={test2img } />
+                      </div>
+                      <div className='my-collection-gallery-modal-art-img-container'>
+                          <img src={test3img } />
+                      </div>
+                      <div className='my-collection-gallery-modal-art-img-container'>
+                          <img src={test4img } />
+                      </div>
+                  </div>
+              </div>   
+          )}
+        {/* */}
 
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+       
+        </div>
       </div>
     );
   }

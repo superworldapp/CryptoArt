@@ -79,7 +79,7 @@
     /* border: 1px solid black; */
     width: 70%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     /* margin-left: 2%; */
 }
   
