@@ -19,6 +19,8 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
+  Container,
+  Row,
 } from 'reactstrap';
 import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
@@ -822,6 +824,7 @@ export class MyStore extends Component {
       isListModalOpen: false,
       isUploadModalOpen: false,
       isEditModalOpen: false,
+      isModalOpen: false,
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.toggleModal2 = this.toggleModal2.bind(this);
@@ -1016,6 +1019,8 @@ export class MyStore extends Component {
     });
   };
 
+  
+
   render() {
 
 
@@ -1141,6 +1146,274 @@ export class MyStore extends Component {
               </div>
           )}
           {/* */}
+
+          {/* Modal Resale */}
+          <Modal
+              isOpen={this.state.isModalOpen}
+              toggle={this.toggleModal}
+              className='modal_popup'
+            >
+              <ModalHeader toggle={this.toggleModal} className='pl-5'>
+                Put For Sale
+              </ModalHeader>
+              <Card className='artCard' style={{ height: '50%' }}>
+                <CardImg
+                  top
+                  className='displayImage'
+                  // src={this.props.art.imgurl}
+                  alt='Card image'
+                />
+                <CardBody>
+                  <div className='ctext' style={{ padding: '2px' }}>
+                    <CardSubtitle
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: '#B3B3B3',
+                      }}
+                    >
+                      Title
+                    </CardSubtitle>
+                    <CardSubtitle
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: '#B3B3B3',
+                      }}
+                    >
+                      Price
+                    </CardSubtitle>
+                  </div>
+                  <div className='ctext' style={{ padding: '2px' }}>
+                    <CardText
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: 'black',
+                      }}
+                    >
+                      {/* {this.props.art.tokenTitle} */}
+                    </CardText>
+                    <CardText
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: 'black',
+                      }}
+                    >
+                      {/* {Web3.utils.fromWei(
+                        this.props.art.tokenSellPrice.toString(),
+                        'ether'
+                      )}{' '} */}
+                      ETH
+                    </CardText>
+                  </div>
+                  <div className='ctext1'>
+                    <p
+                      style={{
+                        position: 'relative',
+                        fontFamily: 'Gibson',
+                        fontSize: '15px',
+                        color: 'black',
+                        marginTop: '2%',
+                      }}
+                    >
+                      Sell Price :{' '}
+                    </p>
+                    <p>
+                      {' '}
+                      <Input
+                        type='text'
+                        id='sellPrice'
+                        name='sellPrice'
+                        onChange={this.handleInputChange}
+                      ></Input>
+                    </p>
+                  </div>
+                  <div>
+                    <div>
+                      <button
+                        className='abtn'
+                        style={{
+                          left: '32%',
+                          color: 'white',
+                          backgroundColor: '#5540C7',
+                        }}
+                        type='submit'
+                        onClick={this.putForSale}
+                      >
+                        Confirm
+                      </button>{' '}
+                    </div>
+                    <div
+                      style={{ display: 'flex', justifyContent: 'flex-end' }}
+                    >
+                      {this.state.putForSaleLoading ? (
+                        <img src={loader} />
+                      ) : (
+                        <div></div>
+                      )}
+                    </div>
+                  </div>
+                </CardBody>
+              </Card>
+            </Modal>
+            {/* */}
+
+            {/* LIST FOR AUCTION MODAL */}
+            <Modal
+              isOpen={this.state.listForAuctionSuccess}
+              toggle={this.toggleListForAuction}
+              onClosed={this.refreshMyArt}
+              className='modal-xl'
+            >
+              <ModalHeader toggle={this.toggleListForAuction}>
+                <div></div>
+              </ModalHeader>
+              <ModalBody
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  font: 'Gibson',
+                  height: '20rem',
+                  paddingBottom: '5rem',
+                }}
+              >
+                <p
+                  style={{
+                    textAlign: 'center',
+                    fontSize: '1.25rem',
+                    fontWeight: '450',
+                    marginTop: '1rem',
+                  }}
+                >
+                  Congratulations!
+                </p>
+                <img src={checkmark} />
+                <p
+                  style={{
+                    textAlign: 'center',
+                    color: 'gray',
+                    fontSize: '12px',
+                  }}
+                >
+                  Your item has been listed for auction in the marketplace!
+                </p>
+                <button
+                  className='upload-more-btn'
+                  onClick={this.toggleListForAuction}
+                >
+                  BACK TO MY COLLECTIONS
+                </button>
+              </ModalBody>
+            </Modal>
+          {/* */}
+
+
+            {/* LIST FOR SALE MODAL */}
+            <Modal
+              isOpen={this.state.listForSaleSuccess}
+              toggle={this.toggleListForSale}
+              onClosed={this.refreshMyArt}
+              className='modal-xl'
+            >
+              <ModalHeader toggle={this.toggleListForSale}>
+                <div></div>
+              </ModalHeader>
+              <ModalBody
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  font: 'Gibson',
+                  height: '20rem',
+                  paddingBottom: '5rem',
+                }}
+              >
+                <p
+                  style={{
+                    textAlign: 'center',
+                    fontSize: '1.25rem',
+                    fontWeight: '450',
+                    marginTop: '1rem',
+                  }}
+                >
+                  Congratulations!
+                </p>
+                <img src={checkmark} />
+                <p
+                  style={{
+                    textAlign: 'center',
+                    color: 'gray',
+                    fontSize: '12px',
+                  }}
+                >
+                  Your item has been listed for sale in the marketplace!
+                </p>
+                <button
+                  className='upload-more-btn'
+                  onClick={this.toggleListForSale}
+                >
+                  BACK TO MY COLLECTIONS
+                </button>
+              </ModalBody>
+            </Modal>
+            {/* */}
+
+              {/* END AUCTION MODAL */}
+              <Modal
+              isOpen={this.state.endAuctionSuccess}
+              toggle={this.toggleEndAuction}
+              onClosed={this.refreshMyArt}
+              className='modal-xl'
+            >
+              <ModalHeader toggle={this.toggleEndAuction}>
+                <div></div>
+              </ModalHeader>
+              <ModalBody
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  font: 'Gibson',
+                  height: '20rem',
+                  paddingBottom: '5rem',
+                }}
+              >
+                <p
+                  style={{
+                    textAlign: 'center',
+                    fontSize: '1.25rem',
+                    fontWeight: '450',
+                    marginTop: '1rem',
+                  }}
+                >
+                  Done!
+                </p>
+                <img src={checkmark} />
+                <p
+                  style={{
+                    textAlign: 'center',
+                    color: 'gray',
+                    fontSize: '12px',
+                  }}
+                >
+                  You have ended the auction for your item.
+                </p>
+                <button
+                  className='upload-more-btn'
+                  onClick={this.toggleEndAuction}
+                >
+                  BACK TO MY COLLECTIONS
+                </button>
+              </ModalBody>
+            </Modal>
+            {/* */}
 
         <Modal
           isOpen={this.state.isModalOpen1}
