@@ -129,7 +129,7 @@
 .my-collection-modal-art-description-container {
     background-color: #FFFFFF;
     height: 250px;
-    width: 550px;
+    width: 600px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -151,6 +151,7 @@
 .my-collection-modal-art-description-line1 {
     width: 100%;
     justify-content: center;
+    /* border: 1px solid black; */
 }
 
 .my-collection-modal-art-description-line1 h3{
@@ -183,12 +184,12 @@
 .my-collection-modal-art-description-line4 {
     display: flex;
     position: relative;
-    right: 148px;
+    right: 175px;
 }
 
 .my-collection-modal-art-price {
     position: relative;
-    left: 35px;
+    left: 90px;
 }
 
 .my-collection-modal-art-description-line5 {
@@ -200,13 +201,13 @@
 
 .my-collection-modal-art-owner-count {
     position: relative;
-    left: 78px;
+    left: 20px;
 }
 
 .my-collection-modal-art-trading-history {
     color: #5540C7;
     position: relative;
-    left: 95px;
+    left: 25px;
 }
 
 .my-collection-sell-btn {
@@ -217,14 +218,14 @@
     font-size: 24px;
     width: 125px;
     position: relative;
-    bottom: 63px;
-    left: 180px;
+    bottom: 67px;
+    left: 200px;
 }
 
 .my-collection-modal-close-btn {
     position: relative;
     top: 8px;
-    left: 90px;
+    left: 220px;
     font-size: 18px;
     border: none;
     background-color: #FFFFFF;

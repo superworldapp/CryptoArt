@@ -243,9 +243,9 @@ class Allpatrender extends Component {
         : 'visible';
     let reSellOrSell = this.props.art.isSelling;
     let Auc = this.props.art.auction.isBidding;
-    let accNum = this.props.art.tokenCreator;
-
-    const accUsername = () => {
+    let artCreator = this.props.art.tokenCreator;
+    let artOwner = this.props.art.tokenOwner;
+    const accUsername = (accNum) => {
       if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
         return '@Chitra';
       else if (accNum === '0x0d5567345D3Cb1114471BC07c396Cc32C7CF92ec')
@@ -277,8 +277,8 @@ class Allpatrender extends Component {
     img.src = this.props.art.imgurl;
     img.onload();
 
+    // console.log(this.props)
     return (
-
       <div>
         {/* <a href={this.props.art.imgurl} target='_blank'> */}
         <div className='card-img-top-all-art'>
@@ -297,12 +297,17 @@ class Allpatrender extends Component {
                 <img src={this.props.art.imgurl} className='my-collection-modal-art-img' alt='my-collection-art' />
             </div>
             <div className='my-collection-modal-art-description-container'>
-                <span className='my-collection-modal-art-description-line1'><h3>Back Country Fishing</h3><button className='my-collection-modal-close-btn' onClick={this.toggleArtModal}>X</button></span>
-                <span className='my-collection-modal-art-description-line2'><h5 className='my-collection-modal-created'>Created by:</h5><h className='my-collection-modal-user'>Username</h></span>
+                <span className='my-collection-modal-art-description-line1'><h3>{this.props.art.tokenTitle}</h3><button className='my-collection-modal-close-btn' onClick={this.toggleArtModal}>X</button></span>
+                <span className='my-collection-modal-art-description-line2'><h5 className='my-collection-modal-created'>Created by:</h5><h className='my-collection-modal-user'>{accUsername(artCreator)}</h></span>
                 <p className='my-collection-modal-art-description-line3'>Back Country Fishing was Inspired by my regular weekend trips to the mountains. 
                 Max, my dog, would love to sit by the fire as I cast my line to try and catch our dinner.</p>
-                <span className='my-collection-modal-art-description-line4'><p>Purchased For</p><p className='my-collection-modal-art-price'>55 ETH</p></span>
-                <span className='my-collection-modal-art-description-line5'><p>Owner #</p><p className='my-collection-modal-art-owner-count'>3</p><p className='my-collection-modal-art-trading-history'>View Trading History</p></span>
+                <span className='my-collection-modal-art-description-line4'><p>Purchased For</p><p className='my-collection-modal-art-price'>
+                {Web3.utils.fromWei(
+                        this.props.art.tokenSellPrice.toString(),
+                        'ether'
+                      )}
+                 &nbsp; ETH</p></span>
+                <span className='my-collection-modal-art-description-line5'><p>Owner {accUsername(artOwner)} #</p><p className='my-collection-modal-art-owner-count'>3</p><p className='my-collection-modal-art-trading-history'>View Trading History</p></span>
                 <Link to='/mystore'><button className='my-collection-sell-btn'>Sell</button></Link>
             </div>
         </div>
