@@ -28,7 +28,7 @@ contract SuperArt is ERC721, Ownable {
         }
     
     //Batch Start
-    uint256 tokenBatchIndex; //Batch ID
+    uint256 public tokenBatchIndex; //Batch ID
     mapping(uint256 => string) public tokenBatch; // Key -> Batch ID  : Value -> Batch Hash
     mapping(uint256 => string) public tokenBatchName; // Key -> Batch ID  : Value -> Batch Title
     mapping(uint256 => uint256) public tokenBatchEditionSize; // Key -> Batch ID  : Value -> how many tokens can we mint in the same batch (group)
@@ -151,35 +151,33 @@ contract SuperArt is ERC721, Ownable {
     // Use : Minting new tokens from batch   
     // Input : Token Batch ID, minting amount
     // Output : minted token(s)
-        function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) public payable {
-            uint price = tokenBatchPrice[tokenBatchId] * amountToMint;
+    function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) public  {
+            for(uint i = 0 ; i<amountToMint;i++){
+                mintToken(tokenBatchId);
+            }
+        }
+         function mintToken(uint256 tokenBatchId) public {
+            uint safestate = totalMintedTokens[tokenBatchId] + 1 ;
             if(openminting[tokenBatchId]){
-            require(msg.value >= price);
-            require(totalMintedTokens[tokenBatchId] + amountToMint <= tokenBatchEditionSize[tokenBatchId]);
-            for(uint256 i=totalMintedTokens[tokenBatchId]; i<amountToMint + totalMintedTokens[tokenBatchId]; i++) {
+            require(safestate <= tokenBatchEditionSize[tokenBatchId]);
                   uint256 tokenId = totalSupply() + 1;
                 _safeMint(msg.sender, tokenId);
                 tokenOwner[tokenId] = msg.sender;
                 referenceTotokenBatch[tokenId] = tokenBatchId;
-                tokenEditionNumber[tokenId] = i + 1;
+                tokenEditionNumber[tokenId] += 1;
                 totalMintedTokens[tokenBatchId]++;
-                }
-            address payable a = payable(tokenCreator[tokenBatchId]);
-            a.transfer(msg.value);
+               
+            
             }
             else{
                 require(tokenCreator[tokenBatchId] == msg.sender);
-                require(totalMintedTokens[tokenBatchId] + amountToMint <= tokenBatchEditionSize[tokenBatchId]);
-            for(uint256 i=totalMintedTokens[tokenBatchId]; i<amountToMint + totalMintedTokens[tokenBatchId]; i++) {
+                require(safestate <= tokenBatchEditionSize[tokenBatchId]);
                 uint256 tokenId = totalSupply() + 1;
                 _safeMint(msg.sender, tokenId);
                 tokenOwner[tokenId] = msg.sender;
                 referenceTotokenBatch[tokenId] = tokenBatchId;
-                tokenEditionNumber[tokenId] = i + 1;
+                tokenEditionNumber[tokenId] += 1;
                 totalMintedTokens[tokenBatchId]++;
-               
-            }
-                
             }
         }
         
@@ -191,9 +189,9 @@ contract SuperArt is ERC721, Ownable {
             require(tokenCreator[x] == msg.sender);
             isSellings[_tokenId] = isListed;
             sellPrices[_tokenId] = _sellprice;
-            // if(isListed){
-            //     setApprovalForAll(address(this), true) ;
-            // }
+            if(isListed){
+                setApprovalForAll(address(this), true) ;
+            }
             emit tokenputforsale(_tokenId,msg.sender,_sellprice,isListed,now);
         }
     
@@ -351,9 +349,9 @@ contract SuperArt is ERC721, Ownable {
                 if(typebuy == 2){
                     emit tokenbid(_tokenId,seller,true,2,block.timestamp); 
                 }
-               // safeTransferFrom(seller, addr,_tokenId);
-                _holderTokens[seller].remove(_tokenId);
-                _holderTokens[addr].add(_tokenId);
+                //safeTransferFrom(seller, addr,_tokenId);
+               // _holderTokens[seller].remove(_tokenId);
+               // _holderTokens[addr].add(_tokenId);
                 emit tokenbought(_tokenId,addr,seller,block.timestamp,val);
                 return true;
             }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import BNContract from '../contracts/Cryptoart.json';
+import BNContract2 from '../contracts/Cryptoart.json';
+import BNContract from '../contracts/Cryptoart2.json';
 import getWeb3 from '../getWeb3';
 import '../App.css';
 import Header from './HeaderComponent';
@@ -31,6 +32,7 @@ class Main extends Component {
       tokensBought: [],
       tokensBid: [],
       tokensBidStarted: [],
+      batch:[]
     };
   }
 
@@ -44,80 +46,106 @@ class Main extends Component {
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
       const deployedNetwork = BNContract.networks[networkId];
+    
+      
       const instance = new web3.eth.Contract(
         BNContract.abi,
         deployedNetwork && deployedNetwork.address
       );
+      let response= [];
       console.log('contract', instance);
-
-      let cre = await instance.getPastEvents('tokencreated', {
-        fromBlock: 7970334,
-      });
-
-      let newArr = [];
-      for (let i = 0; i < cre.length; i++) {
-        newArr.push(cre[i]);
-        console.log(cre[i]);
+      let resx1 = await instance.methods.tokenBatchIndex().call();
+      console.log(resx1);
+      for (let i = 1; i <= resx1; i++) {
+        const rexx = await instance.methods.getTokenBatchData(i).call();
+        response.push(rexx);
       }
+      allDocs = [];
+      allDocs = response;
+      console.log(response);
+      this.setState({ batch: allDocs });
+      let rexponse= [];
+      let resx2 = await instance.methods.totalSupply().call();
+      console.log(resx2);
+      for (let i = 1; i <= resx2; i++) {
+        const rexx = await instance.methods.getTokenData(i).call();
+        rexponse.push(rexx);
+      }
+      allDocs = [];
+      allDocs = rexponse;
+      console.log(rexponse);
+      this.setState({ art: allDocs });
+
       this.setState({
         web3,
         accounts: accounts[0],
         contract: instance,
         balance,
-        creValue: newArr,
+        //creValue: newArr,
       });
-      console.log('this.state.creValue', this.state.creValue);
-      let res = await this.state.contract?.methods.tokenCount().call();
-      console.log(res);
 
-      let response = [];
-      for (let i = 1; i <= res; i++) {
-        let rex = await this.state.contract?.methods.Arts(i).call();
-        response.push(rex);
-      }
-      allDocs = [];
-      allDocs = response;
-      console.log(response);
-      this.setState({ art: allDocs });
+      // let cre = await instance.getPastEvents('tokencreated', {
+      //   fromBlock: 7970334,
+      // });
 
-      let allCreatedTokens = await Axios.get(
-        `${process.env.REACT_APP_TOKEN_API_URL}/tokencreated/4/get/`
-      );
-      this.setState({ tokensCreated: allCreatedTokens.data.data.data });
+      // let newArr = [];
+      // for (let i = 0; i < cre.length; i++) {
+      //   newArr.push(cre[i]);
+      //   console.log(cre[i]);
+      // }
+      
+      // console.log('this.state.creValue', this.state.creValue);
+      // let res = await this.state.contract?.methods.tokenCount().call();
+      // console.log(res);
 
-      //token listed for sale
-      let allTokensPutForSale = await Axios.get(
-        `${process.env.REACT_APP_TOKEN_API_URL}/tokenputforsale/4/get/`
-      );
-      this.setState({ tokensPutForSale: allTokensPutForSale.data.data.data });
+      // let response = [];
+      // for (let i = 1; i <= res; i++) {
+      //   let rex = await this.state.contract?.methods.Arts(i).call();
+      //   response.push(rex);
+      // }
+      // allDocs = [];
+      // allDocs = response;
+      // console.log(response);
+      // this.setState({ art: allDocs });
 
-      //tokens bought
-      // let allTokensBought = await Axios.get(
-      //   `${process.env.REACT_APP_TOKEN_API_URL}/tokenbought/4/get/`
+      // let allCreatedTokens = await Axios.get(
+      //   `${process.env.REACT_APP_TOKEN_API_URL}/tokencreated/4/get/`
       // );
-      // this.setState({ tokensBought: allTokensBought.data.data.data });
+      // this.setState({ tokensCreated: allCreatedTokens.data.data.data });
 
-      let allTokensBought = await instance.getPastEvents('tokenbought', {
-        fromBlock: 7970334,
-      });
-      this.setState({ tokensBought: allTokensBought });
-
-      //tokens listed for auction
-      let allTokensBid = await Axios.get(
-        `${process.env.REACT_APP_TOKEN_API_URL}/tokenbid/4/get/`
-      );
-      this.setState({ tokensBid: allTokensBid.data.data.data });
-
-      //tokens bid
-      // let allTokensBidStarted = await Axios.get(
-      //   `${process.env.REACT_APP_TOKEN_API_URL}/bidstarted/4/get/`
+      // //token listed for sale
+      // let allTokensPutForSale = await Axios.get(
+      //   `${process.env.REACT_APP_TOKEN_API_URL}/tokenputforsale/4/get/`
       // );
-      // this.setState({ tokensBidStarted: allTokensBidStarted.data.data.data });
+      // this.setState({ tokensPutForSale: allTokensPutForSale.data.data.data });
 
-      let allTokensBidStarted = await instance.getPastEvents('bidstarted', {
-        fromBlock: 7970334,
-      });
-      this.setState({ tokensBidStarted: allTokensBidStarted });
+      // //tokens bought
+      // // let allTokensBought = await Axios.get(
+      // //   `${process.env.REACT_APP_TOKEN_API_URL}/tokenbought/4/get/`
+      // // );
+      // // this.setState({ tokensBought: allTokensBought.data.data.data });
+
+      // let allTokensBought = await instance.getPastEvents('tokenbought', {
+      //   fromBlock: 7970334,
+      // });
+      // this.setState({ tokensBought: allTokensBought });
+
+      // //tokens listed for auction
+      // let allTokensBid = await Axios.get(
+      //   `${process.env.REACT_APP_TOKEN_API_URL}/tokenbid/4/get/`
+      // );
+      // this.setState({ tokensBid: allTokensBid.data.data.data });
+
+      // //tokens bid
+      // // let allTokensBidStarted = await Axios.get(
+      // //   `${process.env.REACT_APP_TOKEN_API_URL}/bidstarted/4/get/`
+      // // );
+      // // this.setState({ tokensBidStarted: allTokensBidStarted.data.data.data });
+
+      // let allTokensBidStarted = await instance.getPastEvents('bidstarted', {
+      //   fromBlock: 7970334,
+      // });
+      // this.setState({ tokensBidStarted: allTokensBidStarted });
     } catch (error) {
       // Catch any errors for any of the above operations.
 
@@ -127,34 +155,34 @@ class Main extends Component {
 
   render() {
     const CardWithId = ({ match }) => {
-      return (
-        <CardDetail
-          tokenCreated={this.state.tokensCreated.filter(
-            (token) => token.returnValues.tokenId === match.params.id
-          )}
-          tokenPutForSale={this.state.tokensPutForSale.filter(
-            (token) => token.returnValues.tokenId === match.params.id
-          )}
-          tokenBought={this.state.tokensBought.filter(
-            (token) => token.returnValues.tokenId === match.params.id
-          )}
-          tokenBid={this.state.tokensBid.filter(
-            (token) => token.returnValues.tokenId === match.params.id
-          )}
-          tokenBidStarted={this.state.tokensBidStarted.filter(
-            (token) => token.returnValues.tokenId === match.params.id
-          )}
-          art={
-            this.state.art?.filter(
-              (singleart) => singleart.tokenIdentifier === match.params.id
-            )[0]
-          }
-          contract={this.state.contract}
-          accounts={this.state.accounts}
-          cre={this.state.creValue}
-          matchId={match.params.id}
-        />
-      );
+      // return (
+      //   <CardDetail
+      //     tokenCreated={this.state.tokensCreated.filter(
+      //       (token) => token.returnValues.tokenId === match.params.id
+      //     )}
+      //     tokenPutForSale={this.state.tokensPutForSale.filter(
+      //       (token) => token.returnValues.tokenId === match.params.id
+      //     )}
+      //     tokenBought={this.state.tokensBought.filter(
+      //       (token) => token.returnValues.tokenId === match.params.id
+      //     )}
+      //     tokenBid={this.state.tokensBid.filter(
+      //       (token) => token.returnValues.tokenId === match.params.id
+      //     )}
+      //     tokenBidStarted={this.state.tokensBidStarted.filter(
+      //       (token) => token.returnValues.tokenId === match.params.id
+      //     )}
+      //     art={
+      //       this.state.art?.filter(
+      //         (singleart) => singleart.tokenIdentifier === match.params.id
+      //       )[0]
+      //     }
+      //     contract={this.state.contract}
+      //     accounts={this.state.accounts}
+      //     cre={this.state.creValue}
+      //     matchId={match.params.id}
+      //   />
+      // );
     };
     return (
       <div className='App'>
