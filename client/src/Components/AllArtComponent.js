@@ -37,33 +37,33 @@ class AllArt extends Component {
 
     creData = async () => {
         let cre = await this.props.contract?.getPastEvents('tokencreated', {
-            filter: { tokenId: this.props.art.tokenIdentifier },
+            filter: { tokenId: this.props.art._tokenId },
             fromBlock: 7970334
         });
         let tokenBid = await this.props.contract?.getPastEvents('tokenbid', {
-            filter: { tokenId: this.props.art.tokenIdentifier },
+            filter: { tokenId: this.props.art._tokenId },
             fromBlock: 7970334
         });
 
         console.log(tokenBid);
-        // let bidStarted = await this.props.contract?.getPastEvents('bidstarted', {
-        //     filter: { tokenId: this.props.art.tokenIdentifier },
-        //     fromBlock: 0
-        // });
-        //  // Using an array means OR: e.g. 20 or 23
+        let bidStarted = await this.props.contract?.getPastEvents('bidstarted', {
+            filter: { tokenId: this.props.art._tokenId },
+            fromBlock: 7970334
+        });
+  
 
         let tb = await this.props.contract?.getPastEvents('tokenbought', {
-            filter: { tokenId: this.props.art.tokenIdentifier },
+            filter: { tokenId: this.props.art._tokenId },
             fromBlock: 7970334
         });
         let tfs = await this.props.contract?.getPastEvents('tokenputforsale', {
-            filter: { tokenId: this.props.art.tokenIdentifier },
+            filter: { tokenId: this.props.art._tokenId },
             fromBlock: 7970334
         });
-        console.log(this.props.art.tokenIdentifier, cre);
+        console.log(this.props.art._tokenId, cre);
     };
     componentDidMount = () => {
-       // this.creData();
+        this.creData();
     };
 
     buyItem = async () => {
@@ -108,7 +108,7 @@ class AllArt extends Component {
     };
 
     render() {
-        //this.creData();
+        this.creData();
         let but = this.props.art._isSelling ? 'visible' : 'invisible';
         let bux = this.props.art._isBidding ? 'visible' : 'invisible';
         let bak = this.props.art._isSelling ? 'bg-success text-white' : '';

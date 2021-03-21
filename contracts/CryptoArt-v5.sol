@@ -10,12 +10,11 @@ contract SuperArt is ERC721, Ownable {
     uint public buyId = 0;
     string public metaUrl; 
     uint256 public percentageCut;
-    address payable public SuperWorldWallet;
     
     constructor(uint _percentageCut,string memory _metaurl) ERC721("SuperAsset", "SUPERASSET") public { // Constructor ("SuperAsset", "SUPERASSET") (18%)
             percentageCut = _percentageCut;
             metaUrl = _metaurl;
-            SuperWorldWallet = 0x9aE048c47aef066E03593D5Edb230E3fa80c3f17;
+            
             
         } 
         

@@ -162,9 +162,9 @@ const CardDetail = ({
 
   const handlePurchase = async () => {
     setLoadingPurchase(true);
-    const res = await contract?.methods.buyToken(art.tokenIdentifier).send({
+    const res = await contract?.methods.buyToken(art._tokenId).send({
       from: accounts,
-      value: art?.tokenSellPrice.toString(),
+      value: art?._sellprice.toString(),
       gas: 7000000,
     });
     setLoadingPurchase(false);
@@ -197,7 +197,7 @@ const CardDetail = ({
           <div>{loadingPurchase ? <img src={loader} /> : <div></div>}</div>
         </div>
       );
-    } else if (art.auction.isBidding) {
+    } else if (art.auction._isBidding) {
       return (
         <React.Fragment>
           <Input
@@ -393,8 +393,8 @@ const CardDetail = ({
               width: '50%',
             }}
           >
-            <a href={art?.imgurl} target='_blank'>
-              <img src={art?.imgurl} className='card-img' alt='...' />
+            <a href={art?._imgurl} target='_blank'>
+              <img src={art?._imgurl} className='card-img' alt='...' />
             </a>
           </div>
           <div className='information d-flex flex-column'>
@@ -402,11 +402,11 @@ const CardDetail = ({
                         <h1>{match.params.id}</h1> */}
             <p>
               Created by{' '}
-              <span class='text-primary'>{accUsername(art?.tokenCreator)}</span>
+              <span class='text-primary'>{accUsername(art?._tokenCreator)}</span>
             </p>
             <p>
               Owned by{' '}
-              <span class='text-primary'>{accUsername(art?.tokenOwner)}</span>
+              <span class='text-primary'>{accUsername(art?._tokenOwner)}</span>
             </p>
             <div
               className='card py-3'
