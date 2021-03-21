@@ -63,7 +63,7 @@ class AllArt extends Component {
         console.log(this.props.art.tokenIdentifier, cre);
     };
     componentDidMount = () => {
-        this.creData();
+       // this.creData();
     };
 
     buyItem = async () => {
@@ -108,14 +108,14 @@ class AllArt extends Component {
     };
 
     render() {
-        this.creData();
-        let but = this.props.art.isSelling ? 'visible' : 'invisible';
-        let bux = this.props.art.auction.isBidding ? 'visible' : 'invisible';
-        let bak = this.props.art.isSelling ? 'bg-success text-white' : '';
-        let buk = this.props.art.auction.isBidding ? 'bg-warning' : '';
+        //this.creData();
+        let but = this.props.art._isSelling ? 'visible' : 'invisible';
+        let bux = this.props.art._isBidding ? 'visible' : 'invisible';
+        let bak = this.props.art._isSelling ? 'bg-success text-white' : '';
+        let buk = this.props.art._isBidding ? 'bg-warning' : '';
         let pr =
             Web3.utils.fromWei(
-                this.props.art.tokenSellPrice.toString(),
+                this.props.art._sellprice.toString(),
                 'ether'
             ) == 0
                 ? 'invisible'
@@ -129,7 +129,7 @@ class AllArt extends Component {
 
             orientation = width < height ? 'portrait' : 'landscape';
         };
-        img.src = this.props.art.imgurl;
+        img.src = this.props.art._imgurl;
         img.onload();
 
         return (
@@ -143,13 +143,13 @@ class AllArt extends Component {
                         color: '#212529',
                         textDecoration: 'none'
                     }}
-                    to={`/card/${this.props.art.tokenIdentifier}`}>
+                    to={`/card/${this.props.art._tokenId}`}>
                     <div className='card-img-top-all-art'>
                         <CardImg
                             // className='card-img-top-all-art'
                             className={orientation}
                             top
-                            src={this.props.art.imgurl}></CardImg>
+                            src={this.props.art._imgurl}></CardImg>
                     </div>
                     <CardBody className='all-art-body'>
                         <div style={{ display: 'flex' }}>
@@ -173,7 +173,7 @@ class AllArt extends Component {
                                 <div className='token-creator'>
                                     {' '}
                                     {this.accUsername(
-                                        this.props.art.tokenCreator
+                                        this.props.art._tokenCreator
                                     )}
                                 </div>
                             </CardSubtitle>
@@ -187,9 +187,9 @@ class AllArt extends Component {
                                     color: 'black',
                                     fontWeight: 'bold'
                                 }}>
-                                {this.props.art.tokenTitle}
+                                {this.props.art._tokenBatchName}
                             </CardText>
-                            {this.props.art.isSelling ? (
+                            {this.props.art._isSelling ? (
                                 <CardText
                                     className={but}
                                     style={{
@@ -198,7 +198,7 @@ class AllArt extends Component {
                                         color: '#5540c7'
                                     }}>
                                     {Web3.utils.fromWei(
-                                        this.props.art.tokenSellPrice.toString(),
+                                        this.props.art._sellprice.toString(),
                                         'ether'
                                     )}{' '}
                                     ETH
@@ -212,7 +212,7 @@ class AllArt extends Component {
                                         color: '#5540c7'
                                     }}>
                                     {Web3.utils.fromWei(
-                                        this.props.art.tokenSellPrice.toString(),
+                                        this.props.art._sellprice.toString(),
                                         'ether'
                                     )}{' '}
                                     ETH
@@ -223,7 +223,7 @@ class AllArt extends Component {
                         <Col sm={{ size: 12 }}>
                             {but === 'visible' ? (
                                 <Link
-                                    to={`/card/${this.props.art.tokenIdentifier}`}>
+                                    to={`/card/${this.props.art.tokenId}`}>
                                     <Button
                                         className={but}
                                         id='buy-bid-btn'
@@ -370,20 +370,47 @@ class AllItemComponent extends Component {
     }
 
     async componentDidMount() {
-        let res = await this.props.contract?.methods.tokenCount().call();
-        console.log(res);
+        let res = await this.props.contract?.methods.totalSupply().call();
+    console.log(res);
 
-        let response = [];
-        for (let i = 1; i <= res; i++) {
-            let rex = await this.props.contract?.methods.Arts(i).call();
-            response.push(rex);
-        }
+    let response = [];
+    let createrToken = [];
+    
+    for (let i = 1; i <= res; i++) {
+      let rex = await this.props.contract?.methods.getTokenData(i).call();
+      let rex2 = await this.props.contract?.methods.getTokenDataBatch(i).call();
+      if (rex._tokenOwner == this.props.accounts) {
+      var newBlock = {
+        _tokenId : i,
+        _tokenOwner : rex._tokenOwner,
+        _isSellings : rex._isSellings,
+        _sellprice :rex._sellprice,
+        _refbatch : rex._refbatch,
+        _tokenbidder : rex._tokenbidder,
+        _isBidding : rex._isBidding,
+        _bidprice : rex._bidprice,
+        _tokenHash :rex2._tokenHash,
+        _tokenBatchName : rex2._tokenBatchName,
+        _tokenCreator : rex2._tokenCreator,
+        _imgurl : rex2._imgurl,
+        _imgThumbnail : rex2._imgThumbnail,
+       
+      }
+        response.push(newBlock);
+        console.log(newBlock)
+      }
+      if (rex2._tokenCreator == this.props.accounts) {
+        createrToken.push(rex);
+      }
 
-        allDocs = [];
-        allDocs = response;
-        console.log(response);
-        this.setState({ art: allDocs });
-        console.log(this.state.art);
+    }
+
+
+    console.log(createrToken);
+    allDocs = [];
+    allDocs = response;
+    console.log(response);
+    this.setState({ art: allDocs , batchart: createrToken });
     }
     allBtn = () => {
         this.setState({ art: allDocs });
@@ -391,13 +418,13 @@ class AllItemComponent extends Component {
     };
 
     onAuctionBtn = () => {
-        let auctionDocs = allDocs.filter((art) => art.auction.isBidding);
+        let auctionDocs = allDocs.filter((art) => art._isBidding);
 
         this.setState({ art: auctionDocs });
     };
 
     hasSoldBtn = () => {
-        let soldDocs = allDocs.filter((art) => art.isSelling);
+        let soldDocs = allDocs.filter((art) => art._isSelling);
         this.setState({ art: soldDocs });
     };
 
