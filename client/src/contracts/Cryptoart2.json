@@ -284,24 +284,6 @@
         {
             "inputs": [
                 {
-                    "internalType": "uint256",
-                    "name": "tokenBatchId",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "amountToMint",
-                    "type": "uint256"
-                }
-            ],
-            "name": "mintTokenBatch",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
                     "internalType": "uint256[]",
                     "name": "_tokens",
                     "type": "uint256[]"
@@ -366,29 +348,6 @@
             "type": "event"
         },
         {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "tokenBatchToUpdate",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_price",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "bool",
-                    "name": "_open",
-                    "type": "bool"
-                }
-            ],
-            "name": "openCloseMint",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
             "anonymous": false,
             "inputs": [
                 {
@@ -406,131 +365,6 @@
             ],
             "name": "OwnershipTransferred",
             "type": "event"
-        },
-        {
-            "inputs": [],
-            "name": "renounceOwnership",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "address",
-                    "name": "from",
-                    "type": "address"
-                },
-                {
-                    "internalType": "address",
-                    "name": "to",
-                    "type": "address"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "tokenId",
-                    "type": "uint256"
-                }
-            ],
-            "name": "safeTransferFrom",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "address",
-                    "name": "from",
-                    "type": "address"
-                },
-                {
-                    "internalType": "address",
-                    "name": "to",
-                    "type": "address"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "tokenId",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "bytes",
-                    "name": "_data",
-                    "type": "bytes"
-                }
-            ],
-            "name": "safeTransferFrom",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "address",
-                    "name": "operator",
-                    "type": "address"
-                },
-                {
-                    "internalType": "bool",
-                    "name": "approved",
-                    "type": "bool"
-                }
-            ],
-            "name": "setApprovalForAll",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_url",
-                    "type": "string"
-                }
-            ],
-            "name": "setMetaUrl",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "_percent",
-                    "type": "uint256"
-                }
-            ],
-            "name": "setPercentCut",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "_tokenId",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_startprice",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_times",
-                    "type": "uint256"
-                }
-            ],
-            "name": "startbid",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
         },
         {
             "anonymous": false,
@@ -617,6 +451,105 @@
             "inputs": [
                 {
                     "internalType": "uint256",
+                    "name": "tokenBatchId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "amountToMint",
+                    "type": "uint256"
+                }
+            ],
+            "name": "mintTokenBatch",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "tokenBatchToUpdate",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_price",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "_open",
+                    "type": "bool"
+                }
+            ],
+            "name": "openCloseMint",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "renounceOwnership",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "tokenId",
+                    "type": "uint256"
+                }
+            ],
+            "name": "safeTransferFrom",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "tokenId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "bytes",
+                    "name": "_data",
+                    "type": "bytes"
+                }
+            ],
+            "name": "safeTransferFrom",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
                     "name": "_tokenId",
                     "type": "uint256"
                 },
@@ -632,6 +565,73 @@
                 }
             ],
             "name": "Sale",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "operator",
+                    "type": "address"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "approved",
+                    "type": "bool"
+                }
+            ],
+            "name": "setApprovalForAll",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_url",
+                    "type": "string"
+                }
+            ],
+            "name": "setMetaUrl",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_percent",
+                    "type": "uint256"
+                }
+            ],
+            "name": "setPercentCut",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_tokenId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_startprice",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_times",
+                    "type": "uint256"
+                }
+            ],
+            "name": "startbid",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -1393,6 +1393,19 @@
                 }
             ],
             "name": "tokenBatchEditionSize",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "tokenBatchIndex",
             "outputs": [
                 {
                     "internalType": "uint256",
@@ -15235,7 +15248,7 @@
       "4": {
         "events": {},
         "links": {},
-        "address": "0xbEF6A3eeC487b50E774550266AdF95c7b4dc77d1",
+        "address": "0xA6094dda000534475F665364D95Ab2AdBA42f81f",
         "transactionHash": "0xc718a3651568abd5153db40d73392a94a1003bf0703f147e2ff8fb3723d3f256"
       },
       "5777": {

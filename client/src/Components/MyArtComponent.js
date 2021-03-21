@@ -112,14 +112,17 @@ class Allpatrender extends Component {
     //this.toggleAuction = this.toggleAuction.bind(this);
   }
   buyItem = async () => {
-    const res = await this.props.contract.methods
-      .buyToken(this.props.art.tokenIdentifier)
-      .send({
-        from: this.props.accounts,
-        value: this.props.art.tokenSellPrice,
-        gas: 10000000,
-      });
-    console.log(res);
+   
+    try {
+    //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+      const res = await this.props.contract.methods
+        .buyToken(this.props.art._tokenId)
+        .send({ from: this.props.accounts,value: this.props.art._sellprice, gas: 5000000 });
+      console.log('res', res);
+      
+    } catch(error){
+        console.error(error)
+    }
   };
   toggleModal() {
     this.setState({
@@ -164,11 +167,14 @@ class Allpatrender extends Component {
   putForSale = async () => {
     this.setState({ putForSaleLoading: true });
     const res = await this.props.contract.methods
-      .putForSale(
-        this.props.art.tokenIdentifier,
-        (this.state.sellPrice * ETHER).toString()
+      .Sale(
+        this.props.art._tokenId,
+        (this.state.sellPrice * ETHER).toString(),
+        true,
       )
       .send({ from: this.props.accounts, gas: 1000000 });
+
+    console.log('res', res);
     this.setState({ putForSaleLoading: false, listForSaleSuccess: true });
     this.toggleModal();
     console.log(res);
@@ -176,8 +182,14 @@ class Allpatrender extends Component {
   DeSale = async () => {
     this.setState({ delistLoading: true });
     const res = await this.props.contract.methods
-      .deSale(this.props.art.tokenIdentifier)
+      .Sale(
+        this.props.art._tokenId,
+        (this.state.sellPrice * ETHER).toString(),
+        false,
+      )
       .send({ from: this.props.accounts, gas: 1000000 });
+
+    console.log('res', res);
     this.setState({ delistLoading: false });
     window.location.reload();
     console.log(res);
@@ -212,23 +224,23 @@ class Allpatrender extends Component {
     console.log(res);
   };
   render() {
-    let but = this.props.art.isSelling ? ' ' : 'hidden';
-    let bak = this.props.art.isSelling ? 'bg-success text-white' : '';
-    let buk = this.props.art.auction.isBidding ? 'bg-warning' : '';
-    let b = this.props.art.isSelling ? 'hidden' : 'abtn';
-    let b1 = this.props.art.isSelling ? 'hidden' : 'abtn1';
-    let but1 = this.props.art.isSelling ? 'abtn1' : 'hidden';
-    let auc1 = this.props.art.auction.isBidding ? 'hidden' : 'abtn';
-    let auc2 = this.props.art.auction.isBidding ? 'hidden' : 'abtn1';
-    let forAuc = this.props.art.auction.isBidding ? 'visible' : 'invisible';
-    console.log(this.props.art.imgUrl);
+    let but = this.props.art._isSellings ? ' ' : 'hidden';
+    let bak = this.props.art._isSellings ? 'bg-success text-white' : '';
+    let buk = this.props.art._isBidding ? 'bg-warning' : '';
+    let b = this.props.art._isSellings ? 'hidden' : 'abtn';
+    let b1 = this.props.art._isSellings ? 'hidden' : 'abtn1';
+    let but1 = this.props.art._isSellings ? 'abtn1' : 'hidden';
+    let auc1 = this.props.art._isBidding ? 'hidden' : 'abtn';
+    let auc2 = this.props.art._isBidding ? 'hidden' : 'abtn1';
+    let forAuc = this.props.art._isBidding ? 'visible' : 'invisible';
+    
     let pr =
-      Web3.utils.fromWei(this.props.art.tokenSellPrice.toString(), 'ether') == 0
+      Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether') == 0
         ? 'invisible'
         : 'visible';
-    let reSellOrSell = this.props.art.isSelling;
-    let Auc = this.props.art.auction.isBidding;
-    let accNum = this.props.art.tokenCreator;
+    let reSellOrSell = this.props.art._isSellings;
+    let Auc = this.props.art._isBidding;
+    let accNum = this.props.art._tokenCreator;
 
     const accUsername = () => {
       if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
@@ -246,8 +258,8 @@ class Allpatrender extends Component {
       else return '@Annonymous';
     };
     const colorpills = () => {
-      if (this.props.art.isSelling) return cardpills[1];
-      else if (this.props.art.auction.isBidding) return cardpills[3];
+      if (this.props.art._isSelling) return cardpills[1];
+      else if (this.props.art._isBidding) return cardpills[3];
       else return cardpills[0];
     };
     let x = colorpills();
@@ -267,16 +279,16 @@ class Allpatrender extends Component {
       // {cardpills.map((item) => {
       //   return (
       <Card
-        className={this.props.art.auction.isBidding ? buk : bak}
+        className={this.props.art._isBidding ? buk : bak}
         className='card-artcard'
       >
         {/* <a href={this.props.art.imgurl} target='_blank'> */}
         <div className='card-img-top-all-art'>
-          <Link to={`/card/${this.props.art.tokenIdentifier}`}>
+          <Link to={`/card/${this.props.art._tokenId}`}>
             <CardImg
               className={orientation}
               top
-              src={this.props.art.imgurl}
+              src={this.props.art._imgurl}
               alt='Card image'
             ></CardImg>
             <CardImgOverlay>
@@ -357,7 +369,7 @@ class Allpatrender extends Component {
                   textDecoration: 'none',
                 }}
               >
-                {this.props.art.tokenTitle}
+                {this.props.art._tokenBatchName}
               </CardText>
               <CardText
                 style={{
@@ -369,7 +381,7 @@ class Allpatrender extends Component {
                 }}
               >
                 {Web3.utils.fromWei(
-                  this.props.art.tokenSellPrice.toString(),
+                  this.props.art._sellprice.toString(),
                   'ether'
                 )}{' '}
                 ETH
@@ -451,7 +463,7 @@ class Allpatrender extends Component {
                 type='submit'
                 // color='primary'
                 onClick={
-                  this.props.art.auction.isBidding
+                  this.props.art._isBidding
                     ? this.EndAuction
                     : this.StartAuction
                 }
@@ -467,7 +479,7 @@ class Allpatrender extends Component {
                 type='submit'
                 // color='primary'
                 onClick={
-                  this.props.art.auction.isBidding
+                  this.props.art._isBidding
                     ? this.EndAuction
                     : this.StartAuction
                 }
@@ -519,7 +531,7 @@ class Allpatrender extends Component {
                 <CardImg
                   top
                   className='displayImage'
-                  src={this.props.art.imgurl}
+                  src={this.props.art._imgurl}
                   alt='Card image'
                 />
                 <CardBody>
@@ -554,7 +566,7 @@ class Allpatrender extends Component {
                         color: 'black',
                       }}
                     >
-                      {this.props.art.tokenTitle}
+                      {this.props.art._tokenBatchName}
                     </CardText>
                     <CardText
                       style={{
@@ -565,7 +577,7 @@ class Allpatrender extends Component {
                       }}
                     >
                       {Web3.utils.fromWei(
-                        this.props.art.tokenSellPrice.toString(),
+                        this.props.art._sellprice.toString(),
                         'ether'
                       )}{' '}
                       ETH
@@ -933,6 +945,7 @@ class MyItemComponent extends Component {
     this.state = {
       docCount: 0,
       art: [],
+      batchart :[],
       cust: [],
       manuf: [],
       isModalOpen1: false,
@@ -1045,24 +1058,60 @@ class MyItemComponent extends Component {
   }
 
   async componentDidMount() {
-    let res = await this.props.contract?.methods.tokenCount().call();
+    let res = await this.props.contract?.methods.totalSupply().call();
     console.log(res);
 
     let response = [];
     let createrToken = [];
+    
     for (let i = 1; i <= res; i++) {
-      let rex = await this.props.contract?.methods.Arts(i).call();
-      if (rex.tokenOwner == this.props.accounts) {
-        response.push(rex);
-      } else if (rex.tokenCreator == this.props.accounts) {
+      let rex = await this.props.contract?.methods.getTokenData(i).call();
+      let rex2 = await this.props.contract?.methods.getTokenDataBatch(i).call();
+      if (rex._tokenOwner == this.props.accounts) {
+      var newBlock = {
+        _tokenId : i,
+        _tokenOwner : rex._tokenOwner,
+        _isSellings : rex._isSellings,
+        _sellprice :rex._sellprice,
+        _refbatch : rex._refbatch,
+        _tokenbidder : rex._tokenbidder,
+        _isBidding : rex._isBidding,
+        _bidprice : rex._bidprice,
+        _tokenHash :rex2._tokenHash,
+        _tokenBatchName : rex2._tokenBatchName,
+        _tokenCreator : rex2._tokenCreator,
+        _imgurl : rex2._imgurl,
+        _imgThumbnail : rex2._imgThumbnail,
+       
+      }
+        response.push(newBlock);
+        console.log(newBlock)
+      }
+      if (rex2._tokenCreator == this.props.accounts) {
         createrToken.push(rex);
       }
+
     }
+    
+
+    // for (let i = 1; i <= response.length; i++) {
+    //   let rex = await this.props.contract?.methods.getTokenDataBatch(1).call();
+    //   response[i]._tokenHash = '0x454';
+    //   response[i]._tokenBatchName = rex._tokenBatchName;
+    //   response[i]._tokenCreator = rex._tokenCreator;
+    //   response[i]._imgurl = rex._imgurl;
+    //   response[i]._imgThumbnail = rex._imgThumbnail;
+
+    //   if (rex._tokenCreator == this.props.accounts) {
+    //     createrToken.push(rex);
+    //   }
+    // }
+
     console.log(createrToken);
     allDocs = [];
     allDocs = response;
     console.log(response);
-    this.setState({ art: allDocs });
+    this.setState({ art: allDocs , batchart: createrToken });
   }
   fileSelectHandler = (event) => {
     console.log(event.target.files);
