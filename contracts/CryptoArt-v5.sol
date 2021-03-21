@@ -66,6 +66,7 @@ contract SuperArt is ERC721, Ownable {
     event AddtokenBatchRoyalties(uint256 tokenBatchId, uint256 count);
     event ClearRoyalties(uint256 tokenBatchId);
     event mintingstatus(uint256 tokenBatchToUpdate, uint256 price,bool isopenminting);
+    event tokencreated(uint indexed tokenId, address indexed tokenCreator,uint times,uint indexed batchId);
     event tokenputforsale(uint indexed tokenId,address indexed seller,uint sellPrice,bool isListed,uint times);
     event tokenbid(uint indexed tokenId,address indexed stcl,bool isBid,uint close,uint times);
     event bidstarted(uint indexed tokenId,address indexed stcl,uint tokenPrice,uint times);
@@ -179,6 +180,7 @@ contract SuperArt is ERC721, Ownable {
                 tokenEditionNumber[tokenId] += 1;
                 totalMintedTokens[tokenBatchId]++;
             }
+             emit tokencreated(totalSupply(),msg.sender,now,tokenBatchId);
         }
         
     // Use : List token for sell (It you want to resell you re-list)
