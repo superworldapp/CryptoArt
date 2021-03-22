@@ -432,7 +432,7 @@ class AllItemComponent extends Component {
         const menu = this.state.art.map((x) => {
             return (
                 <div
-                    key={x.tokenIdentifier}
+                    key={x._tokenId}
                     className='col-4 col-md-3'
                     id='all-art-card'>
                     <AllArt

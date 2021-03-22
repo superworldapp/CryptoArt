@@ -181,7 +181,7 @@ const CardDetail = ({
   };
 
   const buyOrSell = () => {
-    if (art.isSelling) {
+    if (art?._isSelling) {
       return (
         <div>
           <button
@@ -197,7 +197,7 @@ const CardDetail = ({
           <div>{loadingPurchase ? <img src={loader} /> : <div></div>}</div>
         </div>
       );
-    } else if (art._isBidding) {
+    } else if (art?._isBidding) {
       return (
         <React.Fragment>
           <Input
@@ -402,11 +402,11 @@ const CardDetail = ({
                         <h1>{match.params.id}</h1> */}
             <p>
               Created by{' '}
-              <span class='text-primary'>{accUsername(art?._tokenCreator)}</span>
+              <span className='text-primary'>{accUsername(art?._tokenCreator)}</span>
             </p>
             <p>
               Owned by{' '}
-              <span class='text-primary'>{accUsername(art?._tokenOwner)}</span>
+              <span className='text-primary'>{accUsername(art?._tokenOwner)}</span>
             </p>
             <div
               className='card py-3'
@@ -416,14 +416,14 @@ const CardDetail = ({
             >
               <p className='text-secondary'>Current price</p>
               <h4>
-                {Web3.utils.fromWei(art?._sellprice.toString(), 'ether')}{' '}
+                {Web3.utils.fromWei('5000000', 'ether')}{' '}
                 ETH
                 <small>
                   <span className='text-secondary'>
                     (
                     {(
                       Web3.utils.fromWei(
-                        art?._sellprice.toString(),
+                        '50000000000000',
                         'ether'
                       ) * ethPrice[dropdownValue]
                     ).toFixed(2)}{' '}
@@ -462,7 +462,7 @@ const CardDetail = ({
               }}
             >
               <h4>
-                <i class='fas fa-arrows-alt-v'></i> Trading History
+                <i className='fas fa-arrows-alt-v'></i> Trading History
               </h4>
             </CardHeader>
             <React.Fragment>

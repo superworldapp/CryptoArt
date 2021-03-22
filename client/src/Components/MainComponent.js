@@ -76,6 +76,33 @@ class Main extends Component {
       console.log(rexponse);
       this.setState({ art: allDocs });
 
+      let cre = await instance.getPastEvents('tokencreated', {
+        fromBlock: 7970334,
+      });
+      
+     
+      let newArr = [];
+      for (let i = 0; i < cre.length; i++) {
+        newArr.push(cre[i]);
+        console.log(cre[i]);
+      }
+      let allTokensBought = await instance.getPastEvents('tokenbought', {
+        fromBlock: 7970334,
+      });
+      this.setState({ tokensBought: allTokensBought });
+ 
+      let allTokensBidStarted = await instance.getPastEvents('bidstarted', {
+        fromBlock: 7970334,
+      });
+      this.setState({ tokensBidStarted: allTokensBidStarted });
+      let allTokensPutForSale = await instance.getPastEvents('tokenputforsale', {
+        fromBlock: 7970334,
+      });
+      this.setState({ tokensPutForSale: allTokensPutForSale });
+      let allTokensBid = await instance.getPastEvents('bidstarted', {
+        fromBlock: 7970334,
+      });
+      this.setState({ tokensBid: allTokensBid });
       this.setState({
         web3,
         accounts: accounts[0],
@@ -84,15 +111,8 @@ class Main extends Component {
         //creValue: newArr,
       });
 
-      // let cre = await instance.getPastEvents('tokencreated', {
-      //   fromBlock: 7970334,
-      // });
+      
 
-      // let newArr = [];
-      // for (let i = 0; i < cre.length; i++) {
-      //   newArr.push(cre[i]);
-      //   console.log(cre[i]);
-      // }
       
       // console.log('this.state.creValue', this.state.creValue);
       // let res = await this.state.contract?.methods.tokenCount().call();
@@ -125,10 +145,6 @@ class Main extends Component {
       // // );
       // // this.setState({ tokensBought: allTokensBought.data.data.data });
 
-      // let allTokensBought = await instance.getPastEvents('tokenbought', {
-      //   fromBlock: 7970334,
-      // });
-      // this.setState({ tokensBought: allTokensBought });
 
       // //tokens listed for auction
       // let allTokensBid = await Axios.get(
@@ -142,10 +158,6 @@ class Main extends Component {
       // // );
       // // this.setState({ tokensBidStarted: allTokensBidStarted.data.data.data });
 
-      // let allTokensBidStarted = await instance.getPastEvents('bidstarted', {
-      //   fromBlock: 7970334,
-      // });
-      // this.setState({ tokensBidStarted: allTokensBidStarted });
     } catch (error) {
       // Catch any errors for any of the above operations.
 
@@ -157,19 +169,19 @@ class Main extends Component {
     const CardWithId = ({ match }) => {
       return (
         <CardDetail
-          tokenCreated={this.state.tokensCreated.filter(
+          tokenCreated={this.state.tokensCreated?.filter(
             (token) => token.returnValues.tokenId === match.params.id
           )}
-          tokenPutForSale={this.state.tokensPutForSale.filter(
+          tokenPutForSale={this.state.tokensPutForSale?.filter(
             (token) => token.returnValues.tokenId === match.params.id
           )}
-          tokenBought={this.state.tokensBought.filter(
+          tokenBought={this.state.tokensBought?.filter(
             (token) => token.returnValues.tokenId === match.params.id
           )}
-          tokenBid={this.state.tokensBid.filter(
+          tokenBid={this.state.tokensBid?.filter(
             (token) => token.returnValues.tokenId === match.params.id
           )}
-          tokenBidStarted={this.state.tokensBidStarted.filter(
+          tokenBidStarted={this.state.tokensBidStarted?.filter(
             (token) => token.returnValues.tokenId === match.params.id
           )}
           art={
