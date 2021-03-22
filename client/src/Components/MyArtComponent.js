@@ -196,30 +196,41 @@ class Allpatrender extends Component {
   };
   StartAuction = async () => {
     this.setState({ auctionLoading: true });
+    let startprice = "1000000000000000000"  
+   let times = 1615401942
     const res = await this.props.contract.methods
-      .startbid(this.props.art.tokenIdentifier)
-      .send({ from: this.props.accounts, gas: 1000000 });
+    .startbid(
+      this.props.art._tokenId,
+      startprice,
+      times
+    )
+    .send({ from: this.props.accounts, gas: 5000000 });
+  console.log('res', res);  
     this.setState({ auctionLoading: false, listForAuctionSuccess: true });
     console.log(res);
   };
   EndAuction = async () => {
     this.setState({ endAuctionLoading: true });
     const res = await this.props.contract.methods
-      .closeBidOwner(this.props.art.tokenIdentifier)
-      .send({ from: this.props.accounts, gas: 7000000 });
+    .closeBidOwner(
+      this.props.art._tokenId,
+    )
+      .send({ from: this.props.accounts, gas: 5000000 });
     this.setState({ endAuctionLoading: false, endAuctionSuccess: true });
     console.log(res);
   };
   AddBid = async () => {
     const res = await this.props.contract.methods
-      .addBid(this.props.art.tokenIdentifier)
+    .addBid(
+      this.props.art._tokenId,
+    )
       .send({ from: this.props.accounts, gas: 1000000, value: 1000000 });
     // window.location.reload();
     console.log(res);
   };
   CloseBid = async () => {
     const res = await this.props.contract.methods
-      .closBid(this.props.art.tokenIdentifier)
+      .closBid(this.props.art._tokenId)
       .send({ from: this.props.accounts, gas: 7000000 });
     console.log(res);
   };
