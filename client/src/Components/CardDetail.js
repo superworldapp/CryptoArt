@@ -197,7 +197,7 @@ const CardDetail = ({
           <div>{loadingPurchase ? <img src={loader} /> : <div></div>}</div>
         </div>
       );
-    } else if (art.auction._isBidding) {
+    } else if (art._isBidding) {
       return (
         <React.Fragment>
           <Input
@@ -416,14 +416,14 @@ const CardDetail = ({
             >
               <p className='text-secondary'>Current price</p>
               <h4>
-                {Web3.utils.fromWei(art?.tokenSellPrice.toString(), 'ether')}{' '}
+                {Web3.utils.fromWei(art?._sellprice.toString(), 'ether')}{' '}
                 ETH
                 <small>
                   <span className='text-secondary'>
                     (
                     {(
                       Web3.utils.fromWei(
-                        art?.tokenSellPrice.toString(),
+                        art?._sellprice.toString(),
                         'ether'
                       ) * ethPrice[dropdownValue]
                     ).toFixed(2)}{' '}
@@ -446,7 +446,7 @@ const CardDetail = ({
 
               {buyOrSell()}
             </div>
-          </div>
+          </div>  
         </div>
         <div className='my-5'>
           <Card

@@ -155,34 +155,34 @@ class Main extends Component {
 
   render() {
     const CardWithId = ({ match }) => {
-      // return (
-      //   <CardDetail
-      //     tokenCreated={this.state.tokensCreated.filter(
-      //       (token) => token.returnValues.tokenId === match.params.id
-      //     )}
-      //     tokenPutForSale={this.state.tokensPutForSale.filter(
-      //       (token) => token.returnValues.tokenId === match.params.id
-      //     )}
-      //     tokenBought={this.state.tokensBought.filter(
-      //       (token) => token.returnValues.tokenId === match.params.id
-      //     )}
-      //     tokenBid={this.state.tokensBid.filter(
-      //       (token) => token.returnValues.tokenId === match.params.id
-      //     )}
-      //     tokenBidStarted={this.state.tokensBidStarted.filter(
-      //       (token) => token.returnValues.tokenId === match.params.id
-      //     )}
-      //     art={
-      //       this.state.art?.filter(
-      //         (singleart) => singleart.tokenIdentifier === match.params.id
-      //       )[0]
-      //     }
-      //     contract={this.state.contract}
-      //     accounts={this.state.accounts}
-      //     cre={this.state.creValue}
-      //     matchId={match.params.id}
-      //   />
-      // );
+      return (
+        <CardDetail
+          tokenCreated={this.state.tokensCreated.filter(
+            (token) => token.returnValues.tokenId === match.params.id
+          )}
+          tokenPutForSale={this.state.tokensPutForSale.filter(
+            (token) => token.returnValues.tokenId === match.params.id
+          )}
+          tokenBought={this.state.tokensBought.filter(
+            (token) => token.returnValues.tokenId === match.params.id
+          )}
+          tokenBid={this.state.tokensBid.filter(
+            (token) => token.returnValues.tokenId === match.params.id
+          )}
+          tokenBidStarted={this.state.tokensBidStarted.filter(
+            (token) => token.returnValues.tokenId === match.params.id
+          )}
+          art={
+            this.state.art?.filter(
+              (singleart) => singleart._tokenId === match.params.id
+            )[0]
+          }
+          contract={this.state.contract}
+          accounts={this.state.accounts}
+          cre={this.state.creValue}
+          matchId={match.params.id}
+        />
+      );
     };
     return (
       <div className='App'>
@@ -226,7 +226,7 @@ class Main extends Component {
           <Route path='/card/:id' component={CardWithId} />
           {/* <Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } /> */}
 
-          {/* <Route
+           <Route
                         path='/card/:id'
                         component={(props) => (
                             <CardDetail
@@ -236,7 +236,7 @@ class Main extends Component {
                                 art = {this.state.art}
                             />
                         )}
-                    /> */}
+                    /> 
 
           <Redirect to='/home' />
         </Switch>
