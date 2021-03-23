@@ -29,9 +29,24 @@
     background-color: #FFFFFF;
 }
 
-.mystore-art-queue-container {
+.mystore-art-queue-container, .mystore-art-active-container {
     display: flex;
+    margin-top: 30px;
 }
+
+.mystore-queue-card, .mystore-active-card {
+    height: 400px;
+    width: 280px;
+}
+
+.mystore-queue-card-img, .mystore-active-card-img {
+    height: 18rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .mystore-upload-art {
     width: 280px;
