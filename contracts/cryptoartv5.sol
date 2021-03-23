@@ -10,12 +10,11 @@ contract SuperArt is ERC721, Ownable {
     uint public buyId = 0;
     string public metaUrl; 
     uint256 public percentageCut;
-    address payable public SuperWorldWallet;
     
-    constructor(uint _percentageCut,string memory _metaurl) ERC721("SuperArt", "SUPERART") public { // Constructor ("SuperArt", "SUPERART")
+    constructor(uint _percentageCut,string memory _metaurl) ERC721("SuperAsset", "SUPERASSET") public { // Constructor ("SuperAsset", "SUPERASSET") (18%)
             percentageCut = _percentageCut;
             metaUrl = _metaurl;
-            SuperWorldWallet = 0x9aE048c47aef066E03593D5Edb230E3fa80c3f17;
+            
             
         } 
         
@@ -28,7 +27,7 @@ contract SuperArt is ERC721, Ownable {
         }
     
     //Batch Start
-    uint256 tokenBatchIndex; //Batch ID
+    uint256 public tokenBatchIndex; //Batch ID
     mapping(uint256 => string) public tokenBatch; // Key -> Batch ID  : Value -> Batch Hash
     mapping(uint256 => string) public tokenBatchName; // Key -> Batch ID  : Value -> Batch Title
     mapping(uint256 => uint256) public tokenBatchEditionSize; // Key -> Batch ID  : Value -> how many tokens can we mint in the same batch (group)
@@ -66,6 +65,7 @@ contract SuperArt is ERC721, Ownable {
     event AddtokenBatchRoyalties(uint256 tokenBatchId, uint256 count);
     event ClearRoyalties(uint256 tokenBatchId);
     event mintingstatus(uint256 tokenBatchToUpdate, uint256 price,bool isopenminting);
+    event tokencreated(uint indexed tokenId, address indexed tokenCreator,uint times,uint indexed batchId);
     event tokenputforsale(uint indexed tokenId,address indexed seller,uint sellPrice,bool isListed,uint times);
     event tokenbid(uint indexed tokenId,address indexed stcl,bool isBid,uint close,uint times);
     event bidstarted(uint indexed tokenId,address indexed stcl,uint tokenPrice,uint times);
@@ -179,6 +179,7 @@ contract SuperArt is ERC721, Ownable {
                 tokenEditionNumber[tokenId] += 1;
                 totalMintedTokens[tokenBatchId]++;
             }
+             emit tokencreated(totalSupply(),msg.sender,now,tokenBatchId);
         }
         
     // Use : List token for sell (It you want to resell you re-list)
@@ -189,6 +190,9 @@ contract SuperArt is ERC721, Ownable {
             require(tokenCreator[x] == msg.sender);
             isSellings[_tokenId] = isListed;
             sellPrices[_tokenId] = _sellprice;
+            if(isListed){
+                setApprovalForAll(address(this), true) ;
+            }
             emit tokenputforsale(_tokenId,msg.sender,_sellprice,isListed,now);
         }
     
@@ -203,7 +207,8 @@ contract SuperArt is ERC721, Ownable {
     // Use : Gets all information about the batch from the Token Batch ID
     // Input : Token Batch ID
     // Output : Token hash, token batch name, token batch edition size, token creator, and image URL      
-    function getTokenBatchData(uint256 tokenBatchId) public view returns (string memory _tokenHash, string memory _tokenBatchName, uint256 _unmintedEditions,address _tokenCreator,string memory _imgurl, string memory _imgThumbnail) {
+    function getTokenBatchData(uint256 tokenBatchId) public view returns (uint256 _batchId,string memory _tokenHash, string memory _tokenBatchName, uint256 _unmintedEditions,address _tokenCreator,string memory _imgurl, string memory _imgThumbnail) {
+            _batchId = tokenBatchId;
             _tokenHash = tokenBatch[tokenBatchId];
             _tokenBatchName = tokenBatchName[tokenBatchId];
             _unmintedEditions = tokenBatchEditionSize[tokenBatchId] - totalMintedTokens[tokenBatchId];
@@ -309,7 +314,7 @@ contract SuperArt is ERC721, Ownable {
     // Use : Buy a token
     // Input : Token ID, address that will be paid, cost amount, and 1(represents the creator)
     // Output : Boolean          
-    function _buyToken(uint256 _tokenId,address payable addr,uint256 val,uint8 _type) private returns(bool){
+    function _buyToken(uint256 _tokenId, address payable addr, uint256 val, uint8 _type) private returns(bool){
                uint256 totalmoney = val;
                address payable royaltyperson;
                uint256 royaltyper;
@@ -346,6 +351,7 @@ contract SuperArt is ERC721, Ownable {
                 if(typebuy == 2){
                     emit tokenbid(_tokenId,seller,true,2,block.timestamp); 
                 }
+                //safeTransferFrom(seller, addr,_tokenId);
                 _holderTokens[seller].remove(_tokenId);
                 _holderTokens[addr].add(_tokenId);
                 emit tokenbought(_tokenId,addr,seller,block.timestamp,val);

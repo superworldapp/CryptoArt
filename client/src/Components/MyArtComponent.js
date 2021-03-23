@@ -55,7 +55,7 @@ const ETHER = 1000000000000000000;
 
 const cardpills = [
   {
-    title: 'Ready For Sale',
+    title: '',
     class: 'class1',
   },
   {
@@ -245,12 +245,12 @@ class Allpatrender extends Component {
     let auc2 = this.props.art._isBidding ? 'hidden' : 'abtn1';
     let forAuc = this.props.art._isBidding ? 'visible' : 'invisible';
     
-    let pr =
-      Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether') == 0
-        ? 'invisible'
-        : 'visible';
-    let reSellOrSell = this.props.art._isSellings;
-    let Auc = this.props.art._isBidding;
+    // let pr =
+    //   Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether') == 0
+    //     ? 'invisible'
+    //     : 'visible';
+    // let reSellOrSell = this.props.art._isSellings;
+    // let Auc = this.props.art._isBidding;
     let accNum = this.props.art._tokenCreator;
 
     const accUsername = () => {
@@ -269,9 +269,10 @@ class Allpatrender extends Component {
       else return '@Annonymous';
     };
     const colorpills = () => {
-      if (this.props.art._isSelling) return cardpills[1];
-      else if (this.props.art._isBidding) return cardpills[3];
-      else return cardpills[0];
+      // if (this.props.art._isSelling) return cardpills[1];
+      // else if (this.props.art._isBidding) return cardpills[3];
+      // else return cardpills[0];
+      return cardpills[0];
     };
     let x = colorpills();
 
@@ -290,12 +291,13 @@ class Allpatrender extends Component {
       // {cardpills.map((item) => {
       //   return (
       <Card
-        className={this.props.art._isBidding ? buk : bak}
+        className={buk}//{this.props.art._isBidding ? buk : bak}
         className='card-artcard'
       >
         {/* <a href={this.props.art.imgurl} target='_blank'> */}
         <div className='card-img-top-all-art'>
-          <Link to={`/card/${this.props.art._tokenId}`}>
+          {/* <Link to={`/card/${this.props.art._tokenId}`}> */}
+          <Link to={`/batch/${this.props.art._batchId}`}>
             <CardImg
               className={orientation}
               top
@@ -338,7 +340,7 @@ class Allpatrender extends Component {
                 }}
               >
                 {' '}
-                Created by <div className='token-creator'>{accUsername()} </div>
+                Created by <div className='token-creator'>{accUsername(this.props.art._tokenCreator)} </div>
               </CardSubtitle>
             </div>
 
@@ -380,9 +382,9 @@ class Allpatrender extends Component {
                   textDecoration: 'none',
                 }}
               >
-                {this.props.art._tokenBatchName}
+                {this.props.art?._tokenBatchName}
               </CardText>
-              <CardText
+              {/* <CardText
                 style={{
                   position: 'relative',
                   fontFamily: 'Gibson',
@@ -396,7 +398,7 @@ class Allpatrender extends Component {
                   'ether'
                 )}{' '}
                 ETH
-              </CardText>
+              </CardText> */}
             </div>
             {/* <CardText>
                         <small>
@@ -418,7 +420,7 @@ class Allpatrender extends Component {
             className='ctext'
             style={{ padding: '0px', height: '2rem', marginTop: '5%' }}
           >
-            {reSellOrSell ? (
+            {/* {reSellOrSell ? (
               <button
                 className={auc2}
                 //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
@@ -436,7 +438,7 @@ class Allpatrender extends Component {
               >
                 Sell
               </button>
-            )}
+            )} */}
             {/* <button
               className={auc1}
               //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
@@ -445,15 +447,15 @@ class Allpatrender extends Component {
             >
               {reSellOrSell}
             </button> */}
-            <button
+            {/* <button
               className={but1}
               //className='abtn'
               type='submit'
               onClick={this.DeSale}
             >
               Delist
-            </button>
-            {forAuc === 'visible' ? (
+            </button> */}
+            {/* {forAuc === 'visible' ? (
               <button
                 style={{
                   color: 'white',
@@ -465,8 +467,8 @@ class Allpatrender extends Component {
               </button>
             ) : (
               <div></div>
-            )}
-            {Auc ? (
+            )} */}
+            {/* {Auc ? (
               <button
                 className={b1}
                 //className={auc1}
@@ -498,7 +500,7 @@ class Allpatrender extends Component {
               >
                 Auction
               </button>
-            )}
+            )} */}
 
             {/* <button
               className={b}
@@ -515,7 +517,7 @@ class Allpatrender extends Component {
             >
               {Auc}
             </button> */}
-            {this.state.endAuctionLoading ? <img src={loader} /> : <div></div>}
+            {/* {this.state.endAuctionLoading ? <img src={loader} /> : <div></div>}
             {forAuc === 'visible' ? (
               <button
                 style={{
@@ -528,7 +530,7 @@ class Allpatrender extends Component {
               </button>
             ) : (
               <div></div>
-            )}
+            )} */}
 
             <Modal
               isOpen={this.state.isModalOpen}
@@ -557,7 +559,7 @@ class Allpatrender extends Component {
                     >
                       Title
                     </CardSubtitle>
-                    <CardSubtitle
+                    {/* <CardSubtitle
                       style={{
                         position: 'relative',
                         fontFamily: 'Gibson',
@@ -566,7 +568,7 @@ class Allpatrender extends Component {
                       }}
                     >
                       Price
-                    </CardSubtitle>
+                    </CardSubtitle> */}
                   </div>
                   <div className='ctext' style={{ padding: '2px' }}>
                     <CardText
@@ -579,7 +581,7 @@ class Allpatrender extends Component {
                     >
                       {this.props.art._tokenBatchName}
                     </CardText>
-                    <CardText
+                    {/* <CardText
                       style={{
                         position: 'relative',
                         fontFamily: 'Gibson',
@@ -592,7 +594,7 @@ class Allpatrender extends Component {
                         'ether'
                       )}{' '}
                       ETH
-                    </CardText>
+                    </CardText> */}
                   </div>
                   <div className='ctext1'>
                     <p
@@ -1119,7 +1121,7 @@ class MyItemComponent extends Component {
     //     createrToken.push(rex);
     //   }
     // }
-
+    console.log(this.props.art);
     console.log(createrToken);
     allDocs = [];
     allDocs = response;
@@ -1166,9 +1168,9 @@ class MyItemComponent extends Component {
   };
 
   render() {
-    const Menu = this.state.art.map((x) => {
+    const Menu = this.props.batch?.map((x) => {
       return (
-        <div key={x.tokenIdentifier} className='col-4 col-md-3'>
+        <div key={x._batchId} className='col-4 col-md-3'>
           <Allpatrender
             art={x}
             contract={this.props.contract}
