@@ -1104,12 +1104,12 @@ class Allpatrender2 extends Component {
                   style ={{ color :'white', backgroundColor:'#5540C7', fontSize: '14px', width: '100px', borderRadius: '10px' }}
                   
                   // color='primary'
-                //   onClick={
-                //     this.props.art._isBidding
-                //       ? this.EndAuction
-                //       : this.StartAuction
-                //   }
-                  //onClick = {this.toggleAuction}
+                  onClick={
+                    this.props.art._isBidding
+                      ? this.EndAuction
+                      : this.StartAuction
+                  }
+                //   onClick = {this.toggleAuction}
                 >
                   Edit
                 </button>
