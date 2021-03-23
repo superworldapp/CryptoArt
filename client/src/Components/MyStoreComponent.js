@@ -1587,7 +1587,7 @@ class MyStoreComponent extends Component {
       isLoading: false,
       loadingError: false,
       uploadSuccess: false,
-      artStatus: 'Active',
+      artStatus: 'Queue',
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.toggleModal2 = this.toggleModal2.bind(this);

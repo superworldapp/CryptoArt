@@ -408,7 +408,7 @@ class Allpatrender extends Component {
               <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '400'}}>3</p>
               <a style={{color: '#5540C7'}}>View Trading History</a>
             </div>
-            <button style={{borderRadius: '10px', backgroundColor: '#5540C7', color: 'white', width: '100px', position: 'relative', top: '-55px', left: '180px'}}>Sell</button>
+            <Link to='/mystore'><button style={{borderRadius: '10px', backgroundColor: '#5540C7', color: 'white', width: '100px', position: 'relative', top: '-55px', left: '180px'}}>Sell</button></Link>
 
           </div>
       </ModalBody>
