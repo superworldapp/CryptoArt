@@ -28,6 +28,10 @@ import { render } from 'react-dom';
 import Axios from 'axios';
 import './MyArtComponent.css';
 import './MyCollection.css';
+import test1img from '../images/image 25.png'
+import test2img from '../images/image 11.png'
+import test3img from '../images/Nate3.jpg'
+import test4img from '../images/image 29.png'
 import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
@@ -438,6 +442,7 @@ class MyCollectionComponent extends Component {
       loadingError: false,
       uploadSuccess: false,
       selectGallery: '',
+      isGalleryModalOpen: false,
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.toggleModal2 = this.toggleModal2.bind(this);
@@ -448,6 +453,7 @@ class MyCollectionComponent extends Component {
     this.fileAwsHandler = this.fileAwsHandler.bind(this);
     this.refreshMyArt = this.refreshMyArt.bind(this);
     this.dropdown = this.dropdown.bind(this);
+    this.toggleGalleryModal = this.toggleGalleryModal.bind(this)
   }
 
   toggleModal1() {
@@ -461,6 +467,13 @@ class MyCollectionComponent extends Component {
       uploadSuccess: !this.state.uploadSuccess,
     });
   }
+
+  toggleGalleryModal() {
+    this.setState({
+        isGalleryModalOpen: !this.state.isGalleryModalOpen,
+    });
+  }
+
 
   refreshMyArt() {
     if (!this.state.isModalOpen1 && !this.state.uploadSuccess)
@@ -733,7 +746,8 @@ class MyCollectionComponent extends Component {
           }}>
             Nature
           </p>
-          <button style={{
+          <button 
+            style={{
             fontFamily: 'Gibson',
             fontSize: '18px',
             fontWeight: '400',
@@ -742,7 +756,8 @@ class MyCollectionComponent extends Component {
             backgroundColor: 'white',
             marginLeft: '-5px',
             marginTop: '-7px',
-          }}
+            }}
+            onClick={this.toggleGalleryModal}
           >
             +Add
           </button>
@@ -751,6 +766,29 @@ class MyCollectionComponent extends Component {
           <div>{Menu}</div>
         </Col>
       </Row>
+
+       {/* Gallery Modal */}
+       {this.state.isGalleryModalOpen && (
+              <div className='my-collection-modal-bg my-collection-gallery-modal '>
+                  <h1 className='my-collection-gallery-modal-heading'>Enter Title</h1>
+                  <span className='my-collection-gallery-modal-span'><input type='text' className='my-collection-gallery-input' placeholder='Search MyCollection' /><button className='my-collection-gallery-done-btn'>Done</button><button onClick={this.toggleGalleryModal} className='my-collection-gallery-cancel-btn'>Cancel</button></span>
+                  <div className='my-collection-gallery-modal-art-container'>
+                      <div className='my-collection-gallery-modal-art-img-container'>
+                          <img src={test1img } />
+                      </div>
+                      <div className='my-collection-gallery-modal-art-img-container'>
+                          <img src={test2img } />
+                      </div>
+                      <div className='my-collection-gallery-modal-art-img-container'>
+                          <img src={test3img } />
+                      </div>
+                      <div className='my-collection-gallery-modal-art-img-container'>
+                          <img src={test4img } />
+                      </div>
+                  </div>
+              </div>   
+          )}
+        {/* */}
         
 
         <Modal
