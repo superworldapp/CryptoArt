@@ -10,6 +10,7 @@ import MyItemComponent from './MyArtComponent';
 import MyCollectionComponent from './MyCollectionComponent';
 import MyStoreComponent from './MyStoreComponent';
 import CardDetail from './CardDetail';
+import BatchDetail from './BatchDetail';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './FooterComponent';
 import ProtectedRoute from './ProtectedRoute';
@@ -34,6 +35,7 @@ class Main extends Component {
       tokensBought: [],
       tokensBid: [],
       tokensBidStarted: [],
+      tokensPutForSale: [],
       batch:[]
     };
   }
@@ -78,33 +80,50 @@ class Main extends Component {
       console.log(rexponse);
       this.setState({ art: allDocs });
 
-      let cre = await instance.getPastEvents('tokencreated', {
-        fromBlock: 7970334,
-      });
+      let cre = await Axios.get(
+        `http://geo.superworldapp.com/api/json/nftevents/tokencreated/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
+      ); 
+
       
      
       let newArr = [];
       for (let i = 0; i < cre.length; i++) {
-        newArr.push(cre[i]);
-        console.log(cre[i]);
+        newArr.push(cre[i].data.data);
+      
       }
-      let allTokensBought = await instance.getPastEvents('tokenbought', {
-        fromBlock: 7970334,
-      });
-      this.setState({ tokensBought: allTokensBought });
+      let allTokensBought = await Axios.get(
+        `http://geo.superworldapp.com/api/json/nftevents/tokenbought/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
+      ); 
+        
+      this.setState({ tokensBought: allTokensBought.data.data });
  
-      let allTokensBidStarted = await instance.getPastEvents('bidstarted', {
-        fromBlock: 7970334,
-      });
-      this.setState({ tokensBidStarted: allTokensBidStarted });
-      let allTokensPutForSale = await instance.getPastEvents('tokenputforsale', {
-        fromBlock: 7970334,
-      });
-      this.setState({ tokensPutForSale: allTokensPutForSale });
-      let allTokensBid = await instance.getPastEvents('bidstarted', {
-        fromBlock: 7970334,
-      });
-      this.setState({ tokensBid: allTokensBid });
+      let allTokensBidStarted =  await Axios.get(
+        `http://geo.superworldapp.com/api/json/nftevents/bidstarted/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
+      ); 
+
+      this.setState({ tokensBidStarted: allTokensBidStarted.data.data});
+      
+      let allTokensPutForSale = await Axios.get(
+        `http://geo.superworldapp.com/api/json/nftevents/tokenputforsale/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
+
+      ); 
+      
+      this.setState({ tokensPutForSale: allTokensPutForSale.data.data});
+      let allTokensBid =  await Axios.get(
+        `http://geo.superworldapp.com/api/json/nftevents/tokenbid/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
+        
+      ); 
+      this.setState({ tokensBid: allTokensBid.data.data });
+     // batch events
+      let BatchCreated = await Axios.get(
+        `http://geo.superworldapp.com/api/json/nftevents/NewtokenBatchCreated/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
+           
+         );
+        
+      this.setState({ BatchCreated: BatchCreated.data.data });
+
+      
+  
       this.setState({
         web3,
         accounts: accounts[0],
@@ -133,32 +152,32 @@ class Main extends Component {
       // let allCreatedTokens = await Axios.get(
       //   `${process.env.REACT_APP_TOKEN_API_URL}/tokencreated/4/get/`
       // );
-      // this.setState({ tokensCreated: allCreatedTokens.data.data.data });
+      // this.setState({ tokensCreated: allCreatedTokens.data.data });
 
       // //token listed for sale
       // let allTokensPutForSale = await Axios.get(
       //   `${process.env.REACT_APP_TOKEN_API_URL}/tokenputforsale/4/get/`
       // );
-      // this.setState({ tokensPutForSale: allTokensPutForSale.data.data.data });
+      // this.setState({ tokensPutForSale: allTokensPutForSale.data.data });
 
       // //tokens bought
       // // let allTokensBought = await Axios.get(
       // //   `${process.env.REACT_APP_TOKEN_API_URL}/tokenbought/4/get/`
       // // );
-      // // this.setState({ tokensBought: allTokensBought.data.data.data });
+      // // this.setState({ tokensBought: allTokensBought.data.data });
 
 
       // //tokens listed for auction
       // let allTokensBid = await Axios.get(
       //   `${process.env.REACT_APP_TOKEN_API_URL}/tokenbid/4/get/`
       // );
-      // this.setState({ tokensBid: allTokensBid.data.data.data });
+      // this.setState({ tokensBid: allTokensBid.data.data });
 
       // //tokens bid
       // // let allTokensBidStarted = await Axios.get(
       // //   `${process.env.REACT_APP_TOKEN_API_URL}/bidstarted/4/get/`
       // // );
-      // // this.setState({ tokensBidStarted: allTokensBidStarted.data.data.data });
+      // // this.setState({ tokensBidStarted: allTokensBidStarted.data.data });
 
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -198,6 +217,19 @@ class Main extends Component {
         />
       );
     };
+    const BatchWithId = ({ match }) => {
+      return (
+        <BatchDetail
+        BatchCreated={this.state.batch?.filter(
+          (batch) => batch._batchId === match.params.id
+        )}
+          contract={this.state.contract}
+          accounts={this.state.accounts}
+          
+          matchId={match.params.id}
+        />
+      );
+    };
     return (
       <div className='App'>
         <Header
@@ -224,6 +256,7 @@ class Main extends Component {
               <AllItemComponent
                 contract={this.state.contract}
                 accounts={this.state.accounts}
+                batch = {this.state.batch}
               />
             )}
           />
@@ -234,6 +267,9 @@ class Main extends Component {
               <MyItemComponent
                 contract={this.state.contract}
                 accounts={this.state.accounts}
+                batch={this.state.batch?.filter(
+                  (batch) => batch._tokenCreator == this.state.accounts
+                )}
               />
             )}
           />
@@ -258,6 +294,7 @@ class Main extends Component {
             )}
           />
           <Route path='/card/:id' component={CardWithId} />
+          <Route path='/batch/:id' component={BatchWithId} />
           {/* <Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } /> */}
 
            <Route
@@ -268,6 +305,18 @@ class Main extends Component {
                                 contract={this.state.contract}
                                 accounts={this.state.accounts}
                                 art = {this.state.art}
+                            />
+                        )}
+                    /> 
+            <Route
+                        path='/batch/:id'
+                        component={(props) => (
+                            <BatchDetail
+
+                                contract={this.state.contract}
+                                accounts={this.state.accounts}
+                                art = {this.state.batch}
+                                
                             />
                         )}
                     /> 
