@@ -323,7 +323,8 @@ class Allpatrender extends Component {
         <Card className='mycollection-card'>
           <CardImg
             top
-            src={this.props.art._imgurl}
+            // src={this.props.art._imgurl}
+            src={test1img}
             alt='Card image'
             style={{
               width: '98.5%',
