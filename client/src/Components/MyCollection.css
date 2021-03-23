@@ -6,13 +6,14 @@
 
 .second-row-container {
     /* border: 1px solid green; */
+    margin-top: 35px;
 }
 
 .second-row-col-1 {
     /* border: 1px solid blue; */
+    padding-left: 35px;
     display: flex;
     flex-direction: column;
-
     align-items: flex-start;
 }
 

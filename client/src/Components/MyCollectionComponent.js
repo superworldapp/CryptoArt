@@ -971,6 +971,7 @@ class MyCollectionComponent extends Component {
       isLoading: false,
       loadingError: false,
       uploadSuccess: false,
+      selectGallery: '',
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.toggleModal2 = this.toggleModal2.bind(this);
@@ -980,6 +981,7 @@ class MyCollectionComponent extends Component {
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
     this.fileAwsHandler = this.fileAwsHandler.bind(this);
     this.refreshMyArt = this.refreshMyArt.bind(this);
+    this.dropdown = this.dropdown.bind(this);
   }
 
   toggleModal1() {
@@ -1003,6 +1005,11 @@ class MyCollectionComponent extends Component {
     this.toggleModal2();
     this.toggleModal1();
   }
+
+  dropdown(e) {
+    this.setState({selectGallery: e.target.value})
+  }
+
   creatingItems = async (x) => {
     let tokenHash = this.state.artHash.toString();
     let tokenTitle = this.state.title;
@@ -1208,7 +1215,72 @@ class MyCollectionComponent extends Component {
         </Col>
       </Row>
       <Row className='second-row-container'>
-        <Col md={3} className='second-row-col-1'>Hey</Col>
+        <Col md={3} className='second-row-col-1'>
+          <h5 style={{
+            fontFamily: 'Gibson',
+            fontSize: '18px',
+            fontWeight: '700',
+            lineHeight: '23.44px',
+          }}>
+            SORT BY:
+          </h5>
+          <select 
+            id="dropdown" 
+            onChange={this.dropdown}
+            style={{ 
+              fontFamily: 'Gibson',
+              width: '75%',
+              borderTop: 'none',
+              borderLeft: 'none',
+              borderRight: 'none',
+              fontSize: '18px',
+              marginLeft: '-3px',
+            }} 
+          >
+              <option value="" className="option-selected">New</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+          </select>
+          <h5 style={{
+            fontFamily: 'Gibson',
+            fontSize: '18px',
+            fontWeight: '700',
+            lineHeight: '23.44px',
+            marginTop: '50px',
+          }}>
+            GALLERIES:
+          </h5>
+          <p style={{ 
+            fontFamily: 'Gibson',
+            fontSize: '24px',
+            fontWeight: '400',
+          }}>
+            Abstract
+          </p>
+          <p style={{ 
+            fontFamily: 'Gibson',
+            fontSize: '24px',
+            fontWeight: '400',
+            marginTop: '-10px',
+          }}>
+            Nature
+          </p>
+          <button style={{
+            fontFamily: 'Gibson',
+            fontSize: '18px',
+            fontWeight: '400',
+            border: 'none',
+            color: '#5540C7',
+            backgroundColor: 'white',
+            marginLeft: '-5px',
+            marginTop: '-7px',
+          }}
+          >
+            +Add
+          </button>
+        </Col>
         <Col className='second-row-col-2'>
           <div>{Menu}</div>
         </Col>
