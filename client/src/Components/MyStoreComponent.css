@@ -1,0 +1,69 @@
+.mystore-first-row-container {
+    /* border: 1px solid red; */
+    margin-top: 60px;
+    padding-left: 18px;
+}
+
+.mystore-second-row-container {
+    /* border: 1px solid red; */
+}
+
+.mystore-art-container {
+    /* border: 1px solid red; */
+}
+
+.mystore-nft-status-container {
+    /* border: 1px solid blue; */
+    width: 30%;
+    padding-left: 35px;
+}
+
+.mystore-art-status-container {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: space-around;
+}
+
+.mystore-art-status-container button {
+    border: none;
+    background-color: #FFFFFF;
+}
+
+.mystore-art-queue-container {
+    display: flex;
+}
+
+.mystore-upload-art {
+    width: 280px;
+    height: 268px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mystore-upload-btn {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: #5540C7;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mystore-upload-add {
+    width: 43px;
+    height: 43px;
+    font-family: Gibson;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 48px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}

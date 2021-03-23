@@ -971,6 +971,7 @@ class MyStoreComponent extends Component {
       isLoading: false,
       loadingError: false,
       uploadSuccess: false,
+      artStatus: 'Queue',
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.toggleModal2 = this.toggleModal2.bind(this);
@@ -980,6 +981,8 @@ class MyStoreComponent extends Component {
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
     this.fileAwsHandler = this.fileAwsHandler.bind(this);
     this.refreshMyArt = this.refreshMyArt.bind(this);
+    this.storeQueue = this.storeQueue.bind(this);
+    this.storeActive = this.storeActive.bind(this);
   }
 
   toggleModal1() {
@@ -997,6 +1000,18 @@ class MyStoreComponent extends Component {
   refreshMyArt() {
     if (!this.state.isModalOpen1 && !this.state.uploadSuccess)
       window.location.reload();
+  }
+
+  storeQueue() {
+    this.setState({
+        artStatus: 'Queue',
+    })
+  }
+
+  storeActive() {
+      this.setState({
+          artStatus: 'Active',
+      })
   }
 
   handleUploadMore() {
@@ -1185,42 +1200,54 @@ class MyStoreComponent extends Component {
 
     let ch = 'visible';
     return (
-      <div className='artContainer'>
-        <div
-          style={{
-            marginLeft: '2px',
-          }}
-        >
-          <p
-            style={{
-              fontFamily: 'Gibson',
-              fontSize: '30px',
-              fontWeight: 'bold',
-              marginTop: '10px',
-              textAlign: 'left',
-            }}
-          >
-            My Collections
-          </p>
+      <Container fluid>
+       
+        <Row className='mystore-first-row-container'>
+            <Col>
+                <h1
+                    style={{
+                        fontFamily: 'Gibson',
+                        fontSize: '64px',
+                        textAlign: 'left',
+                    }}
+                >MyStore</h1>
+            </Col>
+        </Row>
+        <Row className='mystore-second-row-container'>
+            <Col className='mystore-nft-status-container' md={2}>
+                <div style={{display: 'flex', justifyContent: 'space-between', width: '90%'}}>
+                    <h5 style={{fontFamily: 'Gibson', fontSize: '18px', fontWeight: '400'}}>NFT's Listed:</h5>
+                    <p style={{fontFamily: 'Gibson', fontSize: '18px', fontWeight: '400'}}>0</p>
+                </div>
+                <div style={{display: 'flex', justifyContent: 'space-between', width: '90%', marginTop: '-10px'}}>
+                    <h5 style={{fontFamily: 'Gibson', fontSize: '18px', fontWeight: '400'}}>NFT's Sold:</h5>
+                    <p style={{fontFamily: 'Gibson', fontSize: '18px', fontWeight: '400'}}>0</p>
+                </div>
+            </Col>
+            <Col className='mystore-art-container'>
+                <div className='mystore-art-status-container'>
+                    <button onClick={this.storeQueue}><h2 >QUEUE (1)</h2></button>
+                    <button onClick={this.storeActive}><h2>ACTIVE</h2></button>
+                    <button><h2>ENDED</h2></button>
+                    <button><h2>OFFERS</h2></button>
+                </div>
+                
+                {this.state.artStatus === 'Queue' && (
+                    <div className='mystore-art-queue-container'>
+                        <div>{Menu}</div>
+                        <div className='mystore-upload-art' >
+                        <Button className='mystore-upload-btn' onClick={this.toggleModal1}>
+                            <div className='mystore-upload-add'>+</div>
+                        </Button>
+                        </div>
+                    </div>
+                )}
+            </Col>
+        </Row>      
 
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <p style={{ marginLeft: '2px', position: 'relative' }}>
-              <button className='abtn'>All</button>
-              <button className='abtn'>Offer Made </button>
-              <button className='abtn'>Offer Received </button>
-              <button className='abtn'>My Creations </button>
-            </p>
-            <p style={{ marginLeft: '2px', position: 'relative' }}>
-              <Button
-                className='abtn'
-                style={{ backgroundColor: '#5548C7', color: 'white' }}
-                onClick={this.toggleModal1}
-              >
-                + {''}UPLOAD
-              </Button>
-            </p>
-          </div>
-        </div>
+    
+          
+        
 
         <Modal
           isOpen={this.state.isModalOpen1}
@@ -1441,8 +1468,6 @@ class MyStoreComponent extends Component {
           </ModalBody>
         </Modal>
 
-        <div className='row'>{Menu}</div>
-
         <br />
         <br />
         <br />
@@ -1469,7 +1494,7 @@ class MyStoreComponent extends Component {
         <br />
         <br />
         <br />
-      </div>
+      </Container>
     );
   }
 }
