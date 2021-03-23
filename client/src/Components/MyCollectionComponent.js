@@ -19,11 +19,14 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
+  Container,
+  Row,
 } from 'reactstrap';
 import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
 import Axios from 'axios';
+import './MyArtComponent.css';
 import './MyCollection.css';
 import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
@@ -303,9 +306,9 @@ class Allpatrender extends Component {
               alt='Card image'
             ></CardImg>
             <CardImgOverlay>
-              {/* <Badge pill className={x.class}>
+              <Badge pill className={x.class}>
                 {x.title}
-              </Badge> */}
+              </Badge>
             </CardImgOverlay>
           </Link>
         </div>
@@ -1182,42 +1185,35 @@ class MyCollectionComponent extends Component {
 
     let ch = 'visible';
     return (
-      <div className='artContainer'>
-        <div
-          style={{
-            marginLeft: '2px',
-          }}
-        >
-          <p
-            style={{
-              fontFamily: 'Gibson',
-              fontSize: '30px',
-              fontWeight: 'bold',
-              marginTop: '10px',
-              textAlign: 'left',
-            }}
-          >
-            My Collections
-          </p>
+      <Container fluid>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <p style={{ marginLeft: '2px', position: 'relative' }}>
-              <button className='abtn'>All</button>
-              <button className='abtn'>Offer Made </button>
-              <button className='abtn'>Offer Received </button>
-              <button className='abtn'>My Creations </button>
-            </p>
-            <p style={{ marginLeft: '2px', position: 'relative' }}>
-              <Button
-                className='abtn'
-                style={{ backgroundColor: '#5548C7', color: 'white' }}
-                onClick={this.toggleModal1}
-              >
-                + {''}UPLOAD
-              </Button>
-            </p>
-          </div>
-        </div>
+      <Row className='first-row-container'>
+        <Col>
+          <h1 style={{
+            fontFamily: 'Gibson',
+            fontSize: '50px',
+            textAlign: 'left',
+          }}>
+          MyCollection
+          </h1>
+          <p style={{
+            fontFamily: 'Gibson',
+            fontSize: '30px',
+            textAlign: 'left',
+            fontWeight: '400',
+            color: '#5540C7',
+          }}>
+            172 NFT's 
+          </p>
+        </Col>
+      </Row>
+      <Row className='second-row-container'>
+        <Col md={3} className='second-row-col-1'>Hey</Col>
+        <Col className='second-row-col-2'>
+          <div>{Menu}</div>
+        </Col>
+      </Row>
+        
 
         <Modal
           isOpen={this.state.isModalOpen1}
@@ -1438,7 +1434,6 @@ class MyCollectionComponent extends Component {
           </ModalBody>
         </Modal>
 
-        <div className='row'>{Menu}</div>
 
         <br />
         <br />
@@ -1466,7 +1461,7 @@ class MyCollectionComponent extends Component {
         <br />
         <br />
         <br />
-      </div>
+      </Container>
     );
   }
 }
