@@ -8,6 +8,7 @@ import Home from './HomeComponent';
 import AllItemComponent from './AllArtComponent';
 import MyItemComponent from './MyArtComponent';
 import MyCollectionComponent from './MyCollectionComponent';
+import MyStoreComponent from './MyStoreComponent';
 import CardDetail from './CardDetail';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './FooterComponent';
@@ -241,6 +242,16 @@ class Main extends Component {
             path='/mycollection'
             component={() => (
               <MyCollectionComponent
+                contract={this.state.contract}
+                accounts={this.state.accounts}
+              />
+            )}
+          />
+          <ProtectedRoute
+            exact
+            path='/mystore'
+            component={() => (
+              <MyStoreComponent
                 contract={this.state.contract}
                 accounts={this.state.accounts}
               />

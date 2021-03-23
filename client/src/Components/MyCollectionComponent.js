@@ -27,7 +27,7 @@ import Web3 from 'web3';
 import { render } from 'react-dom';
 import Axios from 'axios';
 import './MyArtComponent.css';
-import './MyCollection.css';
+import './MyCollectionComponent.css';
 import test1img from '../images/image 25.png'
 import test2img from '../images/image 11.png'
 import test3img from '../images/Nate3.jpg'
