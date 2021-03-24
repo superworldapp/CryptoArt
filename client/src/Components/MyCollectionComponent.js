@@ -324,7 +324,7 @@ class Allpatrender extends Component {
           <CardImg
             top
             // src={this.props.art._imgurl}
-            src={test1img}
+            src={this.props.art._imgurl}
             alt='Card image'
             style={{
               width: '98.5%',
