@@ -17,6 +17,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import helpIcon from '../assets/svg/help.svg';
 import greenDot from '../assets/svg/green-dot.svg';
+import checkmark1 from "../images/svg/Checkmark1.svg";
 import MenuItem from '@material-ui/core/MenuItem';
 import Axios from 'axios';
 import Cookies from 'js-cookie';
@@ -457,18 +458,18 @@ class Header extends Component {
                         >
                           {this.props.accounts ? (
                             <>
-                              <Grid item>Wallet Connected</Grid>
+                              <Grid item>Wallet </Grid>
                               <Grid item>
                                 <img
                                   id='green-dot'
-                                  style={{ width: '10px' }}
-                                  src={greenDot}
+                                  style={{ width: '15px' }}
+                                  src={checkmark1}
                                   alt=''
                                 />{' '}
                               </Grid>{' '}
                             </>
                           ) : (
-                            <Grid item>Connect Wallet</Grid>
+                            <Grid item>Wallet</Grid>
                           )}
                         </Grid>
                       </Button>

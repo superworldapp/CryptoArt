@@ -132,7 +132,7 @@ class Home extends Component {
       return (
         <>
           <div className='Home'>
-            <Container>
+            <Container fluid>
               <div className= "upperView">
               <div className ="sectionText1">
                   <h1 id='header'>WELCOME TO THE <br/> NFT SALON</h1>
@@ -165,13 +165,12 @@ class Home extends Component {
                 <img className='topimage' src={image1} alt='img' />
                 </div>
               </div>
-              </Container>
               <br/>
 
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA',}}></div>
               <br/>
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
-              <Container>
+              
               <div className='middleView'>
               <div className="col2">
               <Row around="xs" className= "gridRow1">
@@ -259,13 +258,13 @@ class Home extends Component {
                 </div>
               </div> */}
               </div>
-              </Container>
+              
               <br /> 
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
               <br/>
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
-              <Container>
-              <div className ="bottomView">
+              
+             
               <div
                 style={{
                   display: 'flex',
@@ -279,6 +278,7 @@ class Home extends Component {
                     fontSize: '18px',
                     fontFamily: 'Gibson',
                     fontWeight: 'bold',
+                    marginLeft:'13rem'
                   }}
                 >
                   {' '}
@@ -292,12 +292,14 @@ class Home extends Component {
                     fontSize: '18px',
                     textDecoration: 'none',
                     color: '#B3B3B3',
+                    marginRight:'13rem'
                   }}
                 >
                   {' '}
                   View More <img src={svg1} alt='svg1' />
                 </a>
               </div>
+              <div className ="bottomView">
               <div className='rowImages'>
               <Card className='imageCards'>
                   <CardImg
@@ -525,6 +527,7 @@ class Home extends Component {
                   </CardBody>
                 </Card>
               </div>
+              </div>
               <div
                 style={{
                   display: 'flex',
@@ -538,6 +541,7 @@ class Home extends Component {
                     fontSize: '18px',
                     fontFamily: 'Gibson',
                     fontWeight: 'bold',
+                    marginLeft:'13rem',
                   }}
                 >
                   {' '}
@@ -551,12 +555,14 @@ class Home extends Component {
                     fontSize: '18px',
                     textDecoration: 'none',
                     color: '#B3B3B3',
+                    marginRight:'13rem'
                   }}
                 >
                   {' '}
                   View More <img src={svg1} alt='svg1' />
                 </a>
               </div>
+              <div className ="bottomView">
               <div className='rowImages'>
                 <Card className='imageCards'>
                   <CardImg
