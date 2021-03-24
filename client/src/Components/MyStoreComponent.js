@@ -1879,8 +1879,8 @@ class MyStoreComponent extends Component {
             </Col>
             <Col className='mystore-art-container'>
                 <div className='mystore-art-status-container'>
-                    <button onClick={this.storeQueue}><h2 >QUEUE</h2></button>
-                    <button onClick={this.storeActive}><h2>ACTIVE</h2></button>
+                    <button onClick={this.storeQueue} className='queue-status'><h2 >QUEUE</h2></button>
+                    <button onClick={this.storeActive} className='active-status'><h2>ACTIVE</h2></button>
                     <button><h2>ENDED</h2></button>
                     <button><h2>OFFERS</h2></button>
                 </div>

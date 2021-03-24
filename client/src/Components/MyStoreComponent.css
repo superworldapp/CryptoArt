@@ -82,3 +82,7 @@
     text-transform: uppercase;
     color: #FFFFFF;
 }
+
+.queue-status:active, .active-status:active {
+    text-decoration: underline;
+}
