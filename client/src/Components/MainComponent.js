@@ -286,6 +286,9 @@ class Main extends Component {
               <MyCollectionComponent
                 contract={this.state.contract}
                 accounts={this.state.accounts}
+                batch={this.state.batch?.filter(
+                  (batch) => batch._tokenCreator == this.state.accounts
+                )}
               />
             )}
           />
@@ -296,6 +299,9 @@ class Main extends Component {
               <MyStoreComponent
                 contract={this.state.contract}
                 accounts={this.state.accounts}
+                batch={this.state.batch?.filter(
+                  (batch) => batch._tokenCreator == this.state.accounts
+                )}
               />
             )}
           />
