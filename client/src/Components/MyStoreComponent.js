@@ -111,6 +111,7 @@ class Allpatrender extends Component {
     this.StartAuction = this.StartAuction.bind(this);
     this.EndAuction = this.EndAuction.bind(this);
     this.refreshMyArt = this.refreshMyArt.bind(this);
+    this.mintToken = this.mintToken.bind(this);
 
     //this.toggleAuction = this.toggleAuction.bind(this);
   }
@@ -158,6 +159,8 @@ class Allpatrender extends Component {
     )
       window.location.reload();
   }
+
+  mintToken() {}
 
   handleInputChange(event) {
     const target = event.target;
@@ -311,6 +314,8 @@ class Allpatrender extends Component {
         <CardBody style={{ backgroundColor: '#eeeeee', width: '100%' }}>
 
             <h3 style={{fontFamily: 'Gibson', fontSize: '20px', fontWeight: '700'}}>Back Country Fishing</h3>
+
+            <button onClick={this.mintToken} style={{color :'white', backgroundColor:'#5540C7', fontSize: '18px', width: '120px', borderRadius: '10px' }}>Mint</button>
           
           <div>
             {/* {reSellOrSell ? (
@@ -877,6 +882,8 @@ class Allpatrender2 extends Component {
       this.StartAuction = this.StartAuction.bind(this);
       this.EndAuction = this.EndAuction.bind(this);
       this.refreshMyArt = this.refreshMyArt.bind(this);
+      this.mintToken = this.mintToken.bind(this)
+      
   
       //this.toggleAuction = this.toggleAuction.bind(this);
     }
@@ -923,6 +930,10 @@ class Allpatrender2 extends Component {
         (!this.state.toggleListForAuction && !this.state.listForAuctionSuccess)
       )
         window.location.reload();
+    }
+
+    mintToken(){
+
     }
   
     handleInputChange(event) {
@@ -1066,11 +1077,13 @@ class Allpatrender2 extends Component {
         >
           {/* <a href={this.props.art.imgurl} target='_blank'> */}
           <div className='mystore-active-card-img'>
+          <Link to={`/batch/${this.props.art._batchId}`}> 
               <CardImg
                 top
                 src={this.props.art._imgurl}
                 alt='Card image'
               ></CardImg>
+          </Link>
           </div>
   
           <CardBody style={{ backgroundColor: '#eeeeee', width: '100%'}}>
@@ -1083,6 +1096,8 @@ class Allpatrender2 extends Component {
             <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '700', color: '#5540C7'}}>1.00 ETH</p>
             <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '500', color: '#5540C7', marginTop: '-20px'}}>($1,580.10 USD)</p>
         </span>
+
+        <button onClick={this.mintToken} style={{color :'white', backgroundColor:'#5540C7', fontSize: '18px', width: '120px', borderRadius: '10px' }}>Mint</button>
 
             <div>
               {/* {Auc ? (
@@ -1604,6 +1619,7 @@ class MyStoreComponent extends Component {
     this.refreshMyArt = this.refreshMyArt.bind(this);
     this.storeQueue = this.storeQueue.bind(this);
     this.storeActive = this.storeActive.bind(this);
+
   }
 
   toggleModal1() {
@@ -1634,6 +1650,8 @@ class MyStoreComponent extends Component {
           artStatus: 'Active',
       })
   }
+
+ 
 
   handleUploadMore() {
     this.toggleModal2();
@@ -1861,8 +1879,8 @@ class MyStoreComponent extends Component {
             </Col>
             <Col className='mystore-art-container'>
                 <div className='mystore-art-status-container'>
-                    <button onClick={this.storeQueue}><h2 >QUEUE</h2></button>
-                    <button onClick={this.storeActive}><h2>ACTIVE</h2></button>
+                    <button onClick={this.storeQueue} className='queue-status'><h2 >QUEUE</h2></button>
+                    <button onClick={this.storeActive} className='active-status'><h2>ACTIVE</h2></button>
                     <button><h2>ENDED</h2></button>
                     <button><h2>OFFERS</h2></button>
                 </div>
