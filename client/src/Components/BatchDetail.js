@@ -118,7 +118,7 @@ const BatchDetail = ({
           <div className='information d-flex flex-column'>
             <div>
             <h4>
-            Journey From Furture
+            {batchCreated._tokenBatchName}
           </h4>
             </div>
            <div className = "View"> 
@@ -128,7 +128,7 @@ const BatchDetail = ({
            &nbsp;
            &nbsp;
            <p className = "style2">
-             4 of 5 remaing
+            4 of 5 remaining
            </p>
 
            </div>
@@ -150,14 +150,14 @@ const BatchDetail = ({
             </p>
           </div>
           <div style= {{display:'flex', justifyContent:'space-between',}}>
-            <h5>
+            {/* <h5>
               History
             </h5>
           <button  style={{ marginBottom: '1rem', border:'none' }} onClick={collapsetoggle}>
             <img src= {dropdownarrow} alt = "img">
             </img>
 
-          </button>
+          </button> */}
           {/* <Collapse isOpen={isOpen} className = "collapse1">
         <p className ="style2">
         Anim pariatur cliche reprehenderit,
@@ -215,7 +215,7 @@ const BatchDetail = ({
                 ></img>
                    </div>
                     <CardTitle className="Batchcard-imgTitle">
-                      Alimation Character
+                    {batchCreated._tokenBatchName}
                     </CardTitle> 
                   </CardImgOverlay> 
                   <CardBody>
@@ -261,7 +261,7 @@ const BatchDetail = ({
                 ></img>
                    </div>
                     <CardTitle className="Batchcard-imgTitle">
-                      Alimation Character
+                    {batchCreated._tokenBatchName}
                     </CardTitle> 
                   </CardImgOverlay> 
                   <CardBody>
@@ -307,7 +307,7 @@ const BatchDetail = ({
                 ></img>
                    </div>
                     <CardTitle className="Batchcard-imgTitle">
-                      Alimation Character
+                    {batchCreated._tokenBatchName}
                     </CardTitle> 
                   </CardImgOverlay> 
                   <CardBody>

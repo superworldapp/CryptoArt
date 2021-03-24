@@ -999,7 +999,7 @@ class Header extends Component {
                         // marginLeft: '-0.2rem',
                         // marginBottom: '0.75rem',
                       }}
-                      to='/mycollections'
+                      to='/mycollection'
                     >
                       <MenuItem disableGutters>
                         <span
@@ -1026,7 +1026,17 @@ class Header extends Component {
                         </span>
                       </MenuItem>
                     </NavLink>
-
+                    <NavLink
+                      style={{
+                        color: 'gray',
+                        fontFamily: 'Gibson',
+                        fontSize: '13px',
+                        textDecoration: 'none',
+                        // marginLeft: '-0.2rem',
+                        // marginBottom: '0.75rem',
+                      }}
+                      to='/mystore'
+                    >
                     <MenuItem
                       onClick={() => console.log('my store clicked')}
                       disableGutters
@@ -1054,6 +1064,7 @@ class Header extends Component {
                         </p>
                       </span>
                     </MenuItem>
+                    </NavLink>
 
                     <MenuItem
                       onClick={this.changeUsernameHandleClick}
