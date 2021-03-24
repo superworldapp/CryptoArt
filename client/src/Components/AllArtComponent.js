@@ -113,13 +113,13 @@ class AllArt extends Component {
         let bux = this.props.art._isBidding ? 'visible' : 'invisible';
         let bak = this.props.art._isSelling ? 'bg-success text-white' : '';
         let buk = this.props.art._isBidding ? 'bg-warning' : '';
-        let pr =
-            Web3.utils.fromWei(
-                this.props.art._sellprice.toString(),
-                'ether'
-            ) == 0
-                ? 'invisible'
-                : 'visible';
+        // let pr =
+        //     Web3.utils.fromWei(
+        //         this.props.art._sellprice.toString(),
+        //         'ether'
+        //     ) == 0
+        //         ? 'invisible'
+        //         : 'visible';
 
         const img = new Image();
         let orientation;
@@ -143,7 +143,7 @@ class AllArt extends Component {
                         color: '#212529',
                         textDecoration: 'none'
                     }}
-                    to={`/card/${this.props.art._tokenId}`}>
+                    to={`/batch/${this.props.art._batchId}`}>
                     <div className='card-img-top-all-art'>
                         <CardImg
                             // className='card-img-top-all-art'
@@ -179,7 +179,7 @@ class AllArt extends Component {
                             </CardSubtitle>
                         </div>
 
-                        <div className='ctext'>
+                        {/* <div className='ctext'>
                             <CardText
                                 style={{
                                     fontFamily: 'Gibson',
@@ -218,9 +218,9 @@ class AllArt extends Component {
                                     ETH
                                 </CardText>
                             )}
-                        </div>
+                        </div> */}
 
-                        <Col sm={{ size: 12 }}>
+                        {/* <Col sm={{ size: 12 }}>
                             {but === 'visible' ? (
                                 <Link
                                     to={`/card/${this.props.art.tokenId}`}>
@@ -261,7 +261,7 @@ class AllArt extends Component {
                             ) : (
                                 <div></div>
                             )}
-                        </Col>
+                        </Col> */}
                     </CardBody>
                 </Link>
             </Card>
@@ -429,10 +429,10 @@ class AllItemComponent extends Component {
     };
 
     render() {
-        const menu = this.state.art.map((x) => {
+        const menu = this.props.batch?.map((x) => {
             return (
                 <div
-                    key={x._tokenId}
+                    key={x._batchId}
                     className='col-4 col-md-3'
                     id='all-art-card'>
                     <AllArt
