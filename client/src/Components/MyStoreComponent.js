@@ -160,7 +160,13 @@ class Allpatrender extends Component {
       window.location.reload();
   }
 
-  mintToken() {}
+  mintToken = async() => {
+    const res = await this.props.contract.methods
+      .mintToken(
+        this.props.art._batchId,
+      )
+      .send({ from: this.props.accounts, gas: 5000000 });
+  }
 
   handleInputChange(event) {
     const target = event.target;
