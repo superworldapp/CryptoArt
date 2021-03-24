@@ -9,8 +9,9 @@
 /* Top section*/
 .upperView {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding-bottom: 2rem;
+  margin: 1rem 7rem;
 }
 .topimage{
   width: 20rem;
@@ -31,7 +32,7 @@
 /* Middle Section */
 .middleView {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 1rem;
   background-color: white;
   padding-top: 2rem;
@@ -103,9 +104,10 @@ a {
 #header {
   margin-top: 5rem;
   font-family: 'gibson', sans-serif;
-  font-weight: 600;
+  font-weight: 900;
   text-align: left;
   width: 30rem;
+  font-size: 2.7rem;
 }
 
 .text1 {
@@ -191,7 +193,7 @@ a {
 
 div.imageCards {
   height: 270px !important;
-  width: 250px;
+  width: 220px;
   border-radius: 1rem;
   margin-right: 1rem;
   opacity: 0.95;
@@ -300,7 +302,10 @@ img.rounded-circle {
 
 .bottomView{
   background-color: white;
-  padding-bottom: 5rem;
+  padding-bottom: 0rem;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1rem 15rem !important;
 }
 
 .cardImg-body{
