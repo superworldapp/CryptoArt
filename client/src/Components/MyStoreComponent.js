@@ -1077,11 +1077,13 @@ class Allpatrender2 extends Component {
         >
           {/* <a href={this.props.art.imgurl} target='_blank'> */}
           <div className='mystore-active-card-img'>
+          <Link to={`/batch/${this.props.art._batchId}`}> 
               <CardImg
                 top
                 src={this.props.art._imgurl}
                 alt='Card image'
               ></CardImg>
+          </Link>
           </div>
   
           <CardBody style={{ backgroundColor: '#eeeeee', width: '100%'}}>
