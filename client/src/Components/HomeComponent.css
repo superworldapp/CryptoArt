@@ -1,7 +1,7 @@
 .hidden {
   overflow-x: hidden;
 }
-/* 
+/*
 .Home {
   display: flex;
   justify-content: space-around;
@@ -9,9 +9,8 @@
 /* Top section*/
 .upperView {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding-bottom: 2rem;
-  margin: 1rem 7rem;
 }
 .topimage{
   width: 20rem;
@@ -32,12 +31,12 @@
 /* Middle Section */
 .middleView {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-top: 1rem;
   background-color: white;
   padding-top: 2rem;
   padding-bottom: 2rem;
-} 
+}
 .col2 {
   margin-left: 1rem;
   /* display: flex; */
@@ -104,10 +103,9 @@ a {
 #header {
   margin-top: 5rem;
   font-family: 'gibson', sans-serif;
-  font-weight: 900;
+  font-weight: 600;
   text-align: left;
   width: 30rem;
-  font-size: 2.7rem;
 }
 
 .text1 {
@@ -193,7 +191,7 @@ a {
 
 div.imageCards {
   height: 270px !important;
-  width: 220px;
+  width: 250px;
   border-radius: 1rem;
   margin-right: 1rem;
   opacity: 0.95;
@@ -239,7 +237,8 @@ div.imageCards {
   width: 100%;
 }
 .card-body {
-  padding: 0.5rem;
+  padding: 0;
+  border-radius: 0 0 10px 10px;
 }
 
 img.rounded-circle {
@@ -277,8 +276,8 @@ img.rounded-circle {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.068) 0%, rgba(0, 0, 0, 0.075) 100%);
   margin-left: -8rem;
   margin-top: -1.5rem;
-  border-radius: 0rem 0rem 0.7rem 0.7rem !important; 
-  padding: 0rem 0rem 0rem 0rem !important; 
+  border-radius: 0rem 0rem 0.7rem 0.7rem !important;
+  padding: 0rem 0rem 0rem 0rem !important;
   height: 40px;
   width: 45px;
   line-height: 0px !important;
@@ -297,15 +296,12 @@ img.rounded-circle {
   margin-left: 0.35rem;
   margin-bottom: 1.5rem;
   margin-top:0.3rem;
-} 
+}
 
 
 .bottomView{
   background-color: white;
-  padding-bottom: 0rem;
-  display: flex;
-  justify-content: space-evenly;
-  margin: 1rem 15rem !important;
+  padding-bottom: 5rem;
 }
 
 .cardImg-body{
@@ -335,4 +331,50 @@ img.rounded-circle {
   font-size: 10px;
   color: #5540c7;
   margin-bottom: 1.5rem !important;
+}
+
+.home-slider {
+  overflow: hidden;
+  width: 20rem;
+}
+
+.home-slider figure {
+  position: relative;
+  width: 500%;
+  animation: 20s slider infinite;
+}
+
+.home-slider figure img {
+  width: 20%;
+  float: left;
+}
+
+@keyframes slider {
+  0% {
+    left: 0;
+  }
+  20% {
+    left: 0;
+  }
+  25% {
+    left: -100%;
+  }
+  45% {
+    left: -100%;
+  }
+  50% {
+    left: -200%;
+  }
+  70% {
+    left: -200%;
+  }
+  75% {
+    left: -300%;
+  }
+  95% {
+    left: -300%;
+  }
+  100% {
+    left: -400%;
+  }
 }
