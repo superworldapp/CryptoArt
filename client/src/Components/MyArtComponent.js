@@ -24,7 +24,7 @@ import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
 import Axios from 'axios';
-import './MyArtComponent.css';
+import './MyArtComponent.scss';
 import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
@@ -112,14 +112,14 @@ class Allpatrender extends Component {
     //this.toggleAuction = this.toggleAuction.bind(this);
   }
   buyItem = async () => {
-   
+
     try {
     //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
       const res = await this.props.contract.methods
         .buyToken(this.props.art._tokenId)
         .send({ from: this.props.accounts,value: this.props.art._sellprice, gas: 5000000 });
       console.log('res', res);
-      
+
     } catch(error){
         console.error(error)
     }
@@ -233,7 +233,7 @@ class Allpatrender extends Component {
     let auc1 = this.props.art._isBidding ? 'hidden' : 'abtn';
     let auc2 = this.props.art._isBidding ? 'hidden' : 'abtn1';
     let forAuc = this.props.art._isBidding ? 'visible' : 'invisible';
-    
+
     // let pr =
     //   Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether') == 0
     //     ? 'invisible'
@@ -1006,7 +1006,7 @@ class MyItemComponent extends Component {
           (this.state.price * ETHER).toString(),
           imgUrl,
           imgUrl
-          
+
         )
         .send({ from: this.props.accounts, gas: 5000000 });
 
@@ -1065,7 +1065,7 @@ class MyItemComponent extends Component {
 
     let response = [];
     let createrToken = [];
-    
+
     for (let i = 1; i <= res; i++) {
       let rex = await this.props.contract?.methods.getTokenData(i).call();
       let rex2 = await this.props.contract?.methods.getTokenDataBatch(i).call();
@@ -1084,7 +1084,7 @@ class MyItemComponent extends Component {
         _tokenCreator : rex2._tokenCreator,
         _imgurl : rex2._imgurl,
         _imgThumbnail : rex2._imgThumbnail,
-       
+
       }
         response.push(newBlock);
         console.log(newBlock)
@@ -1094,7 +1094,7 @@ class MyItemComponent extends Component {
       }
 
     }
-    
+
 
     // for (let i = 1; i <= response.length; i++) {
     //   let rex = await this.props.contract?.methods.getTokenDataBatch(1).call();

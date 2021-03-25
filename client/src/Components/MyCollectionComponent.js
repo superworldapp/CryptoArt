@@ -26,8 +26,8 @@ import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
 import Axios from 'axios';
-import './MyArtComponent.css';
-import './MyCollectionComponent.css';
+import './MyArtComponent.scss';
+import './MyCollectionComponent.scss';
 import test1img from '../images/image 25.png'
 import test2img from '../images/image 11.png'
 import test3img from '../images/Nate3.jpg'
@@ -121,14 +121,14 @@ class Allpatrender extends Component {
     //this.toggleAuction = this.toggleAuction.bind(this);
   }
   buyItem = async () => {
-   
+
     try {
     //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
       const res = await this.props.contract.methods
         .buyToken(this.props.art._tokenId)
         .send({ from: this.props.accounts,value: this.props.art._sellprice, gas: 5000000 });
       console.log('res', res);
-      
+
     } catch(error){
         console.error(error)
     }
@@ -218,7 +218,7 @@ class Allpatrender extends Component {
   };
   StartAuction = async () => {
     this.setState({ auctionLoading: true });
-    let startprice = "1000000000000000000"  
+    let startprice = "1000000000000000000"
    let times = 1615401942
     const res = await this.props.contract.methods
     .startbid(
@@ -227,7 +227,7 @@ class Allpatrender extends Component {
       times
     )
     .send({ from: this.props.accounts, gas: 5000000 });
-  console.log('res', res);  
+  console.log('res', res);
     this.setState({ auctionLoading: false, listForAuctionSuccess: true });
     console.log(res);
   };
@@ -268,7 +268,7 @@ class Allpatrender extends Component {
     let forAuc = this.props.art._isBidding ? 'visible' : 'invisible';
     let artCreator = this.props.art.tokenCreator;
     let artOwner = this.props.art.tokenOwner;
-    
+
     let pr =
       Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether') == 0
         ? 'invisible'
@@ -313,7 +313,7 @@ class Allpatrender extends Component {
 
       <div>
 
-      <button 
+      <button
         style={{
         border: 'none',
         backgroundColor: 'transparent',
@@ -340,13 +340,13 @@ class Allpatrender extends Component {
         onClosed={this.refreshMyArt}
         className='art-modal-popup'
       >
-      <img 
-        src={this.props.art._imgurl} 
+      <img
+        src={this.props.art._imgurl}
         style={{
           height: '75%',
         }} />
 
-      <ModalBody 
+      <ModalBody
         style={{
           backgroundColor: '#808080',
           display: 'flex',
@@ -396,13 +396,13 @@ class Allpatrender extends Component {
           >
             Back Country Fishing was Inspired by my regular weekend trips to the mountains. Max, my dog, would love to sit by the fire as I cast my line to try and catch our dinner.
           </p>
-            <div 
+            <div
               style={{display: 'flex', justifyContent: 'space-between', width: '50%', position: 'relative', right: '105px'}}
             >
               <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '400'}}>Purchased For</p>
               <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '400'}}>55 &nbsp; ETH</p>
             </div>
-            <div 
+            <div
               style={{display: 'flex', justifyContent: 'space-between', width: '50%', position: 'relative', top: '3px', right: '105px'}}
             >
               <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '400'}}>Owner  #</p>
@@ -414,11 +414,11 @@ class Allpatrender extends Component {
           </div>
       </ModalBody>
 
-        
+
       </Modal>
       {/* */}
-      
-      
+
+
       </div>
     );
   }
@@ -507,7 +507,7 @@ class MyCollectionComponent extends Component {
           (this.state.price * ETHER).toString(),
           imgUrl,
           imgUrl
-          
+
         )
         .send({ from: this.props.accounts, gas: 5000000 });
 
@@ -566,7 +566,7 @@ class MyCollectionComponent extends Component {
 
     let response = [];
     let createrToken = [];
-    
+
     for (let i = 1; i <= res; i++) {
       let rex = await this.props.contract?.methods.getTokenData(i).call();
       let rex2 = await this.props.contract?.methods.getTokenDataBatch(i).call();
@@ -585,7 +585,7 @@ class MyCollectionComponent extends Component {
         _tokenCreator : rex2._tokenCreator,
         _imgurl : rex2._imgurl,
         _imgThumbnail : rex2._imgThumbnail,
-       
+
       }
         response.push(newBlock);
         console.log(newBlock)
@@ -595,7 +595,7 @@ class MyCollectionComponent extends Component {
       }
 
     }
-    
+
 
     // for (let i = 1; i <= response.length; i++) {
     //   let rex = await this.props.contract?.methods.getTokenDataBatch(1).call();
@@ -690,7 +690,7 @@ class MyCollectionComponent extends Component {
             fontWeight: '400',
             color: '#5540C7',
           }}>
-            172 NFT's 
+            172 NFT's
           </p>
         </Col>
       </Row>
@@ -704,10 +704,10 @@ class MyCollectionComponent extends Component {
           }}>
             SORT BY:
           </h5>
-          <select 
-            id="dropdown" 
+          <select
+            id="dropdown"
             onChange={this.dropdown}
-            style={{ 
+            style={{
               fontFamily: 'Gibson',
               width: '75%',
               borderTop: 'none',
@@ -715,7 +715,7 @@ class MyCollectionComponent extends Component {
               borderRight: 'none',
               fontSize: '18px',
               marginLeft: '-3px',
-            }} 
+            }}
           >
               <option value="" className="option-selected">New</option>
               <option value="1">1</option>
@@ -732,14 +732,14 @@ class MyCollectionComponent extends Component {
           }}>
             GALLERIES:
           </h5>
-          <p style={{ 
+          <p style={{
             fontFamily: 'Gibson',
             fontSize: '24px',
             fontWeight: '400',
           }}>
             Abstract
           </p>
-          <p style={{ 
+          <p style={{
             fontFamily: 'Gibson',
             fontSize: '24px',
             fontWeight: '400',
@@ -747,7 +747,7 @@ class MyCollectionComponent extends Component {
           }}>
             Nature
           </p>
-          <button 
+          <button
             style={{
             fontFamily: 'Gibson',
             fontSize: '18px',
@@ -787,10 +787,10 @@ class MyCollectionComponent extends Component {
                           <img src={test4img } />
                       </div>
                   </div>
-              </div>   
+              </div>
           )}
         {/* */}
-        
+
 
         <Modal
           isOpen={this.state.isModalOpen1}
