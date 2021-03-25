@@ -1,7 +1,7 @@
 .hidden {
   overflow-x: hidden;
 }
-/* 
+/*
 .Home {
   display: flex;
   justify-content: space-around;
@@ -36,7 +36,7 @@
   background-color: white;
   padding-top: 2rem;
   padding-bottom: 2rem;
-} 
+}
 .col2 {
   margin-left: 1rem;
   /* display: flex; */
@@ -237,7 +237,8 @@ div.imageCards {
   width: 100%;
 }
 .card-body {
-  padding: 0.5rem;
+  padding: 0;
+  border-radius: 0 0 10px 10px;
 }
 
 img.rounded-circle {
@@ -275,8 +276,8 @@ img.rounded-circle {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.068) 0%, rgba(0, 0, 0, 0.075) 100%);
   margin-left: -8rem;
   margin-top: -1.5rem;
-  border-radius: 0rem 0rem 0.7rem 0.7rem !important; 
-  padding: 0rem 0rem 0rem 0rem !important; 
+  border-radius: 0rem 0rem 0.7rem 0.7rem !important;
+  padding: 0rem 0rem 0rem 0rem !important;
   height: 40px;
   width: 45px;
   line-height: 0px !important;
@@ -295,7 +296,7 @@ img.rounded-circle {
   margin-left: 0.35rem;
   margin-bottom: 1.5rem;
   margin-top:0.3rem;
-} 
+}
 
 
 .bottomView{
@@ -331,6 +332,7 @@ img.rounded-circle {
   color: #5540c7;
   margin-bottom: 1.5rem !important;
 }
+<<<<<<< HEAD
 
 .home-slider {
   overflow: hidden;
@@ -377,3 +379,5 @@ img.rounded-circle {
     left: -400%;
   }
 }
+=======
+>>>>>>> 1f0d5642dd8d432d4e57b9d5360189064c661a9c

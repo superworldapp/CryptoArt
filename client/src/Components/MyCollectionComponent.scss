@@ -1,3 +1,5 @@
+@import '../styles/global';
+
 .first-row-container {
     /* border: 1px solid red; */
     margin-top: 50px;
@@ -128,4 +130,8 @@
 .my-collection-gallery-modal-art-img-container img {
     height: 250px;
     width: 250px;
+}
+
+.fs {
+    font-family: $fontFamily;
 }
