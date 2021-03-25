@@ -1,0 +1,137 @@
+@import '../styles/global';
+
+.first-row-container {
+    /* border: 1px solid red; */
+    margin-top: 50px;
+    padding-left: 15px;
+}
+
+.second-row-container {
+    /* border: 1px solid green; */
+    margin-top: 35px;
+}
+
+.second-row-col-1 {
+    /* border: 1px solid blue; */
+    padding-left: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.second-row-col-2 {
+    /* border: 3px solid orange; */
+}
+
+.mycollection-card {
+    height: 268px;
+    width: 268px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.art-modal-popup {
+    /* border: 1px solid red; */
+    margin-top: 90px;
+    max-width: 75%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+}
+
+/*==========Gallery Modal=======*/
+
+.my-collection-modal-bg {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    animation:modalSlide 0.3s ease-in-out;
+}
+
+.my-collection-gallery-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.my-collection-gallery-modal-heading {
+    color: white;
+    font-size: 64px;
+    font-weight: 250;
+    margin-top: 25px;
+}
+
+.my-collection-gallery-modal-span {
+    /* border: 1px solid white; */
+    display: flex;
+    margin-top: 10px;
+    /* width: 23%; */
+}
+
+.my-collection-gallery-input {
+    margin-right: 5px;
+    width: 350px;
+    background: #F6F6F6;
+    border-radius: 10px;
+    border: none;
+}
+
+.my-collection-gallery-done-btn {
+    margin-right: 5px;
+    background: #5540C6;
+    color: #FFFFFF;
+    border-radius: 10px;
+    width: 75px;
+    border: none;
+}
+
+.my-collection-gallery-cancel-btn {
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    background: black;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 75px;
+    /* border: none; */
+}
+
+.my-collection-gallery-modal-art-container {
+    /* border: 1px solid black; */
+    width: 85%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-collection-gallery-modal-art-img-container {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    height: 268px;
+    width: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.my-collection-gallery-modal-art-img-container img {
+    height: 250px;
+    width: 250px;
+}
+
+.fs {
+    font-family: $fontFamily;
+}
