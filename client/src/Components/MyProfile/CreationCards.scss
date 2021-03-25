@@ -1,10 +1,9 @@
-/* Image Card */
 .rowImages {
     display: flex;
     justify-content: space-around;
     margin: 0rem 2.5rem 0rem 2.5rem;
   }
-  
+
   div.imageCards {
     height: 320px !important;
     width: 243px;
@@ -44,18 +43,18 @@
   .card-body {
     padding: 0.5rem;
   }
-  
+
   img.rounded-circle {
     margin-right: 0.5rem !important;
     margin-left: 0.2rem;
   }
-  
+
   /* first row subtitle  */
   #root > div > div > div > div > div > div > div > div:nth-child(1) {
     margin-top: 0.5rem;
     align-items: baseline;
   }
-  
+
   .buy-bid-btn {
     border-radius: 2em;
     font-family: 'gibson', sans-serif;
@@ -68,20 +67,20 @@
     color: white;
     padding: 0.2rem 0.5rem;
   }
-  
+
   .buy-bid-btn-div {
     display: flex;
     justify-content: center;
     margin-top: 0.5rem;
   }
-  
+
   .sw-overlay{
     backdrop-filter: blur(60px);
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.068) 0%, rgba(0, 0, 0, 0.075) 100%);
     margin-left: -8rem;
     margin-top: -1.5rem;
-    border-radius: 0rem 0rem 0.7rem 0.7rem !important; 
-    padding: 0rem 0rem 0rem 0rem !important; 
+    border-radius: 0rem 0rem 0.7rem 0.7rem !important;
+    padding: 0rem 0rem 0rem 0rem !important;
     height: 40px;
     width: 45px;
     line-height: 0px !important;
@@ -98,14 +97,14 @@
     margin-left: 0.35rem;
     margin-bottom: 1.5rem;
     margin-top:0.3rem;
-  } 
-  
-  
+  }
+
+
   .bottomView{
     background-color: white;
     padding-bottom: 5rem;
   }
-  
+
   .cardImg-body{
     display : flex;
     justify-content: center;

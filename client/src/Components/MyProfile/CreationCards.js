@@ -1,67 +1,62 @@
-import React, { Component } from 'react';
-import './CreationCards.css';
-import profile from '../../images/profile-image.png';
-import image200 from '../../images/image 200.png';
+import React from 'react';
 import {
-    Container,
-    Card,
-    CardBody,
-    CardSubtitle,
-    CardText,
-    CardImg,
-    CardImgOverlay,
-    Row,
-    Col,
-    CardTitle,
-    Badge,
-  } from 'reactstrap';
-  const CreationCards = () => {
-      return (
-        <>
-          <Card className='imageCards'>
-              <CardImg
-                top
-                className="Cardimg"
-                src={image200}
-                alt='image3'
-              ></CardImg>
-              <CardImgOverlay className="imgOverlay">
-              <img className="userimg" src={profile}></img>
-                <CardTitle className="card-imgTitle" >
-                  Alimation Character
-                </CardTitle>
-              </CardImgOverlay>
-              <CardBody>
-                <div className="cardImg-body">
-                  <CardSubtitle className= "createdby">
-                    Created by 
-                  </CardSubtitle>
-                  &nbsp;
-                  <CardSubtitle className="cardsubtitleName">
-                  Amelia
-                  </CardSubtitle>
-                </div>                    
-                <div className='ctext'>
-                  <CardText className="price">
-                    0.5ETH
-                    <p className="USD-price">
-                    ($985.56 USD)
-                      </p>
-                  </CardText>
-                  <div>
-                  <button className='buy-bid-btn'>Place Bid</button>
-                  </div>
-                </div> 
-                <div className='buy-bid-btn-div'>
-                  
-                    <p className='time-div'>
-                    26 hrs 42 mins remaining
-                    </p>
-                  </div>
-              </CardBody>
-            </Card>
-        </>
-      )
+	Card,
+	CardBody,
+	CardSubtitle,
+	CardText,
+	CardImg,
+	CardImgOverlay,
+	CardTitle,
+} from 'reactstrap';
+
+import './CreationCards.scss';
+
+const CreationCards = (props) => {
+	return (
+		<>
+			<Card className='imageCards'>
+				<CardImg
+					top
+					className="Cardimg"
+					src={props.cardImage}
+					alt='image3'
+				/>
+				<CardImgOverlay className="imgOverlay">
+					<img className="userimg" src={props.profileImage} alt="userImg"/>
+					<CardTitle className="card-imgTitle">
+						{props.cardTitle}
+					</CardTitle>
+				</CardImgOverlay>
+				<CardBody>
+					<div className="cardImg-body">
+						<CardSubtitle className="createdby">
+							{props.CardSubtitle}
+						</CardSubtitle>
+						&nbsp;
+						<CardSubtitle className="cardsubtitleName">
+							{props.CardSubtitleName}
+						</CardSubtitle>
+					</div>
+					<div className='ctext'>
+						<CardText className="price">
+							{props.price}
+							<p className="USD-price">
+								{props.usdPrice}
+							</p>
+						</CardText>
+						<div>
+							<button className='buy-bid-btn'>Place Bid</button>
+						</div>
+					</div>
+					<div className='buy-bid-btn-div'>
+						<p className='time-div'>
+							{props.time}
+						</p>
+					</div>
+				</CardBody>
+			</Card>
+		</>
+	)
 }
 
-export default CreationCards
+export default CreationCards;

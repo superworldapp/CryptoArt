@@ -1,0 +1,16 @@
+.creation-wrapper {
+	margin: 0 auto;
+  max-width: 1200px;
+
+	.creation {
+		display: inline-flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		width: 100%;
+	}
+
+	.creation > div {
+		margin: 20px;
+	}
+}
+
