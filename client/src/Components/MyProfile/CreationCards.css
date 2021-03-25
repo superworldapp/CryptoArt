@@ -1,0 +1,136 @@
+/* Image Card */
+.rowImages {
+    display: flex;
+    justify-content: space-around;
+    margin: 0rem 2.5rem 0rem 2.5rem;
+  }
+  
+  div.imageCards {
+    height: 320px !important;
+    width: 243px;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    opacity: 0.95;
+  }
+  .ctext {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    height: 1.75rem;
+  }
+  .card-image{
+    height: 12rem;
+  }
+  .card-imgTitle{
+    right: 0 !important;
+    color: white;
+    font-weight: 600;
+    font-family: 'Gibson';
+    text-align: center;
+    position: relative;
+    top: 40%;
+    opacity: 0.95;
+    backdrop-filter: blur(7px);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.068) 0%, rgba(0, 0, 0, 0.075) 100%);
+  }
+  .imgOverlay{
+    right: 0 !important;
+  }
+  .Cardimg{
+    border-radius: 1rem 1rem 0rem 0rem;
+    height: 65%;
+    width: 100%;
+  }
+  .card-body {
+    padding: 0.5rem;
+  }
+  
+  img.rounded-circle {
+    margin-right: 0.5rem !important;
+    margin-left: 0.2rem;
+  }
+  
+  /* first row subtitle  */
+  #root > div > div > div > div > div > div > div > div:nth-child(1) {
+    margin-top: 0.5rem;
+    align-items: baseline;
+  }
+  
+  .buy-bid-btn {
+    border-radius: 2em;
+    font-family: 'gibson', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    border: 2px solid #5540c6;
+    text-transform: uppercase;
+    background-color: #5540c6;
+    color: white;
+    padding: 0.2rem 0.5rem;
+  }
+  
+  .buy-bid-btn-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  
+  .sw-overlay{
+    backdrop-filter: blur(60px);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.068) 0%, rgba(0, 0, 0, 0.075) 100%);
+    margin-left: -8rem;
+    margin-top: -1.5rem;
+    border-radius: 0rem 0rem 0.7rem 0.7rem !important; 
+    padding: 0rem 0rem 0rem 0rem !important; 
+    height: 40px;
+    width: 45px;
+    line-height: 0px !important;
+  }
+  .userimg{
+    height: 37px;
+    width: 37px;
+    margin: 10px;
+  }
+   .time-div {
+    font-family: Gibson;
+    font-size: 12px;
+    color: #888888;
+    margin-left: 0.35rem;
+    margin-bottom: 1.5rem;
+    margin-top:0.3rem;
+  } 
+  
+  
+  .bottomView{
+    background-color: white;
+    padding-bottom: 5rem;
+  }
+  
+  .cardImg-body{
+    display : flex;
+    justify-content: center;
+  }
+  .createdby{
+    font-family: Gibson;
+    font-size: 13px;
+    color: #888888;
+    font-weight: normal;
+  }
+  .cardsubtitleName{
+    font-family: Gibson;
+    font-size: 13px;
+    color: #5540c7;
+    font-weight: 600;
+  }
+  .price{
+    font-family: Gibson;
+    font-size: 13px;
+    color: #5540c7;
+    margin-top:0rem;
+  }
+  .USD-price{
+    font-family: Gibson;
+    font-size: 10px;
+    color: #5540c7;
+    margin-bottom: 1.5rem !important;
+  }
