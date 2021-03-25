@@ -162,7 +162,17 @@ class Home extends Component {
                   </div>
                 </div>
                 <div className="col1">
-                <img className='topimage' src={image1} alt='img' />
+
+                  <div className='home-slider'>
+                      <figure>
+                        <img className='topimage' src={image1} alt='img' />
+                        <img className='topimage' src={image2} alt='img' />
+                        <img className='topimage' src={image3} alt='img' />
+                        <img className='topimage' src={image4} alt='img' />
+                        <img className='topimage' src={image1} alt='img' />
+                      </figure>
+                  </div>
+
                 </div>
               </div>
               </Container>
