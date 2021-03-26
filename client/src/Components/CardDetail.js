@@ -10,6 +10,7 @@ import {
   CardHeader,
   Table,
   Input,
+  Label,
   Modal,
   ModalHeader,
   ModalBody,
@@ -28,6 +29,10 @@ import annonuser from '../images/user.png';
 import checkmark from '../images/svg/checkmark.svg';
 import Web3 from 'web3';
 import Axios from 'axios';
+import anonUser from '../images/user.png';
+import openeye from "../assets/svg/eyeopen.svg";
+import Outlineheart from "../assets/svg/heartoutline.svg";
+import "./CardDetail.css";
 
 const CardDetail = ({
   art,
@@ -386,7 +391,7 @@ const CardDetail = ({
   return (
     <>
       <div className='container'>
-        <div className='d-flex justify-content-between mt-5 py-5'>
+        <div className='upperView1'>
           <div
             className='card'
             style={{
@@ -397,29 +402,68 @@ const CardDetail = ({
               <img src={art?._imgurl} className='card-img' alt='...' />
             </a>
           </div>
+          <div>
           <div className='information d-flex flex-column'>
             {/* <a href='#'>{match.params.id}</a>
                         <h1>{match.params.id}</h1> */}
-            <p>
+             <div>
+            <h4>
+            Journey From Furture
+          </h4>
+            </div>
+            <div className = "View"> 
+           <p className = "style2">
+            1 of 1 Edition
+           </p>
+
+           </div>
+           <div className ="View">
+          <p className = "style1">
+          <img
+                  className="userimg"
+                  src={anonUser}
+                ></img> 
               Created by{' '}
               <span className='text-primary'>{accUsername(art?._tokenCreator)}</span>
             </p>
-            <p>
+            &nbsp;
+            &nbsp;
+            <p className = "style1">
+          <img
+                  className="userimg"
+                  src={anonUser}
+                ></img>   {' '}
               Owned by{' '}
               <span className='text-primary'>{accUsername(art?._tokenOwner)}</span>
             </p>
+            </div>
             <div
-              className='card py-3'
-              style={{
-                width: '30rem',
-              }}
-            >
-              <p className='text-secondary'>Current price</p>
-              <h4>
-                {Web3.utils.fromWei('5000000', 'ether')}{' '}
-                ETH
-                <small>
-                  <span className='text-secondary'>
+              className='priceCard '
+              
+            > 
+            <div className ="card-div">
+            <p className ="style1" style={{marginLeft:'2%', marginTop:'1%'}}>
+                  Sales ends in 19hrs 10 min (March 25, 2021 10:15am + 04)
+                </p>
+            </div>
+              <div className= "style3">
+              <p className = "style1">
+                Current offer:
+                <span className = "style2">6.59 ETH ($100.00)</span> 
+              </p>
+              </div>
+              <div className = "View1"> 
+              <div className='information d-flex flex-column'>
+                <div className= "View1">
+                <Input type="text" name="price" id="price" className ="priceInput" > 
+        {Web3.utils.fromWei('5000000', 'ether')}{' '}
+        </Input>
+        &nbsp;
+        <Label className="labelName">ETH</Label>
+                </div>
+                <div className = "View1">
+                <p className= "labelName">
+                  <span >
                     (
                     {(
                       Web3.utils.fromWei(
@@ -429,9 +473,10 @@ const CardDetail = ({
                     ).toFixed(2)}{' '}
                     )
                   </span>
-                </small>
+                </p>
+                <p>
                 <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                  <DropdownToggle caret>Choose your currency</DropdownToggle>
+                  <DropdownToggle caret className = "priceDropdown" > USD </DropdownToggle>
                   <DropdownMenu>
                     {Object.keys(ethPrice).map((keyName, idx) => {
                       return (
@@ -442,11 +487,42 @@ const CardDetail = ({
                     })}
                   </DropdownMenu>
                 </Dropdown>
-              </h4>
+              </p>
 
-              {buyOrSell()}
-            </div>
-          </div>  
+              {buyOrSell()}  
+                </div>
+                </div>   
+                <div>
+              <button className='batchcardbid-btn'> PLACE BID</button>
+              </div>
+              </div>
+              <br/>
+              <div className ="View2">
+                <p className= "style1">
+                  <img src= {openeye} alt= ".." className="userimg">
+                  </img>
+                  &nbsp;
+                   15 Views
+                </p>
+                <p className = "style1">
+                <img src= {Outlineheart} alt= ".." className="userimg">
+                  </img>
+                  &nbsp;
+                    15 Favorite
+                </p>
+              </div>
+              
+            </div> 
+          </div>
+          <div style={{marginTop:'5%'}}>
+            <h5> Description</h5>
+            <p className="style1">
+
+            </p>
+          </div>
+
+          </div>
+            
         </div>
         <div className='my-5'>
           <Card
