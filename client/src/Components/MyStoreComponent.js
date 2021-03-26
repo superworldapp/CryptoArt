@@ -319,6 +319,8 @@ class MyStoreComponent extends Component {
   render() {
     const { batch } = this.props
     const { artStatus } = this.state
+    // TODO optimize
+    const nftsListed = batch.reduce((count, item) => +item[3] + count, 0)
 
     const Menu1 = batch?.map((x) => {
       return (
@@ -360,7 +362,7 @@ class MyStoreComponent extends Component {
         <Row className='mystore-second-row-container'>
             <div className='mystore-nft-status-container'>
                 <div className='mystore-nft-status-container-row'>
-                    <h5>NFT's Listed:</h5><span>0</span>
+                    <h5>NFT's Listed:</h5><span>{nftsListed}</span>
                 </div>
                 <div className='mystore-nft-status-container-row'>
                     <h5>NFT's Sold:</h5><span>0</span>
@@ -368,7 +370,7 @@ class MyStoreComponent extends Component {
             </div>
             <Col className='mystore-art-container'>
               <StyledTabs value={artStatus} onChange={this.onArtStatusChange}>
-                <StyledTab label={`Queue${batch.length > 0 ? ` (${batch.length})` : ''}`} {...artStatusTabPropsByIndex(0)} />
+                <StyledTab label={`Queue${nftsListed > 0 ? ` (${nftsListed})` : ''}`} {...artStatusTabPropsByIndex(0)} />
                 <StyledTab label={'Active'} {...artStatusTabPropsByIndex(1)} />
                 <StyledTab label={'Ended'} {...artStatusTabPropsByIndex(2)} />
                 <StyledTab label={'Offers'} {...artStatusTabPropsByIndex(3)} />
@@ -402,31 +404,12 @@ class MyStoreComponent extends Component {
           className='uploadpopup'
         >
           <ModalHeader toggle={this.toggleModal1}>
-            <p
-              style={{
-                fontFamily: 'Gibson',
-                fontSize: '25px',
-                fontWeight: '800',
-                marginTop: '10px',
-                textAlign: 'left',
-                marginLeft: '7px',
-                marginBottom: '0rem',
-                textTransform: 'uppercase',
-              }}
-            >
+            <div className='title'>
               Upload New Item
-            </p>
-            <p
-              style={{
-                fontFamily: 'Gibson',
-                fontSize: '15px',
-                fontWeight: '800',
-                textAlign: 'left',
-                marginLeft: '7px',
-              }}
-            >
+            </div>
+            <div className='subtitle'>
               Image, Video, Audio or 3D Model
-            </p>
+            </div>
           </ModalHeader>
           <ModalBody>
             <Form>
@@ -507,14 +490,13 @@ class MyStoreComponent extends Component {
                   onChange={this.handleInputChange}
                 />
                 <Label
-                  className='uploadlabel'
+                  className='uploadlabel token-price'
                   style={{
                     fontFamily: 'Gibson',
                     fontSize: '20px',
                     color: 'black',
                   }}
                 >
-                  {' '}
                   ETH
                 </Label>
               </FormGroup>
