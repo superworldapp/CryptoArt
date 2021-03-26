@@ -10,52 +10,51 @@ import {
 } from 'reactstrap';
 
 import './CreationCards.scss';
+import heart from '../../images/svg/heart-card-img.svg';
 
 const CreationCards = (props) => {
 	return (
-		<>
-			<Card className='imageCards'>
-				<CardImg
-					top
-					className="Cardimg"
-					src={props.cardImage}
-					alt='image3'
-				/>
-				<CardImgOverlay className="imgOverlay">
-					<img className="userimg" src={props.profileImage} alt="userImg"/>
-					<CardTitle className="card-imgTitle">
-						{props.cardTitle}
-					</CardTitle>
-				</CardImgOverlay>
-				<CardBody>
-					<div className="cardImg-body">
-						<CardSubtitle className="createdby">
-							{props.CardSubtitle}
-						</CardSubtitle>
-						&nbsp;
-						<CardSubtitle className="cardsubtitleName">
-							{props.CardSubtitleName}
-						</CardSubtitle>
-					</div>
-					<div className='ctext'>
-						<CardText className="price">
-							{props.price}
-							<p className="USD-price">
-								{props.usdPrice}
-							</p>
-						</CardText>
-						<div>
-							<button className='buy-bid-btn'>Place Bid</button>
-						</div>
-					</div>
-					<div className='buy-bid-btn-div'>
-						<p className='time-div'>
-							{props.time}
+		<Card className='card-wrapper'>
+			<CardImg
+				top
+				className="card-background-image"
+				src={props.cardImage}
+				alt='image3'
+			/>
+			<CardImgOverlay className="card-img-overlay">
+				<img className="card-user-img" src={props.profileImage} alt="userImg"/>
+				<img src={heart} alt="heart" className="card-user-heart"/>
+				<CardTitle className="card-user-title">
+					{props.cardTitle}
+				</CardTitle>
+			</CardImgOverlay>
+			<CardBody>
+				<div className="card-user-body">
+					<CardSubtitle className="card-created-by">
+						{props.CardSubtitle}
+					</CardSubtitle>
+					<CardSubtitle className="card-subtitle-name">
+						{props.CardSubtitleName}
+					</CardSubtitle>
+				</div>
+				<div className='card-text-info'>
+					<CardText className="card-text-info-price">
+						{props.price}
+						<p className="card-text-info-usd">
+							{props.usdPrice}
 						</p>
+					</CardText>
+					<div>
+						<button className='card-buy-button'>Bid</button>
 					</div>
-				</CardBody>
-			</Card>
-		</>
+				</div>
+				<div className='card-buy-time'>
+					<p className='card-buy-time-text'>
+						{props.time}
+					</p>
+				</div>
+			</CardBody>
+		</Card>
 	)
 }
 
