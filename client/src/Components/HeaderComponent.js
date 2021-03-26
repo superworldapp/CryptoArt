@@ -1026,29 +1026,14 @@ class Header extends Component {
                         </span>
                       </MenuItem>
                     </NavLink>
-<<<<<<< HEAD
-=======
-
->>>>>>> a3216b3b362244fe88eae14277c0ed1cdab4ffec
                     <NavLink
                       style={{
                         color: 'gray',
                         fontFamily: 'Gibson',
                         fontSize: '13px',
                         textDecoration: 'none',
-<<<<<<< HEAD
-                        // marginLeft: '-0.2rem',
-                        // marginBottom: '0.75rem',
                       }}
                       to='/mystore'
-                    >
-                    <MenuItem
-                      onClick={() => console.log('my store clicked')}
-                      disableGutters
-=======
-                      }}
-                      to='/mystore'
->>>>>>> a3216b3b362244fe88eae14277c0ed1cdab4ffec
                     >
                       <MenuItem disableGutters>
                         <span
