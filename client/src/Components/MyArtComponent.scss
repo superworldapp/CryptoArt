@@ -9,7 +9,35 @@
   font-family: Gibson;
   font-size: 20px;
   font-weight: bold;
+
+  p {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .title {
+    font-family: $fontFamily;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 21px;
+    line-height: 27px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-family: $fontFamily;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 10px;
+  }
 }
+
+.modal-body {
+  padding: 0;
+}
+
 .pl-5 {
   padding-left: 2rem !important;
   padding-bottom: 0.2rem !important;
@@ -20,11 +48,13 @@
   border-top: none !important;
 }
 .modal-content {
-  width: 80%;
+  padding: 50px 37px 50px 50px;
   height: auto;
 }
 .modal-header {
   border: hidden !important;
+  padding: 0;
+  margin-bottom: 43px;
 }
 
 .abtn {
@@ -109,12 +139,13 @@
   flex-flow: column;
   border: none;
   border-radius: 10px;
+  margin: 0 20px 20px 20px;
 
   .card-body-wrapper {
     font-family: $fontFamily;
     height: 24px;
     background: linear-gradient(0, rgba(255, 255, 255, 0.068) 0%, rgba(0, 0, 0, 0.075) 100%);
-    width: inherit;
+    width: 100%;
 
     h3 {
       text-transform: none;
@@ -156,11 +187,16 @@ h3 {
 }
 .form-control {
   display: flex;
-  border-radius: 1rem;
-  margin-left: 0.5rem;
+  border-radius: 10px;
 }
 .form-group {
   display: flex;
+  white-space: nowrap;
+  align-items: baseline;
+
+  .token-price {
+    margin-left: 10px;
+  }
 }
 
 .card-artcard {
@@ -224,10 +260,14 @@ h3 {
 .uploadpopup{
   max-width: 38rem !important;
   height: auto;
+  padding: 50px;
 }
 .uploadlabel{
-  width: 50%;
-  margin-left: 1rem;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 19px;
+  line-height: 19px;
+  min-width: 130px;
 }
 .uploadinput{
   margin-left: 1rem;

@@ -1026,12 +1026,17 @@ class Header extends Component {
                         </span>
                       </MenuItem>
                     </NavLink>
+<<<<<<< HEAD
+=======
+
+>>>>>>> a3216b3b362244fe88eae14277c0ed1cdab4ffec
                     <NavLink
                       style={{
                         color: 'gray',
                         fontFamily: 'Gibson',
                         fontSize: '13px',
                         textDecoration: 'none',
+<<<<<<< HEAD
                         // marginLeft: '-0.2rem',
                         // marginBottom: '0.75rem',
                       }}
@@ -1040,30 +1045,35 @@ class Header extends Component {
                     <MenuItem
                       onClick={() => console.log('my store clicked')}
                       disableGutters
+=======
+                      }}
+                      to='/mystore'
+>>>>>>> a3216b3b362244fe88eae14277c0ed1cdab4ffec
                     >
-                      <span
-                        style={{
-                          display: 'flex',
-                          maxHeight: '10px',
-                          alignItems: 'center',
-                          whiteSpace: 'pre-line',
-                          marginLeft: '10px',
-                          padding: '10px 3px 5px 3px',
-                        }}
-                      >
-                        <p
+                      <MenuItem disableGutters>
+                        <span
                           style={{
-                            flex: '1',
-                            color: '#888888',
-                            fontFamily: 'Gibson',
-                            fontSize: '13px',
-                            margin: '5px 0',
+                            display: 'flex',
+                            maxHeight: '10px',
+                            alignItems: 'center',
+                            whiteSpace: 'pre-line',
+                            marginLeft: '10px',
+                            padding: '10px 3px 5px 3px',
                           }}
                         >
-                          My Store
-                        </p>
-                      </span>
-                    </MenuItem>
+                          <p
+                            style={{
+                              flex: '1',
+                              color: '#888888',
+                              fontFamily: 'Gibson',
+                              fontSize: '13px',
+                              margin: '5px 0',
+                            }}
+                          >
+                            My Store
+                          </p>
+                        </span>
+                      </MenuItem>
                     </NavLink>
 
                     <MenuItem
