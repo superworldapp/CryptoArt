@@ -22,12 +22,17 @@ import {
   Container,
   Row,
 } from 'reactstrap';
+import {withStyles} from "@material-ui/core/styles";
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
 import Axios from 'axios';
 import './MyArtComponent.scss';
-import './MyStoreComponent.css'
+import './MyStoreComponent.scss'
 import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
@@ -82,6 +87,13 @@ export const cardpills = [
   },
 ];
 
+const artStatuses = {
+  'Queue': 0,
+  'Active': 1,
+  'Ended': 2,
+  'Offers': 3,
+}
+
 class MyStoreComponent extends Component {
   constructor(props) {
     super(props);
@@ -100,7 +112,7 @@ class MyStoreComponent extends Component {
       isLoading: false,
       loadingError: false,
       uploadSuccess: false,
-      artStatus: 'Queue',
+      artStatus: artStatuses['Queue'],
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.toggleModal2 = this.toggleModal2.bind(this);
@@ -110,8 +122,7 @@ class MyStoreComponent extends Component {
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
     this.fileAwsHandler = this.fileAwsHandler.bind(this);
     this.refreshMyArt = this.refreshMyArt.bind(this);
-    this.storeQueue = this.storeQueue.bind(this);
-    this.storeActive = this.storeActive.bind(this);
+    this.onArtStatusChange = this.onArtStatusChange.bind(this);
 
   }
 
@@ -132,19 +143,9 @@ class MyStoreComponent extends Component {
       window.location.reload();
   }
 
-  storeQueue() {
-    this.setState({
-        artStatus: 'Queue',
-    })
+  onArtStatusChange(e, artStatus) {
+    this.setState({artStatus})
   }
-
-  storeActive() {
-      this.setState({
-          artStatus: 'Active',
-      })
-  }
-
-
 
   handleUploadMore() {
     this.toggleModal2();
@@ -317,31 +318,29 @@ class MyStoreComponent extends Component {
 
   render() {
     const { batch } = this.props
+    const { artStatus } = this.state
+    // TODO optimize
+    const nftsListed = batch.reduce((count, item) => +item[3] + count, 0)
 
-    console.log('### batch ->', batch);
     const Menu1 = batch?.map((x) => {
       return (
-        <div key={x._batchId} style={{ minWidth: 280, margin: '0 20px' }} className='col-4 col-md-3 col-lg-2'>
-          <Allpatrender
-            art={x}
-            contract={this.props.contract}
-            accounts={this.props.accounts}
-          />
-        </div>
-      );
+        <Allpatrender
+          key={x._batchId}
+          art={x}
+          contract={this.props.contract}
+          accounts={this.props.accounts}
+        />
+      )
     });
 
     const Menu2 = batch?.map((x) => {
         return (
-          <div key={x._batchId} style={{ minWidth: 280, margin: '0 20px' }} className='col-4 col-md-3 col-lg-2'>
-            <Allpatrender2
-              art={x}
-              contract={this.props.contract}
-              accounts={this.props.accounts}
-            />
-            <br />
-            <br />
-          </div>
+          <Allpatrender2
+            key={x._batchId}
+            art={x}
+            contract={this.props.contract}
+            accounts={this.props.accounts}
+          />
         );
       });
 
@@ -361,43 +360,38 @@ class MyStoreComponent extends Component {
             </Col>
         </Row>
         <Row className='mystore-second-row-container'>
-            <Col className='mystore-nft-status-container' md={2}>
-                <div style={{display: 'flex', justifyContent: 'space-between', width: '90%'}}>
-                    <h5 style={{fontFamily: 'Gibson', fontSize: '18px', fontWeight: '400'}}>NFT's Listed:</h5>
-                    <p style={{fontFamily: 'Gibson', fontSize: '18px', fontWeight: '400'}}>0</p>
+            <div className='mystore-nft-status-container'>
+                <div className='mystore-nft-status-container-row'>
+                    <h5>NFT's Listed:</h5><span>{nftsListed}</span>
                 </div>
-                <div style={{display: 'flex', justifyContent: 'space-between', width: '90%', marginTop: '-10px'}}>
-                    <h5 style={{fontFamily: 'Gibson', fontSize: '18px', fontWeight: '400'}}>NFT's Sold:</h5>
-                    <p style={{fontFamily: 'Gibson', fontSize: '18px', fontWeight: '400'}}>0</p>
+                <div className='mystore-nft-status-container-row'>
+                    <h5>NFT's Sold:</h5><span>0</span>
                 </div>
-            </Col>
+            </div>
             <Col className='mystore-art-container'>
-                <div className='mystore-art-status-container'>
-                    <button onClick={this.storeQueue} className='queue-status'>
-                      <h2>QUEUE</h2>
-                      {/*{batch?.length !== 0 && `(${batch?.length})`}*/}
-                    </button>
-                    <button onClick={this.storeActive} className='active-status'><h2>ACTIVE</h2></button>
-                    <button><h2>ENDED</h2></button>
-                    <button><h2>OFFERS</h2></button>
+              <StyledTabs value={artStatus} onChange={this.onArtStatusChange}>
+                <StyledTab label={`Queue${nftsListed > 0 ? ` (${nftsListed})` : ''}`} {...artStatusTabPropsByIndex(0)} />
+                <StyledTab label={'Active'} {...artStatusTabPropsByIndex(1)} />
+                <StyledTab label={'Ended'} {...artStatusTabPropsByIndex(2)} />
+                <StyledTab label={'Offers'} {...artStatusTabPropsByIndex(3)} />
+              </StyledTabs>
+
+              <TabPanel value={artStatus} index={0}>
+                <div className='mystore-art-queue-container row'>
+                  {Menu1}
+                  <div className='mystore-upload-art'>
+                    <Button className='mystore-upload-btn' onClick={this.toggleModal1}>
+                      <div className='mystore-upload-add'>+</div>
+                    </Button>
+                  </div>
                 </div>
+              </TabPanel>
 
-                {this.state.artStatus === 'Queue' && (
-                    <div className='mystore-art-queue-container row'>
-                        {Menu1}
-                        <div className='mystore-upload-art' >
-                        <Button className='mystore-upload-btn' onClick={this.toggleModal1}>
-                            <div className='mystore-upload-add'>+</div>
-                        </Button>
-                        </div>
-                    </div>
-                )}
-
-                {this.state.artStatus === 'Active' && (
-                    <div className='mystore-art-active-container row'>
-                        {Menu2}
-                    </div>
-                )}
+              <TabPanel value={artStatus} index={1}>
+                <div className='mystore-art-active-container row'>
+                  {Menu2}
+                </div>
+              </TabPanel>
             </Col>
         </Row>
 
@@ -410,31 +404,12 @@ class MyStoreComponent extends Component {
           className='uploadpopup'
         >
           <ModalHeader toggle={this.toggleModal1}>
-            <p
-              style={{
-                fontFamily: 'Gibson',
-                fontSize: '25px',
-                fontWeight: '800',
-                marginTop: '10px',
-                textAlign: 'left',
-                marginLeft: '7px',
-                marginBottom: '0rem',
-                textTransform: 'uppercase',
-              }}
-            >
+            <div className='title'>
               Upload New Item
-            </p>
-            <p
-              style={{
-                fontFamily: 'Gibson',
-                fontSize: '15px',
-                fontWeight: '800',
-                textAlign: 'left',
-                marginLeft: '7px',
-              }}
-            >
+            </div>
+            <div className='subtitle'>
               Image, Video, Audio or 3D Model
-            </p>
+            </div>
           </ModalHeader>
           <ModalBody>
             <Form>
@@ -515,14 +490,13 @@ class MyStoreComponent extends Component {
                   onChange={this.handleInputChange}
                 />
                 <Label
-                  className='uploadlabel'
+                  className='uploadlabel token-price'
                   style={{
                     fontFamily: 'Gibson',
                     fontSize: '20px',
                     color: 'black',
                   }}
                 >
-                  {' '}
                   ETH
                 </Label>
               </FormGroup>
@@ -651,6 +625,78 @@ class MyStoreComponent extends Component {
       </Container>
     );
   }
+}
+
+const TabPanel = props => {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`art-status-tabpanel-${index}`}
+      aria-labelledby={`art-status-tab-${index}`}
+      {...other}
+    >
+      {value === index && <>{children}</>}
+    </div>
+  );
+}
+
+const StyledTab = withStyles({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    fontFamily: ['Gibson'],
+    fontStyle: 'normal',
+    fontWeight: 700,
+    fontSize: '1.5rem',
+    lineHeight: '24px',
+    '&:focus': {
+      outline: 'none',
+    },
+    opacity: 1,
+},
+})((props) => <Tab indicatorColor='black' {...props} />);
+
+const StyledTabs = withStyles({
+  root: {
+    justifyContent: 'space-between',
+    paddingLeft: '90px',
+    '@media screen and (max-width: 1024px)': {
+      paddingLeft: 0,
+    }
+  },
+  scroller: {
+    overflowX: 'scroll !important',
+    '&::-webkit-scrollbar': {
+      width: 0,
+    },
+    '-ms-overflow-style': 'none',
+    overflow: '-moz-scrollbars-none',
+  },
+  flexContainer: {
+    justifyContent: 'space-between',
+    maxWidth: '774px',
+    width: '100%',
+  },
+  indicator: {
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    '& > span': {
+      maxWidth: 132,
+      width: '100%',
+      backgroundColor: 'black',
+    },
+  },
+})((props) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
+
+const artStatusTabPropsByIndex = index => {
+  return {
+    id: `art-status-tab-${index}`,
+    'aria-controls': `art-status-tabpanel-${index}`,
+  };
 }
 
 export default MyStoreComponent;

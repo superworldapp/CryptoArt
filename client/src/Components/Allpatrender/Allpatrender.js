@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import checkmark from "../../images/svg/checkmark.svg";
 import loader from "../../images/loader.svg";
 import {cardpills, ETHER} from "../MyStoreComponent";
-import './style.sass';
+import './style.scss';
 
 class Allpatrender extends Component {
   // let day = moment.unix(art.dateofComp);
@@ -90,6 +90,9 @@ class Allpatrender extends Component {
   }
 
   mintToken() {
+    this.props.contract.methods
+      .mintToken(this.props.art._batchId)
+      .send({ from: this.props.accounts, gas: 5000000 });
   }
 
   handleInputChange(event) {
@@ -173,6 +176,7 @@ class Allpatrender extends Component {
   };
 
   render() {
+    const { art } = this.props
     let but = this.props.art._isSellings ? ' ' : 'hidden';
     let bak = this.props.art._isSellings ? 'bg-success text-white' : '';
     let buk = this.props.art._isBidding ? 'bg-warning' : '';
@@ -233,6 +237,7 @@ class Allpatrender extends Component {
         className='mystore-queue-card'
       >
         {/* <a href={this.props.art.imgurl} target='_blank'> */}
+        {+art[3] > 1 && <span className='card-counter'>+{art[3]}</span>}
         <div className='mystore-queue-card-img'>
           <Link to={`/batch/${this.props.art._batchId}`}>
             <CardImg
