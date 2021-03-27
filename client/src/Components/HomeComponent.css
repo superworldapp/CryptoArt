@@ -424,3 +424,16 @@ img.rounded-circle {
     left: -400%;
   }
 }
+
+.image-change{ 
+  animation: changeBackground 1s infinite;
+  background-size: cover;
+  background-position: center;
+}
+
+@keyframes changeBackground{
+   0%,100%  {background-image: url("../images/image\ 6.png");}
+   25% {background-image: url("../images/image\ 7.png");}
+   50% {background-image: url("../images/image\ 8.png");}
+   75% {background-image: url("../images/image\ 9.png");}
+}

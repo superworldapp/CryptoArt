@@ -186,7 +186,7 @@ class Home extends Component {
               <div className="col2">
               <Row around="xs" className= "gridRow1">
                 <Col xs={2}  className= "gridCol1">
-                  <div className='home-slider-multiple home-slider-multiple-1'>
+                  {/* <div className='home-slider-multiple home-slider-multiple-1'>
                     <figure>
                       <img src ={image2} className="image10" alt="image10" />
                       <img src ={image3} className="image10" alt="image10" />
@@ -194,7 +194,8 @@ class Home extends Component {
                       <img src ={image3} className="image10" alt="image10" />
                       <img src ={image2} className="image10" alt="image10" />
                     </figure>
-                  </div>
+                  </div> */}
+                    <div className='image10 image-change'></div>
                   </Col> 
                   <Col xs={2} className= "gridCol1">
                   <div className='home-slider-multiple home-slider-multiple-2'>
