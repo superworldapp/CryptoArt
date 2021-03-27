@@ -79,7 +79,44 @@ class Main extends Component {
       allDocs = rexponse;
       console.log(rexponse);
       this.setState({ art: allDocs });
+      console.log(this.props.art);
+   
 
+
+      response = [];
+    //   for (let i = 1; i <= resx2; i++) {
+    //     let rex = await this.props.contract?.methods.getTokenData(i).call();
+    //     let rex2 = await this.props.contract?.methods.getTokenDataBatch(i).call();
+    //     if (rex._tokenOwner == this.props.accounts) {
+    //     var newBlock = {
+    //       _tokenId : i,
+    //       _tokenOwner : rex._tokenOwner,
+    //       _isSellings : rex._isSellings,
+    //       _sellprice :rex._sellprice,
+    //       _refbatch : rex._refbatch,
+    //       _tokenbidder : rex._tokenbidder,
+    //       _isBidding : rex._isBidding,
+    //       _bidprice : rex._bidprice,
+    //       _tokenHash :rex2._tokenHash,
+    //       _tokenBatchName : rex2._tokenBatchName,
+    //       _tokenCreator : rex2._tokenCreator,
+    //       _imgurl : rex2._imgurl,
+    //       _imgThumbnail : rex2._imgThumbnail,
+         
+    //     }
+    //       response.push(newBlock);
+    //       console.log(newBlock)
+    //     }
+    //     // if (rex2._tokenCreator == this.props.accounts) {
+    //     //   createrToken.push(rex);
+    //     // }
+  
+    //   }
+    //   allDoc= [];
+    // allDoc = response;
+    // console.log(response);
+    // this.setState({ art2: allDocs});
+   
       let cre = await Axios.get(
         // `http://geo.superworldapp.com/api/json/nftevents/tokencreated/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
         `${process.env.REACT_APP_TOKEN_API_URL}/nftevents/tokencreated/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
@@ -231,7 +268,7 @@ class Main extends Component {
         )}
           contract={this.state.contract}
           accounts={this.state.accounts}
-          
+          allTokens={this.state.art}
           matchId={match.params.id}
         />
       );
@@ -289,6 +326,7 @@ class Main extends Component {
                 batch={this.state.batch?.filter(
                   (batch) => batch._tokenCreator == this.state.accounts
                 )}
+                // art2own = {this.state.art2?.filter((art2s) => art2s._tokenOwner == this.state.accounts)}
               />
             )}
           />
