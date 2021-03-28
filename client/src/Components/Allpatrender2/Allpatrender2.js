@@ -37,13 +37,14 @@ class Allpatrender2 extends Component {
     this.StartAuction = this.StartAuction.bind(this);
     this.EndAuction = this.EndAuction.bind(this);
     this.refreshMyArt = this.refreshMyArt.bind(this);
-    this.mintToken = this.mintToken.bind(this)
+    this.mintToken = this.mintToken.bind(this);
+    this.Sale = this.Sale.bind(this);
 
 
     //this.toggleAuction = this.toggleAuction.bind(this);
   }
   componentDidMount = async() => {
-    this.setState({art : this.props.art2});
+    this.setState({art : this.props.art});
   }
 
   buyItem = async () => {
@@ -104,7 +105,26 @@ class Allpatrender2 extends Component {
       [name]: value,
     });
   }
-
+  Sale = async() => {
+    let tokenId = 1 
+    let sellprice = "1000000000000000000" 
+    let isListed = true
+    try {
+    //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+      const res = await this.props.contract.methods
+        .Sale(
+          tokenId,
+          sellprice,
+          isListed,
+        )
+        .send({ from: this.props.accounts, gas: 5000000 });
+  
+      console.log('res', res);
+      let data;
+    } catch(error){
+        console.error(error)
+    }
+  }
   putForSale = async () => {
     this.setState({putForSaleLoading: true});
     const res = await this.props.contract.methods
@@ -239,7 +259,7 @@ class Allpatrender2 extends Component {
       >
         {/* <a href={this.props.art.imgurl} target='_blank'> */}
         <div className='mystore-active-card-img'>
-          <Link to={`/batch/${this.state.art._batchId}`}>
+          <Link to={`/card/${this.state.art._tokenId}`}>
             <CardImg
               top
               src={this.props.art._imgurl}
@@ -260,7 +280,7 @@ class Allpatrender2 extends Component {
               style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '500', color: '#5540C7', marginTop: '-20px'}}>{this.state.art._sellprice}</p>
         </span>
 
-              <button className="button_mint" onClick={this.mintToken}>Mint
+              <button className="button_mint" >Edit
               </button>
 
               <div>

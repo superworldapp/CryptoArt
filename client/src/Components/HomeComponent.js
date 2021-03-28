@@ -708,7 +708,12 @@ class Home extends Component {
                           </p>
                       </CardText>
                       <div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                      >
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </a>
                       </div>
                     </div> 
                   </CardBody>
@@ -791,7 +796,12 @@ class Home extends Component {
                           </p>
                       </CardText>
                       <div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                      >
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </a>
                       </div>
                     </div> 
                   </CardBody>
@@ -874,7 +884,12 @@ class Home extends Component {
 
                       </CardText>
                       <div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                      >
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </a>
                       </div>
                     </div> 
                   </CardBody>
@@ -946,9 +961,16 @@ class Home extends Component {
                         ($176.61 USD)
                           </p>
                       </CardText>
+                      
                       <div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                      >
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </a>
                       </div>
+                      
                     </div> 
 
                   </CardBody>

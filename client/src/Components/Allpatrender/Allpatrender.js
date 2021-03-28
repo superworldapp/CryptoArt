@@ -39,6 +39,8 @@ class Allpatrender extends Component {
     this.EndAuction = this.EndAuction.bind(this);
     this.refreshMyArt = this.refreshMyArt.bind(this);
     this.mintToken = this.mintToken.bind(this);
+    this.Sale = this.Sale.bind(this);
+    this.mintTokenBatch = this.mintTokenBatch.bind(this);
 
     //this.toggleAuction = this.toggleAuction.bind(this);
   }
@@ -103,7 +105,48 @@ class Allpatrender extends Component {
       [name]: value,
     });
   }
-
+  mintTokenBatch = async() => {
+    // const res = await instance.methods.createtokenBatch().send();
+    // console.log(res)
+    let tokenBatchId = 1//this.state.artHash.toString();
+    let amountToMint = 1 //this.state.title;
+    
+    try {
+    //function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) 
+      const res = await this.props.contract.methods
+        .mintTokenBatch(
+          tokenBatchId,
+          amountToMint,
+      
+        )
+        .send({ from:this.props.accounts, gas: 5000000 });
+  
+      console.log('res', res);
+      let data;
+    } catch(error){
+        console.error(error)
+    }
+  }
+  Sale = async() => {
+    let tokenId = 1 
+    let sellprice = "100000000000000000" 
+    let isListed = true
+    try {
+    //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+      const res = await this.props.contract.methods
+        .Sale(
+          tokenId,
+          sellprice,
+          isListed,
+        )
+        .send({ from: this.props.accounts, gas: 5000000 });
+  
+      console.log('res', res);
+      let data;
+    } catch(error){
+        console.error(error)
+    }
+  }
   putForSale = async () => {
     this.setState({putForSaleLoading: true});
     const res = await this.props.contract.methods
@@ -237,7 +280,7 @@ class Allpatrender extends Component {
         className='mystore-queue-card'
       >
         {/* <a href={this.props.art.imgurl} target='_blank'> */}
-        {+art[3] > 1 && <span className='card-counter'>+{art[3]}</span>}
+        {/* {+art[3] > 1 && <span className='card-counter'>+{art[3]}</span>} */}
         <div className='mystore-queue-card-img'>
           <Link to={`/batch/${this.props.art._batchId}`}>
             <CardImg
@@ -254,6 +297,7 @@ class Allpatrender extends Component {
 
             <div className='second-section'>
               <button onClick={this.mintToken} className='button_mint'>Mint</button>
+             
             </div>
 
             <div>

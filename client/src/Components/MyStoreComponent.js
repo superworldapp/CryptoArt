@@ -113,6 +113,7 @@ class MyStoreComponent extends Component {
       loadingError: false,
       uploadSuccess: false,
       artStatus: artStatuses['Queue'],
+      indextab : 7
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.toggleModal2 = this.toggleModal2.bind(this);
@@ -256,7 +257,7 @@ class MyStoreComponent extends Component {
       }
 
     }
-    this.setState({ art: response , batchart: createrToken });
+    this.setState({ art3: response , batchart: createrToken });
 
     // for (let i = 1; i <= response.length; i++) {
     //   let rex = await this.props.contract?.methods.getTokenDataBatch(1).call();
@@ -320,6 +321,7 @@ class MyStoreComponent extends Component {
     const { batch } = this.props
     const { artStatus } = this.state
     const {art2} = this.props
+    console.log(art2);
     // TODO optimize
     const nftsListed = batch.reduce((count, item) => +item[3] + count, 0)
 
@@ -334,10 +336,10 @@ class MyStoreComponent extends Component {
       )
     });
 
-    const Menu2 = art2?.map((x) => {
+    const Menu2 = this.state.art3?.map((x) => {
         return (
           <Allpatrender2
-            key={x._batchId}
+            key={x._tokenId}
             art={x}
             contract={this.props.contract}
             accounts={this.props.accounts}
@@ -694,6 +696,7 @@ const StyledTabs = withStyles({
 })((props) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
 
 const artStatusTabPropsByIndex = index => {
+  //setState({indextab : index});
   return {
     id: `art-status-tab-${index}`,
     'aria-controls': `art-status-tabpanel-${index}`,
