@@ -256,7 +256,7 @@ class MyStoreComponent extends Component {
       }
 
     }
-
+    this.setState({ art: response , batchart: createrToken });
 
     // for (let i = 1; i <= response.length; i++) {
     //   let rex = await this.props.contract?.methods.getTokenDataBatch(1).call();
@@ -271,11 +271,11 @@ class MyStoreComponent extends Component {
     //   }
     // }
 
-    console.log(createrToken);
-    allDocs = [];
-    allDocs = response;
-    console.log(response);
-    this.setState({ art: allDocs , batchart: createrToken });
+    // console.log(createrToken);
+    // allDocs = [];
+    // allDocs = response;
+    // console.log(response);
+    // this.setState({ art: allDocs , batchart: createrToken });
   }
   fileSelectHandler = (event) => {
     console.log(event.target.files);
@@ -319,6 +319,7 @@ class MyStoreComponent extends Component {
   render() {
     const { batch } = this.props
     const { artStatus } = this.state
+    const {art2} = this.props
     // TODO optimize
     const nftsListed = batch.reduce((count, item) => +item[3] + count, 0)
 
@@ -333,7 +334,7 @@ class MyStoreComponent extends Component {
       )
     });
 
-    const Menu2 = batch?.map((x) => {
+    const Menu2 = art2?.map((x) => {
         return (
           <Allpatrender2
             key={x._batchId}

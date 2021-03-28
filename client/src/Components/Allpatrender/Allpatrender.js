@@ -250,7 +250,7 @@ class Allpatrender extends Component {
         <div className='card-body-wrapper'>
           <CardBody style={{width: '100%'}}>
 
-            <h3>Back Country Fishing</h3>
+            <h3>{this.props.art._tokenBatchName}</h3>
 
             <div className='second-section'>
               <button onClick={this.mintToken} className='button_mint'>Mint</button>
