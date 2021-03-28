@@ -1,6 +1,8 @@
 import React from 'react';
 import Web3 from 'web3';
 import axios from 'axios';
+import {CardBody, Card } from 'reactstrap';
+import './TableBody.css'
 
 const TableBody = ({ cre }) => {
   const calcTime = (timeCreated) => {
@@ -50,55 +52,52 @@ const TableBody = ({ cre }) => {
       return '@SwapnilTest';
     else return '@Annonymous';
   };
+
   console.log('item in return', cre);
   return (
-    <tbody>
-      {cre?.map((item) => {
-        return (
-          <React.Fragment>
-            <tr key={item.id}>
-              <th scope='row'>
-                {item?.event == 'Tokenbid'
-                  ? 'Auction Started'
-                  : item.event == 'Bidstarted'
-                  ? 'Bid Placed'
-                  : item.event == 'Tokenputforsale'
-                  ? 'Listed For Sale'
-                  : item.event == 'Tokencreated'
-                  ? 'Token Created'
-                  : item.event == 'Tokenbought'
-                  ? 'Purchased'
-                  : item.event}
-              </th>
-              <td>
-                {item?.returnValues.tokenPrice
-                  ? `${Web3.utils.fromWei(
-                      Number(item?.returnValues.tokenPrice).toString(),
-                      'ether'
-                    )} ETH`
-                  : item?.returnValues.sellPrice
-                  ? `${Web3.utils.fromWei(
-                      Number(item?.returnValues.sellPrice).toString(),
-                      'ether'
-                    )} ETH`
-                  : 'null'}
-              </td>
-              <td>
-                {item?.returnValues.tokenCreator
-                  ? accUsername(item?.returnValues.tokenCreator)
-                  : accUsername(item?.returnValues.seller)}
-              </td>
-              <td>
-                {item?.returnValues.newowner
-                  ? accUsername(item?.returnValues.newowner)
-                  : 'null'}
-              </td>
-              <td>{calcTime(item?.returnValues.times)}</td>
-            </tr>
-          </React.Fragment>
-        );
-      })}
-    </tbody>
+    <div class = "history">
+        {cre?.map((item) => {
+          return (
+            <div>
+              <Card key={item.id}>
+                <CardBody scope='row'>
+                  <p>
+                    <span className = "history-detail">{item?.event == 'Tokenbid'
+                    ? 'Auction Started '
+                    : item.event == 'Bidstarted'
+                    ? 'Bid Placed '
+                    : item.event == 'Tokenputforsale'
+                    ? 'Listed For Sale '
+                    : item.event == 'Tokencreated'
+                    ? 'Token Created '
+                    : item.event == 'Tokenbought'
+                    ? 'Purchased '
+                    : item.event}
+                    <span className = "price">{item?.returnValues.tokenPrice
+                    ? `${Web3.utils.fromWei(
+                        Number(item?.returnValues.tokenPrice).toString(),
+                        'ether'
+                      )} ETH `
+                    : item?.returnValues.sellPrice
+                    ? `${Web3.utils.fromWei(
+                        Number(item?.returnValues.sellPrice).toString(),
+                        'ether'
+                      )} ETH `
+                    : 'null'}</span>
+                    {item?.returnValues.tokenCreator
+                    ? accUsername(item?.returnValues.tokenCreator)
+                    : accUsername(item?.returnValues.seller)}
+                    {item?.returnValues.newowner
+                    ? accUsername(item?.returnValues.newowner)
+                    : 'null'}</span>
+                  </p>
+                    <p className = "time">{calcTime(item?.returnValues.times)}</p>
+                </CardBody>
+              </Card>
+              </div>
+          );
+        })}
+      </div>
   );
 };
 
