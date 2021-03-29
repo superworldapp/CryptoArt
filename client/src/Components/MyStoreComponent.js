@@ -43,6 +43,7 @@ import annonuser from '../images/user.png';
 import checkmark from '../images/svg/checkmark.svg';
 import Allpatrender from "./Allpatrender";
 import Allpatrender2 from "./Allpatrender2";
+import ModalUploadToMyStore from "./ModalUploadToMyStore/ModalUploadToMyStore";
 
 const SHA256 = require('crypto-js/sha256');
 
@@ -140,6 +141,9 @@ class MyStoreComponent extends Component {
   }
 
   refreshMyArt() {
+    return this.setState({
+      isModalOpen1: false,
+    })
     if (!this.state.isModalOpen1 && !this.state.uploadSuccess)
       window.location.reload();
   }
@@ -398,165 +402,139 @@ class MyStoreComponent extends Component {
             </Col>
         </Row>
 
-
-
-        <Modal
+        <ModalUploadToMyStore
           isOpen={this.state.isModalOpen1}
           toggle={this.toggleModal1}
           onClosed={this.refreshMyArt}
-          className='uploadpopup'
-        >
-          <ModalHeader toggle={this.toggleModal1}>
-            <div className='title'>
-              Upload New Item
-            </div>
-            <div className='subtitle'>
-              Image, Video, Audio or 3D Model
-            </div>
-          </ModalHeader>
-          <ModalBody>
-            <Form>
-              <FormGroup>
-                <Label
-                  htmlFor='artHash'
-                  className='uploadlabel'
-                  style={{
-                    fontFamily: 'Gibson',
-                    fontSize: '20px',
-                    color: 'black',
-                  }}
-                >
-                  File to Upload
-                </Label>
-                <Input
-                  //style={{ marginLeft: '1.0rem' }}
-                  type='file'
-                  onChange={this.fileSelectHandler}
-                />
-              </FormGroup>
+        />
 
-              <FormGroup>
-                <Label
-                  htmlFor='title'
-                  className='uploadlabel'
-                  style={{
-                    fontFamily: 'Gibson',
-                    fontSize: '20px',
-                    color: 'black',
-                  }}
-                >
-                  Name*
-                </Label>
-                <Input
-                  type='text'
-                  id='title'
-                  name='title'
-                  onChange={this.handleInputChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label
-                  htmlFor='title'
-                  className='uploadlabel'
-                  style={{
-                    fontFamily: 'Gibson',
-                    fontSize: '20px',
-                    color: 'black',
-                  }}
-                >
-                  Description
-                </Label>
-                <Input
-                  type='textarea'
-                  id='des'
-                  name='des'
-                  onChange={this.handleInputChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label
-                  htmlFor='price'
-                  className='uploadlabel'
-                  style={{
-                    fontFamily: 'Gibson',
-                    fontSize: '20px',
-                    color: 'black',
-                  }}
-                >
-                  Token Price
-                </Label>
-                <Input
-                  style={{ width: '50%' }}
-                  type='text'
-                  id='price'
-                  name='price'
-                  onChange={this.handleInputChange}
-                />
-                <Label
-                  className='uploadlabel token-price'
-                  style={{
-                    fontFamily: 'Gibson',
-                    fontSize: '20px',
-                    color: 'black',
-                  }}
-                >
-                  ETH
-                </Label>
-              </FormGroup>
-              <FormGroup>
-                <Label
-                  htmlFor='nos'
-                  className='uploadlabel'
-                  style={{
-                    fontFamily: 'Gibson',
-                    fontSize: '20px',
-                    color: 'black',
-                  }}
-                >
-                  No. of Tokens
-                </Label>
-                <Input
-                  style={{ width: '40%', marginRight: '11rem' }}
-                  placeholder='1'
-                  type='number'
-                  id='nos'
-                  name='nos'
-                  onChange={this.handleInputChange}
-                />
-              </FormGroup>
-              <br />
-              <button
-                className='abtn'
-                style={{
-                  color: 'white',
-                  left: '9rem',
-                  backgroundColor: '#5548C7',
-                  fontSize: '18px',
-                }}
-                //color='primary'
-                onClick={this.fileUploadHandler}
-              >
-                Upload
-              </button>
-              {this.state.isLoading ? (
-                <img
-                  style={{ display: 'flex', verticalAlign: 'none' }}
-                  src={loader}
-                />
-              ) : (
-                <div></div>
-              )}
-              {this.state.loadingError ? (
-                <div style={{ color: 'red', fontFamily: 'Gibson' }}>
-                  There was a transaction/processing error. Please try again.
-                </div>
-              ) : (
-                <div></div>
-              )}
-              <br />
-            </Form>
-          </ModalBody>
-        </Modal>
+        {/*<Modal*/}
+        {/*  isOpen={this.state.isModalOpen1}*/}
+        {/*  toggle={this.toggleModal1}*/}
+        {/*  onClosed={this.refreshMyArt}*/}
+        {/*  className='uploadpopup'*/}
+        {/*>*/}
+        {/*  <ModalHeader toggle={this.toggleModal1}>*/}
+        {/*    <div className='title'>*/}
+        {/*      Upload New Item*/}
+        {/*    </div>*/}
+        {/*    <div className='subtitle'>*/}
+        {/*      Image, Video, Audio or 3D Model*/}
+        {/*    </div>*/}
+        {/*  </ModalHeader>*/}
+        {/*  <ModalBody>*/}
+        {/*    <Form>*/}
+        {/*      <FormGroup>*/}
+        {/*        <Label*/}
+        {/*          htmlFor='artHash'*/}
+        {/*          className='uploadlabel'*/}
+        {/*        >*/}
+        {/*          File to Upload*/}
+        {/*        </Label>*/}
+        {/*        <Input*/}
+        {/*          //style={{ marginLeft: '1.0rem' }}*/}
+        {/*          type='file'*/}
+        {/*          onChange={this.fileSelectHandler}*/}
+        {/*        />*/}
+        {/*      </FormGroup>*/}
+
+        {/*      <FormGroup>*/}
+        {/*        <Label*/}
+        {/*          htmlFor='title'*/}
+        {/*          className='uploadlabel'*/}
+        {/*        >*/}
+        {/*          Name**/}
+        {/*        </Label>*/}
+        {/*        <Input*/}
+        {/*          type='text'*/}
+        {/*          id='title'*/}
+        {/*          name='title'*/}
+        {/*          onChange={this.handleInputChange}*/}
+        {/*        />*/}
+        {/*      </FormGroup>*/}
+        {/*      <FormGroup>*/}
+        {/*        <Label*/}
+        {/*          htmlFor='title'*/}
+        {/*          className='uploadlabel'*/}
+        {/*        >*/}
+        {/*          Description*/}
+        {/*        </Label>*/}
+        {/*        <Input*/}
+        {/*          type='textarea'*/}
+        {/*          id='des'*/}
+        {/*          name='des'*/}
+        {/*          onChange={this.handleInputChange}*/}
+        {/*        />*/}
+        {/*      </FormGroup>*/}
+        {/*      <FormGroup>*/}
+        {/*        <Label*/}
+        {/*          htmlFor='price'*/}
+        {/*          className='uploadlabel'*/}
+        {/*        >*/}
+        {/*          Token Price*/}
+        {/*        </Label>*/}
+        {/*        <Input*/}
+        {/*          style={{ width: '50%' }}*/}
+        {/*          type='text'*/}
+        {/*          id='price'*/}
+        {/*          name='price'*/}
+        {/*          onChange={this.handleInputChange}*/}
+        {/*        />*/}
+        {/*        <Label*/}
+        {/*          className='uploadlabel token-price'*/}
+        {/*        >*/}
+        {/*          ETH*/}
+        {/*        </Label>*/}
+        {/*      </FormGroup>*/}
+        {/*      <FormGroup>*/}
+        {/*        <Label*/}
+        {/*          htmlFor='nos'*/}
+        {/*          className='uploadlabel'*/}
+        {/*        >*/}
+        {/*          No. of Tokens*/}
+        {/*        </Label>*/}
+        {/*        <Input*/}
+        {/*          style={{ width: '40%', marginRight: '11rem' }}*/}
+        {/*          placeholder='1'*/}
+        {/*          type='number'*/}
+        {/*          id='nos'*/}
+        {/*          name='nos'*/}
+        {/*          onChange={this.handleInputChange}*/}
+        {/*        />*/}
+        {/*      </FormGroup>*/}
+        {/*      <br />*/}
+        {/*      <button*/}
+        {/*        className='abtn'*/}
+        {/*        style={{*/}
+        {/*          color: 'white',*/}
+        {/*          left: '9rem',*/}
+        {/*          backgroundColor: '#5548C7',*/}
+        {/*          fontSize: '18px',*/}
+        {/*        }}*/}
+        {/*        //color='primary'*/}
+        {/*        onClick={this.fileUploadHandler}*/}
+        {/*      >*/}
+        {/*        Upload*/}
+        {/*      </button>*/}
+        {/*      {this.state.isLoading ? (*/}
+        {/*        <img*/}
+        {/*          style={{ display: 'flex', verticalAlign: 'none' }}*/}
+        {/*          src={loader}*/}
+        {/*        />*/}
+        {/*      ) : (*/}
+        {/*        <div></div>*/}
+        {/*      )}*/}
+        {/*      {this.state.loadingError ? (*/}
+        {/*        <div style={{ color: 'red', fontFamily: 'Gibson' }}>*/}
+        {/*          There was a transaction/processing error. Please try again.*/}
+        {/*        </div>*/}
+        {/*      ) : (*/}
+        {/*        <div></div>*/}
+        {/*      )}*/}
+        {/*      <br />*/}
+        {/*    </Form>*/}
+        {/*  </ModalBody>*/}
+        {/*</Modal>*/}
 
         {/* UPLOAD SUCCESS MODAL */}
 

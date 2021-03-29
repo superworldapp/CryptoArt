@@ -48,8 +48,9 @@
   border-top: none !important;
 }
 .modal-content {
-  padding: 50px 37px 50px 50px;
+  padding: 50px 37px 45px 50px;
   height: auto;
+  max-width: 480px;
 }
 .modal-header {
   border: hidden !important;
@@ -188,6 +189,11 @@ h3 {
 .form-control {
   display: flex;
   border-radius: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  height: 28px;
+  font-size: 15px;
+  line-height: 15px;
 }
 .form-group {
   display: flex;
@@ -258,16 +264,20 @@ h3 {
   color: white;
 }
 .uploadpopup{
+  font-family: Gibson;
   max-width: 38rem !important;
   height: auto;
-  padding: 50px;
+  padding: 50px 0;
 }
 .uploadlabel{
+  font-family: $fontFamily;
   font-style: normal;
   font-weight: normal;
   font-size: 19px;
   line-height: 19px;
   min-width: 130px;
+  color: black;
+  margin-right: 20px;
 }
 .uploadinput{
   margin-left: 1rem;
