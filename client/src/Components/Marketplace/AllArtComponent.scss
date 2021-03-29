@@ -1,0 +1,76 @@
+* {
+	font-family: Gibson, sans-serif;
+}
+
+.container_marketplace {
+	margin-top: calc(1.8rem + 76px);
+	margin-bottom: 90px;
+	display: flex;
+	justify-content: center;
+
+	.filter_list {
+		max-width: 253px;
+		width: 100%;
+		margin-left: 33px;
+		margin-right: 55px;
+		text-align: left;
+		background: #FFFFFF;
+		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+		border-radius: 10px;
+		padding: 18px 11px 40px 11px;
+		height: 560px;
+		input {
+			background: red;
+		}
+	}
+
+	.cards_marketplace {
+		margin-right: 63px;
+
+		.head_result {
+			max-width: 1005px;
+			display: flex;
+			justify-content: space-between;
+
+			.head_result_num {
+				font-size: 19px;
+				line-height: 19px;
+				color: #5540C7;
+			}
+
+			.head_result_menu {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				.arrow_img {
+					width: 10px;
+					height: 5px;
+					margin-left: 5px;
+				}
+
+				.burger_img {
+					width: 20px;
+					height: 20px;
+					margin-right: 4px;
+				}
+			}
+		}
+
+		.cards_wrapper {
+			max-width: 1020px;
+			margin: 0 auto;
+
+			.creation_cards {
+				display: inline-flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				width: 100%;
+			}
+
+			.creation_cards > div {
+				margin: 0 15px 55px 0;
+			}
+		}
+	}
+}

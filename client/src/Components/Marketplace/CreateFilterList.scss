@@ -1,0 +1,38 @@
+.filter_wrapper {
+	margin-top: 34px;
+
+	&:first-child {
+		margin-top: 0;
+	}
+
+	.filter_head {
+		font-weight: 600;
+		font-size: 24px;
+		line-height: 24px;
+		color: #000000;
+		padding-bottom: 3px;
+		border-bottom: 1px solid #B3B3B3;
+		margin-bottom: 14px;
+	}
+
+	.filter_main {
+		display: flex;
+		flex-direction: row;
+		margin-bottom: 17px;
+
+		.filter_checkbox {
+			background: #FFFFFF;
+			border: 2px solid #888888;
+			box-sizing: border-box;
+			border-radius: 5px;
+			margin-right: 16px;
+		}
+
+		.filter_element {
+			font-size: 18px;
+			line-height: 18px;
+			color: #000000;
+		}
+	}
+}
+

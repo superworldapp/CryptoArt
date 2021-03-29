@@ -1,0 +1,21 @@
+.button_mu {
+	padding: 0;
+	font-size: 18px;
+	line-height: 18px;
+	color: #000000;
+	text-transform: capitalize;
+}
+
+button:focus {
+	outline: none;
+}
+
+.MuiMenu-list {
+	margin: 20px!important;
+	li {
+		font-size: 13px;
+		line-height: 13px;
+		text-align: center;
+		color: #000000;
+	}
+}
