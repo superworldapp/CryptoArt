@@ -26,7 +26,7 @@ import {
 import loader from '../images/loader.svg';
 import anonUser from '../images/user.png';
 import "./BatchDetail.css";
-import heart from "../images/svg/Heart.svg";
+// import heart from "../images/svg/Heart.svg";
 import dropdownarrow from "../assets/svg/Drop down arrow.svg";
 import Web3 from 'web3';
 const ETHER = 1000000000000000000;

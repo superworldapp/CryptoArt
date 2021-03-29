@@ -5,7 +5,7 @@ import getWeb3 from '../getWeb3';
 import '../App.css';
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
-import AllItemComponent from './AllArtComponent';
+import AllItemComponent from './Marketplace/AllArtComponent';
 import MyItemComponent from './MyArtComponent';
 import MyCollectionComponent from './MyCollectionComponent';
 import MyStoreComponent from './MyStoreComponent';

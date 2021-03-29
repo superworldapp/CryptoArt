@@ -9,11 +9,11 @@ import {
 	CardTitle,
 } from 'reactstrap';
 
-import heart from '../../images/svg/heart.svg';
+import heart from '../../images/svg/heartSvg.svg';
 import './CreationCards.scss';
 
 const CreationCards = (props) => {
-	console.log('========>props', props);
+	// console.log('========>props', props);
 
 	return (
 		<Card className='card-wrapper'>

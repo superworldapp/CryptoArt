@@ -11,7 +11,7 @@ import arrow from '../../images/svg/arrow.svg';
 import './AllArtComponent.scss';
 
 const AllItemComponent = (props) => {
-	// console.log('========>props', props);
+	console.log('========>props', props);
 	const mockArr = [
 		{
 			cardImage: coverImage,
@@ -98,11 +98,18 @@ const AllItemComponent = (props) => {
 	const mockList = [
 		{
 			name: "STATUS",
-			lists: [{name: 'On Auction'}, {name: 'Buy Now'}, {name: 'Make Offer'}]
+			lists: [{name: 'On Auction'}, {name: 'Buy Now'}, {name: 'Make Offer'}],
+			id: 1,
 		},
 		{
 			name: "TRENDING",
-			lists: [{name: 'Text'}, {name: 'Text'}, {name: 'Text'}, {name: 'Text'}]
+			lists: [{name: 'Text'}, {name: 'Text'}, {name: 'Text'}, {name: 'Text'}],
+			id: 2,
+		},
+		{
+			name: "Type",
+			lists: [{name: 'Images'}, {name: 'GIF'}, {name: 'Video'}],
+			id: 3,
 		},
 	];
 
