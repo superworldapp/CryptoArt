@@ -1,4 +1,4 @@
-import React, {useRef, useReducer, useCallback} from 'react';
+import React, {useRef, useEffect, useState, useReducer, useCallback} from 'react';
 import Modal from "../Modal";
 import {Container, Form, FormGroup, Input, Label} from "reactstrap";
 import loader from "../../images/loader.svg";
@@ -69,6 +69,7 @@ const ModalUploadToMyStore = props => {
 
   const inputFileRef = useRef(null)
   const [controls, controlsDispatch] = useReducer(controlsReducer, initialControls);
+  const [isValidForm, setIsValidForm] = useState(false);
 
   const onInputChange = useCallback(e => {
     const { name, value } = e.target
@@ -104,6 +105,10 @@ const ModalUploadToMyStore = props => {
 
   const onConfirmClick = useCallback(e => {
     onConfirm(e, controls)
+  }, [controls])
+
+  useEffect(() => {
+    setIsValidForm(controls.name.value && controls.file.value)
   }, [controls])
 
   return (
@@ -196,6 +201,7 @@ const ModalUploadToMyStore = props => {
             <button
               className='abtn submit-button'
               onClick={onConfirmClick}
+              disabled={!isValidForm}
             >
               Confirm
             </button>
