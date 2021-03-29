@@ -1,4 +1,4 @@
-import React, { useRef, useReducer } from 'react';
+import React, {useRef, useReducer, useCallback} from 'react';
 import Modal from "../Modal";
 import {Container, Form, FormGroup, Input, Label} from "reactstrap";
 import loader from "../../images/loader.svg";
@@ -10,7 +10,8 @@ const CHANGE_DESCRIPTION_VALUE = 'CHANGE_DESCRIPTION_VALUE';
 
 const initialControls = {
   file: {
-    value: '',
+    value: null,
+    url: null,
     required: true,
     isValid: false,
   },
@@ -33,6 +34,7 @@ function controlsReducer(state, action) {
         ...state,
         file: {
           ...state.file,
+          url: action.payload.url,
           value: action.payload.value,
         }
       };
@@ -62,17 +64,55 @@ const ModalUploadToMyStore = props => {
     isOpen,
     toggle,
     onClosed,
+    onConfirm,
   } = props
 
   const inputFileRef = useRef(null)
   const [controls, controlsDispatch] = useReducer(controlsReducer, initialControls);
-  console.log('### controls ->', controls);
+
+  const onInputChange = useCallback(e => {
+    const { name, value } = e.target
+
+    if (name === 'file') {
+      const file = e.target.files[0]
+
+      if (file) {
+        controlsDispatch({
+          type: CHANGE_FILE_VALUE,
+          payload: {
+            value: file,
+            url: URL.createObjectURL(file),
+          }
+        })
+      }
+    } else if (name === 'title') {
+      controlsDispatch({
+        type: CHANGE_NAME_VALUE,
+        payload: { value },
+      })
+    } else if (name === 'desc') {
+      controlsDispatch({
+        type: CHANGE_DESCRIPTION_VALUE,
+        payload: { value },
+      })
+    }
+  }, [])
+
+  const onInputFileClick = useCallback(() => {
+    inputFileRef.current && inputFileRef.current.click()
+  }, [inputFileRef.current])
+
+  const onConfirmClick = useCallback(e => {
+    onConfirm(e, controls)
+  }, [controls])
+
   return (
     <Modal
       isOpen={isOpen}
       toggle={toggle}
       onClosed={onClosed}
       className='uploadpopup'
+      unmountOnClose
       header={(
         <>
           <div className='title'>
@@ -93,21 +133,33 @@ const ModalUploadToMyStore = props => {
               File to Upload
             </Label>
             <Label>
-              <button className='modal-upload-input-file' onClick={(e) => {
-                e.preventDefault()
-                console.log('### inputFileRef.current ->', inputFileRef.current);
-                inputFileRef.current.getRef().click()
-              }}>Browse...</button>
+              <button className='modal-upload-input-file' onClick={onInputFileClick}>Browse...</button>
             </Label>
             <Input
               id='file-input'
               style={{ display: 'none' }}
               type='file'
-              ref={inputFileRef}
-              onChange={/*this.fileSelectHandler*/() => {console.log('######################');}}
+              name='file'
+              innerRef={inputFileRef}
+              onChange={onInputChange}
             />
           </FormGroup>
-
+          <FormGroup className='form-group-preview'>
+            <Label
+              htmlFor='title'
+              className={`uploadlabel ${controls.description.required ? 'control-required' : ''}`}
+            >
+              Preview
+            </Label>
+            {!controls.file.url
+              ? <div className='control-preview' onClick={onInputFileClick}>+</div>
+              : <img
+                className='control-preview-img'
+                src={controls.file.url}
+                alt={controls.file.value.name}
+              />
+            }
+          </FormGroup>
           <FormGroup>
             <Label
               htmlFor='title'
@@ -120,10 +172,7 @@ const ModalUploadToMyStore = props => {
               id='title'
               name='title'
               value={controls.name.value}
-              onChange={/*this.handleInputChange*/(e) => {
-                console.log('### controls.name.value ->', controls.name.value);
-                controlsDispatch({ type: CHANGE_NAME_VALUE, payload: { value: e.target.value } })
-              }}
+              onChange={onInputChange}
             />
           </FormGroup>
           <FormGroup>
@@ -136,68 +185,17 @@ const ModalUploadToMyStore = props => {
             <Input
               className='control-description'
               type='textarea'
-              id='des'
-              name='des'
+              id='desc'
+              name='desc'
               placeholder='Enter text'
               value={controls.description.value}
-              onChange={/*this.handleInputChange*/(e) => {
-                console.log('### controls.description.value ->', controls.description.value);
-                controlsDispatch({ type: CHANGE_DESCRIPTION_VALUE, payload: { value: e.target.value } })
-              }}
+              onChange={onInputChange}
             />
           </FormGroup>
-          <FormGroup className='form-group-preview'>
-            <Label
-              htmlFor='title'
-              className={`uploadlabel ${controls.description.required ? 'control-required' : ''}`}
-            >
-              Description
-            </Label>
-            <div className='control-preview'>
-              +
-            </div>
-          </FormGroup>
-          {/*<FormGroup>*/}
-          {/*  <Label*/}
-          {/*    htmlFor='price'*/}
-          {/*    className='uploadlabel'*/}
-          {/*  >*/}
-          {/*    Token Price*/}
-          {/*  </Label>*/}
-          {/*  <Input*/}
-          {/*    style={{ width: '50%' }}*/}
-          {/*    type='text'*/}
-          {/*    id='price'*/}
-          {/*    name='price'*/}
-          {/*    onChange=/!*this.handleInputChange*/}
-          {/*  />*/}
-          {/*  <Label*/}
-          {/*    className='uploadlabel token-price'*/}
-          {/*  >*/}
-          {/*    ETH*/}
-          {/*  </Label>*/}
-          {/*</FormGroup>*/}
-          {/*<FormGroup>*/}
-          {/*  <Label*/}
-          {/*    htmlFor='nos'*/}
-          {/*    className='uploadlabel'*/}
-          {/*  >*/}
-          {/*    No. of Tokens*/}
-          {/*  </Label>*/}
-          {/*  <Input*/}
-          {/*    style={{ width: '40%', marginRight: '11rem' }}*/}
-          {/*    placeholder='1'*/}
-          {/*    type='number'*/}
-          {/*    id='nos'*/}
-          {/*    name='nos'*/}
-          {/*    onChange=/!*this.handleInputChange*/}
-          {/*  />*/}
-          {/*</FormGroup>*/}
           <div className='submit-button-wrapper'>
             <button
               className='abtn submit-button'
-              onClick={/*this.fileUploadHandler*/(e,...pp) => {e.preventDefault()
-                console.log('######################');}}
+              onClick={onConfirmClick}
             >
               Confirm
             </button>

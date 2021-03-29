@@ -37,6 +37,16 @@
     width: 105px;
     border: 1px solid black;
     border-radius: 10px;
+    font-size: 48px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .control-preview-img {
+    max-width: 105px;
+    min-height: 105px;
   }
 
   .form-group-preview {
@@ -58,6 +68,15 @@
     height: 55px;
     border-radius: 10px;
     text-transform: none;
+  }
+
+  .form-control {
+    border-color: #888888;
+  }
+
+  .form-control:focus {
+    border-color: black;
+    box-shadow: none;
   }
 }
 

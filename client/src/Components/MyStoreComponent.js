@@ -288,12 +288,12 @@ class MyStoreComponent extends Component {
       selectedFile: event.target.files[0],
     });
   };
-  fileUploadHandler = async (event) => {
+  fileUploadHandler = async (event, controls) => {
     event.preventDefault();
     // const hash = await blobToSHA256(this.state.selectedFile);
     let hash = '';
     this.setState({ isLoading: true, loadingError: false, artHash: hash });
-    this.fileAwsHandler(this.state.selectedFile, this.creatingItems);
+    this.fileAwsHandler(controls.file.value, this.creatingItems);
   };
 
   fileAwsHandler = async (file, callback) => {
@@ -406,6 +406,7 @@ class MyStoreComponent extends Component {
           isOpen={this.state.isModalOpen1}
           toggle={this.toggleModal1}
           onClosed={this.refreshMyArt}
+          onConfirm={this.fileUploadHandler}
         />
 
         {/*<Modal*/}
