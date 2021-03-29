@@ -31,10 +31,10 @@ const getWeb3 = () =>
       }
 
       // portis...
-      else if (localStorage.getItem('walletType') === 'portis') {
-        const web3 = new Web3(portis_rinkeby.provider);
-        resolve(web3);
-      }
+      // else if (localStorage.getItem('walletType') === 'portis') {
+      //   const web3 = new Web3(portis_rinkeby.provider);
+      //   resolve(web3);
+      // }
       // fortmatic...
       else if (localStorage.getItem('walletType') === 'fortmatic') {
         const web3 = new Web3(fortmatic_rinkeby.getProvider());
