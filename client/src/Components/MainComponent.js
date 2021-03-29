@@ -9,6 +9,7 @@ import AllItemComponent from './AllArtComponent';
 import MyItemComponent from './MyArtComponent';
 import MyCollectionComponent from './MyCollectionComponent';
 import MyStoreComponent from './MyStoreComponent';
+import Profile from './MyProfile/MyProfileComponent'
 import CardDetail from './CardDetail';
 import BatchDetail from './BatchDetail';
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -36,7 +37,7 @@ class Main extends Component {
       tokensBid: [],
       tokensBidStarted: [],
       tokensPutForSale: [],
-      batch:[]
+      batch: []
     };
   }
 
@@ -50,13 +51,13 @@ class Main extends Component {
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
       const deployedNetwork = BNContract.networks[networkId];
-    
-      
+
+
       const instance = new web3.eth.Contract(
         BNContract.abi,
         deployedNetwork && deployedNetwork.address
       );
-      let response= [];
+      let response = [];
       console.log('contract', instance);
       let resx1 = await instance.methods.tokenBatchIndex().call();
       console.log(resx1);
@@ -68,7 +69,7 @@ class Main extends Component {
       allDocs = response;
       console.log(response);
       this.setState({ batch: allDocs });
-      let rexponse= [];
+      let rexponse = [];
       let resx2 = await instance.methods.totalSupply().call();
       console.log(resx2);
       for (let i = 1; i <= resx2; i++) {
@@ -84,52 +85,52 @@ class Main extends Component {
         // `http://geo.superworldapp.com/api/json/nftevents/tokencreated/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
         `${process.env.REACT_APP_TOKEN_API_URL}/nftevents/tokencreated/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
 
-      ); 
+      );
 
-      
-     
+
+
       let newArr = [];
       for (let i = 0; i < cre.length; i++) {
         newArr.push(cre[i].data.data);
-      
+
       }
       let allTokensBought = await Axios.get(
         // `http://geo.superworldapp.com/api/json/nftevents/tokenbought/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
         `${process.env.REACT_APP_TOKEN_API_URL}/nftevents/tokenbought/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
 
-      ); 
-        
+      );
+
       this.setState({ tokensBought: allTokensBought.data.data });
- 
-      let allTokensBidStarted =  await Axios.get(
+
+      let allTokensBidStarted = await Axios.get(
         // `http://geo.superworldapp.com/api/json/nftevents/bidstarted/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
         `${process.env.REACT_APP_TOKEN_API_URL}/nftevents/bidstarted/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
 
-      ); 
+      );
 
-      this.setState({ tokensBidStarted: allTokensBidStarted.data.data});
-      
+      this.setState({ tokensBidStarted: allTokensBidStarted.data.data });
+
       let allTokensPutForSale = await Axios.get(
         `http://geo.superworldapp.com/api/json/nftevents/tokenputforsale/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
 
-      ); 
-      
-      this.setState({ tokensPutForSale: allTokensPutForSale.data.data});
-      let allTokensBid =  await Axios.get(
+      );
+
+      this.setState({ tokensPutForSale: allTokensPutForSale.data.data });
+      let allTokensBid = await Axios.get(
         `http://geo.superworldapp.com/api/json/nftevents/tokenbid/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
-        
-      ); 
+
+      );
       this.setState({ tokensBid: allTokensBid.data.data });
-     // batch events
+      // batch events
       let BatchCreated = await Axios.get(
         `http://geo.superworldapp.com/api/json/nftevents/NewtokenBatchCreated/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
-           
-         );
-        
+
+      );
+
       this.setState({ BatchCreated: BatchCreated.data.data });
 
-      
-  
+
+
       this.setState({
         web3,
         accounts: accounts[0],
@@ -138,9 +139,9 @@ class Main extends Component {
         //creValue: newArr,
       });
 
-      
 
-      
+
+
       // console.log('this.state.creValue', this.state.creValue);
       // let res = await this.state.contract?.methods.tokenCount().call();
       // console.log(res);
@@ -226,12 +227,12 @@ class Main extends Component {
     const BatchWithId = ({ match }) => {
       return (
         <BatchDetail
-        BatchCreated={this.state.batch?.filter(
-          (batch) => batch._batchId === match.params.id
-        )}
+          BatchCreated={this.state.batch?.filter(
+            (batch) => batch._batchId === match.params.id
+          )}
           contract={this.state.contract}
           accounts={this.state.accounts}
-          
+
           matchId={match.params.id}
         />
       );
@@ -262,7 +263,7 @@ class Main extends Component {
               <AllItemComponent
                 contract={this.state.contract}
                 accounts={this.state.accounts}
-                batch = {this.state.batch}
+                batch={this.state.batch}
               />
             )}
           />
@@ -279,7 +280,7 @@ class Main extends Component {
               />
             )}
           />
-           <ProtectedRoute
+          <ProtectedRoute
             exact
             path='/mycollection'
             component={() => (
@@ -305,33 +306,41 @@ class Main extends Component {
               />
             )}
           />
+
+          <ProtectedRoute
+            exact
+            path='/myprofile'
+            component={() => (
+              <Profile/>
+            )}
+          />
           <Route path='/card/:id' component={CardWithId} />
           <Route path='/batch/:id' component={BatchWithId} />
           {/* <Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } /> */}
 
-           <Route
-                        path='/card/:id'
-                        component={(props) => (
-                            <CardDetail
+          <Route
+            path='/card/:id'
+            component={(props) => (
+              <CardDetail
 
-                                contract={this.state.contract}
-                                accounts={this.state.accounts}
-                                art = {this.state.art}
-                            />
-                        )}
-                    /> 
-            <Route
-                        path='/batch/:id'
-                        component={(props) => (
-                            <BatchDetail
+                contract={this.state.contract}
+                accounts={this.state.accounts}
+                art={this.state.art}
+              />
+            )}
+          />
+          <Route
+            path='/batch/:id'
+            component={(props) => (
+              <BatchDetail
 
-                                contract={this.state.contract}
-                                accounts={this.state.accounts}
-                                art = {this.state.batch}
-                                
-                            />
-                        )}
-                    /> 
+                contract={this.state.contract}
+                accounts={this.state.accounts}
+                art={this.state.batch}
+
+              />
+            )}
+          />
 
           <Redirect to='/home' />
         </Switch>

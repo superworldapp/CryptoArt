@@ -1,0 +1,56 @@
+.recent-content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-bottom: 4px solid #F6F6F6;
+	max-width: 1034px;
+	width: 100%;
+	height: 95px;
+	margin: 0 auto;
+
+	&.blur {
+		opacity: .5;
+	}
+
+	.recent-content-avatar {
+		width: 65px;
+		height: 65px;
+		margin-right: 28px;
+	}
+
+	.recent-content-text {
+		max-width: 717px;
+		width: 100%;
+		margin-right: 35px;
+
+		.recent-content-info {
+			font-weight: 600;
+			font-size: 18px;
+			line-height: 18px;
+			text-transform: uppercase;
+			color: #000000;
+		}
+
+		.recent-content-time {
+			margin-top: 15px;
+			margin-left: 24px;
+			display: block;
+			font-weight: 250;
+			font-size: 18px;
+			line-height: 18px;
+			color: #000000;
+		}
+	}
+
+	.recent-content-card {
+		width: 75px;
+		height: 75px;
+		margin-right: 33px;
+		background: #F6F6F6;
+	}
+
+	.recent-content-eye {
+		width: 24px;
+		height: 24px;
+	}
+}

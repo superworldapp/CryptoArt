@@ -1,0 +1,15 @@
+.creation-wrapper-collections {
+	max-width: 1300px;
+	margin: 0 auto 230px;
+
+	.creation-collections {
+		display: inline-flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		width: 100%;
+	}
+
+	.creation-collections > div {
+		margin: 20px;
+	}
+}
