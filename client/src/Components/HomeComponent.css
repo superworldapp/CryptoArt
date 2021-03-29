@@ -77,8 +77,8 @@
   right: 25rem;
 }
 .image10 {
-  width: 8rem;
-  height: 8rem;
+  width: 10rem;
+  height: 10rem;
   border-radius: 1rem;
   border-bottom-left-radius:1.5rem ;
   border-bottom-right-radius: 1.5rem;
@@ -352,35 +352,35 @@ img.rounded-circle {
 }
 
 .home-slider-multiple-2 figure {
-  animation-delay: .4s;
+  animation-delay: .2s;
 }
 
 .home-slider-multiple-3 figure {
-  animation-delay: .6s;
+  animation-delay: .2s;
 }
 
 .home-slider-multiple-4 figure {
-  animation-delay: .8s;
+  animation-delay: .2s;
 }
 
 .home-slider-multiple-5 figure {
-  animation-delay: 1s;
+  animation-delay: .2s;
 }
 
 .home-slider-multiple-6 figure {
-  animation-delay: 1.2s;
+  animation-delay: .2s;
 }
 
 .home-slider-multiple-7 figure {
-  animation-delay: 1.4s;
+  animation-delay: .2s;
 }
 
 .home-slider-multiple-8 figure {
-  animation-delay: 1.6s;
+  animation-delay: .2s;
 }
 
 .home-slider-multiple-9 figure {
-  animation-delay: 1.8s;
+  animation-delay: .2s;
 }
 
 
@@ -419,11 +419,12 @@ img.rounded-circle {
   }
 }
 
-.image-change{ 
-  animation: changeBackground 1s infinite;
+/* .image-change{ 
+  animation: changeBackground 5s infinite;
   background-size: cover;
   background-position: center;
-}
+  transition: all 0.1s ease-in;
+} */
 
 @keyframes changeBackground{
    0%,100%  {background-image: url("../images/image\ 6.png");}
