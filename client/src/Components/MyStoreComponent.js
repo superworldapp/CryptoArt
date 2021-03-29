@@ -385,12 +385,12 @@ class MyStoreComponent extends Component {
 
               <TabPanel value={artStatus} index={0}>
                 <div className='mystore-art-queue-container row'>
-                  {Menu1}
                   <div className='mystore-upload-art'>
                     <Button className='mystore-upload-btn' onClick={this.toggleModal1}>
                       <div className='mystore-upload-add'>+</div>
                     </Button>
                   </div>
+                  {Menu1}
                 </div>
               </TabPanel>
 
