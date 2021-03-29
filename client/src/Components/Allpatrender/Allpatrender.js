@@ -110,17 +110,17 @@ class Allpatrender extends Component {
     // console.log(res)
     let tokenBatchId = 1//this.state.artHash.toString();
     let amountToMint = 1 //this.state.title;
-    
+
     try {
-    //function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint) 
+    //function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint)
       const res = await this.props.contract.methods
         .mintTokenBatch(
           tokenBatchId,
           amountToMint,
-      
+
         )
         .send({ from:this.props.accounts, gas: 5000000 });
-  
+
       console.log('res', res);
       let data;
     } catch(error){
@@ -128,8 +128,8 @@ class Allpatrender extends Component {
     }
   }
   Sale = async() => {
-    let tokenId = 1 
-    let sellprice = "100000000000000000" 
+    let tokenId = 1
+    let sellprice = "100000000000000000"
     let isListed = true
     try {
     //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
@@ -140,7 +140,7 @@ class Allpatrender extends Component {
           isListed,
         )
         .send({ from: this.props.accounts, gas: 5000000 });
-  
+
       console.log('res', res);
       let data;
     } catch(error){
@@ -297,7 +297,7 @@ class Allpatrender extends Component {
 
             <div className='second-section'>
               <button onClick={this.mintToken} className='button_mint'>Mint</button>
-             
+              <button onClick={this.props.onListButtonClick} className='button_mint'>List</button>
             </div>
 
             <div>

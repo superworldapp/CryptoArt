@@ -44,6 +44,7 @@ import checkmark from '../images/svg/checkmark.svg';
 import Allpatrender from "./Allpatrender";
 import Allpatrender2 from "./Allpatrender2";
 import ModalUploadToMyStore from "./ModalUploadToMyStore/ModalUploadToMyStore";
+import ModalListingNft from "./ModalListingNft/ModalListingNft";
 
 const SHA256 = require('crypto-js/sha256');
 
@@ -114,7 +115,8 @@ class MyStoreComponent extends Component {
       loadingError: false,
       uploadSuccess: false,
       artStatus: artStatuses['Queue'],
-      indextab : 7
+      indextab : 7,
+      isListModalOpen: false,
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.toggleModal2 = this.toggleModal2.bind(this);
@@ -125,7 +127,27 @@ class MyStoreComponent extends Component {
     this.fileAwsHandler = this.fileAwsHandler.bind(this);
     this.refreshMyArt = this.refreshMyArt.bind(this);
     this.onArtStatusChange = this.onArtStatusChange.bind(this);
+    this.toggleListModal = this.toggleListModal.bind(this);
+    this.onListButtonClick = this.onListButtonClick.bind(this);
+    this.onListModalClosed = this.onListModalClosed.bind(this);
+  }
 
+  toggleListModal() {
+    this.setState({
+      isListModalOpen: !this.state.isListModalOpen,
+    })
+  }
+
+  onListModalClosed() {
+    this.setState({
+      isListModalOpen: false,
+    })
+  }
+
+  onListButtonClick() {
+    this.setState({
+      isListModalOpen: true,
+    })
   }
 
   toggleModal1() {
@@ -336,6 +358,7 @@ class MyStoreComponent extends Component {
           art={x}
           contract={this.props.contract}
           accounts={this.props.accounts}
+          onListButtonClick={this.onListButtonClick}
         />
       )
     });
@@ -407,6 +430,14 @@ class MyStoreComponent extends Component {
           toggle={this.toggleModal1}
           onClosed={this.refreshMyArt}
           onConfirm={this.fileUploadHandler}
+        />
+
+        <ModalListingNft
+          onOpen={this.onListModalOpen}
+          onClose={this.onListModalClosed}
+          toggle={this.toggleListModal}
+          isOpen={this.state.isListModalOpen}
+          fileName='mock.png'
         />
 
         {/*<Modal*/}
