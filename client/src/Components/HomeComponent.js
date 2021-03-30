@@ -132,7 +132,7 @@ class Home extends Component {
       return (
         <>
           <div className='Home'>
-            <Container>
+            <Container fluid>
               <div className= "upperView">
               <div className ="sectionText1">
                   <h1 id='header'>WELCOME TO THE <br/> NFT SALON</h1>
@@ -175,13 +175,12 @@ class Home extends Component {
 
                 </div>
               </div>
-              </Container>
               <br/>
 
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA',}}></div>
               <br/>
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
-              <Container>
+              
               <div className='middleView'>
               <div className="col2">
               <Row around="xs" className= "gridRow1">
@@ -195,7 +194,6 @@ class Home extends Component {
                       <img src ={image2} className="image10" alt="image10" />
                     </figure>
                   </div>
-                    {/* <div className='image10 image-change'></div> */}
                   </Col> 
                   <Col xs={2} className= "gridCol1">
                   <div className='home-slider-multiple home-slider-multiple-2'>
@@ -342,13 +340,13 @@ class Home extends Component {
                 </div>
               </div> */}
               </div>
-              </Container>
+              
               <br /> 
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
               <br/>
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
-              <Container>
-              <div className ="bottomView">
+              
+              
               <div
                 style={{
                   display: 'flex',
@@ -362,27 +360,28 @@ class Home extends Component {
                     fontSize: '18px',
                     fontFamily: 'Gibson',
                     fontWeight: 'bold',
+                    marginLeft:'4.5rem',
                   }}
                 >
                   {' '}
                   Trending NFT's
                 </p>
-                <Link to='/allart' style={{textDecoration: 'none'}}>
                 <a
-                  href=''
+                href=''
                   style={{
                     fontFamily: 'Gibson',
                     fontWeight: 'bold',
                     fontSize: '18px',
                     textDecoration: 'none',
                     color: '#B3B3B3',
+                    marginRight:'4rem'
                   }}
                 >
                   {' '}
                   View More <img src={svg1} alt='svg1' />
                 </a>
-                </Link>
               </div>
+              <div className ="bottomView">
               <div className='rowImages'>
               <Card className='imageCards'>
                   <CardImg
@@ -609,88 +608,7 @@ class Home extends Component {
                     </div> 
                   </CardBody>
                 </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={image12}
-                    alt='image3'
-                  ></CardImg>
-                  <CardImgOverlay className="imgOverlay">
-                  <Badge pill className= "sw-overlay">
-                  <img
-                  className="userimg"
-                  src={anonUser}
-                ></img>
-              </Badge>
-                    <CardTitle className="card-imgTitle" >
-                      New Planet PitStop
-                    </CardTitle>
-                  </CardImgOverlay>
-                  <CardBody>
-                  <div className="cardImg-body">
-                      <CardSubtitle className= "createdby">
-                        Created by 
-                      </CardSubtitle>
-                      &nbsp;
-                      <CardSubtitle className = "cardsubtitleName">
-                       SaraViz
-                      </CardSubtitle>
-                    </div>                    
-                     <div className='ctext'>
-                      <CardText className = "price">
-                        0.5ETH
-                        <p className = "USD-price">
-                        ($985.56 USD)
-                          </p>
-                      </CardText>
-                      <div>
-                      <button className='buy-bid-btn'>BUY {' '}NOW</button>
-                      </div>
-                    </div> 
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={image12}
-                    alt='image3'
-                  ></CardImg>
-                  <CardImgOverlay className="imgOverlay">
-                  <Badge pill className= "sw-overlay">
-                  <img
-                  className="userimg"
-                  src={anonUser}
-                ></img>
-              </Badge>
-                    <CardTitle className="card-imgTitle" >
-                      New Planet PitStop
-                    </CardTitle>
-                  </CardImgOverlay>
-                  <CardBody>
-                  <div className="cardImg-body">
-                      <CardSubtitle className= "createdby">
-                        Created by 
-                      </CardSubtitle>
-                      &nbsp;
-                      <CardSubtitle className = "cardsubtitleName">
-                       SaraViz
-                      </CardSubtitle>
-                    </div>                    
-                     <div className='ctext'>
-                      <CardText className = "price">
-                        0.5ETH
-                        <p className = "USD-price">
-                        ($985.56 USD)
-                          </p>
-                      </CardText>
-                      <div>
-                      <button className='buy-bid-btn'>BUY {' '}NOW</button>
-                      </div>
-                    </div> 
-                  </CardBody>
-                </Card>
+              </div>
               </div>
               <div
                 style={{
@@ -705,6 +623,7 @@ class Home extends Component {
                     fontSize: '18px',
                     fontFamily: 'Gibson',
                     fontWeight: 'bold',
+                    marginLeft:'4.5rem'
                   }}
                 >
                   {' '}
@@ -718,12 +637,14 @@ class Home extends Component {
                     fontSize: '18px',
                     textDecoration: 'none',
                     color: '#B3B3B3',
+                    marginRight:'4rem'
                   }}
                 >
                   {' '}
                   View More <img src={svg1} alt='svg1' />
                 </a>
               </div>
+              <div className ="bottomView">
               <div className='rowImages'>
                 <Card className='imageCards'>
                   <CardImg
@@ -793,7 +714,12 @@ class Home extends Component {
                           </p>
                       </CardText>
                       <div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                      >
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </a>
                       </div>
                     </div> 
                   </CardBody>
@@ -876,7 +802,12 @@ class Home extends Component {
                           </p>
                       </CardText>
                       <div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                      >
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </a>
                       </div>
                     </div> 
                   </CardBody>
@@ -959,7 +890,12 @@ class Home extends Component {
 
                       </CardText>
                       <div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                      >
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </a>
                       </div>
                     </div> 
                   </CardBody>
@@ -1031,323 +967,16 @@ class Home extends Component {
                         ($176.61 USD)
                           </p>
                       </CardText>
+                      
                       <div>
-                      <button className='buy-bid-btn'>BUY {' '}NOW</button>
-                      </div>
-                    </div> 
-
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={Timesquare}
-                    alt='image3'
-                  ></CardImg>
-                 <CardImgOverlay className="imgOverlay">
-                  <Badge pill className= "sw-overlay">
-                  <img
-                  className="userimg"
-                  src={swicon}
-                ></img>
-              </Badge>
-                  
-                    <CardTitle className="card-imgTitle" >
-                      Times Square
-                    </CardTitle>
-                  </CardImgOverlay>
-                  <CardBody>
-                  <div className="cardImg-body">
-                      <CardSubtitle className= "createdby">
-                        Created by 
-                      </CardSubtitle>
-                      &nbsp;
-                      <CardSubtitle className = "cardsubtitleName">
-                       SuperWorld
-                      </CardSubtitle>
-                    </div>
-                    {/* <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        Golden Temple
-                      </CardText>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                        }}
-                      >
-                        0.1ETH
-                      </CardText>
-                    </div>
-                    <div className='buy-bid-btn-div'>
-                      <div className='time-div'>
-                        <p
-                          style={{
-                            fontFamily: 'Gibson',
-                            fontSize: '9px',
-                            color: 'gray',
-                            marginLeft: '0.35rem',
-                            marginBottom: '0rem',
-                          }}
-                        ></p>
-                      </div>
                       <a
                         target='blank'
                         href='https://map.superworldapp.com/'
-                        style={{ marginTop: '0.85rem' }}
                       >
-                        <button className='buy-bid-btn'>Purchase</button>
-                      </a>
-                    </div> */}
-                    <div className='ctext'>
-                      <CardText className = "price">
-                        0.1ETH
-                        <p className = "USD-price">
-                        ($176.61 USD)
-                          </p>
-                      </CardText>
-                      <div>
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
-                      </div>
-                    </div> 
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={Downtowntoronto}
-                    alt='image3'
-                  ></CardImg>
-                  <CardImgOverlay className="imgOverlay">
-                  <Badge pill className= "sw-overlay">
-                  <img
-                  className="userimg"
-                  src={swicon}
-                ></img>
-              </Badge>
-                    <CardTitle className="card-imgTitle" >
-                      Downtown Toronto
-                    </CardTitle>
-                  </CardImgOverlay>
-                  <CardBody>
-                  <div className="cardImg-body">
-                      <CardSubtitle className= "createdby">
-                        Created by 
-                      </CardSubtitle>
-                      &nbsp;
-                      <CardSubtitle className = "cardsubtitleName">
-                       SuperWorld
-                      </CardSubtitle>
-
-                    </div>
-                    {/* <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        Neuschwanstein Castle
-                      </CardText>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                        }}
-                      >
-                        0.1ETH
-                      </CardText>
-                    </div>
-                    <div className='buy-bid-btn-div'>
-                      <div className='time-div'></div>
-                      <a
-                        target='blank'
-                        href='https://map.superworldapp.com/'
-                        style={{ marginTop: '0.85rem' }}
-                      >
-                        <button className='buy-bid-btn'>Purchase</button>
                       </a>
-                    </div> */}
-                    <div className='ctext'>
-                      <CardText className = "price">
-                        0.1ETH
-                        <p className = "USD-price">
-                        ($176.61 USD)
-                          </p>
-                      </CardText>
-                      <div>
-                      <button className='buy-bid-btn'>BUY {' '}NOW</button>
                       </div>
-                    </div> 
-
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={Timesquare}
-                    alt='image3'
-                  ></CardImg>
-                 <CardImgOverlay className="imgOverlay">
-                  <Badge pill className= "sw-overlay">
-                  <img
-                  className="userimg"
-                  src={swicon}
-                ></img>
-              </Badge>
-                  
-                    <CardTitle className="card-imgTitle" >
-                      Times Square
-                    </CardTitle>
-                  </CardImgOverlay>
-                  <CardBody>
-                  <div className="cardImg-body">
-                      <CardSubtitle className= "createdby">
-                        Created by 
-                      </CardSubtitle>
-                      &nbsp;
-                      <CardSubtitle className = "cardsubtitleName">
-                       SuperWorld
-                      </CardSubtitle>
-                    </div>
-                    {/* <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        Golden Temple
-                      </CardText>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                        }}
-                      >
-                        0.1ETH
-                      </CardText>
-                    </div>
-                    <div className='buy-bid-btn-div'>
-                      <div className='time-div'>
-                        <p
-                          style={{
-                            fontFamily: 'Gibson',
-                            fontSize: '9px',
-                            color: 'gray',
-                            marginLeft: '0.35rem',
-                            marginBottom: '0rem',
-                          }}
-                        ></p>
-                      </div>
-                      <a
-                        target='blank'
-                        href='https://map.superworldapp.com/'
-                        style={{ marginTop: '0.85rem' }}
-                      >
-                        <button className='buy-bid-btn'>Purchase</button>
-                      </a>
-                    </div> */}
-                    <div className='ctext'>
-                      <CardText className = "price">
-                        0.1ETH
-                        <p className = "USD-price">
-                        ($176.61 USD)
-                          </p>
-                      </CardText>
-                      <div>
-                      <button className='buy-bid-btn'>BUY {' '}NOW</button>
-                      </div>
-                    </div> 
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={Downtowntoronto}
-                    alt='image3'
-                  ></CardImg>
-                  <CardImgOverlay className="imgOverlay">
-                  <Badge pill className= "sw-overlay">
-                  <img
-                  className="userimg"
-                  src={swicon}
-                ></img>
-              </Badge>
-                    <CardTitle className="card-imgTitle" >
-                      Downtown Toronto
-                    </CardTitle>
-                  </CardImgOverlay>
-                  <CardBody>
-                  <div className="cardImg-body">
-                      <CardSubtitle className= "createdby">
-                        Created by 
-                      </CardSubtitle>
-                      &nbsp;
-                      <CardSubtitle className = "cardsubtitleName">
-                       SuperWorld
-                      </CardSubtitle>
-
-                    </div>
-                    {/* <div className='ctext'>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        Neuschwanstein Castle
-                      </CardText>
-                      <CardText
-                        style={{
-                          fontFamily: 'Gibson',
-                          fontSize: '13px',
-                          color: 'black',
-                        }}
-                      >
-                        0.1ETH
-                      </CardText>
-                    </div>
-                    <div className='buy-bid-btn-div'>
-                      <div className='time-div'></div>
-                      <a
-                        target='blank'
-                        href='https://map.superworldapp.com/'
-                        style={{ marginTop: '0.85rem' }}
-                      >
-                        <button className='buy-bid-btn'>Purchase</button>
-                      </a>
-                    </div> */}
-                    <div className='ctext'>
-                      <CardText className = "price">
-                        0.1ETH
-                        <p className = "USD-price">
-                        ($176.61 USD)
-                          </p>
-                      </CardText>
-                      <div>
-                      <button className='buy-bid-btn'>BUY {' '}NOW</button>
-                      </div>
+                      
                     </div> 
 
                   </CardBody>
