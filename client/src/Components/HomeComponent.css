@@ -9,8 +9,9 @@
 /* Top section*/
 .upperView {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding-bottom: 2rem;
+  margin: 1rem 7rem;
 }
 .topimage{
   width: 20rem;
@@ -31,28 +32,29 @@
 /* Middle Section */
 .middleView {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 1rem;
   background-color: white;
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
 .col2 {
-  margin-left: -3rem;
+  margin-left: 1rem;
   /* display: flex; */
 }
 .gridRow1{
   margin-top: 0.5rem !important;
   margin-left: 0rem !important;
   display: flex;
-  /* justify-content: space-evenly; */
+  justify-content: center; 
   flex-wrap: nowrap;
 }
 .gridCol1{
   margin-top: 0rem !important;
   display: flex;
-  /* justify-content: space-between; */
-  margin-right: 2rem;
+  /* justify-content: space-between; 
+  margin-right: 2rem;*/
+  justify-content: space-evenly;
 }
 .gridRow2{
   margin-top: 1.8rem !important;
@@ -60,6 +62,7 @@
   display: flex;
   /* justify-content: space-evenly; */
   flex-wrap: nowrap;
+  justify-content: center;
 }
 .gridRow3{
   margin-top: 1.8rem !important;
@@ -67,6 +70,7 @@
   display: flex;
   /* justify-content: space-evenly; */
   flex-wrap: nowrap;
+  justify-content: center;
 }
 
 .sectionText2{
@@ -74,7 +78,7 @@
   /* padding-left: 2rem; */
   /* border: 1px solid red; */
   position: relative;
-  right: 25rem;
+  right: 10rem;
 }
 .image10 {
   width: 8rem;
@@ -195,7 +199,7 @@ a {
 
 div.imageCards {
   height: 270px !important;
-  width: 250px;
+  width: 220px;
   border-radius: 1rem;
   margin-right: 1rem;
   opacity: 0.95;
@@ -300,6 +304,9 @@ img.rounded-circle {
 .bottomView{
   background-color: white;
   padding-bottom: 5rem;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1rem 15rem;
 }
 
 .cardImg-body{
