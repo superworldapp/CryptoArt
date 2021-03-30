@@ -17,6 +17,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import helpIcon from '../assets/svg/help.svg';
 import greenDot from '../assets/svg/green-dot.svg';
+import checkmark1 from "../images/svg/Checkmark1.svg";
 import MenuItem from '@material-ui/core/MenuItem';
 import Axios from 'axios';
 import Cookies from 'js-cookie';
@@ -457,18 +458,18 @@ class Header extends Component {
                         >
                           {this.props.accounts ? (
                             <>
-                              <Grid item>Wallet Connected</Grid>
+                              <Grid item>Wallet </Grid>
                               <Grid item>
                                 <img
                                   id='green-dot'
-                                  style={{ width: '10px' }}
-                                  src={greenDot}
+                                  style={{ width: '15px' }}
+                                  src={checkmark1}
                                   alt=''
                                 />{' '}
                               </Grid>{' '}
                             </>
                           ) : (
-                            <Grid item>Connect Wallet</Grid>
+                            <Grid item>Wallet</Grid>
                           )}
                         </Grid>
                       </Button>
@@ -998,44 +999,7 @@ class Header extends Component {
                         // marginLeft: '-0.2rem',
                         // marginBottom: '0.75rem',
                       }}
-                      to='/myprofile'
-                    >
-                      <MenuItem disableGutters>
-                        <span
-                          style={{
-                            display: 'flex',
-                            maxHeight: '10px',
-                            alignItems: 'center',
-                            whiteSpace: 'pre-line',
-                            marginLeft: '10px',
-                            padding: '10px 3px 5px 3px',
-                          }}
-                        >
-                          <p
-                            style={{
-                              flex: '1',
-                              color: '#888888',
-                              fontFamily: 'Gibson',
-                              fontSize: '13px',
-                              margin: '5px 0',
-                            }}
-                          >
-                            My Profile
-                          </p>
-                        </span>
-                      </MenuItem>
-                    </NavLink>
-
-                    <NavLink
-                      style={{
-                        color: 'gray',
-                        fontFamily: 'Gibson',
-                        fontSize: '13px',
-                        textDecoration: 'none',
-                        // marginLeft: '-0.2rem',
-                        // marginBottom: '0.75rem',
-                      }}
-                      to='/mycollections'
+                      to='/mycollection'
                     >
                       <MenuItem disableGutters>
                         <span
@@ -1062,7 +1026,6 @@ class Header extends Component {
                         </span>
                       </MenuItem>
                     </NavLink>
-
                     <NavLink
                       style={{
                         color: 'gray',

@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import TableBody from './TableBody';
 import { Link } from 'react-router-dom';
 import {
+  Button,
   Card,
   CardBody,
   CardSubtitle,
   CardText,
   CardImg,
+  CardTitle,
+  CardImgOverlay,
   CardHeader,
+  Collapse,
   Table,
   Input,
   Modal,
@@ -19,6 +23,11 @@ import {
   DropdownItem,
 } from 'reactstrap';
 import loader from '../images/loader.svg';
+import anonUser from '../images/user.png';
+import "./BatchDetail.css";
+import heart from "../images/svg/Heart.svg";
+import dropdownarrow from "../assets/svg/Drop down arrow.svg";
+
 
 
 const BatchDetail = ({
@@ -46,6 +55,9 @@ const BatchDetail = ({
   const changeValue = (e) => {
     setDropdownValue(e.currentTarget.textContent);
   };
+  const [isOpen, setIsOpen] = useState(false);
+
+  const collapsetoggle = () => setIsOpen(!isOpen);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
@@ -91,38 +103,293 @@ const BatchDetail = ({
   return (
     <>
       <div className='container'>
-        <div className='d-flex justify-content-between mt-5 py-5'>
+        <div className='batchUpperview'>
           <div
             className='card'
             style={{
-              width: '50%',
-            }}
+             width: '50%',
+             }}
           >
             <a href={batchCreated._imgurl} target='_blank'>
               <img src={batchCreated._imgurl} className='card-img' alt='...' />
             </a>
           </div>
+          <div>
           <div className='information d-flex flex-column'>
-            {/* <a href='#'>{match.params.id}</a>
-                        <h1>{match.params.id}</h1> */}
-            <h4>{batchCreated._tokenBatchName}</h4>
-            <p>
+            <div>
+            <h4>
+            {batchCreated._tokenBatchName}
+          </h4>
+            </div>
+           <div className = "View"> 
+           <p className = "style2">
+             Starting from 6.5ETH
+           </p>
+           &nbsp;
+           &nbsp;
+           <p className = "style2">
+            4 of 5 remaining
+           </p>
+
+           </div>
+          <div>
+          <p className = "style1">
+          <img
+                  className="userimg"
+                  src={anonUser}
+                ></img>   {' '}
               Created by{' '}
               <span className='text-primary'>{accUsername(batchCreated?._tokenCreator)}</span>
+            </p> 
+
+          </div>
+          <div>
+            <h5> Description</h5>
+            <p className="style1">
+
             </p>
-            <div
+          </div>
+          <div style= {{display:'flex', justifyContent:'space-between',}}>
+            {/* <h5>
+              History
+            </h5>
+          <button  style={{ marginBottom: '1rem', border:'none' }} onClick={collapsetoggle}>
+            <img src= {dropdownarrow} alt = "img">
+            </img>
+
+          </button> */}
+          {/* <Collapse isOpen={isOpen} className = "collapse1">
+        <p className ="style2">
+        Anim pariatur cliche reprehenderit,
+           enim eiusmod high life accusamus terry richardson ad squid. Nihil
+           anim keffiyeh helvetica, craft beer labore wes anderson cred
+           nesciunt sapiente ea proident.
+
+        </p>
+          
+          
+      </Collapse> */}
+            </div>
+
+             {/* <div
               className='card py-3'
               style={{
                 width: '30rem',
               }}
             >
+              <h4>{batchCreated._tokenBatchName}</h4>
               
+            </div> */}
             </div>
-          </div>  
+
+          </div>
+
+          </div>
+            
+            {/* <a href='#'>{match.params.id}</a>
+                        <h1>{match.params.id}</h1> */}
+           {/* 
+             
+          </div> */} 
+          
+          
+
+          <div className ="bottomView">
+              <div className='rowImages'>
+          <Card className='imageCards'>
+                  <CardImg
+                    top
+                    className="Cardimg"
+                    src={batchCreated._imgurl}
+                    alt='image'
+                  ></CardImg>
+                  <CardImgOverlay className = "imgOverlay">
+                    <div className="BatchcardImgOverlay">
+                    <img
+                  className="userimg"
+                  src={anonUser}
+                ></img>
+                   <img 
+                className = "userimg"
+                src = {heart}
+                ></img>
+                   </div>
+                    <CardTitle className="Batchcard-imgTitle">
+                    {batchCreated._tokenBatchName}
+                    </CardTitle> 
+                  </CardImgOverlay> 
+                  <CardBody>
+                  <div className="cardImg-body">
+                      <CardSubtitle className = "cardsubtitleName">
+                      <span className='text-primary'>{accUsername(batchCreated?._tokenCreator)}</span>
+                      </CardSubtitle>
+                    </div>                    
+                     <div className='ctext'>
+                      <CardText className = "price">
+                        0.5ETH
+                        <p className = "USD-price">
+                        ($985.56 USD)
+                          </p>
+                      </CardText>
+                      <div>
+                      <button className='batchcardbid-btn'>BID</button>
+                      </div>
+                    </div> 
+                    <div className='buy-bid-btn-div'>
+                        <p className="Batchcardtime-div">
+                          1 day left to purchase
+                        </p>
+                      </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg
+                    top
+                    className="Cardimg"
+                    src={batchCreated._imgurl}
+                    alt='image'
+                  ></CardImg>
+                  <CardImgOverlay className = "imgOverlay">
+                    <div className="BatchcardImgOverlay">
+                    <img
+                  className="userimg"
+                  src={anonUser}
+                ></img>
+                   <img 
+                className = "userimg"
+                src = {heart}
+                ></img>
+                   </div>
+                    <CardTitle className="Batchcard-imgTitle">
+                    {batchCreated._tokenBatchName}
+                    </CardTitle> 
+                  </CardImgOverlay> 
+                  <CardBody>
+                  <div className="cardImg-body">
+                      <CardSubtitle className = "cardsubtitleName">
+                      <span className='text-primary'>{accUsername(batchCreated?._tokenCreator)}</span>
+                      </CardSubtitle>
+                    </div>                    
+                     <div className='ctext'>
+                      <CardText className = "price">
+                        0.5ETH
+                        <p className = "USD-price">
+                        ($985.56 USD)
+                          </p>
+                      </CardText>
+                      <div>
+                      <button className='batchcardbid-btn'>BID</button>
+                      </div>
+                    </div> 
+                    <div className='buy-bid-btn-div'>
+                        <p className="Batchcardtime-div">
+                          1 day left to purchase
+                        </p>
+                      </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg
+                    top
+                    className="Cardimg"
+                    src={batchCreated._imgurl}
+                    alt='image'
+                  ></CardImg>
+                  <CardImgOverlay className = "imgOverlay">
+                    <div className="BatchcardImgOverlay">
+                    <img
+                  className="userimg"
+                  src={anonUser}
+                ></img>
+                   <img 
+                className = "userimg"
+                src = {heart}
+                ></img>
+                   </div>
+                    <CardTitle className="Batchcard-imgTitle">
+                    {batchCreated._tokenBatchName}
+                    </CardTitle> 
+                  </CardImgOverlay> 
+                  <CardBody>
+                  <div className="cardImg-body">
+                      <CardSubtitle className = "cardsubtitleName">
+                      <span className='text-primary'>{accUsername(batchCreated?._tokenCreator)}</span>
+                      </CardSubtitle>
+                    </div>                    
+                     <div className='ctext'>
+                      <CardText className = "price">
+                        0.5ETH
+                        <p className = "USD-price">
+                        ($985.56 USD)
+                          </p>
+                      </CardText>
+                      <div>
+                      <button className='batchcardbid-btn'>BID</button>
+                      </div>
+                    </div> 
+                    <div className='buy-bid-btn-div'>
+                        <p className="Batchcardtime-div">
+                          1 day left to purchase
+                        </p>
+                      </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg
+                    top
+                    className="Cardimg"
+                    src={batchCreated._imgurl}
+                    alt='image'
+                  ></CardImg>
+                  <CardImgOverlay className = "imgOverlay">
+                    <div className="BatchcardImgOverlay">
+                    <img
+                  className="userimg"
+                  src={anonUser}
+                ></img>
+                   <img 
+                className = "userimg"
+                src = {heart}
+                ></img>
+                   </div>
+                    <CardTitle className="Batchcard-imgTitle">
+                      Alimation Character
+                    </CardTitle> 
+                  </CardImgOverlay> 
+                  <CardBody>
+                  <div className="cardImg-body">
+                      <CardSubtitle className = "cardsubtitleName">
+                      <span className='text-primary'>{accUsername(batchCreated?._tokenCreator)}</span>
+                      </CardSubtitle>
+                    </div>                    
+                     <div className='ctext'>
+                      <CardText className = "price">
+                        0.5ETH
+                        <p className = "USD-price">
+                        ($985.56 USD)
+                          </p>
+                      </CardText>
+                      <div>
+                      <button className='batchcardbid-btn'>BID</button>
+                      </div>
+                    </div> 
+                    <div className='buy-bid-btn-div'>
+                        <p className="Batchcardtime-div">
+                          1 day left to purchase
+                        </p>
+                      </div>
+                  </CardBody>
+                </Card>
+          </div>
+          </div>
+          
+          <br/>
+          <br/>
+          <br/>
         </div>
         
       
-      </div>
+      
     </>
   );
 };
