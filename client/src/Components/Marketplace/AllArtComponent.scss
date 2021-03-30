@@ -1,88 +1,120 @@
 * {
-	font-family: Gibson, sans-serif;
+  font-family: Gibson, sans-serif;
 }
 
 .container_marketplace {
-	margin-top: calc(1.8rem + 76px);
-	margin-bottom: 90px;
-	display: flex;
-	justify-content: center;
+  margin-top: calc(1.8rem + 76px);
+  margin-bottom: 90px;
+  display: flex;
+  justify-content: center;
 
-	.filter_list {
-		max-width: 271px;
-		width: 100%;
-		max-height: 560px;
-		height: 100%;
-		margin-left: 33px;
-		margin-right: 55px;
-		text-align: left;
-		background: #FFFFFF;
-		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-		border-radius: 10px;
-		padding: 18px 11px 40px 11px;
-		overflow-y: scroll;
-		&::-webkit-scrollbar {
-			background: inherit;
-			width: 6px;
-		}
+  .filter_list {
+    max-width: 271px;
+    width: 100%;
+    max-height: 560px;
+    height: 100%;
+    margin-left: 33px;
+    margin-right: 55px;
+    text-align: left;
+    background: #FFFFFF;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 18px 11px 40px 11px;
+    overflow-y: scroll;
 
-		&::-webkit-scrollbar-thumb {
-			background: #C4C4C4;
-			border-radius: 5px;
-		}
+    &::-webkit-scrollbar {
+      background: inherit;
+      width: 6px;
+    }
 
-		input {
-			background: red;
-		}
-	}
+    &::-webkit-scrollbar-thumb {
+      background: #C4C4C4;
+      border-radius: 5px;
+    }
+  }
 
-	.cards_marketplace {
-		margin-right: 63px;
+  .chipCards {
+    display: flex;
+    flex-direction: column;
+    margin-right: 63px;
 
-		.head_result {
-			max-width: 1005px;
-			display: flex;
-			justify-content: space-between;
+    .chipList {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-bottom: 28px;
+      width: 100%;
+      overflow-x: scroll;
 
-			.head_result_num {
-				font-size: 19px;
-				line-height: 19px;
-				color: #5540C7;
-			}
+      &::-webkit-scrollbar {
+        width: 0;
+      }
 
-			.head_result_menu {
-				display: flex;
-				justify-content: center;
-				align-items: center;
+      -ms-overflow-style: none;
+      overflow: -moz-scrollbars-none;
+    }
 
-				.arrow_img {
-					width: 10px;
-					height: 5px;
-					margin-left: 5px;
-				}
+    .chipHead {
+      font-family: Gibson;
+      font-size: 21px;
+      line-height: 21px;
+      margin-bottom: 14px;
+    }
 
-				.burger_img {
-					width: 20px;
-					height: 20px;
-					margin-right: 4px;
-				}
-			}
-		}
+    .chips {
+      display: flex;
+      width: 100%;
+      overflow-x: scroll;
+    }
+  }
 
-		.cards_wrapper {
-			max-width: 1020px;
-			margin: 0 auto;
+  .cards_marketplace {
 
-			.creation_cards {
-				display: inline-flex;
-				flex-wrap: wrap;
-				justify-content: center;
-				width: 100%;
-			}
+    .head_result {
+      max-width: 1005px;
+      display: flex;
+      justify-content: space-between;
 
-			.creation_cards > div {
-				margin: 0 15px 55px 0;
-			}
-		}
-	}
+      .head_result_num {
+        font-size: 19px;
+        line-height: 19px;
+        color: #5540C7;
+      }
+
+      .head_result_menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .arrow_img {
+          width: 10px;
+          height: 5px;
+          margin-left: 5px;
+        }
+
+        .burger_img {
+          width: 20px;
+          height: 20px;
+          margin-right: 4px;
+        }
+      }
+    }
+
+    .cards_wrapper {
+      max-width: 1020px;
+      margin: 0 auto;
+
+      .creation_cards {
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .creation_cards > div {
+        margin: 0 15px 55px 0;
+      }
+    }
+  }
 }
