@@ -21,5 +21,8 @@
   "homepage": "https://github.com/alejoacosta74/CryptoArt#readme",
   "devDependencies": {
     "@openzeppelin/contracts": "^3.3.0"
+  },
+  "dependencies": {
+    "react-icons": "^4.2.0"
   }
 }
