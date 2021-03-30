@@ -1,6 +1,6 @@
-import React, {useRef, useReducer, useCallback} from 'react';
+import React, {useRef, useEffect, useState, useReducer, useCallback} from 'react';
 import Modal from "../Modal";
-import {Container, Form, FormGroup, Input, Label} from "reactstrap";
+import { Form, FormGroup, Input, Label} from "reactstrap";
 import loader from "../../images/loader.svg";
 import './style.scss';
 
@@ -69,6 +69,12 @@ const ModalUploadToMyStore = props => {
 
   const inputFileRef = useRef(null)
   const [controls, controlsDispatch] = useReducer(controlsReducer, initialControls);
+  const [isValidForm, setIsValidForm] = useState(false);
+
+  useEffect(()=>{
+    controls.name.value = '';
+    controls.description.value = '';
+  }, [isOpen])
 
   const onInputChange = useCallback(e => {
     const { name, value } = e.target
@@ -104,6 +110,10 @@ const ModalUploadToMyStore = props => {
 
   const onConfirmClick = useCallback(e => {
     onConfirm(e, controls)
+  }, [controls])
+
+  useEffect(() => {
+    setIsValidForm(controls.name.value && controls.file.value)
   }, [controls])
 
   return (
@@ -168,6 +178,7 @@ const ModalUploadToMyStore = props => {
               Name
             </Label>
             <Input
+              className="input-name"
               type='text'
               id='title'
               name='title'
@@ -196,6 +207,7 @@ const ModalUploadToMyStore = props => {
             <button
               className='abtn submit-button'
               onClick={onConfirmClick}
+              disabled={!isValidForm}
             >
               Confirm
             </button>

@@ -5,6 +5,10 @@
   overflow-x: hidden;
 }
 
+.modal.fade .modal-dialog {
+  transition: .0s;
+}
+
 .modal-title {
   font-family: Gibson;
   font-size: 20px;
@@ -48,10 +52,14 @@
   border-top: none !important;
 }
 .modal-content {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 50px 37px 45px 50px;
   height: auto;
   max-width: 480px;
 }
+
 .modal-header {
   border: hidden !important;
   padding: 0;
@@ -81,11 +89,9 @@
 }
 
 .abtn:focus {
-  outline: 0px;
+  outline: 0;
   border: 0;
 }
-
-
 
 .abtn1 {
   position: relative;
@@ -267,7 +273,6 @@ h3 {
   font-family: Gibson;
   max-width: 38rem !important;
   height: auto;
-  padding: 50px 0;
 }
 .uploadlabel{
   font-family: $fontFamily;
