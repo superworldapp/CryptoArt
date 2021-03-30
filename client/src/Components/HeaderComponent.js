@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import helpIcon from '../assets/svg/help.svg';
 import greenDot from '../assets/svg/green-dot.svg';
-import checkmark1 from "../images/svg/Checkmark1.svg";
+import checkmark1 from '../images/svg/Checkmark1.svg';
 import MenuItem from '@material-ui/core/MenuItem';
 import Axios from 'axios';
 import Cookies from 'js-cookie';
@@ -138,12 +138,25 @@ class Header extends Component {
     Axios.defaults.headers = {
       Authorization: Auth.getToken(),
     };
-    const { userId } = Auth.getToken();
-    return Axios.post(`${process.env.REACT_APP_SW_API_URL}/user/get`, {
-      userId: userId,
+    let auth = Auth.getToken();
+    if (!auth || !auth.userId) {
+      return;
+    }
+    console.log('auth.userId', auth.userId);
+    Axios.post(`${process.env.REACT_APP_SW_API_URL}/user/get/`, {
+      userId: auth.userId,
     })
       .then((res) => {
-        this.setState({ currentUser: res.data.data });
+        console.log('res.data', res.data, 'res.data.r', res.data.r);
+        if (res.data && res.data.r == 's' && res.data.data) {
+          this.setState({ currentUser: res.data.data });
+        } else {
+          console.log(
+            res.data && res.data.r == 'e' && res.data.e
+              ? res.data.e
+              : '[Header] useEffect user/get error'
+          );
+        }
       })
       .catch((e) => {
         console.log(e);
@@ -241,23 +254,26 @@ class Header extends Component {
 
   changeUsernameOnSubmit = (e) => {
     e.preventDefault();
-    Axios.defaults.headers = {
-      Authorization: Auth.getToken(),
-    };
-    const tk = Auth.getToken();
-    const { userId, session } = tk;
+    let auth = Auth.getToken();
+    if (!auth || !auth.userId || !auth.session) {
+      return;
+    }
+  };
+
+  changePasswordOnSubmit = (e) => {
+    let auth = Auth.getToken();
     Axios.post(
-      `${process.env.REACT_APP_SW_API_URL}/user/update/${userId}/${session}`,
+      `${process.env.REACT_APP_SW_API_URL}/user/update`,
+      { username: this.state.credentials.newUsername },
       {
-        username: this.state.credentials.newUsername,
+        headers: {
+          Cookie: 'userId=' + auth.userId + '; session=' + auth.session,
+        },
       }
     )
       .then((response) => {
-        this.setState({ changeUsernameSuccessDialogOpen: true });
-        this.setState({ changeUsernamePressed: false });
-        this.setState({
-          newUsernameToDisplay: this.state.credentials.newUsername,
-        });
+        this.setState({ setChangeUsernameSuccessDialogOpen: true });
+        this.setState({ ChangeUsernamePressed: false });
         this.setState({
           credentials: {
             ...this.state.credentials,
@@ -267,40 +283,6 @@ class Header extends Component {
       })
       .catch((error) => {
         console.log(error);
-      });
-  };
-
-  changePasswordOnSubmit = (e) => {
-    e.preventDefault();
-    Axios.defaults.headers = {
-      Authorization: Auth.getToken(),
-    };
-    const tk = Auth.getToken();
-    Axios.post(`${process.env.REACT_APP_SW_API_URL}/password/reset`, {
-      authType: 'e',
-      authId: this.state.currentUser.email,
-      // currentPassword: this.state.credentials.currentPassword,
-      // password: this.state.credentials.newPassword,
-    })
-      .then((response) => {
-        if (response.data.status === 's') {
-          this.setState({ changePasswordErrorMessage: '' });
-          this.setState({ changePasswordSuccessDialogOpen: true });
-          this.setState({ changePasswordPressed: false });
-          this.setState({
-            credentials: {
-              ...this.state.credentials,
-              newPassword: this.state.credentials.newPassword,
-            },
-          });
-        } else {
-          this.setState({
-            changePasswordErrorMessage: 'Please use a correct current password',
-          });
-        }
-      })
-      .catch((error) => {
-        console.log('change password went to catch', error);
       });
   };
 
@@ -1149,16 +1131,16 @@ class Header extends Component {
                         Axios.defaults.headers = {
                           Authorization: Auth.getToken(),
                         };
-                        Axios.post(
-                          `${process.env.REACT_APP_API_URL}/user/logout`
-                        )
-                          .then(() => {
-                            // console.log('LOGGED OUT');
-                          })
-                          .catch((_e) => {
-                            // console.log('LOGGED OUT ERROR');
-                            console.log(_e);
-                          });
+                        // Axios.post(
+                        //   `${process.env.REACT_APP_SW_API_URL}/user/logout`
+                        // )
+                        //   .then(() => {
+                        //     // console.log('LOGGED OUT');
+                        //   })
+                        //   .catch((_e) => {
+                        //     // console.log('LOGGED OUT ERROR');
+                        //     console.log(_e);
+                        //   });
                         Auth.logout();
                         this.handleClose();
                         window.location.reload();
@@ -1217,7 +1199,10 @@ class Header extends Component {
                   />
                 </NavLink>
               </NavItem> */}
-              <SignInModal initContracts={this.props.initContracts} />
+              <SignInModal
+                initContracts={this.props.initContracts}
+                currentUser={this.state.currentUser}
+              />
             </Nav>
           </Collapse>
 
