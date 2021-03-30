@@ -384,19 +384,7 @@ class Header extends Component {
                   Marketplace
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink
-                  className='nav-link'
-                  style={{
-                    width: 200,
-                    fontFamily: 'Gibson',
-                    fontSize: '17px',
-                  }}
-                  to='/allart'
-                >
-                  Picks
-                </NavLink>
-              </NavItem>
+              
               <NavItem>
                 <NavLink
                   className='nav-link'
