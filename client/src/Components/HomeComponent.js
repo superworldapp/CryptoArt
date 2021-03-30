@@ -366,7 +366,8 @@ class Home extends Component {
                   {' '}
                   Trending NFT's
                 </p>
-                <a
+                <Link to='/allart'>
+                <button
                 href=''
                   style={{
                     fontFamily: 'Gibson',
@@ -374,12 +375,15 @@ class Home extends Component {
                     fontSize: '18px',
                     textDecoration: 'none',
                     color: '#B3B3B3',
-                    marginRight:'4rem'
+                    marginRight:'4rem',
+                    border: 'none',
+                    backgroundColor: 'transparent'
                   }}
                 >
                   {' '}
                   View More <img src={svg1} alt='svg1' />
-                </a>
+                </button>
+                </Link>
               </div>
               <div className ="bottomView">
               <div className='rowImages'>
@@ -606,6 +610,100 @@ class Home extends Component {
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
                       </div>
                     </div> 
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg
+                    top
+                    className="Cardimg"
+                    src={image14}
+                    alt='image3'
+                  ></CardImg>
+                  <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  className="userimg"
+                  src={anonUser}
+                ></img>
+              </Badge>
+                    <CardTitle className="card-imgTitle" >
+                      Look
+                    </CardTitle>
+                  </CardImgOverlay>
+                  <CardBody>
+                    <div className="cardImg-body">
+                      <CardSubtitle className= "createdby">
+                        Created by 
+                      </CardSubtitle>
+                      &nbsp;
+                      <CardSubtitle className="cardsubtitleName">
+                       Mai
+                      </CardSubtitle>
+                    </div>                    
+                     <div className='ctext'>
+                      <CardText className="price">
+                        0.5ETH
+                        <p className="USD-price">
+                        ($985.56 USD)
+                          </p>
+                      </CardText>
+                      <div>
+                      <button className='buy-bid-btn'>Place Bid</button>
+                      </div>
+                    </div> 
+                    <div className='buy-bid-btn-div'>
+                      
+                        <p className='time-div'>
+                        26 hrs 42 mins remaining
+                        </p>
+                      </div>
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg
+                    top
+                    className="Cardimg"
+                    src={image14}
+                    alt='image3'
+                  ></CardImg>
+                  <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  className="userimg"
+                  src={anonUser}
+                ></img>
+              </Badge>
+                    <CardTitle className="card-imgTitle" >
+                      Look
+                    </CardTitle>
+                  </CardImgOverlay>
+                  <CardBody>
+                    <div className="cardImg-body">
+                      <CardSubtitle className= "createdby">
+                        Created by 
+                      </CardSubtitle>
+                      &nbsp;
+                      <CardSubtitle className="cardsubtitleName">
+                       Mai
+                      </CardSubtitle>
+                    </div>                    
+                     <div className='ctext'>
+                      <CardText className="price">
+                        0.5ETH
+                        <p className="USD-price">
+                        ($985.56 USD)
+                          </p>
+                      </CardText>
+                      <div>
+                      <button className='buy-bid-btn'>Place Bid</button>
+                      </div>
+                    </div> 
+                    <div className='buy-bid-btn-div'>
+                      
+                        <p className='time-div'>
+                        26 hrs 42 mins remaining
+                        </p>
+                      </div>
                   </CardBody>
                 </Card>
               </div>
@@ -1060,6 +1158,162 @@ class Home extends Component {
                       </CardText>
                       <div>
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </div>
+                    </div> 
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg
+                    top
+                    className="Cardimg"
+                    src={AnkorWat}
+                    alt='image3'
+                  ></CardImg>
+                  <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  className="userimg"
+                  src={swicon}
+                ></img>
+              </Badge>
+                    <CardTitle className="card-imgTitle" >
+                      Angkor Wat
+                    </CardTitle>
+                  </CardImgOverlay>
+                  <CardBody>
+                  <div className="cardImg-body">
+                      <CardSubtitle className= "createdby">
+                        Created by 
+                      </CardSubtitle>
+                      &nbsp;
+                      <CardSubtitle className = "cardsubtitleName">
+                       SuperWorld
+                      </CardSubtitle>
+                    </div>
+                    {/* <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        Arc de Triomphe
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: 'black',
+                        }}
+                      >
+                        0.1ETH
+                      </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'></div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                        style={{ marginTop: '0.85rem' }}
+                      >
+                        <button className='buy-bid-btn'>Purchase</button>
+                      </a>
+                    </div>
+                     */}
+                     <div className='ctext'>
+                      <CardText className = "price">
+                        0.1ETH
+                        <p className = "USD-price">
+                        ($176.61 USD)
+                          </p>
+                      </CardText>
+                      <div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                      >
+                      <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </a>
+                      </div>
+                    </div> 
+                  </CardBody>
+                </Card>
+                <Card className='imageCards'>
+                  <CardImg
+                    top
+                    className="Cardimg"
+                    src={AnkorWat}
+                    alt='image3'
+                  ></CardImg>
+                  <CardImgOverlay className="imgOverlay">
+                  <Badge pill className= "sw-overlay">
+                  <img
+                  className="userimg"
+                  src={swicon}
+                ></img>
+              </Badge>
+                    <CardTitle className="card-imgTitle" >
+                      Angkor Wat
+                    </CardTitle>
+                  </CardImgOverlay>
+                  <CardBody>
+                  <div className="cardImg-body">
+                      <CardSubtitle className= "createdby">
+                        Created by 
+                      </CardSubtitle>
+                      &nbsp;
+                      <CardSubtitle className = "cardsubtitleName">
+                       SuperWorld
+                      </CardSubtitle>
+                    </div>
+                    {/* <div className='ctext'>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: 'black',
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        Arc de Triomphe
+                      </CardText>
+                      <CardText
+                        style={{
+                          fontFamily: 'Gibson',
+                          fontSize: '13px',
+                          color: 'black',
+                        }}
+                      >
+                        0.1ETH
+                      </CardText>
+                    </div>
+                    <div className='buy-bid-btn-div'>
+                      <div className='time-div'></div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                        style={{ marginTop: '0.85rem' }}
+                      >
+                        <button className='buy-bid-btn'>Purchase</button>
+                      </a>
+                    </div>
+                     */}
+                     <div className='ctext'>
+                      <CardText className = "price">
+                        0.1ETH
+                        <p className = "USD-price">
+                        ($176.61 USD)
+                          </p>
+                      </CardText>
+                      <div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                      >
+                      <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </a>
                       </div>
                     </div> 
                   </CardBody>
