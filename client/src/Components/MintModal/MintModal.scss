@@ -1,0 +1,69 @@
+@import '../../styles/global';
+
+.mint_modal_wrapper {
+	font-family: $fontFamily;
+	max-width: 480px;
+	width: 100%;
+	color: #000;
+
+	.label {
+		font-size: 19px;
+		line-height: 19px;
+		min-width: 125px;
+		margin-right: 20px;
+	}
+
+	.file-name {
+		color: #888888;
+		font-size: 15px;
+		line-height: 15px;
+	}
+
+	.upload-label {
+		max-width: 145px;
+		width: 100%;
+		font-size: 19px;
+		line-height: 19px;
+		color: #000000;
+		&::after {
+			content: '*';
+			color: red;
+		}
+	}
+
+	.text-input {
+		width: 81px;
+		height: 31px;
+		font-size: 15px;
+		line-height: 15px;
+		background: #FFFFFF;
+		border: 1px solid #000000;
+		box-sizing: border-box;
+		border-radius: 10px;
+	}
+
+	.submit-button {
+		display: block;
+		margin: 56px auto 0;
+		font-size: 19px;
+		line-height: 19px;
+		text-align: center;
+		color: #FFFFFF;
+		background: #5A45C7;
+		border: 2px solid #5A45C7;
+		box-sizing: border-box;
+		border-radius: 10px;
+		padding: 18px 48px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.mint_modal_wrapper {
+		padding-left: 0;
+		padding-right: 0;
+
+		.form-group {
+			flex-wrap: wrap;
+		}
+	}
+}

@@ -25,7 +25,11 @@
     }
   }
 
+
   .control-description {
+    border: 1px solid #888888;
+    box-sizing: border-box;
+    border-radius: 10px;
     height: 95px;
     resize: none;
     padding-top: 15px;
@@ -71,7 +75,10 @@
   }
 
   .form-control {
-    border-color: #888888;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
   }
 
   .form-control:focus {
@@ -79,6 +86,7 @@
     box-shadow: none;
   }
 }
+
 
 @media screen and (max-width: 600px) {
   .uploadpopup {
