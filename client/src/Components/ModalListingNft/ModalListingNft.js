@@ -1,7 +1,37 @@
-import React from 'react';
+import React, {useEffect, useCallback, useRef, useState} from 'react';
 import Modal from "../Modal";
 import {Form, FormGroup, Input, Label} from "reactstrap";
 import './style.scss';
+
+const saleTypes = {
+  AUCTION: 'AUCTION',
+  BUY_NOW: 'BUY_NOW',
+}
+
+const initialControls = {
+  saleType: {
+    value: saleTypes.BUY_NOW,
+    isRequired: true,
+    isValid: true,
+  },
+  tokenPrice: {
+    value: 1,
+    isRequired: true,
+    isValid: false,
+  },
+  noOfTokens: {
+    value: 1,
+    isRequired: true,
+    isValid: false,
+    disabled: true,
+  },
+  duration: {
+    value: null,
+    isRequired: true,
+    isValid: false,
+    disabled: true,
+  }
+}
 
 const ModalListingNft = props => {
   const {
@@ -10,6 +40,19 @@ const ModalListingNft = props => {
     onClosed,
     fileName,
   } = props
+
+  const auctionInputRef = useRef(null)
+  const buyNowInputRef = useRef(null)
+
+  const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
+
+  const onSaleTypeChange = useCallback(e => {
+    setSaleType(e.target.value)
+  }, [])
+
+  useEffect(() => {
+
+  }, [saleType])
 
   return (
     <Modal
@@ -35,16 +78,32 @@ const ModalListingNft = props => {
             <span className='file-name'>{fileName}</span>
           </FormGroup>
           <FormGroup>
-            <Label className='label label-radio' htmlFor='auction'>
+            <Label className='label sale-type' onClick={() => auctionInputRef.current.click()}>
               Auction
             </Label>
-            <Input type='radio' />
+            <Input
+              className='sale-input'
+              type='radio'
+              name='sale-type'
+              value={saleTypes.AUCTION}
+              innerRef={auctionInputRef}
+              onChange={onSaleTypeChange}
+              checked={saleTypes.AUCTION === saleType}
+            />
           </FormGroup>
           <FormGroup>
-            <Label className='label label-radio' htmlFor='buynow'>
+            <Label className='label sale-type' onClick={() => buyNowInputRef.current.click()}>
               Buy Now
             </Label>
-            <Input type='radio' />
+            <Input
+              className='sale-input'
+              type='radio'
+              name='sale-type'
+              value={saleTypes.BUY_NOW}
+              innerRef={buyNowInputRef}
+              onChange={onSaleTypeChange}
+              checked={saleTypes.BUY_NOW === saleType}
+            />
           </FormGroup>
           <FormGroup>
             <div className='label label-token-price'>
