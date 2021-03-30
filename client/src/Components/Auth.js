@@ -23,6 +23,8 @@ const Auth = {
     Cookies.remove('userId');
     Cookies.remove('session');
     Cookies.remove('email');
+    localStorage.removeItem('walletType');
+    localStorage.removeItem('walletConnected');
     this.isAuthenticated = false;
   },
   getAuth() {
