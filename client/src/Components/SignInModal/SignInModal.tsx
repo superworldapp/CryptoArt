@@ -152,25 +152,44 @@ const SignInModal = (
       setOpenError(true);
       setNotificationMessage(
         <Alert variant='filled' severity='error'>
-          There was an error logging you in!
+          Please fill in blank field(s).
         </Alert>
       );
     } else {
       try {
-        const res = await axios.post(
-          `${process.env.REACT_APP_SW_API_URL}/user/connect`,
+        const userExists = await axios.post(
+          `${process.env.REACT_APP_SW_API_URL}/user/exists`,
           {
             authType: 'e',
             authId: email,
-            authToken: password,
-            username,
           }
         );
-        Cookies.set('email', email);
-        Cookies.set('session', res.data.data.session);
-        Cookies.set('userId', res.data.data.userId);
-        setLoggedIn(true);
-        Auth.authenticate();
+
+        if (userExists.data.data.isUserExists) {
+          const res = await axios.post(
+            `${process.env.REACT_APP_SW_API_URL}/user/connect`,
+            {
+              authType: 'e',
+              authId: email,
+              authToken: password,
+              username,
+            }
+          );
+          Cookies.set('email', email);
+          Cookies.set('session', res.data.data.session);
+          Cookies.set('userId', res.data.data.userId);
+          setLoggedIn(true);
+          setOpenError(false);
+          Auth.authenticate();
+        } else {
+          setOpenError(true);
+          setNotificationMessage(
+            <Alert variant='filled' severity='error'>
+              An account with this email does not exist. Please create an
+              account.
+            </Alert>
+          );
+        }
         setLoading(false);
       } catch (error) {
         setOpenError(true);
