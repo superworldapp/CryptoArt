@@ -293,8 +293,9 @@ class Allpatrender extends Component {
 				className={buk}//{this.props.art._isBidding ? buk : bak}
 				className='mystore-queue-card'
 			>
-				{/* <a href={this.props.art.imgurl} target='_blank'> */}
-				{/* {+art[3] > 1 && <span className='card-counter'>+{art[3]}</span>} */}
+				 {/*<a href={this.props.art.imgurl} target='_blank'> */}
+				 {+art[3] >= 0 && <span className='card-counter'>+{art[3]}</span>}
+				{console.log('========>art[3]', art[3])}
 				<div className='mystore-queue-card-img'>
 					<Link to={`/batch/${this.props.art._batchId}`}>
 						<CardImg

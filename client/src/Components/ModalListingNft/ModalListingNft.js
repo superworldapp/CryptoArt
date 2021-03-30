@@ -2,6 +2,7 @@ import React, {useEffect, useCallback, useRef, useState} from 'react';
 import Modal from "../Modal";
 import {Form, FormGroup, Input, Label} from "reactstrap";
 import './style.scss';
+import Checkbox from "./checkbox/checkbox";
 
 const saleTypes = {
 	AUCTION: 'AUCTION',
@@ -47,11 +48,15 @@ const ModalListingNft = props => {
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
 
 	const onSaleTypeChange = useCallback(e => {
+		console.log('========>e', e.target.value);
 		setSaleType(e.target.value)
 	}, [])
 
+	console.log('========>saleType', saleType);
+
 	useEffect(() => {
-		if(saleType === saleTypes.AUCTION) {
+		console.log('========>saleType', saleType);
+		if (saleType === saleTypes.AUCTION) {
 			initialControls.noOfTokens.disabled = true
 			initialControls.duration.disabled = false
 		} else if (saleType === saleTypes.BUY_NOW) {
@@ -88,27 +93,28 @@ const ModalListingNft = props => {
 						<span className='file-name'>{fileName}</span>
 					</FormGroup>
 					<FormGroup>
-            <div className="sale-block">
-              <Label className='sale-type-label' onClick={() => auctionInputRef.current.click()}>
-                Auction
-              </Label>
-              <Input
-                className='sale-input'
-                type='checkbox'
-                name='sale-type'
-                value={saleTypes.AUCTION}
-                innerRef={auctionInputRef}
-                onChange={onSaleTypeChange}
-                checked={saleTypes.AUCTION === saleType}
-              />
-            </div>
+						<div className="sale-block">
+							<Label className='sale-type-label'>
+								Auction
+							</Label>
+							<Checkbox
+								className='sale-input'
+								type='checkbox'
+								name='sale-type'
+								value={saleTypes.AUCTION}
+								innerRef={auctionInputRef}
+								onChange={onSaleTypeChange}
+								checked={saleTypes.AUCTION === saleType}
+								id="one"
+							/>
+						</div>
 					</FormGroup>
 					<FormGroup>
 						<div className="sale-block">
-							<Label className='sale-type-label' onClick={() => buyNowInputRef.current.click()}>
+							<Label className='sale-type-label'>
 								Buy Now
 							</Label>
-							<Input
+							<Checkbox
 								className='sale-input'
 								type='checkbox'
 								name='sale-type'
@@ -116,6 +122,7 @@ const ModalListingNft = props => {
 								innerRef={buyNowInputRef}
 								onChange={onSaleTypeChange}
 								checked={saleTypes.BUY_NOW === saleType}
+								id="two"
 							/>
 						</div>
 					</FormGroup>
