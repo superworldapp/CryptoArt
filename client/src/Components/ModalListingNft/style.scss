@@ -5,7 +5,8 @@
 }
 
 .modal-listing-nft {
-
+	display: flex;
+	justify-content: center;
 	font-family: $fontFamily;
 	color: #000;
 
@@ -13,9 +14,9 @@
 		opacity: .3;
 	}
 
-  label {
-    margin-bottom: 0;
-  }
+	label {
+		margin-bottom: 0;
+	}
 
 	.file-name {
 		color: #888888;
@@ -24,8 +25,7 @@
 	}
 
 	.file-label {
-		min-width: 125px;
-		margin-right: 20px;
+		min-width: 150px;
 	}
 
 	.label {
@@ -51,8 +51,9 @@
 	}
 
 	.sale-block {
-    display: flex;
-    align-items: center;
+		display: flex;
+		align-items: center;
+
 		.sale-input {
 			width: 15px;
 			height: 15px;
@@ -100,5 +101,34 @@
 		box-sizing: border-box;
 		border-radius: 10px;
 		padding: 18px 48px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.modal-listing-nft {
+		padding-left: 0;
+		padding-right: 0;
+
+		.form-group {
+			flex-wrap: wrap;
+		}
+
+		.text-input {
+			width: 100%;
+			margin-top: 10px;
+		}
+
+		.label-token-price {
+			flex-direction: inherit;
+			align-items: flex-end;
+
+			.label {
+				line-height: 15px;
+			}
+		}
+
+		.after-input-text {
+			margin-left: 0;
+		}
 	}
 }

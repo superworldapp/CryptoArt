@@ -108,68 +108,68 @@ class Allpatrender extends Component {
 		});
 		this.props.contract.methods
 			.mintToken(this.props.art._batchId)
-			.send({ from: this.props.accounts, gas: 5000000 });
+			.send({from: this.props.accounts, gas: 5000000});
 	}
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    this.setState({
-      [name]: value,
-    });
-  }
-  mintTokenBatch = async() => {
-    // const res = await instance.methods.createtokenBatch().send();
-    // console.log(res)
-    let tokenBatchId = 1//this.state.artHash.toString();
-    let amountToMint = 1 //this.state.title;
+	handleInputChange(event) {
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
+		this.setState({
+			[name]: value,
+		});
+	}
 
-    try {
-    //function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint)
-      const res = await this.props.contract.methods
-        .mintTokenBatch(
-          tokenBatchId,
-          amountToMint,
+	mintTokenBatch = async () => {
+		// const res = await instance.methods.createtokenBatch().send();
+		// console.log(res)
+		let tokenBatchId = 1//this.state.artHash.toString();
+		let amountToMint = 1 //this.state.title;
 
-        )
-        .send({ from:this.props.accounts, gas: 5000000 });
+		try {
+			//function mintTokenBatch(uint256 tokenBatchId, uint256 amountToMint)
+			const res = await this.props.contract.methods
+				.mintTokenBatch(
+					tokenBatchId,
+					amountToMint,
+				)
+				.send({from: this.props.accounts, gas: 5000000});
 
-      console.log('res', res);
-      let data;
-    } catch(error){
-        console.error(error)
-    }
-  }
-  Sale = async() => {
-    let tokenId = 1
-    let sellprice = "100000000000000000"
-    let isListed = true
-    try {
-    //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
-      const res = await this.props.contract.methods
-        .Sale(
-          tokenId,
-          sellprice,
-          isListed,
-        )
-        .send({ from: this.props.accounts, gas: 5000000 });
+			console.log('res', res);
+			let data;
+		} catch (error) {
+			console.error(error)
+		}
+	}
+	Sale = async () => {
+		let tokenId = 1
+		let sellprice = "100000000000000000"
+		let isListed = true
+		try {
+			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+			const res = await this.props.contract.methods
+				.Sale(
+					tokenId,
+					sellprice,
+					isListed,
+				)
+				.send({from: this.props.accounts, gas: 5000000});
 
-      console.log('res', res);
-      let data;
-    } catch(error){
-        console.error(error)
-    }
-  }
-  putForSale = async () => {
-    this.setState({putForSaleLoading: true});
-    const res = await this.props.contract.methods
-      .Sale(
-        this.props.art._tokenId,
-        (this.state.sellPrice * ETHER).toString(),
-        true,
-      )
-      .send({from: this.props.accounts, gas: 1000000});
+			console.log('res', res);
+			let data;
+		} catch (error) {
+			console.error(error)
+		}
+	}
+	putForSale = async () => {
+		this.setState({putForSaleLoading: true});
+		const res = await this.props.contract.methods
+			.Sale(
+				this.props.art._tokenId,
+				(this.state.sellPrice * ETHER).toString(),
+				true,
+			)
+			.send({from: this.props.accounts, gas: 1000000});
 
 		console.log('res', res);
 		this.setState({putForSaleLoading: false, listForSaleSuccess: true});
@@ -309,10 +309,10 @@ class Allpatrender extends Component {
 
 						<h3>{this.props.art._tokenBatchName}</h3>
 
-            <div className='second-section'>
-              <button onClick={this.closeMintToken} className='button_mint'>Mint</button>
-              <button onClick={this.props.onListButtonClick} className='button_mint'>List</button>
-            </div>
+						<div className='second-section'>
+							<button onClick={this.closeMintToken} className='button_mint'>Mint</button>
+							<button onClick={this.props.onListButtonClick} className='button_mint'>List</button>
+						</div>
 
 						<div>
 							{/* {reSellOrSell ? (

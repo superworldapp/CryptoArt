@@ -1,9 +1,9 @@
 @import '../../styles/global';
 
 .mint_modal_wrapper {
+	display: flex;
+	justify-content: center;
 	font-family: $fontFamily;
-	max-width: 480px;
-	width: 100%;
 	color: #000;
 
 	.label {

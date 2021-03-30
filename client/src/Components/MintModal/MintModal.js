@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 
 import Modal from "../Modal";
 
-import './MintModal.scss';
 import {Form, FormGroup, Input, Label} from "reactstrap";
+import './MintModal.scss';
 
 const MintModal = (props) => {
 	const {
@@ -24,6 +24,7 @@ const MintModal = (props) => {
 			isOpen={isOpen}
 			toggle={toggle}
 			className='mint_modal_wrapper'
+			unmountOnClose
 			header={(
 				<>
 					<div className='title'>
@@ -47,7 +48,7 @@ const MintModal = (props) => {
 						>
 							No. of Tokens
 						</Label>
-						<Input onChange={handleInput} className='text-input' type='text' />
+						<Input onChange={handleInput} className='text-input' type='text'/>
 					</FormGroup>
 					<button disabled={!valueInput} onClick={send} className="submit-button">Confirm</button>
 				</Form>
