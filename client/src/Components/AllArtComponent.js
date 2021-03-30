@@ -161,6 +161,36 @@ class AllArt extends Component {
                                     className='rounded-circle'
                                     src={anonUser}></img>
                             </CardSubtitle>
+                            
+                            <CardSubtitle
+                                style={{
+                                    fontFamily: 'Gibson',
+                                    fontSize: '13px',
+                                    color: '#888888',
+                                    display: 'flex',
+                                    alignItems: 'flex-end'
+                                }}>
+                                Title{' '}
+                                <div className='token-creator'>
+                                    {' '}
+                                    {this.props.art._tokenBatchName}
+                                </div>
+                            </CardSubtitle>
+                            
+                            <CardSubtitle
+                                style={{
+                                    fontFamily: 'Gibson',
+                                    fontSize: '13px',
+                                    color: '#888888',
+                                    display: 'flex',
+                                    alignItems: 'flex-end'
+                                }}>
+                                remaining Tokens{' '}
+                                <div className='token-creator'>
+                                    {' '}
+                                    {this.props.art._unmintedEditions}
+                                </div>
+                            </CardSubtitle>
                             <CardSubtitle
                                 style={{
                                     fontFamily: 'Gibson',
