@@ -981,7 +981,44 @@ class Header extends Component {
                         // marginLeft: '-0.2rem',
                         // marginBottom: '0.75rem',
                       }}
-                      to='/mycollection'
+                      to='/myprofile'
+                    >
+                      <MenuItem disableGutters>
+                        <span
+                          style={{
+                            display: 'flex',
+                            maxHeight: '10px',
+                            alignItems: 'center',
+                            whiteSpace: 'pre-line',
+                            marginLeft: '10px',
+                            padding: '10px 3px 5px 3px',
+                          }}
+                        >
+                          <p
+                            style={{
+                              flex: '1',
+                              color: '#888888',
+                              fontFamily: 'Gibson',
+                              fontSize: '13px',
+                              margin: '5px 0',
+                            }}
+                          >
+                            My Profile
+                          </p>
+                        </span>
+                      </MenuItem>
+                    </NavLink>
+
+                    <NavLink
+                      style={{
+                        color: 'gray',
+                        fontFamily: 'Gibson',
+                        fontSize: '13px',
+                        textDecoration: 'none',
+                        // marginLeft: '-0.2rem',
+                        // marginBottom: '0.75rem',
+                      }}
+                      to='/mycollections'
                     >
                       <MenuItem disableGutters>
                         <span
