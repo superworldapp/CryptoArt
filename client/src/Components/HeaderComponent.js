@@ -628,8 +628,8 @@ class Header extends Component {
                             style={{
                               color: '#888888',
                               fontSize: '11px',
-                              margin: '0 0 0 5%',
                               maxHeight: '10px',
+                              marginBottom: '0.5rem',
                             }}
                           >
                             &#8288;New Username
@@ -639,9 +639,14 @@ class Header extends Component {
                               display: 'flex',
                               justifyContent: 'center',
                               alignItems: 'center',
+                              paddingTop: '5px',
                             }}
                           >
                             <Input
+                              style={{
+                                textAlign: 'center',
+                                fontSize: '11px',
+                              }}
                               key='newUsernameInput'
                               id='newUsername'
                               type='text'
