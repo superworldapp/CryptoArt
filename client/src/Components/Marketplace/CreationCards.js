@@ -58,7 +58,7 @@ const CreationCards = (props) => {
 						<img src={heart} alt="heart"/>
 					</div>
 					<CardTitle className="card-user-title">
-						{props['2'] || 'none'}
+						{props._tokenBatchName || 'none'}
 					</CardTitle>
 				</CardImgOverlay>
 				<CardBody className="card-body">

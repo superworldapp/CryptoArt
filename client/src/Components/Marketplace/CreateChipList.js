@@ -22,15 +22,17 @@ const CreateChipList = ({checked, handleRemove, handleRemoveAll}) => {
 	const classes = useStyles();
 	return (
 		<div className="chipWrapper">
-			{checked.map((elem) => (
-				<div key={elem.key}>
-					<Chip
-						label={elem.name}
-						onDelete={() => handleRemove(elem)}
-						className={classes.chip}
-					/>
-				</div>
-			))}
+			{checked.map((elem) => {
+				return (
+					<div key={elem.key}>
+						<Chip
+							label={elem.name}
+							onDelete={() => handleRemove(elem)}
+							className={classes.chip}
+						/>
+					</div>
+				)
+			})}
 			<div onClick={handleRemoveAll} className="chipClear">Clear All</div>
 		</div>
 	);

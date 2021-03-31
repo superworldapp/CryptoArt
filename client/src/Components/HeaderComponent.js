@@ -12,6 +12,8 @@ import {
   InputGroupText,
   Input,
 } from 'reactstrap';
+import { connect } from "react-redux";
+import { setFilteredData, setInputValue } from "../redux/marketplace/actions";
 import { Link, NavLink, Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
@@ -114,6 +116,7 @@ class Header extends Component {
       changeUsernameSuccessDialogOpen: false,
       changePasswordSuccessDialogOpen: false,
       changePasswordErrorMessage: '',
+      searchValue: '',
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.getnewHash = this.getnewHash.bind(this);
@@ -214,6 +217,18 @@ class Header extends Component {
       myReferralsAnchorEl: null,
       profileDropDownAnchorEl: null,
     });
+  };
+
+  handleSearchChange = (value) => {
+    const searchData = this.props.allData.batch;
+    this.setState({searchValue: value});
+    this.props.setInputValue({inputValue: value});
+    const arraySearchResult = searchData.filter(word => value.toLowerCase() === word._tokenBatchName.toLowerCase());
+    if (value === '') {
+      return this.props.setFilteredData([])
+    } else {
+      this.props.setFilteredData(arraySearchResult);
+    }
   };
 
   //change username/password Menu
@@ -339,33 +354,23 @@ class Header extends Component {
               />
             </NavLink>
           </NavbarBrand>
-          {/*<InputGroup
+          <InputGroup
             style={{
               position: 'relative',
               marginLeft: '2rem',
             }}
           >
              <Input
-              placeholder='Search for Artist, Art name'
-              value={this.state.value}
-              onChange={this.handleChange}
+              placeholder='Search'
+              value={this.props.inputValue}
+              onChange={(e) => this.handleSearchChange(e.target.value)}
               style={{
                 padding: '0 2rem',
                 maxWidth: '400px',
                 borderRadius: '20px',
               }}
             />
-            <i
-              className='fas fa-search'
-              style={{
-                position: 'absolute',
-                left: '10px',
-                top: '25%',
-                color: '#ccc',
-                display: !this.state.value ? 'block' : 'none',
-              }}
-            ></i>
-          </InputGroup> */}
+          </InputGroup>
           <Collapse isOpen={this.state.isNavOpen} navbar>
             <Nav
               navbar
@@ -1278,4 +1283,14 @@ class Header extends Component {
   }
 }
 
-export default withStyles(profileMenuStyles)(Header);
+const mapStateToProps = (state) => ({
+  allData: state.marketplace.setAllData,
+  inputValue: state.marketplace.inputValue,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setFilteredData: (data) => dispatch(setFilteredData(data)),
+  setInputValue: (data) => dispatch(setInputValue(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

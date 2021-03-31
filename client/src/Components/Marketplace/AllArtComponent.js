@@ -1,42 +1,31 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from "react-redux";
 
 import CreationCards from "./CreationCards";
 import SimpleMenu from "./menu/MenuListed";
 import CreateFilterList from "./CreateFilterList";
 import CreateChipList from "./CreateChipList";
+import { setAllData, setInputValue } from "../../redux/marketplace/actions";
 
 import burger from '../../images/svg/burger-recently-list.svg';
 import arrow from '../../images/svg/arrow.svg';
 import './AllArtComponent.scss';
 
 const AllItemComponent = (props) => {
-	const mockList = [
-		{
-			name: "STATUS",
-			lists: [{name: 'On Auction', key: 0}, {name: 'Buy Now', key: 1}, {name: 'Make Offer', key: 2}],
-			id: 1,
-		},
-		{
-			name: "TRENDING",
-			lists: [{name: 'Text', key: 3}, {name: 'Text', key: 4}, {name: 'Text', key: 5}, {name: 'Text', key: 6}],
-			id: 2,
-		},
-		{
-			name: "Type",
-			lists: [{name: 'Images', key: 7}, {name: 'GIF', key: 8}, {name: 'Video', key: 9}],
-			id: 3,
-		},
-	];
+	useEffect(() => {
+		props.setAllData(props);
+	}, []);
 
-	const [checked, setChecked] = useState([])
+	const [checked, setChecked] = useState([]);
 
 	const handleRemove = (elem) => {
 		setChecked(checked.filter(el => el !== elem))
-	}
+	};
 
 	const handleRemoveAll = () => {
 		setChecked([])
-	}
+		props.setInputValue({inputValue: ''})
+	};
 
 	const handleCheck = (elem) => {
 		if (checked.filter(el => el.key === elem.key && el.name === elem.name).length > 0) {
@@ -44,13 +33,18 @@ const AllItemComponent = (props) => {
 		} else {
 			setChecked(checked.concat(elem))
 		}
-	}
+	};
 
+	if (props.filteredData) {
+		if (props.filteredData.length > 0) {
+			checked.push({name: props.filteredData[0]._tokenBatchName, key: props.filteredData[0]._batchId});
+		}
+	}
 	return (
 		<div className="container_marketplace">
 			<div className="filter_list">
 				<CreateFilterList
-					list={mockList}
+					list={props.chips}
 					checked={checked}
 					handleCheck={handleCheck}
 				/>
@@ -71,7 +65,11 @@ const AllItemComponent = (props) => {
 				<div className="cards_marketplace">
 					<div className="head_result">
 						<p className="head_result_num">
-							{props.batch.length} Results
+							{props.filteredData && props.filteredData.length > 0
+								? props.filteredData.length
+								: props.batch.length
+							}
+							Results
 						</p>
 						<p className="head_result_menu">
 							<img
@@ -89,7 +87,11 @@ const AllItemComponent = (props) => {
 					</div>
 					<div className="cards_wrapper">
 						<div className="creation_cards">
-							{props.batch.map((item) => (
+							{props.filteredData && props.filteredData.length > 0
+								?	props.filteredData.map((item) => (
+									<CreationCards props={props} {...item}/>
+								))
+								: props.batch.map((item) => (
 								<CreationCards props={props} {...item}/>
 							))}
 						</div>
@@ -98,6 +100,16 @@ const AllItemComponent = (props) => {
 			</divc>
 		</div>
 	);
-}
+};
 
-export default AllItemComponent;
+const mapStateToProps = (state) => ({
+	chips: state.marketplace.chipData,
+	filteredData: state.marketplace.setFilteredData,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+	setAllData: (data) => dispatch(setAllData(data)),
+	setInputValue: (data) => dispatch(setInputValue(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllItemComponent);
