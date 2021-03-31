@@ -2,13 +2,13 @@
   font-family: Gibson, sans-serif;
 }
 
-.card-wrapper {
+.cardWrapper {
   position: relative;
-  min-height: 320px;
-  height: 100%;
+  height: 320px;
   width: 240px;
   border-radius: 5%;
   border: 0;
+  margin: 0 15px 55px 0!important;
 
 
   .card-background-image {
@@ -16,13 +16,13 @@
     border-radius: 5%;
   }
 
-  .card-img-overlay {
+  .cardImgOverlay {
     height: 210px;
     width: 240px;
     display: flex;
     justify-content: space-between;
 
-    .card-user-img {
+    .userImg {
       height: 37px;
       width: 45px;
       display: block;

@@ -43,15 +43,15 @@ const CreationCards = (props) => {
 				textDecoration: 'none'
 			}}
 			to={`/batch/${props._batchId}`}>
-			<Card className='card-wrapper'>
+			<Card className="cardWrapper">
 				<CardImg
 					top
 					className="card-background-image"
 					src={props['5']}
 					alt='image3'
 				/>
-				<CardImgOverlay className="card-img-overlay">
-					<div className="card-user-img">
+				<CardImgOverlay className="cardImgOverlay">
+					<div className="userImg">
 						<img src={props.profileImage || profile} alt="userImg"/>
 					</div>
 					<div className="card-user-heart">
