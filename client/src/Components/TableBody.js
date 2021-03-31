@@ -3,9 +3,16 @@ import Web3 from 'web3';
 import axios from 'axios';
 import {CardBody, Card } from 'reactstrap';
 import './TableBody.css'
+import moment from 'moment';
 
 const TableBody = ({ cre }) => {
   const calcTime = (timeCreated) => {
+    
+    let day = moment.unix(timeCreated);
+    let xy = timeCreated
+    let date = new Date(xy * 1000);
+    let time  = day.format('MMMM Do, YYYY [at] h:mm A')
+
     let totalTime = '';
     const currentTime = Date.now() / 1000;
 
@@ -34,7 +41,7 @@ const TableBody = ({ cre }) => {
       minutes === 0 || hours === 1
         ? `${minutes} minutes`
         : `${minutes} minutes`;
-    return totalTime;
+    return time;
   };
 
   const accUsername = (accNum) => {
