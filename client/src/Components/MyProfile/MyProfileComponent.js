@@ -102,63 +102,65 @@ const MyProfileComponent = () => {
 						alt="cover-img"
 					/>
 				</div>
-				<div className="user-container">
-					<img
-						className="user-img"
-						src={profileImage}
-						alt="user-img"
-					/>
-					<div className={"user-img-hover"}>
-						<div className="edit">Edit</div>
-						<div className="upload">Upload</div>
-					</div>
-				</div>
-				<p className="user-name">
-					@amelia_creator
-					<img src={successLogo} alt="logo"/>
-
-				</p>
-				<div className="name_block_creator">
-					<p className="creator-name">
-						{linksStore && linksStore.name || 'Amelia'}
+				<div className="exampl">
+					<div className="user-container">
 						<img
-							src={pencil}
-							alt="pencil"
-							id="pencil"
-							onClick={handleEdit}
+							className="user-img"
+							src={profileImage}
+							alt="user-img"
 						/>
+						<div className={"user-img-hover"}>
+							<div className="edit">Edit</div>
+							<div className="upload">Upload</div>
+						</div>
+					</div>
+					<p className="user-name">
+						@amelia_creator
+						<img src={successLogo} alt="logo"/>
+
 					</p>
-				</div>
-				<p className="location">
-					{linksStore && linksStore.bio || 'Bagno a Ripoli, Tuscany, Italy'}
-				</p>
-				<div className="social-media">
-					<a href={linksStore && 'http://' + linksStore.email || "#!"} className="icon" target="_blank">
-						{linksStore && linksStore.email && <FiMail size={24} color="grey"/> || <FiMail size={24} color="black"/>}
-					</a>
-					<a href={linksStore && 'http://' + linksStore.twitter || "#!"} className="icon" target="_blank">
-						{linksStore && linksStore.twitter && <RiTwitterLine size={24} color="grey"/> ||
-						<RiTwitterLine size={24} color="black"/>}
-					</a>
-					<a href={linksStore && 'http://' + linksStore.inst || "#!"} className="icon" target="_blank">
-						{linksStore && linksStore.inst && <RiInstagramLine size={24} color="grey"/> ||
-						<RiInstagramLine size={24} color="black"/>}
-					</a>
-					<a href={linksStore && 'http://' + linksStore.facebook || "#!"} className="icon" target="_blank">
-						{linksStore && linksStore.facebook && <FiFacebook size={24} color="grey"/> ||
-						<FiFacebook size={24} color="black"/>}
-					</a>
-					<a href={linksStore && 'http://' + linksStore.youtube || "#!"} className="icon" target="_blank">
-						{linksStore && linksStore.youtube && <FiYoutube size={24} color="grey"/> ||
-						<FiYoutube size={24} color="black"/>}
-					</a>
-					<a href={linksStore && 'http://' + linksStore.website || "#!"} className="icon" target="_blank">
-						{linksStore && linksStore.youtube && <RiGlobalLine size={24} color="grey"/> ||
-						<RiGlobalLine size={24} color="black"/>}
-					</a>
-					<a href="#!" className="icon">
-						<FiUpload size={24} color="black"/>
-					</a>
+					<div className="name_block_creator">
+						<p className="creator-name">
+							{linksStore && linksStore.name || 'Amelia'}
+							<img
+								src={pencil}
+								alt="pencil"
+								id="pencil"
+								onClick={handleEdit}
+							/>
+						</p>
+					</div>
+					<p className="location">
+						{linksStore && linksStore.bio || 'Bagno a Ripoli, Tuscany, Italy'}
+					</p>
+					<div className="social-media">
+						<a href={linksStore && 'http://' + linksStore.email || "#!"} className="icon" target="_blank">
+							{linksStore && linksStore.email && <FiMail size={24} color="grey"/> || <FiMail size={24} color="black"/>}
+						</a>
+						<a href={linksStore && 'http://' + linksStore.twitter || "#!"} className="icon" target="_blank">
+							{linksStore && linksStore.twitter && <RiTwitterLine size={24} color="grey"/> ||
+							<RiTwitterLine size={24} color="black"/>}
+						</a>
+						<a href={linksStore && 'http://' + linksStore.inst || "#!"} className="icon" target="_blank">
+							{linksStore && linksStore.inst && <RiInstagramLine size={24} color="grey"/> ||
+							<RiInstagramLine size={24} color="black"/>}
+						</a>
+						<a href={linksStore && 'http://' + linksStore.facebook || "#!"} className="icon" target="_blank">
+							{linksStore && linksStore.facebook && <FiFacebook size={24} color="grey"/> ||
+							<FiFacebook size={24} color="black"/>}
+						</a>
+						<a href={linksStore && 'http://' + linksStore.youtube || "#!"} className="icon" target="_blank">
+							{linksStore && linksStore.youtube && <FiYoutube size={24} color="grey"/> ||
+							<FiYoutube size={24} color="black"/>}
+						</a>
+						<a href={linksStore && 'http://' + linksStore.website || "#!"} className="icon" target="_blank">
+							{linksStore && linksStore.youtube && <RiGlobalLine size={24} color="grey"/> ||
+							<RiGlobalLine size={24} color="black"/>}
+						</a>
+						<a href="#!" className="icon">
+							<FiUpload size={24} color="black"/>
+						</a>
+					</div>
 				</div>
 			</div>
 			<StyledTabs
