@@ -33,14 +33,16 @@
     margin-top: 1.5%;
 }
 .priceInput{
-    width: 5rem;
-    height: 2rem;
+    width: 7rem;
+    height: 2.2rem;
     border-radius: 0rem;
     font-family: Gibson;
+    background-color: #D5D7FA;
+    border-right: none;
 }
 .labelName{
-    width: 5rem;
-    height: 2rem;
+    width: 7rem;
+    height: 2.2rem;
     border-radius: 0rem;
     border: 1px solid #ced4da;
     font-family: Gibson;
@@ -60,11 +62,12 @@
 .priceDropdown{
     color: black;
     background-color: white;
-    width: 5rem;
-    height: 2rem;
+    width: 7rem;
+    height: 2.2rem;
     border-radius: 0rem;
     border: 1px solid #ced4da;
     font-family: Gibson;
+    border-left: none;
 
 }
 .button-border{

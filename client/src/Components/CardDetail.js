@@ -63,7 +63,7 @@ const CardDetail = ({
   const [loadingPlaceBid, setLoadingPlaceBid] = useState(false);
   const [bidSuccess, setBidSuccess] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [dropdownValue, setDropdownValue] = useState('USD');
+  const [dropdownValue, setDropdownValue] = useState('usd');
   const [priceInputValue, setpriceInputValue] = useState('');
   const changeValue = (e) => {
     setDropdownValue(e.currentTarget.textContent);
@@ -472,11 +472,11 @@ const CardDetail = ({
                 <Input type="text" name="price" id="priceEnter" className ="priceInput"  onChange = {handlepriceInput}> 
         {/* {Web3.utils.fromWei('5000000', 'ether')}{' '} */}
         </Input>
-        &nbsp;
-        <Label className="labelName">ETH</Label>
+        
+        <Label className="labelName" style= {{backgroundColor:'#D5D7FA', borderLeft:'none'}}>ETH</Label>
                 </div>
                 <div className = "View1">
-                <p className= "labelName">
+                <p className= "labelName" style= {{borderRight:'none'}}>
                   <span >
                     
                     {(
@@ -491,15 +491,17 @@ const CardDetail = ({
                 </p>
                 <p>
                 <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                  <DropdownToggle caret className = "priceDropdown" > CURR</DropdownToggle>
+                  <DropdownToggle caret className = "priceDropdown" > USD </DropdownToggle>
                   <DropdownMenu>
                     {Object.keys(ethPrice).map((keyName, idx) => {
                       return (
-                        <DropdownItem onClick={changeValue} key={idx}>
+                        <DropdownItem onClick={changeValue}  key={idx}  >
                           {keyName}
                         </DropdownItem>
+
                       );
                     })}
+
                   </DropdownMenu>
                 </Dropdown>
               </p>
