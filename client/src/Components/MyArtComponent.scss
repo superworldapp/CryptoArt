@@ -1,3 +1,5 @@
+@import '../styles/global';
+
 .hidden {
   overflow-y: auto;
   overflow-x: hidden;
@@ -7,7 +9,35 @@
   font-family: Gibson;
   font-size: 20px;
   font-weight: bold;
+
+  p {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .title {
+    font-family: $fontFamily;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 21px;
+    line-height: 27px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-family: $fontFamily;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 10px;
+  }
 }
+
+.modal-body {
+  padding: 0;
+}
+
 .pl-5 {
   padding-left: 2rem !important;
   padding-bottom: 0.2rem !important;
@@ -18,11 +48,14 @@
   border-top: none !important;
 }
 .modal-content {
-  width: 80%;
+  padding: 50px 37px 45px 50px;
   height: auto;
+  max-width: 480px;
 }
 .modal-header {
   border: hidden !important;
+  padding: 0;
+  margin-bottom: 43px;
 }
 
 .abtn {
@@ -102,15 +135,45 @@
 .card {
   height: fit-content;
 
-  box-shadow: 1px 5px 5px #888888;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-flow: column;
+  border: none;
+  border-radius: 10px;
+  margin: 0 20px 20px 20px;
+
+  .card-body-wrapper {
+    font-family: $fontFamily;
+    height: 24px;
+    background: linear-gradient(0, rgba(255, 255, 255, 0.068) 0%, rgba(0, 0, 0, 0.075) 100%);
+    width: 100%;
+
+    h3 {
+      text-transform: none;
+      margin: 2% 2% 2% 2%;
+      font-size: 25px;
+      line-height: 25px;
+      font-weight: 700;
+    }
+
+    .second-section {
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 21px;
+    }
+
+    button {
+      width: 100px;
+      height: 32px;
+      border: none;
+    }
+  }
 }
 
 .row {
-  margin-top: 1rem;
+  /* margin-top: 1rem;
   margin-left: 5rem;
-  margin-right: 1.5rem;
+  margin-right: 1.5rem; */
 }
 
 .a {
@@ -125,11 +188,21 @@ h3 {
 }
 .form-control {
   display: flex;
-  border-radius: 1rem;
-  margin-left: 0.5rem;
+  border-radius: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  height: 28px;
+  font-size: 15px;
+  line-height: 15px;
 }
 .form-group {
   display: flex;
+  white-space: nowrap;
+  align-items: baseline;
+
+  .token-price {
+    margin-left: 10px;
+  }
 }
 
 .card-artcard {
@@ -191,12 +264,20 @@ h3 {
   color: white;
 }
 .uploadpopup{
+  font-family: Gibson;
   max-width: 38rem !important;
   height: auto;
+  padding: 50px 0;
 }
 .uploadlabel{
-  width: 50%;
-  margin-left: 1rem;
+  font-family: $fontFamily;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 19px;
+  line-height: 19px;
+  min-width: 130px;
+  color: black;
+  margin-right: 20px;
 }
 .uploadinput{
   margin-left: 1rem;

@@ -63,9 +63,14 @@ const CardDetail = ({
   const [loadingPlaceBid, setLoadingPlaceBid] = useState(false);
   const [bidSuccess, setBidSuccess] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [dropdownValue, setDropdownValue] = useState('');
+  const [dropdownValue, setDropdownValue] = useState('USD');
+  const [priceInputValue, setpriceInputValue] = useState('');
   const changeValue = (e) => {
     setDropdownValue(e.currentTarget.textContent);
+  };
+  const handlepriceInput = (event) => {
+    setpriceInputValue(event.target.value);
+    //console.log(handleInput);
   };
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -464,8 +469,8 @@ const CardDetail = ({
               <div className = "View1"> 
               <div className='information d-flex flex-column'>
                 <div className= "View1">
-                <Input type="text" name="price" id="price" className ="priceInput" > 
-        {Web3.utils.fromWei('5000000', 'ether')}{' '}
+                <Input type="text" name="price" id="priceEnter" className ="priceInput"  onChange = {handlepriceInput}> 
+        {/* {Web3.utils.fromWei('5000000', 'ether')}{' '} */}
         </Input>
         &nbsp;
         <Label className="labelName">ETH</Label>
@@ -473,19 +478,20 @@ const CardDetail = ({
                 <div className = "View1">
                 <p className= "labelName">
                   <span >
-                    (
+                    
                     {(
-                      Web3.utils.fromWei(
-                        '50000000000000',
-                        'ether'
-                      ) * ethPrice[dropdownValue]
-                    ).toFixed(2)}{' '}
-                    )
+                      // Web3.utils.fromWei(
+                      //   '50000000000000',
+                      //   'ether'
+                      // ) 
+                      priceInputValue*ethPrice[dropdownValue]
+                    )}
+                    
                   </span>
                 </p>
                 <p>
                 <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                  <DropdownToggle caret className = "priceDropdown" > USD </DropdownToggle>
+                  <DropdownToggle caret className = "priceDropdown" > CURR</DropdownToggle>
                   <DropdownMenu>
                     {Object.keys(ethPrice).map((keyName, idx) => {
                       return (
@@ -501,12 +507,14 @@ const CardDetail = ({
               {buyOrSell()}  
                 </div>
                 </div>   
-                <div>
+                <div style={{
+                  marginLeft:'1rem', marginTop:'1.5rem'
+                }}>
               <button className='batchcardbid-btn'> PLACE BID</button>
               </div>
               </div>
               <br/>
-              <div className ="View2">
+              {/* <div className ="View2">
                 <p className= "style1">
                   <img src= {openeye} alt= ".." className="userimg">
                   </img>
@@ -519,7 +527,7 @@ const CardDetail = ({
                   &nbsp;
                     15 Favorite
                 </p>
-              </div>
+              </div> */}
               
             </div> 
           </div>
@@ -551,6 +559,8 @@ const CardDetail = ({
                     <Collapse isOpen = {isOpen}>
                       <TableBody cre={creValue} />
                     </Collapse>
+                    <br/>
+                    <br/>
                 </div>
           </div>
         </div>
@@ -657,6 +667,11 @@ const CardDetail = ({
             </Link>
           </ModalBody>
         </Modal>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
       </div>
     </>
   );

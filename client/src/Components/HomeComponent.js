@@ -162,7 +162,17 @@ class Home extends Component {
                   </div>
                 </div>
                 <div className="col1">
-                <img className='topimage' src={image1} alt='img' />
+
+                  <div className='home-slider'>
+                      <figure>
+                        <img className='topimage' src={image1} alt='img' />
+                        <img className='topimage' src={image2} alt='img' />
+                        <img className='topimage' src={image3} alt='img' />
+                        <img className='topimage' src={image4} alt='img' />
+                        <img className='topimage' src={image1} alt='img' />
+                      </figure>
+                  </div>
+
                 </div>
               </div>
               <br/>
@@ -175,35 +185,107 @@ class Home extends Component {
               <div className="col2">
               <Row around="xs" className= "gridRow1">
                 <Col xs={2}  className= "gridCol1">
-                <img src ={image2} className="image10" alt="image10" />
+                  <div className='home-slider-multiple home-slider-multiple-1'>
+                    <figure>
+                      <img src ={image2} className="image10" alt="image10" />
+                      <img src ={image3} className="image10" alt="image10" />
+                      <img src ={image2} className="image10" alt="image10" />
+                      <img src ={image3} className="image10" alt="image10" />
+                      <img src ={image2} className="image10" alt="image10" />
+                    </figure>
+                  </div>
                   </Col> 
                   <Col xs={2} className= "gridCol1">
-                <img src ={image3} className="image10" alt="image10" />
+                  <div className='home-slider-multiple home-slider-multiple-2'>
+                    <figure>
+                      <img src ={image3} className="image10" alt="image10" />
+                      <img src ={image4} className="image10" alt="image10" />
+                      <img src ={image3} className="image10" alt="image10" />
+                      <img src ={image4} className="image10" alt="image10" />
+                      <img src ={image3} className="image10" alt="image10" />
+                    </figure>
+                  </div>
                   </Col>
                   <Col xs={2} className= "gridCol1">
-                <img src ={image4} className="image10" alt="image10" />
+                  <div className='home-slider-multiple home-slider-multiple-3'>
+                    <figure>
+                      <img src ={image4} className="image10" alt="image10" />
+                      <img src ={image5} className="image10" alt="image10" />
+                      <img src ={image4} className="image10" alt="image10" />
+                      <img src ={image5} className="image10" alt="image10" />
+                      <img src ={image4} className="image10" alt="image10" />
+                    </figure>
+                  </div>
                   </Col>
                   </Row>
                   <Row around="xs" className= "gridRow2">
                   <Col xs={2} className= "gridCol1">
-                <img src ={image5} className="image10" alt="image10" />
+                  <div className='home-slider-multiple home-slider-multiple-4'>
+                    <figure>
+                      <img src ={image5} className="image10" alt="image10" />
+                      <img src ={image6} className="image10" alt="image10" />
+                      <img src ={image5} className="image10" alt="image10" />
+                      <img src ={image6} className="image10" alt="image10" />
+                      <img src ={image5} className="image10" alt="image10" />
+                    </figure>
+                  </div>
                   </Col>
                   <Col xs={2} className= "gridCol1">
-                <img src ={image6} className="image10" alt="image10" />
+                  <div className='home-slider-multiple home-slider-multiple-5'>
+                    <figure>
+                      <img src ={image6} className="image10" alt="image10" />
+                      <img src ={image7} className="image10" alt="image10" />
+                      <img src ={image6} className="image10" alt="image10" />
+                      <img src ={image7} className="image10" alt="image10" />
+                      <img src ={image6} className="image10" alt="image10" />
+                    </figure>
+                  </div>
                   </Col>
                   <Col xs={2} className= "gridCol1">
-                <img src ={image7} className="image10" alt="image10" />
+                  <div className='home-slider-multiple home-slider-multiple-6'>
+                    <figure>
+                      <img src ={image7} className="image10" alt="image10" />
+                      <img src ={image8} className="image10" alt="image10" />
+                      <img src ={image7} className="image10" alt="image10" />
+                      <img src ={image8} className="image10" alt="image10" />
+                      <img src ={image7} className="image10" alt="image10" />
+                    </figure>
+                  </div>
                   </Col>
                   </Row>
                    <Row around="xs" className = "gridRow3">
                   <Col xs={2} className= "gridCol1" >
-                <img src ={image8} className="image10" alt="image10" />
+                  <div className='home-slider-multiple home-slider-multiple-7'>
+                    <figure>
+                      <img src ={image8} className="image10" alt="image10" />
+                      <img src ={image9} className="image10" alt="image10" />
+                      <img src ={image8} className="image10" alt="image10" />
+                      <img src ={image9} className="image10" alt="image10" />
+                      <img src ={image8} className="image10" alt="image10" />
+                    </figure>
+                  </div>
                   </Col>
                   <Col xs={2} className= "gridCol1" >
-                <img src ={image9} className="image10" alt="image10" />
+                  <div className='home-slider-multiple home-slider-multiple-8'>
+                    <figure>
+                      <img src ={image9} className="image10" alt="image10" />
+                      <img src ={image10} className="image10" alt="image10" />
+                      <img src ={image9} className="image10" alt="image10" />
+                      <img src ={image10} className="image10" alt="image10" />
+                      <img src ={image9} className="image10" alt="image10" />
+                    </figure>
+                  </div>
                   </Col>
                   <Col xs={2} className= "gridCol1">
-                <img src ={image10} className="image10" alt="image10" />
+                  <div className='home-slider-multiple home-slider-multiple-9'>
+                    <figure>
+                      <img src ={image10} className="image10" alt="image10" />
+                      <img src ={image11} className="image10" alt="image10" />
+                      <img src ={image10} className="image10" alt="image10" />
+                      <img src ={image11} className="image10" alt="image10" />
+                      <img src ={image10} className="image10" alt="image10" />
+                    </figure>
+                  </div>
                   </Col>
                 </Row> 
                 </div> 
@@ -264,7 +346,7 @@ class Home extends Component {
               <br/>
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
               
-             
+              
               <div
                 style={{
                   display: 'flex',
@@ -541,7 +623,7 @@ class Home extends Component {
                     fontSize: '18px',
                     fontFamily: 'Gibson',
                     fontWeight: 'bold',
-                    marginLeft:'13rem',
+                    marginLeft:'13rem'
                   }}
                 >
                   {' '}
@@ -632,7 +714,12 @@ class Home extends Component {
                           </p>
                       </CardText>
                       <div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                      >
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </a>
                       </div>
                     </div> 
                   </CardBody>
@@ -715,7 +802,12 @@ class Home extends Component {
                           </p>
                       </CardText>
                       <div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                      >
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </a>
                       </div>
                     </div> 
                   </CardBody>
@@ -798,7 +890,12 @@ class Home extends Component {
 
                       </CardText>
                       <div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                      >
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </a>
                       </div>
                     </div> 
                   </CardBody>
@@ -870,9 +967,16 @@ class Home extends Component {
                         ($176.61 USD)
                           </p>
                       </CardText>
+                      
                       <div>
+                      <a
+                        target='blank'
+                        href='https://map.superworldapp.com/'
+                      >
                       <button className='buy-bid-btn'>BUY {' '}NOW</button>
+                      </a>
                       </div>
+                      
                     </div> 
 
                   </CardBody>

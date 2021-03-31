@@ -1,0 +1,141 @@
+@import '../styles/global';
+
+.mystore-first-row-container {
+    /* border: 1px solid red; */
+    margin-top: 60px;
+    margin-bottom: 12px;
+    padding-left: 18px;
+}
+
+.mystore-second-row-container {
+    /* border: 1px solid red; */
+}
+
+.mystore-art-container {
+    /* border: 1px solid red; */
+}
+
+.mystore-nft-status-container {
+    /* border: 1px solid blue; */
+    width: 185px;
+    margin-top: 5px;
+    padding-left: 35px;
+    margin-right: 170px;
+}
+
+.mystore-nft-status-container-row {
+    font-family: $fontFamily;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    font-weight: 400;
+    align-items: center;
+    line-height: 18px;
+}
+
+.mystore-nft-status-container-row {
+    h5, span {
+        font-size: 18px;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.mystore-nft-status-container-row h5 {
+    text-transform: uppercase;
+}
+
+.mystore-art-status-container {
+    /* border: 1px solid black; */
+    font-family: $fontFamily;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.mystore-art-status-container h2 {
+    font-size: 1.5rem;
+}
+
+.mystore-art-status-container button {
+    white-space: nowrap;
+    margin: 0 15px;
+}
+
+@media screen and (max-width: 660px) {
+    .mystore-art-status-container {
+        overflow-x: scroll;
+        justify-content: normal;
+    }
+}
+
+.mystore-art-status-container button {
+    border: none;
+    background-color: #FFFFFF;
+}
+
+.mystore-art-queue-container, .mystore-art-active-container {
+    display: flex;
+    margin-top: 30px;
+}
+
+@media screen and (max-width: 640px) {
+    .mystore-art-queue-container, .mystore-art-active-container {
+        justify-content: center;
+    }
+
+    .mystore-nft-status-container {
+        margin-right: 0;
+    }
+}
+
+.mystore-queue-card, .mystore-active-card {
+    height: 400px;
+    width: 280px;
+}
+
+.mystore-queue-card-img, .mystore-active-card-img {
+    height: 18rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.mystore-upload-art {
+    width: 280px;
+    height: 268px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    margin: 10px 20px 20px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mystore-upload-btn {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: #5540C7;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mystore-upload-add {
+    width: 43px;
+    height: 43px;
+    font-family: Gibson;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 48px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
