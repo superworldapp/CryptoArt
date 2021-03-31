@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import TableBody from './TableBody';
 import { Link } from 'react-router-dom';
 import {
@@ -11,6 +11,7 @@ import {
   CardTitle,
   CardImgOverlay,
   CardHeader,
+  Col,
   Collapse,
   Table,
   Input,
@@ -25,45 +26,423 @@ import {
 import loader from '../images/loader.svg';
 import anonUser from '../images/user.png';
 import "./BatchDetail.css";
-import heart from "../images/svg/Heart.svg";
+// import heart from "../images/svg/Heart.svg";
 import dropdownarrow from "../assets/svg/Drop down arrow.svg";
+import Web3 from 'web3';
+const ETHER = 1000000000000000000;
+export const cardpills = [
+  {
+    title: 'Ready For Sale',
+    class: 'class1',
+  },
+  {
+    title: 'Listing For Sale',
+    class: 'class2',
+  },
+  {
+    title: 'Biding',
+    class: 'class2',
+  },
+  {
+    title: 'Auction Ongoing',
+    class: 'class2',
+  },
+  {
+    title: 'Owned by',
+    class: 'class3',
+  },
+];
+class Allpatrender extends Component {
+  // let day = moment.unix(art.dateofComp);
+  // let xy = art.dateofComp;
+  // let date = new Date(xy*1000);
+  // let time = day.format('dddd MMMM Do YYYY, h:mm:ss a');
+  // let yz = xy != 0?"bg-success text-white":"";
+  constructor(props) {
+    super(props);
+    this.state = {
+      docCount: 0,
+      art: [],
+      BatchDet : [],
+      isModalOpen: false,
+      sellPrice: 0,
+      auctionLoading: false,
+      putForSaleLoading: false,
+      delistLoading: false,
+      listForAuctionSuccess: false,
+      listForSaleSuccess: false,
+      endAuctionLoading: false,
+      endAuctionSuccess: false,
+      isArtModalOpen: false,
+    };
+    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleArtModal = this.toggleArtModal.bind(this);
+    this.toggleListForAuction = this.toggleListForAuction.bind(this);
+    this.toggleListForSale = this.toggleListForSale.bind(this);
+    this.toggleEndAuction = this.toggleEndAuction.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.buyItem = this.buyItem.bind(this);
+    this.putForSale = this.putForSale.bind(this);
+    this.DeSale = this.DeSale.bind(this);
+    this.StartAuction = this.StartAuction.bind(this);
+    this.EndAuction = this.EndAuction.bind(this);
+    this.refreshMyArt = this.refreshMyArt.bind(this);
 
+    //this.toggleAuction = this.toggleAuction.bind(this);
+  }
+  buyItem = async () => {
 
+    try {
+    //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+      const res = await this.props.contract.methods
+        .buyToken(this.props.art._tokenId)
+        .send({ from: this.props.accounts,value: this.props.art._sellprice, gas: 5000000 });
+      console.log('res', res);
 
-const BatchDetail = ({
-  art,
-  accounts,
-  contract,
-  cre,
-  matchId,
-  BatchCreated,
-}) => {
-  console.log(art);
-
-  const [ethPrice, setEthPrice] = useState({});
-  const [creValue, setCreValue] = useState([]);
-  const [batchCreated, setBatchCreated] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [handleInput, setHandleInput] = useState('');
-  const [pay, setPay] = useState(0);
-  const [loadingPurchase, setLoadingPurchase] = useState(false);
-  const [purchaseSuccess, setPurchaseSuccess] = useState(false);
-  const [loadingPlaceBid, setLoadingPlaceBid] = useState(false);
-  const [bidSuccess, setBidSuccess] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [dropdownValue, setDropdownValue] = useState('');
-  const changeValue = (e) => {
-    setDropdownValue(e.currentTarget.textContent);
+    } catch(error){
+        console.error(error)
+    }
   };
-  const [isOpen, setIsOpen] = useState(false);
 
-  const collapsetoggle = () => setIsOpen(!isOpen);
+  toggleModal1() {
+    this.setState({
+      isModalOpen1: !this.state.isModalOpen1,
+    });
+  }
 
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
+  toggleModal() {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen,
+    });
+  }
 
-  const ETHER = 1000000000000000000;
+  toggleArtModal() {
+    this.setState({
+      isArtModalOpen: !this.state.isArtModalOpen,
+    });
+  }
 
-  const accUsername = (accNum) => {
+  toggleAuction() {
+    this.setState({
+      isModalAucOpen: !this.state.isModalAucOpen,
+    });
+  }
+
+  toggleListForAuction() {
+    this.setState({ listForAuctionSuccess: !this.state.listForAuctionSuccess });
+  }
+
+  toggleListForSale() {
+    this.setState({ listForSaleSuccess: !this.state.listForSaleSuccess });
+  }
+
+  toggleEndAuction() {
+    this.setState({ endAuctionSuccess: !this.state.endAuctionSuccess });
+  }
+
+  refreshMyArt() {
+    if (
+      (!this.state.toggleListForSale && !this.state.listForSaleSuccess) ||
+      (!this.state.toggleListForAuction && !this.state.listForAuctionSuccess)
+    )
+      window.location.reload();
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value,
+    });
+  }
+  putForSale = async () => {
+    this.setState({ putForSaleLoading: true });
+    const res = await this.props.contract.methods
+      .Sale(
+        this.props.art._tokenId,
+        (this.state.sellPrice * ETHER).toString(),
+        true,
+      )
+      .send({ from: this.props.accounts, gas: 1000000 });
+
+    console.log('res', res);
+    this.setState({ putForSaleLoading: false, listForSaleSuccess: true });
+    this.toggleModal();
+    console.log(res);
+  };
+  DeSale = async () => {
+    this.setState({ delistLoading: true });
+    const res = await this.props.contract.methods
+      .Sale(
+        this.props.art._tokenId,
+        (this.state.sellPrice * ETHER).toString(),
+        false,
+      )
+      .send({ from: this.props.accounts, gas: 1000000 });
+
+    console.log('res', res);
+    this.setState({ delistLoading: false });
+    window.location.reload();
+    console.log(res);
+  };
+  StartAuction = async () => {
+    this.setState({ auctionLoading: true });
+    let startprice = "1000000000000000000"
+   let times = 1615401942
+    const res = await this.props.contract.methods
+    .startbid(
+      this.props.art._tokenId,
+      startprice,
+      times
+    )
+    .send({ from: this.props.accounts, gas: 5000000 });
+  console.log('res', res);
+    this.setState({ auctionLoading: false, listForAuctionSuccess: true });
+    console.log(res);
+  };
+  EndAuction = async () => {
+    this.setState({ endAuctionLoading: true });
+    const res = await this.props.contract.methods
+    .closeBidOwner(
+      this.props.art._tokenId,
+    )
+      .send({ from: this.props.accounts, gas: 5000000 });
+    this.setState({ endAuctionLoading: false, endAuctionSuccess: true });
+    console.log(res);
+  };
+  AddBid = async () => {
+    const res = await this.props.contract.methods
+    .addBid(
+      this.props.art._tokenId,
+    )
+      .send({ from: this.props.accounts, gas: 1000000, value: 1000000 });
+    // window.location.reload();
+    console.log(res);
+  };
+  CloseBid = async () => {
+    const res = await this.props.contract.methods
+      .closBid(this.props.art._tokenId)
+      .send({ from: this.props.accounts, gas: 7000000 });
+    console.log(res);
+  };
+  render() {
+    let but = this.props.art._isSellings ? ' ' : 'hidden';
+    let bak = this.props.art._isSellings ? 'bg-success text-white' : '';
+    let buk = this.props.art._isBidding ? 'bg-warning' : '';
+    let b = this.props.art._isSellings ? 'hidden' : 'abtn';
+    let b1 = this.props.art._isSellings ? 'hidden' : 'abtn1';
+    let but1 = this.props.art._isSellings ? 'abtn1' : 'hidden';
+    let auc1 = this.props.art._isBidding ? 'hidden' : 'abtn';
+    let auc2 = this.props.art._isBidding ? 'hidden' : 'abtn1';
+    let forAuc = this.props.art._isBidding ? 'visible' : 'invisible';
+    let artCreator = this.props.art.tokenCreator;
+    let artOwner = this.props.art.tokenOwner;
+
+    let pr =
+      Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether') == 0
+        ? 'invisible'
+        : 'visible';
+    let reSellOrSell = this.props.art._isSellings;
+    let Auc = this.props.art._isBidding;
+    let accNum = this.props.art._tokenCreator;
+
+    const accUsername = (accNum) => {
+      if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
+        return '@Chitra';
+      else if (accNum === '0x0d5567345D3Cb1114471BC07c396Cc32C7CF92ec')
+        return '@Arianna';
+      else if (accNum === '0xABD82c9B735F2C89f2e62152A9884F4A92414F20')
+        return '@CJMain';
+      else if (accNum === '0x63611F92FA2d7B7e6625a97E6474b7fA16DbD89F')
+        return '@CJ Test';
+      else if (accNum === '0x4271AC6Bb565D120e2Ac1C3fb855aE5Dad6aE8ff')
+        return '@Swapnil';
+      else if (accNum === '0x81B2362F55Ea93f71990d7F446dca80BdD94C6e7')
+        return '@SwapnilTest';
+      else return '@Annonymous';
+    };
+    const colorpills = () => {
+      if (this.props.art._isSelling) return cardpills[1];
+      else if (this.props.art._isBidding) return cardpills[3];
+      else return cardpills[0];
+    };
+    let x = colorpills();
+
+    const img = new Image();
+    let orientation;
+    img.onload = function () {
+      let width = this.width;
+      let height = this.height;
+      orientation = width < height ? 'portrait' : 'landscape';
+    };
+    img.src = this.props.BatchCreated._imgurl;
+    img.onload();
+
+    return (
+
+      <div>
+
+      {/* <button
+        style={{
+        border: 'none',
+        backgroundColor: 'transparent',
+        }}
+        onClick={this.toggleArtModal}
+      > */}
+        <Card className='mycollection-card'>
+        <Link
+                    style={{
+                        color: '#212529',
+                        textDecoration: 'none'
+                    }}
+                    to={`/card/${this.props.art._refbatch}`}>
+          <CardImg
+            top
+            // src={this.props.art._imgurl}
+            src={this.props.BatchCreated._imgurl}
+            alt='Card image'
+            style={{
+              width: '98.5%',
+            }}
+          ></CardImg>
+          <CardSubtitle>Bid Price : {this.props.art._bidprice}</CardSubtitle>
+          <CardSubtitle>isBidding? : {this.props.art._isBidding}</CardSubtitle>
+          <CardSubtitle>isSell?{this.props.art._isSellings}</CardSubtitle>
+          <CardSubtitle>sellprice = {this.props.art._sellprice}</CardSubtitle>
+          <CardSubtitle><small>tokenowner = {this.props.art._tokenOwner}</small></CardSubtitle>
+          
+          </Link>
+      </Card>
+      {/* </button> */}
+
+      {/* Art Modal */}
+      <Modal
+        isOpen={this.state.isArtModalOpen}
+        toggle={this.toggleArtModal}
+        onClosed={this.refreshMyArt}
+        className='art-modal-popup'
+      >
+      <img
+        src={this.props.art._imgurl}
+        style={{
+          height: '75%',
+        }} />
+
+      <ModalBody
+        style={{
+          backgroundColor: '#808080',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <div style={{
+          background: '#FFFFFF',
+          borderRadius: '10px',
+          width: '600px',
+          height: '240px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+        }}>
+          <p
+            style={{
+              fontFamily: 'Gibson',
+              fontWeight: '700',
+              fontSize: '25px',
+              lineHeight: '32.55px',
+              marginTop: '10px',
+            }}
+          >
+          Back Country Fishing
+          </p>
+          <p
+            style={{
+              fontFamily: 'Gibson',
+              fontWeight: '600',
+              fontSize: '16px',
+              lineHeight: '32.55px',
+              marginTop: '-15px'
+            }}
+          >
+            Created By: <span style={{color: '#5540C7'}}>Username</span>
+          </p>
+          <p
+            style={{
+              fontFamily: 'Gibson',
+              fontWeight: '700',
+              fontSize: '14px',
+              lineHeight: '18.23px',
+              width: '85%',
+            }}
+          >
+            Back Country Fishing was Inspired by my regular weekend trips to the mountains. Max, my dog, would love to sit by the fire as I cast my line to try and catch our dinner.
+          </p>
+            <div
+              style={{display: 'flex', justifyContent: 'space-between', width: '50%', position: 'relative', right: '105px'}}
+            >
+              <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '400'}}>Purchased For</p>
+              <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '400'}}>55 &nbsp; ETH</p>
+            </div>
+            <div
+              style={{display: 'flex', justifyContent: 'space-between', width: '50%', position: 'relative', top: '3px', right: '105px'}}
+            >
+              <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '400'}}>Owner  #</p>
+              <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '400'}}>3</p>
+              <a style={{color: '#5540C7'}}>View Trading History</a>
+            </div>
+            <Link to='/mystore'><button style={{borderRadius: '10px', backgroundColor: '#5540C7', color: 'white', width: '100px', position: 'relative', top: '-55px', left: '180px'}}>Sell</button></Link>
+
+          </div>
+      </ModalBody>
+
+
+      </Modal>
+      {/* */}
+
+
+      </div>
+    );
+  }
+}
+
+
+class BatchDetail extends Component{ 
+  constructor(props) {
+    super(props);
+    this.state = {
+
+}
+this.accUsername = this.accUsername.bind(this);
+//this.getCreData = this.getCreData.bind(this);
+  }
+  // console.log(art);
+
+  // const [ethPrice, setEthPrice] = useState({});
+  // const [creValue, setCreValue] = useState([]);
+  // const [batchCreated, setBatchCreated] = useState([]);
+  // const [modalOpen, setModalOpen] = useState(false);
+  // const [handleInput, setHandleInput] = useState('');
+  // const [pay, setPay] = useState(0);
+  // const [loadingPurchase, setLoadingPurchase] = useState(false);
+  // const [purchaseSuccess, setPurchaseSuccess] = useState(false);
+  // const [loadingPlaceBid, setLoadingPlaceBid] = useState(false);
+  // const [bidSuccess, setBidSuccess] = useState(false);
+  // const [dropdownOpen, setDropdownOpen] = useState(false);
+  // const [dropdownValue, setDropdownValue] = useState('');
+  // const changeValue = (e) => {
+  //   setDropdownValue(e.currentTarget.textContent);
+  // };
+  // const [isOpen, setIsOpen] = useState(false);
+
+  // const collapsetoggle = () => setIsOpen(!isOpen);
+
+  // const toggle = () => setDropdownOpen((prevState) => !prevState);
+ 
+
+
+  accUsername = (accNum) => {
     if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
       return '@Chitra';
     else if (accNum === '0x0d5567345D3Cb1114471BC07c396Cc32C7CF92ec')
@@ -81,25 +460,34 @@ const BatchDetail = ({
 
 
 
-  const getCreData = async () => {
- 
+render(){
+  let tokenInBatch;
 
-    setBatchCreated(BatchCreated[0]);
-
-  };
-
-
-
-
-  useEffect(() => {
-    getCreData();
+    //getCreData();
     
-     console.log(BatchCreated[0])
-    // console.log('Header', myProperties);
-  }, []);
+     console.log(this.props.BatchCreated[0])
+     let batchID = this.props.matchId; 
+     tokenInBatch = this.props.allTokens.filter((x) => x._refbatch == batchID);
+     console.log('Header', tokenInBatch);
+     
+     const Menu = tokenInBatch.map((x) => {
+      return (
+        <div key={1} className='col-4 col-md-3'>
+          <Allpatrender
+            art={x}
+            contract={this.props.contract}
+            accounts={this.props.accounts}
+            BatchCreated={this.props.BatchCreated[0]}
+          />
+          <br />
+          <br />
+        </div>
+      );
+    });
 
 
-  console.log(ethPrice);
+  
+
   return (
     <>
       <div className='container'>
@@ -110,15 +498,15 @@ const BatchDetail = ({
              width: '50%',
              }}
           >
-            <a href={batchCreated._imgurl} target='_blank'>
-              <img src={batchCreated._imgurl} className='card-img' alt='...' />
+            <a href={this.props.BatchCreated[0]._imgurl} target='_blank'>
+              <img src={this.props.BatchCreated[0]._imgurl} className='card-img' alt='...' />
             </a>
           </div>
           <div>
           <div className='information d-flex flex-column'>
             <div>
             <h4>
-            {batchCreated._tokenBatchName}
+            {this.props.BatchCreated[0]._tokenBatchName}
           </h4>
             </div>
            <div className = "View"> 
@@ -128,7 +516,7 @@ const BatchDetail = ({
            &nbsp;
            &nbsp;
            <p className = "style2">
-            4 of 5 remaining
+            {this.props.BatchCreated[0]._unmintedEditions}
            </p>
 
            </div>
@@ -139,7 +527,7 @@ const BatchDetail = ({
                   src={anonUser}
                 ></img>   {' '}
               Created by{' '}
-              <span className='text-primary'>{accUsername(batchCreated?._tokenCreator)}</span>
+              <span className='text-primary'>{this.accUsername(this.props.BatchCreated?._tokenCreator)}</span>
             </p> 
 
           </div>
@@ -177,7 +565,7 @@ const BatchDetail = ({
                 width: '30rem',
               }}
             >
-              <h4>{batchCreated._tokenBatchName}</h4>
+              <h4>{this.props.BatchCreated._tokenBatchName}</h4>
               
             </div> */}
             </div>
@@ -186,204 +574,13 @@ const BatchDetail = ({
 
           </div>
             
-            {/* <a href='#'>{match.params.id}</a>
-                        <h1>{match.params.id}</h1> */}
-           {/* 
-             
-          </div> */} 
-          
-          
-
-          <div className ="bottomView">
-              <div className='rowImages'>
-          <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={batchCreated._imgurl}
-                    alt='image'
-                  ></CardImg>
-                  <CardImgOverlay className = "imgOverlay">
-                    <div className="BatchcardImgOverlay">
-                    <img
-                  className="userimg"
-                  src={anonUser}
-                ></img>
-                   <img 
-                className = "userimg"
-                src = {heart}
-                ></img>
-                   </div>
-                    <CardTitle className="Batchcard-imgTitle">
-                    {batchCreated._tokenBatchName}
-                    </CardTitle> 
-                  </CardImgOverlay> 
-                  <CardBody>
-                  <div className="cardImg-body">
-                      <CardSubtitle className = "cardsubtitleName">
-                      <span className='text-primary'>{accUsername(batchCreated?._tokenCreator)}</span>
-                      </CardSubtitle>
-                    </div>                    
-                     <div className='ctext'>
-                      <CardText className = "price">
-                        0.5ETH
-                        <p className = "USD-price">
-                        ($985.56 USD)
-                          </p>
-                      </CardText>
-                      <div>
-                      <button className='batchcardbid-btn'>BID</button>
-                      </div>
-                    </div> 
-                    <div className='buy-bid-btn-div'>
-                        <p className="Batchcardtime-div">
-                          1 day left to purchase
-                        </p>
-                      </div>
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={batchCreated._imgurl}
-                    alt='image'
-                  ></CardImg>
-                  <CardImgOverlay className = "imgOverlay">
-                    <div className="BatchcardImgOverlay">
-                    <img
-                  className="userimg"
-                  src={anonUser}
-                ></img>
-                   <img 
-                className = "userimg"
-                src = {heart}
-                ></img>
-                   </div>
-                    <CardTitle className="Batchcard-imgTitle">
-                    {batchCreated._tokenBatchName}
-                    </CardTitle> 
-                  </CardImgOverlay> 
-                  <CardBody>
-                  <div className="cardImg-body">
-                      <CardSubtitle className = "cardsubtitleName">
-                      <span className='text-primary'>{accUsername(batchCreated?._tokenCreator)}</span>
-                      </CardSubtitle>
-                    </div>                    
-                     <div className='ctext'>
-                      <CardText className = "price">
-                        0.5ETH
-                        <p className = "USD-price">
-                        ($985.56 USD)
-                          </p>
-                      </CardText>
-                      <div>
-                      <button className='batchcardbid-btn'>BID</button>
-                      </div>
-                    </div> 
-                    <div className='buy-bid-btn-div'>
-                        <p className="Batchcardtime-div">
-                          1 day left to purchase
-                        </p>
-                      </div>
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={batchCreated._imgurl}
-                    alt='image'
-                  ></CardImg>
-                  <CardImgOverlay className = "imgOverlay">
-                    <div className="BatchcardImgOverlay">
-                    <img
-                  className="userimg"
-                  src={anonUser}
-                ></img>
-                   <img 
-                className = "userimg"
-                src = {heart}
-                ></img>
-                   </div>
-                    <CardTitle className="Batchcard-imgTitle">
-                    {batchCreated._tokenBatchName}
-                    </CardTitle> 
-                  </CardImgOverlay> 
-                  <CardBody>
-                  <div className="cardImg-body">
-                      <CardSubtitle className = "cardsubtitleName">
-                      <span className='text-primary'>{accUsername(batchCreated?._tokenCreator)}</span>
-                      </CardSubtitle>
-                    </div>                    
-                     <div className='ctext'>
-                      <CardText className = "price">
-                        0.5ETH
-                        <p className = "USD-price">
-                        ($985.56 USD)
-                          </p>
-                      </CardText>
-                      <div>
-                      <button className='batchcardbid-btn'>BID</button>
-                      </div>
-                    </div> 
-                    <div className='buy-bid-btn-div'>
-                        <p className="Batchcardtime-div">
-                          1 day left to purchase
-                        </p>
-                      </div>
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={batchCreated._imgurl}
-                    alt='image'
-                  ></CardImg>
-                  <CardImgOverlay className = "imgOverlay">
-                    <div className="BatchcardImgOverlay">
-                    <img
-                  className="userimg"
-                  src={anonUser}
-                ></img>
-                   <img 
-                className = "userimg"
-                src = {heart}
-                ></img>
-                   </div>
-                    <CardTitle className="Batchcard-imgTitle">
-                      Alimation Character
-                    </CardTitle> 
-                  </CardImgOverlay> 
-                  <CardBody>
-                  <div className="cardImg-body">
-                      <CardSubtitle className = "cardsubtitleName">
-                      <span className='text-primary'>{accUsername(batchCreated?._tokenCreator)}</span>
-                      </CardSubtitle>
-                    </div>                    
-                     <div className='ctext'>
-                      <CardText className = "price">
-                        0.5ETH
-                        <p className = "USD-price">
-                        ($985.56 USD)
-                          </p>
-                      </CardText>
-                      <div>
-                      <button className='batchcardbid-btn'>BID</button>
-                      </div>
-                    </div> 
-                    <div className='buy-bid-btn-div'>
-                        <p className="Batchcardtime-div">
-                          1 day left to purchase
-                        </p>
-                      </div>
-                  </CardBody>
-                </Card>
-          </div>
-          </div>
-          
           <br/>
+          <Col className='second-row-col-2'>
+          <div>{Menu}
+   
+          </div>
+        </Col>
+          
           <br/>
           <br/>
         </div>
@@ -392,6 +589,8 @@ const BatchDetail = ({
       
     </>
   );
+        
 };
+}
 
 export default BatchDetail;

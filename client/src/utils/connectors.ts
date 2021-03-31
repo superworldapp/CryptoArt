@@ -47,18 +47,18 @@ export const fortmatic_rinkeby = new Fortmatic(
 // );
 
 // PORTIS
-export const portis = new PortisConnector({
-  dAppId: process.env.REACT_APP_PORTIS_DAPP_ID as string,
-  networks: [1],
-});
+// export const portis = new PortisConnector({
+//   dAppId: process.env.REACT_APP_PORTIS_DAPP_ID as string,
+//   networks: [1],
+// });
 
-export const portis_ropsten = new Portis(
-  process.env.REACT_APP_PORTIS_DAPP_ID as string,
-  'ropsten'
-);
+// export const portis_ropsten = new Portis(
+//   process.env.REACT_APP_PORTIS_DAPP_ID as string,
+//   'ropsten'
+// );
 
-export const portis_rinkeby = new Portis(
-  process.env.REACT_APP_PORTIS_DAPP_ID as string,
-  'rinkeby'
-);
+// export const portis_rinkeby = new Portis(
+//   process.env.REACT_APP_PORTIS_DAPP_ID as string,
+//   'rinkeby'
+// );
 // export const portis_mainnet = new Portis(process.env.REACT_APP_PORTIS_DAPP_ID as string, 'mainnet');

@@ -1,0 +1,28 @@
+.history{
+    display: grid;
+    width: 500px;
+    height: 96px;
+    padding: 10px;
+    position: relative;
+    text-align: start;
+    font-family: 'gibson', sans-serif;
+    font-style: normal;
+    margin-left: auto;
+    margin-right: auto;
+    row-gap: 20px;
+    padding: 10px;
+}
+.price{
+    text-decoration-color: #5146BF;
+    font-size: 18px;
+    line-height: 10px;
+}
+.history-detail{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 10px;
+}
+.time{
+    font-size: 14px;
+    line-height: 10px;
+}

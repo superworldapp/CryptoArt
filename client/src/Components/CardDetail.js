@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TableBody from './TableBody';
 import { Link } from 'react-router-dom';
+import cx from "classnames";
 import {
   Card,
   CardBody,
@@ -18,6 +19,8 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Button,
+  Collapse
 } from 'reactstrap';
 import loader from '../images/loader.svg';
 import image3 from '../images/image 6.png';
@@ -33,6 +36,8 @@ import anonUser from '../images/user.png';
 import openeye from "../assets/svg/eyeopen.svg";
 import Outlineheart from "../assets/svg/heartoutline.svg";
 import "./CardDetail.css";
+import {IoIosArrowDown} from 'react-icons/io'
+import { BorderAll } from '@material-ui/icons';
 
 const CardDetail = ({
   art,
@@ -58,9 +63,14 @@ const CardDetail = ({
   const [loadingPlaceBid, setLoadingPlaceBid] = useState(false);
   const [bidSuccess, setBidSuccess] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [dropdownValue, setDropdownValue] = useState('');
+  const [dropdownValue, setDropdownValue] = useState('USD');
+  const [priceInputValue, setpriceInputValue] = useState('');
   const changeValue = (e) => {
     setDropdownValue(e.currentTarget.textContent);
+  };
+  const handlepriceInput = (event) => {
+    setpriceInputValue(event.target.value);
+    //console.log(handleInput);
   };
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -387,6 +397,10 @@ const CardDetail = ({
   //             });
   //         console.log(res);
   //     };
+  const [isOpen, setIsOpen] = useState(false);
+
+  const historyToggle = () => setIsOpen(!isOpen);
+
   console.log(ethPrice);
   return (
     <>
@@ -455,8 +469,8 @@ const CardDetail = ({
               <div className = "View1"> 
               <div className='information d-flex flex-column'>
                 <div className= "View1">
-                <Input type="text" name="price" id="price" className ="priceInput" > 
-        {Web3.utils.fromWei('5000000', 'ether')}{' '}
+                <Input type="text" name="price" id="priceEnter" className ="priceInput"  onChange = {handlepriceInput}> 
+        {/* {Web3.utils.fromWei('5000000', 'ether')}{' '} */}
         </Input>
         &nbsp;
         <Label className="labelName">ETH</Label>
@@ -464,19 +478,20 @@ const CardDetail = ({
                 <div className = "View1">
                 <p className= "labelName">
                   <span >
-                    (
+                    
                     {(
-                      Web3.utils.fromWei(
-                        '50000000000000',
-                        'ether'
-                      ) * ethPrice[dropdownValue]
-                    ).toFixed(2)}{' '}
-                    )
+                      // Web3.utils.fromWei(
+                      //   '50000000000000',
+                      //   'ether'
+                      // ) 
+                      priceInputValue*ethPrice[dropdownValue]
+                    )}
+                    
                   </span>
                 </p>
                 <p>
                 <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                  <DropdownToggle caret className = "priceDropdown" > USD </DropdownToggle>
+                  <DropdownToggle caret className = "priceDropdown" > CURR</DropdownToggle>
                   <DropdownMenu>
                     {Object.keys(ethPrice).map((keyName, idx) => {
                       return (
@@ -492,12 +507,14 @@ const CardDetail = ({
               {buyOrSell()}  
                 </div>
                 </div>   
-                <div>
+                <div style={{
+                  marginLeft:'1rem', marginTop:'1.5rem'
+                }}>
               <button className='batchcardbid-btn'> PLACE BID</button>
               </div>
               </div>
               <br/>
-              <div className ="View2">
+              {/* <div className ="View2">
                 <p className= "style1">
                   <img src= {openeye} alt= ".." className="userimg">
                   </img>
@@ -510,58 +527,42 @@ const CardDetail = ({
                   &nbsp;
                     15 Favorite
                 </p>
-              </div>
+              </div> */}
               
             </div> 
           </div>
           <div style={{marginTop:'5%'}}>
             <h5> Description</h5>
             <p className="style1">
-
             </p>
-          </div>
+          </div>        
+            <div className='my-5'>
+                  <button style = 
+                    {{
+                        width: "520px",
+                        height: "65px",
+                        textAlign: "start",
+                        background: "none",
+                        color: "black",
+                        marginLeft: "0px",
+                        border: "none",
+                        borderTop: "2px solid rgba(0, 0, 0, 0.1)",
+                        borderBottom: "2px solid rgba(0, 0, 0, 0.1)",
+                        marginTop: "-50px",
 
+                    }} 
+                    onClick = {historyToggle}>
+                    
+                      <h5>History <IoIosArrowDown size ={16} className={cx("icon", { "icon--expanded": isOpen })}/></h5>
+                  </button>
+              
+                    <Collapse isOpen = {isOpen}>
+                      <TableBody cre={creValue} />
+                    </Collapse>
+                    <br/>
+                    <br/>
+                </div>
           </div>
-            
-        </div>
-        <div className='my-5'>
-          <Card
-            className='card'
-            style={{
-              overflow: 'auto',
-            }}
-          >
-            <CardHeader
-              className='text-left'
-              style={{
-                backgroundColor: '#fff',
-              }}
-            >
-              <h4>
-                <i className='fas fa-arrows-alt-v'></i> Trading History
-              </h4>
-            </CardHeader>
-            <React.Fragment>
-              <CardBody>
-                <Table
-                  style={{
-                    width: '100%',
-                  }}
-                >
-                  <thead>
-                    <tr className='text-secondary'>
-                      <th>Event</th>
-                      <th>Price</th>
-                      <th>From</th>
-                      <th>To</th>
-                      <th>Date</th>
-                    </tr>
-                  </thead>
-                  <TableBody cre={creValue} />
-                </Table>
-              </CardBody>
-            </React.Fragment>
-          </Card>
         </div>
         <Modal
           isOpen={purchaseSuccess}
@@ -666,6 +667,11 @@ const CardDetail = ({
             </Link>
           </ModalBody>
         </Modal>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
       </div>
     </>
   );

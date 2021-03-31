@@ -1,0 +1,100 @@
+@import '../../styles/global';
+
+.uploadpopup {
+  display: flex;
+  justify-content: center;
+
+  .modal-upload-input-file {
+    width: 106px;
+    height: 31px;
+    background: #B3B3B3;
+    border: 1px solid #D8D8D8;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-size: 15px;
+    line-height: 15px;
+    font-family: $fontFamily;
+    font-style: normal;
+    font-weight: normal;
+  }
+
+  .control-required {
+    &::after {
+      content: '*';
+      color: red;
+    }
+  }
+
+
+  .control-description {
+    border: 1px solid #888888;
+    box-sizing: border-box;
+    border-radius: 10px;
+    height: 95px;
+    resize: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .control-preview {
+    height: 105px;
+    width: 105px;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 48px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .control-preview-img {
+    max-width: 105px;
+    min-height: 105px;
+  }
+
+  .form-group-preview {
+    align-items: normal;
+  }
+
+  .submit-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+  }
+
+  .submit-button {
+    font-family: $fontFamily;
+    color: white;
+    background-color: #5548C7;
+    font-size: 18px;
+    width: 234px;
+    height: 55px;
+    border-radius: 10px;
+    text-transform: none;
+  }
+
+  .form-control {
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+
+  .form-control:focus {
+    border-color: black;
+    box-shadow: none;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .uploadpopup {
+    padding-left: 0;
+    padding-right: 0;
+
+    .form-group {
+      flex-wrap: wrap;
+    }
+  }
+}

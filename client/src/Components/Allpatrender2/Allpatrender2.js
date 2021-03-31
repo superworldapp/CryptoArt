@@ -37,10 +37,14 @@ class Allpatrender2 extends Component {
     this.StartAuction = this.StartAuction.bind(this);
     this.EndAuction = this.EndAuction.bind(this);
     this.refreshMyArt = this.refreshMyArt.bind(this);
-    this.mintToken = this.mintToken.bind(this)
+    this.mintToken = this.mintToken.bind(this);
+    this.Sale = this.Sale.bind(this);
 
 
     //this.toggleAuction = this.toggleAuction.bind(this);
+  }
+  componentDidMount = async() => {
+    this.setState({art : this.props.art});
   }
 
   buyItem = async () => {
@@ -48,8 +52,8 @@ class Allpatrender2 extends Component {
     try {
       //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
       const res = await this.props.contract.methods
-        .buyToken(this.props.art._tokenId)
-        .send({from: this.props.accounts, value: this.props.art._sellprice, gas: 5000000});
+        .buyToken(this.state.art._tokenId)
+        .send({from: this.props.accounts, value: this.state.art._sellprice, gas: 5000000});
       console.log('res', res);
 
     } catch (error) {
@@ -101,12 +105,31 @@ class Allpatrender2 extends Component {
       [name]: value,
     });
   }
-
+  Sale = async() => {
+    let tokenId = 1 
+    let sellprice = "1000000000000000000" 
+    let isListed = true
+    try {
+    //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+      const res = await this.props.contract.methods
+        .Sale(
+          tokenId,
+          sellprice,
+          isListed,
+        )
+        .send({ from: this.props.accounts, gas: 5000000 });
+  
+      console.log('res', res);
+      let data;
+    } catch(error){
+        console.error(error)
+    }
+  }
   putForSale = async () => {
     this.setState({putForSaleLoading: true});
     const res = await this.props.contract.methods
       .Sale(
-        this.props.art._tokenId,
+        this.state.art._tokenId,
         (this.state.sellPrice * ETHER).toString(),
         true,
       )
@@ -121,7 +144,7 @@ class Allpatrender2 extends Component {
     this.setState({delistLoading: true});
     const res = await this.props.contract.methods
       .Sale(
-        this.props.art._tokenId,
+        this.state.art._tokenId,
         (this.state.sellPrice * ETHER).toString(),
         false,
       )
@@ -138,7 +161,7 @@ class Allpatrender2 extends Component {
     let times = 1615401942
     const res = await this.props.contract.methods
       .startbid(
-        this.props.art._tokenId,
+        this.state.art._tokenId,
         startprice,
         times
       )
@@ -160,7 +183,7 @@ class Allpatrender2 extends Component {
   AddBid = async () => {
     const res = await this.props.contract.methods
       .addBid(
-        this.props.art._tokenId,
+        this.state.art._tokenId,
       )
       .send({from: this.props.accounts, gas: 1000000, value: 1000000});
     // window.location.reload();
@@ -168,21 +191,22 @@ class Allpatrender2 extends Component {
   };
   CloseBid = async () => {
     const res = await this.props.contract.methods
-      .closBid(this.props.art._tokenId)
+      .closBid(this.state.art._tokenId)
       .send({from: this.props.accounts, gas: 7000000});
     console.log(res);
   };
 
   render() {
-    let but = this.props.art._isSellings ? ' ' : 'hidden';
-    let bak = this.props.art._isSellings ? 'bg-success text-white' : '';
-    let buk = this.props.art._isBidding ? 'bg-warning' : '';
-    let b = this.props.art._isSellings ? 'hidden' : 'abtn';
-    let b1 = this.props.art._isSellings ? 'hidden' : 'abtn1';
-    let but1 = this.props.art._isSellings ? 'abtn1' : 'hidden';
-    let auc1 = this.props.art._isBidding ? 'hidden' : 'abtn';
-    let auc2 = this.props.art._isBidding ? 'hidden' : 'abtn1';
-    let forAuc = this.props.art._isBidding ? 'visible' : 'invisible';
+    console.log(this.state.art);
+    let but = this.state.art._isSellings ? ' ' : 'hidden';
+    let bak = this.state.art._isSellings ? 'bg-success text-white' : '';
+    let buk = this.state.art._isBidding ? 'bg-warning' : '';
+    let b = this.state.art._isSellings ? 'hidden' : 'abtn';
+    let b1 = this.state.art._isSellings ? 'hidden' : 'abtn1';
+    let but1 = this.state.art._isSellings ? 'abtn1' : 'hidden';
+    let auc1 = this.state.art._isBidding ? 'hidden' : 'abtn';
+    let auc2 = this.state.art._isBidding ? 'hidden' : 'abtn1';
+    let forAuc = this.state.art._isBidding ? 'visible' : 'invisible';
 
     // let pr =
     //   Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether') == 0
@@ -190,7 +214,7 @@ class Allpatrender2 extends Component {
     //     : 'visible';
     // let reSellOrSell = this.props.art._isSellings;
     // let Auc = this.props.art._isBidding;
-    let accNum = this.props.art._tokenCreator;
+    let accNum = this.state.art._tokenCreator;
 
     const accUsername = () => {
       if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
@@ -223,7 +247,7 @@ class Allpatrender2 extends Component {
       let height = this.height;
       orientation = width < height ? 'portrait' : 'landscape';
     };
-    img.src = this.props.art.imgurl;
+    img.src = this.state.art.imgurl;
     img.onload();
 
     return (
@@ -231,12 +255,11 @@ class Allpatrender2 extends Component {
       // {cardpills.map((item) => {
       //   return (
       <Card
-        className={this.props.art._isBidding ? buk : bak}
         className='mystore-active-card'
       >
         {/* <a href={this.props.art.imgurl} target='_blank'> */}
         <div className='mystore-active-card-img'>
-          <Link to={`/batch/${this.props.art._batchId}`}>
+          <Link to={`/card/${this.state.art._tokenId}`}>
             <CardImg
               top
               src={this.props.art._imgurl}
@@ -247,17 +270,17 @@ class Allpatrender2 extends Component {
         <div className='card-body-wrapper'>
           <CardBody style={{width: '100%'}}>
 
-            <h3>Back Country Fishing</h3>
+            <h3>{this.state.art._tokenBatchName}</h3>
 
             <div className='second-section'>
 
           <span>
-            <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '700', color: '#5540C7'}}>1.00 ETH</p>
+            <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '700', color: '#5540C7'}}>{this.state.art?._sellprice}</p>
             <p
-              style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '500', color: '#5540C7', marginTop: '-20px'}}>($1,580.10 USD)</p>
+              style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '500', color: '#5540C7', marginTop: '-20px'}}>{this.state.art._sellprice}</p>
         </span>
 
-              <button className="button_mint" onClick={this.mintToken}>Mint
+              <button className="button_mint" >Edit
               </button>
 
               <div>

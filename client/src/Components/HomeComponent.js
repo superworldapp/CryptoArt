@@ -614,6 +614,7 @@ class Home extends Component {
                   </Card>
               </div>
               </div>
+              
               <div
                 style={{
                   display: 'flex',

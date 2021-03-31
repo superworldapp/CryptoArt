@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component ,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 //import moment from 'moment';
 import {
@@ -89,6 +89,7 @@ class Allpatrender extends Component {
   // let date = new Date(xy*1000);
   // let time = day.format('dddd MMMM Do YYYY, h:mm:ss a');
   // let yz = xy != 0?"bg-success text-white":"";
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -117,16 +118,29 @@ class Allpatrender extends Component {
     this.StartAuction = this.StartAuction.bind(this);
     this.EndAuction = this.EndAuction.bind(this);
     this.refreshMyArt = this.refreshMyArt.bind(this);
-
+    this.fetchdata = this.fetchdata.bind(this);
     //this.toggleAuction = this.toggleAuction.bind(this);
   }
+  fetchdata = async() => {
+    this.setState({art : this.props.art2});
+    console.log(this.state.art);
+    
+  }
+
+
+  
+  componentDidMount = async () => {
+    this.fetchdata();
+    this._isMounted = true;
+  }
+  
   buyItem = async () => {
 
     try {
     //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
       const res = await this.props.contract.methods
         .buyToken(this.props.art._tokenId)
-        .send({ from: this.props.accounts,value: this.props.art._sellprice, gas: 5000000 });
+        .send({ from: this.props.accounts,value: this.state.art._sellprice, gas: 5000000 });
       console.log('res', res);
 
     } catch(error){
@@ -190,7 +204,7 @@ class Allpatrender extends Component {
     this.setState({ putForSaleLoading: true });
     const res = await this.props.contract.methods
       .Sale(
-        this.props.art._tokenId,
+        this.state.art._tokenId,
         (this.state.sellPrice * ETHER).toString(),
         true,
       )
@@ -257,25 +271,25 @@ class Allpatrender extends Component {
     console.log(res);
   };
   render() {
-    let but = this.props.art._isSellings ? ' ' : 'hidden';
-    let bak = this.props.art._isSellings ? 'bg-success text-white' : '';
-    let buk = this.props.art._isBidding ? 'bg-warning' : '';
-    let b = this.props.art._isSellings ? 'hidden' : 'abtn';
-    let b1 = this.props.art._isSellings ? 'hidden' : 'abtn1';
-    let but1 = this.props.art._isSellings ? 'abtn1' : 'hidden';
-    let auc1 = this.props.art._isBidding ? 'hidden' : 'abtn';
-    let auc2 = this.props.art._isBidding ? 'hidden' : 'abtn1';
-    let forAuc = this.props.art._isBidding ? 'visible' : 'invisible';
-    let artCreator = this.props.art.tokenCreator;
-    let artOwner = this.props.art.tokenOwner;
+    let but = this.state.art._isSellings ? ' ' : 'hidden';
+    let bak = this.state.art._isSellings ? 'bg-success text-white' : '';
+    let buk = this.state.art._isBidding ? 'bg-warning' : '';
+    let b = this.state.art._isSellings ? 'hidden' : 'abtn';
+    let b1 = this.state.art._isSellings ? 'hidden' : 'abtn1';
+    let but1 = this.state.art._isSellings ? 'abtn1' : 'hidden';
+    let auc1 = this.state.art._isBidding ? 'hidden' : 'abtn';
+    let auc2 = this.state.art._isBidding ? 'hidden' : 'abtn1';
+    let forAuc = this.state.art._isBidding ? 'visible' : 'invisible';
+    let artCreator = this.state.art._tokenCreator;
+    let artOwner = this.state.art._tokenOwner;
 
-    let pr =
-      Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether') == 0
-        ? 'invisible'
-        : 'visible';
-    let reSellOrSell = this.props.art._isSellings;
-    let Auc = this.props.art._isBidding;
-    let accNum = this.props.art._tokenCreator;
+    // let pr =
+    //   Web3.utils.fromWei(this.state.art._sellprice.toString(), 'ether') == 0
+    //     ? 'invisible'
+    //     : 'visible';
+    // let reSellOrSell = this.state.art._isSellings;
+    // let Auc = this.state.art._isBidding;
+    // let accNum = this.state.art._tokenCreator;
 
     const accUsername = (accNum) => {
       if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
@@ -293,8 +307,8 @@ class Allpatrender extends Component {
       else return '@Annonymous';
     };
     const colorpills = () => {
-      if (this.props.art._isSelling) return cardpills[1];
-      else if (this.props.art._isBidding) return cardpills[3];
+      if (this.state.art._isSelling) return cardpills[1];
+      else if (this.state.art._isBidding) return cardpills[3];
       else return cardpills[0];
     };
     let x = colorpills();
@@ -306,8 +320,8 @@ class Allpatrender extends Component {
       let height = this.height;
       orientation = width < height ? 'portrait' : 'landscape';
     };
-    img.src = this.props.art.imgurl;
-    img.onload();
+    // img.src = this.state.art?._imgurl;
+    // img.onload();
 
     return (
 
@@ -322,15 +336,20 @@ class Allpatrender extends Component {
       >
         <Card className='mycollection-card'>
           <CardImg
-            top
             // src={this.props.art._imgurl}
-            src={this.props.art._imgurl}
+            src={this.state.art?._imgurl}
             alt='Card image'
             style={{
               width: '98.5%',
             }}
           ></CardImg>
-      </Card>
+          <CardSubtitle>Bid Price : {this.state.art?._imgurl}</CardSubtitle>
+          <CardSubtitle>Bid Price : {this.state.art?._bidprice}</CardSubtitle>
+          <CardSubtitle>isBidding? : {this.state.art?._isBidding}</CardSubtitle>
+          <CardSubtitle>isSell?{this.state.art?._isSellings}</CardSubtitle>
+          <CardSubtitle>sellprice = {this.state.art?._sellprice}</CardSubtitle>
+          <CardSubtitle><small>tokenowner = {this.state.art?._tokenOwner}</small></CardSubtitle>
+          </Card>
       </button>
 
       {/* Art Modal */}
@@ -341,7 +360,7 @@ class Allpatrender extends Component {
         className='art-modal-popup'
       >
       <img
-        src={this.props.art._imgurl}
+        src={this.state.art?._imgurl}
         style={{
           height: '75%',
         }} />
@@ -656,11 +675,12 @@ class MyCollectionComponent extends Component {
   };
 
   render() {
+//    let Menu = null;
     const Menu = this.state.art.map((x) => {
       return (
-        <div key={x.tokenIdentifier} className='col-4 col-md-3'>
+        <div key={x._tokenId} className='col-4 col-md-3'>
           <Allpatrender
-            art={x}
+            art2={x}
             contract={this.props.contract}
             accounts={this.props.accounts}
           />
@@ -669,6 +689,7 @@ class MyCollectionComponent extends Component {
         </div>
       );
     });
+    console.log(Menu);
 
     let ch = 'visible';
     return (
