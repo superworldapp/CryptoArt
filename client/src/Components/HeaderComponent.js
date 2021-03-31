@@ -316,7 +316,6 @@ class Header extends Component {
 
   render() {
     console.log('this.state.currentUser', this.state.currentUser);
-    console.log('=============================================>');
     return (
       <>
         <Navbar

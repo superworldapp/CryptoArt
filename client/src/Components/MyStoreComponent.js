@@ -250,7 +250,6 @@ class MyStoreComponent extends Component {
 
 	async componentDidMount() {
 		let res = await this.props.contract?.methods.totalSupply().call();
-		console.log(res);
 
 		let response = [];
 		let createrToken = [];
@@ -258,7 +257,7 @@ class MyStoreComponent extends Component {
 		for (let i = 1; i <= res; i++) {
 			let rex = await this.props.contract?.methods.getTokenData(i).call();
 			let rex2 = await this.props.contract?.methods.getTokenDataBatch(i).call();
-			if (rex._tokenOwner == this.props.accounts) {
+			if (rex._tokenOwner === this.props.accounts) {
 				var newBlock = {
 					_tokenId: i,
 					_tokenOwner: rex._tokenOwner,
@@ -311,11 +310,12 @@ class MyStoreComponent extends Component {
 			selectedFile: event.target.files[0],
 		});
 	};
+
 	fileUploadHandler = async (event, controls) => {
 		event.preventDefault();
 		// const hash = await blobToSHA256(this.state.selectedFile);
 		let hash = '';
-		this.setState({isLoading: true, loadingError: false, artHash: hash});
+		await this.setState({isLoading: true, loadingError: false, artHash: hash});
 		this.fileAwsHandler(controls.file.value, this.creatingItems);
 	};
 
@@ -402,7 +402,7 @@ class MyStoreComponent extends Component {
 					<Col className='mystore-art-container'>
 						<StyledTabs value={artStatus} onChange={this.onArtStatusChange}>
 							<StyledTab label={`Queue${nftsListed > 0 ? ` (${nftsListed})` : ''}`} {...artStatusTabPropsByIndex(0)} />
-							<StyledTab label={'Active'} {...artStatusTabPropsByIndex(1)} />
+							<StyledTab label={`Active ${this.state.art3 && this.state.art3.length > 0 ? `(${this.state.art3.length})` : '' }`} {...artStatusTabPropsByIndex(1)} />
 							<StyledTab label={'Ended'} {...artStatusTabPropsByIndex(2)} />
 							<StyledTab label={'Offers'} {...artStatusTabPropsByIndex(3)} />
 						</StyledTabs>

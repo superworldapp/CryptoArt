@@ -49,7 +49,6 @@ class Allpatrender extends Component {
 	}
 
 	buyItem = async () => {
-
 		try {
 			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
 			const res = await this.props.contract.methods
@@ -95,20 +94,19 @@ class Allpatrender extends Component {
 	}
 
 	closeMintToken() {
-		console.log('========>1', 1);
 		this.setState({
 			isMintModal: !this.state.isMintModal,
 		});
 	}
 
-	sendMintToken() {
-		console.log('========>2', 2);
+	sendMintToken(e) {
 		this.setState({
 			isMintModal: !this.state.isMintModal,
 		});
+		console.log('========>e', this.props.contract.methods.mintToken);
 		this.props.contract.methods
 			.mintToken(this.props.art._batchId)
-			.send({from: this.props.accounts, gas: 5000000});
+			.send({from: this.props.accounts, gasPrice: Number(e + '000000000'), gas: 3000000});
 	}
 
 	handleInputChange(event) {
@@ -295,7 +293,6 @@ class Allpatrender extends Component {
 			>
 				 {/*<a href={this.props.art.imgurl} target='_blank'> */}
 				 {+art[3] >= 0 && <span className='card-counter'>+{art[3]}</span>}
-				{console.log('========>art[3]', art[3])}
 				<div className='mystore-queue-card-img'>
 					<Link to={`/batch/${this.props.art._batchId}`}>
 						<CardImg
