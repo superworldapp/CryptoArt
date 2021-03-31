@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import checkmark from "../../images/svg/checkmark.svg";
 import loader from "../../images/loader.svg";
 import {cardpills, ETHER} from "../MyStoreComponent";
-import EditModal from "../EditModal/EditModal";
+import EditModal from "../EditModal";
 
 class Allpatrender2 extends Component {
 	// let day = moment.unix(art.dateofComp);
@@ -787,6 +787,9 @@ class Allpatrender2 extends Component {
 				{
 					this.state.isEditModal
 						? <EditModal
+							tokenID = {this.state.art._tokenId}
+							contract={this.props.contract}
+							accounts={this.props.accounts}
 							isOpen={this.state.isEditModal}
 							toggle={this.closeEditToken}
 							fileName="BackCountry.png"

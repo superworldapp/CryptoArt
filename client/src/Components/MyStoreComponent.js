@@ -312,11 +312,12 @@ class MyStoreComponent extends Component {
 	};
 
 	fileUploadHandler = async (event, controls) => {
+		console.log('========>controls', controls);
 		event.preventDefault();
 		// const hash = await blobToSHA256(this.state.selectedFile);
 		let hash = '';
 		await this.setState({isLoading: true, loadingError: false, artHash: hash});
-		this.fileAwsHandler(controls.file.value, this.creatingItems);
+		await this.fileAwsHandler(controls.file.value, this.creatingItems);
 	};
 
 	fileAwsHandler = async (file, callback) => {

@@ -31,8 +31,14 @@ const initialControls = {
 	}
 }
 
+const ETHER = 1000000000000000000;
+
+
 const EditModal = props => {
 	const {
+		contract,
+		accounts,
+		tokenID,
 		isOpen,
 		toggle,
 		onClosed,
@@ -60,7 +66,29 @@ const EditModal = props => {
 	}, [saleType])
 
 	const handleClick = () => {
-		toggle()
+		Sale().then()
+	}
+
+
+	const Sale = async () => {
+		// let tokenId = tokenID
+		// let sellprice = "1000000000000000000"
+		let isListed = true
+		try {
+			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+			const res = await contract.methods
+				.Sale(
+					tokenID,
+					ETHER * (initialControls.tokenPrice.value),
+					isListed,
+				)
+				.send({from: accounts, gas: 5000000});
+
+			console.log('res', res);
+			let data;
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	return (
@@ -150,13 +178,13 @@ const EditModal = props => {
 					<div className='submit-button-wrapper'>
 						<button
 							className='abtn submit-button'
-							onClick={handleClick}
+							onClick={Sale}
 						>
 							List/Relist
 						</button>
 						<button
 							className='abtn submit-button-two'
-							onClick={handleClick}
+							onClick={Sale}
 						>
 							Take Down
 						</button>
