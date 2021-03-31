@@ -231,7 +231,7 @@ div.imageCards {
   font-family: 'Gibson';
   text-align: center;
   position: relative;
-  top: 40%;
+  top: 42%;
   opacity: 0.95;
   backdrop-filter: blur(7px);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.068) 0%, rgba(0, 0, 0, 0.075) 100%);
