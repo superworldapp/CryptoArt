@@ -24,7 +24,7 @@ import {BrowserRouter, NavLink} from 'react-router-dom';
 import Web3 from 'web3';
 import {render} from 'react-dom';
 import Axios from 'axios';
-import './MyArtComponent.scss';
+import '../MyArtComponent.scss';
 import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';
@@ -1313,7 +1313,30 @@ class MyItemComponent extends Component {
 					</div>
 				</div>
 
-				{this.state.sortLayout ? SortLayoutWrapper : null}
+				{this.state.sortLayout
+					? <div className="sort-layout-wrapper">
+						<p className="enter-title-text">Enter Tiltle</p>
+						<div className="enter-title">
+								<input
+									type="text"
+									className="input-enter-title"
+									placeholder='Search MyCollection'
+								/>
+								<button
+									className="button-done"
+								>
+									Done
+								</button>
+								<button
+									onClick={this.handleClickAdd}
+									className="button-cancel"
+								>Cancel</button>
+							</div>
+							<div className="my-art-row scroll">
+								{SortLayoutWrapper}
+							</div>
+					</div>
+					: null}
 				{/*<Modal*/}
 				{/*	isOpen={this.state.isModalOpen1}*/}
 				{/*	toggle={this.toggleModal1}*/}

@@ -26,7 +26,7 @@ import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
 import Axios from 'axios';
-import './MyArtComponent/MyArtComponent.scss';
+import './MyArtComponent.scss';
 import './MyCollectionComponent.scss';
 import test1img from '../images/image 25.png'
 import test2img from '../images/image 11.png'

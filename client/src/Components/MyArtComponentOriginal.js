@@ -24,7 +24,7 @@ import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
 import Axios from 'axios';
-import './MyArtComponent/MyArtComponent.scss';
+import './MyArtComponent.scss';
 import * as aws from 'aws-sdk';
 import * as dotenv from 'aws-sdk';
 import * as fs from 'fs';

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Modal as ReactstrapModal, ModalBody, ModalHeader} from "reactstrap";
-import '../MyArtComponent/MyArtComponent.scss';
+import '../MyArtComponent.scss';
 import '../MyStoreComponent.scss';
 
 const Modal = props => {
