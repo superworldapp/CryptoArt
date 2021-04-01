@@ -1,0 +1,29 @@
+.header-navbar {
+  height: 117px;
+  background-color: #d5d7fa;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-nav-links {
+  display: flex;
+  height: 33px;
+  font-family: Gibson;
+  font-weight: 700;
+  font-size: 25px;
+  position: relative;
+  top: -5px;
+  left: -35px;
+}
+
+.navbar-logo {
+  position: relative;
+  /* top: -6px; */
+}
+
+.user-icon-img {
+  position: relative;
+  top: -5px;
+  border-radius: 50%;
+  filter: opacity(0.5) drop-shadow(0 0 0 purple);
+}
