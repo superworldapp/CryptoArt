@@ -100,7 +100,7 @@ const AllItemComponent = (props) => {
 								? props.filteredData.length
 								: props.batch.length
 							}
-							Results
+							&ensp;Results
 						</p>
 						<p className="head_result_menu">
 							<img
