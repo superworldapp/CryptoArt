@@ -72,8 +72,8 @@ const ModalUploadToMyStore = props => {
   const [isValidForm, setIsValidForm] = useState(false);
 
   useEffect(()=>{
-    controls.name.value = '';
-    controls.description.value = '';
+    // controls.name.value = '';
+    // controls.description.value = '';
   }, [isOpen])
 
   const onInputChange = useCallback(e => {

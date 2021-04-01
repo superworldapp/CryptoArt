@@ -53,21 +53,36 @@ const EditModal = props => {
 		setSaleType(e.target.value)
 	}, [])
 
-	const handleSubmit = (event) => {
-           event.preventDefault();
-			Sale(true);
-			toggle();
+	useEffect(() => {
+		console.log('========>initialControls.tokenPrice', initialControls.tokenPrice);
+		if (saleType === saleTypes.AUCTION) {
+			initialControls.tokenPrice.disabled = true
+			initialControls.duration.disabled = false
+		} else if (saleType === saleTypes.BUY_NOW) {
+			initialControls.tokenPrice.disabled = false
+			initialControls.duration.disabled = true
+		}
+	}, [saleType])
+
+	const handleClick = () => {
+		Sale().then()
 	}
-	
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		Sale(true);
+		toggle();
+	}
+
 	const handleSubmit2 = (event) => {
 		event.preventDefault();
-		 Sale(false);
-		 toggle();
- }
+		Sale(false);
+		toggle();
+	}
 	const Sale = async (isListed) => {
 		// let tokenId = tokenID
 		// let sellprice = "1000000000000000000"
-		let price = isListed == true? ((initialControls.tokenPrice.value)*ETHER).toString() : 0; 
+		let price = isListed == true? ((initialControls.tokenPrice.value)*ETHER).toString() : 0;
 		try {
 			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
 			const res = await contract.methods
@@ -85,26 +100,9 @@ const EditModal = props => {
 		}
 	}
 
-	useEffect(() => {
-		console.log('========>initialControls.tokenPrice', initialControls.tokenPrice);
-		if (saleType === saleTypes.AUCTION) {
-			initialControls.tokenPrice.disabled = true
-			initialControls.duration.disabled = false
-		} else if (saleType === saleTypes.BUY_NOW) {
-			initialControls.tokenPrice.disabled = false
-			initialControls.duration.disabled = true
-		}
-	}, [saleType])
-
-	const handleClick = () => {
-		Sale().then()
-	}
-
-
-	
 	return (
 
-		
+
 		<Modal
 			isOpen={isOpen}
 			toggle={toggle}

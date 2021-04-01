@@ -207,7 +207,6 @@ class Allpatrender2 extends Component {
 	}
 
 	render() {
-		console.log(this.state.art);
 		let but = this.state.art._isSellings ? ' ' : 'hidden';
 		let bak = this.state.art._isSellings ? 'bg-success text-white' : '';
 		let buk = this.state.art._isBidding ? 'bg-warning' : '';
@@ -259,7 +258,6 @@ class Allpatrender2 extends Component {
 		};
 		img.src = this.state.art.imgurl;
 		img.onload();
-		console.log('========>this.state.art', this.state.art);
 		return (
 			<Card
 				className='mystore-active-card'
@@ -285,6 +283,7 @@ class Allpatrender2 extends Component {
 									color: '#5540C7',
 									margin: '0px'
 								}}>{Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')}</p>
+								{console.log('========>Web3.utils.fromWei', Web3.utils.fromWei)}
 								<p
 									style={{
 										fontFamily: 'Gibson',
@@ -293,14 +292,14 @@ class Allpatrender2 extends Component {
 										color: '#5540C7',
 										margin: '0px'
 									}}>( $1,580.10 USD )</p>
-						</span>
+							</span>
 							<button
 								onClick={this.closeEditToken}
 								className="button_mint"
 							>
 								Edit
 							</button>
-							<div>
+							<>
 								{/* {Auc ? (
                 <button
                   className={b1}
@@ -769,8 +768,9 @@ class Allpatrender2 extends Component {
                                   </CardBody>
                               </Card>
                           </Modal>  */}
-							</div>
+							</>
 						</div>
+						<p className="card-body-time">70 Hrs 15 Min Remaining</p>
 						<div style={{display: 'flex', justifyContent: 'center'}}>
 							{this.state.delistLoading ? (
 								<img height='35' src={loader} alt="load"/>
@@ -788,7 +788,7 @@ class Allpatrender2 extends Component {
 				{
 					this.state.isEditModal
 						? <EditModal
-							tokenID = {this.state.art._tokenId}
+							tokenID={this.state.art._tokenId}
 							contract={this.props.contract}
 							accounts={this.props.accounts}
 							isOpen={this.state.isEditModal}

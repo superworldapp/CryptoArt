@@ -26,7 +26,7 @@ import { BrowserRouter, NavLink } from 'react-router-dom';
 import Web3 from 'web3';
 import { render } from 'react-dom';
 import Axios from 'axios';
-import './MyArtComponent.scss';
+import './MyArtComponent/MyArtComponent.scss';
 import './MyCollectionComponent.scss';
 import test1img from '../images/image 25.png'
 import test2img from '../images/image 11.png'
@@ -124,16 +124,16 @@ class Allpatrender extends Component {
   fetchdata = async() => {
     this.setState({art : this.props.art2});
     console.log(this.state.art);
-    
+
   }
 
 
-  
+
   componentDidMount = async () => {
     this.fetchdata();
     this._isMounted = true;
   }
-  
+
   buyItem = async () => {
 
     try {

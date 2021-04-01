@@ -311,7 +311,7 @@ class Allpatrender extends Component {
           <CardSubtitle>isSell?{this.props.art._isSellings}</CardSubtitle>
           <CardSubtitle>sellprice = {this.props.art._sellprice}</CardSubtitle>
           <CardSubtitle><small>tokenowner = {this.props.art._tokenOwner}</small></CardSubtitle>
-          
+
           </Link>
       </Card>
       {/* </button> */}
@@ -408,7 +408,7 @@ class Allpatrender extends Component {
 }
 
 
-class BatchDetail extends Component{ 
+class BatchDetail extends Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -439,7 +439,7 @@ this.accUsername = this.accUsername.bind(this);
   // const collapsetoggle = () => setIsOpen(!isOpen);
 
   // const toggle = () => setDropdownOpen((prevState) => !prevState);
- 
+
 
 
   accUsername = (accNum) => {
@@ -464,12 +464,12 @@ render(){
   let tokenInBatch;
 
     //getCreData();
-    
+
      console.log(this.props.BatchCreated[0])
-     let batchID = this.props.matchId; 
-     tokenInBatch = this.props.allTokens.filter((x) => x._refbatch == batchID);
+     let batchID = this.props.matchId;
+     tokenInBatch = this.props.allTokens.filter((x) => x._refbatch === batchID);
      console.log('Header', tokenInBatch);
-     
+
      const Menu = tokenInBatch.map((x) => {
       return (
         <div key={1} className='col-4 col-md-3'>
@@ -486,7 +486,7 @@ render(){
     });
 
 
-  
+
 
   return (
     <>
@@ -509,7 +509,7 @@ render(){
             {this.props.BatchCreated[0]._tokenBatchName}
           </h4>
             </div>
-           <div className = "View"> 
+           <div className = "View">
            <p className = "style2">
              Starting from 6.5ETH
            </p>
@@ -528,7 +528,7 @@ render(){
                 ></img>   {' '}
               Created by{' '}
               <span className='text-primary'>{this.accUsername(this.props.BatchCreated?._tokenCreator)}</span>
-            </p> 
+            </p>
 
           </div>
           <div>
@@ -554,8 +554,8 @@ render(){
            nesciunt sapiente ea proident.
 
         </p>
-          
-          
+
+
       </Collapse> */}
             </div>
 
@@ -566,30 +566,30 @@ render(){
               }}
             >
               <h4>{this.props.BatchCreated._tokenBatchName}</h4>
-              
+
             </div> */}
             </div>
 
           </div>
 
           </div>
-            
+
           <br/>
           <Col className='second-row-col-2'>
           <div>{Menu}
-   
+
           </div>
         </Col>
-          
+
           <br/>
           <br/>
         </div>
-        
-      
-      
+
+
+
     </>
   );
-        
+
 };
 }
 

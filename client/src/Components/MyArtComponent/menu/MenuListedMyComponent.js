@@ -3,10 +3,10 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import './MenuListed.scss';
+import './MenuListedMyComponent.scss';
 
 export default function
-	SimpleMenu() {
+	MenuListedMyComponent() {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 
 	const handleClick = (event) => {
@@ -18,9 +18,9 @@ export default function
 	};
 
 	return (
-		<div className="simple-menu">
-			<Button classes={{ label: 'button_mu' }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-				Recently Listed
+		<div className="menu-my-col">
+			<Button classes={{ label: 'button_my_coll' }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+				New
 			</Button>
 			<Menu
 				id="simple-menu"
@@ -28,13 +28,9 @@ export default function
 				keepMounted
 				open={Boolean(anchorEl)}
 				onClose={handleClose}
-				classes={{ label: 'button_mu' }}
+				classes={{ label: 'button_my_coll' }}
 			>
-				<MenuItem onClick={handleClose}>Recently Listed</MenuItem>
-				<MenuItem onClick={handleClose}>Ending Soon</MenuItem>
-				<MenuItem onClick={handleClose}>Lowest Price</MenuItem>
-				<MenuItem onClick={handleClose}>Highest Price</MenuItem>
-				<MenuItem onClick={handleClose}>Oldest</MenuItem>
+				<MenuItem onClick={handleClose}>New</MenuItem>
 			</Menu>
 		</div>
 	);
