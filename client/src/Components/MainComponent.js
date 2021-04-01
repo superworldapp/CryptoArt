@@ -3,23 +3,13 @@ import BNContract2 from '../contracts/Cryptoart.json';
 import BNContract from '../contracts/Cryptoart2.json';
 import getWeb3 from '../getWeb3';
 import '../App.css';
-
-import NewHeader from './NewHeaderComponent'
-import MyCollections from './MyArtComponent'
-import {MyStore} from './MyArtComponent'
-
-
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
-<<<<<<< HEAD
 import AllItemComponent from './Marketplace/AllArtComponent';
 import MyItemComponent from './MyArtComponent';
 import MyCollectionComponent from './MyCollectionComponent';
 import MyStoreComponent from './MyStoreComponent';
 import Profile from './MyProfile/MyProfileComponent'
-=======
-import AllItemComponent from './AllArtComponent';
->>>>>>> tim
 import CardDetail from './CardDetail';
 import BatchDetail from './BatchDetail';
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -28,7 +18,6 @@ import ProtectedRoute from './ProtectedRoute';
 import Axios from 'axios';
 //import HDWalletProvider from "@truffle/hdwallet-provider";
 let allDocs = [];
-
 
 class Main extends Component {
   constructor(props) {
@@ -290,13 +279,12 @@ class Main extends Component {
     };
     return (
       <div className='App'>
-        {/* <Header
+        <Header
           contract={this.state.contract}
           accounts={this.state.accounts}
           balance={this.state.balance}
           web3={this.state.web3}
-        /> */}
-        <NewHeader />
+        />
         <Switch>
           <Route
             exact
@@ -319,12 +307,11 @@ class Main extends Component {
               />
             )}
           />
-
-        <ProtectedRoute
+          <ProtectedRoute
             exact
             path='/mycollections'
             component={() => (
-              <MyCollections
+              <MyItemComponent
                 contract={this.state.contract}
                 accounts={this.state.accounts}
                 batch={this.state.batch?.filter(
@@ -334,14 +321,32 @@ class Main extends Component {
               />
             )}
           />
-
-        <ProtectedRoute
+          <ProtectedRoute
+            exact
+            path='/mycollection'
+            component={() => (
+              <MyCollectionComponent
+                contract={this.state.contract}
+                accounts={this.state.accounts}
+                batch={this.state.batch?.filter(
+                  (batch) => batch._tokenCreator == this.state.accounts
+                )}
+                art2={this.state.art2}
+                // art2own = {this.state.art2?.filter((art2s) => art2s._tokenOwner == this.state.accounts)}
+              />
+            )}
+          />
+          <ProtectedRoute
             exact
             path='/mystore'
             component={() => (
-              <MyStore
+              <MyStoreComponent
                 contract={this.state.contract}
                 accounts={this.state.accounts}
+                batch={this.state.batch?.filter(
+                  (batch) => batch._tokenCreator == this.state.accounts
+                )}
+                art2={this.state.art2}
               />
             )}
           />
