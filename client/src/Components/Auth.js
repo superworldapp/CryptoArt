@@ -5,22 +5,13 @@ const Auth = {
   isAuthenticated: false,
   user: null,
   getToken() {
-    const session = Cookies.get('session');
     const userId = Cookies.get('userId');
-    // const cookie = Cookies.get('Authorization');
-    return { session, userId };
+    const session = Cookies.get('session');
+    return { userId: userId, session: session };
   },
   authenticate() {
     try {
       const tk = this.getToken();
-      // if (tk) {
-      //   const decoded = decode(tk);
-      //   // console.log("AUTH TEST");
-      //   // console.log(tk);
-      //   if (decoded.iat < Date.now() / 1000) {
-      //     this.isAuthenticated = true;
-      //   }
-      // }
       if (tk.session && tk.userId) {
         this.isAuthenticated = true;
       }
@@ -29,8 +20,11 @@ const Auth = {
     }
   },
   logout() {
-    // Cookies.remove('Authorization');
-    Cookies.remove('session', 'userId');
+    Cookies.remove('userId');
+    Cookies.remove('session');
+    Cookies.remove('email');
+    localStorage.removeItem('walletType');
+    localStorage.removeItem('walletConnected');
     this.isAuthenticated = false;
   },
   getAuth() {
