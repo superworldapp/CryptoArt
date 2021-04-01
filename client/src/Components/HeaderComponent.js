@@ -389,19 +389,7 @@ class Header extends Component {
                   Marketplace
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink
-                  className='nav-link'
-                  style={{
-                    width: 200,
-                    fontFamily: 'Gibson',
-                    fontSize: '17px',
-                  }}
-                  to='/allart'
-                >
-                  Picks
-                </NavLink>
-              </NavItem>
+              
               <NavItem>
                 <NavLink
                   className='nav-link'
@@ -1041,7 +1029,7 @@ class Header extends Component {
                         // marginLeft: '-0.2rem',
                         // marginBottom: '0.75rem',
                       }}
-                      to='/mycollections'
+                      to='/mycollection'
                     >
                       <MenuItem disableGutters>
                         <span
