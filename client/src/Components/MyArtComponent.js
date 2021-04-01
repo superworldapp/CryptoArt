@@ -31,6 +31,8 @@ import * as fs from 'fs';
 import * as util from 'util';
 import loader from '../images/loader.svg';
 import annonuser from '../images/user.png';
+import Sound from 'react-sound';
+import ReactPlayer from 'react-player';
 // import { blobToSHA256 } from 'file-to-sha256';
 import checkmark from '../images/svg/checkmark.svg';
 const SHA256 = require('crypto-js/sha256');
@@ -257,6 +259,7 @@ class Allpatrender extends Component {
         return '@SwapnilTest';
       else return '@Annonymous';
     };
+
     const colorpills = () => {
       // if (this.props.art._isSelling) return cardpills[1];
       // else if (this.props.art._isBidding) return cardpills[3];
@@ -286,6 +289,7 @@ class Allpatrender extends Component {
         {/* <a href={this.props.art.imgurl} target='_blank'> */}
         <div className='card-img-top-all-art'>
           {/* <Link to={`/card/${this.props.art._tokenId}`}> */}
+      
           <Link to={`/batch/${this.props.art._batchId}`}>
             <CardImg
               className={orientation}
@@ -293,6 +297,7 @@ class Allpatrender extends Component {
               src={this.props.art._imgurl}
               alt='Card image'
             ></CardImg>
+            
             <CardImgOverlay>
               <Badge pill className={x.class}>
                 {x.title}
