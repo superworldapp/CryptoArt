@@ -32,6 +32,7 @@ class Allpatrender extends Component {
 			endAuctionLoading: false,
 			endAuctionSuccess: false,
 			isMintModal: false,
+			soundPlaying: false,
 		};
 		this.toggleModal = this.toggleModal.bind(this);
 		this.toggleListForAuction = this.toggleListForAuction.bind(this);
