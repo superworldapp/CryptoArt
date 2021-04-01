@@ -25,7 +25,9 @@ import {
 } from 'reactstrap';
 import loader from '../images/loader.svg';
 import anonUser from '../images/user.png';
-import "./BatchDetail.css";
+import heart from '../images/svg/batchHeart.svg';
+import avatar from '../images/svg/batchAvatar.svg';
+import "./BatchDetail.scss";
 // import heart from "../images/svg/Heart.svg";
 import dropdownarrow from "../assets/svg/Drop down arrow.svg";
 import Web3 from 'web3';
@@ -412,8 +414,8 @@ class BatchDetail extends Component{
   constructor(props) {
     super(props);
     this.state = {
-
-}
+      readMore: true,
+    }
 this.accUsername = this.accUsername.bind(this);
 //this.getCreData = this.getCreData.bind(this);
   }
@@ -472,7 +474,7 @@ render(){
      
      const Menu = tokenInBatch.map((x) => {
       return (
-        <div key={1} className='col-4 col-md-3'>
+        <div key={1}>
           <Allpatrender
             art={x}
             contract={this.props.contract}
@@ -484,112 +486,151 @@ render(){
         </div>
       );
     });
+  const text = 'The exhibition titled ‘Goliaths, Tanks’ is an amalgamation of her paintings and objects A together in her site-specific ' +
+    'installations and multi-media projections, accompanied by performance pieces. The movement in each object resonating with the sound ' +
+    'of ticking clocks serenely draws out the muted anxiety underlying the division of Korean peninsula following the war in the 1950’s. ' +
+    'The ensemble takes place at the Peace Culture Bunker The exhibition titled ‘Goliaths, Tanks’ is an amalgamation of her paintings and objects ' +
+    'A together in her site-specific installations and multi-media projections, accompanied by performance pieces. The movement in each object ' +
+    'resonating with the sound of ticking clocks serenely draws out the muted anxiety underlying the division of Korean peninsula following the ' +
+    'war in the 1950’s. The ensemble takes place at the Peace Culture Bunker'
 
-
-  
 
   return (
     <>
-      <div className='container'>
-        <div className='batchUpperview'>
-          <div
-            className='card'
-            style={{
-             width: '50%',
-             }}
-          >
+      <div className="batchWrapper">
+        <div className="batchView">
+          <div className="batchImgBlock">
             <a href={this.props.BatchCreated[0]._imgurl} target='_blank'>
-              <img src={this.props.BatchCreated[0]._imgurl} className='card-img' alt='...' />
+              <img src={this.props.BatchCreated[0]._imgurl} className="batchImg" alt='batch img'/>
             </a>
           </div>
-          <div>
-          <div className='information d-flex flex-column'>
-            <div>
-            <h4>
-            {this.props.BatchCreated[0]._tokenBatchName}
-          </h4>
+          <div className="batchInfo">
+            <div className="batchHeader">
+              <div className="batchName">
+                {this.props.BatchCreated[0]._tokenBatchName}
+              </div>
+              <div><img src={heart} alt="heart"/></div>
             </div>
-           <div className = "View"> 
-           <p className = "style2">
-             Starting from 6.5ETH
-           </p>
-           &nbsp;
-           &nbsp;
-           <p className = "style2">
-            {this.props.BatchCreated[0]._unmintedEditions}
-           </p>
-
-           </div>
-          <div>
-          <p className = "style1">
-          <img
-                  className="userimg"
-                  src={anonUser}
-                ></img>   {' '}
-              Created by{' '}
-              <span className='text-primary'>{this.accUsername(this.props.BatchCreated?._tokenCreator)}</span>
-            </p> 
-
-          </div>
-          <div>
-            <h5> Description</h5>
-            <p className="style1">
-
-            </p>
-          </div>
-          <div style= {{display:'flex', justifyContent:'space-between',}}>
-            {/* <h5>
-              History
-            </h5>
-          <button  style={{ marginBottom: '1rem', border:'none' }} onClick={collapsetoggle}>
-            <img src= {dropdownarrow} alt = "img">
-            </img>
-
-          </button> */}
-          {/* <Collapse isOpen={isOpen} className = "collapse1">
-        <p className ="style2">
-        Anim pariatur cliche reprehenderit,
-           enim eiusmod high life accusamus terry richardson ad squid. Nihil
-           anim keffiyeh helvetica, craft beer labore wes anderson cred
-           nesciunt sapiente ea proident.
-
-        </p>
-          
-          
-      </Collapse> */}
+            <div className="batchSell">
+              <div className="batchStart">
+                Starting from 6.5ETH
+              </div>
+              <div className="batchRemain">
+                4 of 5 Remaining
+              </div>
             </div>
-
-             {/* <div
-              className='card py-3'
-              style={{
-                width: '30rem',
-              }}
-            >
-              <h4>{this.props.BatchCreated._tokenBatchName}</h4>
-              
-            </div> */}
+            <div className="batchCreator">
+              <div className="batchImgCreator">
+                <img src={avatar} alt="avatar"/>
+              </div>
+              <div className="batchName">
+                Created by&ensp;
+                <div className="batchNameArtist">{this.accUsername(this.props.BatchCreated[0]._tokenCreator)}</div>
+              </div>
             </div>
-
+            <div className="batchDesc">
+              <div className="batchDescTitle">Description</div>
+              <div className={`${this.state.readMore ? 'batchTextContent' : 'batchTextContent batchTextContentActive'}`}>
+                <div className={`${!this.state.readMore ? 'batchDescText' : 'batchDescTextActive'}`}>{text}</div>
+                {text.length > 800 && <span className="batchTextReadMore" onClick={() => {
+                  this.setState({
+                    readMore: !this.state.readMore
+                  })
+                }}>... <span>Read More</span></span>}
+              </div>
+            </div>
           </div>
-
-          </div>
-            
-          <br/>
-          <Col className='second-row-col-2'>
-          <div>{Menu}
-   
-          </div>
-        </Col>
-          
-          <br/>
-          <br/>
         </div>
-        
-      
-      
+        <div className="batchCards">
+          <div className="batchCardsHead">
+            <div className="batchToken">All Tokens</div>
+            <div className="batchViewMore">View More</div>
+          </div>
+          <div className="batchCards">
+            {Menu}
+          </div>
+        </div>
+      </div>
+      {/*    <div>*/}
+      {/*      <div className='information d-flex flex-column'>*/}
+      {/*        <div>*/}
+      {/*          <h4>*/}
+      {/*            {this.props.BatchCreated[0]._tokenBatchName}*/}
+      {/*          </h4>*/}
+      {/*        </div>*/}
+      {/*        <div className="View">*/}
+      {/*          <p className="style2">*/}
+      {/*            Starting from 6.5ETH*/}
+      {/*          </p>*/}
+      {/*          &nbsp;*/}
+      {/*          &nbsp;*/}
+      {/*          <p className="style2">*/}
+      {/*            {this.props.BatchCreated[0]._unmintedEditions}*/}
+      {/*          </p>*/}
+
+      {/*        </div>*/}
+      {/*        <div>*/}
+      {/*          <p className="style1">*/}
+      {/*            <img*/}
+      {/*              className="userimg"*/}
+      {/*              src={anonUser}*/}
+      {/*            ></img> {' '}*/}
+      {/*            Created by{' '}*/}
+      {/*            <span className='text-primary'>{this.accUsername(this.props.BatchCreated?._tokenCreator)}</span>*/}
+      {/*          </p>*/}
+
+      {/*        </div>*/}
+      {/*        <div>*/}
+      {/*          <h5> Description</h5>*/}
+      {/*          <p className="style1">*/}
+
+      {/*          </p>*/}
+      {/*        </div>*/}
+      {/*        <div style={{display: 'flex', justifyContent: 'space-between',}}>*/}
+      {/*          /!* <h5>*/}
+      {/*        History*/}
+      {/*      </h5>*/}
+      {/*    <button  style={{ marginBottom: '1rem', border:'none' }} onClick={collapsetoggle}>*/}
+      {/*      <img src= {dropdownarrow} alt = "img">*/}
+      {/*      </img>*/}
+
+      {/*    </button> *!/*/}
+      {/*          /!* <Collapse isOpen={isOpen} className = "collapse1">*/}
+      {/*  <p className ="style2">*/}
+      {/*  Anim pariatur cliche reprehenderit,*/}
+      {/*     enim eiusmod high life accusamus terry richardson ad squid. Nihil*/}
+      {/*     anim keffiyeh helvetica, craft beer labore wes anderson cred*/}
+      {/*     nesciunt sapiente ea proident.*/}
+
+      {/*  </p>*/}
+      {/*    */}
+      {/*    */}
+      {/*</Collapse> *!/*/}
+      {/*        </div>*/}
+
+      {/*        /!* <div*/}
+      {/*        className='card py-3'*/}
+      {/*        style={{*/}
+      {/*          width: '30rem',*/}
+      {/*        }}*/}
+      {/*      >*/}
+      {/*        <h4>{this.props.BatchCreated._tokenBatchName}</h4>*/}
+      {/*        */}
+      {/*      </div> *!/*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+        {/*<br/>*/}
+        {/*<Col className='second-row-col-2'>*/}
+        {/*  <div>*/}
+        {/*    {Menu}*/}
+        {/*  </div>*/}
+        {/*</Col>*/}
+        {/*<br/>*/}
+        {/*<br/>*/}
+      {/*</div>*/}
     </>
   );
-        
 };
 }
 

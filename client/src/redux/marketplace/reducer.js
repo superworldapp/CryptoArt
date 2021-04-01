@@ -2,7 +2,7 @@ import {
 	SET_ALL_DATA,
 	CHIPS_DATA,
 	SET_FILTERED_DATA,
-	SET_INPUT_VALUE,
+	SET_SEARCH_VALUE,
 } from '../types';
 
 const initialState = {
@@ -23,6 +23,10 @@ const initialState = {
 			id: 3,
 		},
 	],
+	searchValue: '',
+	setAllData: {
+		batch: [],
+	},
 }
 
 export const reducer = (state = initialState, action) => {
@@ -33,8 +37,8 @@ export const reducer = (state = initialState, action) => {
 			return {...state, setAllData: action.payload}
 		case SET_FILTERED_DATA:
 			return {...state, setFilteredData: action.payload}
-		case SET_INPUT_VALUE:
-			return {...state, inputValue: action.payload}
+		case SET_SEARCH_VALUE:
+			return {...state, searchValue: action.payload}
 		default:
 			return state
 	}

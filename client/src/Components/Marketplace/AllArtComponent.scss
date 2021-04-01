@@ -37,6 +37,8 @@
     display: flex;
     flex-direction: column;
     margin-right: 63px;
+    max-width: 1020px;
+    width: 100%;
 
     .chipList {
       display: flex;
@@ -65,7 +67,6 @@
     .chips {
       display: flex;
       width: 100%;
-      overflow-x: scroll;
     }
   }
 
@@ -108,7 +109,7 @@
       .creation_cards {
         display: inline-flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: flex-start;
         width: 100%;
       }
 

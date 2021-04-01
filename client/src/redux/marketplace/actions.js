@@ -1,4 +1,4 @@
-import { SET_ALL_DATA, SET_FILTERED_DATA, SET_INPUT_VALUE } from "../types";
+import { SET_ALL_DATA, SET_FILTERED_DATA, SET_SEARCH_VALUE } from "../types";
 
 export function setAllData(allData) {
 	return {
@@ -14,10 +14,10 @@ export function setFilteredData(filteredData) {
 	}
 }
 
-export function setInputValue({inputValue}) {
+export function setSearchValue({searchValue}) {
 	return {
-		type: SET_INPUT_VALUE,
-		payload: inputValue,
+		type: SET_SEARCH_VALUE,
+		payload: searchValue,
 	}
 }
 
