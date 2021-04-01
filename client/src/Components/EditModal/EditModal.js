@@ -49,7 +49,6 @@ const EditModal = props => {
 	const buyNowInputRef = useRef(null)
 
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
-
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value)
 	}, [])
@@ -57,22 +56,24 @@ const EditModal = props => {
 	const handleSubmit = (event) => {
            event.preventDefault();
 			Sale(true);
+			toggle();
 	}
 	
 	const handleSubmit2 = (event) => {
 		event.preventDefault();
 		 Sale(false);
+		 toggle();
  }
 	const Sale = async (isListed) => {
 		// let tokenId = tokenID
 		// let sellprice = "1000000000000000000"
-
+		let price = isListed == true? ((initialControls.tokenPrice.value)*ETHER).toString() : 0; 
 		try {
 			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
 			const res = await contract.methods
 				.Sale(
 					tokenID,
-					((initialControls.tokenPrice.value)*ETHER).toString(),
+					price,
 					isListed,
 				)
 				.send({from: accounts, gas: 5000000});
@@ -102,6 +103,8 @@ const EditModal = props => {
 
 	
 	return (
+
+		
 		<Modal
 			isOpen={isOpen}
 			toggle={toggle}
