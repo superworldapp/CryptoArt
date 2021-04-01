@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from "react-redux";
+import {connect} from 'react-redux';
 
-import CreationCards from "./CreationCards";
-import SimpleMenu from "./menu/MenuListed";
-import CreateFilterList from "./CreateFilterList";
-import CreateChipList from "./CreateChipList";
-import { setAllData, setInputValue } from "../../redux/marketplace/actions";
+import CreationCards from './CreationCards';
+import SimpleMenu from './menu/MenuListed';
+import CreateFilterList from './CreateFilterList';
+import CreateChipList from './CreateChipList';
+import {
+	setAllData,
+	setFilteredData,
+	setSearchValue
+} from '../../redux/marketplace/actions';
 
 import burger from '../../images/svg/burger-recently-list.svg';
 import arrow from '../../images/svg/arrow.svg';
 import './AllArtComponent.scss';
+
+const WORD_KEY = 'word'
 
 const AllItemComponent = (props) => {
 	useEffect(() => {
@@ -17,14 +23,18 @@ const AllItemComponent = (props) => {
 	}, []);
 
 	const [checked, setChecked] = useState([]);
+	const [word, setWord] = useState(null)
 
 	const handleRemove = (elem) => {
 		setChecked(checked.filter(el => el !== elem))
+		if (elem.key === WORD_KEY) {
+			props.setSearchValue({searchValue: ''})
+		}
 	};
 
 	const handleRemoveAll = () => {
 		setChecked([])
-		props.setInputValue({inputValue: ''})
+		props.setSearchValue({searchValue: ''})
 	};
 
 	const handleCheck = (elem) => {
@@ -35,11 +45,32 @@ const AllItemComponent = (props) => {
 		}
 	};
 
-	if (props.filteredData) {
-		if (props.filteredData.length > 0) {
-			checked.push({name: props.filteredData[0]._tokenBatchName, key: props.filteredData[0]._batchId});
+	useEffect(() => {
+		const batchItem = props.batch.find(word => props.searchValue.toLowerCase() === word._tokenBatchName.toLowerCase());
+
+		if (batchItem) {
+			const word = batchItem._tokenBatchName.toLowerCase()
+			setWord(word)
 		}
-	}
+	}, [props.searchValue])
+
+	useEffect(() => {
+		if (word) {
+			const wordObj = checked.find(({key}) => key === WORD_KEY)
+
+			if (wordObj) {
+				setChecked(checked.map(item => item.key !== WORD_KEY ? item : {...item, name: word}))
+			} else {
+				setChecked([...checked, {name: word, key: WORD_KEY}])
+			}
+		}
+	}, [word])
+
+	useEffect(() => {
+		props.setFilteredData(props.batch.filter(batchItem => {
+			return checked.find(cheap => cheap.name === batchItem._tokenBatchName.toLowerCase())
+		}))
+	}, [checked])
 	return (
 		<div className="container_marketplace">
 			<div className="filter_list">
@@ -88,12 +119,12 @@ const AllItemComponent = (props) => {
 					<div className="cards_wrapper">
 						<div className="creation_cards">
 							{props.filteredData && props.filteredData.length > 0
-								?	props.filteredData.map((item) => (
+								? props.filteredData.map((item) => (
 									<CreationCards props={props} {...item}/>
 								))
 								: props.batch.map((item) => (
-								<CreationCards props={props} {...item}/>
-							))}
+									<CreationCards props={props} {...item}/>
+								))}
 						</div>
 					</div>
 				</div>
@@ -105,11 +136,13 @@ const AllItemComponent = (props) => {
 const mapStateToProps = (state) => ({
 	chips: state.marketplace.chipData,
 	filteredData: state.marketplace.setFilteredData,
+	searchValue: state.marketplace.searchValue,
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	setAllData: (data) => dispatch(setAllData(data)),
-	setInputValue: (data) => dispatch(setInputValue(data))
+	setSearchValue: (data) => dispatch(setSearchValue(data)),
+	setFilteredData: (data) => dispatch(setFilteredData(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllItemComponent);
