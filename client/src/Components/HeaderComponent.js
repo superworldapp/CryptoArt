@@ -174,6 +174,7 @@ class Header extends Component {
   conver = async (x) => {
     util = Web3.utils.toWei(x, 'milli');
   };
+
   converb = async (x) => {
     util1 = Web3.utils.fromWei(x, 'milli');
   };
@@ -330,7 +331,6 @@ class Header extends Component {
 
   render() {
     console.log('this.state.currentUser', this.state.currentUser);
-
     return (
       <>
         <Navbar

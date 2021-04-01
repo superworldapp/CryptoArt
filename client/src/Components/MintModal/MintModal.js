@@ -50,7 +50,7 @@ const MintModal = (props) => {
 						</Label>
 						<Input onChange={handleInput} className='text-input' type='text'/>
 					</FormGroup>
-					<button disabled={!valueInput} onClick={send} className="submit-button">Confirm</button>
+					<button disabled={!valueInput} onClick={() => send(valueInput)} className="submit-button">Confirm</button>
 				</Form>
 			)}
 		/>

@@ -1,8 +1,10 @@
 import React, {useEffect, useCallback, useRef, useState} from 'react';
-import Modal from "../Modal";
 import {Form, FormGroup, Input, Label} from "reactstrap";
-import './style.scss';
+
 import Checkbox from "./checkbox/checkbox";
+import Modal from "../Modal";
+
+import './EditModal.scss';
 
 const saleTypes = {
 	AUCTION: 'AUCTION',
@@ -19,12 +21,7 @@ const initialControls = {
 		value: 1,
 		isRequired: true,
 		isValid: false,
-	},
-	noOfTokens: {
-		value: 1,
-		isRequired: true,
-		isValid: false,
-		disabled: true,
+		disabled: false,
 	},
 	duration: {
 		value: 1,
@@ -34,8 +31,14 @@ const initialControls = {
 	}
 }
 
-const ModalListingNft = props => {
+const ETHER = 1000000000000000000;
+
+
+const EditModal = props => {
 	const {
+		contract,
+		accounts,
+		tokenID,
 		isOpen,
 		toggle,
 		onClosed,
@@ -51,19 +54,41 @@ const ModalListingNft = props => {
 		setSaleType(e.target.value)
 	}, [])
 
-
 	useEffect(() => {
+		console.log('========>initialControls.tokenPrice', initialControls.tokenPrice);
 		if (saleType === saleTypes.AUCTION) {
-			initialControls.noOfTokens.disabled = true
+			initialControls.tokenPrice.disabled = true
 			initialControls.duration.disabled = false
 		} else if (saleType === saleTypes.BUY_NOW) {
-			initialControls.noOfTokens.disabled = false
+			initialControls.tokenPrice.disabled = false
 			initialControls.duration.disabled = true
 		}
 	}, [saleType])
 
 	const handleClick = () => {
-		toggle()
+		Sale().then()
+	}
+
+
+	const Sale = async () => {
+		// let tokenId = tokenID
+		// let sellprice = "1000000000000000000"
+		let isListed = true
+		try {
+			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+			const res = await contract.methods
+				.Sale(
+					tokenID,
+					ETHER * (initialControls.tokenPrice.value),
+					isListed,
+				)
+				.send({from: accounts, gas: 5000000});
+
+			console.log('res', res);
+			let data;
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	return (
@@ -76,7 +101,7 @@ const ModalListingNft = props => {
 			header={(
 				<>
 					<div className='title'>
-						Listing NFT
+						EDIT LISTING
 					</div>
 					<div className='subtitle'>
 						Image, Video, Audio or 3D Model
@@ -123,37 +148,45 @@ const ModalListingNft = props => {
 							/>
 						</div>
 					</FormGroup>
-					<FormGroup>
+					<FormGroup className={saleType === saleTypes.AUCTION ? 'form-disabled' : ''}>
 						<div className='label-token-price'>
 							<Label className='label' htmlFor='buy1now'>
 								Token Price
 							</Label>
 							<span className='custom-tooltip'>(Start Price if Auction)</span>
 						</div>
-						<Input className='text-input' type='text'/>
+						<Input
+							disabled={saleType === saleTypes.AUCTION}
+							className='text-input'
+							type='text'
+						/>
 						<span className='after-input-text'>
               ETH<span>($1,580.10 USD)</span>
             </span>
-					</FormGroup>
-					<FormGroup className={saleType === saleTypes.AUCTION ? 'form-disabled' : ''}>
-						<Label className='label' htmlFor='buynow'>
-							No. of Tokens
-						</Label>
-						<Input disabled={saleType === saleTypes.AUCTION} className='text-input' type='text'/>
 					</FormGroup>
 					<FormGroup className={saleType === saleTypes.BUY_NOW ? 'form-disabled' : ''}>
 						<Label className='label' htmlFor='buynow'>
 							Duration
 						</Label>
-						<Input disabled={saleType === saleTypes.BUY_NOW} className='text-input' type='text'/>
+						<Input
+							disabled={saleType === saleTypes.BUY_NOW}
+							className='text-input'
+							type='text'
+						/>
 						<span className='after-input-text'>Days</span>
 					</FormGroup>
 					<div className='submit-button-wrapper'>
 						<button
 							className='abtn submit-button'
-							onClick={handleClick}
+							onClick={Sale}
 						>
-							Confirm
+							List/Relist
+						</button>
+						<button
+							className='abtn submit-button-two'
+							onClick={Sale}
+						>
+							Take Down
 						</button>
 					</div>
 				</Form>
@@ -162,4 +195,4 @@ const ModalListingNft = props => {
 	);
 };
 
-export default ModalListingNft;
+export default EditModal;
