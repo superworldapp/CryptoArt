@@ -8,9 +8,10 @@
 } */
 /* Top section*/
 .upperView {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 2rem;
+  display: flex;	
+  justify-content: space-evenly;	
+  padding-bottom: 2rem;	
+  margin: 1rem 7rem;
 }
 .topimage{
   width: 20rem;
@@ -30,43 +31,45 @@
 
 /* Middle Section */
 .middleView {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-  background-color: white;
-  padding-top: 2rem;
+  display: flex;	
+  justify-content: space-evenly;	
+  margin-top: 1rem;	
+  background-color: white;	
+  padding-top: 2rem;	
   padding-bottom: 2rem;
 }
 .col2 {
-  margin-left: -3rem;
+  margin-left: 1rem;
   /* display: flex; */
 }
 .gridRow1{
   margin-top: 0.5rem !important;
   margin-left: 0rem !important;
   display: flex;
-  /* justify-content: space-evenly; */
+  justify-content: center; 
   flex-wrap: nowrap;
 }
 .gridCol1{
-  margin-top: 0rem !important;
-  display: flex;
-  /* justify-content: space-between; */
-  margin-right: 2rem;
+  margin-top: 0rem !important;	
+  display: flex;	
+  /* justify-content: space-between; 	
+  margin-right: 2rem;*/	
+  justify-content: space-evenly;
 }
 .gridRow2{
   margin-top: 1.8rem !important;
   margin-left: 0rem !important;
   display: flex;
-  /* justify-content: space-evenly; */
   flex-wrap: nowrap;
+  justify-content: center;
 }
 .gridRow3{
   margin-top: 1.8rem !important;
   margin-left: 0rem !important;
   display: flex;
-  /* justify-content: space-evenly; */
+  justify-content: center;
   flex-wrap: nowrap;
+  justify-content: center;
 }
 
 .sectionText2{
@@ -74,11 +77,11 @@
   /* padding-left: 2rem; */
   /* border: 1px solid red; */
   position: relative;
-  right: 25rem;
+  right: 10rem;
 }
 .image10 {
-  width: 10rem;
-  height: 10rem;
+  width: 8rem;	
+  height: 8rem;
   border-radius: 1rem;
   border-bottom-left-radius:1.5rem ;
   border-bottom-right-radius: 1.5rem;
@@ -191,11 +194,13 @@ a {
   display: flex;
   justify-content: space-around;
   margin: 0rem 2.5rem 0rem 2.5rem;
+  /* border: 1px solid black; */
+  /* width: 100%; */
 }
 
 div.imageCards {
   height: 270px !important;
-  width: 250px;
+  width: 220px;
   border-radius: 1rem;
   margin-right: 1rem;
   opacity: 0.95;
@@ -227,7 +232,7 @@ div.imageCards {
   font-family: 'Gibson';
   text-align: center;
   position: relative;
-  top: 40%;
+  top: 42%;
   opacity: 0.95;
   backdrop-filter: blur(7px);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.068) 0%, rgba(0, 0, 0, 0.075) 100%);
@@ -300,6 +305,9 @@ img.rounded-circle {
 .bottomView{
   background-color: white;
   padding-bottom: 5rem;
+  display: flex;	
+  justify-content: space-evenly;	
+  margin: 1rem 15rem;
 }
 
 .cardImg-body{
@@ -311,12 +319,14 @@ img.rounded-circle {
   font-size: 13px;
   color: #888888;
   font-weight: normal;
+  margin-top: 1px;
 }
 .cardsubtitleName{
   font-family: Gibson;
   font-size: 13px;
   color: #5540c7;
   font-weight: 600;
+  margin-top: 1px;
 }
 .price{
   font-family: Gibson;

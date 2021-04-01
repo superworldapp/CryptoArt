@@ -23,6 +23,9 @@
     "@openzeppelin/contracts": "^3.3.0"
   },
   "dependencies": {
-    "react-icons": "^4.2.0"
+    "moment": "^2.29.1",
+    "react-icons": "^4.2.0",
+    "react-player": "^2.9.0",
+    "react-sound": "^1.2.0"
   }
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TableBody from './TableBody';
 import { Link } from 'react-router-dom';
+import cx from "classnames";
 import {
   Card,
   CardBody,
@@ -10,6 +11,7 @@ import {
   CardHeader,
   Table,
   Input,
+  Label,
   Modal,
   ModalHeader,
   ModalBody,
@@ -17,6 +19,8 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Button,
+  Collapse
 } from 'reactstrap';
 import loader from '../images/loader.svg';
 import image3 from '../images/image 6.png';
@@ -28,6 +32,12 @@ import annonuser from '../images/user.png';
 import checkmark from '../images/svg/checkmark.svg';
 import Web3 from 'web3';
 import Axios from 'axios';
+import anonUser from '../images/user.png';
+import openeye from "../assets/svg/eyeopen.svg";
+import Outlineheart from "../assets/svg/heartoutline.svg";
+import "./CardDetail.css";
+import {IoIosArrowDown} from 'react-icons/io'
+import { BorderAll } from '@material-ui/icons';
 
 const CardDetail = ({
   art,
@@ -53,9 +63,14 @@ const CardDetail = ({
   const [loadingPlaceBid, setLoadingPlaceBid] = useState(false);
   const [bidSuccess, setBidSuccess] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [dropdownValue, setDropdownValue] = useState('');
+  const [dropdownValue, setDropdownValue] = useState('USD');
+  const [priceInputValue, setpriceInputValue] = useState('');
   const changeValue = (e) => {
     setDropdownValue(e.currentTarget.textContent);
+  };
+  const handlepriceInput = (event) => {
+    setpriceInputValue(event.target.value);
+    //console.log(handleInput);
   };
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -382,11 +397,15 @@ const CardDetail = ({
   //             });
   //         console.log(res);
   //     };
+  const [isOpen, setIsOpen] = useState(false);
+
+  const historyToggle = () => setIsOpen(!isOpen);
+
   console.log(ethPrice);
   return (
     <>
       <div className='container'>
-        <div className='d-flex justify-content-between mt-5 py-5'>
+        <div className='upperView1'>
           <div
             className='card'
             style={{
@@ -397,41 +416,82 @@ const CardDetail = ({
               <img src={art?._imgurl} className='card-img' alt='...' />
             </a>
           </div>
+          <div>
           <div className='information d-flex flex-column'>
             {/* <a href='#'>{match.params.id}</a>
                         <h1>{match.params.id}</h1> */}
-            <p>
+             <div>
+            <h4>
+            Journey From Furture
+          </h4>
+            </div>
+            <div className = "View"> 
+           <p className = "style2">
+            1 of 1 Edition
+           </p>
+
+           </div>
+           <div className ="View">
+          <p className = "style1">
+          <img
+                  className="userimg"
+                  src={anonUser}
+                ></img> 
               Created by{' '}
               <span className='text-primary'>{accUsername(art?._tokenCreator)}</span>
             </p>
-            <p>
+            &nbsp;
+            &nbsp;
+            <p className = "style1">
+          <img
+                  className="userimg"
+                  src={anonUser}
+                ></img>   {' '}
               Owned by{' '}
               <span className='text-primary'>{accUsername(art?._tokenOwner)}</span>
             </p>
+            </div>
             <div
-              className='card py-3'
-              style={{
-                width: '30rem',
-              }}
-            >
-              <p className='text-secondary'>Current price</p>
-              <h4>
-                {Web3.utils.fromWei('5000000', 'ether')}{' '}
-                ETH
-                <small>
-                  <span className='text-secondary'>
-                    (
+              className='priceCard '
+              
+            > 
+            <div className ="card-div">
+            <p className ="style1" style={{marginLeft:'2%', marginTop:'1%'}}>
+                  Sales ends in 19hrs 10 min (March 25, 2021 10:15am + 04)
+                </p>
+            </div>
+              <div className= "style3">
+              <p className = "style1">
+                Current offer:
+                <span className = "style2">6.59 ETH ($100.00)</span> 
+              </p>
+              </div>
+              <div className = "View1"> 
+              <div className='information d-flex flex-column'>
+                <div className= "View1">
+                <Input type="text" name="price" id="priceEnter" className ="priceInput"  onChange = {handlepriceInput}> 
+        {/* {Web3.utils.fromWei('5000000', 'ether')}{' '} */}
+        </Input>
+        &nbsp;
+        <Label className="labelName">ETH</Label>
+                </div>
+                <div className = "View1">
+                <p className= "labelName">
+                  <span >
+                    
                     {(
-                      Web3.utils.fromWei(
-                        '50000000000000',
-                        'ether'
-                      ) * ethPrice[dropdownValue]
-                    ).toFixed(2)}{' '}
-                    )
+                      // Web3.utils.fromWei(
+                      //   '50000000000000',
+                      //   'ether'
+                      // ) 
+                      priceInputValue*ethPrice[dropdownValue]
+                    )}
+                    
                   </span>
-                </small>
+                </p>
+                <p>
                 <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                  <DropdownToggle caret>Choose your currency</DropdownToggle>
+                  <DropdownToggle caret className = "priceDropdown" > CURR</DropdownToggle>
                   <DropdownMenu>
                     {Object.keys(ethPrice).map((keyName, idx) => {
                       return (
@@ -442,50 +502,67 @@ const CardDetail = ({
                     })}
                   </DropdownMenu>
                 </Dropdown>
-              </h4>
+              </p>
 
-              {buyOrSell()}
-            </div>
-          </div>  
-        </div>
-        <div className='my-5'>
-          <Card
-            className='card'
-            style={{
-              overflow: 'auto',
-            }}
-          >
-            <CardHeader
-              className='text-left'
-              style={{
-                backgroundColor: '#fff',
-              }}
-            >
-              <h4>
-                <i className='fas fa-arrows-alt-v'></i> Trading History
-              </h4>
-            </CardHeader>
-            <React.Fragment>
-              <CardBody>
-                <Table
-                  style={{
-                    width: '100%',
-                  }}
-                >
-                  <thead>
-                    <tr className='text-secondary'>
-                      <th>Event</th>
-                      <th>Price</th>
-                      <th>From</th>
-                      <th>To</th>
-                      <th>Date</th>
-                    </tr>
-                  </thead>
-                  <TableBody cre={creValue} />
-                </Table>
-              </CardBody>
-            </React.Fragment>
-          </Card>
+              {buyOrSell()}  
+                </div>
+                </div>   
+                <div style={{
+                  marginLeft:'1rem', marginTop:'1.5rem'
+                }}>
+              <button className='batchcardbid-btn'> PLACE BID</button>
+              </div>
+              </div>
+              <br/>
+              {/* <div className ="View2">
+                <p className= "style1">
+                  <img src= {openeye} alt= ".." className="userimg">
+                  </img>
+                  &nbsp;
+                   15 Views
+                </p>
+                <p className = "style1">
+                <img src= {Outlineheart} alt= ".." className="userimg">
+                  </img>
+                  &nbsp;
+                    15 Favorite
+                </p>
+              </div> */}
+              
+            </div> 
+          </div>
+          <div style={{marginTop:'5%'}}>
+            <h5> Description</h5>
+            <p className="style1">
+            </p>
+          </div>        
+            <div className='my-5'>
+                  <button style = 
+                    {{
+                        width: "520px",
+                        height: "65px",
+                        textAlign: "start",
+                        background: "none",
+                        color: "black",
+                        marginLeft: "0px",
+                        border: "none",
+                        borderTop: "2px solid rgba(0, 0, 0, 0.1)",
+                        borderBottom: "2px solid rgba(0, 0, 0, 0.1)",
+                        marginTop: "-50px",
+
+                    }} 
+                    onClick = {historyToggle}>
+                    
+                      <h5>History <IoIosArrowDown size ={16} className={cx("icon", { "icon--expanded": isOpen })}/></h5>
+                  </button>
+              
+                    <Collapse isOpen = {isOpen}>
+                      <TableBody cre={creValue} />
+                    </Collapse>
+                    <br/>
+                    <br/>
+                </div>
+          </div>
         </div>
         <Modal
           isOpen={purchaseSuccess}
@@ -590,6 +667,11 @@ const CardDetail = ({
             </Link>
           </ModalBody>
         </Modal>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
       </div>
     </>
   );
