@@ -324,7 +324,7 @@ class Allpatrender extends Component {
 				);
 			}
 		};
-	
+
 
 		const colorpills = () => {
 			// if (this.props.art._isSelling) return cardpills[1];
