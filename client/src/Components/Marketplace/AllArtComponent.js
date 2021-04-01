@@ -71,6 +71,7 @@ const AllItemComponent = (props) => {
 			return checked.find(cheap => cheap.name === batchItem._tokenBatchName.toLowerCase())
 		}))
 	}, [checked])
+
 	return (
 		<div className="container_marketplace">
 			<div className="filter_list">
