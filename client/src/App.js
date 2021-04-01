@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Main from './Components/MainComponent';
-import { HashRouter } from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { LayoutProvider } from './state/Layout/context';
 import { Web3ReactProvider } from '@web3-react/core';

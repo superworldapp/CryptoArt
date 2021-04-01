@@ -179,6 +179,7 @@ class MyStoreComponent extends Component {
 		this.toggleModal1();
 	}
 
+	
 	creatingItems = async (x) => {
 		let tokenHash = this.state.artHash.toString();
 		let tokenTitle = this.state.title;

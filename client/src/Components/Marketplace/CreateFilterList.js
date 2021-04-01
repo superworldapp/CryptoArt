@@ -19,20 +19,22 @@ const CreateFilterList = ({list, handleCheck, checked}) => (
 		{list.map(({name, lists}) => (
 			<div className="filter_wrapper">
 				<p className="filter_head">{name}</p>
-				{lists.map((elem) => (
-					<div className="form-check">
-						<label className="form-check-label" htmlFor={elem.key + name}>
-							<CustomCheckbox
-								checked={checked.filter(el => el.key === elem.key && el.name === elem.name).length > 0}
-								name={elem.name}
-								onChange={() => handleCheck(elem)}
-								color="primary"
-								inputProps={{'aria-label': 'secondary checkbox'}}
-							/>
-							{elem.name}
-						</label>
-					</div>
-				))}
+				{lists.map((elem) => {
+					return (
+						<div className="form-check">
+							<label className="form-check-label" htmlFor={elem.key + name}>
+								<CustomCheckbox
+									checked={checked.filter(el => el.key === elem.key && el.name === elem.name).length > 0}
+									name={elem.name}
+									onChange={() => handleCheck(elem)}
+									color="primary"
+									inputProps={{'aria-label': 'secondary checkbox'}}
+								/>
+								{elem.name}
+							</label>
+						</div>
+					)
+				})}
 			</div>
 		))}
 	</>

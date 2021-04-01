@@ -132,7 +132,7 @@ class Home extends Component {
       return (
         <>
           <div className='Home'>
-            <Container>
+            <Container fluid>
               <div className= "upperView">
               <div className ="sectionText1">
                   <h1 id='header'>WELCOME TO THE <br/> NFT SALON</h1>
@@ -175,13 +175,12 @@ class Home extends Component {
 
                 </div>
               </div>
-              </Container>
               <br/>
 
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA',}}></div>
               <br/>
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
-              <Container>
+              
               <div className='middleView'>
               <div className="col2">
               <Row around="xs" className= "gridRow1">
@@ -195,7 +194,6 @@ class Home extends Component {
                       <img src ={image2} className="image10" alt="image10" />
                     </figure>
                   </div>
-                    {/* <div className='image10 image-change'></div> */}
                   </Col> 
                   <Col xs={2} className= "gridCol1">
                   <div className='home-slider-multiple home-slider-multiple-2'>
@@ -342,19 +340,19 @@ class Home extends Component {
                 </div>
               </div> */}
               </div>
-              </Container>
+              
               <br /> 
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
               <br/>
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
-              <Container>
-              <div className ="bottomView">
+              
+              
               <div
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
                   paddingTop: '5%',
-                  margin:'1.5rem'
+                  margin:'1.5rem',
                 }}
               >
                 <p
@@ -362,25 +360,32 @@ class Home extends Component {
                     fontSize: '18px',
                     fontFamily: 'Gibson',
                     fontWeight: 'bold',
+                    marginLeft:'4.5rem',
                   }}
                 >
                   {' '}
                   Trending NFT's
                 </p>
-                <a
-                  href=''
+                <Link to='/allart'>
+                <button
+                href=''
                   style={{
                     fontFamily: 'Gibson',
                     fontWeight: 'bold',
                     fontSize: '18px',
                     textDecoration: 'none',
                     color: '#B3B3B3',
+                    marginRight:'4rem',
+                    border: 'none',
+                    backgroundColor: 'transparent'
                   }}
                 >
                   {' '}
                   View More <img src={svg1} alt='svg1' />
-                </a>
+                </button>
+                </Link>
               </div>
+              <div className ="bottomView">
               <div className='rowImages'>
               <Card className='imageCards'>
                   <CardImg
@@ -606,8 +611,10 @@ class Home extends Component {
                       </div>
                     </div> 
                   </CardBody>
-                </Card>
+                  </Card>
               </div>
+              </div>
+              
               <div
                 style={{
                   display: 'flex',
@@ -621,25 +628,28 @@ class Home extends Component {
                     fontSize: '18px',
                     fontFamily: 'Gibson',
                     fontWeight: 'bold',
+                    marginLeft:'4.5rem'
                   }}
                 >
                   {' '}
                   Popular in Real Estate
                 </p>
                 <a
-                  href=''
+                  href='https://map.superworldapp.com/'
                   style={{
                     fontFamily: 'Gibson',
                     fontWeight: 'bold',
                     fontSize: '18px',
                     textDecoration: 'none',
                     color: '#B3B3B3',
+                    marginRight:'4rem'
                   }}
                 >
                   {' '}
                   View More <img src={svg1} alt='svg1' />
                 </a>
               </div>
+              <div className ="bottomView">
               <div className='rowImages'>
                 <Card className='imageCards'>
                   <CardImg

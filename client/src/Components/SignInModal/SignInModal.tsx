@@ -30,8 +30,12 @@ interface IHeader {
 
 interface Props {
   login: () => void;
+  currentUser: () => void;
 }
-const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
+const SignInModal = (
+  { initContracts }: IHeader,
+  { login, currentUser }: Props
+) => {
   const history = useHistory();
   const { state, dispatch } = useContext(LayoutContext);
   // const { activate, account } = useWeb3React<Web3Provider>();
@@ -54,9 +58,12 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
 
   const resendVerification = async () => {
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/resend/verification`, {
-        email,
-      });
+      await axios.post(
+        `${process.env.REACT_APP_SW_API_URL}/resend/verification`,
+        {
+          email,
+        }
+      );
       // Add feedback her
       setOpenError(true);
       setNotificationMessage(
@@ -138,49 +145,73 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
   };
 
   const handleUserSignIn = async (e: any) => {
+    console.log('this.props.currentUser', currentUser);
     e.preventDefault();
     setLoading(true);
-    try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_SW_API_URL}/user/connect`,
-        {
-          authType: 'e',
-          authId: email,
-          authToken: password,
-          username,
-        }
-      );
-      Cookies.set('email', email);
-      // Cookies.set('uid', res.data.user._id);
-      //NEED A BEARER TOKEN
-      // Cookies.set('Authorization', 'Bearer ' + res.data.tk, {
-      //   path: '',
-      // });
-      Cookies.set('session', res.data.data.session);
-      Cookies.set('userId', res.data.data.userId);
-      setLoggedIn(true);
-      Auth.authenticate();
-      // Auth.setUser(res.data.user);
-      setLoading(false);
-    } catch (error) {
-      console.log('login error');
+    if (!email || !password) {
       setOpenError(true);
       setNotificationMessage(
         <Alert variant='filled' severity='error'>
-          There was an error logging you in!
+          Please fill in blank field(s).
         </Alert>
       );
-      setLoading(false);
+    } else {
+      try {
+        const userExists = await axios.post(
+          `${process.env.REACT_APP_SW_API_URL}/user/exists`,
+          {
+            authType: 'e',
+            authId: email,
+          }
+        );
+
+        if (userExists.data.data.isUserExists) {
+          const res = await axios.post(
+            `${process.env.REACT_APP_SW_API_URL}/user/connect`,
+            {
+              authType: 'e',
+              authId: email,
+              authToken: password,
+              username,
+            }
+          );
+          Cookies.set('email', email);
+          Cookies.set('session', res.data.data.session);
+          Cookies.set('userId', res.data.data.userId);
+          setLoggedIn(true);
+          setOpenError(false);
+          Auth.authenticate();
+        } else {
+          setOpenError(true);
+          setNotificationMessage(
+            <Alert variant='filled' severity='error'>
+              An account with this email does not exist. Please create an
+              account.
+            </Alert>
+          );
+        }
+        setLoading(false);
+      } catch (error) {
+        setOpenError(true);
+        setNotificationMessage(
+          <Alert variant='filled' severity='error'>
+            There was an error logging you in!
+          </Alert>
+        );
+      }
     }
+    setLoading(false);
   };
 
   const handleUserSignUp = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-
     axios
       .post(`${process.env.REACT_APP_SW_API_URL}/user/connect`, {
-        username: username,
+        authType: 'e',
+        authId: email,
+        authToken: password,
+        username,
       })
       .then((res) => {
         console.log('res in signup', res);
@@ -260,7 +291,7 @@ const SignInModal = ({ initContracts }: IHeader, { login }: Props) => {
       <Button
         onClick={() => {
           axios
-            .post(`${process.env.REACT_APP_API_URL}/user/logout`)
+            .post(`${process.env.REACT_APP_SW_API_URL}/user/logout`)
             .catch((_e: any) => {
               console.log('logging out error');
               console.log(_e);

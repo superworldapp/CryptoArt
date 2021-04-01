@@ -5,8 +5,11 @@ import checkmark from "../../images/svg/checkmark.svg";
 import loader from "../../images/loader.svg";
 import {cardpills, ETHER} from "../MyStoreComponent";
 import './style.scss';
+import Sound from 'react-sound';
+import ReactPlayer from 'react-player';
 import MintModal from "../MintModal/MintModal";
 import ModalUploadToMyStore from "../ModalUploadToMyStore/ModalUploadToMyStore";
+
 
 class Allpatrender extends Component {
 	// let day = moment.unix(art.dateofComp);
@@ -29,6 +32,7 @@ class Allpatrender extends Component {
 			endAuctionLoading: false,
 			endAuctionSuccess: false,
 			isMintModal: false,
+			soundPlaying: false,
 		};
 		this.toggleModal = this.toggleModal.bind(this);
 		this.toggleListForAuction = this.toggleListForAuction.bind(this);
@@ -265,6 +269,62 @@ class Allpatrender extends Component {
 				return '@SwapnilTest';
 			else return '@Annonymous';
 		};
+
+		const displayFileType = () => {
+			if (/\.(jpe?g|png|gif|bmp)$/i.test(this.props.art._imgurl)) {
+				return (
+					<CardImg
+						className={orientation}
+						top
+						src={this.props.art._imgurl}
+						alt='Card image'></CardImg>
+				);
+			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgurl)) {
+				return (
+					<>
+						<button
+							style={{
+								zIndex: '1'
+							}}
+							onClick={() =>
+								this.setState({
+									soundPlaying: !this.state.soundPlaying
+								})
+							}>
+							{this.state.soundPlaying ? 'Pause' : 'Play'}
+						</button>
+						<Sound
+							url={this.props.art._imgurl}
+							playStatus={
+								this.state.soundPlaying
+									? Sound.status.PLAYING
+									: ''
+							}
+							playFromPosition={300 /* in milliseconds */}
+							onLoading={this.handleSongLoading}
+							onPlaying={this.handleSongPlaying}
+							onFinishedPlaying={this.handleSongFinishedPlaying}
+						/>
+					</>
+				);
+			} else if (
+				/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
+					this.props.art._imgurl
+				)
+			) {
+				return (
+					<ReactPlayer
+						class={orientation}
+						style={{ maxWidth: '270px' }}
+						loop={true}
+						playing={true}
+						url={this.props.art._imgurl}
+					/>
+				);
+			}
+		};
+
+
 		const colorpills = () => {
 			// if (this.props.art._isSelling) return cardpills[1];
 			// else if (this.props.art._isBidding) return cardpills[3];
@@ -293,17 +353,14 @@ class Allpatrender extends Component {
 			>
 				 {/*<a href={this.props.art.imgurl} target='_blank'> */}
 				 {+art[3] >= 0 && <span className='card-counter'>+{art[3]}</span>}
+				{console.log('========>art[3]', art[3])}
+				{/* <Link to={`/batch/${this.props.art._batchId}`}> */}
 				<div className='mystore-queue-card-img'>
-					<Link to={`/batch/${this.props.art._batchId}`}>
-						<CardImg
-							top
-							src={this.props.art._imgurl}
-							alt='Card image'
-						/>
-					</Link>
+						{displayFileType()}
 				</div>
+				{/* </Link> */}
 				<div className='card-body-wrapper'>
-					<CardBody style={{width: '100%'}}>
+					<CardBody  style={{width: '100%'}}>
 
 						<h3>{this.props.art._tokenBatchName}</h3>
 

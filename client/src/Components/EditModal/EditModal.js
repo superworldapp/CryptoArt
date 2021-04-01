@@ -31,7 +31,7 @@ const initialControls = {
 	}
 }
 
-const ETHER = 1000000000000000000;
+const ETHER = '1000000000000000000';
 
 
 const EditModal = props => {
@@ -49,10 +49,41 @@ const EditModal = props => {
 	const buyNowInputRef = useRef(null)
 
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
-
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value)
 	}, [])
+
+	const handleSubmit = (event) => {
+           event.preventDefault();
+			Sale(true);
+			toggle();
+	}
+	
+	const handleSubmit2 = (event) => {
+		event.preventDefault();
+		 Sale(false);
+		 toggle();
+ }
+	const Sale = async (isListed) => {
+		// let tokenId = tokenID
+		// let sellprice = "1000000000000000000"
+		let price = isListed == true? ((initialControls.tokenPrice.value)*ETHER).toString() : 0; 
+		try {
+			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+			const res = await contract.methods
+				.Sale(
+					tokenID,
+					price,
+					isListed,
+				)
+				.send({from: accounts, gas: 5000000});
+
+			console.log('res', res);
+			let data;
+		} catch (error) {
+			console.error(error)
+		}
+	}
 
 	useEffect(() => {
 		console.log('========>initialControls.tokenPrice', initialControls.tokenPrice);
@@ -70,28 +101,10 @@ const EditModal = props => {
 	}
 
 
-	const Sale = async () => {
-		// let tokenId = tokenID
-		// let sellprice = "1000000000000000000"
-		let isListed = true
-		try {
-			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
-			const res = await contract.methods
-				.Sale(
-					tokenID,
-					ETHER * (initialControls.tokenPrice.value),
-					isListed,
-				)
-				.send({from: accounts, gas: 5000000});
-
-			console.log('res', res);
-			let data;
-		} catch (error) {
-			console.error(error)
-		}
-	}
-
+	
 	return (
+
+		
 		<Modal
 			isOpen={isOpen}
 			toggle={toggle}
@@ -109,7 +122,7 @@ const EditModal = props => {
 				</>
 			)}
 			body={(
-				<Form>
+				<Form >
 					<FormGroup>
 						<span className='file-label'>File</span>
 						<span className='file-name'>{fileName}</span>
@@ -124,7 +137,7 @@ const EditModal = props => {
 								type='checkbox'
 								name='sale-type'
 								value={saleTypes.AUCTION}
-								innerRef={auctionInputRef}
+								innerref={auctionInputRef}
 								onChange={onSaleTypeChange}
 								checked={saleTypes.AUCTION === saleType}
 								id="one"
@@ -141,7 +154,7 @@ const EditModal = props => {
 								type='checkbox'
 								name='sale-type'
 								value={saleTypes.BUY_NOW}
-								innerRef={buyNowInputRef}
+								innerref={buyNowInputRef}
 								onChange={onSaleTypeChange}
 								checked={saleTypes.BUY_NOW === saleType}
 								id="two"
@@ -178,13 +191,13 @@ const EditModal = props => {
 					<div className='submit-button-wrapper'>
 						<button
 							className='abtn submit-button'
-							onClick={Sale}
+							onClick={handleSubmit}
 						>
 							List/Relist
 						</button>
 						<button
 							className='abtn submit-button-two'
-							onClick={Sale}
+							onClick={handleSubmit2}
 						>
 							Take Down
 						</button>
