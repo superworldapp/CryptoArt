@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import checkmark from "../../images/svg/checkmark.svg";
 import loader from "../../images/loader.svg";
 import {cardpills, ETHER} from "../MyStoreComponent";
+import Web3 from 'web3';
 import EditModal from "../EditModal";
 
 class Allpatrender2 extends Component {
@@ -283,7 +284,7 @@ class Allpatrender2 extends Component {
 									fontSize: '16px',
 									color: '#5540C7',
 									margin: '0px'
-								}}>{this.state.sellPrice || this.state.art?._sellprice}</p>
+								}}>{Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')}</p>
 								<p
 									style={{
 										fontFamily: 'Gibson',
