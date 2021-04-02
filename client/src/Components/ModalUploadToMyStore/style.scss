@@ -18,6 +18,13 @@
     font-weight: normal;
   }
 
+  .info-about-image {
+    margin-left: 20px;
+    font-size: 15px;
+    line-height: 15px;
+    color: #888888;
+  }
+
   .control-required {
     &::after {
       content: '*';
@@ -49,6 +56,7 @@
   }
 
   .control-preview-img {
+    margin-left: 150px;
     max-width: 105px;
     min-height: 105px;
   }
