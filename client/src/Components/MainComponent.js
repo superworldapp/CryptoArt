@@ -16,6 +16,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import Footer from './FooterComponent';
 import ProtectedRoute from './ProtectedRoute';
 import Axios from 'axios';
+import MyArtComponent from "./MyArtComponent/MyArtComponent";
 //import HDWalletProvider from "@truffle/hdwallet-provider";
 let allDocs = [];
 
@@ -303,11 +304,11 @@ class Main extends Component {
 						exact
 						path='/mycollection'
 						component={() => (
-							<MyCollectionComponent
+							<MyArtComponent
 								contract={this.state.contract}
 								accounts={this.state.accounts}
 								batch={this.state.batch?.filter(
-									(batch) => batch._tokenCreator == this.state.accounts
+									(batch) => batch._tokenCreator === this.state.accounts
 								)}
 								art2={this.state.art2}
 								// art2own = {this.state.art2?.filter((art2s) => art2s._tokenOwner == this.state.accounts)}

@@ -39,7 +39,6 @@ import MyCollectionCards from "../MyCollectionCards";
 import burger from "../../images/svg/burger-recently-list.svg";
 import SimpleMenu from "../Marketplace/menu/MenuListed";
 import arrow from "../../images/svg/arrow.svg";
-import MenuListedMyComponent from "./menu/MenuListedMyComponent";
 import SortLayout from "./SortLayout";
 
 const SHA256 = require('crypto-js/sha256');
@@ -1197,6 +1196,7 @@ class MyItemComponent extends Component {
 		});
 
 		const SortLayoutWrapper = this.props.batch?.map((x) => {
+			console.log('========>this.props.batch555555555555555555555555555555', this.props.batch);
 			return (
 				<div key={x._batchId} className='item-nft'>
 					<SortLayout
@@ -1208,7 +1208,7 @@ class MyItemComponent extends Component {
 			);
 		});
 
-		let ch = 'visible';
+		const ch = 'visible';
 		return (
 			<div className='artContainer'>
 				<div>
@@ -1222,7 +1222,7 @@ class MyItemComponent extends Component {
 							color: "#000000",
 						}}
 					>
-						My Collections
+						MyCollections
 					</p>
 
 					<p
@@ -1239,18 +1239,20 @@ class MyItemComponent extends Component {
 					</p>
 					<div
 						style={{
-							marginTop: '65px',
 							display: 'flex',
-							justifyContent: 'space-between',
+							flexWrap: 'wrap',
+							minHeight: '800px',
 						}}
 					>
 						<div
 							style={{
+								marginTop: '65px',
 								maxWidth: '300px',
 								width: '100%',
 								display: 'flex',
 								alignItems: 'end',
 								flexDirection: 'column',
+								marginRight: '120px',
 							}}
 						>
 							<p
@@ -1265,13 +1267,33 @@ class MyItemComponent extends Component {
 							>
 								sort by:
 							</p>
-							<p className="head_result_menu">
-								<MenuListedMyComponent/>
-								<img
-									className="arrow_img"
-									src={arrow}
-									alt="arrow"
-								/>
+							<p
+								style={{
+									marginBottom: '50px',
+									width: '100%',
+									display: 'flex',
+								}}
+							>
+								<select
+									id="dropdown"
+									// onChange={}
+									style={{
+										fontFamily: 'Gibson',
+										width: '75%',
+										borderTop: 'none',
+										borderLeft: 'none',
+										borderRight: 'none',
+										fontSize: '18px',
+										marginLeft: '-3px',
+										background: 'none',
+									}}
+								>
+									<option value="" className="option-selected">New</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+								</select>
 							</p>
 							<p
 								style={{
@@ -1317,24 +1339,25 @@ class MyItemComponent extends Component {
 					? <div className="sort-layout-wrapper">
 						<p className="enter-title-text">Enter Tiltle</p>
 						<div className="enter-title">
-								<input
-									type="text"
-									className="input-enter-title"
-									placeholder='Search MyCollection'
-								/>
-								<button
-									className="button-done"
-								>
-									Done
-								</button>
-								<button
-									onClick={this.handleClickAdd}
-									className="button-cancel"
-								>Cancel</button>
-							</div>
-							<div className="my-art-row scroll">
-								{SortLayoutWrapper}
-							</div>
+							<input
+								type="text"
+								className="input-enter-title"
+								placeholder='Search MyCollection'
+							/>
+							<button
+								className="button-done"
+							>
+								Done
+							</button>
+							<button
+								onClick={this.handleClickAdd}
+								className="button-cancel"
+							>Cancel
+							</button>
+						</div>
+						<div className="my-art-row scroll">
+							{SortLayoutWrapper}
+						</div>
 					</div>
 					: null}
 				{/*<Modal*/}

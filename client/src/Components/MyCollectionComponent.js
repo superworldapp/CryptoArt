@@ -702,7 +702,7 @@ class MyCollectionComponent extends Component {
             fontSize: '50px',
             textAlign: 'left',
           }}>
-          MyCollection
+          My Collection
           </h1>
           <p style={{
             fontFamily: 'Gibson',

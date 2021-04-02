@@ -92,6 +92,7 @@ p {
 	max-width: 1285px!important;
 	max-height: calc(100vh - 345px);
 	overflow: auto;
+	margin: 0 auto;
 	.my-collection-sort-layout {
 		width: 280px!important;
 		height: 268px;
@@ -118,9 +119,9 @@ p {
 }
 
 .my-art-row {
+	margin-top: 65px;
 	max-width: 965px;
 	width: 100%;
-	margin: 0 auto;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
