@@ -978,6 +978,9 @@ class MyItemComponent extends Component {
 			loadingError: false,
 			uploadSuccess: false,
 			sortLayout: false,
+			searchCollectionValue: '',
+			parsedSearchCollectionValue: [],
+			filteredCollectionItems: this.props.batch,
 		};
 		// this.toggleModal1 = this.toggleModal1.bind(this);
 		this.toggleModal2 = this.toggleModal2.bind(this);
@@ -1138,6 +1141,21 @@ class MyItemComponent extends Component {
 		this.setState({art: allDocs, batchart: createrToken});
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		const { batch } = this.props
+		const { parsedSearchCollectionValue } = this.state
+
+		if (prevState.parsedSearchCollectionValue !== parsedSearchCollectionValue) {
+			this.setState({
+				filteredCollectionItems: parsedSearchCollectionValue.length === 0
+					? batch
+					: batch.filter(batchItem => {
+							return parsedSearchCollectionValue.find(value => value.toLowerCase() === batchItem._tokenBatchName.toLowerCase())
+						})
+			})
+		}
+	}
+
 	fileSelectHandler = (event) => {
 		console.log(event.target.files);
 		this.setState({
@@ -1182,7 +1200,19 @@ class MyItemComponent extends Component {
 		this.setState({sortLayout: !this.state.sortLayout})
 	}
 
+	onSearchCollectionChange = (event) => {
+		const { value } = event.target;
+		const parsedSearchCollectionValue = value.split(/[^a-zA-Z0-9]+/g).filter(item => item !== '')
+		this.setState({
+			searchCollectionValue: value,
+			parsedSearchCollectionValue,
+		})
+		console.log(`==========>this.state.searchCollectionValue`, this.state.searchCollectionValue);
+		console.log(`==========>parsedSearchCollectionValue`, parsedSearchCollectionValue);
+	}
+
 	render() {
+		const { filteredCollectionItems } = this.state;
 		const Menu = this.props.batch?.map((x) => {
 			return (
 				<div key={x._batchId} className='item-nft'>
@@ -1195,7 +1225,7 @@ class MyItemComponent extends Component {
 			);
 		});
 
-		const SortLayoutWrapper = this.props.batch?.map((x) => {
+		const SortLayoutWrapper = filteredCollectionItems.map((x) => {
 			console.log('========>this.props.batch555555555555555555555555555555', this.props.batch);
 			return (
 				<div key={x._batchId} className='item-nft'>
@@ -1343,6 +1373,7 @@ class MyItemComponent extends Component {
 								type="text"
 								className="input-enter-title"
 								placeholder='Search MyCollection'
+								onChange={this.onSearchCollectionChange}
 							/>
 							<button
 								className="button-done"
