@@ -8,9 +8,16 @@ const CHANGE_FILE_VALUE = 'CHANGE_FILE_VALUE';
 const CHANGE_NAME_VALUE = 'CHANGE_NAME_VALUE';
 const CHANGE_DESCRIPTION_VALUE = 'CHANGE_DESCRIPTION_VALUE';
 const RESET_VALUE = 'RESET_VALUE';
+const CHANGE_FILE_THUMB_VALUE = 'CHANGE_FILE_THUMB_VALUE';
 
 const initialControls = {
   file: {
+    value: null,
+    url: null,
+    required: true,
+    isValid: false,
+  },
+  fileThumb: {
     value: null,
     url: null,
     required: true,
@@ -39,6 +46,15 @@ function controlsReducer(state, action) {
           value: action.payload.value,
         }
       };
+    case CHANGE_FILE_THUMB_VALUE:
+      return {
+        ...state,
+        fileThumb: {
+          ...state.fileThumb,
+          url: action.payload.url,
+          value: action.payload.value,
+        }
+      };
     case CHANGE_NAME_VALUE:
       return {
         ...state,
@@ -59,7 +75,7 @@ function controlsReducer(state, action) {
       return {
         ...state,
         name: {
-          ...state.description,
+          ...state.name,
           value: '',
         },
         description: {
@@ -67,10 +83,15 @@ function controlsReducer(state, action) {
           value: '',
         },
         file: {
-          ...state.description,
+          ...state.file,
           value: '',
           url: '',
         },
+        fileThumb: {
+          ...state.fileThumb,
+          value: '',
+          url: '',
+        }
       }
     default:
       throw new Error();
@@ -96,7 +117,7 @@ const ModalUploadToMyStore = props => {
   const onInputChange = useCallback(e => {
     const { name, value } = e.target
 
-    if (name === 'file-main') {
+    if (name === 'file') {
       const file = e.target.files[0]
 
       if (file) {
@@ -104,9 +125,20 @@ const ModalUploadToMyStore = props => {
           type: CHANGE_FILE_VALUE,
           payload: {
             value: file,
+            url: URL.createObjectURL(file),
           }
         })
       }
+    } else if (name === 'fileThumb') {
+      const file = e.target.files[0]
+
+      controlsDispatch({
+        type: CHANGE_FILE_THUMB_VALUE,
+        payload: {
+          value: file,
+          url: URL.createObjectURL(file),
+        }
+      })
     } else if (name === 'title') {
       controlsDispatch({
         type: CHANGE_NAME_VALUE,
@@ -166,11 +198,23 @@ const ModalUploadToMyStore = props => {
               id='file-input'
               style={{ opacity: '0', position: 'absolute' }}
               type='file'
-              name='file-main'
+              name='file'
               innerRef={inputFileRef}
               onChange={onInputChange}
             />
-            <p>{controls.file.value && controls.file.value.name}</p>
+            <p
+              style={{
+                fontSize: '15px',
+                lineHeight: '15px',
+                color: '#888888',
+                maxWidth: '130px',
+                width: '100%',
+                display: 'block',
+                marginLeft: '20px',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >{controls.file.value && controls.file.value.name}</p>
           </FormGroup>
           <FormGroup>
             <Label
@@ -186,19 +230,31 @@ const ModalUploadToMyStore = props => {
               id='thumbnail'
               style={{ opacity: '0', position: 'absolute' }}
               type='file'
-              name='file-thumb'
+              name='fileThumb'
               innerRef={inputFileRef}
               onChange={onInputChange}
             />
-            <p>{controls.file.value && controls.file.value.name}</p>
+            <p
+              style={{
+                fontSize: '15px',
+                lineHeight: '15px',
+                color: '#888888',
+                maxWidth: '130px',
+                width: '100%',
+                display: 'block',
+                marginLeft: '20px',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >{controls.fileThumb.value && controls.fileThumb.value.name}</p>
           </FormGroup>
           <FormGroup className='form-group-preview'>
-            {!controls.file.url
+            {!controls.fileThumb.url
               ? null
               : <img
                 className='control-preview-img'
-                src={controls.file.url}
-                alt={controls.file.value.name}
+                src={controls.fileThumb.url}
+                alt={controls.fileThumb.value.name}
               />
             }
           </FormGroup>
@@ -244,14 +300,12 @@ const ModalUploadToMyStore = props => {
               Confirm
             </button>
           </div>
-          {/*{this.state.isLoading ? (*/}
+          {/*{batch && batch.length > 0 ? (*/}
           {/*  <img*/}
           {/*    style={{ display: 'flex', verticalAlign: 'none' }}*/}
           {/*    src={loader}*/}
           {/*  />*/}
-          {/*) : (*/}
-          {/*  <div></div>*/}
-          {/*)}*/}
+          {/*) : null }*/}
           {/*{this.state.loadingError ? (*/}
           {/*  <div style={{ color: 'red', fontFamily: 'Gibson' }}>*/}
           {/*    There was a transaction/processing error. Please try again.*/}

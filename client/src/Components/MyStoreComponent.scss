@@ -79,6 +79,7 @@
 .mystore-art-queue-container, .mystore-art-active-container {
     display: flex;
     margin-top: 30px;
+    min-height: 300px;
 }
 
 @media screen and (max-width: 640px) {
