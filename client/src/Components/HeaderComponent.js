@@ -13,7 +13,7 @@ import {
   Input,
 } from 'reactstrap';
 import { connect } from "react-redux";
-import { setFilteredData, setInputValue } from "../redux/marketplace/actions";
+import { setFilteredData, setSearchValue } from '../redux/marketplace/actions';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
@@ -116,7 +116,6 @@ class Header extends Component {
       changeUsernameSuccessDialogOpen: false,
       changePasswordSuccessDialogOpen: false,
       changePasswordErrorMessage: '',
-      searchValue: '',
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.getnewHash = this.getnewHash.bind(this);
@@ -220,16 +219,9 @@ class Header extends Component {
     });
   };
 
-  handleSearchChange = (value) => {
-    const searchData = this.props.allData.batch;
-    this.setState({searchValue: value});
-    this.props.setInputValue({inputValue: value});
-    const arraySearchResult = searchData.filter(word => value.toLowerCase() === word._tokenBatchName.toLowerCase());
-    if (value === '') {
-      return this.props.setFilteredData([])
-    } else {
-      this.props.setFilteredData(arraySearchResult);
-    }
+  handleSearchChange = (evt) => {
+    const { value } = evt.target;
+    this.props.setSearchValue({searchValue: value});
   };
 
   //change username/password Menu
@@ -362,8 +354,8 @@ class Header extends Component {
           >
              <Input
               placeholder='Search'
-              value={this.props.inputValue}
-              onChange={(e) => this.handleSearchChange(e.target.value)}
+              value={this.props.searchValue}
+              onChange={this.handleSearchChange}
               style={{
                 padding: '0 2rem',
                 maxWidth: '400px',
@@ -389,19 +381,7 @@ class Header extends Component {
                   Marketplace
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink
-                  className='nav-link'
-                  style={{
-                    width: 200,
-                    fontFamily: 'Gibson',
-                    fontSize: '17px',
-                  }}
-                  to='/allart'
-                >
-                  Picks
-                </NavLink>
-              </NavItem>
+              
               <NavItem>
                 <NavLink
                   className='nav-link'
@@ -1041,7 +1021,7 @@ class Header extends Component {
                         // marginLeft: '-0.2rem',
                         // marginBottom: '0.75rem',
                       }}
-                      to='/mycollections'
+                      to='/mycollection'
                     >
                       <MenuItem disableGutters>
                         <span
@@ -1285,12 +1265,12 @@ class Header extends Component {
 
 const mapStateToProps = (state) => ({
   allData: state.marketplace.setAllData,
-  inputValue: state.marketplace.inputValue,
+  searchValue: state.marketplace.searchValue,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setFilteredData: (data) => dispatch(setFilteredData(data)),
-  setInputValue: (data) => dispatch(setInputValue(data))
+  setSearchValue: (data) => dispatch(setSearchValue(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

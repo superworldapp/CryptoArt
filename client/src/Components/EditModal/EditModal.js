@@ -47,27 +47,17 @@ const EditModal = props => {
 
 	const auctionInputRef = useRef(null)
 	const buyNowInputRef = useRef(null)
-
+	const [sellPrice,setSellPrice] = useState(saleTypes.BUY_NOW);
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
 	const onSaleTypeChange = useCallback(e => {
-		setSaleType(e.target.value)
+		setSaleType(e.target.value);
+		console.log(e.target.value);
 	}, [])
-
-	useEffect(() => {
-		console.log('========>initialControls.tokenPrice', initialControls.tokenPrice);
-		if (saleType === saleTypes.AUCTION) {
-			initialControls.tokenPrice.disabled = true
-			initialControls.duration.disabled = false
-		} else if (saleType === saleTypes.BUY_NOW) {
-			initialControls.tokenPrice.disabled = false
-			initialControls.duration.disabled = true
-		}
-	}, [saleType])
-
-	const handleClick = () => {
-		Sale().then()
-	}
-
+	const handleInputChange=(e)  => {
+		const target = e.target;
+		setSellPrice(target.value);
+		console.log(target.value);
+	  }
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		Sale(true);
@@ -82,7 +72,7 @@ const EditModal = props => {
 	const Sale = async (isListed) => {
 		// let tokenId = tokenID
 		// let sellprice = "1000000000000000000"
-		let price = isListed == true? ((initialControls.tokenPrice.value)*ETHER).toString() : 0;
+		let price = isListed == true? ((sellPrice)*ETHER).toString() : 0;
 		try {
 			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
 			const res = await contract.methods
@@ -99,6 +89,23 @@ const EditModal = props => {
 			console.error(error)
 		}
 	}
+
+	useEffect(() => {
+		console.log('========>initialControls.tokenPrice', initialControls.tokenPrice);
+		if (saleType === saleTypes.AUCTION) {
+			initialControls.tokenPrice.disabled = true
+			initialControls.duration.disabled = false
+		} else if (saleType === saleTypes.BUY_NOW) {
+			initialControls.tokenPrice.disabled = false
+			initialControls.duration.disabled = true
+		}
+	}, [saleType])
+
+	const handleClick = () => {
+		Sale().then()
+	}
+
+
 
 	return (
 
@@ -170,6 +177,7 @@ const EditModal = props => {
 							disabled={saleType === saleTypes.AUCTION}
 							className='text-input'
 							type='text'
+							onChange={handleInputChange}
 						/>
 						<span className='after-input-text'>
               ETH<span>($1,580.10 USD)</span>
