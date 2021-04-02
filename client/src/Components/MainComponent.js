@@ -6,7 +6,7 @@ import '../App.css';
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import AllItemComponent from './Marketplace/AllArtComponent';
-import MyItemComponent from './MyArtComponent';
+import MyItemComponent from './MyArtComponent/MyArtComponent';
 import MyCollectionComponent from './MyCollectionComponent';
 import MyStoreComponent from './MyStoreComponent';
 import Profile from './MyProfile/MyProfileComponent'
@@ -16,6 +16,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import Footer from './FooterComponent';
 import ProtectedRoute from './ProtectedRoute';
 import Axios from 'axios';
+import MyArtComponent from "./MyArtComponent/MyArtComponent";
 //import HDWalletProvider from "@truffle/hdwallet-provider";
 let allDocs = [];
 
@@ -66,22 +67,22 @@ class Main extends Component {
 			this.setState({batch: allDocs});
 			let rexponse = [];
 			let resx2 = await instance.methods.totalSupply().call();
-			console.log(resx2);
+			// console.log(resx2);
 			for (let i = 1; i <= resx2; i++) {
 				const rexx = await instance.methods.getTokenData(i).call();
 				rexponse.push(rexx);
 			}
 			allDocs = [];
 			allDocs = rexponse;
-			console.log(rexponse);
+			// console.log(rexponse);
 			this.setState({art: allDocs});
-			console.log(this.props.art);
+			// console.log(this.props.art);
 
 			response = [];
 			let nresx2 = await instance.methods.totalSupply().call();
 			for (let i = 1; i <= nresx2; i++) {
 				let rex = await instance.methods.getTokenData(i).call();
-				console.log(rex);
+				// console.log(rex);
 				let rex2 = await instance.methods.getTokenDataBatch(i).call();
 				if (rex._tokenOwner === this.props.accounts) {
 					var newBlock = {
@@ -101,7 +102,7 @@ class Main extends Component {
 
 					}
 					response.push(newBlock);
-					console.log(newBlock)
+					// console.log(newBlock)
 				}
 				// if (rex2._tokenCreator == this.props.accounts) {
 				//   createrToken.push(rex);
@@ -110,7 +111,7 @@ class Main extends Component {
 
 			let allDoc = [];
 			allDoc = response;
-			console.log(response);
+			// console.log(response);
 			this.setState({art2: allDoc});
 
 			let cre = await Axios.get(
@@ -303,17 +304,18 @@ class Main extends Component {
 						exact
 						path='/mycollection'
 						component={() => (
-							<MyCollectionComponent
+							<MyArtComponent
 								contract={this.state.contract}
 								accounts={this.state.accounts}
 								batch={this.state.batch?.filter(
-									(batch) => batch._tokenCreator == this.state.accounts
+									(batch) => batch._tokenCreator === this.state.accounts
 								)}
 								art2={this.state.art2}
 								// art2own = {this.state.art2?.filter((art2s) => art2s._tokenOwner == this.state.accounts)}
 							/>
 						)}
 					/>
+					{console.log('========>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', this.state)}
 					<ProtectedRoute
 						exact
 						path='/mystore'
@@ -322,7 +324,7 @@ class Main extends Component {
 								contract={this.state.contract}
 								accounts={this.state.accounts}
 								batch={this.state.batch?.filter(
-									(batch) => batch._tokenCreator == this.state.accounts
+									(batch) => batch._tokenCreator === this.state.accounts
 								)}
 								art2={this.state.art2}
 							/>

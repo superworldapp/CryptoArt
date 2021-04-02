@@ -124,16 +124,16 @@ class Allpatrender extends Component {
   fetchdata = async() => {
     this.setState({art : this.props.art2});
     console.log(this.state.art);
-    
+
   }
 
 
-  
+
   componentDidMount = async () => {
     this.fetchdata();
     this._isMounted = true;
   }
-  
+
   buyItem = async () => {
 
     try {
@@ -702,7 +702,7 @@ class MyCollectionComponent extends Component {
             fontSize: '50px',
             textAlign: 'left',
           }}>
-          MyCollection
+          My Collection
           </h1>
           <p style={{
             fontFamily: 'Gibson',

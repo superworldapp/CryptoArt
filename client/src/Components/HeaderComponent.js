@@ -148,7 +148,7 @@ class Header extends Component {
         this.setState({ currentUser: res.data.data });
       })
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
       });
   }
 
@@ -184,7 +184,7 @@ class Header extends Component {
 
   getnewHash = async () => {
     let x = 1;
-    console.log(x);
+    // console.log(x);
     //x= x.substring(1,10);
     return x;
   };
@@ -274,7 +274,7 @@ class Header extends Component {
         });
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -308,7 +308,7 @@ class Header extends Component {
         }
       })
       .catch((error) => {
-        console.log('change password went to catch', error);
+        // console.log('change password went to catch', error);
       });
   };
 
@@ -322,7 +322,7 @@ class Header extends Component {
   };
 
   render() {
-    console.log('this.state.currentUser', this.state.currentUser);
+    // console.log('this.state.currentUser', this.state.currentUser);
     return (
       <>
         <Navbar
@@ -1179,7 +1179,7 @@ class Header extends Component {
                           })
                           .catch((_e) => {
                             // console.log('LOGGED OUT ERROR');
-                            console.log(_e);
+                            // console.log(_e);
                           });
                         Auth.logout();
                         this.handleClose();

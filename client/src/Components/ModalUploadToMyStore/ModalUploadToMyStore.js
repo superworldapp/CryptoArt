@@ -7,6 +7,7 @@ import './style.scss';
 const CHANGE_FILE_VALUE = 'CHANGE_FILE_VALUE';
 const CHANGE_NAME_VALUE = 'CHANGE_NAME_VALUE';
 const CHANGE_DESCRIPTION_VALUE = 'CHANGE_DESCRIPTION_VALUE';
+const RESET_VALUE = 'RESET_VALUE';
 
 const initialControls = {
   file: {
@@ -54,6 +55,23 @@ function controlsReducer(state, action) {
           value: action.payload.value,
         }
       };
+    case RESET_VALUE:
+      return {
+        ...state,
+        name: {
+          ...state.description,
+          value: '',
+        },
+        description: {
+          ...state.description,
+          value: '',
+        },
+        file: {
+          ...state.description,
+          value: '',
+          url: '',
+        },
+      }
     default:
       throw new Error();
   }
@@ -72,14 +90,13 @@ const ModalUploadToMyStore = props => {
   const [isValidForm, setIsValidForm] = useState(false);
 
   useEffect(()=>{
-    controls.name.value = '';
-    controls.description.value = '';
+    controlsDispatch({type: RESET_VALUE})
   }, [isOpen])
 
   const onInputChange = useCallback(e => {
     const { name, value } = e.target
 
-    if (name === 'file') {
+    if (name === 'file-main') {
       const file = e.target.files[0]
 
       if (file) {
@@ -87,7 +104,6 @@ const ModalUploadToMyStore = props => {
           type: CHANGE_FILE_VALUE,
           payload: {
             value: file,
-            url: URL.createObjectURL(file),
           }
         })
       }
@@ -115,6 +131,7 @@ const ModalUploadToMyStore = props => {
   useEffect(() => {
     setIsValidForm(controls.name.value && controls.file.value)
   }, [controls])
+
 
   return (
     <Modal
@@ -147,22 +164,37 @@ const ModalUploadToMyStore = props => {
             </Label>
             <Input
               id='file-input'
-              style={{ display: 'none' }}
+              style={{ opacity: '0', position: 'absolute' }}
               type='file'
-              name='file'
+              name='file-main'
               innerRef={inputFileRef}
               onChange={onInputChange}
             />
+            <p>{controls.file.value && controls.file.value.name}</p>
+          </FormGroup>
+          <FormGroup>
+            <Label
+              htmlFor='artHash'
+              className="uploadlabel"
+            >
+              Thumbnail
+            </Label>
+            <Label>
+              <button className='modal-upload-input-file' onClick={onInputFileClick}>Browse...</button>
+            </Label>
+            <Input
+              id='thumbnail'
+              style={{ opacity: '0', position: 'absolute' }}
+              type='file'
+              name='file-thumb'
+              innerRef={inputFileRef}
+              onChange={onInputChange}
+            />
+            <p>{controls.file.value && controls.file.value.name}</p>
           </FormGroup>
           <FormGroup className='form-group-preview'>
-            <Label
-              htmlFor='title'
-              className={`uploadlabel ${controls.description.required ? 'control-required' : ''}`}
-            >
-              Preview
-            </Label>
             {!controls.file.url
-              ? <div className='control-preview' onClick={onInputFileClick}>+</div>
+              ? null
               : <img
                 className='control-preview-img'
                 src={controls.file.url}

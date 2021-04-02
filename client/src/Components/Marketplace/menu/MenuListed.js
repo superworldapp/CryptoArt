@@ -5,7 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import './MenuListed.scss';
 
-export default function SimpleMenu() {
+export default function
+	SimpleMenu() {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 
 	const handleClick = (event) => {
@@ -17,7 +18,7 @@ export default function SimpleMenu() {
 	};
 
 	return (
-		<div>
+		<div className="simple-menu">
 			<Button classes={{ label: 'button_mu' }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
 				Recently Listed
 			</Button>

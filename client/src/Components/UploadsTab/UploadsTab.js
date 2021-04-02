@@ -5,18 +5,9 @@ import checkmark from "../../images/svg/checkmark.svg";
 import loader from "../../images/loader.svg";
 import {cardpills, ETHER} from "../MyStoreComponent";
 import './style.scss';
-import Sound from 'react-sound';
-import ReactPlayer from 'react-player';
 import MintModal from "../MintModal/MintModal";
-import ModalUploadToMyStore from "../ModalUploadToMyStore/ModalUploadToMyStore";
 
-
-class Allpatrender extends Component {
-	// let day = moment.unix(art.dateofComp);
-	// let xy = art.dateofComp;
-	// let date = new Date(xy*1000);
-	// let time = day.format('dddd MMMM Do YYYY, h:mm:ss a');
-	// let yz = xy != 0?"bg-success text-white":"";
+class UploadsTab extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -32,7 +23,6 @@ class Allpatrender extends Component {
 			endAuctionLoading: false,
 			endAuctionSuccess: false,
 			isMintModal: false,
-			soundPlaying: false,
 		};
 		this.toggleModal = this.toggleModal.bind(this);
 		this.toggleListForAuction = this.toggleListForAuction.bind(this);
@@ -45,6 +35,8 @@ class Allpatrender extends Component {
 		this.StartAuction = this.StartAuction.bind(this);
 		this.EndAuction = this.EndAuction.bind(this);
 		this.refreshMyArt = this.refreshMyArt.bind(this);
+		this.closeMintToken = this.closeMintToken.bind(this);
+		this.sendMintToken = this.sendMintToken.bind(this);
 		this.Sale = this.Sale.bind(this);
 		this.mintTokenBatch = this.mintTokenBatch.bind(this);
 		this.mintTokenBatch = this.mintTokenBatch.bind(this);
@@ -93,6 +85,22 @@ class Allpatrender extends Component {
 			(!this.state.toggleListForAuction && !this.state.listForAuctionSuccess)
 		)
 			window.location.reload();
+	}
+
+	closeMintToken() {
+		this.setState({
+			isMintModal: !this.state.isMintModal,
+		});
+	}
+
+	sendMintToken(e) {
+		this.setState({
+			isMintModal: !this.state.isMintModal,
+		});
+		console.log('========>e', this.props.contract.methods.mintToken);
+		this.props.contract.methods
+			.mintToken(this.props.art._batchId)
+			.send({from: this.props.accounts, gasPrice: Number(e + '000000000'), gas: 3000000});
 	}
 
 	handleInputChange(event) {
@@ -251,63 +259,6 @@ class Allpatrender extends Component {
 				return '@SwapnilTest';
 			else return '@Annonymous';
 		};
-
-		const displayFileType = () => {
-			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.art._imgurl)) {
-				return (
-					<CardImg
-						className={orientation}
-						top
-						src={this.props.art._imgurl}
-						alt='Card image'
-					/>
-				);
-			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgurl)) {
-				return (
-					<>
-						<button
-							style={{
-								zIndex: '1'
-							}}
-							onClick={() =>
-								this.setState({
-									soundPlaying: !this.state.soundPlaying
-								})
-							}>
-							{this.state.soundPlaying ? 'Pause' : 'Play'}
-						</button>
-						<Sound
-							url={this.props.art._imgurl}
-							playStatus={
-								this.state.soundPlaying
-									? Sound.status.PLAYING
-									: ''
-							}
-							playFromPosition={300 /* in milliseconds */}
-							onLoading={this.handleSongLoading}
-							onPlaying={this.handleSongPlaying}
-							onFinishedPlaying={this.handleSongFinishedPlaying}
-						/>
-					</>
-				);
-			} else if (
-				/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
-					this.props.art._imgurl
-				)
-			) {
-				return (
-					<ReactPlayer
-						class={orientation}
-						style={{maxWidth: '270px'}}
-						loop={true}
-						playing={true}
-						url={this.props.art._imgurl}
-					/>
-				);
-			}
-		};
-
-
 		const colorpills = () => {
 			// if (this.props.art._isSelling) return cardpills[1];
 			// else if (this.props.art._isBidding) return cardpills[3];
@@ -327,257 +278,31 @@ class Allpatrender extends Component {
 		img.onload();
 
 		return (
-			// <div>
-			// {cardpills.map((item) => {
-			//   return (
 			<Card
 				className={buk}//{this.props.art._isBidding ? buk : bak}
 				className='mystore-queue-card'
 			>
-				{/* <Link to={`/batch/${this.props.art._batchId}`}> */}
-				{/*{+art[3] >= 0 && <span className='card-counter'>+{art[3]}</span>}*/}
+				 {/*<a href={this.props.art.imgurl} target='_blank'> */}
+				 {/*{+art[3] >= 0 && <span className='card-counter'>+{art[3]}</span>}*/}
 				<div className='mystore-queue-card-img'>
-					{displayFileType()}
+					<Link to={`/batch/${this.props.art._batchId}`}>
+						<CardImg
+							top
+							src={this.props.art._imgurl}
+							alt='Card image'
+						/>
+					</Link>
 				</div>
-				{/* </Link> */}
 				<div className='card-body-wrapper'>
 					<CardBody style={{width: '100%'}}>
 
 						<h3>{this.props.art._tokenBatchName}</h3>
 
 						<div className='second-section'>
-							<button onClick={this.props.onListButtonClick} className='button_mint'>List</button>
+							<button onClick={this.closeMintToken} className='button_mint'>Mint</button>
 						</div>
 
 						<div>
-							{/* {reSellOrSell ? (
-              <button
-                className={auc2}
-                //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
-                // color='primary'
-                onClick={this.toggleModal}
-              >
-                Relist
-              </button>
-            ) : (
-              <button
-                className={auc1}
-                style ={{ color :'white', backgroundColor:'#5540C7', fontSize: '14px', width: '100px', borderRadius: '10px' }}
-                // color='primary'
-                onClick={this.toggleModal}
-              >
-                List
-              </button>
-            )} */}
-							{/* <button
-              className={auc1}
-              //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
-              // color='primary'
-              onClick={this.toggleModal}
-            >
-              {reSellOrSell}
-            </button> */}
-							{/* <button
-              className={but1}
-              //className='abtn'
-              type='submit'
-              onClick={this.DeSale}
-            >
-              Delist
-            </button> */}
-							{/* {forAuc === 'visible' ? (
-              <button
-                style={{
-                  color: 'white',
-                  border: 'none',
-                  backgroundColor: 'white',
-                }}
-              >
-                but
-              </button>
-            ) : (
-              <div></div>
-            )} */}
-							{/* {Auc ? (
-              <button
-                className={b1}
-                //className={auc1}
-                //className='abtn'
-                type='submit'
-                // color='primary'
-                onClick={
-                  this.props.art._isBidding
-                    ? this.EndAuction
-                    : this.StartAuction
-                }
-                //onClick = {this.toggleAuction}
-              >
-                End Auction
-              </button>
-            ) : (
-              <button
-                className={b}
-                //className={auc1}
-                //className='abtn'
-                type='submit'
-                // color='primary'
-                onClick={
-                  this.props.art._isBidding
-                    ? this.EndAuction
-                    : this.StartAuction
-                }
-                //onClick = {this.toggleAuction}
-              >
-                Auction
-              </button>
-            )} */}
-
-							{/* <button
-              className={b}
-              //className={auc1}
-              //className='abtn'
-              type='submit'
-              // color='primary'
-              onClick={
-                this.props.art.auction.isBidding
-                  ? this.EndAuction
-                  : this.StartAuction
-              }
-              //onClick = {this.toggleAuction}
-            >
-              {Auc}
-            </button> */}
-							{/* {this.state.endAuctionLoading ? <img src={loader} /> : <div></div>}
-            {forAuc === 'visible' ? (
-              <button
-                style={{
-                  color: 'white',
-                  border: 'none',
-                  backgroundColor: 'white',
-                }}
-              >
-                but
-              </button>
-            ) : (
-              <div></div>
-            )} */}
-
-							{/* <Modal
-              isOpen={this.state.isModalOpen}
-              toggle={this.toggleModal}
-              className='modal_popup'
-            >
-              <ModalHeader toggle={this.toggleModal} className='pl-5'>
-                Put For Sale
-              </ModalHeader>
-              <Card className='artCard' style={{ height: '50%' }}>
-                <CardImg
-                  top
-                  className='displayImage'
-                  src={this.props.art._imgurl}
-                  alt='Card image'
-                />
-                <CardBody>
-                  <div className='ctext' style={{ padding: '2px' }}>
-                    <CardSubtitle
-                      style={{
-                        position: 'relative',
-                        fontFamily: 'Gibson',
-                        fontSize: '15px',
-                        color: '#B3B3B3',
-                      }}
-                    >
-                      Title
-                    </CardSubtitle>
-                    <CardSubtitle
-                      style={{
-                        position: 'relative',
-                        fontFamily: 'Gibson',
-                        fontSize: '15px',
-                        color: '#B3B3B3',
-                      }}
-                    >
-                      Price
-                    </CardSubtitle>
-                  </div>
-                  <div className='ctext' style={{ padding: '2px' }}>
-                    <CardText
-                      style={{
-                        position: 'relative',
-                        fontFamily: 'Gibson',
-                        fontSize: '15px',
-                        color: 'black',
-                      }}
-                    >
-                      {this.props.art._tokenBatchName}
-                    </CardText>
-                    <CardText
-                      style={{
-                        position: 'relative',
-                        fontFamily: 'Gibson',
-                        fontSize: '15px',
-                        color: 'black',
-                      }}
-                    >
-                      {Web3.utils.fromWei(
-                        this.props.art._sellprice.toString(),
-                        'ether'
-                      )}{' '}
-                      ETH
-                    </CardText>
-                  </div>
-                  <div className='ctext1'>
-                    <p
-                      style={{
-                        position: 'relative',
-                        fontFamily: 'Gibson',
-                        fontSize: '15px',
-                        color: 'black',
-                        marginTop: '2%',
-                      }}
-                    >
-                      Sell Price :{' '}
-                    </p>
-                    <p>
-                      {' '}
-                      <Input
-                        type='text'
-                        id='sellPrice'
-                        name='sellPrice'
-                        onChange={this.handleInputChange}
-                      ></Input>
-                    </p>
-                  </div>
-                  <div>
-                    <div>
-                      <button
-                        className='abtn'
-                        style={{
-                          left: '32%',
-                          color: 'white',
-                          backgroundColor: '#5540C7',
-                        }}
-                        type='submit'
-                        onClick={this.putForSale}
-                      >
-                        Confirm
-                      </button>{' '}
-                    </div>
-                    <div
-                      style={{ display: 'flex', justifyContent: 'flex-end' }}
-                    >
-                      {this.state.putForSaleLoading ? (
-                        <img src={loader} />
-                      ) : (
-                        <div></div>
-                      )}
-                    </div>
-                  </div>
-                </CardBody>
-              </Card>
-            </Modal> */}
-
-							{/* LIST FOR AUCTION MODAL */}
 							<Modal
 								isOpen={this.state.listForAuctionSuccess}
 								toggle={this.toggleListForAuction}
@@ -585,7 +310,7 @@ class Allpatrender extends Component {
 								className='modal-xl'
 							>
 								<ModalHeader toggle={this.toggleListForAuction}>
-									<div></div>
+									<></>
 								</ModalHeader>
 								<ModalBody
 									style={{
@@ -875,6 +600,16 @@ class Allpatrender extends Component {
 							) : (
 								<div></div>
 							)}
+							{
+								this.state.isMintModal
+									? <MintModal
+										isOpen={this.state.isMintModal}
+										toggle={this.closeMintToken}
+										send={this.sendMintToken}
+										fileName="Leopard.Png"
+									/>
+									: null
+							}
 						</div>
 					</CardBody>
 				</div>
@@ -883,4 +618,4 @@ class Allpatrender extends Component {
 	}
 }
 
-export default Allpatrender;
+export default UploadsTab;

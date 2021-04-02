@@ -45,6 +45,7 @@ import Allpatrender from "./Allpatrender";
 import Allpatrender2 from "./Allpatrender2";
 import ModalUploadToMyStore from "./ModalUploadToMyStore/ModalUploadToMyStore";
 import ModalListingNft from "./ModalListingNft/ModalListingNft";
+import UploadsTab from "./UploadsTab";
 
 const SHA256 = require('crypto-js/sha256');
 
@@ -116,39 +117,39 @@ class MyStoreComponent extends Component {
 			uploadSuccess: false,
 			artStatus: artStatuses['Queue'],
 			indextab: 7,
-      isListModalOpen: false,
-    };
-    this.toggleModal1 = this.toggleModal1.bind(this);
-    this.toggleModal2 = this.toggleModal2.bind(this);
-    this.handleUploadMore = this.handleUploadMore.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.fileSelectHandler = this.fileSelectHandler.bind(this);
-    this.fileUploadHandler = this.fileUploadHandler.bind(this);
-    this.fileAwsHandler = this.fileAwsHandler.bind(this);
-    this.refreshMyArt = this.refreshMyArt.bind(this);
-    this.onArtStatusChange = this.onArtStatusChange.bind(this);
-    this.toggleListModal = this.toggleListModal.bind(this);
-    this.onListButtonClick = this.onListButtonClick.bind(this);
-    this.onListModalClosed = this.onListModalClosed.bind(this);
-  }
+			isListModalOpen: false,
+		};
+		this.toggleModal1 = this.toggleModal1.bind(this);
+		this.toggleModal2 = this.toggleModal2.bind(this);
+		this.handleUploadMore = this.handleUploadMore.bind(this);
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.fileSelectHandler = this.fileSelectHandler.bind(this);
+		this.fileUploadHandler = this.fileUploadHandler.bind(this);
+		this.fileAwsHandler = this.fileAwsHandler.bind(this);
+		this.refreshMyArt = this.refreshMyArt.bind(this);
+		this.onArtStatusChange = this.onArtStatusChange.bind(this);
+		this.toggleListModal = this.toggleListModal.bind(this);
+		this.onListButtonClick = this.onListButtonClick.bind(this);
+		this.onListModalClosed = this.onListModalClosed.bind(this);
+	}
 
-  toggleListModal() {
-    this.setState({
-      isListModalOpen: !this.state.isListModalOpen,
-    })
-  }
+	toggleListModal() {
+		this.setState({
+			isListModalOpen: !this.state.isListModalOpen,
+		})
+	}
 
 	onListModalClosed() {
-    this.setState({
-      isListModalOpen: false,
-    })
-  }
+		this.setState({
+			isListModalOpen: false,
+		})
+	}
 
-  onListButtonClick() {
-    this.setState({
-      isListModalOpen: true,
-    })
-  }
+	onListButtonClick() {
+		this.setState({
+			isListModalOpen: true,
+		})
+	}
 
 	toggleModal1() {
 		this.setState({
@@ -179,14 +180,13 @@ class MyStoreComponent extends Component {
 		this.toggleModal1();
 	}
 
-	
+
 	creatingItems = async (x) => {
 		let tokenHash = this.state.artHash.toString();
 		let tokenTitle = this.state.title;
 		let tokenPrice = (this.state.price * ETHER).toString();
 		let imgUrl = x;
 		let nos = this.state.nos;
-		console.log(tokenHash, tokenTitle, tokenPrice, imgUrl, nos);
 
 		try {
 			const res = await this.props.contract.methods
@@ -200,7 +200,6 @@ class MyStoreComponent extends Component {
 				)
 				.send({from: this.props.accounts, gas: 5000000});
 
-			console.log('res', res);
 			let data;
 
 			// if (Array.isArray(res.events.tokencreated)) {
@@ -230,12 +229,12 @@ class MyStoreComponent extends Component {
 			//   );
 			// }
 
-			console.log('data', data);
+			// console.log('data', data);
 			this.toggleModal1();
 			this.setState({isLoading: false, uploadSuccess: true});
 		} catch (err) {
 			this.setState({loadingError: true});
-			console.error(err.message);
+			// console.error(err.message);
 		}
 		this.setState({isLoading: false});
 	};
@@ -276,9 +275,9 @@ class MyStoreComponent extends Component {
 
 				}
 				response.push(newBlock);
-				console.log(newBlock)
+				// console.log(newBlock)
 			}
-			if (rex2._tokenCreator == this.props.accounts) {
+			if (rex2._tokenCreator === this.props.accounts) {
 				createrToken.push(rex);
 			}
 
@@ -306,14 +305,17 @@ class MyStoreComponent extends Component {
 	}
 
 	fileSelectHandler = (event) => {
-		console.log(event.target.files);
+		// console.log(event.target.files);
 		this.setState({
 			selectedFile: event.target.files[0],
 		});
 	};
 
 	fileUploadHandler = async (event, controls) => {
-		console.log('========>controls', controls);
+		this.setState({
+			title: controls.name.value,
+			description: controls.description.value,
+		});
 		event.preventDefault();
 		// const hash = await blobToSHA256(this.state.selectedFile);
 		let hash = '';
@@ -322,11 +324,11 @@ class MyStoreComponent extends Component {
 	};
 
 	fileAwsHandler = async (file, callback) => {
-		console.log(file);
+		// console.log(file);
 		let newfilename = `image_${Date.now()}${path
 			.extname(file.name)
 			.toLowerCase()}`;
-		console.log(newfilename);
+		// console.log(newfilename);
 		let params = {
 			ACL: 'public-read',
 			Bucket: BUCKET_NAME,
@@ -337,7 +339,7 @@ class MyStoreComponent extends Component {
 
 		s3.putObject(params, function (err, data) {
 			if (err) {
-				console.log('error :', err);
+				// console.log('error :', err);
 			} else {
 				callback(
 					`https://superworldapp.s3.amazonaws.com/marketplace/${newfilename}`
@@ -350,23 +352,38 @@ class MyStoreComponent extends Component {
 		const {batch} = this.props
 		const {artStatus} = this.state
 		const {art2} = this.props
-		console.log(art2);
+		console.log('========>art2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', art2);
+		console.log('========>batch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', batch);
 		// TODO optimize
 		const nftsListed = batch.reduce((count, item) => +item[3] + count, 0)
 
-    const Menu1 = batch?.map((x) => {
-      return (
-        <Allpatrender
-          key={x._batchId}
-          art={x}
-          contract={this.props.contract}
-          accounts={this.props.accounts}
-          onListButtonClick={this.onListButtonClick}
-        />
-      )
-    });
+		const Menu1 = batch?.map((x) => {
+			// console.log('========>x!!!!!', x);
+			return (
+				<UploadsTab
+					key={x._tokenId}
+					art={x}
+					contract={this.props.contract}
+					accounts={this.props.accounts}
+				/>
+			);
+		});
 
-		const Menu2 = this.state.art3?.map((x) => {
+		const Menu2 = batch?.map((x) => {
+			// console.log('========>x', x);
+			return (
+				<Allpatrender
+					key={x._tokenId}
+					art={x}
+					contract={this.props.contract}
+					accounts={this.props.accounts}
+					onListButtonClick={this.onListButtonClick}
+				/>
+			)
+		});
+
+		const Menu3 = this.state.art3?.map((x) => {
+			// console.log('========>x!!!!!', x);
 			return (
 				<Allpatrender2
 					key={x._tokenId}
@@ -402,46 +419,64 @@ class MyStoreComponent extends Component {
 						</div>
 					</div>
 					<Col className='mystore-art-container'>
+						{console.log('========>this.state!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', this.state)}
 						<StyledTabs value={artStatus} onChange={this.onArtStatusChange}>
-							<StyledTab label={`Queue${nftsListed > 0 ? ` (${nftsListed})` : ''}`} {...artStatusTabPropsByIndex(0)} />
-							<StyledTab label={`Active ${this.state.art3 && this.state.art3.length > 0 ? `(${this.state.art3.length})` : '' }`} {...artStatusTabPropsByIndex(1)} />
-							<StyledTab label={'Ended'} {...artStatusTabPropsByIndex(2)} />
-							<StyledTab label={'Offers'} {...artStatusTabPropsByIndex(3)} />
+							<StyledTab
+								label={`Uploads${this.props.batch.length > 0 ? ` (${this.props.batch.length})` : ''}`}
+								{...artStatusTabPropsByIndex(0)}
+							/>
+							<StyledTab
+								label={`Queue${this.props.batch.length > 0 ? ` (${this.props.batch.length})` : ''}`}
+								// label={`Queue${nftsListed > 0 ? ` (${nftsListed})` : ''}`}
+								{...artStatusTabPropsByIndex(1)}
+							/>
+							<StyledTab
+								label={`Active ${this.state.art3 && this.state.art3.length > 0 ? `(${this.state.art3.length})` : ''}`}
+								{...artStatusTabPropsByIndex(2)}
+							/>
+							<StyledTab label={'Ended'} {...artStatusTabPropsByIndex(3)} />
+							<StyledTab label={'Offers'} {...artStatusTabPropsByIndex(4)} />
 						</StyledTabs>
 
 						<TabPanel value={artStatus} index={0}>
 							<div className='mystore-art-queue-container row'>
 								<div className='mystore-upload-art'>
-                    <Button className='mystore-upload-btn' onClick={this.toggleModal1}>
-                      <div className='mystore-upload-add'>+</div>
-                    </Button>
-                  </div>
-                  {Menu1}
+									<Button className='mystore-upload-btn' onClick={this.toggleModal1}>
+										<div className='mystore-upload-add'>+</div>
+									</Button>
+								</div>
+								{Menu1}
 							</div>
 						</TabPanel>
 
 						<TabPanel value={artStatus} index={1}>
-							<div className='mystore-art-active-container row'>
+							<div className='mystore-art-queue-container row'>
 								{Menu2}
+							</div>
+						</TabPanel>
+
+						<TabPanel value={artStatus} index={2}>
+							<div className='mystore-art-active-container row'>
+								{Menu3}
 							</div>
 						</TabPanel>
 					</Col>
 				</Row>
 
-        <ModalUploadToMyStore
-          isOpen={this.state.isModalOpen1}
-          toggle={this.toggleModal1}
-          onClosed={this.refreshMyArt}
-          onConfirm={this.fileUploadHandler}
-        />
+				<ModalUploadToMyStore
+					isOpen={this.state.isModalOpen1}
+					toggle={this.toggleModal1}
+					onClosed={this.refreshMyArt}
+					onConfirm={this.fileUploadHandler}
+				/>
 
-        <ModalListingNft
-          onOpen={this.onListModalOpen}
-          onClose={this.onListModalClosed}
-          toggle={this.toggleListModal}
-          isOpen={this.state.isListModalOpen}
-          fileName='Leopard.png'
-        />
+				<ModalListingNft
+					onOpen={this.onListModalOpen}
+					onClose={this.onListModalClosed}
+					toggle={this.toggleListModal}
+					isOpen={this.state.isListModalOpen}
+					fileName='Leopard.png'
+				/>
 
 				{/*<Modal*/}
 				{/*  isOpen={this.state.isModalOpen1}*/}
@@ -611,33 +646,6 @@ class MyStoreComponent extends Component {
 						</button>
 					</ModalBody>
 				</Modal>
-
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
 			</Container>
 		);
 	}
@@ -668,6 +676,7 @@ const StyledTab = withStyles({
 		fontWeight: 700,
 		fontSize: '1.5rem',
 		lineHeight: '24px',
+		marginRight: '70px',
 		'&:focus': {
 			outline: 'none',
 		},
