@@ -93,15 +93,16 @@ class UploadsTab extends Component {
 		});
 	}
 
-	sendMintToken(e) {
+	async sendMintToken(e) {
 		this.setState({
 			isMintModal: !this.state.isMintModal,
 		});
-		console.log('========>e', this.props.contract.methods.mintToken);
-		this.props.contract.methods
-			.mintToken(this.props.art._batchId)
-			.send({from: this.props.accounts, gasPrice: Number(e + '000000000'), gas: 3000000});
-	}
+		console.log('========>e', e);
+
+		const res = await this.props.contract.methods
+			.mintTokenBatch(this.props.art._batchId,e)
+			.send({from: this.props.accounts, gas: 5000000});
+}
 
 	handleInputChange(event) {
 		const target = event.target;
@@ -607,6 +608,7 @@ class UploadsTab extends Component {
 										toggle={this.closeMintToken}
 										send={this.sendMintToken}
 										fileName="Leopard.Png"
+										arturl={this.props.art._imgurl}
 									/>
 									: null
 							}

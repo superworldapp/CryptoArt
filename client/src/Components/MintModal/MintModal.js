@@ -11,6 +11,7 @@ const MintModal = (props) => {
 		toggle,
 		send,
 		fileName,
+		arturl,
 	} = props
 
 	const [valueInput, setValueInput] = useState(0);
@@ -37,10 +38,18 @@ const MintModal = (props) => {
 			)}
 			body={(
 				<Form>
-					<FormGroup>
+					{/* <FormGroup>
 						<span className='label'>File</span>
-						<span className='file-name'>{fileName}</span>
-					</FormGroup>
+						<span className='file-name'>{arturl}</span>
+					</FormGroup> */}
+					<FormGroup className='form-group-preview'>
+            		{<img style={{height:'20', width: '20%'}}
+                		className='control-preview-img'
+                		src={arturl}
+                		alt={arturl}
+              />
+            }
+          </FormGroup>
 					<FormGroup>
 						<Label
 							htmlFor='artHash'

@@ -208,7 +208,7 @@ class MyStoreComponent extends Component {
 		let tokenTitle = this.state.title;
 		let tokenPrice = (this.state.price * ETHER).toString();
 		let imgUrl = x;
-		let nos = this.state.nos;
+		let nos = 30;
 
 		try {
 			const res = await this.props.contract.methods
