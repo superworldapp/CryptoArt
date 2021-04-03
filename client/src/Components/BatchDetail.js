@@ -546,7 +546,7 @@ console.log(`==========>this.props`, this.props);
     
      console.log(this.props.BatchCreated[0])
      let batchID = this.props.matchId; 
-     tokenInBatch = this.props.allTokens.filter((x) => x._refbatch == batchID);
+     tokenInBatch = this.props.allTokens?.filter((x) => x._refbatch == batchID);
      console.log('Header', tokenInBatch);
       let newTokenBatch
      if(!this.state.viewMore){
@@ -594,7 +594,7 @@ console.log(`==========>this.props`, this.props);
                 Starting from 6.5ETH
               </div>
               <div className="batchRemain">
-                4 of 5 Remaining
+                x of {this.props.BatchCreated[0]._mintedEditions} Remaining
               </div>
             </div>
             <div className="batchCreator">
