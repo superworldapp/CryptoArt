@@ -117,27 +117,49 @@ class MyStoreComponent extends Component {
 			uploadSuccess: false,
 			artStatus: artStatuses['Queue'],
 			indextab: 7,
-			isListModalOpen: false,
-		};
-		this.toggleModal1 = this.toggleModal1.bind(this);
-		this.toggleModal2 = this.toggleModal2.bind(this);
-		this.handleUploadMore = this.handleUploadMore.bind(this);
-		this.handleInputChange = this.handleInputChange.bind(this);
-		this.fileSelectHandler = this.fileSelectHandler.bind(this);
-		this.fileUploadHandler = this.fileUploadHandler.bind(this);
-		this.fileAwsHandler = this.fileAwsHandler.bind(this);
-		this.refreshMyArt = this.refreshMyArt.bind(this);
-		this.onArtStatusChange = this.onArtStatusChange.bind(this);
-		this.toggleListModal = this.toggleListModal.bind(this);
-		this.onListButtonClick = this.onListButtonClick.bind(this);
-		this.onListModalClosed = this.onListModalClosed.bind(this);
-	}
+      isListModalOpen: false,
+    };
+    this.toggleModal1 = this.toggleModal1.bind(this);
+    this.toggleModal2 = this.toggleModal2.bind(this);
+    this.handleUploadMore = this.handleUploadMore.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.fileSelectHandler = this.fileSelectHandler.bind(this);
+    this.fileUploadHandler = this.fileUploadHandler.bind(this);
+    this.fileAwsHandler = this.fileAwsHandler.bind(this);
+    this.refreshMyArt = this.refreshMyArt.bind(this);
+    this.onArtStatusChange = this.onArtStatusChange.bind(this);
+    this.toggleListModal = this.toggleListModal.bind(this);
+    this.onListButtonClick = this.onListButtonClick.bind(this);
+    this.onListModalClosed = this.onListModalClosed.bind(this);
+	this.accUsername = this.accUsername.bind(this)
+  }
 
-	toggleListModal() {
-		this.setState({
-			isListModalOpen: !this.state.isListModalOpen,
-		})
-	}
+  accUsername = (accNum) => {
+	if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
+		return '@Chitra';
+	else if (accNum === '0x0d5567345D3Cb1114471BC07c396Cc32C7CF92ec')
+		return '@Arianna';
+	else if (accNum === '0xABD82c9B735F2C89f2e62152A9884F4A92414F20')
+		return '@CJMain';
+	else if (accNum === '0x63611F92FA2d7B7e6625a97E6474b7fA16DbD89F')
+		return '@CJ Test';
+	else if (accNum === '0x4271AC6Bb565D120e2Ac1C3fb855aE5Dad6aE8ff')
+		return '@Swapnil';
+	else if (accNum === '0x81B2362F55Ea93f71990d7F446dca80BdD94C6e7')
+		return '@SwapnilTest';
+	else if (accNum === '0xE337525DD5d34fC683f43CbBDF3e1EDe0833B744')
+		return '@Viktor';
+	else if (accNum === '0x32c93d70E9813fFe62a2fCf6189F14A4ff2e8cB3')
+		return '@Alex';
+	else return '@Annonymous';
+};
+
+
+  toggleListModal() {
+    this.setState({
+      isListModalOpen: !this.state.isListModalOpen,
+    })
+  }
 
 	onListModalClosed() {
 		this.setState({
@@ -169,8 +191,8 @@ class MyStoreComponent extends Component {
 		})
 		if (!this.state.isModalOpen1 && !this.state.uploadSuccess)
 			window.location.reload();
-	}
-
+		}
+		
 	onArtStatusChange(e, artStatus) {
 		this.setState({artStatus})
 	}
@@ -347,6 +369,7 @@ class MyStoreComponent extends Component {
 			}
 		});
 	};
+
 
 	render() {
 		const {batch} = this.props
@@ -636,13 +659,13 @@ class MyStoreComponent extends Component {
 								marginTop: '1rem',
 							}}
 						>
-							Hi, your upload was successful!
+							Hey @megan462, your upload was successful!
 						</p>
 						<p style={{textAlign: 'center', color: 'gray', fontSize: '12px'}}>
-							You can view your recent uploaded file under “MY COLLECTIONS”
+							You can view your recent uploaded file in “MyStore”
 						</p>
 						<button className='upload-more-btn' onClick={this.handleUploadMore}>
-							Upload More
+							UPLOAD MORE
 						</button>
 					</ModalBody>
 				</Modal>
