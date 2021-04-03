@@ -127,10 +127,10 @@ class Allpatrender extends Component {
 			const res = await this.props.contract.methods
 				.buyToken(this.props.art._tokenId)
 				.send({from: this.props.accounts, value: this.props.art._sellprice, gas: 5000000});
-			console.log('res', res);
+			// console.log('res', res);
 
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 		}
 	};
 
@@ -185,10 +185,10 @@ class Allpatrender extends Component {
 			)
 			.send({from: this.props.accounts, gas: 1000000});
 
-		console.log('res', res);
+		// console.log('res', res);
 		this.setState({putForSaleLoading: false, listForSaleSuccess: true});
 		this.toggleModal();
-		console.log(res);
+		// console.log(res);
 	};
 
 	DeSale = async () => {
@@ -201,10 +201,10 @@ class Allpatrender extends Component {
 			)
 			.send({from: this.props.accounts, gas: 1000000});
 
-		console.log('res', res);
+		// console.log('res', res);
 		this.setState({delistLoading: false});
 		window.location.reload();
-		console.log(res);
+		// console.log(res);
 	};
 
 	StartAuction = async () => {
@@ -213,7 +213,7 @@ class Allpatrender extends Component {
 			.startbid(this.props.art.tokenIdentifier)
 			.send({from: this.props.accounts, gas: 1000000});
 		this.setState({auctionLoading: false, listForAuctionSuccess: true});
-		console.log(res);
+		// console.log(res);
 	};
 
 	EndAuction = async () => {
@@ -222,7 +222,7 @@ class Allpatrender extends Component {
 			.closeBidOwner(this.props.art.tokenIdentifier)
 			.send({from: this.props.accounts, gas: 7000000});
 		this.setState({endAuctionLoading: false, endAuctionSuccess: true});
-		console.log(res);
+		// console.log(res);
 	};
 
 	AddBid = async () => {
@@ -230,14 +230,14 @@ class Allpatrender extends Component {
 			.addBid(this.props.art.tokenIdentifier)
 			.send({from: this.props.accounts, gas: 1000000, value: 1000000});
 		// window.location.reload();
-		console.log(res);
+		// console.log(res);
 	};
 
 	CloseBid = async () => {
 		const res = await this.props.contract.methods
 			.closBid(this.props.art.tokenIdentifier)
 			.send({from: this.props.accounts, gas: 7000000});
-		console.log(res);
+		// console.log(res);
 	};
 
 	render() {
@@ -623,7 +623,7 @@ class Allpatrender extends Component {
 												id='sellPrice'
 												name='sellPrice'
 												onChange={this.handleInputChange}
-											></Input>
+											/>
 										</p>
 									</div>
 									<div>
@@ -1021,7 +1021,7 @@ class MyItemComponent extends Component {
 		let tokenPrice = (this.state.price * ETHER).toString();
 		let imgUrl = x;
 		let nos = this.state.nos;
-		console.log(tokenHash, tokenTitle, tokenPrice, imgUrl, nos);
+		// console.log(tokenHash, tokenTitle, tokenPrice, imgUrl, nos);
 
 		try {
 			const res = await this.props.contract.methods
@@ -1035,7 +1035,7 @@ class MyItemComponent extends Component {
 				)
 				.send({from: this.props.accounts, gas: 5000000});
 
-			console.log('res', res);
+			// console.log('res', res);
 			let data;
 
 			// if (Array.isArray(res.events.tokencreated)) {
@@ -1065,12 +1065,12 @@ class MyItemComponent extends Component {
 			//   );
 			// }
 
-			console.log('data', data);
+			// console.log('data', data);
 			// this.toggleModal1();
 			this.setState({isLoading: false, uploadSuccess: true});
 		} catch (err) {
 			this.setState({loadingError: true});
-			console.error(err.message);
+			// console.error(err.message);
 		}
 		this.setState({isLoading: false});
 	};
@@ -1086,7 +1086,7 @@ class MyItemComponent extends Component {
 
 	async componentDidMount() {
 		let res = await this.props.contract?.methods.totalSupply().call();
-		console.log(res);
+		// console.log(res);
 
 		let response = [];
 		let createrToken = [];
@@ -1112,7 +1112,7 @@ class MyItemComponent extends Component {
 
 				}
 				response.push(newBlock);
-				console.log(newBlock)
+				// console.log(newBlock)
 			}
 			if (rex2._tokenCreator == this.props.accounts) {
 				createrToken.push(rex);
@@ -1133,8 +1133,8 @@ class MyItemComponent extends Component {
 		//     createrToken.push(rex);
 		//   }
 		// }
-		console.log(this.props.art);
-		console.log(createrToken);
+		// console.log(this.props.art);
+		// console.log(createrToken);
 		allDocs = [];
 		allDocs = response;
 		console.log(response);
@@ -1225,8 +1225,7 @@ class MyItemComponent extends Component {
 			);
 		});
 
-		const SortLayoutWrapper = filteredCollectionItems.map((x) => {
-			console.log('========>this.props.batch555555555555555555555555555555', this.props.batch);
+		const SortLayoutWrapper = this.props.batch?.map((x) => {
 			return (
 				<div key={x._batchId} className='item-nft'>
 					<SortLayout

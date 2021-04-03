@@ -72,7 +72,7 @@ const EditModal = props => {
 	const Sale = async (isListed) => {
 		// let tokenId = tokenID
 		// let sellprice = "1000000000000000000"
-		let price = isListed == true? ((sellPrice)*ETHER).toString() : 0;
+		let price = isListed === true? ((sellPrice)*ETHER).toString() : 0;
 		try {
 			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
 			const res = await contract.methods

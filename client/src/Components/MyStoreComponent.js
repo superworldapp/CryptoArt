@@ -375,7 +375,6 @@ class MyStoreComponent extends Component {
 		const {batch} = this.props
 		const {artStatus} = this.state
 		const {art2} = this.props
-		console.log('========>art2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', art2);
 		console.log('========>batch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', batch);
 		// TODO optimize
 		const nftsListed = batch.reduce((count, item) => +item[3] + count, 0)
@@ -393,7 +392,6 @@ class MyStoreComponent extends Component {
 		});
 
 		const Menu2 = batch?.map((x) => {
-			// console.log('========>x', x);
 			return (
 				<Allpatrender
 					key={x._tokenId}
@@ -406,7 +404,6 @@ class MyStoreComponent extends Component {
 		});
 
 		const Menu3 = this.state.art3?.map((x) => {
-			// console.log('========>x!!!!!', x);
 			return (
 				<Allpatrender2
 					key={x._tokenId}
@@ -501,6 +498,22 @@ class MyStoreComponent extends Component {
 					fileName='Leopard.png'
 				/>
 
+				{batch && batch.length > 0
+					? null
+					: (
+						<img
+							style={
+								{
+									width: '300px',
+									height: '300px',
+									position: 'absolute',
+									zIndex: '100000000',
+									top: '300px',
+								}
+							}
+							src={loader}
+						/>
+					)}
 				{/*<Modal*/}
 				{/*  isOpen={this.state.isModalOpen1}*/}
 				{/*  toggle={this.toggleModal1}*/}

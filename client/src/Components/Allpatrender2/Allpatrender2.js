@@ -44,7 +44,6 @@ class Allpatrender2 extends Component {
 		this.mintToken = this.mintToken.bind(this);
 		this.Sale = this.Sale.bind(this);
 
-
 		//this.toggleAuction = this.toggleAuction.bind(this);
 	}
 
