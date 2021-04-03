@@ -43,6 +43,7 @@ const EditModal = props => {
 		toggle,
 		onClosed,
 		fileName,
+		imgThumb,
 	} = props
 
 	const auctionInputRef = useRef(null)
@@ -128,10 +129,15 @@ const EditModal = props => {
 			)}
 			body={(
 				<Form >
-					<FormGroup>
-						<span className='file-label'>File</span>
-						<span className='file-name'>{fileName}</span>
-					</FormGroup>
+					
+					<FormGroup className='form-group-preview'>
+            		{<img style={{height:'20', width: '20%'}}
+                		className='control-preview-img'
+                		src={imgThumb}
+                		alt={imgThumb}
+              />
+            }
+			</FormGroup>
 					<FormGroup>
 						<div className="sale-block">
 							<Label className='sale-type-label'>

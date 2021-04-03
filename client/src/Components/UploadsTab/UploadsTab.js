@@ -284,7 +284,7 @@ class UploadsTab extends Component {
 				className='mystore-queue-card'
 			>
 				 {/*<a href={this.props.art.imgurl} target='_blank'> */}
-				 {/*{+art[3] >= 0 && <span className='card-counter'>+{art[3]}</span>}*/}
+				 {this.props.art._mintedEditions >= 0 && <span className='card-counter'>{this.props.art._mintedEditions}</span>}
 				<div className='mystore-queue-card-img'>
 					<Link to={`/batch/${this.props.art._batchId}`}>
 						<CardImg

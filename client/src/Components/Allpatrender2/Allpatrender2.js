@@ -206,15 +206,20 @@ class Allpatrender2 extends Component {
 	}
 
 	render() {
-		let but = this.state.art._isSellings ? ' ' : 'hidden';
+		let but = this.state.art._isSellings ? 'mystore-active-card' : 'hidden';
 		let bak = this.state.art._isSellings ? 'bg-success text-white' : '';
 		let buk = this.state.art._isBidding ? 'bg-warning' : '';
-		let b = this.state.art._isSellings ? 'hidden' : 'abtn';
+		let b = this.state.art._isSellings ? 'hidden' : 'hidden';
 		let b1 = this.state.art._isSellings ? 'hidden' : 'abtn1';
 		let but1 = this.state.art._isSellings ? 'abtn1' : 'hidden';
 		let auc1 = this.state.art._isBidding ? 'hidden' : 'abtn';
 		let auc2 = this.state.art._isBidding ? 'hidden' : 'abtn1';
 		let forAuc = this.state.art._isBidding ? 'visible' : 'invisible';
+		let newarr;
+		// if(this.props.type == 2){
+		// 	newarr = this.state.art?.filter((x) => x._isSellings);
+		// 	this.setState({art : newarr});
+		// }
 
 		// let pr =
 		//   Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether') == 0
@@ -792,6 +797,7 @@ class Allpatrender2 extends Component {
 							accounts={this.props.accounts}
 							isOpen={this.state.isEditModal}
 							toggle={this.closeEditToken}
+							imgThumb={this.state.art._imgThumbnail}
 							fileName="BackCountry.png"
 						/>
 						: null

@@ -294,6 +294,7 @@ class MyStoreComponent extends Component {
 					_tokenCreator: rex2._tokenCreator,
 					_imgurl: rex2._imgurl,
 					_imgThumbnail: rex2._imgThumbnail,
+					__mintedEditions: rex2._mintedEditions
 
 				}
 				response.push(newBlock);
@@ -377,7 +378,7 @@ class MyStoreComponent extends Component {
 		const {art2} = this.props
 		console.log('========>batch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', batch);
 		// TODO optimize
-		const nftsListed = batch.reduce((count, item) => +item[3] + count, 0)
+		const nftsListed = batch.reduce((count, item) => +item._mintedEditions + count, 0)
 
 		const Menu1 = batch?.map((x) => {
 			// console.log('========>x!!!!!', x);
@@ -391,16 +392,16 @@ class MyStoreComponent extends Component {
 			);
 		});
 
-		const Menu2 = batch?.map((x) => {
+		const Menu2 = this.state.art3?.map((x) => {
 			return (
-				<Allpatrender
+				<Allpatrender2
 					key={x._tokenId}
 					art={x}
 					contract={this.props.contract}
 					accounts={this.props.accounts}
-					onListButtonClick={this.onListButtonClick}
+					type={1}
 				/>
-			)
+			);
 		});
 
 		const Menu3 = this.state.art3?.map((x) => {
@@ -410,6 +411,7 @@ class MyStoreComponent extends Component {
 					art={x}
 					contract={this.props.contract}
 					accounts={this.props.accounts}
+					type={2}
 				/>
 			);
 		});
@@ -446,7 +448,7 @@ class MyStoreComponent extends Component {
 								{...artStatusTabPropsByIndex(0)}
 							/>
 							<StyledTab
-								label={`Queue${this.props.batch.length > 0 ? ` (${this.props.batch.length})` : ''}`}
+								label={`Queue ${this.state.art3 && this.state.art3.length > 0 ? `(${this.state.art3.length})` : ''}`}
 								// label={`Queue${nftsListed > 0 ? ` (${nftsListed})` : ''}`}
 								{...artStatusTabPropsByIndex(1)}
 							/>
@@ -498,7 +500,7 @@ class MyStoreComponent extends Component {
 					fileName='Leopard.png'
 				/>
 
-				{batch && batch.length > 0
+				{batch && batch.length >= 0
 					? null
 					: (
 						<img
