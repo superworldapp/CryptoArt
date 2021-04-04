@@ -94,6 +94,10 @@ const CardDetail = ({
       return '@Swapnil';
     else if (accNum === '0x81B2362F55Ea93f71990d7F446dca80BdD94C6e7')
       return '@SwapnilTest';
+      else if (accNum === '0x483C8624a26acc7C1d5baA6c3648E4A5B64164e0')
+      return '@Magdalena';
+    else if (accNum === '0xA64a71dAC0F4F61FD1e569F59a31c0860c0A33d5')
+      return '@MagdalenaTest';
     else return '@Annonymous';
   };
 
@@ -118,10 +122,16 @@ const CardDetail = ({
     setHandleInput(value);
     console.log(handleInput);
   };
+  const BidBuy = async () => {
+    if(art._isBidding)
+    AddBid();
+    else
+    handlePurchase();
 
+  }
   const AddBid = async () => {
     setLoadingPlaceBid(true);
-    const res = await contract.methods.addBid(art.tokenIdentifier).send({
+    const res = await contract.methods.addBid(art._tokenId).send({
       from: accounts,
       gas: 1000000,
       value: (handleInput * ETHER).toString(),
@@ -200,16 +210,13 @@ const CardDetail = ({
   };
 
   const buyOrSell = () => {
-    if (art?._isSelling) {
+    if (art?._isSellings) {
       return (
         <div>
           <button
-            className='btn btn-primary'
+            className='batchcardbid-btn'
             onClick={handlePurchase}
-            style={{
-              width: '50%',
-              alignSelf: 'center',
-            }}
+            
           >
             Buy Item
           </button>
@@ -223,18 +230,16 @@ const CardDetail = ({
             type='text'
             id='sellPrice'
             name='sellPrice'
+            
             style={{ width: '50%', alignSelf: 'center' }}
             onChange={handleInputChange}
           ></Input>
           <div>
             <button
-              className='btn-primary'
+              className='batchcardbid-btn'
               color='primary'
               onClick={AddBid}
-              style={{
-                width: '50%',
-                alignSelf: 'center',
-              }}
+              
             >
               Place Bid
             </button>
@@ -520,7 +525,7 @@ const CardDetail = ({
                 <div style={{
                   marginLeft:'1rem', marginTop:'1.5rem'
                 }}>
-              <button className='batchcardbid-btn'> PLACE BID</button>
+              {/* <button className='batchcardbid-btn'> PLACE BID</button> */}
               </div>
               </div>
               <br/>

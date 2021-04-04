@@ -410,7 +410,8 @@ class MyStoreComponent extends Component {
 					accounts={this.props.accounts}
 					type={1}
 				/>
-			);
+				
+				)
 			}
 		});
 

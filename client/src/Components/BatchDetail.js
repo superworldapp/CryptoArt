@@ -249,6 +249,10 @@ class Allpatrender extends Component {
       return '@Viktor';
     else if (accNum === '0x32c93d70E9813fFe62a2fCf6189F14A4ff2e8cB3')
       return '@Alex';
+      else if (accNum === '0x483C8624a26acc7C1d5baA6c3648E4A5B64164e0')
+      return '@Magdalena';
+    else if (accNum === '0xA64a71dAC0F4F61FD1e569F59a31c0860c0A33d5')
+      return '@MagdalenaTest';
     else return '@Annonymous';
   };
   render() {
@@ -357,7 +361,7 @@ console.log(`==========>this.props.BatchCreated`, this.props.BatchCreated);
                 </p>
               </CardText>
               <div>
-                <button className='card-buy-button'>Bid</button>
+                <button className='card-buy-button'>{this.props.art._isSellings?'BUY':(this.props.art._isBidding?'BID':'NA')}</button>
               </div>
             </div>
             <div className='card-buy-time'>
