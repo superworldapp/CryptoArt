@@ -1046,6 +1046,11 @@
             "internalType": "uint256",
             "name": "_bidprice",
             "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_tokenId",
+            "type": "uint256"
           }
         ],
         "stateMutability": "view",
@@ -15281,7 +15286,7 @@
       "4": {
         "events": {},
         "links": {},
-        "address": "0x5c254425639E91498c0E163Df6A78a6e953a3953",
+        "address": "0xfe750703a45411Be800ef2E89F451207c0823B65",
         "transactionHash": "0x010ba33cfebbd0a688e846fbf3b510dbc159af93a31e55e92d0c13de34a0e2d3"
       },
       "5777": {

@@ -393,6 +393,7 @@ class MyStoreComponent extends Component {
 		});
 
 		const Menu2 = this.state.art3?.map((x) => {
+			if(x._isSellings == false){
 			return (
 				<Allpatrender2
 					key={x._tokenId}
@@ -402,9 +403,11 @@ class MyStoreComponent extends Component {
 					type={1}
 				/>
 			);
+			}
 		});
 
 		const Menu3 = this.state.art3?.map((x) => {
+			if(x._isSellings == true){
 			return (
 				<Allpatrender2
 					key={x._tokenId}
@@ -414,6 +417,7 @@ class MyStoreComponent extends Component {
 					type={2}
 				/>
 			);
+			}
 		});
 
 		let ch = 'visible';

@@ -322,7 +322,7 @@ console.log(`==========>this.props.BatchCreated`, this.props.BatchCreated);
               color: '#212529',
               textDecoration: 'none'
             }}
-            to={`/card/${this.props.art._refbatch}`}>
+            to={`/card/${this.props.art._tokenId}`}>
           <CardImg
             top
             className="card-background-image"

@@ -48,9 +48,11 @@ class Allpatrender2 extends Component {
 	}
 
 	componentDidMount = async () => {
-		this.setState({art: this.props.art});
+		//;'let newArr = await this.props.art?.filter((x) => x._isSellings);
+	 	this.setState({art: this.props.art});
+	
+		
 	}
-
 	buyItem = async () => {
 		try {
 			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
@@ -215,7 +217,7 @@ class Allpatrender2 extends Component {
 		let auc1 = this.state.art._isBidding ? 'hidden' : 'abtn';
 		let auc2 = this.state.art._isBidding ? 'hidden' : 'abtn1';
 		let forAuc = this.state.art._isBidding ? 'visible' : 'invisible';
-		let newarr;
+	
 		// if(this.props.type == 2){
 		// 	newarr = this.state.art?.filter((x) => x._isSellings);
 		// 	this.setState({art : newarr});

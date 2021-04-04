@@ -10,7 +10,7 @@ import MyItemComponent from './MyArtComponent/MyArtComponent';
 import MyCollectionComponent from './MyCollectionComponent';
 import MyStoreComponent from './MyStoreComponent';
 import Profile from './MyProfile/MyProfileComponent'
-import CardDetail from './CardDetail';
+import TokenDetail from './CardDetail';
 import BatchDetail from './BatchDetail';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import Footer from './FooterComponent';
@@ -116,7 +116,7 @@ class Main extends Component {
 
 			let cre = await Axios.get(
 				// `http://geo.superworldapp.com/api/json/nftevents/tokencreated/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
-				`http://geo.superworldapp.com/api/json/nftevents/tokencreated/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
+				`http://geo.superworldapp.com/api/json/nftevents/tokencreated/4/get?contractAddress=0xfe750703a45411Be800ef2E89F451207c0823B65`
 			);
 
 			let newArr = [];
@@ -126,30 +126,30 @@ class Main extends Component {
 			}
 			let allTokensBought = await Axios.get(
 				// `http://geo.superworldapp.com/api/json/nftevents/tokenbought/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
-				`http://geo.superworldapp.com/api/json/nftevents/tokenbought/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
+				`http://geo.superworldapp.com/api/json/nftevents/tokenbought/4/get?contractAddress=0xfe750703a45411Be800ef2E89F451207c0823B65`
 			);
 
 			this.setState({tokensBought: allTokensBought.data.data});
 
 			let allTokensBidStarted = await Axios.get(
 				// `http://geo.superworldapp.com/api/json/nftevents/bidstarted/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
-				`http://geo.superworldapp.com/api/json/nftevents/bidstarted/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
+				`http://geo.superworldapp.com/api/json/nftevents/bidstarted/4/get?contractAddress=0xfe750703a45411Be800ef2E89F451207c0823B65`
 			);
 
 			this.setState({tokensBidStarted: allTokensBidStarted.data.data});
 
 			let allTokensPutForSale = await Axios.get(
-				`http://geo.superworldapp.com/api/json/nftevents/tokenputforsale/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
+				`http://geo.superworldapp.com/api/json/nftevents/tokenputforsale/4/get?contractAddress=0xfe750703a45411Be800ef2E89F451207c0823B65`
 			);
 
 			this.setState({tokensPutForSale: allTokensPutForSale.data.data});
 			let allTokensBid = await Axios.get(
-				`http://geo.superworldapp.com/api/json/nftevents/tokenbid/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
+				`http://geo.superworldapp.com/api/json/nftevents/tokenbid/4/get?contractAddress=0xfe750703a45411Be800ef2E89F451207c0823B65`
 			);
 			this.setState({tokensBid: allTokensBid.data.data});
 			// batch events
 			let BatchCreated = await Axios.get(
-				`http://geo.superworldapp.com/api/json/nftevents/NewtokenBatchCreated/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
+				`http://geo.superworldapp.com/api/json/nftevents/NewtokenBatchCreated/4/get?contractAddress=0xfe750703a45411Be800ef2E89F451207c0823B65`
 			);
 
 			this.setState({BatchCreated: BatchCreated.data.data});
@@ -213,9 +213,9 @@ class Main extends Component {
 	};
 
 	render() {
-		const CardWithId = ({match}) => {
+		const TokenWithId = ({match}) => {
 			return (
-				<CardDetail
+<TokenDetail
 					tokenCreated={this.state.tokensCreated?.filter(
 						(token) => token.returnValues.tokenId === match.params.id
 					)}
@@ -231,18 +231,19 @@ class Main extends Component {
 					tokenBidStarted={this.state.tokensBidStarted?.filter(
 						(token) => token.returnValues.tokenId === match.params.id
 					)}
-					art={
-						this.state.art?.filter(
-							(singleart) => singleart._tokenId === match.params.id
-						)[0]
+					art4={
+						this.state.art2
 					}
+								
 					contract={this.state.contract}
 					accounts={this.state.accounts}
 					cre={this.state.creValue}
 					matchId={match.params.id}
+					
 				/>
 			);
 		};
+		
 		const BatchWithId = ({match}) => {
 			return (
 				<BatchDetail
@@ -338,18 +339,18 @@ class Main extends Component {
 							<Profile/>
 						)}
 					/>
-					<Route path='/card/:id' component={CardWithId}/>
+					<Route path='/card/:id' component={TokenWithId}/>
 					<Route path='/batch/:id' component={BatchWithId}/>
 					{/* <Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } /> */}
 
 					<Route
 						path='/card/:id'
 						component={(props) => (
-							<CardDetail
+							<TokenDetail
 
 								contract={this.state.contract}
 								accounts={this.state.accounts}
-								art={this.state.art}
+								art={this.state.art2}
 							/>
 						)}
 					/>

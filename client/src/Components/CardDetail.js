@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import TableBody from './TableBody';
 import { Link } from 'react-router-dom';
 import cx from "classnames";
@@ -61,6 +61,7 @@ const CardDetail = ({
   const [loadingPurchase, setLoadingPurchase] = useState(false);
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
   const [loadingPlaceBid, setLoadingPlaceBid] = useState(false);
+  const [art2,setart2] = useState([]);
   const [bidSuccess, setBidSuccess] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownValue, setDropdownValue] = useState('USD');
@@ -74,7 +75,10 @@ const CardDetail = ({
   };
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
-
+  const converttoether = (x) => {return Web3.utils.fromWei(
+     x.toString(),
+     'ether'
+)}
   const ETHER = 1000000000000000000;
 
   const accUsername = (accNum) => {
@@ -379,10 +383,15 @@ const CardDetail = ({
       );
     }
   };
-
+ 
   useEffect(() => {
     getCreData();
     getEthDollarPrice();
+    async function get(){
+      let newart = await art;
+      setart2(newart);
+      get(); 
+    };
     // console.log(matchId)
     // console.log('Header', myProperties);
   }, []);
@@ -402,6 +411,7 @@ const CardDetail = ({
   const historyToggle = () => setIsOpen(!isOpen);
 
   console.log(ethPrice);
+  console.log(art2);
   return (
     <>
       <div className='container'>
@@ -422,7 +432,7 @@ const CardDetail = ({
                         <h1>{match.params.id}</h1> */}
              <div>
             <h4>
-            Journey From Furture
+            {art?._tokenBatchName}
           </h4>
             </div>
             <div className = "View"> 
@@ -457,13 +467,13 @@ const CardDetail = ({
             > 
             <div className ="card-div">
             <p className ="style1" style={{marginLeft:'2%', marginTop:'1%'}}>
-                  Sales ends in 19hrs 10 min (March 25, 2021 10:15am + 04)
+                  Bid ends in 
                 </p>
             </div>
               <div className= "style3">
               <p className = "style1">
                 Current offer:
-                <span className = "style2">6.59 ETH ($100.00)</span> 
+                <span className = "style2">{art?._isSellings? converttoether(art?._sellprice) : (art?._isBidding? converttoether(art?._bidprice) : 0)}</span> 
               </p>
               </div>
               <div className = "View1"> 
@@ -677,4 +687,70 @@ const CardDetail = ({
   );
 };
 
-export default CardDetail;
+
+
+class TokenDetails extends Component {
+
+  constructor(props) {
+		super(props);
+		this.state = {
+			art3 : []
+		};
+  }
+
+  componentDidMount = async () => {
+				let rex = await this.props.contract.methods.getTokenData(this.props.matchId).call();
+				// console.log(rex);
+				let rex2 = await this.props.contract.methods.getTokenDataBatch(this.props.matchId).call();
+					var newBlock = {
+						_tokenId: this.props.matchId,
+						_tokenOwner: rex._tokenOwner,
+						_isSellings: rex._isSellings,
+						_sellprice: rex._sellprice,
+						_refbatch: rex._refbatch,
+						_tokenbidder: rex._tokenbidder,
+						_isBidding: rex._isBidding,
+						_bidprice: rex._bidprice,
+						_tokenHash: rex2._tokenHash,
+						_tokenBatchName: rex2._tokenBatchName,
+						_tokenCreator: rex2._tokenCreator,
+						_imgurl: rex2._imgurl,
+						_imgThumbnail: rex2._imgThumbnail,
+
+					}
+					// console.log(newBlock)
+				
+				// if (rex2._tokenCreator == this.props.accounts) {
+				//   createrToken.push(rex);
+				// }
+
+			this.setState({single: newBlock});
+
+ 
+  }
+  render() {
+    console.log(this.state.single);
+    return(
+      <CardDetail
+					tokenCreated={this.props.tokenCreated}
+					tokenPutForSale={this.props.tokenPutForSale}
+					// tokenBought={this.porps.tokenBought}
+					tokenBid={this.props.tokenBid}
+					tokenBidStarted={this.props.tokenBidStarted}
+					art={
+						this.state.single
+					}
+								
+					contract={this.props.contract}
+					accounts={this.props.accounts}
+					cre={this.props.creValue}
+					matchId={this.props.matchId}
+					
+				/>
+    );
+
+    
+  }
+
+}
+export default TokenDetails;
