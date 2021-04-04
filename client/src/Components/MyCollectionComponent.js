@@ -343,12 +343,12 @@ class Allpatrender extends Component {
               width: '98.5%',
             }}
           ></CardImg>
-          <CardSubtitle>Bid Price : {this.state.art?._imgurl}</CardSubtitle>
+          {/* <CardSubtitle>Bid Price : {this.state.art?._imgurl}</CardSubtitle>
           <CardSubtitle>Bid Price : {this.state.art?._bidprice}</CardSubtitle>
           <CardSubtitle>isBidding? : {this.state.art?._isBidding}</CardSubtitle>
           <CardSubtitle>isSell?{this.state.art?._isSellings}</CardSubtitle>
           <CardSubtitle>sellprice = {this.state.art?._sellprice}</CardSubtitle>
-          <CardSubtitle><small>tokenowner = {this.state.art?._tokenOwner}</small></CardSubtitle>
+          <CardSubtitle><small>tokenowner = {this.state.art?._tokenOwner}</small></CardSubtitle> */}
           </Card>
       </button>
 
@@ -391,7 +391,7 @@ class Allpatrender extends Component {
               marginTop: '10px',
             }}
           >
-          Back Country Fishing
+          {this.state.art?._tokenBatchName}
           </p>
           <p
             style={{
@@ -402,7 +402,7 @@ class Allpatrender extends Component {
               marginTop: '-15px'
             }}
           >
-            Created By: <span style={{color: '#5540C7'}}>Username</span>
+            Created By: <span style={{color: '#5540C7'}}>{accUsername(this.state.art?._tokenCreator)}</span>
           </p>
           <p
             style={{
@@ -426,7 +426,7 @@ class Allpatrender extends Component {
             >
               <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '400'}}>Owner  #</p>
               <p style={{fontFamily: 'Gibson', fontSize: '14px', fontWeight: '400'}}>3</p>
-              <a style={{color: '#5540C7'}}>View Trading History</a>
+              <Link to={`/card/${this.state.art._tokenId}`}><a style={{color: '#5540C7'}}>View Trading History</a></Link>
             </div>
             <Link to='/mystore'><button style={{borderRadius: '10px', backgroundColor: '#5540C7', color: 'white', width: '100px', position: 'relative', top: '-55px', left: '180px'}}>Sell</button></Link>
 
@@ -589,7 +589,7 @@ class MyCollectionComponent extends Component {
     for (let i = 1; i <= res; i++) {
       let rex = await this.props.contract?.methods.getTokenData(i).call();
       let rex2 = await this.props.contract?.methods.getTokenDataBatch(i).call();
-      if (rex._tokenOwner == this.props.accounts) {
+      if (rex._tokenOwner == this.props.accounts && rex2._tokenCreator != this.props.accounts) {
       var newBlock = {
         _tokenId : i,
         _tokenOwner : rex._tokenOwner,
@@ -711,7 +711,7 @@ class MyCollectionComponent extends Component {
             fontWeight: '400',
             color: '#5540C7',
           }}>
-            172 NFT's
+            {this.state.art.length} NFTs
           </p>
         </Col>
       </Row>

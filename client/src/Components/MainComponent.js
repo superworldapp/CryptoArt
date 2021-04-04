@@ -306,7 +306,7 @@ class Main extends Component {
 						exact
 						path='/mycollection'
 						component={() => (
-							<MyArtComponent
+							<MyCollectionComponent
 								contract={this.state.contract}
 								accounts={this.state.accounts}
 								batch={this.state.batch?.filter(
