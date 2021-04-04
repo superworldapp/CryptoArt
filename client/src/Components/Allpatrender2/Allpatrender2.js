@@ -288,7 +288,7 @@ class Allpatrender2 extends Component {
 									fontSize: '16px',
 									color: '#5540C7',
 									margin: '0px'
-								}}>{Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')}</p>
+								}}>{this.props.art._sellprice != 0 ? Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether') : Web3.utils.fromWei(this.props.art._bidprice.toString(), 'ether')}</p>
 								{console.log('========>Web3.utils.fromWei', Web3.utils.fromWei)}
 								<p
 									style={{

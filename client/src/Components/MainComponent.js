@@ -94,6 +94,7 @@ class Main extends Component {
 						_tokenbidder: rex._tokenbidder,
 						_isBidding: rex._isBidding,
 						_bidprice: rex._bidprice,
+						_bidend : rex._bidend,
 						_tokenHash: rex2._tokenHash,
 						_tokenBatchName: rex2._tokenBatchName,
 						_tokenCreator: rex2._tokenCreator,

@@ -289,6 +289,7 @@ class MyStoreComponent extends Component {
 					_tokenbidder: rex._tokenbidder,
 					_isBidding: rex._isBidding,
 					_bidprice: rex._bidprice,
+					_bidend : rex._bidend,
 					_tokenHash: rex2._tokenHash,
 					_tokenBatchName: rex2._tokenBatchName,
 					_tokenCreator: rex2._tokenCreator,
@@ -393,7 +394,7 @@ class MyStoreComponent extends Component {
 		});
 
 		const Menu2 = this.state.art3?.map((x) => {
-			if(x._isSellings == false){
+			if((x._isSellings == false) && (x._isBidding == false)){
 			return (
 				<Allpatrender2
 					key={x._tokenId}
@@ -407,7 +408,7 @@ class MyStoreComponent extends Component {
 		});
 
 		const Menu3 = this.state.art3?.map((x) => {
-			if(x._isSellings == true){
+			if(x._isSellings == true || x._isBidding == true){
 			return (
 				<Allpatrender2
 					key={x._tokenId}
@@ -415,6 +416,21 @@ class MyStoreComponent extends Component {
 					contract={this.props.contract}
 					accounts={this.props.accounts}
 					type={2}
+				/>
+			);
+			}
+		});
+
+		const Menu4 = this.state.art3?.map((x) => {
+			if((x._bidend*1000) <= Date.now() && x._bidend !=0 ){
+			return (
+				<Allpatrender2
+					key={x._tokenId}
+					art={x}
+					contract={this.props.contract}
+					accounts={this.props.accounts}
+					
+
 				/>
 			);
 			}
@@ -484,6 +500,12 @@ class MyStoreComponent extends Component {
 						<TabPanel value={artStatus} index={2}>
 							<div className='mystore-art-active-container row'>
 								{Menu3}
+							</div>
+						</TabPanel>
+
+						<TabPanel value={artStatus} index={3}>
+							<div className='mystore-art-active-container row'>
+								{Menu4}
 							</div>
 						</TabPanel>
 					</Col>
