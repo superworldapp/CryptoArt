@@ -96,7 +96,10 @@ const artStatuses = {
 	'Ended': 2,
 	'Offers': 3,
 }
-
+let cntupload = 0;
+let cntqueue = 0;
+let cntactive = 0;
+let cntended = 0;
 class MyStoreComponent extends Component {
 	constructor(props) {
 		super(props);
@@ -117,7 +120,9 @@ class MyStoreComponent extends Component {
 			uploadSuccess: false,
 			artStatus: artStatuses['Queue'],
 			indextab: 7,
-      isListModalOpen: false,
+			cntactive:0,
+			
+     	 isListModalOpen: false,
     };
     this.toggleModal1 = this.toggleModal1.bind(this);
     this.toggleModal2 = this.toggleModal2.bind(this);
@@ -382,6 +387,7 @@ class MyStoreComponent extends Component {
 		const nftsListed = batch.reduce((count, item) => +item._mintedEditions + count, 0)
 
 		const Menu1 = batch?.map((x) => {
+			
 			// console.log('========>x!!!!!', x);
 			return (
 				<UploadsTab
@@ -395,7 +401,8 @@ class MyStoreComponent extends Component {
 
 		const Menu2 = this.state.art3?.map((x) => {
 			if((x._isSellings == false) && (x._isBidding == false)){
-			return (
+				
+				return (
 				<Allpatrender2
 					key={x._tokenId}
 					art={x}
@@ -408,7 +415,9 @@ class MyStoreComponent extends Component {
 		});
 
 		const Menu3 = this.state.art3?.map((x) => {
-			if(x._isSellings == true || x._isBidding == true){
+			if(x._isSellings == true || (x._isBidding == true && !((x._bidend*1000) <= Date.now() && x._bidend !=0 ))){
+			cntactive++;
+			
 			return (
 				<Allpatrender2
 					key={x._tokenId}
@@ -419,11 +428,13 @@ class MyStoreComponent extends Component {
 				/>
 			);
 			}
+			
 		});
 
 		const Menu4 = this.state.art3?.map((x) => {
 			if((x._bidend*1000) <= Date.now() && x._bidend !=0 ){
-			return (
+			cntended++;
+				return (
 				<Allpatrender2
 					key={x._tokenId}
 					art={x}
@@ -468,15 +479,15 @@ class MyStoreComponent extends Component {
 								{...artStatusTabPropsByIndex(0)}
 							/>
 							<StyledTab
-								label={`Queue ${this.state.art3 && this.state.art3.length > 0 ? `(${this.state.art3.length})` : ''}`}
+								label={`Queue (${cntqueue})`}
 								// label={`Queue${nftsListed > 0 ? ` (${nftsListed})` : ''}`}
 								{...artStatusTabPropsByIndex(1)}
 							/>
 							<StyledTab
-								label={`Active ${this.state.art3 && this.state.art3.length > 0 ? `(${this.state.art3.length})` : ''}`}
+								label={`Active (${this.state.cntactive})`}
 								{...artStatusTabPropsByIndex(2)}
 							/>
-							<StyledTab label={'Ended'} {...artStatusTabPropsByIndex(3)} />
+							<StyledTab label={`Ended`} {...artStatusTabPropsByIndex(3)} />
 							<StyledTab label={'Offers'} {...artStatusTabPropsByIndex(4)} />
 						</StyledTabs>
 

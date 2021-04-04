@@ -351,7 +351,7 @@ console.log(`==========>this.props.BatchCreated`, this.props.BatchCreated);
             </div>
             <div className='card-text-info'>
               <CardText className="card-text-info-price">
-                {this.props.price || '0.5ETH'}
+                {Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')==0? Web3.utils.fromWei(this.props.art._bidprice.toString(), 'ether') : Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')}
                 <p className="card-text-info-usd">
                   {this.props.usdPrice || '($985.56 USD)'}
                 </p>
@@ -362,7 +362,8 @@ console.log(`==========>this.props.BatchCreated`, this.props.BatchCreated);
             </div>
             <div className='card-buy-time'>
               <p className='card-buy-time-text'>
-                {this.props.time || '26 hrs 42 mins remaining'}
+                {/* {this.props.art._bidend} */}
+                {Date.now()/1000 < this.props.art._bidend ? this.props.art._bidend - (Date.now()/1000)  : 0}
               </p>
             </div>
           </CardBody>

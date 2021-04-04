@@ -776,7 +776,7 @@ class Allpatrender2 extends Component {
                           </Modal>  */}
 							</>
 						</div>
-						<p className="card-body-time">70 Hrs 15 Min Remaining</p>
+						<p className="card-body-time">{Date.now()/1000 < this.state.art._bidend ? this.state.art._bidend - (Date.now()/1000)  : 0}</p>
 						<div style={{display: 'flex', justifyContent: 'center'}}>
 							{this.state.delistLoading ? (
 								<img height='35' src={loader} alt="load"/>
