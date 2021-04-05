@@ -3,7 +3,6 @@ import React, {useEffect} from 'react';
 import CreationCards from '../CreationCards'
 
 import profile from '../../../images/svg/profile-image.svg';
-import coverImage from '../../../images/profileBg.jpg';
 import './MyCreationsCards.scss';
 
 import {connect} from "react-redux";

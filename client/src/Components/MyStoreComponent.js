@@ -385,7 +385,6 @@ class MyStoreComponent extends Component {
 		const {art2} = this.props
 		let menuTwoCount = 0;
 		let menuThreeCount = 0;
-		console.log('========>batch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', batch);
 		// TODO optimize
 		const nftsListed = batch.reduce((count, item) => +item._mintedEditions + count, 0)
 
