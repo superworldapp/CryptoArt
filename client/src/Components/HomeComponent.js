@@ -40,6 +40,8 @@ import Nate1 from '../images/Nate1.jpg';
 import Nate2 from '../images/Nate2.jpg';
 import Nate3 from '../images/Nate3.jpg';
 import Nate4 from '../images/Nate4.jpg';
+import avatar from '../images/svg/avatar.svg';
+
 
 import Auth from './Auth';
 import SignInModal from './SignInModal/SignInModal';
@@ -49,8 +51,63 @@ import anonUser from '../images/user.png';
 import swicon from  "../images/Group 220.png";
 import p1 from '../images/p1.png';
 import svg1 from '../images/svg/angle.svg';
-import './HomeComponent.css';
+import './HomeComponent.scss';
 import { Redirect, Link } from 'react-router-dom';
+import profile from "../images/svg/avatar.svg";
+import heart from "../images/svg/heartSvg.svg";
+
+const mockData = [
+  {
+    img: image11,
+    profileImg: avatar,
+    title: 'Octo',
+    userName: 'Cjsmith',
+    price: '0.5 ETH',
+    usdPrice: '$985.56 USD',
+    btnName: 'BUY NOW',
+    time: ''
+  },
+  {
+    img: image12,
+    profileImg: avatar,
+    title: 'New Planet Pitstop',
+    userName: 'SaraViz',
+    price: '0.5 ETH',
+    usdPrice: '$985.56 USD',
+    btnName: 'BUY NOW',
+    time: ''
+  },
+  {
+    img: image13,
+    profileImg: avatar,
+    title: 'Break Free',
+    userName: 'Olivia',
+    price: '0.5 ETH',
+    usdPrice: '$985.56 USD',
+    btnName: 'PLACE BID',
+    time: '26 hrs 42 min remaining'
+  },
+  {
+    img: image14,
+    profileImg: avatar,
+    title: 'Look',
+    userName: 'Mai',
+    price: '0.5 ETH',
+    usdPrice: '$985.56 USD',
+    btnName: 'PLACE BID',
+    time: '26 hrs 42 min remaining'
+  },
+  {
+    img: image15,
+    profileImg: avatar,
+    title: 'Faces',
+    userName: 'kyliehart',
+    price: '0.5 ETH',
+    usdPrice: '$985.56 USD',
+    btnName: 'BUY NOW',
+    time: ''
+  },
+]
 
 class Home extends Component {
   static contextType = LayoutContext;
@@ -346,274 +403,338 @@ class Home extends Component {
               <br/>
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
               
-              
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  paddingTop: '5%',
-                  margin:'1.5rem',
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: '18px',
-                    fontFamily: 'Gibson',
-                    fontWeight: 'bold',
-                    marginLeft:'4.5rem',
-                  }}
-                >
-                  {' '}
-                  Trending NFT's
-                </p>
-                <Link to='/allart'>
-                <button
-                href=''
-                  style={{
-                    fontFamily: 'Gibson',
-                    fontWeight: 'bold',
-                    fontSize: '18px',
-                    textDecoration: 'none',
-                    color: '#B3B3B3',
-                    marginRight:'4rem',
-                    border: 'none',
-                    backgroundColor: 'transparent'
-                  }}
-                >
-                  {' '}
-                  View More <img src={svg1} alt='svg1' />
-                </button>
-                </Link>
-              </div>
-              <div className ="bottomView">
-              <div className='rowImages'>
-              <Card className='imageCards'>
+              <div className="trendNftMain">
+                <div className="trendTitle">
+                  <div className="trendTitleMain">
+                    Trending NFTs
+                  </div>
+                  <div className="trendViewMore">
+                    View More
+                  </div>
+                </div>
+                <div className="cardMain">
+                {mockData.map(({
+                                 img,
+                                 profileImg,
+                                 title,
+                                 userName,
+                                 price,
+                                 usdPrice,
+                                 btnName,
+                                 time
+                               }) => (
+                  <Card className="cardWrapper">
                   <CardImg
                     top
-                    
-                    className="Cardimg"
-                    src={image11}
+                    className="card-background-image"
+                    src={img}
                     alt='image3'
-                  ></CardImg>
-                  <CardImgOverlay className="imgOverlay">
-                  <Badge pill className= "sw-overlay">
-                   {/* <img
-                  className="userimg"
-                  id='profile'
-                      src={`data:image/png;base64,${new Identicon(
-                        new Date().toString()
-                      )}`}
-                  alt='profile'
-                > </img>  */}
-                <img
-                  className="userimg"
-                  src={anonUser}
-                ></img> 
-              </Badge>
-                    <CardTitle className="card-imgTitle" >
-                      Octo
-                    </CardTitle> 
-                  </CardImgOverlay>
-                  <CardBody>
-                  <div className="cardImg-body">
-                      <CardSubtitle className= "createdby">
-                        Created by 
-                      </CardSubtitle>
-                      &nbsp;
-                      <CardSubtitle className = "cardsubtitleName">
-                       Cjsmith
-                      </CardSubtitle>
-                    </div>                    
-                     <div className='ctext'>
-                      <CardText className = "price">
-                        0.5ETH
-                        <p className = "USD-price">
-                        ($985.56 USD)
-                          </p>
-                      </CardText>
-                      <div>
-                      <button className='buy-bid-btn'>BUY {' '}NOW</button>
-                      </div>
-                    </div> 
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={image12}
-                    alt='image3'
-                  ></CardImg>
-                  <CardImgOverlay className="imgOverlay">
-                  <Badge pill className= "sw-overlay">
-                  <img
-                  className="userimg"
-                  src={anonUser}
-                ></img>
-              </Badge>
-                    <CardTitle className="card-imgTitle" >
-                      New Planet PitStop
+                  />
+                  <CardImgOverlay className="cardImgOverlay">
+                    <div className="userImg">
+                      <img src={profileImg || profile} alt="userImg"/>
+                    </div>
+                    <CardTitle className="card-user-title">
+                      {title || 'none'}
                     </CardTitle>
                   </CardImgOverlay>
-                  <CardBody>
-                  <div className="cardImg-body">
-                      <CardSubtitle className= "createdby">
-                        Created by 
+                  <CardBody className="card-body">
+                    <div className="card-user-body">
+                      <CardSubtitle className="card-created-by">
+                        by
                       </CardSubtitle>
-                      &nbsp;
-                      <CardSubtitle className = "cardsubtitleName">
-                       SaraViz
+                      <CardSubtitle className="card-subtitle-name">
+                        {userName || ''}
                       </CardSubtitle>
-                    </div>                    
-                     <div className='ctext'>
-                      <CardText className = "price">
-                        0.5ETH
-                        <p className = "USD-price">
-                        ($985.56 USD)
-                          </p>
-                      </CardText>
-                      <div>
-                      <button className='buy-bid-btn'>BUY {' '}NOW</button>
-                      </div>
-                    </div> 
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={image13}
-                    alt='image3'
-                  ></CardImg>
-                  <CardImgOverlay className="imgOverlay">
-                  <Badge pill className= "sw-overlay">
-                  <img
-                  className="userimg"
-                  src={anonUser}
-                ></img>
-              </Badge>
-                    <CardTitle className="card-imgTitle" >
-                      Break Free
-                    </CardTitle>
-                  </CardImgOverlay>
-                  <CardBody>
-                    <div className="cardImg-body">
-                      <CardSubtitle className="createdby">
-                        Created by 
-                      </CardSubtitle>
-                      &nbsp;
-                      <CardSubtitle className = "cardsubtitleName">
-                       Olivia
-                      </CardSubtitle>
-                    </div>                    
-                     <div className='ctext'>
-                      <CardText className="price">
-                        0.5ETH
-                        <p className= "USD-price">
-                        ($985.56 USD)
-                          </p>
-                      </CardText>
-                      <div>
-                      <button className='buy-bid-btn'>Place Bid</button>
-                      </div>
-                    </div> 
-                    <div className='buy-bid-btn-div'>
-                        <p className="time-div">
-                          26 hrs 42 mins remaining
+                    </div>
+                    <div className='card-text-info'>
+                      <CardText className="card-text-info-price">
+                        {price || '0.5ETH'}
+                        <p className="card-text-info-usd">
+                          {usdPrice || '($985.56 USD)'}
                         </p>
-                      </div>
-                  </CardBody>
-                </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={image14}
-                    alt='image3'
-                  ></CardImg>
-                  <CardImgOverlay className="imgOverlay">
-                  <Badge pill className= "sw-overlay">
-                  <img
-                  className="userimg"
-                  src={anonUser}
-                ></img>
-              </Badge>
-                    <CardTitle className="card-imgTitle" >
-                      Look
-                    </CardTitle>
-                  </CardImgOverlay>
-                  <CardBody>
-                    <div className="cardImg-body">
-                      <CardSubtitle className= "createdby">
-                        Created by 
-                      </CardSubtitle>
-                      &nbsp;
-                      <CardSubtitle className="cardsubtitleName">
-                       Mai
-                      </CardSubtitle>
-                    </div>                    
-                     <div className='ctext'>
-                      <CardText className="price">
-                        0.5ETH
-                        <p className="USD-price">
-                        ($985.56 USD)
-                          </p>
                       </CardText>
                       <div>
-                      <button className='buy-bid-btn'>Place Bid</button>
+                        <button className='card-buy-button'>{btnName}</button>
                       </div>
-                    </div> 
-                    <div className='buy-bid-btn-div'>
-                      
-                        <p className='time-div'>
-                        26 hrs 42 mins remaining
-                        </p>
-                      </div>
+                    </div>
+                    <div className='card-buy-time'>
+                      <p className='card-buy-time-text'>
+                        {time}
+                      </p>
+                    </div>
                   </CardBody>
                 </Card>
-                <Card className='imageCards'>
-                  <CardImg
-                    top
-                    className="Cardimg"
-                    src={image15}
-                    alt='image3'
-                  ></CardImg>
-                  <CardImgOverlay className="imgOverlay">
-                  <Badge pill className= "sw-overlay">
-                  <img
-                  className="userimg"
-                  src={anonUser}
-                ></img>
-              </Badge>
-                    <CardTitle className="card-imgTitle" >
-                      Faces
-                    </CardTitle>
-                  </CardImgOverlay>
-                  <CardBody>
-                  <div className="cardImg-body">
-                      <CardSubtitle className= "createdby">
-                        Created by 
-                      </CardSubtitle>
-                      &nbsp;
-                      <CardSubtitle className = "cardsubtitleName">
-                       kyliehart
-                      </CardSubtitle>
-                    </div>                    
-                     <div className='ctext'>
-                      <CardText className = "price">
-                        0.5ETH
-                        <p className = "USD-price">
-                        ($985.56 USD)
-                          </p>
-                      </CardText>
-                      <div>
-                      <button className='buy-bid-btn'>BUY {' '}NOW</button>
-                      </div>
-                    </div> 
-                  </CardBody>
-                  </Card>
+                ))}
+                </div>
               </div>
-              </div>
+              {/*<div*/}
+              {/*  style={{*/}
+              {/*    display: 'flex',*/}
+              {/*    justifyContent: 'space-between',*/}
+              {/*    paddingTop: '5%',*/}
+              {/*    margin:'1.5rem',*/}
+              {/*  }}*/}
+              {/*>*/}
+              {/*  <p*/}
+              {/*    style={{*/}
+              {/*      fontSize: '18px',*/}
+              {/*      fontFamily: 'Gibson',*/}
+              {/*      fontWeight: 'bold',*/}
+              {/*      marginLeft:'4.5rem',*/}
+              {/*    }}*/}
+              {/*  >*/}
+              {/*    {' '}*/}
+              {/*    Trending NFT's*/}
+              {/*  </p>*/}
+              {/*  <Link to='/allart'>*/}
+              {/*  <button*/}
+              {/*  href=''*/}
+              {/*    style={{*/}
+              {/*      fontFamily: 'Gibson',*/}
+              {/*      fontWeight: 'bold',*/}
+              {/*      fontSize: '18px',*/}
+              {/*      textDecoration: 'none',*/}
+              {/*      color: '#B3B3B3',*/}
+              {/*      marginRight:'4rem',*/}
+              {/*      border: 'none',*/}
+              {/*      backgroundColor: 'transparent'*/}
+              {/*    }}*/}
+              {/*  >*/}
+              {/*    {' '}*/}
+              {/*    View More <img src={svg1} alt='svg1' />*/}
+              {/*  </button>*/}
+              {/*  </Link>*/}
+              {/*</div>*/}
+              {/*<div className ="bottomView">*/}
+              {/*<div className='rowImages'>*/}
+              {/*<Card className='imageCards'>*/}
+              {/*    <CardImg*/}
+              {/*      top*/}
+              {/*      */}
+              {/*      className="Cardimg"*/}
+              {/*      src={image11}*/}
+              {/*      alt='image3'*/}
+              {/*    ></CardImg>*/}
+              {/*    <CardImgOverlay className="imgOverlay">*/}
+              {/*    <Badge pill className= "sw-overlay">*/}
+              {/*     /!* <img*/}
+              {/*    className="userimg"*/}
+              {/*    id='profile'*/}
+              {/*        src={`data:image/png;base64,${new Identicon(*/}
+              {/*          new Date().toString()*/}
+              {/*        )}`}*/}
+              {/*    alt='profile'*/}
+              {/*  > </img>  *!/*/}
+              {/*  <img*/}
+              {/*    className="userimg"*/}
+              {/*    src={anonUser}*/}
+              {/*  ></img> */}
+              {/*</Badge>*/}
+              {/*      <CardTitle className="card-imgTitle" >*/}
+              {/*        Octo*/}
+              {/*      </CardTitle> */}
+              {/*    </CardImgOverlay>*/}
+              {/*    <CardBody>*/}
+              {/*    <div className="cardImg-body">*/}
+              {/*        <CardSubtitle className= "createdby">*/}
+              {/*          Created by */}
+              {/*        </CardSubtitle>*/}
+              {/*        &nbsp;*/}
+              {/*        <CardSubtitle className = "cardsubtitleName">*/}
+              {/*         Cjsmith*/}
+              {/*        </CardSubtitle>*/}
+              {/*      </div>                    */}
+              {/*       <div className='ctext'>*/}
+              {/*        <CardText className = "price">*/}
+              {/*          0.5ETH*/}
+              {/*          <p className = "USD-price">*/}
+              {/*          ($985.56 USD)*/}
+              {/*            </p>*/}
+              {/*        </CardText>*/}
+              {/*        <div>*/}
+              {/*        <button className='buy-bid-btn'>BUY {' '}NOW</button>*/}
+              {/*        </div>*/}
+              {/*      </div> */}
+              {/*    </CardBody>*/}
+              {/*  </Card>*/}
+              {/*  <Card className='imageCards'>*/}
+              {/*    <CardImg*/}
+              {/*      top*/}
+              {/*      className="Cardimg"*/}
+              {/*      src={image12}*/}
+              {/*      alt='image3'*/}
+              {/*    ></CardImg>*/}
+              {/*    <CardImgOverlay className="imgOverlay">*/}
+              {/*    <Badge pill className= "sw-overlay">*/}
+              {/*    <img*/}
+              {/*    className="userimg"*/}
+              {/*    src={anonUser}*/}
+              {/*  ></img>*/}
+              {/*</Badge>*/}
+              {/*      <CardTitle className="card-imgTitle" >*/}
+              {/*        New Planet PitStop*/}
+              {/*      </CardTitle>*/}
+              {/*    </CardImgOverlay>*/}
+              {/*    <CardBody>*/}
+              {/*    <div className="cardImg-body">*/}
+              {/*        <CardSubtitle className= "createdby">*/}
+              {/*          Created by */}
+              {/*        </CardSubtitle>*/}
+              {/*        &nbsp;*/}
+              {/*        <CardSubtitle className = "cardsubtitleName">*/}
+              {/*         SaraViz*/}
+              {/*        </CardSubtitle>*/}
+              {/*      </div>                    */}
+              {/*       <div className='ctext'>*/}
+              {/*        <CardText className = "price">*/}
+              {/*          0.5ETH*/}
+              {/*          <p className = "USD-price">*/}
+              {/*          ($985.56 USD)*/}
+              {/*            </p>*/}
+              {/*        </CardText>*/}
+              {/*        <div>*/}
+              {/*        <button className='buy-bid-btn'>BUY {' '}NOW</button>*/}
+              {/*        </div>*/}
+              {/*      </div> */}
+              {/*    </CardBody>*/}
+              {/*  </Card>*/}
+              {/*  <Card className='imageCards'>*/}
+              {/*    <CardImg*/}
+              {/*      top*/}
+              {/*      className="Cardimg"*/}
+              {/*      src={image13}*/}
+              {/*      alt='image3'*/}
+              {/*    ></CardImg>*/}
+              {/*    <CardImgOverlay className="imgOverlay">*/}
+              {/*    <Badge pill className= "sw-overlay">*/}
+              {/*    <img*/}
+              {/*    className="userimg"*/}
+              {/*    src={anonUser}*/}
+              {/*  ></img>*/}
+              {/*</Badge>*/}
+              {/*      <CardTitle className="card-imgTitle" >*/}
+              {/*        Break Free*/}
+              {/*      </CardTitle>*/}
+              {/*    </CardImgOverlay>*/}
+              {/*    <CardBody>*/}
+              {/*      <div className="cardImg-body">*/}
+              {/*        <CardSubtitle className="createdby">*/}
+              {/*          Created by */}
+              {/*        </CardSubtitle>*/}
+              {/*        &nbsp;*/}
+              {/*        <CardSubtitle className = "cardsubtitleName">*/}
+              {/*         Olivia*/}
+              {/*        </CardSubtitle>*/}
+              {/*      </div>                    */}
+              {/*       <div className='ctext'>*/}
+              {/*        <CardText className="price">*/}
+              {/*          0.5ETH*/}
+              {/*          <p className= "USD-price">*/}
+              {/*          ($985.56 USD)*/}
+              {/*            </p>*/}
+              {/*        </CardText>*/}
+              {/*        <div>*/}
+              {/*        <button className='buy-bid-btn'>Place Bid</button>*/}
+              {/*        </div>*/}
+              {/*      </div> */}
+              {/*      <div className='buy-bid-btn-div'>*/}
+              {/*          <p className="time-div">*/}
+              {/*            26 hrs 42 mins remaining*/}
+              {/*          </p>*/}
+              {/*        </div>*/}
+              {/*    </CardBody>*/}
+              {/*  </Card>*/}
+              {/*  <Card className='imageCards'>*/}
+              {/*    <CardImg*/}
+              {/*      top*/}
+              {/*      className="Cardimg"*/}
+              {/*      src={image14}*/}
+              {/*      alt='image3'*/}
+              {/*    ></CardImg>*/}
+              {/*    <CardImgOverlay className="imgOverlay">*/}
+              {/*    <Badge pill className= "sw-overlay">*/}
+              {/*    <img*/}
+              {/*    className="userimg"*/}
+              {/*    src={anonUser}*/}
+              {/*  ></img>*/}
+              {/*</Badge>*/}
+              {/*      <CardTitle className="card-imgTitle" >*/}
+              {/*        Look*/}
+              {/*      </CardTitle>*/}
+              {/*    </CardImgOverlay>*/}
+              {/*    <CardBody>*/}
+              {/*      <div className="cardImg-body">*/}
+              {/*        <CardSubtitle className= "createdby">*/}
+              {/*          Created by */}
+              {/*        </CardSubtitle>*/}
+              {/*        &nbsp;*/}
+              {/*        <CardSubtitle className="cardsubtitleName">*/}
+              {/*         Mai*/}
+              {/*        </CardSubtitle>*/}
+              {/*      </div>                    */}
+              {/*       <div className='ctext'>*/}
+              {/*        <CardText className="price">*/}
+              {/*          0.5ETH*/}
+              {/*          <p className="USD-price">*/}
+              {/*          ($985.56 USD)*/}
+              {/*            </p>*/}
+              {/*        </CardText>*/}
+              {/*        <div>*/}
+              {/*        <button className='buy-bid-btn'>Place Bid</button>*/}
+              {/*        </div>*/}
+              {/*      </div> */}
+              {/*      <div className='buy-bid-btn-div'>*/}
+              {/*        */}
+              {/*          <p className='time-div'>*/}
+              {/*          26 hrs 42 mins remaining*/}
+              {/*          </p>*/}
+              {/*        </div>*/}
+              {/*    </CardBody>*/}
+              {/*  </Card>*/}
+              {/*  <Card className='imageCards'>*/}
+              {/*    <CardImg*/}
+              {/*      top*/}
+              {/*      className="Cardimg"*/}
+              {/*      src={image15}*/}
+              {/*      alt='image3'*/}
+              {/*    ></CardImg>*/}
+              {/*    <CardImgOverlay className="imgOverlay">*/}
+              {/*    <Badge pill className= "sw-overlay">*/}
+              {/*    <img*/}
+              {/*    className="userimg"*/}
+              {/*    src={anonUser}*/}
+              {/*  ></img>*/}
+              {/*</Badge>*/}
+              {/*      <CardTitle className="card-imgTitle" >*/}
+              {/*        Faces*/}
+              {/*      </CardTitle>*/}
+              {/*    </CardImgOverlay>*/}
+              {/*    <CardBody>*/}
+              {/*    <div className="cardImg-body">*/}
+              {/*        <CardSubtitle className= "createdby">*/}
+              {/*          Created by */}
+              {/*        </CardSubtitle>*/}
+              {/*        &nbsp;*/}
+              {/*        <CardSubtitle className = "cardsubtitleName">*/}
+              {/*         kyliehart*/}
+              {/*        </CardSubtitle>*/}
+              {/*      </div>                    */}
+              {/*       <div className='ctext'>*/}
+              {/*        <CardText className = "price">*/}
+              {/*          0.5ETH*/}
+              {/*          <p className = "USD-price">*/}
+              {/*          ($985.56 USD)*/}
+              {/*            </p>*/}
+              {/*        </CardText>*/}
+              {/*        <div>*/}
+              {/*        <button className='buy-bid-btn'>BUY {' '}NOW</button>*/}
+              {/*        </div>*/}
+              {/*      </div> */}
+              {/*    </CardBody>*/}
+              {/*    </Card>*/}
+              {/*</div>*/}
+              {/*</div>*/}
               
               <div
                 style={{
