@@ -444,10 +444,14 @@ img.rounded-circle {
    75% {background-image: url("../images/image\ 9.png");}
 }
 
+.containerFluidMain {
+  margin-bottom: 85px;
+}
+
 .trendNftMain {
   display: flex;
   flex-direction: column;
-  padding: 56px 83px 77px 82px;
+  padding: 56px 67px 30px;
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
@@ -468,6 +472,7 @@ img.rounded-circle {
       font-size: 18px;
       line-height: 18px;
       color: #B2B2B2;
+      cursor: pointer;
     }
   }
   .cardMain {
@@ -482,7 +487,7 @@ img.rounded-circle {
       width: 240px;
       border-radius: 5%;
       border: 0;
-      margin: 0 15px 55px 0 !important;
+      margin: 0 15px 20px 0 !important;
 
 
       .card-background-image {
