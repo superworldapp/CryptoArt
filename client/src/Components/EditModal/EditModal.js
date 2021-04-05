@@ -93,7 +93,7 @@ const EditModal = props => {
 
 	useEffect(() => {
 		if (saleType === saleTypes.AUCTION) {
-			initialControls.tokenPrice.disabled = false
+			initialControls.tokenPrice.disabled = true
 			initialControls.duration.disabled = true
 		} else if (saleType === saleTypes.BUY_NOW) {
 			initialControls.tokenPrice.disabled = true
@@ -104,7 +104,6 @@ const EditModal = props => {
 	const handleClick = () => {
 		Sale().then()
 	}
-
 
 	return (
 
@@ -170,7 +169,7 @@ const EditModal = props => {
 							/>
 						</div>
 					</FormGroup>
-					<FormGroup className={saleType === saleTypes.AUCTION ? 'form-disabled' : ''}>
+					<FormGroup>
 						<div className='label-token-price'>
 							<Label className='label' htmlFor='buy1now'>
 								Token Price
@@ -178,7 +177,6 @@ const EditModal = props => {
 							<span className='custom-tooltip'>(Start Price if Auction)</span>
 						</div>
 						<Input
-							disabled={saleType === saleTypes.AUCTION}
 							className='text-input'
 							type='text'
 							onChange={handleInputChange}
