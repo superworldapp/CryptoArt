@@ -3,7 +3,7 @@ import React from 'react';
 import RecentActivityCards from "../RecentActivityCards";
 
 import profile from "../../../images/svg/profile-image.svg";
-import bg4 from '../../../images/svg/bg4.svg';
+import bg4 from '../../../images/svg/avatar.svg';
 import './RecentActivity.scss';
 
 const RecentActivity = () => {

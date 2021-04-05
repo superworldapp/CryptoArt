@@ -208,7 +208,6 @@ class Allpatrender2 extends Component {
 	}
 
 	render() {
-		console.log('========>this.props!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1555555555555555555555555555555555555555555555555555555555555555555555555555555555', this.props);
 		let but = this.state.art._isSellings ? 'mystore-active-card' : 'hidden';
 		let bak = this.state.art._isSellings ? 'bg-success text-white' : '';
 		let buk = this.state.art._isBidding ? 'bg-warning' : '';

@@ -17,6 +17,8 @@ import Footer from './FooterComponent';
 import ProtectedRoute from './ProtectedRoute';
 import Axios from 'axios';
 import MyArtComponent from "./MyArtComponent/MyArtComponent";
+import {setArt} from "../redux/myStoreComponent/actions";
+import {connect} from "react-redux";
 //import HDWalletProvider from "@truffle/hdwallet-provider";
 let allDocs = [];
 
@@ -84,7 +86,7 @@ class Main extends Component {
 				let rex = await instance.methods.getTokenData(i).call();
 				// console.log(rex);
 				let rex2 = await instance.methods.getTokenDataBatch(i).call();
-				if (rex._tokenOwner === this.props.accounts) {
+				if (rex._tokenOwner === accounts[0]) {
 					var newBlock = {
 						_tokenId: i,
 						_tokenOwner: rex._tokenOwner,
@@ -94,13 +96,12 @@ class Main extends Component {
 						_tokenbidder: rex._tokenbidder,
 						_isBidding: rex._isBidding,
 						_bidprice: rex._bidprice,
-						_bidend : rex._bidend,
+						_bidend: rex._bidend,
 						_tokenHash: rex2._tokenHash,
 						_tokenBatchName: rex2._tokenBatchName,
 						_tokenCreator: rex2._tokenCreator,
 						_imgurl: rex2._imgurl,
 						_imgThumbnail: rex2._imgThumbnail,
-
 					}
 					response.push(newBlock);
 					// console.log(newBlock)
@@ -109,6 +110,7 @@ class Main extends Component {
 				//   createrToken.push(rex);
 				// }
 			}
+			this.props.setArt({art3: response});
 
 			let allDoc = [];
 			allDoc = response;
@@ -216,7 +218,7 @@ class Main extends Component {
 	render() {
 		const TokenWithId = ({match}) => {
 			return (
-<TokenDetail
+				<TokenDetail
 					tokenCreated={this.state.tokensCreated?.filter(
 						(token) => token.returnValues.tokenId === match.params.id
 					)}
@@ -338,7 +340,12 @@ class Main extends Component {
 						exact
 						path='/myprofile'
 						component={() => (
-							<Profile/>
+							<Profile
+								state={this.state}
+								batch={this.state.batch?.filter(
+									(batch) => batch._tokenCreator === this.state.accounts
+								)}
+							/>
 						)}
 					/>
 					<Route path='/card/:id' component={TokenWithId}/>
@@ -376,4 +383,9 @@ class Main extends Component {
 		);
 	}
 }
-export default Main;
+
+const mapDispatchToProps = (dispatch) => ({
+	setArt: (data) => dispatch(setArt(data)),
+});
+
+export default connect(null, mapDispatchToProps)(Main);

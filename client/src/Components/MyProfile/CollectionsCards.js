@@ -14,12 +14,12 @@ const CollectionsCards = (props) => {
 			<CardImg
 				top
 				className="card-background-image-collection"
-				src={props.cardImage}
-				alt='image3'
+				src={props['5']}
+				alt={props['5']}
 			/>
 			<CardBody className="card-img-overlay-collection">
 				<CardTitle className="card-user-title-collection">
-					{props.cardTitle}
+					{props['2']}
 				</CardTitle>
 			</CardBody>
 		</Card>

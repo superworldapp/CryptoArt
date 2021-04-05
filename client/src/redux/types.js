@@ -6,3 +6,6 @@ export const SET_FILTERED_DATA = 'SET_FILTERED_DATA';
 export const CHIPS_DATA = 'CHIPS_DATA';
 
 export const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE';
+
+//myStoreComponent
+export const SET_ART = 'SET_ART';

@@ -27,7 +27,7 @@ import pencil from '../../images/pencil.png'
 import './MyProfileComponent.scss'
 
 
-const MyProfileComponent = () => {
+const MyProfileComponent = (props) => {
 	const [selectedTab, setSelectedTab] = useState(0);
 	const [isEdit, setIsEdit] = useState(false);
 	const [linksStore, setLinksStore] = useState();
@@ -90,7 +90,6 @@ const MyProfileComponent = () => {
 			height: 5,
 		},
 	})((props) => <Tabs {...props} TabIndicatorProps={{children: <span/>}}/>);
-
 
 	return (
 		<>
@@ -176,10 +175,11 @@ const MyProfileComponent = () => {
 				{/*<Tab label="Favourites"/>*/}
 				<StyledTab label="Recent activity"/>
 			</StyledTabs>
-			{selectedTab === 0 && <MyCreation/>}
-			{selectedTab === 1 && <MyCollectionsCards/>}
+			{selectedTab === 0 && <MyCreation />}
+			{selectedTab === 1 && <MyCollectionsCards collectionBatch={props.batch}/>}
 			{selectedTab === 2 && <RecentActivity/>}
 		</>
 	);
 };
-export default MyProfileComponent
+
+export default MyProfileComponent;
