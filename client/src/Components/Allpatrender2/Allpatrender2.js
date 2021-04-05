@@ -50,8 +50,8 @@ class Allpatrender2 extends Component {
 	componentDidMount = async () => {
 		//;'let newArr = await this.props.art?.filter((x) => x._isSellings);
 	 	this.setState({art: this.props.art});
-	
-		
+
+
 	}
 	buyItem = async () => {
 		try {
@@ -208,6 +208,7 @@ class Allpatrender2 extends Component {
 	}
 
 	render() {
+		console.log('========>this.props!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1555555555555555555555555555555555555555555555555555555555555555555555555555555555', this.props);
 		let but = this.state.art._isSellings ? 'mystore-active-card' : 'hidden';
 		let bak = this.state.art._isSellings ? 'bg-success text-white' : '';
 		let buk = this.state.art._isBidding ? 'bg-warning' : '';
@@ -217,7 +218,7 @@ class Allpatrender2 extends Component {
 		let auc1 = this.state.art._isBidding ? 'hidden' : 'abtn';
 		let auc2 = this.state.art._isBidding ? 'hidden' : 'abtn1';
 		let forAuc = this.state.art._isBidding ? 'visible' : 'invisible';
-	
+
 		// if(this.props.type == 2){
 		// 	newarr = this.state.art?.filter((x) => x._isSellings);
 		// 	this.setState({art : newarr});

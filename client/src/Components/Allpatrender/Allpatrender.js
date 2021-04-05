@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Card, CardBody, CardImg, Modal, ModalBody, ModalHeader} from "reactstrap";
+import {Card, CardBody, CardImg, Container, Modal, ModalBody, ModalHeader} from "reactstrap";
 import {Link} from "react-router-dom";
 import checkmark from "../../images/svg/checkmark.svg";
 import loader from "../../images/loader.svg";
@@ -9,6 +9,7 @@ import Sound from 'react-sound';
 import ReactPlayer from 'react-player';
 import MintModal from "../MintModal/MintModal";
 import ModalUploadToMyStore from "../ModalUploadToMyStore/ModalUploadToMyStore";
+import ModalListingNft from "../ModalListingNft";
 
 
 class Allpatrender extends Component {
@@ -33,6 +34,8 @@ class Allpatrender extends Component {
 			endAuctionSuccess: false,
 			isMintModal: false,
 			soundPlaying: false,
+
+			openListModal: false,
 		};
 		this.toggleModal = this.toggleModal.bind(this);
 		this.toggleListForAuction = this.toggleListForAuction.bind(this);
@@ -48,6 +51,8 @@ class Allpatrender extends Component {
 		this.Sale = this.Sale.bind(this);
 		this.mintTokenBatch = this.mintTokenBatch.bind(this);
 		this.mintTokenBatch = this.mintTokenBatch.bind(this);
+
+		this.handleOpenListModal = this.handleOpenListModal.bind(this);
 	}
 
 	buyItem = async () => {
@@ -62,6 +67,12 @@ class Allpatrender extends Component {
 			console.error(error)
 		}
 	};
+
+	handleOpenListModal() {
+		this.setState({
+			openListModal: !this.state.openListModal,
+		})
+	}
 
 	toggleModal() {
 		this.setState({
@@ -334,13 +345,13 @@ class Allpatrender extends Component {
 				className={buk}//{this.props.art._isBidding ? buk : bak}
 				className='mystore-queue-card'
 			>
-				 {/*<a href={this.props.art.imgurl} target='_blank'> */}
-				 {+art[3] >= 0 && <span className='card-counter'>+{art[3]}</span>}
+				{/*<a href={this.props.art.imgurl} target='_blank'> */}
+				{+art[3] >= 0 && <span className='card-counter'>+{art[3]}</span>}
 				{console.log('========>art[3]', art[3])}
 				<Link to={`/batch/${this.props.art._batchId}`}>
-				<div className='mystore-queue-card-img'>
-					{displayFileType()}
-				</div>
+					<div className='mystore-queue-card-img'>
+						{displayFileType()}
+					</div>
 				</Link>
 				<div className='card-body-wrapper'>
 					<CardBody style={{width: '100%'}}>
@@ -348,7 +359,7 @@ class Allpatrender extends Component {
 						<h3>{this.props.art._tokenBatchName}</h3>
 
 						<div className='second-section'>
-							<button onClick={this.props.onListButtonClick} className='button_mint'>List</button>
+							<button onClick={this.handleOpenListModal} className='button_mint'>List</button>
 						</div>
 
 						<div>
@@ -880,6 +891,16 @@ class Allpatrender extends Component {
 						</div>
 					</CardBody>
 				</div>
+				{
+					this.state.openListModal
+						? <ModalListingNft
+							isOpen={this.state.openListModal}
+							toggle={this.handleOpenListModal}
+							onClose={this.handleOpenListModal}
+							fileName='Leopard.png'
+						/>
+						: null
+				}
 			</Card>
 		);
 	}

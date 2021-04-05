@@ -100,6 +100,7 @@ let cntupload = 0;
 let cntqueue = 0;
 let cntactive = 0;
 let cntended = 0;
+
 class MyStoreComponent extends Component {
 	constructor(props) {
 		super(props);
@@ -120,51 +121,51 @@ class MyStoreComponent extends Component {
 			uploadSuccess: false,
 			artStatus: artStatuses['Queue'],
 			indextab: 7,
-			cntactive:0,
-			
-     	 isListModalOpen: false,
-    };
-    this.toggleModal1 = this.toggleModal1.bind(this);
-    this.toggleModal2 = this.toggleModal2.bind(this);
-    this.handleUploadMore = this.handleUploadMore.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.fileSelectHandler = this.fileSelectHandler.bind(this);
-    this.fileUploadHandler = this.fileUploadHandler.bind(this);
-    this.fileAwsHandler = this.fileAwsHandler.bind(this);
-    this.refreshMyArt = this.refreshMyArt.bind(this);
-    this.onArtStatusChange = this.onArtStatusChange.bind(this);
-    this.toggleListModal = this.toggleListModal.bind(this);
-    this.onListButtonClick = this.onListButtonClick.bind(this);
-    this.onListModalClosed = this.onListModalClosed.bind(this);
-	this.accUsername = this.accUsername.bind(this)
-  }
+			cntactive: 0,
 
-  accUsername = (accNum) => {
-	if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
-		return '@Chitra';
-	else if (accNum === '0x0d5567345D3Cb1114471BC07c396Cc32C7CF92ec')
-		return '@Arianna';
-	else if (accNum === '0xABD82c9B735F2C89f2e62152A9884F4A92414F20')
-		return '@CJMain';
-	else if (accNum === '0x63611F92FA2d7B7e6625a97E6474b7fA16DbD89F')
-		return '@CJ Test';
-	else if (accNum === '0x4271AC6Bb565D120e2Ac1C3fb855aE5Dad6aE8ff')
-		return '@Swapnil';
-	else if (accNum === '0x81B2362F55Ea93f71990d7F446dca80BdD94C6e7')
-		return '@SwapnilTest';
-	else if (accNum === '0xE337525DD5d34fC683f43CbBDF3e1EDe0833B744')
-		return '@Viktor';
-	else if (accNum === '0x32c93d70E9813fFe62a2fCf6189F14A4ff2e8cB3')
-		return '@Alex';
-	else return '@Annonymous';
-};
+			isListModalOpen: false,
+		};
+		this.toggleModal1 = this.toggleModal1.bind(this);
+		this.toggleModal2 = this.toggleModal2.bind(this);
+		this.handleUploadMore = this.handleUploadMore.bind(this);
+		this.handleInputChange = this.handleInputChange.bind(this);
+		this.fileSelectHandler = this.fileSelectHandler.bind(this);
+		this.fileUploadHandler = this.fileUploadHandler.bind(this);
+		this.fileAwsHandler = this.fileAwsHandler.bind(this);
+		this.refreshMyArt = this.refreshMyArt.bind(this);
+		this.onArtStatusChange = this.onArtStatusChange.bind(this);
+		this.toggleListModal = this.toggleListModal.bind(this);
+		this.onListButtonClick = this.onListButtonClick.bind(this);
+		this.onListModalClosed = this.onListModalClosed.bind(this);
+		this.accUsername = this.accUsername.bind(this)
+	}
+
+	accUsername = (accNum) => {
+		if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
+			return '@Chitra';
+		else if (accNum === '0x0d5567345D3Cb1114471BC07c396Cc32C7CF92ec')
+			return '@Arianna';
+		else if (accNum === '0xABD82c9B735F2C89f2e62152A9884F4A92414F20')
+			return '@CJMain';
+		else if (accNum === '0x63611F92FA2d7B7e6625a97E6474b7fA16DbD89F')
+			return '@CJ Test';
+		else if (accNum === '0x4271AC6Bb565D120e2Ac1C3fb855aE5Dad6aE8ff')
+			return '@Swapnil';
+		else if (accNum === '0x81B2362F55Ea93f71990d7F446dca80BdD94C6e7')
+			return '@SwapnilTest';
+		else if (accNum === '0xE337525DD5d34fC683f43CbBDF3e1EDe0833B744')
+			return '@Viktor';
+		else if (accNum === '0x32c93d70E9813fFe62a2fCf6189F14A4ff2e8cB3')
+			return '@Alex';
+		else return '@Annonymous';
+	};
 
 
-  toggleListModal() {
-    this.setState({
-      isListModalOpen: !this.state.isListModalOpen,
-    })
-  }
+	toggleListModal() {
+		this.setState({
+			isListModalOpen: !this.state.isListModalOpen,
+		})
+	}
 
 	onListModalClosed() {
 		this.setState({
@@ -196,8 +197,8 @@ class MyStoreComponent extends Component {
 		})
 		if (!this.state.isModalOpen1 && !this.state.uploadSuccess)
 			window.location.reload();
-		}
-		
+	}
+
 	onArtStatusChange(e, artStatus) {
 		this.setState({artStatus})
 	}
@@ -294,7 +295,7 @@ class MyStoreComponent extends Component {
 					_tokenbidder: rex._tokenbidder,
 					_isBidding: rex._isBidding,
 					_bidprice: rex._bidprice,
-					_bidend : rex._bidend,
+					_bidend: rex._bidend,
 					_tokenHash: rex2._tokenHash,
 					_tokenBatchName: rex2._tokenBatchName,
 					_tokenCreator: rex2._tokenCreator,
@@ -382,13 +383,14 @@ class MyStoreComponent extends Component {
 		const {batch} = this.props
 		const {artStatus} = this.state
 		const {art2} = this.props
+		let menuTwoCount = 0;
+		let menuThreeCount = 0;
 		console.log('========>batch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', batch);
 		// TODO optimize
 		const nftsListed = batch.reduce((count, item) => +item._mintedEditions + count, 0)
 
 		const Menu1 = batch?.map((x) => {
-			
-			// console.log('========>x!!!!!', x);
+
 			return (
 				<UploadsTab
 					key={x._tokenId}
@@ -400,51 +402,49 @@ class MyStoreComponent extends Component {
 		});
 
 		const Menu2 = this.state.art3?.map((x) => {
-			if((x._isSellings == false) && (x._isBidding == false)){
-				
+			if ((x._isSellings === false) && (x._isBidding === false)) {
+				menuTwoCount++;
+
 				return (
-				<Allpatrender2
-					key={x._tokenId}
-					art={x}
-					contract={this.props.contract}
-					accounts={this.props.accounts}
-					type={1}
-				/>
-				
+					<Allpatrender2
+						key={x._tokenId}
+						art={x}
+						contract={this.props.contract}
+						accounts={this.props.accounts}
+						type={1}
+					/>
 				)
 			}
 		});
 
 		const Menu3 = this.state.art3?.map((x) => {
-			if(x._isSellings == true || (x._isBidding == true && !((x._bidend*1000) <= Date.now() && x._bidend !=0 ))){
-			cntactive++;
-			
-			return (
-				<Allpatrender2
-					key={x._tokenId}
-					art={x}
-					contract={this.props.contract}
-					accounts={this.props.accounts}
-					type={2}
-				/>
-			);
+			if (x._isSellings === true || (x._isBidding === true && !((x._bidend * 1000) <= Date.now() && x._bidend !== 0))) {
+				cntactive++;
+				menuThreeCount++;
+
+				return (
+					<Allpatrender2
+						key={x._tokenId}
+						art={x}
+						contract={this.props.contract}
+						accounts={this.props.accounts}
+						type={2}
+					/>
+				);
 			}
-			
 		});
 
 		const Menu4 = this.state.art3?.map((x) => {
-			if((x._bidend*1000) <= Date.now() && x._bidend !=0 ){
-			cntended++;
+			if ((x._bidend * 1000) <= Date.now() && x._bidend !== 0) {
+				cntended++;
 				return (
-				<Allpatrender2
-					key={x._tokenId}
-					art={x}
-					contract={this.props.contract}
-					accounts={this.props.accounts}
-					
-
-				/>
-			);
+					<Allpatrender2
+						key={x._tokenId}
+						art={x}
+						contract={this.props.contract}
+						accounts={this.props.accounts}
+					/>
+				);
 			}
 		});
 
@@ -480,28 +480,33 @@ class MyStoreComponent extends Component {
 								{...artStatusTabPropsByIndex(0)}
 							/>
 							<StyledTab
-								label={`Queue (${cntqueue})`}
+								label={`Queue (${menuTwoCount})`}
 								// label={`Queue${nftsListed > 0 ? ` (${nftsListed})` : ''}`}
 								{...artStatusTabPropsByIndex(1)}
 							/>
 							<StyledTab
-								label={`Active (${this.state.cntactive})`}
+								// label={`Active (${this.state.cntactive})`}
+								label={`Active (${menuThreeCount})`}
 								{...artStatusTabPropsByIndex(2)}
 							/>
 							<StyledTab label={`Ended`} {...artStatusTabPropsByIndex(3)} />
-							<StyledTab label={'Offers'} {...artStatusTabPropsByIndex(4)} />
+							{/*<StyledTab label={'Offers'} {...artStatusTabPropsByIndex(4)} />*/}
 						</StyledTabs>
 
-						<TabPanel value={artStatus} index={0}>
-							<div className='mystore-art-queue-container row'>
-								<div className='mystore-upload-art'>
-									<Button className='mystore-upload-btn' onClick={this.toggleModal1}>
-										<div className='mystore-upload-add'>+</div>
-									</Button>
-								</div>
-								{Menu1}
-							</div>
-						</TabPanel>
+						{/*{this.props.state.batch && this.props.state.batch.length > 0 ? (*/}
+						{batch.length > 0 ? (
+								<TabPanel value={artStatus} index={0}>
+									<div className='mystore-art-queue-container row'>
+										<div className='mystore-upload-art'>
+											<Button className='mystore-upload-btn' onClick={this.toggleModal1}>
+												<div className='mystore-upload-add'>+</div>
+											</Button>
+										</div>
+										{Menu1}
+									</div>
+								</TabPanel>
+							)
+							: null}
 
 						<TabPanel value={artStatus} index={1}>
 							<div className='mystore-art-queue-container row'>
@@ -530,13 +535,12 @@ class MyStoreComponent extends Component {
 					onConfirm={this.fileUploadHandler}
 				/>
 
-				<ModalListingNft
-					onOpen={this.onListModalOpen}
-					onClose={this.onListModalClosed}
-					toggle={this.toggleListModal}
-					isOpen={this.state.isListModalOpen}
-					fileName='Leopard.png'
-				/>
+				{/*<ModalListingNft*/}
+				{/*	onOpen={this.onListModalOpen}*/}
+				{/*	onClose={this.onListModalClosed}*/}
+				{/*	toggle={this.toggleListModal}*/}
+				{/*	fileName='Leopard.png'*/}
+				{/*/>*/}
 
 				{batch && batch.length >= 0
 					? null

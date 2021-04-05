@@ -235,16 +235,16 @@ class Main extends Component {
 					art4={
 						this.state.art2
 					}
-								
+
 					contract={this.state.contract}
 					accounts={this.state.accounts}
 					cre={this.state.creValue}
 					matchId={match.params.id}
-					
+
 				/>
 			);
 		};
-		
+
 		const BatchWithId = ({match}) => {
 			return (
 				<BatchDetail
@@ -296,7 +296,7 @@ class Main extends Component {
 								contract={this.state.contract}
 								accounts={this.state.accounts}
 								batch={this.state.batch?.filter(
-									(batch) => batch._tokenCreator == this.state.accounts
+									(batch) => batch._tokenCreator === this.state.accounts
 								)}
 
 							/>
@@ -306,7 +306,7 @@ class Main extends Component {
 						exact
 						path='/mycollection'
 						component={() => (
-							<MyCollectionComponent
+							<MyArtComponent
 								contract={this.state.contract}
 								accounts={this.state.accounts}
 								batch={this.state.batch?.filter(
@@ -317,12 +317,13 @@ class Main extends Component {
 							/>
 						)}
 					/>
-					{console.log('========>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', this.state)}
+
 					<ProtectedRoute
 						exact
 						path='/mystore'
 						component={() => (
 							<MyStoreComponent
+								state={this.state}
 								contract={this.state.contract}
 								accounts={this.state.accounts}
 								batch={this.state.batch?.filter(

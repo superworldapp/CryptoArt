@@ -36,9 +36,9 @@ const initialControls = {
 
 const ModalListingNft = props => {
 	const {
-		isOpen,
 		toggle,
 		onClosed,
+		isOpen,
 		fileName,
 	} = props
 
@@ -54,11 +54,11 @@ const ModalListingNft = props => {
 
 	useEffect(() => {
 		if (saleType === saleTypes.AUCTION) {
-			initialControls.noOfTokens.disabled = true
-			initialControls.duration.disabled = false
-		} else if (saleType === saleTypes.BUY_NOW) {
 			initialControls.noOfTokens.disabled = false
 			initialControls.duration.disabled = true
+		} else if (saleType === saleTypes.BUY_NOW) {
+			initialControls.noOfTokens.disabled = true
+			initialControls.duration.disabled = false
 		}
 	}, [saleType])
 
@@ -68,9 +68,9 @@ const ModalListingNft = props => {
 
 	return (
 		<Modal
-			isOpen={isOpen}
 			toggle={toggle}
 			onClosed={onClosed}
+			isOpen={isOpen}
 			className='modal-listing-nft'
 			unmountOnClose
 			header={(
