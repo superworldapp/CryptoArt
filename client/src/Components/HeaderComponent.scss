@@ -1,23 +1,33 @@
 .wallet-button {
   color: #5540c7 !important;
-  height: 40px !important;
-   padding: 0 35px !important; 
-  font-family: 'Gibson' !important;
-  font-size: 17px !important;
-  width: 10rem ;
-  position: flex;
-  text-align: end;
-  height: 40px;
+  font-family: GibsonSemiBold;
+  font-size: 22px !important;
+  line-height: 22px !important;
+  text-transform: uppercase;
+  padding: 0!important;
+  display: flex!important;
+  align-items: center!important;
+  justify-content: center!important;
+  font-weight: 600!important;
+  height: 54px!important;
+  margin: 0 30px!important;
+  max-width: 104px;
+  width: 100%;
 }
 
 .not-connected {
-  height: 40px;
   color: black !important;
-  height: 40px !important;
-   padding: 0 0 !important; 
-  font-family: 'Gibson' !important;
-  font-size: 17px !important;
-  width: 10rem ;
+  font-family: GibsonSemiBold;
+  font-size: 22px !important;
+  line-height: 22px !important;
+  text-transform: uppercase;
+  padding: 0!important;
+  display: flex!important;
+  align-items: center!important;
+  justify-content: center!important;
+  font-weight: 600!important;
+  height: 54px!important;
+  margin: 0 30px!important;
 }
 
 .Signinbutton-header{
@@ -68,6 +78,7 @@ a.nav-link.active {
 #profile {
   border: 2px solid #5540c7;
   margin: 0 !important;
+  padding: 0 !important;
 }
 
 .navbar-collapse {
@@ -76,10 +87,6 @@ a.nav-link.active {
 
 #green-dot {
   display: flex;
-}
-
-#logo-img {
-  margin-top: 0.5rem;
 }
 
 .fa-search:before {
@@ -108,4 +115,33 @@ a.nav-link.active {
   > a {
   margin: 0;
   margin-left: 1rem;
+}
+
+.navbarMain {
+  box-sizing: border-box;
+  padding: 18px 43px;
+  height: 95px;
+  background-color: #d5d7fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+    .imgLogo {
+      width: 60px;
+      height: 60px;
+  }
+  .navItemHeader {
+    font-family: GibsonSemiBold;
+    font-size: 22px;
+    line-height: 22px;
+    padding: 0;
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    margin: 0 30px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

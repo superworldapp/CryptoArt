@@ -13,7 +13,7 @@ import {
   Input,
 } from 'reactstrap';
 import { connect } from "react-redux";
-import { setFilteredData, setSearchValue } from '../redux/marketplace/actions';
+import { setSearchValue } from '../redux/marketplace/actions';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
@@ -37,7 +37,7 @@ import SignInModal from './SignInModal/SignInModal';
 import Auth from './Auth';
 import Identicon from 'identicon.js';
 import Web3 from 'web3';
-import './HeaderComponent.css';
+import './HeaderComponent.scss';
 import dotenv from 'dotenv';
 
 const env = dotenv.config();
@@ -328,42 +328,40 @@ class Header extends Component {
         <Navbar
           light
           expand='md'
-          style={{
-            marginBottom: '-1.8rem',
-            backgroundColor: '#d5d7fa',
-            height: '85px',
-          }}
+          className="navbarMain"
         >
           <NavbarToggler onClick={this.toggleNav} />
-          <NavbarBrand className='mr-auto'>
+          <NavbarBrand>
             <NavLink to='/home'>
               <img
                 src={LogoImg}
                 alt='Logo Image'
                 id='logo-img'
-                height='60'
-                width='60'
+                className="imgLogo"
               />
             </NavLink>
           </NavbarBrand>
           {!window.location.href.includes('home') &&
-            <InputGroup
-              style={{
-                position: 'relative',
-                marginLeft: '2rem',
-              }}
-            >
-              <Input
-                placeholder='Search'
-                value={this.props.searchValue}
-                onChange={this.handleSearchChange}
+            <>
+              <InputGroup
                 style={{
-                  padding: '0 2rem',
-                  maxWidth: '400px',
-                  borderRadius: '20px',
+                  position: 'relative',
+                  width: '60%',
                 }}
-              />
-            </InputGroup>
+              >
+                <Input
+                  placeholder='Search'
+                  value={this.props.searchValue}
+                  onChange={this.handleSearchChange}
+                  style={{
+                    padding: '0 2rem',
+                    maxWidth: '400px',
+                    width: '100%',
+                    borderRadius: '20px',
+                  }}
+                />
+              </InputGroup>
+            </>
           }
           <Collapse isOpen={this.state.isNavOpen} navbar>
             <Nav
@@ -372,12 +370,7 @@ class Header extends Component {
             >
               <NavItem>
                 <NavLink
-                  className='nav-link'
-                  style={{
-                    width: 200,
-                    fontFamily: 'Gibson',
-                    fontSize: '17px',
-                  }}
+                  className="navItemHeader"
                   to='/allart'
                 >
                   Marketplace
@@ -386,12 +379,7 @@ class Header extends Component {
               
               <NavItem>
                 <NavLink
-                  className='nav-link'
-                  style={{
-                    width: 200,
-                    fontFamily: 'Gibson',
-                    fontSize: '17px',
-                  }}
+                  className="navItemHeader"
                   to='/allart'
                 >
                   Help
@@ -426,7 +414,6 @@ class Header extends Component {
                   >
                     <Grid
                       item
-                      style={{ marginRight: '2.5rem', marginLeft: '2rem' }}
                     >
                       <Button
                         className={
@@ -449,7 +436,7 @@ class Header extends Component {
                               <Grid item>
                                 <img
                                   id='green-dot'
-                                  style={{ width: '15px' }}
+                                  style={{ width: '16px' }}
                                   src={checkmark1}
                                   alt=''
                                 />{' '}
@@ -1266,12 +1253,10 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  allData: state.marketplace.setAllData,
   searchValue: state.marketplace.searchValue,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setFilteredData: (data) => dispatch(setFilteredData(data)),
   setSearchValue: (data) => dispatch(setSearchValue(data))
 });
 
