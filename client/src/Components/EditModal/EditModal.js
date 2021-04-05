@@ -49,6 +49,7 @@ const EditModal = props => {
 	const auctionInputRef = useRef(null)
 	const buyNowInputRef = useRef(null)
 	const [sellPrice, setSellPrice] = useState(saleTypes.BUY_NOW);
+	const [duration, setDuration] = useState(saleTypes.BUY_NOW);
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value);
@@ -59,9 +60,19 @@ const EditModal = props => {
 		setSellPrice(target.value);
 		console.log(target.value);
 	}
+	const handleInputChange2 = (e) => {
+		const target = e.target;
+		setDuration(target.value);
+		console.log(target.value);
+	}
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		Sale(true);
+		// if (saleType === saleTypes.AUCTION){
+
+		// }
+		// Sale(true);
+		StartAuction();
 		toggle();
 	}
 
@@ -70,6 +81,24 @@ const EditModal = props => {
 		Sale(false);
 		toggle();
 	}
+	const StartAuction = async () => {
+		console.log(sellPrice,duration);
+		this.setState({ auctionLoading: true });
+		let startprice = "1000000000000000000"
+		//let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
+	   
+		let times = 1615401942
+		const res = await this.props.contract.methods
+		.startbid(
+		  this.props.art._tokenId,
+		  startprice,
+		  times
+		)
+		.send({ from: this.props.accounts, gas: 5000000 });
+	  console.log('res', res);
+		this.setState({ auctionLoading: false, listForAuctionSuccess: true });
+		console.log(res);
+	  };
 	const Sale = async (isListed) => {
 		// let tokenId = tokenID
 		// let sellprice = "1000000000000000000"
