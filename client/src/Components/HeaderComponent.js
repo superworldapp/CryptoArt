@@ -346,23 +346,25 @@ class Header extends Component {
               />
             </NavLink>
           </NavbarBrand>
-          <InputGroup
-            style={{
-              position: 'relative',
-              marginLeft: '2rem',
-            }}
-          >
-             <Input
-              placeholder='Search'
-              value={this.props.searchValue}
-              onChange={this.handleSearchChange}
+          {!window.location.href.includes('home') &&
+            <InputGroup
               style={{
-                padding: '0 2rem',
-                maxWidth: '400px',
-                borderRadius: '20px',
+                position: 'relative',
+                marginLeft: '2rem',
               }}
-            />
-          </InputGroup>
+            >
+              <Input
+                placeholder='Search'
+                value={this.props.searchValue}
+                onChange={this.handleSearchChange}
+                style={{
+                  padding: '0 2rem',
+                  maxWidth: '400px',
+                  borderRadius: '20px',
+                }}
+              />
+            </InputGroup>
+          }
           <Collapse isOpen={this.state.isNavOpen} navbar>
             <Nav
               navbar
