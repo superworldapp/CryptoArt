@@ -1207,8 +1207,6 @@ class MyItemComponent extends Component {
 			searchCollectionValue: value,
 			parsedSearchCollectionValue,
 		})
-		console.log(`==========>this.state.searchCollectionValue`, this.state.searchCollectionValue);
-		console.log(`==========>parsedSearchCollectionValue`, parsedSearchCollectionValue);
 	}
 
 	render() {
@@ -1225,7 +1223,7 @@ class MyItemComponent extends Component {
 			);
 		});
 
-		const SortLayoutWrapper = this.props.batch?.map((x) => {
+		const SortLayoutWrapper = filteredCollectionItems.map((x) => {
 			return (
 				<div key={x._batchId} className='item-nft'>
 					<SortLayout

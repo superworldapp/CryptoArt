@@ -32,11 +32,20 @@
 
 .Signinbutton-header{
   color: #5540c7 !important;
-  height: 40px !important;
-   padding: 0 35px !important; 
-  font-family: 'Gibson' !important;
-  font-size: 17px !important;
-  width: 10rem ;
+  font-family: GibsonSemiBold;
+  font-size: 22px !important;
+  line-height: 22px !important;
+  text-transform: uppercase;
+  padding: 0!important;
+  display: flex!important;
+  align-items: center!important;
+  justify-content: center!important;
+  font-weight: 600!important;
+  height: 54px!important;
+  margin: 0 30px!important;
+  max-width: 104px;
+  text-align: center!important;
+  width: 100%;
   /* text-transform: 'capitalize' !important; */
 
 }

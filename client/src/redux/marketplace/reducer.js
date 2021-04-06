@@ -9,7 +9,7 @@ const initialState = {
 	chipData: [
 		{
 			name: "STATUS",
-			lists: [{name: 'On Auction', key: 0}, {name: 'Buy Now', key: 1}, {name: 'Make Offer', key: 2}],
+			lists: [{name: 'On Auction', key: 0}, {name: 'Buy Now', key: 1}],
 			id: 1,
 		},
 		{

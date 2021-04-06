@@ -23,18 +23,20 @@ const AllItemComponent = (props) => {
 	}, []);
 
 	const [checked, setChecked] = useState([]);
-	const [word, setWord] = useState(null)
+	const [word, setWord] = useState(null);
 
 	const handleRemove = (elem) => {
 		setChecked(checked.filter(el => el !== elem))
 		if (elem.key === WORD_KEY) {
 			props.setSearchValue({searchValue: ''})
+			setWord(null)
 		}
 	};
 
 	const handleRemoveAll = () => {
 		setChecked([])
 		props.setSearchValue({searchValue: ''})
+		setWord(null)
 	};
 
 	const handleCheck = (elem) => {
@@ -68,7 +70,23 @@ const AllItemComponent = (props) => {
 
 	useEffect(() => {
 		props.setFilteredData(props.batch.filter(batchItem => {
-			return checked.find(cheap => cheap.name === batchItem._tokenBatchName.toLowerCase())
+			const resultData = checked.reduce((acc, cheap) => {
+				if (!acc) return false
+				let result = null
+
+				if (cheap.key === WORD_KEY) {
+					result = cheap.name === batchItem._tokenBatchName.toLowerCase()
+				} else if (cheap.name === 'Images') {
+					result = batchItem._imgurl.match(/(?<=\.)(?:jpe?g|png|gif|svg|tiff)$/i)
+				} else if (cheap.name === 'GIF') {
+					result = batchItem._imgurl.match(/(?<=\.)(?:gif)$/i)
+				} else if (cheap.name === 'Video') {
+					result = batchItem._imgurl.match(/(?<=\.)(?:mpeg-4|mp4|mov|avi|wmv)$/i)
+				}
+
+				return result
+			}, true)
+			return resultData
 		}))
 	}, [checked])
 
@@ -97,7 +115,7 @@ const AllItemComponent = (props) => {
 				<div className="cards_marketplace">
 					<div className="head_result">
 						<p className="head_result_num">
-							{props.filteredData && props.filteredData.length > 0
+							{checked.length > 0
 								? props.filteredData.length
 								: props.batch.length
 							}
@@ -119,7 +137,7 @@ const AllItemComponent = (props) => {
 					</div>
 					<div className="cards_wrapper">
 						<div className="creation_cards">
-							{props.filteredData && props.filteredData.length > 0
+							{checked.length > 0
 								? props.filteredData.map((item) => (
 									<CreationCards props={props} {...item}/>
 								))
