@@ -68,11 +68,11 @@ const EditModal = props => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		// if (saleType === saleTypes.AUCTION){
-
-		// }
-		// Sale(true);
-		StartAuction();
+		 if (saleType === saleTypes.AUCTION){
+			StartAuction();
+		 }
+		else{Sale(true)};
+		
 		toggle();
 	}
 
@@ -83,20 +83,20 @@ const EditModal = props => {
 	}
 	const StartAuction = async () => {
 		console.log(sellPrice,duration);
-		this.setState({ auctionLoading: true });
-		let startprice = "1000000000000000000"
+	//	this.setState({ auctionLoading: true });
+		
 		//let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
-	   
+		let price = ((sellPrice) * ETHER).toString();
 		let times = 1615401942
-		const res = await this.props.contract.methods
+		const res = await contract.methods
 		.startbid(
-		  this.props.art._tokenId,
-		  startprice,
+		  tokenID,
+		  price,
 		  times
 		)
-		.send({ from: this.props.accounts, gas: 5000000 });
+		.send({ from: accounts, gas: 5000000 });
 	  console.log('res', res);
-		this.setState({ auctionLoading: false, listForAuctionSuccess: true });
+	//	this.setState({ auctionLoading: false, listForAuctionSuccess: true });
 		console.log(res);
 	  };
 	const Sale = async (isListed) => {

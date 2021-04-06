@@ -493,7 +493,7 @@ class MyStoreComponent extends Component {
 						</StyledTabs>
 
 						{/*{this.props.state.batch && this.props.state.batch.length > 0 ? (*/}
-						{batch.length > 0 ? (
+						{batch.length >= 0 ? (
 								<TabPanel value={artStatus} index={0}>
 									<div className='mystore-art-queue-container row'>
 										<div className='mystore-upload-art'>
