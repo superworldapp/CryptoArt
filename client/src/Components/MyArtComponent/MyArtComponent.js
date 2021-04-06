@@ -1225,7 +1225,7 @@ class MyItemComponent extends Component {
 			);
 		});
 
-		const SortLayoutWrapper = this.props.batch?.map((x) => {
+		const SortLayoutWrapper = filteredCollectionItems.map((x) => {
 			return (
 				<div key={x._batchId} className='item-nft'>
 					<SortLayout

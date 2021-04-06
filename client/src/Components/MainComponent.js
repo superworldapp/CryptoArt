@@ -308,7 +308,7 @@ class Main extends Component {
 			{
 				path: '/mycollection',
 				exact: true,
-				children: <MyCollectionComponent
+				children: <MyArtComponent
 					contract={this.state.contract}
 					accounts={this.state.accounts}
 					batch={this.state.batch?.filter(
