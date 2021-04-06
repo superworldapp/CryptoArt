@@ -9,9 +9,11 @@ const MyCollectionsCards = ({collectionBatch}) => {
 	return (
 		<div className="creation-wrapper-collections">
 			<div className="creation-collections">
-				{collectionBatch.map((item) => (
-					<CollectionsCards {...item}/>
-				))}
+				{collectionBatch && collectionBatch.length > 0
+					? collectionBatch.map((item) => (
+						<CollectionsCards {...item}/>
+					))
+					: null}
 			</div>
 		</div>
 	)

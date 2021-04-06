@@ -13,7 +13,7 @@ import Profile from './MyProfile/MyProfileComponent'
 import TokenDetail from './CardDetail';
 import BatchDetail from './BatchDetail';
 import {Switch, Route, Redirect} from 'react-router-dom';
-import Footer from './FooterComponent';
+import Footer from './Footer/FooterComponent';
 import ProtectedRoute from './ProtectedRoute';
 import Axios from 'axios';
 import MyArtComponent from "./MyArtComponent/MyArtComponent";
@@ -294,7 +294,7 @@ class Main extends Component {
 			{
 				path: '/mycollection',
 				exact: true,
-				children: <MyCollectionComponent
+				children: <MyArtComponent
 					contract={this.state.contract}
 					accounts={this.state.accounts}
 					batch={this.state.batch?.filter(
@@ -438,7 +438,7 @@ class Main extends Component {
 					{/*		/>*/}
 					{/*	)}*/}
 					{/*/>*/}
-					{console.log('========>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', this.state)}
+					{/*{console.log('========>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', this.state)}*/}
 					{/*<ProtectedRoute*/}
 					{/*	exact*/}
 					{/*	path='/mystore'*/}
