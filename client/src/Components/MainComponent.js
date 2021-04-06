@@ -324,39 +324,6 @@ class Main extends Component {
 				children: <Profile />,
 				protected: true,
 			},
-			{
-				path: '/card/:id',
-				exact: false,
-				children: {TokenWithId},
-				protected: false,
-			},
-			{
-				path: '/batch/:id',
-				exact: false,
-				children: {BatchWithId},
-				protected: false,
-			},
-			{
-				path: '/card/:id',
-				exact: false,
-				children: <TokenDetail
-					contract={this.state.contract}
-					accounts={this.state.accounts}
-					art={this.state.art2}
-				/>,
-				protected: false,
-			},
-				{
-					path: '/batch/:id',
-					exact: false,
-					children: <BatchDetail
-						contract={this.state.contract}
-						accounts={this.state.accounts}
-						art={this.state.batch}
-
-					/>,
-					protected: false,
-				},
 		]
 		return (
 			<div className='App'>
@@ -468,33 +435,33 @@ class Main extends Component {
 					{/*		<Profile/>*/}
 					{/*	)}*/}
 					{/*/>*/}
-					{/*<Route path='/card/:id' component={TokenWithId}/>*/}
-					{/*<Route path='/batch/:id' component={BatchWithId}/>*/}
-					{/* <Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } /> */}
+					<Route path='/card/:id' component={TokenWithId}/>
+					<Route path='/batch/:id' component={BatchWithId}/>
+					 {/*<Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } />*/}
 
-					{/*<Route*/}
-					{/*	path='/card/:id'*/}
-					{/*	component={(props) => (*/}
-					{/*		<TokenDetail*/}
+					<Route
+						path='/card/:id'
+						component={(props) => (
+							<TokenDetail
 
-					{/*			contract={this.state.contract}*/}
-					{/*			accounts={this.state.accounts}*/}
-					{/*			art={this.state.art2}*/}
-					{/*		/>*/}
-					{/*	)}*/}
-					{/*/>*/}
-					{/*<Route*/}
-					{/*	path='/batch/:id'*/}
-					{/*	component={(props) => (*/}
-					{/*		<BatchDetail*/}
+								contract={this.state.contract}
+								accounts={this.state.accounts}
+								art={this.state.art2}
+							/>
+						)}
+					/>
+					<Route
+						path='/batch/:id'
+						component={(props) => (
+							<BatchDetail
 
-					{/*			contract={this.state.contract}*/}
-					{/*			accounts={this.state.accounts}*/}
-					{/*			art={this.state.batch}*/}
+								contract={this.state.contract}
+								accounts={this.state.accounts}
+								art={this.state.batch}
 
-					{/*		/>*/}
-					{/*	)}*/}
-					{/*/>*/}
+							/>
+						)}
+					/>
 
 					<Redirect to='/home'/>
 				</Switch>
