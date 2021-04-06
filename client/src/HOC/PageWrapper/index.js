@@ -15,7 +15,12 @@ class PageWrapper extends Component {
 					balance={this.props.balance}
 					web3={this.props.web3}
 				/>
-				{this.props.children}
+				<div
+					style={{
+						minHeight: "calc(100vh - (95px + 700px))",
+					}}>
+					{this.props.children}
+				</div>
 			</>
 		)
 	}

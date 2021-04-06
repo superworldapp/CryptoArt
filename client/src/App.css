@@ -37,21 +37,22 @@
   min-height:400px;
 }
 
-.footer{
-  background-color: #D1C4E9;
-  margin:0px auto;
-  padding: 20px 0px 0px 0px;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  text-align: left !important;
-  /* align-content: left; */
-  color: #5540C6;
-  /* background-color: #fff;
-  padding: 60px 0; */
-  border-top: none;
-}
+/*.footer{*/
+/*  background-color: #D1C4E9;*/
+/*  margin:0px auto;*/
+/*  padding: 20px 0px 0px 0px;*/
+/*  position: fixed;*/
+/*  left: 0;*/
+/*  bottom: 0;*/
+/*  width: 100%;*/
+/*  text-align: left !important;*/
+/*  !* align-content: left; *!*/
+/*  color: #5540C6;*/
+/*  !* background-color: #fff;*/
+/*  padding: 60px 0; *!*/
+/*  border-top: none;*/
+/*}*/
+
 .navi{
   position: fixed;
   left: 0;

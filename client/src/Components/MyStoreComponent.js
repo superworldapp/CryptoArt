@@ -477,7 +477,7 @@ class MyStoreComponent extends Component {
 						{console.log('========>this.state!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', this.state)}
 						<StyledTabs value={artStatus} onChange={this.onArtStatusChange}>
 							<StyledTab
-								label={`Uploads${this.props.batch.length > 0 ? ` (${this.props.batch.length})` : ''}`}
+								label={`Uploads${this.props.batch.length > 0 ? ` (${this.props.batch.length})` : ' (0)'}`}
 								{...artStatusTabPropsByIndex(0)}
 							/>
 							<StyledTab
@@ -494,9 +494,11 @@ class MyStoreComponent extends Component {
 							{/*<StyledTab label={'Offers'} {...artStatusTabPropsByIndex(4)} />*/}
 						</StyledTabs>
 
-						{/*{this.props.state.batch && this.props.state.batch.length > 0 ? (*/}
-						{batch.length >= 0 ? (
+						{batch && batch.length > 0
+						// {this.props.state && this.props.state.batch.length > 0
+							? (
 								<TabPanel value={artStatus} index={0}>
+									{console.log('========>this.props', this.props)}
 									<div className='mystore-art-queue-container row'>
 										<div className='mystore-upload-art'>
 											<Button className='mystore-upload-btn' onClick={this.toggleModal1}>
@@ -507,7 +509,7 @@ class MyStoreComponent extends Component {
 									</div>
 								</TabPanel>
 							)
-							: null}
+							: ''}
 
 						<TabPanel value={artStatus} index={1}>
 							<div className='mystore-art-queue-container row'>
@@ -529,6 +531,20 @@ class MyStoreComponent extends Component {
 					</Col>
 				</Row>
 
+				{batch && batch.length === 0
+					? (
+						<img
+							style={
+								{
+									width: '300px',
+									height: '300px',
+								}
+							}
+							src={loader}
+						/>
+					)
+				: null}
+
 				<ModalUploadToMyStore
 					isOpen={this.state.isModalOpen1}
 					toggle={this.toggleModal1}
@@ -543,22 +559,6 @@ class MyStoreComponent extends Component {
 				{/*	fileName='Leopard.png'*/}
 				{/*/>*/}
 
-				{batch && batch.length >= 0
-					? null
-					: (
-						<img
-							style={
-								{
-									width: '300px',
-									height: '300px',
-									position: 'absolute',
-									zIndex: '100000000',
-									top: '300px',
-								}
-							}
-							src={loader}
-						/>
-					)}
 				{/*<Modal*/}
 				{/*  isOpen={this.state.isModalOpen1}*/}
 				{/*  toggle={this.toggleModal1}*/}

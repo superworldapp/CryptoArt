@@ -13,7 +13,7 @@ import Profile from './MyProfile/MyProfileComponent'
 import TokenDetail from './CardDetail';
 import BatchDetail from './BatchDetail';
 import {Switch, Route, Redirect} from 'react-router-dom';
-import Footer from './FooterComponent';
+import Footer from './Footer/FooterComponent';
 import ProtectedRoute from './ProtectedRoute';
 import Axios from 'axios';
 import MyArtComponent from "./MyArtComponent/MyArtComponent";
