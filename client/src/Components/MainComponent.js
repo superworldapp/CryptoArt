@@ -217,6 +217,12 @@ class Main extends Component {
 	render() {
 		const TokenWithId = ({match}) => {
 			return (
+				<PageWrapper
+					contract={this.state.contract}
+					accounts={this.state.accounts}
+					balance={this.state.balance}
+					web3={this.state.web3}
+				>
 				<TokenDetail
 					tokenCreated={this.state.tokensCreated?.filter(
 						(token) => token.returnValues.tokenId === match.params.id
@@ -243,11 +249,18 @@ class Main extends Component {
 					matchId={match.params.id}
 
 				/>
+				</PageWrapper>
 			);
 		};
 
 		const BatchWithId = ({match}) => {
 			return (
+				<PageWrapper
+					contract={this.state.contract}
+					accounts={this.state.accounts}
+					balance={this.state.balance}
+					web3={this.state.web3}
+				>
 				<BatchDetail
 					BatchCreated={this.state.batch?.filter(
 						(batch) => batch._batchId === match.params.id
@@ -257,6 +270,7 @@ class Main extends Component {
 					allTokens={this.state.art}
 					matchId={match.params.id}
 				/>
+				</PageWrapper>
 			);
 		};
 		const routes = [
@@ -435,24 +449,37 @@ class Main extends Component {
 					{/*		<Profile/>*/}
 					{/*	)}*/}
 					{/*/>*/}
-					<Route path='/card/:id' component={TokenWithId}/>
-					<Route path='/batch/:id' component={BatchWithId}/>
+					<Route path='/card/:id' component={TokenWithId} />
+					<Route path='/batch/:id' component={BatchWithId} />
 					 {/*<Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } />*/}
 
 					<Route
 						path='/card/:id'
 						component={(props) => (
-							<TokenDetail
-
+							<PageWrapper
 								contract={this.state.contract}
 								accounts={this.state.accounts}
-								art={this.state.art2}
-							/>
+								balance={this.state.balance}
+								web3={this.state.web3}
+							>
+								<TokenDetail
+
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									art={this.state.art2}
+								/>
+							</PageWrapper>
 						)}
 					/>
 					<Route
 						path='/batch/:id'
 						component={(props) => (
+							<PageWrapper
+								contract={this.state.contract}
+								accounts={this.state.accounts}
+								balance={this.state.balance}
+								web3={this.state.web3}
+							>
 							<BatchDetail
 
 								contract={this.state.contract}
@@ -460,6 +487,7 @@ class Main extends Component {
 								art={this.state.batch}
 
 							/>
+							</PageWrapper>
 						)}
 					/>
 
