@@ -29,7 +29,7 @@ const Footer = () => {
 					</Container>
 					<Container maxWidth="lg" className="footer-container">
 						<Grid container spacing={5} className="footer-nav">
-							{/*Hubspot Subscribe Form*/}
+							{/*Hubsp	ot Subscribe Form*/}
 							<Grid item lg={5} md={6} sm={7} xs={12}>
 								{/*<Slide bottom cascade duration={3000}>*/}
 								<Typography component="p" variant="body1" color="primary"

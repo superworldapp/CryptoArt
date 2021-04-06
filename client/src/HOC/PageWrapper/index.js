@@ -17,7 +17,7 @@ class PageWrapper extends Component {
 				/>
 				<div
 					style={{
-						minHeight: "calc(100vh - 95px)",
+						minHeight: "calc(100vh - (95px + 700px))",
 					}}>
 					{this.props.children}
 				</div>
