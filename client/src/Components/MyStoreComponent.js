@@ -385,6 +385,7 @@ class MyStoreComponent extends Component {
 		const {art2} = this.props
 		let menuTwoCount = 0;
 		let menuThreeCount = 0;
+		let menuFourCount = 0;
 		// TODO optimize
 		const nftsListed = batch.reduce((count, item) => +item._mintedEditions + count, 0)
 
@@ -434,8 +435,9 @@ class MyStoreComponent extends Component {
 		});
 
 		const Menu4 = this.state.art3?.map((x) => {
-			if ((x._bidend * 1000) <= Date.now() && x._bidend !== 0) {
+			if (x._isBidding === true && ((x._bidend * 1000) <= Date.now()) ) {
 				cntended++;
+				menuFourCount++;
 				return (
 					<Allpatrender2
 						key={x._tokenId}
@@ -488,7 +490,7 @@ class MyStoreComponent extends Component {
 								label={`Active (${menuThreeCount})`}
 								{...artStatusTabPropsByIndex(2)}
 							/>
-							<StyledTab label={`Ended`} {...artStatusTabPropsByIndex(3)} />
+							<StyledTab label={`Ended (${menuFourCount}) `} {...artStatusTabPropsByIndex(3)} />
 							{/*<StyledTab label={'Offers'} {...artStatusTabPropsByIndex(4)} />*/}
 						</StyledTabs>
 

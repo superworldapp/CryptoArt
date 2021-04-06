@@ -119,7 +119,7 @@ class Main extends Component {
 
 			let cre = await Axios.get(
 				// `http://geo.superworldapp.com/api/json/nftevents/tokencreated/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
-				`http://geo.superworldapp.com/api/json/nftevents/tokencreated/4/get?contractAddress=0xfe750703a45411Be800ef2E89F451207c0823B65`
+				`http://geo.superworldapp.com/api/json/nftevents/tokencreated/4/get?contractAddress=0x60C0550cdE0C1696351D234ef6AA995A16AA52dA`
 			);
 
 			let newArr = [];
@@ -129,30 +129,30 @@ class Main extends Component {
 			}
 			let allTokensBought = await Axios.get(
 				// `http://geo.superworldapp.com/api/json/nftevents/tokenbought/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
-				`http://geo.superworldapp.com/api/json/nftevents/tokenbought/4/get?contractAddress=0xfe750703a45411Be800ef2E89F451207c0823B65`
+				`http://geo.superworldapp.com/api/json/nftevents/tokenbought/4/get?contractAddress=0x60C0550cdE0C1696351D234ef6AA995A16AA52dA`
 			);
 
 			this.setState({tokensBought: allTokensBought.data.data});
 
 			let allTokensBidStarted = await Axios.get(
 				// `http://geo.superworldapp.com/api/json/nftevents/bidstarted/4/get?contractAddress=0xe352168A2a9bDaF66a1051E9015c4b246AfD3445`
-				`http://geo.superworldapp.com/api/json/nftevents/bidstarted/4/get?contractAddress=0xfe750703a45411Be800ef2E89F451207c0823B65`
+				`http://geo.superworldapp.com/api/json/nftevents/bidstarted/4/get?contractAddress=0x60C0550cdE0C1696351D234ef6AA995A16AA52dA`
 			);
 
 			this.setState({tokensBidStarted: allTokensBidStarted.data.data});
 
 			let allTokensPutForSale = await Axios.get(
-				`http://geo.superworldapp.com/api/json/nftevents/tokenputforsale/4/get?contractAddress=0xfe750703a45411Be800ef2E89F451207c0823B65`
+				`http://geo.superworldapp.com/api/json/nftevents/tokenputforsale/4/get?contractAddress=0x60C0550cdE0C1696351D234ef6AA995A16AA52dA`
 			);
 
 			this.setState({tokensPutForSale: allTokensPutForSale.data.data});
 			let allTokensBid = await Axios.get(
-				`http://geo.superworldapp.com/api/json/nftevents/tokenbid/4/get?contractAddress=0xfe750703a45411Be800ef2E89F451207c0823B65`
+				`http://geo.superworldapp.com/api/json/nftevents/tokenbid/4/get?contractAddress=0x60C0550cdE0C1696351D234ef6AA995A16AA52dA`
 			);
 			this.setState({tokensBid: allTokensBid.data.data});
 			// batch events
 			let BatchCreated = await Axios.get(
-				`http://geo.superworldapp.com/api/json/nftevents/NewtokenBatchCreated/4/get?contractAddress=0xfe750703a45411Be800ef2E89F451207c0823B65`
+				`http://geo.superworldapp.com/api/json/nftevents/NewtokenBatchCreated/4/get?contractAddress=0x60C0550cdE0C1696351D234ef6AA995A16AA52dA`
 			);
 
 			this.setState({BatchCreated: BatchCreated.data.data});
