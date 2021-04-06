@@ -350,7 +350,7 @@ class Allpatrender extends Component {
 				{console.log('========>art[3]', art[3])}
 				<Link to={`/batch/${this.props.art._batchId}`}>
 					<div className='mystore-queue-card-img'>
-						{displayFileType()}
+						{/* {displayFileType()} */}
 					</div>
 				</Link>
 				<div className='card-body-wrapper'>
