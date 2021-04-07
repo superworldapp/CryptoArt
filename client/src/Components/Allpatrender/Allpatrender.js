@@ -891,16 +891,16 @@ class Allpatrender extends Component {
 						</div>
 					</CardBody>
 				</div>
-				{/*{*/}
-				{/*	this.state.openListModal*/}
-				{/*		? <ModalListingNft*/}
-				{/*			isOpen={this.state.openListModal}*/}
-				{/*			toggle={this.handleOpenListModal}*/}
-				{/*			onClose={this.handleOpenListModal}*/}
-				{/*			imgThumb={this.props.art._imgThumbnail}*/}
-				{/*		/>*/}
-				{/*		: null*/}
-				{/*}*/}
+				{
+					this.state.openListModal
+						? <ModalListingNft
+							isOpen={this.state.openListModal}
+							toggle={this.handleOpenListModal}
+							onClose={this.handleOpenListModal}
+							imgThumb={this.props.art._imgThumbnail}
+						/>
+						: null
+				}
 
 				{/*<Loading*/}
 				{/*	name='Uploading File'*/}
