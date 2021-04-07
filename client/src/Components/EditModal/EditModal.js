@@ -223,7 +223,7 @@ const EditModal = props => {
 						<Input
 							disabled={saleType === saleTypes.BUY_NOW}
 							className='text-input date'
-							type='date'
+							type='datetime-local'
 							onChange={handleInputChange2}
 						/>
 						<span className='after-input-text'>Days</span>

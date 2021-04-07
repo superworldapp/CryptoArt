@@ -41,6 +41,8 @@ import SimpleMenu from "../Marketplace/menu/MenuListed";
 import arrow from "../../images/svg/arrow.svg";
 import SortLayout from "./SortLayout";
 
+
+
 const SHA256 = require('crypto-js/sha256');
 
 const S3 = require('aws-sdk/clients/s3');
@@ -258,6 +260,61 @@ class Allpatrender extends Component {
 		// let reSellOrSell = this.props.art._isSellings;
 		// let Auc = this.props.art._isBidding;
 		let accNum = this.props.art._tokenCreator;
+		const displayFileType = () => {
+			console.log(this.props.art._imgurl);
+			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.art._imgurl)) {
+				return (
+					<CardImg
+						className={orientation}
+						top
+						src={this.props.art._imgurl}
+						alt='Card image'
+					/>
+				);
+			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgurl)) {
+				return (
+					<>
+						<button
+							style={{
+								zIndex: '1'
+							}}
+							onClick={() =>
+								this.setState({
+									soundPlaying: !this.state.soundPlaying
+								})
+							}>
+							{this.state.soundPlaying ? 'Pause' : 'Play'}
+						</button>
+						<Sound
+							url={this.props.art._imgurl}
+							playStatus={
+								this.state.soundPlaying
+									? Sound.status.PLAYING
+									: ''
+							}
+							playFromPosition={300 /* in milliseconds */}
+							onLoading={this.handleSongLoading}
+							onPlaying={this.handleSongPlaying}
+							onFinishedPlaying={this.handleSongFinishedPlaying}
+						/>
+					</>
+				);
+			} else if (
+				/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
+					this.props.art._imgurl
+				)
+			) {
+				return (
+					<ReactPlayer
+						class={orientation}
+						style={{maxWidth: '270px'}}
+						loop={true}
+						playing={true}
+						url={this.props.art._imgurl}
+					/>
+				);
+			}
+		};
 
 		const accUsername = () => {
 			if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
@@ -305,12 +362,13 @@ class Allpatrender extends Component {
 					{/* <Link to={`/card/${this.props.art._tokenId}`}> */}
 
 					<Link to={`/batch/${this.props.art._batchId}`}>
-						<CardImg
+						{/* <CardImg
 							className={orientation}
 							top
 							src={this.props.art._imgurl}
 							alt='Card image'
-						/>
+						/> */}
+						{displayFileType()}
 
 						<CardImgOverlay>
 							<Badge pill className={x.class}>
