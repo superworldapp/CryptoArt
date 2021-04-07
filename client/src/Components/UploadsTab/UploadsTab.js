@@ -343,7 +343,7 @@ class UploadsTab extends Component {
 				className='mystore-queue-card'
 			>
 				 {/*<a href={this.props.art.imgurl} target='_blank'> */}
-				 {this.props.art._mintedEditions >= 0 && <span className='card-counter'>{this.props.art._mintedEditions}</span>}
+				 {this.props.art._mintedEditions > 0 ? <span className='card-counter'>{this.props.art._mintedEditions}</span> : ''}
 				<div className='mystore-queue-card-img'>
 					<Link to={`/batch/${this.props.art._batchId}`}>
 						{/* <CardImg
@@ -667,7 +667,6 @@ class UploadsTab extends Component {
 										isOpen={this.state.isMintModal}
 										toggle={this.closeMintToken}
 										send={this.sendMintToken}
-										fileName="Leopard.Png"
 										arturl={this.props.art._imgurl}
 									/>
 									: null

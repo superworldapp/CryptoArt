@@ -34,6 +34,7 @@ const Footer = () => {
 								{/*<Slide bottom cascade duration={3000}>*/}
 								<Typography component="p" variant="body1" color="primary"
 														align="left"
+														className="description-header"
 														style={{
 															paddingBottom: '20px',
 															fontSize: '20px',
@@ -43,15 +44,16 @@ const Footer = () => {
 									Receive our exclusive research report on virtual real estate, non-fungible
 									tokens and digital assets.
 								</Typography>
-								<HubspotForm
-									portalId='8746200'
-									formId='ca440f2c-b907-4d90-b4f6-8a28cbbf79d7'
-									onSubmit={() => console.log('Submit!')}
-									onReady={(form) => console.log('Form ready!')}
-									loading={<div>Loading...</div>}
-									cssClass='hubspot-form'
-								/>
-								{/*<div className="hubspot-form"/>*/}
+								<div className="hubspot-form">
+									<HubspotForm
+										portalId='8746200'
+										formId='ca440f2c-b907-4d90-b4f6-8a28cbbf79d7'
+										onSubmit={() => console.log('Submit!')}
+										onReady={(form) => console.log('Form ready!')}
+										loading={<div>Loading...</div>}
+										cssClass='hubspot-form'
+									/>
+								</div>
 								{/*</Slide>*/}
 							</Grid>
 							{/*Navigation*/}

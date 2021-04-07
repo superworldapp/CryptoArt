@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
 export class successfulModals extends Component {
 
-    
-    render() {
-        return (
-            <div>
 
-            {/* AFTER UPLOADING SUCCESS MODAL */}
+	render() {
+		return (
+			<div>
+
+				{/* AFTER UPLOADING SUCCESS MODAL */}
 				<Modal
 					isOpen={this.state.uploadSuccess}
 					onClosed={this.refreshMyArt}
@@ -46,9 +46,9 @@ export class successfulModals extends Component {
 						</button>
 					</ModalBody>
 				</Modal>
-                {/*  */}
+				{/*  */}
 
-                {/* AFTER MINTING SUCCESS MODAL */}
+				{/* AFTER MINTING SUCCESS MODAL */}
 				<Modal
 					isOpen={this.state.uploadSuccess}
 					onClosed={this.refreshMyArt}
@@ -87,9 +87,9 @@ export class successfulModals extends Component {
 						</button>
 					</ModalBody>
 				</Modal>
-                {/*  */}
+				{/*  */}
 
-                {/* AFTER Listing for Buy Now MODAL */}
+				{/* AFTER Listing for Buy Now MODAL */}
 				<Modal
 					isOpen={this.state.uploadSuccess}
 					onClosed={this.refreshMyArt}
@@ -128,9 +128,9 @@ export class successfulModals extends Component {
 						</button>
 					</ModalBody>
 				</Modal>
-                {/*  */}
+				{/*  */}
 
-                {/* AFTER Listing for Auction MODAL */}
+				{/* AFTER Listing for Auction MODAL */}
 				<Modal
 					isOpen={this.state.uploadSuccess}
 					onClosed={this.refreshMyArt}
@@ -169,9 +169,9 @@ export class successfulModals extends Component {
 						</button>
 					</ModalBody>
 				</Modal>
-                {/*  */}
+				{/*  */}
 
-                {/* Purchase Made MODAL */}
+				{/* Purchase Made MODAL */}
 				<Modal
 					isOpen={this.state.uploadSuccess}
 					onClosed={this.refreshMyArt}
@@ -210,11 +210,11 @@ export class successfulModals extends Component {
 						</button>
 					</ModalBody>
 				</Modal>
-                {/*  */}
-                
-            </div>
-        )
-    }
+				{/*  */}
+
+			</div>
+		)
+	}
 }
 
 export default successfulModals

@@ -20,12 +20,6 @@ const initialControls = {
 		isRequired: true,
 		isValid: false,
 	},
-	noOfTokens: {
-		value: 1,
-		isRequired: true,
-		isValid: false,
-		disabled: true,
-	},
 	duration: {
 		value: 1,
 		isRequired: true,
@@ -39,13 +33,32 @@ const ModalListingNft = props => {
 		toggle,
 		onClosed,
 		isOpen,
-		fileName,
+		imgThumb,
 	} = props
 
 	const auctionInputRef = useRef(null)
 	const buyNowInputRef = useRef(null)
 
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
+	const [initialValue, setInitialValue] = useState({tokenPrice: '', duration: ''});
+
+	const handleInputChange = (e, target) => {
+		const {value} = e.target
+		const timestamp = new Date(value.split(".").reverse().join(".")).getTime();
+		if (target === 'duration') {
+			setInitialValue(prevState => ({
+					...prevState,
+					[target]: timestamp
+				}
+			));
+		} else {
+			setInitialValue(prevState => ({
+					...prevState,
+					[target]: value
+				}
+			));
+		}
+	};
 
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value)
@@ -54,10 +67,10 @@ const ModalListingNft = props => {
 
 	useEffect(() => {
 		if (saleType === saleTypes.AUCTION) {
-			initialControls.noOfTokens.disabled = false
+			initialControls.tokenPrice.disabled = true
 			initialControls.duration.disabled = true
 		} else if (saleType === saleTypes.BUY_NOW) {
-			initialControls.noOfTokens.disabled = true
+			initialControls.tokenPrice.disabled = true
 			initialControls.duration.disabled = false
 		}
 	}, [saleType])
@@ -85,9 +98,13 @@ const ModalListingNft = props => {
 			)}
 			body={(
 				<Form>
-					<FormGroup>
-						<span className='file-label'>File</span>
-						<span className='file-name'>{fileName}</span>
+					<FormGroup className='form-group-preview'>
+						{<img style={{width: '95px', margin: '0 auto'}}
+									className='control-preview-img'
+									src={imgThumb}
+									alt={imgThumb}
+						/>
+						}
 					</FormGroup>
 					<FormGroup>
 						<div className="sale-block">
@@ -130,22 +147,25 @@ const ModalListingNft = props => {
 							</Label>
 							<span className='custom-tooltip'>(Start Price if Auction)</span>
 						</div>
-						<Input className='text-input' type='text'/>
+						<Input
+							className='text-input'
+							type='text'
+							onChange={(e) => handleInputChange(e, 'tokenPrice')}
+						/>
 						<span className='after-input-text'>
               ETH<span>($1,580.10 USD)</span>
             </span>
-					</FormGroup>
-					<FormGroup className={saleType === saleTypes.AUCTION ? 'form-disabled' : ''}>
-						<Label className='label' htmlFor='buynow'>
-							No. of Tokens
-						</Label>
-						<Input disabled={saleType === saleTypes.AUCTION} className='text-input' type='text'/>
 					</FormGroup>
 					<FormGroup className={saleType === saleTypes.BUY_NOW ? 'form-disabled' : ''}>
 						<Label className='label' htmlFor='buynow'>
 							Duration
 						</Label>
-						<Input disabled={saleType === saleTypes.BUY_NOW} className='text-input' type='text'/>
+						<Input
+							disabled={saleType === saleTypes.BUY_NOW}
+							className='text-input date'
+							type='date'
+							onChange={(e) => handleInputChange(e, 'duration')}
+						/>
 						<span className='after-input-text'>Days</span>
 					</FormGroup>
 					<div className='submit-button-wrapper'>

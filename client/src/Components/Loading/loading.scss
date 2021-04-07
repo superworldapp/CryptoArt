@@ -1,0 +1,27 @@
+.loading-modal {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: rgba(0, 0, 0, 0.8);
+	color: #fff;
+
+	p {
+		font-family: 'GibsonLight', sans-serif!important;
+		font-size: 64px;
+		line-height: 64px;
+		color: #FFFFFF;
+	}
+}
+
+.MuiCircularProgress-colorPrimary {
+	height: 100px!important;
+	width: 100px!important;
+	color: #5540C7!important;
+	margin-bottom: 56px;
+}

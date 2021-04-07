@@ -10,6 +10,7 @@ import ReactPlayer from 'react-player';
 import MintModal from "../MintModal/MintModal";
 import ModalUploadToMyStore from "../ModalUploadToMyStore/ModalUploadToMyStore";
 import ModalListingNft from "../ModalListingNft";
+import Loading from "../Loading/loading";
 
 
 class Allpatrender extends Component {
@@ -342,15 +343,14 @@ class Allpatrender extends Component {
 			// {cardpills.map((item) => {
 			//   return (
 			<Card
-				className={buk}//{this.props.art._isBidding ? buk : bak}
+				// className={buk}//{this.props.art._isBidding ? buk : bak}
 				className='mystore-queue-card'
 			>
 				{/*<a href={this.props.art.imgurl} target='_blank'> */}
-				{+art[3] >= 0 && <span className='card-counter'>+{art[3]}</span>}
-				{console.log('========>art[3]', art[3])}
+				{/*{+art[3] > 0 && <span className='card-counter'>+{art[3]}</span>}*/}
 				<Link to={`/batch/${this.props.art._batchId}`}>
 					<div className='mystore-queue-card-img'>
-						{/* {displayFileType()} */}
+						 {displayFileType()}
 					</div>
 				</Link>
 				<div className='card-body-wrapper'>
@@ -897,10 +897,14 @@ class Allpatrender extends Component {
 							isOpen={this.state.openListModal}
 							toggle={this.handleOpenListModal}
 							onClose={this.handleOpenListModal}
-							fileName='Leopard.png'
+							imgThumb={this.props.art._imgThumbnail}
 						/>
 						: null
 				}
+
+				{/*<Loading*/}
+				{/*	name='Uploading File'*/}
+				{/*/>*/}
 			</Card>
 		);
 	}

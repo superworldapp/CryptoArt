@@ -268,116 +268,118 @@ class Main extends Component {
 					balance={this.state.balance}
 					web3={this.state.web3}
 				/>
-				<Switch>
-					<Route
-						exact
-						path='/home'
-						component={() => (
-							<Home
-								contract={this.state.contract}
-								accounts={this.state.accounts}
-							/>
-						)}
-					/>
-					<Route
-						exact
-						path='/allart'
-						component={() => (
-							<AllItemComponent
-								contract={this.state.contract}
-								accounts={this.state.accounts}
-								batch={this.state.batch}
-							/>
-						)}
-					/>
-					<ProtectedRoute
-						exact
-						path='/mycollections'
-						component={() => (
-							<MyItemComponent
-								contract={this.state.contract}
-								accounts={this.state.accounts}
-								batch={this.state.batch?.filter(
-									(batch) => batch._tokenCreator === this.state.accounts
-								)}
+				<div style={{minHeight: '1010px'}}>
+					<Switch>
+						<Route
+							exact
+							path='/home'
+							component={() => (
+								<Home
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+								/>
+							)}
+						/>
+						<Route
+							exact
+							path='/allart'
+							component={() => (
+								<AllItemComponent
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									batch={this.state.batch}
+								/>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path='/mycollections'
+							component={() => (
+								<MyItemComponent
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									batch={this.state.batch?.filter(
+										(batch) => batch._tokenCreator === this.state.accounts
+									)}
 
-							/>
-						)}
-					/>
-					<ProtectedRoute
-						exact
-						path='/mycollection'
-						component={() => (
-							<MyCollectionComponentNew
-								contract={this.state.contract}
-								accounts={this.state.accounts}
-								batch={this.state.batch?.filter(
-									(batch) => batch._tokenCreator === this.state.accounts
-								)}
-								art2={this.state.art2}
-								// art2own = {this.state.art2?.filter((art2s) => art2s._tokenOwner == this.state.accounts)}
-							/>
-						)}
-					/>
+								/>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path='/mycollection'
+							component={() => (
+								<MyCollectionComponentNew
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									batch={this.state.batch?.filter(
+										(batch) => batch._tokenCreator === this.state.accounts
+									)}
+									art2={this.state.art2}
+									// art2own = {this.state.art2?.filter((art2s) => art2s._tokenOwner == this.state.accounts)}
+								/>
+							)}
+						/>
 
-					<ProtectedRoute
-						exact
-						path='/mystore'
-						component={() => (
-							<MyStoreComponent
-								state={this.state}
-								contract={this.state.contract}
-								accounts={this.state.accounts}
-								batch={this.state.batch?.filter(
-									(batch) => batch._tokenCreator === this.state.accounts
-								)}
-								art2={this.state.art2}
-							/>
-						)}
-					/>
+						<ProtectedRoute
+							exact
+							path='/mystore'
+							component={() => (
+								<MyStoreComponent
+									state={this.state}
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									batch={this.state.batch?.filter(
+										(batch) => batch._tokenCreator === this.state.accounts
+									)}
+									art2={this.state.art2}
+								/>
+							)}
+						/>
 
-					<ProtectedRoute
-						exact
-						path='/myprofile'
-						component={() => (
-							<Profile
-								state={this.state}
-								batch={this.state.batch?.filter(
-									(batch) => batch._tokenCreator === this.state.accounts
-								)}
-							/>
-						)}
-					/>
-					<Route path='/card/:id' component={TokenWithId}/>
-					<Route path='/batch/:id' component={BatchWithId}/>
-					{/* <Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } /> */}
+						<ProtectedRoute
+							exact
+							path='/myprofile'
+							component={() => (
+								<Profile
+									state={this.state}
+									batch={this.state.batch?.filter(
+										(batch) => batch._tokenCreator === this.state.accounts
+									)}
+								/>
+							)}
+						/>
+						<Route path='/card/:id' component={TokenWithId}/>
+						<Route path='/batch/:id' component={BatchWithId}/>
+						{/* <Route path='/card/:id'  location={this.state.location} key={this.state.location.key} render = {props => <CardDetail {...props} key={this.sta.location.key} /> } /> */}
 
-					<Route
-						path='/card/:id'
-						component={(props) => (
-							<TokenDetail
+						<Route
+							path='/card/:id'
+							component={(props) => (
+								<TokenDetail
 
-								contract={this.state.contract}
-								accounts={this.state.accounts}
-								art={this.state.art2}
-							/>
-						)}
-					/>
-					<Route
-						path='/batch/:id'
-						component={(props) => (
-							<BatchDetail
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									art={this.state.art2}
+								/>
+							)}
+						/>
+						<Route
+							path='/batch/:id'
+							component={(props) => (
+								<BatchDetail
 
-								contract={this.state.contract}
-								accounts={this.state.accounts}
-								art={this.state.batch}
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									art={this.state.batch}
 
-							/>
-						)}
-					/>
+								/>
+							)}
+						/>
 
-					<Redirect to='/home'/>
-				</Switch>
+						<Redirect to='/home'/>
+					</Switch>
+				</div>
 				<Footer/>
 			</div>
 		);
