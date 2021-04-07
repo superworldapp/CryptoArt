@@ -89,7 +89,7 @@ const EditModal = props => {
 		
 		//let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
 		let price = ((sellPrice) * ETHER).toString();
-		let times = 1615401942
+		let times = duration/1000;
 		const res = await contract.methods
 		.startbid(
 		  tokenID,
