@@ -65,8 +65,11 @@ const EditModal = props => {
 
 	const handleInputChange2 = (e) => {
 		const target = e.target;
+		
 		const timestamp = new Date(target.value.split(".").reverse().join(".")).getTime();
 		setDuration(timestamp);
+		console.log(timestamp);
+		
 	}
 
 	const handleSubmit = (event) => {
