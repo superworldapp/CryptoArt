@@ -16,8 +16,8 @@ import profile from '../../images/svg/avatar.svg';
 import './CreationCards.scss';
 
 const CreationCards = (props) => {
-	console.log(`==========>props`, props);
-	const [soundPlaying, setSoundPlaying] = useState('')
+	const [soundPlaying, setSoundPlaying] = useState('');
+
 	const displayFileType = () => {
 		if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(props._imgurl)) {
 			return (
