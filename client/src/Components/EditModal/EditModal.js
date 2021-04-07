@@ -218,7 +218,7 @@ const EditModal = props => {
 						</Label>
 						<Input
 							disabled={saleType === saleTypes.BUY_NOW}
-							className='text-input'
+							className='text-input date'
 							type='date'
 							onChange={handleInputChange2}
 						/>
