@@ -30,6 +30,8 @@ import avatar from '../images/svg/batchAvatar.svg';
 import heartCard from '../images/svg/heartSvg.svg';
 import profileCard from '../images/svg/avatar.svg';
 import "./BatchDetail.scss";
+import Sound from 'react-sound';
+import ReactPlayer from 'react-player';
 // import heart from "../images/svg/Heart.svg";
 import dropdownarrow from "../assets/svg/Drop down arrow.svg";
 import Web3 from 'web3';
@@ -275,6 +277,61 @@ class Allpatrender extends Component {
     let reSellOrSell = this.props.art._isSellings;
     let Auc = this.props.art._isBidding;
     let accNum = this.props.art._tokenCreator;
+    const displayFileType = () => {
+			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.BatchCreated._imgurl)) {
+				return (
+					<CardImg
+            top
+            className="card-background-image"
+						src={this.props.BatchCreated._imgurl}
+						alt='Card image'
+					/>
+				);
+			} else if (/\.(?:wav|mp3)$/i.test(this.props.BatchCreated._imgurl)) {
+				return (
+					<>
+						<button
+							style={{
+								zIndex: '1'
+							}}
+							onClick={() =>
+								this.setState({
+									soundPlaying: !this.state.soundPlaying
+								})
+							}>
+							{this.state.soundPlaying ? 'Pause' : 'Play'}
+						</button>
+						<Sound
+							url={this.props.BatchCreated._imgurl}
+							playStatus={
+								this.state.soundPlaying
+									? Sound.status.PLAYING
+									: ''
+							}
+							playFromPosition={300 /* in milliseconds */}
+							onLoading={this.handleSongLoading}
+							onPlaying={this.handleSongPlaying}
+							onFinishedPlaying={this.handleSongFinishedPlaying}
+						/>
+					</>
+				);
+			} else if (
+				/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
+					this.props.BatchCreated._imgurl
+				)
+			) {
+				return (
+					<ReactPlayer
+          className="card-background-image"
+						style={{maxWidth: '200px', maxheight:'200px'}}
+						loop={true}
+						playing={true}
+						url={this.props.BatchCreated._imgurl}
+					/>
+				);
+			}
+		};
+
 
     const accUsername = (accNum) => {
       if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
@@ -327,12 +384,13 @@ console.log(`==========>this.props.BatchCreated`, this.props.BatchCreated);
               textDecoration: 'none'
             }}
             to={`/card/${this.props.art._tokenId}`}>
-          <CardImg
+          {/* <CardImg
             top
             className="card-background-image"
             src={this.props.BatchCreated._imgurl}
             alt='image3'
-          />
+          /> */}
+          {displayFileType()}
           <CardImgOverlay className="cardImgOverlay">
             <div className="userImg">
               <img src={this.props.profileImage || profileCard} alt="userImg"/>
@@ -499,6 +557,7 @@ class BatchDetail extends Component{
       viewMore: false
     }
 this.accUsername = this.accUsername.bind(this);
+this.displayFileType2 = this.displayFileType2.bind(this);
 //this.getCreData = this.getCreData.bind(this);
   }
   // console.log(art);
@@ -525,7 +584,56 @@ this.accUsername = this.accUsername.bind(this);
   // const toggle = () => setDropdownOpen((prevState) => !prevState);
  
 
-
+  displayFileType2 = () => {
+    if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.BatchCreated[0]._imgurl)) {
+      return (
+       
+        <img src={this.props.BatchCreated[0]._imgurl} className="batchImg" alt='batch img'/>
+      );
+    } else if (/\.(?:wav|mp3)$/i.test(this.props.BatchCreated[0]._imgurl)) {
+      return (
+        <>
+          <button
+            style={{
+              zIndex: '1'
+            }}
+            onClick={() =>
+              this.setState({
+                soundPlaying: !this.state.soundPlaying
+              })
+            }>
+            {this.state.soundPlaying ? 'Pause' : 'Play'}
+          </button>
+          <Sound
+            url={this.props.BatchCreated[0]._imgurl}
+            playStatus={
+              this.state.soundPlaying
+                ? Sound.status.PLAYING
+                : ''
+            }
+            playFromPosition={300 /* in milliseconds */}
+            onLoading={this.handleSongLoading}
+            onPlaying={this.handleSongPlaying}
+            onFinishedPlaying={this.handleSongFinishedPlaying}
+          />
+        </>
+      );
+    } else if (
+      /\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
+        this.props.BatchCreated[0]._imgurl
+      )
+    ) {
+      return (
+        <ReactPlayer
+        className="card-background-image"
+          style={{maxWidth: '200px', maxheight:'200px'}}
+          loop={true}
+          playing={true}
+          url={this.props.BatchCreated[0]._imgurl}
+        />
+      );
+    }
+  };
   accUsername = (accNum) => {
     if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
       return '@Chitra';
@@ -584,7 +692,7 @@ console.log(`==========>this.props`, this.props);
         <div className="batchView">
           <div className="batchImgBlock">
             <a href={this.props.BatchCreated[0]._imgurl} target='_blank'>
-              <img src={this.props.BatchCreated[0]._imgurl} className="batchImg" alt='batch img'/>
+              {this.displayFileType2()}
             </a>
           </div>
           <div className="batchInfo">
