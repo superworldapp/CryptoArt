@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	Card,
 	CardBody,
@@ -16,7 +16,57 @@ import profile from '../../images/svg/avatar.svg';
 import './CreationCards.scss';
 
 const CreationCards = (props) => {
-
+	console.log(`==========>props`, props);
+	const [soundPlaying, setSoundPlaying] = useState('')
+	const displayFileType = () => {
+		if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(props._imgurl)) {
+			return (
+				<CardImg
+					top
+					className="card-background-image"
+					src={props._imgurl}
+					alt='Card image'
+				/>
+			);
+		} else if (/\.(?:wav|mp3)$/i.test(props._imgurl)) {
+			return (
+				<>
+					<button
+						style={{
+							zIndex: '1'
+						}}
+						onClick={() => setSoundPlaying(soundPlaying)}>
+						{soundPlaying ? 'Pause' : 'Play'}
+					</button>
+					<Sound
+						url={props._imgurl}
+						playStatus={
+							soundPlaying
+								? Sound.status.PLAYING
+								: ''
+						}
+						playFromPosition={300 /* in milliseconds */}
+						// onLoading={this.handleSongLoading}
+						// onPlaying={this.handleSongPlaying}
+						// onFinishedPlaying={this.handleSongFinishedPlaying}
+					/>
+				</>
+			);
+		} else if (
+			/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
+				props._imgurl
+			)
+		) {
+			return (
+				<ReactPlayer
+					className="cardVideo"
+					loop={true}
+					playing={true}
+					url={props._imgurl}
+				/>
+			);
+		}
+	};
 	const accUsername = (accNum) => {
 		if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
 			return '@Chitra';
@@ -111,13 +161,13 @@ const CreationCards = (props) => {
 			}}
 			to={`/batch/${props._batchId}`}>
 			<Card className="cardWrapper">
-				<CardImg
-					top
-					className="card-background-image"
-					src={props['5']}
-					alt='image3'
-				/>
-				{/* {displayFileType()} */}
+				{/*<CardImg*/}
+				{/*	top*/}
+				{/*	className="card-background-image"*/}
+				{/*	src={props['5']}*/}
+				{/*	alt='image3'*/}
+				{/*/>*/}
+				 {displayFileType()}
 				<CardImgOverlay className="cardImgOverlay">
 					<div className="userImg">
 						<img src={props.profileImage || profile} alt="userImg"/>

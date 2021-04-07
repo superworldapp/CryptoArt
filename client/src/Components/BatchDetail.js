@@ -322,8 +322,8 @@ class Allpatrender extends Component {
 			) {
 				return (
 					<ReactPlayer
-          className="card-background-image"
-						style={{maxWidth: '200px', maxheight:'200px'}}
+            className="cardVideo"
+						// style={{maxWidth: '200px', maxheight:'200px'}}
 						loop={true}
 						playing={true}
 						url={this.props.BatchCreated._imgurl}
@@ -625,8 +625,7 @@ this.displayFileType2 = this.displayFileType2.bind(this);
     ) {
       return (
         <ReactPlayer
-        className="card-background-image"
-          style={{maxWidth: '200px', maxheight:'200px'}}
+          className="batchVideo"
           loop={true}
           playing={true}
           url={this.props.BatchCreated[0]._imgurl}
