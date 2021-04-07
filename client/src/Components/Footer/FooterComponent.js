@@ -14,7 +14,7 @@ import telegram from "./icons/telegram-icon.svg";
 import {Link} from 'react-router-dom';
 import "./FooterComponent.scss"
 // import Slide from "react-reveal";
-// import HubspotForm from "react-hubspot-form";
+import HubspotForm from "react-hubspot-form";
 
 const Footer = () => {
 
@@ -38,19 +38,20 @@ const Footer = () => {
 															paddingBottom: '20px',
 															fontSize: '20px',
 															fontWeight: '400',
+															color: '#5540C6',
 														}}>
 									Receive our exclusive research report on virtual real estate, non-fungible
 									tokens and digital assets.
 								</Typography>
-								{/*<HubspotForm*/}
-								{/*	portalId='8746200'*/}
-								{/*	formId='ca440f2c-b907-4d90-b4f6-8a28cbbf79d7'*/}
-								{/*	onSubmit={() => console.log('Submit!')}*/}
-								{/*	onReady={(form) => console.log('Form ready!')}*/}
-								{/*	loading={<div>Loading...</div>}*/}
-								{/*	cssClass='hubspot-form'*/}
-								{/*/>*/}
-								<div className="hubspot-form"/>
+								<HubspotForm
+									portalId='8746200'
+									formId='ca440f2c-b907-4d90-b4f6-8a28cbbf79d7'
+									onSubmit={() => console.log('Submit!')}
+									onReady={(form) => console.log('Form ready!')}
+									loading={<div>Loading...</div>}
+									cssClass='hubspot-form'
+								/>
+								{/*<div className="hubspot-form"/>*/}
 								{/*</Slide>*/}
 							</Grid>
 							{/*Navigation*/}
