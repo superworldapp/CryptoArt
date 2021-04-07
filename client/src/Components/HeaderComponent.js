@@ -13,7 +13,7 @@ import {
   Input,
 } from 'reactstrap';
 import { connect } from "react-redux";
-import { setSearchValue } from '../redux/marketplace/actions';
+import {setSearchValue, setSearchValueState} from '../redux/marketplace/actions';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
@@ -116,6 +116,7 @@ class Header extends Component {
       changeUsernameSuccessDialogOpen: false,
       changePasswordSuccessDialogOpen: false,
       changePasswordErrorMessage: '',
+      searchValue: '',
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.getnewHash = this.getnewHash.bind(this);
@@ -221,8 +222,15 @@ class Header extends Component {
 
   handleSearchChange = (evt) => {
     const { value } = evt.target;
-    this.props.setSearchValue({searchValue: value});
+    this.setState({searchValue: value});
   };
+
+  handleSearchKeyPress = event => {
+    if (event.keyCode === 13) {
+      const { value } = event.target;
+      this.props.setSearchValue({searchValue: value});
+    }
+  }
 
   //change username/password Menu
   changeUsernameHandleClick = () => {
@@ -351,8 +359,9 @@ class Header extends Component {
               >
                 <Input
                   placeholder='Search'
-                  value={this.props.searchValue}
+                  value={this.state.searchValue}
                   onChange={this.handleSearchChange}
+                  onKeyDown={this.handleSearchKeyPress}
                   style={{
                     padding: '0 2rem',
                     maxWidth: '400px',
@@ -1254,10 +1263,12 @@ class Header extends Component {
 
 const mapStateToProps = (state) => ({
   searchValue: state.marketplace.searchValue,
+  searchValueState: state.marketplace.searchValueState,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setSearchValue: (data) => dispatch(setSearchValue(data))
+  setSearchValue: (data) => dispatch(setSearchValue(data)),
+  setSearchValueState: (data) => dispatch(setSearchValueState(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -113,7 +113,7 @@ a {
   font-family: 'gibson', sans-serif;
   font-weight: 600;
   text-align: left;
-  width: 30rem;
+  width: 24rem;
 }
 
 .text1 {
@@ -342,6 +342,10 @@ img.rounded-circle {
   margin-bottom: 1.5rem !important;
 }
 
+.textFeature {
+  padding: 0;
+}
+
 .home-slider {
   overflow: hidden;
   width: 20rem;
@@ -398,6 +402,7 @@ img.rounded-circle {
 .home-slider figure img, .home-slider-multiple figure img {
   width: 20%;
   float: left;
+  object-fit: contain;
 }
 
 @keyframes slider {
@@ -627,4 +632,99 @@ img.rounded-circle {
       }
     }
   }
+}
+
+@media screen and (max-width: 500px) {
+  .upperView {
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sectionText1 {
+    padding: 0;
+    margin: 0;
+  }
+
+  #header {
+    font-family: GibsonSemiBold!important;
+    line-height: 18px;
+    font-size: 18px;
+    text-indent: 3px;
+    text-transform: uppercase;
+    color: #000000;
+    text-align: center;
+    width: 100%;
+    margin-top: 50px;
+    padding: 0;
+  }
+
+  .text1 {
+    text-align: center;
+    font-family: GibsonSemiBold!important;
+    font-size: 14px;
+    line-height: 14px;
+    text-indent: 3px;
+    margin-top: 27px;
+  }
+
+  .text2 {
+    text-align: center;
+    font-family: GibsonSemiBold!important;
+    font-size: 14px;
+    line-height: 14px;
+    text-indent: 3px;
+  }
+
+  #start-btn {
+    margin-top: 0;
+  }
+
+  .start-btn {
+    margin: 28px auto;
+  }
+
+  .col1 {
+    margin-right: 0;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+  }
+
+  .middleView {
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sectionText2 {
+    position: inherit;
+    right: 0;
+  }
+
+  .textFeature {
+    padding: 0 30px;
+    text-align: center;
+    font-family: GibsonSemiBold!important;
+    font-size: 14px;
+    line-height: 14px;
+    text-indent: 3px;
+    color: #888888;
+    margin-top: 27px;
+  }
+
+  .col2 {
+    margin: 28px 0;
+  }
+
+  .col-2 {
+    max-width: 26.3%;
+    max-height: 63px;
+  }
+
+  .image10 {
+    height: 5rem;
+  }
+
 }

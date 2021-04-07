@@ -2,7 +2,7 @@ import {
 	SET_ALL_DATA,
 	CHIPS_DATA,
 	SET_FILTERED_DATA,
-	SET_SEARCH_VALUE,
+	SET_SEARCH_VALUE, SET_SEARCH_VALUE_STATE,
 } from '../types';
 
 const initialState = {
@@ -19,11 +19,33 @@ const initialState = {
 		},
 		{
 			name: "Type",
-			lists: [{name: 'Images', key: 7}, {name: 'GIF', key: 8}, {name: 'Video', key: 9}],
+			lists: [
+				{
+					name: 'Images',
+					key: 7
+				},
+				{
+					name: 'GIF',
+					key: 8
+				},
+				{
+					name: 'Video',
+					key: 9
+				},
+				{
+					name: 'Audio',
+					key: 10
+				},
+				{
+					name: '3D',
+					key: 11
+				}
+			],
 			id: 3,
 		},
 	],
 	searchValue: '',
+	searchValueState: '',
 	setAllData: {
 		batch: [],
 	},
@@ -39,6 +61,8 @@ export const reducer = (state = initialState, action) => {
 			return {...state, setFilteredData: action.payload}
 		case SET_SEARCH_VALUE:
 			return {...state, searchValue: action.payload}
+		case SET_SEARCH_VALUE_STATE:
+			return {...state, searchValueState: action.payload}
 		default:
 			return state
 	}

@@ -223,6 +223,7 @@ class Home extends Component {
 	}
 
 	render() {
+		const isMobile = window.innerWidth < 500;
 		if (this.state.loggedIn && this.state.startClicked) {
 			return <Redirect to='/allart'/>;
 		} else {
@@ -233,192 +234,241 @@ class Home extends Component {
 							fluid
 							className="containerFluidMain"
 						>
-							<div className="upperView">
-								<div className="sectionText1">
-									<h1 id='header'>WELCOME TO THE <br/> NFT SALON</h1>
-									<p className='text1'>
-										{' '}
-										BUY
-										<span className="text2">
+							{!isMobile ?
+								(
+									<div className="upperView">
+									<div className="sectionText1">
+										<h1 id='header'>WELCOME TO THE NFT SALON</h1>
+										<p className='text1'>
+											{' '}
+											BUY
+											<span className="text2">
                       and
                     </span>
-										SELL
-										<span className="text2">
+											SELL
+											<span className="text2">
                     {' '}NFT's here
                     <br/>
                     to help you curate your{' '}
                     </span>
-										<a target='blank' href='https://www.superworldapp.com/'>
-											SuperWorld
-										</a>
-									</p>
-									<div id='start-btn'>
-										<button
-											className='start-btn'
-											onClick={this.handleStartClick}
-										>
-											Explore
-										</button>
+											<a target='blank' href='https://www.superworldapp.com/'>
+												SuperWorld
+											</a>
+										</p>
+										<div id='start-btn'>
+											<button
+												className='start-btn'
+												onClick={this.handleStartClick}
+											>
+												Explore
+											</button>
+										</div>
+									</div>
+									<div className="col1">
+
+										<div className='home-slider'>
+											<figure>
+												<img className='topimage' src={image1} alt='img'/>
+												<img className='topimage' src={image2} alt='img'/>
+												<img className='topimage' src={image3} alt='img'/>
+												<img className='topimage' src={image4} alt='img'/>
+												<img className='topimage' src={image1} alt='img'/>
+											</figure>
+										</div>
+
 									</div>
 								</div>
-								<div className="col1">
-
-									<div className='home-slider'>
-										<figure>
-											<img className='topimage' src={image1} alt='img'/>
-											<img className='topimage' src={image2} alt='img'/>
-											<img className='topimage' src={image3} alt='img'/>
-											<img className='topimage' src={image4} alt='img'/>
-											<img className='topimage' src={image1} alt='img'/>
-										</figure>
+								)
+								:
+								(
+									<div className="upperView">
+									<div className="sectionText1">
+										<h1 id='header'>WELCOME TO THE NFT SALON</h1>
+										<p className='text1'>
+											{' '}
+											BUY
+											<span className="text2">
+                      and
+                    </span>
+											SELL
+											<span className="text2">
+                    {' '}NFT's here
+                    <br/>
+                    to help you curate your{' '}
+                    </span>
+											<a target='blank' href='https://www.superworldapp.com/'>
+												SuperWorld
+											</a>
+										</p>
 									</div>
-
+									<div className="col1">
+										<div className='home-slider'>
+											<figure>
+												<img className='topimage' src={image1} alt='img'/>
+												<img className='topimage' src={image2} alt='img'/>
+												<img className='topimage' src={image3} alt='img'/>
+												<img className='topimage' src={image4} alt='img'/>
+												<img className='topimage' src={image1} alt='img'/>
+											</figure>
+										</div>
+									</div>
+										<div id='start-btn'>
+											<button
+												className='start-btn'
+												onClick={this.handleStartClick}
+											>
+												Explore
+											</button>
+										</div>
 								</div>
-							</div>
+								)
+							}
 							<br/>
 
 							<div style={{height: '1.5rem', backgroundColor: ' #D5D7FA',}}></div>
 							<br/>
 							<div style={{height: '1.5rem', backgroundColor: ' #D5D7FA'}}></div>
 
-							<div className='middleView'>
-								<div className="col2">
-									<Row around="xs" className="gridRow1">
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-1'>
-												<figure>
-													<img src={image2} className="image10" alt="image10"/>
-													<img src={image3} className="image10" alt="image10"/>
-													<img src={image2} className="image10" alt="image10"/>
-													<img src={image3} className="image10" alt="image10"/>
-													<img src={image2} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-2'>
-												<figure>
-													<img src={image3} className="image10" alt="image10"/>
-													<img src={image4} className="image10" alt="image10"/>
-													<img src={image3} className="image10" alt="image10"/>
-													<img src={image4} className="image10" alt="image10"/>
-													<img src={image3} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-3'>
-												<figure>
-													<img src={image4} className="image10" alt="image10"/>
-													<img src={image5} className="image10" alt="image10"/>
-													<img src={image4} className="image10" alt="image10"/>
-													<img src={image5} className="image10" alt="image10"/>
-													<img src={image4} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-									</Row>
-									<Row around="xs" className="gridRow2">
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-4'>
-												<figure>
-													<img src={image5} className="image10" alt="image10"/>
-													<img src={image6} className="image10" alt="image10"/>
-													<img src={image5} className="image10" alt="image10"/>
-													<img src={image6} className="image10" alt="image10"/>
-													<img src={image5} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-5'>
-												<figure>
-													<img src={image6} className="image10" alt="image10"/>
-													<img src={image7} className="image10" alt="image10"/>
-													<img src={image6} className="image10" alt="image10"/>
-													<img src={image7} className="image10" alt="image10"/>
-													<img src={image6} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-6'>
-												<figure>
-													<img src={image7} className="image10" alt="image10"/>
-													<img src={image8} className="image10" alt="image10"/>
-													<img src={image7} className="image10" alt="image10"/>
-													<img src={image8} className="image10" alt="image10"/>
-													<img src={image7} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-									</Row>
-									<Row around="xs" className="gridRow3">
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-7'>
-												<figure>
-													<img src={image8} className="image10" alt="image10"/>
-													<img src={image9} className="image10" alt="image10"/>
-													<img src={image8} className="image10" alt="image10"/>
-													<img src={image9} className="image10" alt="image10"/>
-													<img src={image8} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-8'>
-												<figure>
-													<img src={image9} className="image10" alt="image10"/>
-													<img src={image10} className="image10" alt="image10"/>
-													<img src={image9} className="image10" alt="image10"/>
-													<img src={image10} className="image10" alt="image10"/>
-													<img src={image9} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-9'>
-												<figure>
-													<img src={image10} className="image10" alt="image10"/>
-													<img src={image11} className="image10" alt="image10"/>
-													<img src={image10} className="image10" alt="image10"/>
-													<img src={image11} className="image10" alt="image10"/>
-													<img src={image10} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-									</Row>
-								</div>
-								<div className="sectionText2">
-									<h1 id='header'>FEATURED NFT's <br/> OF THE DAY</h1>
-									<p className='text2'>
+							{!isMobile ?
+								(
+									<div className='middleView'>
+										<div className="col2">
+											<Row around="xs" className="gridRow1">
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-1'>
+														<figure>
+															<img src={image2} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image2} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image2} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-2'>
+														<figure>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-3'>
+														<figure>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+											</Row>
+											<Row around="xs" className="gridRow2">
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-4'>
+														<figure>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-5'>
+														<figure>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-6'>
+														<figure>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+											</Row>
+											<Row around="xs" className="gridRow3">
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-7'>
+														<figure>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-8'>
+														<figure>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-9'>
+														<figure>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image11} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image11} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+											</Row>
+										</div>
+										<div className="sectionText2">
+											<h1 id='header'>FEATURED NFT's <br/> OF THE DAY</h1>
+											<p className='text2'>
 
-										Each day brings something new,
-										view our ever changing
-										<br/>
-										gallery of NFT's from a wide range
-										of salon creators
-										<br/>
-										{/* And share it in your{' '}
+												Each day brings something new,
+												view our ever changing
+												<br/>
+												gallery of NFT's from a wide range
+												of salon creators
+												<br/>
+												{/* And share it in your{' '}
                     <a target='blank' href='https://www.superworldapp.com/'>
                       SuperWorld
                     </a> */}
-										<br/>
-										<br/>
-									</p>
-									<div id='start-btn'>
-										<button
-											className='start-btn'
-											onClick={this.handleStartClick}
-										>
-											Explore
-										</button>
-									</div>
+												<br/>
+												<br/>
+											</p>
+											<div id='start-btn'>
+												<button
+													className='start-btn'
+													onClick={this.handleStartClick}
+												>
+													Explore
+												</button>
+											</div>
 
-								</div>
-								{/* <div className='col1'>
-                  <img className='img1' src={image1} alt='image1' /> 
-                  <img className='ellispse' src={p1} alt='ellipse' /> 
+										</div>
+										{/* <div className='col1'>
+                  <img className='img1' src={image1} alt='image1' />
+                  <img className='ellispse' src={p1} alt='ellipse' />
                   <img className='image8' src={Nate1} alt='img' />
                   <img className='image9' src={Nate2} alt='img' />
                   <img className='image10' src={image13} alt='img' />
@@ -429,7 +479,7 @@ class Home extends Component {
                   <img className='image13' src={image13} alt='img' />
                   <img className='image14' src={image13} alt='img' />
                   <img className='image15' src={Nate4} alt='img' />
-                </div> 
+                </div>
                 { <div className='col2'>
                   <Grid
                     container
@@ -439,7 +489,140 @@ class Home extends Component {
                   ></Grid>
                 </div>
               </div> */}
-              </div>
+									</div>
+								)
+								:
+								(
+									<div className='middleView'>
+										<div className="sectionText2">
+											<h1 id='header'>FEATURED NFT's OF THE DAY</h1>
+											<p className='textFeature'>
+												Each day brings something new,
+												view our ever changing
+												gallery of NFT's from a wide range
+												of salon creators
+											</p>
+										</div>
+										<div className="col2">
+											<Row around="xs" className="gridRow1">
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-1'>
+														<figure>
+															<img src={image2} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image2} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image2} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-2'>
+														<figure>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-3'>
+														<figure>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+											</Row>
+											<Row around="xs" className="gridRow2">
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-4'>
+														<figure>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-5'>
+														<figure>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-6'>
+														<figure>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+											</Row>
+											<Row around="xs" className="gridRow3">
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-7'>
+														<figure>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-8'>
+														<figure>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-9'>
+														<figure>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image11} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image11} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+											</Row>
+										</div>
+										<div id='start-btn'>
+											<button
+												className='start-btn'
+												onClick={this.handleStartClick}
+											>
+												Explore
+											</button>
+										</div>
+									</div>
+								)
+							}
+
+
 
               <br />
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
