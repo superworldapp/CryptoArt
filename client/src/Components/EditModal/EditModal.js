@@ -62,9 +62,11 @@ const EditModal = props => {
 	}
 	const handleInputChange2 = (e) => {
 		const target = e.target;
-		setDuration(target.value);
-		console.log(target.value);
+		const timestamp = new Date(target.value.split(".").reverse().join(".")).getTime();
+		setDuration(timestamp);
 	}
+
+	console.log('=====>duration', duration);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -129,10 +131,6 @@ const EditModal = props => {
 			initialControls.duration.disabled = false
 		}
 	}, [saleType])
-
-	const handleClick = () => {
-		Sale().then()
-	}
 
 	return (
 
@@ -221,7 +219,8 @@ const EditModal = props => {
 						<Input
 							disabled={saleType === saleTypes.BUY_NOW}
 							className='text-input'
-							type='text'
+							type='date'
+							onChange={handleInputChange2}
 						/>
 						<span className='after-input-text'>Days</span>
 					</FormGroup>

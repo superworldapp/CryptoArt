@@ -6,7 +6,7 @@ import '../App.css';
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import AllItemComponent from './Marketplace/AllArtComponent';
-import MyItemComponent from './MyArtComponent/MyArtComponent';
+import MyItemComponent from './MyCollectionComponentNew/MyCollectionComponentNew';
 import MyCollectionComponent from './MyCollectionComponent';
 import MyStoreComponent from './MyStoreComponent';
 import Profile from './MyProfile/MyProfileComponent'
@@ -16,7 +16,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import Footer from './Footer/FooterComponent';
 import ProtectedRoute from './ProtectedRoute';
 import Axios from 'axios';
-import MyArtComponent from "./MyArtComponent/MyArtComponent";
+import MyCollectionComponentNew from "./MyCollectionComponentNew/MyCollectionComponentNew";
 import {setArt} from "../redux/myStoreComponent/actions";
 import {connect} from "react-redux";
 //import HDWalletProvider from "@truffle/hdwallet-provider";
@@ -308,7 +308,7 @@ class Main extends Component {
 						exact
 						path='/mycollection'
 						component={() => (
-							<MyCollectionComponent
+							<MyCollectionComponentNew
 								contract={this.state.contract}
 								accounts={this.state.accounts}
 								batch={this.state.batch?.filter(
