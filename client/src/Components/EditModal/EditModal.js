@@ -51,22 +51,23 @@ const EditModal = props => {
 	const [sellPrice, setSellPrice] = useState(saleTypes.BUY_NOW);
 	const [duration, setDuration] = useState(saleTypes.BUY_NOW);
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
+
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value);
-		console.log(e.target.value);
+		// console.log(e.target.value);
 	}, [])
+
 	const handleInputChange = (e) => {
 		const target = e.target;
 		setSellPrice(target.value);
 		console.log(target.value);
 	}
+
 	const handleInputChange2 = (e) => {
 		const target = e.target;
 		const timestamp = new Date(target.value.split(".").reverse().join(".")).getTime();
 		setDuration(timestamp);
 	}
-
-	console.log('=====>duration', duration);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -155,7 +156,7 @@ const EditModal = props => {
 				<Form>
 
 					<FormGroup className='form-group-preview'>
-						{<img style={{height: '20', width: '20%'}}
+						{<img style={{width: '95px', margin: '0 auto'}}
 									className='control-preview-img'
 									src={imgThumb}
 									alt={imgThumb}

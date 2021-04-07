@@ -2,7 +2,7 @@ import React from 'react';
 import './style.scss';
 
 const Checkbox = (props) => {
-	console.log('========>props', props);
+	// console.log('========>props', props);
 	return (
 		<span className="checkbox-custom">
 			<input

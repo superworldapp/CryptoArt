@@ -347,9 +347,14 @@ class Allpatrender2 extends Component {
 									lineHeight: '16px',
 									fontSize: '16px',
 									color: '#5540C7',
-									margin: '0px'
-								}}>{this.props.art._sellprice != 0 ? Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether') : Web3.utils.fromWei(this.props.art._bidprice.toString(), 'ether')}</p>
-								{console.log('========>Web3.utils.fromWei', Web3.utils.fromWei)}
+									margin: '0px',
+								}}>
+									{
+										this.props.art._sellprice !== 0
+										? Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
+										: Number(Web3.utils.fromWei(this.props.art._bidprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
+									}
+								</p>
 								<p
 									style={{
 										fontFamily: 'Gibson',
@@ -836,7 +841,8 @@ class Allpatrender2 extends Component {
                           </Modal>  */}
 							</>
 						</div>
-						<p className="card-body-time">{Date.now()/1000 < this.state.art._bidend ? this.state.art._bidend - (Date.now()/1000)  : 0}</p>
+						<p className="card-body-time">{Date.now()/1000 < this.state.art._bidend ? this.state.art._bidend - (Date.now()/1000)  : ''}</p>
+						{/*<p className="card-body-time red">Auction Timer Ended</p>*/}
 						<div style={{display: 'flex', justifyContent: 'center'}}>
 							{this.state.delistLoading ? (
 								<img height='35' src={loader} alt="load"/>
@@ -850,6 +856,7 @@ class Allpatrender2 extends Component {
 							)}
 						</div>
 					</CardBody>
+					{console.log('=====>this.state.art', this.state.art)}
 				</div>
 				{
 					this.state.isEditModal
