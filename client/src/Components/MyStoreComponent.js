@@ -203,7 +203,7 @@ class MyStoreComponent extends Component {
 
 	refreshMyArt() {
 		return this.setState({
-			isModalOpen2: false,
+			isModalOpen1: false,
 		})
 		// window.location.reload()
 		// if (!this.state.isModalOpen1 && !this.state.uploadSuccess)
@@ -240,6 +240,7 @@ class MyStoreComponent extends Component {
 					imgUrl
 				)
 				.send({from: this.props.accounts, gas: 5000000});
+			this.toggleModal2()
 
 			let data;
 
@@ -688,44 +689,13 @@ class MyStoreComponent extends Component {
 				{/*</Modal>*/}
 
 				{/* UPLOAD SUCCESS MODAL */}
-				<Modal
+				<SuccessfulModals
 					isOpen={this.state.uploadSuccess}
-					onClosed={this.refreshMyArt}
 					toggle={this.toggleModal2}
-					className='modal-xl'
-				>
-					<ModalHeader toggle={this.toggleModal2}>
-						<></>
-					</ModalHeader>
-					<ModalBody
-						style={{
-							display: 'flex',
-							flexDirection: 'column',
-							justifyContent: 'center',
-							font: 'Gibson',
-							height: '20rem',
-							paddingBottom: '5rem',
-						}}
-					>
-						<img src={checkmark}/>
-						<p
-							style={{
-								textAlign: 'center',
-								fontSize: '1.25rem',
-								fontWeight: '450',
-								marginTop: '1rem',
-							}}
-						>
-							Hey @megan46233, your upload was successful!
-						</p>
-						<p style={{textAlign: 'center', color: 'gray', fontSize: '12px'}}>
-							You can view your recent uploaded file in “MyStore”
-						</p>
-						<button className='upload-more-btn' onClick={this.handleUploadMore}>
-							UPLOAD MORE
-						</button>
-					</ModalBody>
-				</Modal>
+					onClose={this.toggleModal2}
+					variation={0}
+					handleUploadMore={this.handleUploadMore}
+				/>
 
 				{
 					this.state.loadingAfterSend

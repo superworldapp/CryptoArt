@@ -52,7 +52,7 @@ class Allpatrender extends Component {
 		this.refreshMyArt = this.refreshMyArt.bind(this);
 		this.Sale = this.Sale.bind(this);
 		this.mintTokenBatch = this.mintTokenBatch.bind(this);
-		this.mintTokenBatch = this.mintTokenBatch.bind(this);
+		this.CloseListModal = this.CloseListModal.bind(this);
 
 		this.handleOpenListModal = this.handleOpenListModal.bind(this);
 	}
@@ -73,6 +73,12 @@ class Allpatrender extends Component {
 	handleOpenListModal() {
 		this.setState({
 			openListModal: !this.state.openListModal,
+		})
+	}
+
+	CloseListModal() {
+		this.setState({
+			openListModal: false,
 		})
 	}
 
@@ -899,7 +905,7 @@ class Allpatrender extends Component {
 							accounts={this.props.accounts}
 							isOpen={this.state.openListModal}
 							toggle={this.handleOpenListModal}
-							onClose={this.handleOpenListModal}
+							onClose={this.CloseListModal}
 							imgThumb={this.props.art._imgThumbnail}
 							tokenID={this.props.art._tokenId}
 						/>
