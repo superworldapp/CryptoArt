@@ -952,15 +952,6 @@ class Header extends Component {
                             ? this.state.credentials.newUsername
                             : this.state.currentUser.username}
                         </li>
-                        <li
-                          style={{
-                            color: 'gray',
-                            fontFamily: 'Gibson',
-                            fontSize: '13px',
-                          }}
-                        >
-                          {Cookies.get('email')}
-                        </li>
                       </div>
                     </MenuItem>
 
