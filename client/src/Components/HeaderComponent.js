@@ -12,14 +12,17 @@ import {
   InputGroupText,
   Input,
 } from 'reactstrap';
-import { connect } from "react-redux";
-import {setSearchValue, setSearchValueState} from '../redux/marketplace/actions';
+import { connect } from 'react-redux';
+import {
+  setSearchValue,
+  setSearchValueState,
+} from '../redux/marketplace/actions';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import helpIcon from '../assets/svg/help.svg';
 import greenDot from '../assets/svg/green-dot.svg';
-import checkmark1 from "../images/svg/Checkmark1.svg";
+import checkmark1 from '../images/svg/Checkmark1.svg';
 import MenuItem from '@material-ui/core/MenuItem';
 import Axios from 'axios';
 import Cookies from 'js-cookie';
@@ -222,15 +225,15 @@ class Header extends Component {
 
   handleSearchChange = (evt) => {
     const { value } = evt.target;
-    this.setState({searchValue: value});
+    this.setState({ searchValue: value });
   };
 
-  handleSearchKeyPress = event => {
+  handleSearchKeyPress = (event) => {
     if (event.keyCode === 13) {
       const { value } = event.target;
-      this.props.setSearchValue({searchValue: value});
+      this.props.setSearchValue({ searchValue: value });
     }
-  }
+  };
 
   //change username/password Menu
   changeUsernameHandleClick = () => {
@@ -333,11 +336,7 @@ class Header extends Component {
     // console.log('this.state.currentUser', this.state.currentUser);
     return (
       <>
-        <Navbar
-          light
-          expand='md'
-          className="navbarMain"
-        >
+        <Navbar light expand='md' className='navbarMain'>
           <NavbarToggler onClick={this.toggleNav} />
           <NavbarBrand>
             <NavLink to='/home'>
@@ -345,11 +344,11 @@ class Header extends Component {
                 src={LogoImg}
                 alt='Logo Image'
                 id='logo-img'
-                className="imgLogo"
+                className='imgLogo'
               />
             </NavLink>
           </NavbarBrand>
-          {!window.location.href.includes('home') &&
+          {!window.location.href.includes('home') && (
             <>
               <InputGroup
                 style={{
@@ -371,26 +370,20 @@ class Header extends Component {
                 />
               </InputGroup>
             </>
-          }
+          )}
           <Collapse isOpen={this.state.isNavOpen} navbar>
             <Nav
               navbar
               className='m-auto d-flex align-items-center justify-content-end'
             >
               <NavItem>
-                <NavLink
-                  className="navItemHeader"
-                  to='/allart'
-                >
+                <NavLink className='navItemHeader' to='/allart'>
                   Marketplace
                 </NavLink>
               </NavItem>
-              
+
               <NavItem>
-                <NavLink
-                  className="navItemHeader"
-                  to='/allart'
-                >
+                <NavLink className='navItemHeader' to='/allart'>
                   Help
                 </NavLink>
               </NavItem>
@@ -421,9 +414,7 @@ class Header extends Component {
                     alignItems='center'
                     spacing={2}
                   >
-                    <Grid
-                      item
-                    >
+                    <Grid item>
                       <Button
                         className={
                           this.props.accounts
@@ -1004,7 +995,7 @@ class Header extends Component {
                               margin: '5px 0',
                             }}
                           >
-                            My Profile
+                            MyProfile
                           </p>
                         </span>
                       </MenuItem>
@@ -1041,7 +1032,7 @@ class Header extends Component {
                               margin: '5px 0',
                             }}
                           >
-                            My Collection
+                            MyCollection
                           </p>
                         </span>
                       </MenuItem>
@@ -1075,7 +1066,7 @@ class Header extends Component {
                               margin: '5px 0',
                             }}
                           >
-                            My Store
+                            MyStore
                           </p>
                         </span>
                       </MenuItem>
