@@ -239,7 +239,7 @@ flex-grow: 1;
 .detail-Desc {
     display: flex;
     flex-direction: column;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .detail-DescTitle {
@@ -249,3 +249,22 @@ flex-grow: 1;
     color: #000;
     text-align: start;
 }
+.detail-DescText {
+    font-family: GibsonRegular;
+          font-size: 14px;
+          line-height: 18px;
+          text-align: justify;
+          overflow: hidden;
+          width: auto;
+          max-width: 80ch;
+          color: #000;
+          text-overflow: ellipsis;
+          display: -moz-box;
+          -moz-box-orient: vertical;
+          display: -webkit-box;
+          -webkit-line-clamp: 5;
+          -webkit-box-orient: vertical;
+          line-clamp: 5;
+          transition: .5s;
+          box-orient: vertical;
+  }

@@ -434,6 +434,13 @@ const CardDetail = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const historyToggle = () => setIsOpen(!isOpen);
+  const text = 'The exhibition titled ‘Goliaths, Tanks’ is an amalgamation of her paintings and objects A together in her site-specific ' +
+  'installations and multi-media projections, accompanied by performance pieces. The movement in each object resonating with the sound ' +
+  'of ticking clocks serenely draws out the muted anxiety underlying the division of Korean peninsula following the war in the 1950’s. ' +
+  'The ensemble takes place at the Peace Culture Bunker The exhibition titled ‘Goliaths, Tanks’ is an amalgamation of her paintings and objects ' +
+  'A together in her site-specific installations and multi-media projections, accompanied by performance pieces. The movement in each object ' +
+  'resonating with the sound of ticking clocks serenely draws out the muted anxiety underlying the division of Korean peninsula following the ' +
+  'war in the 1950’s. The ensemble takes place at the Peace Culture Bunker'
 
   console.log(ethPrice);
   console.log(art2);
@@ -487,13 +494,17 @@ const CardDetail = ({
               </div>
               <div className='priceCard ' >
                 <div className="card-div">
+                  {art?._isSellings ?
+                  <div></div> :
                   <div className="detail-time">
                     Bid ends in
                 </div>
+                 }
                 </div>
                 <div className= "View">
                   <div className="current-offer">
-                    Current offer: &ensp;
+                    {art?._isSellings ? "Selling at:": "Current offer:" }
+                    &ensp;
                 <div className="offer-price">{art?._isSellings ? converttoether(art?._sellprice) : (art?._isBidding ? converttoether(art?._bidprice) : 0)}</div>
                   </div>
                 </div>
@@ -552,8 +563,7 @@ const CardDetail = ({
             </div>
             <div className= "detail-Desc ">
               <div className = "detail-DescTitle"> Description</div>
-              <p className="style1">
-              </p>
+              <div className= "detail-DescText">{text}</div>
             </div>
             <div className='History-view'>
               <button  className= "History-btn" 
