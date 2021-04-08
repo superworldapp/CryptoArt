@@ -13,6 +13,7 @@ import profileImage from '../../images/svg/profile-image.svg';
 import successLogo from '../../images/svg/successLogo.svg';
 import pencil from '../../images/pencil.png';
 import './MyProfileComponent.scss';
+import SocialShare from './SocialShare';
 
 const MyProfileComponent = (props) => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -126,7 +127,8 @@ const MyProfileComponent = (props) => {
           {/* <p className="location">
 						{linksStore && linksStore.bio || 'Bagno a Ripoli, Tuscany, Italy'}
 					</p> */}
-          <div className='social-media'>
+          <SocialShare />
+          {/* <div className='social-media'>
             <a
               href={(linksStore && 'http://' + linksStore.email) || '#!'}
               className='icon'
@@ -184,7 +186,7 @@ const MyProfileComponent = (props) => {
             <a href='#!' className='icon'>
               <FiUpload size={24} color='black' />
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
       <StyledTabs
