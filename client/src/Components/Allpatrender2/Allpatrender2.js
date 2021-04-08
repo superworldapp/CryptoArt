@@ -878,7 +878,7 @@ class Allpatrender2 extends Component {
 							)}
 						</div>
 					</CardBody>
-					{console.log('=====>this.state.art', this.state.art)}
+					{/*{console.log('=====>this.state.art2', this.state.art)}*/}
 				</div>
 				{
 					this.state.isEditModal

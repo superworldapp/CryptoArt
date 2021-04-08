@@ -11,6 +11,7 @@ import MintModal from "../MintModal/MintModal";
 import ModalUploadToMyStore from "../ModalUploadToMyStore/ModalUploadToMyStore";
 import ModalListingNft from "../ModalListingNft";
 import Loading from "../Loading/loading";
+import EditModal from "../EditModal";
 
 
 class Allpatrender extends Component {
@@ -350,7 +351,7 @@ class Allpatrender extends Component {
 				{/*{+art[3] > 0 && <span className='card-counter'>+{art[3]}</span>}*/}
 				<Link to={`/batch/${this.props.art._batchId}`}>
 					<div className='mystore-queue-card-img'>
-						 {displayFileType()}
+						{displayFileType()}
 					</div>
 				</Link>
 				<div className='card-body-wrapper'>
@@ -894,17 +895,16 @@ class Allpatrender extends Component {
 				{
 					this.state.openListModal
 						? <ModalListingNft
+							contract={this.props.contract}
+							accounts={this.props.accounts}
 							isOpen={this.state.openListModal}
 							toggle={this.handleOpenListModal}
 							onClose={this.handleOpenListModal}
 							imgThumb={this.props.art._imgThumbnail}
+							tokenID={this.props.art._tokenId}
 						/>
 						: null
 				}
-
-				{/*<Loading*/}
-				{/*	name='Uploading File'*/}
-				{/*/>*/}
 			</Card>
 		);
 	}
