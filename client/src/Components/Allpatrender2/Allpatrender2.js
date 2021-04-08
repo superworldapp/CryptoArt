@@ -51,7 +51,7 @@ class Allpatrender2 extends Component {
 
 	componentDidMount = async () => {
 		//;'let newArr = await this.props.art?.filter((x) => x._isSellings);
-	 	this.setState({art: this.props.art});
+		this.setState({art: this.props.art});
 
 
 	}
@@ -314,6 +314,17 @@ class Allpatrender2 extends Component {
 		};
 		let x = colorpills();
 
+		const setDate = () => {
+			const milliSec = Number(this.state.art._bidend * 1000) - Date.now();
+			console.log('=====>milliSec', milliSec);
+			let hours = Math.floor((milliSec / (1000 * 60 * 60))).toFixed(0);
+			let minutes = ((milliSec / (1000 * 60)) % 60).toFixed(0)
+			hours = (hours < 10) ? "0" + hours : hours;
+			minutes = (minutes < 10) ? "0" + minutes : minutes;
+
+			return `${hours} Hrs ${minutes} Min Remaining`
+		}
+
 		const img = new Image();
 		let orientation;
 		img.onload = function () {
@@ -350,9 +361,9 @@ class Allpatrender2 extends Component {
 									margin: '0px',
 								}}>
 									{
-										this.props.art._sellprice != 0
-										? Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
-										: Number(Web3.utils.fromWei(this.props.art._bidprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
+										this.props.art._sellprice !== 0
+											? Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
+											: Number(Web3.utils.fromWei(this.props.art._bidprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
 									}
 								</p>
 								<p
@@ -841,8 +852,19 @@ class Allpatrender2 extends Component {
                           </Modal>  */}
 							</>
 						</div>
-						<p className="card-body-time">{Date.now()/1000 < this.state.art._bidend ? this.state.art._bidend - (Date.now()/1000)  : ''}</p>
-						{/*<p className="card-body-time red">Auction Timer Ended</p>*/}
+						<p className="card-body-time">
+							{
+								this.state.art._bidend === '0'
+									? ''
+									: Date.now() / 1000 < this.state.art._bidend
+									? setDate()
+									: (<p className="red">Auction Timer Ended</p>)}
+						</p>
+						<p className="card-body-time">
+							{
+								this.state.art._bidend === 0 && ''
+							}
+						</p>
 						<div style={{display: 'flex', justifyContent: 'center'}}>
 							{this.state.delistLoading ? (
 								<img height='35' src={loader} alt="load"/>
