@@ -1040,8 +1040,8 @@ class MyItemComponent extends Component {
 			sortLayout: false,
 			searchCollectionValue: '',
 			parsedSearchCollectionValue: [],
-			filteredCollectionItems: this.props.batch,
-			filteredCollectionTitle: this.props.batch,
+			filteredCollectionItems: [],
+			filteredCollectionTitle: [],
 			searchTitle: 'Enter Title',
 		};
 		
@@ -1187,6 +1187,8 @@ class MyItemComponent extends Component {
 		allDocs = response;
 		console.log(response);
 		this.setState({art: allDocs, batchart: createrToken});
+		this.setState({filteredCollectionItems: allDocs});
+		this.setState({filteredCollectionItemsTitle: allDocs, batchart: createrToken});
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -1268,20 +1270,20 @@ class MyItemComponent extends Component {
 	}
 
 	filterMyCollectionTitle = (e, name) => {
+		this.setState({filteredCollectionTitle: this.state.art});
 		if (name === 'All Cards') {
-			this.setState({
-				filteredCollectionTitle: this.props.batch
-			})
+			return this.state.art;
 		} else {
-			this.setState({
-				filteredCollectionTitle: this.props.batch.filter(item => item._tokenBatchName === name)
+			// return this.state.art.filter(item => item._tokenBatchName === name)
+			return this.setState({
+				art: this.state.filteredCollectionTitle.filter(item => item._tokenBatchName === name)
 			})
 		}
 	}
 
 	render() {
 		const { filteredCollectionItems,filteredCollectionTitle, searchTitle } = this.state;
-		const Menu = filteredCollectionTitle.map((x) => {
+		const Menu = this.state.art?.map((x) => {
 			return (
 				<div key={x._tokenId} className='item-nft'>
 					<MyCollectionCards
