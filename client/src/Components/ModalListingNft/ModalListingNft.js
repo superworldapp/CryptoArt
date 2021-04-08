@@ -28,41 +28,52 @@ const initialControls = {
 	}
 }
 
+const ETHER = '1000000000000000000';
+
+
 const ModalListingNft = props => {
 	const {
 		toggle,
 		onClosed,
 		isOpen,
 		imgThumb,
+		contract,
+		accounts,
+		tokenID,
 	} = props
+
+	console.log('=====>props1', props);
 
 	const auctionInputRef = useRef(null)
 	const buyNowInputRef = useRef(null)
 
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
 	const [initialValue, setInitialValue] = useState({tokenPrice: '', duration: ''});
+	const [duration, setDuration] = useState(saleTypes.BUY_NOW);
+	const [sellPrice, setSellPrice] = useState(saleTypes.BUY_NOW);
+	const [loadingSend, setLoadingSend] = useState(false);
+	const [loadingSendEnd, setLoadingEnd] = useState(false);
 
-	const handleInputChange = (e, target) => {
-		const {value} = e.target
-		const timestamp = new Date(value.split(".").reverse().join(".")).getTime();
-		if (target === 'duration') {
-			setInitialValue(prevState => ({
-					...prevState,
-					[target]: timestamp
-				}
-			));
-		} else {
-			setInitialValue(prevState => ({
-					...prevState,
-					[target]: value
-				}
-			));
-		}
-	};
 
 	const onSaleTypeChange = useCallback(e => {
-		setSaleType(e.target.value)
+		setSaleType(e.target.value);
+		// console.log(e.target.value);
 	}, [])
+
+	const handleInputChange = (e) => {
+		const target = e.target;
+		setSellPrice(target.value);
+		console.log(target.value);
+	}
+
+	const handleInputChange2 = (e) => {
+		const target = e.target;
+
+		const timestamp = new Date(target.value.split(".").reverse().join(".")).getTime();
+		setDuration(timestamp);
+		console.log(timestamp);
+
+	}
 
 
 	useEffect(() => {
@@ -75,8 +86,52 @@ const ModalListingNft = props => {
 		}
 	}, [saleType])
 
-	const handleClick = () => {
-		toggle()
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		if (saleType === saleTypes.AUCTION){
+			StartAuction();
+		}
+		else{Sale(true)};
+
+		toggle();
+	}
+
+	const StartAuction = async () => {
+		//	this.setState({ auctionLoading: true });
+
+		//let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
+		let price = ((sellPrice) * ETHER).toString();
+		let times = duration/1000;
+		const res = await contract.methods
+			.startbid(
+				tokenID,
+				price,
+				times
+			)
+			.send({ from: accounts, gas: 5000000 });
+		console.log('res1', res);
+		//	this.setState({ auctionLoading: false, listForAuctionSuccess: true });
+		console.log(res);
+	};
+
+	const Sale = async (isListed) => {
+		// let tokenId = tokenID
+		// let sellprice = "1000000000000000000"
+		let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
+		try {
+			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+			const res = await contract.methods
+				.Sale(
+					tokenID,
+					price,
+					isListed,
+				)
+				.send({from: accounts, gas: 5000000});
+			console.log('res1', res);
+			let data;
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	return (
@@ -150,7 +205,7 @@ const ModalListingNft = props => {
 						<Input
 							className='text-input'
 							type='text'
-							onChange={(e) => handleInputChange(e, 'tokenPrice')}
+							onChange={handleInputChange}
 						/>
 						<span className='after-input-text'>
               ETH<span>($1,580.10 USD)</span>
@@ -164,14 +219,14 @@ const ModalListingNft = props => {
 							disabled={saleType === saleTypes.BUY_NOW}
 							className='text-input date'
 							type='date'
-							onChange={(e) => handleInputChange(e, 'duration')}
+							onChange={handleInputChange2}
 						/>
 						<span className='after-input-text'>Days</span>
 					</FormGroup>
 					<div className='submit-button-wrapper'>
 						<button
 							className='abtn submit-button'
-							onClick={handleClick}
+							onClick={handleSubmit}
 						>
 							Confirm
 						</button>

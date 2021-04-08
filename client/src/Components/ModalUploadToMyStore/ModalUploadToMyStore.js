@@ -158,6 +158,7 @@ const ModalUploadToMyStore = props => {
 
   const onConfirmClick = useCallback(e => {
     onConfirm(e, controls)
+    toggle()
   }, [controls])
 
   useEffect(() => {
