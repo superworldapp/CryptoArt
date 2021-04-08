@@ -40,6 +40,48 @@ export class SuccessfulModals extends Component {
 									marginTop: '1rem',
 								}}
 							>
+								Hey @megan46233, your upload was successful!
+							</p>
+							<p style={{textAlign: 'center', color: 'gray', fontSize: '12px'}}>
+								You can view your recent uploaded file in “MyStore”
+							</p>
+							<button className='upload-more-btn' onClick={this.props.handleUploadMore}>
+								UPLOAD MORE
+							</button>
+						</div>
+					)}
+				>
+				</Modal>
+			)
+		}
+		else if (variation === 1) {
+			return (
+				<Modal
+					isOpen={this.props.isOpen}
+					onClose={this.props.onClose}
+					toggle={this.props.toggle}
+					className='modal-xl'
+					header={(
+						<></>
+					)}
+					body={(
+						<div style={{
+							display: 'flex',
+							flexDirection: 'column',
+							justifyContent: 'center',
+							font: 'Gibson',
+							height: '20rem',
+							paddingBottom: '5rem',
+						}}>
+							<img src={checkmark}/>
+							<p
+								style={{
+									textAlign: 'center',
+									fontSize: '1.25rem',
+									fontWeight: '450',
+									marginTop: '1rem',
+								}}
+							>
 								Hey megan462, you have successfully minted new tokens!
 							</p>
 							<p style={{textAlign: 'center', color: 'gray', fontSize: '12px'}}>
@@ -53,7 +95,7 @@ export class SuccessfulModals extends Component {
 				>
 				</Modal>
 			)
-		} else if (variation === 1) {
+		} else if (variation === 2) {
 			return (
 				<Modal
 					isOpen={this.state.uploadSuccess}
@@ -94,7 +136,7 @@ export class SuccessfulModals extends Component {
 					</ModalBody>
 				</Modal>
 			)
-		} else if (variation === 2) {
+		} else if (variation === 3) {
 			return (
 				<Modal
 					isOpen={this.state.uploadSuccess}

@@ -70,7 +70,7 @@ class UploadsTab extends Component {
 
 	toggleModal2() {
 		this.setState({
-			uploadSuccess: true,
+			uploadSuccess: !this.state.uploadSuccess,
 			loadingAfterSend: false,
 		});
 	}
@@ -714,7 +714,7 @@ class UploadsTab extends Component {
 						isOpen={this.state.uploadSuccess}
 						toggle={this.toggleModal2}
 						onClose={this.toggleModal2}
-						variation={0}
+						variation={1}
 						handleUploadMore={this.handleUploadMore}
 					/>
 				}
