@@ -14,6 +14,8 @@ import successLogo from '../../images/svg/successLogo.svg';
 import pencil from '../../images/pencil.png';
 import './MyProfileComponent.scss';
 import SocialShare from './SocialShare';
+import Identicon from 'identicon.js';
+import Cookies from 'js-cookie';
 
 const MyProfileComponent = (props) => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -41,6 +43,24 @@ const MyProfileComponent = (props) => {
   useEffect(() => {
     getUser();
   }, []);
+
+  const getEmailLength = (email) => {
+    let diff;
+    if (email.length < 15) {
+      diff = 15 - email.length;
+      for (let i = 0; i < diff; i++) {
+        email += 'x';
+      }
+    }
+    console.log('email', email);
+    return email;
+  };
+
+  const getIdenticon = () => {
+    return `data:image/png;base64,${new Identicon(
+      getEmailLength(Cookies.get('email')).toString()
+    )}`;
+  };
 
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);
@@ -108,7 +128,7 @@ const MyProfileComponent = (props) => {
         </div>
         <div className='exampl'>
           <div className='user-container'>
-            <img className='user-img' src={profileImage} alt='user-img' />
+            <img className='user-img' src={getIdenticon()} alt='user-img' />
             <div className={'user-img-hover'}>
               <div className='edit'>Edit</div>
               <div className='upload'>Upload</div>
