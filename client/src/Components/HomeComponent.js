@@ -444,9 +444,7 @@ class Home extends Component {
 											<p className='text2'>
 
 												Each day brings something new,
-												view our ever changing
-												<br/>
-												gallery of NFT's from a wide range
+												view our ever changing gallery of NFT's from a wide range
 												of salon creators
 												<br/>
 												{/* And share it in your{' '}
