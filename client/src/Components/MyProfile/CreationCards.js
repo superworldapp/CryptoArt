@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
 	Card,
 	CardBody,
@@ -13,14 +13,37 @@ import './CreationCards.scss';
 import heart from '../../images/svg/heart-card-img.svg';
 import Sound from "react-sound";
 import ReactPlayer from "react-player";
+import Axios from "axios";
 
 const convert = (ethprice) => {
-	return (Web3.utils.fromWei(ethprice.toString(), 'ether'))
+	return (Number(Web3.utils.fromWei(ethprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH')
 }
 
+const usdPrice = (ethprice) => {
+	return (Number(Web3.utils.fromWei(ethprice.toString(), 'ether')))
+}
 
 const CreationCards = (props) => {
 	const [soundPlaying, setSoundPlaying] = useState('');
+	const [ethPrice, setEthPrice] = useState({});
+
+
+	const getEthDollarPrice = () => {
+		try {
+			Axios.get(
+				`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,btc,eur,gpb&include_24hr_change=false`
+			).then((res) => {
+				// console.log(typeof res.data.ethereum.usd_24h_change);
+				setEthPrice(res.data.ethereum);
+			});
+		} catch {
+			console.log('could not get the request');
+		}
+	};
+
+	useEffect(() => {
+		getEthDollarPrice();
+	}, []);
 
 	const displayFileType = () => {
 		if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(props.cardImage)) {
@@ -94,7 +117,7 @@ const CreationCards = (props) => {
 					<CardText className="card-text-info-price">
 						{convert(props.price)}
 						<p className="card-text-info-usd">
-							{props.usdPrice}
+							{`($${(usdPrice(props.price)*ethPrice.usd).toFixed(2)} USD)`}
 						</p>
 					</CardText>
 					<div>
