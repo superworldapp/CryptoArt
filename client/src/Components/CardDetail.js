@@ -36,8 +36,10 @@ import anonUser from '../images/user.png';
 import openeye from "../assets/svg/eyeopen.svg";
 import Outlineheart from "../assets/svg/heartoutline.svg";
 import "./CardDetail.css";
-import {IoIosArrowDown} from 'react-icons/io'
+import { IoIosArrowDown } from 'react-icons/io'
 import { BorderAll } from '@material-ui/icons';
+import heart from '../images/svg/batchHeart.svg';
+import avatar from '../images/svg/batchAvatar.svg';
 
 const CardDetail = ({
   art,
@@ -61,10 +63,10 @@ const CardDetail = ({
   const [loadingPurchase, setLoadingPurchase] = useState(false);
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
   const [loadingPlaceBid, setLoadingPlaceBid] = useState(false);
-  const [art2,setart2] = useState([]);
+  const [art2, setart2] = useState([]);
   const [bidSuccess, setBidSuccess] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [dropdownValue, setDropdownValue] = useState('USD');
+  const [dropdownValue, setDropdownValue] = useState('usd');
   const [priceInputValue, setpriceInputValue] = useState('');
   const changeValue = (e) => {
     setDropdownValue(e.currentTarget.textContent);
@@ -75,10 +77,12 @@ const CardDetail = ({
   };
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
-  const converttoether = (x) => {return Web3.utils.fromWei(
-     x.toString(),
-     'ether'
-)}
+  const converttoether = (x) => {
+    return Web3.utils.fromWei(
+      x.toString(),
+      'ether'
+    )
+  }
   const ETHER = 1000000000000000000;
 
   const accUsername = (accNum) => {
@@ -94,7 +98,7 @@ const CardDetail = ({
       return '@Swapnil';
     else if (accNum === '0x81B2362F55Ea93f71990d7F446dca80BdD94C6e7')
       return '@SwapnilTest';
-      else if (accNum === '0x483C8624a26acc7C1d5baA6c3648E4A5B64164e0')
+    else if (accNum === '0x483C8624a26acc7C1d5baA6c3648E4A5B64164e0')
       return '@Magdalena';
     else if (accNum === '0xA64a71dAC0F4F61FD1e569F59a31c0860c0A33d5')
       return '@MagdalenaTest';
@@ -123,10 +127,10 @@ const CardDetail = ({
     console.log(handleInput);
   };
   const BidBuy = async () => {
-    if(art._isBidding)
-    AddBid();
+    if (art._isBidding)
+      AddBid();
     else
-    handlePurchase();
+      handlePurchase();
 
   }
   const AddBid = async () => {
@@ -216,7 +220,7 @@ const CardDetail = ({
           <button
             className='batchcardbid-btn'
             onClick={handlePurchase}
-            
+
           >
             Buy Item
           </button>
@@ -230,7 +234,7 @@ const CardDetail = ({
             type='text'
             id='sellPrice'
             name='sellPrice'
-            
+
             style={{ width: '50%', alignSelf: 'center' }}
             onChange={handleInputChange}
           ></Input>
@@ -239,7 +243,7 @@ const CardDetail = ({
               className='batchcardbid-btn'
               color='primary'
               onClick={AddBid}
-              
+
             >
               Place Bid
             </button>
@@ -388,14 +392,14 @@ const CardDetail = ({
       );
     }
   };
- 
+
   useEffect(() => {
     getCreData();
     getEthDollarPrice();
-    async function get(){
+    async function get() {
       let newart = await art;
       setart2(newart);
-      get(); 
+      get();
     };
     // console.log(matchId)
     // console.log('Header', myProperties);
@@ -419,165 +423,137 @@ const CardDetail = ({
   console.log(art2);
   return (
     <>
-      <div className='container'>
-        <div className='upperView1'>
-          <div
-            className='card'
-            style={{
-              width: '50%',
-            }}
-          >
+      <div className='detail-wrapper'>
+        <div className="detail-view">
+          <div className='detail-imgblock'>
             <a href={art?._imgurl} target='_blank'>
-              <img src={art?._imgurl} className='card-img' alt='...' />
+              <img src={art?._imgurl} className='detail-img' alt='...' />
             </a>
           </div>
-          <div>
-          <div className='information d-flex flex-column'>
-            {/* <a href='#'>{match.params.id}</a>
+          
+            <div className='detail-info'>
+              {/* <a href='#'>{match.params.id}</a>
                         <h1>{match.params.id}</h1> */}
-             <div>
-            <h4>
-            {art?._tokenBatchName}
-          </h4>
-            </div>
-            <div className = "View"> 
-           <p className = "style2">
-            1 of 1 Edition
-           </p>
 
-           </div>
-           <div className ="View">
-          <p className = "style1">
-          <img
-                  className="userimg"
-                  src={anonUser}
-                ></img> 
-              Created by{' '}
-              <span className='text-primary'>{accUsername(art?._tokenCreator)}</span>
-            </p>
-            &nbsp;
-            &nbsp;
-            <p className = "style1">
-          <img
-                  className="userimg"
-                  src={anonUser}
-                ></img>   {' '}
-              Owned by{' '}
-              <span className='text-primary'>{accUsername(art?._tokenOwner)}</span>
-            </p>
-            </div>
-            <div
-              className='priceCard '
-              
-            > 
-            <div className ="card-div">
-            <p className ="style1" style={{marginLeft:'2%', marginTop:'1%'}}>
-                  Bid ends in 
-                </p>
-            </div>
-              <div className= "style3">
-              <p className = "style1">
-                Current offer:
-                <span className = "style2">{art?._isSellings? converttoether(art?._sellprice) : (art?._isBidding? converttoether(art?._bidprice) : 0)}</span> 
-              </p>
+              <div className="detail-header">
+                <div>
+                  <div className="detail-name">
+                    {art?._tokenBatchName}
+                  </div>
+                </div>
+                <div>
+                  <img src={heart} alt="heart" />
+                </div>
               </div>
-              <div className = "View1"> 
-              <div className='information d-flex flex-column'>
-                <div className= "View1">
-                <Input type="text" name="price" id="priceEnter" className ="priceInput"  onChange = {handlepriceInput}> 
-        {/* {Web3.utils.fromWei('5000000', 'ether')}{' '} */}
-        </Input>
+
+              <div className="View">
+                <div className="editionNumber">
+                  1 of 1 Edition
+           </div>
+
+              </div>
+
+              <div className="detail-creator">
+                <div className="detailImg-creator">
+                  <img src={avatar} alt="avatar" />
+                </div>
+                <div className="detail-by">
+                  Created by&ensp;
+              <div className='detail-NameArtist'>{accUsername(art?._tokenCreator)}</div>
+                </div>
+                <div className="detailImg-creator">
+                  <img src={avatar} alt="avatar" />
+                </div>
+                <div className="detail-by">
+                  Owned by&ensp;
+              <div className='detail-NameArtist'>{accUsername(art?._tokenOwner)}</div>
+                </div>
+              </div>
+              <div className='priceCard ' >
+                <div className="card-div">
+                  <div className="detail-time">
+                    Bid ends in
+                </div>
+                </div>
+                <div className= "View">
+                  <div className="current-offer">
+                    Current offer: &ensp;
+                <div className="offer-price">{art?._isSellings ? converttoether(art?._sellprice) : (art?._isBidding ? converttoether(art?._bidprice) : 0)}</div>
+                  </div>
+                </div>
+                <div className="View-1">
+                  <div className= "View-2">
+                    <div className="View2">
+                      <Input type="text" name="price" id="priceEnter" className="priceInput" onChange={handlepriceInput}>
+                        {/* {Web3.utils.fromWei('5000000', 'ether')}{' '} */}
+                      </Input>
         &nbsp;
         <Label className="labelName">ETH</Label>
-                </div>
-                <div className = "View1">
-                <p className= "labelName">
-                  <span >
+                    </div>
+                    <div className="View1">
+                      <p className="labelName">
+                        <span >
+
+                          {(
+                            // Web3.utils.fromWei(
+                            //   '50000000000000',
+                            //   'ether'
+                            // ) 
+                            priceInputValue * ethPrice[dropdownValue]
+                          )}
+
+                        </span>
+                      </p>
+                      <p>
+                        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                          <DropdownToggle caret className="priceDropdown" > USD</DropdownToggle>
+                          <DropdownMenu>
+                            {Object.keys(ethPrice).map((keyName, idx) => {
+                              return (
+                                <DropdownItem onClick={changeValue} key={idx}>
+                                  {keyName}
+                                </DropdownItem>
+                              );
+                            })}
+                          </DropdownMenu>
+                        </Dropdown>
+                      </p> 
+                    </div>
+                  </div>
+                  <div>
                     
-                    {(
-                      // Web3.utils.fromWei(
-                      //   '50000000000000',
-                      //   'ether'
-                      // ) 
-                      priceInputValue*ethPrice[dropdownValue]
-                    )}
-                    
-                  </span>
-                </p>
-                <p>
-                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                  <DropdownToggle caret className = "priceDropdown" > CURR</DropdownToggle>
-                  <DropdownMenu>
-                    {Object.keys(ethPrice).map((keyName, idx) => {
-                      return (
-                        <DropdownItem onClick={changeValue} key={idx}>
-                          {keyName}
-                        </DropdownItem>
-                      );
-                    })}
-                  </DropdownMenu>
-                </Dropdown>
+                  </div>
+                  {buyOrSell()}
+                  </div>
+                  <div style={{
+                    marginLeft: '1rem', marginTop: '1.5rem'
+                  }}>
+                    {/* <button className='batchcardbid-btn'> PLACE BID</button> */}
+                  </div>
+                
+              
+            </div>
+            <div className= "detail-Desc ">
+              <div className = "detail-DescTitle"> Description</div>
+              <p className="style1">
               </p>
+            </div>
+            <div className='History-view'>
+              <button  className= "History-btn" 
+                onClick={historyToggle}>
 
-              {buyOrSell()}  
-                </div>
-                </div>   
-                <div style={{
-                  marginLeft:'1rem', marginTop:'1.5rem'
-                }}>
-              {/* <button className='batchcardbid-btn'> PLACE BID</button> */}
-              </div>
-              </div>
-              <br/>
-              {/* <div className ="View2">
-                <p className= "style1">
-                  <img src= {openeye} alt= ".." className="userimg">
-                  </img>
-                  &nbsp;
-                   15 Views
-                </p>
-                <p className = "style1">
-                <img src= {Outlineheart} alt= ".." className="userimg">
-                  </img>
-                  &nbsp;
-                    15 Favorite
-                </p>
-              </div> */}
-              
-            </div> 
-          </div>
-          <div style={{marginTop:'5%'}}>
-            <h5> Description</h5>
-            <p className="style1">
-            </p>
-          </div>        
-            <div className='my-5'>
-                  <button style = 
-                    {{
-                        width: "520px",
-                        height: "65px",
-                        textAlign: "start",
-                        background: "none",
-                        color: "black",
-                        marginLeft: "0px",
-                        border: "none",
-                        borderTop: "2px solid rgba(0, 0, 0, 0.1)",
-                        borderBottom: "2px solid rgba(0, 0, 0, 0.1)",
-                        marginTop: "-50px",
+                <h5>History <IoIosArrowDown size={16} className={cx("icon", { "icon--expanded": isOpen })} /></h5>
+              </button>
 
-                    }} 
-                    onClick = {historyToggle}>
-                    
-                      <h5>History <IoIosArrowDown size ={16} className={cx("icon", { "icon--expanded": isOpen })}/></h5>
-                  </button>
-              
-                    <Collapse isOpen = {isOpen}>
-                      <TableBody cre={creValue} />
-                    </Collapse>
-                    <br/>
-                    <br/>
-                </div>
+              <Collapse isOpen={isOpen}>
+                <TableBody cre={creValue} />
+              </Collapse>
+              <br />
+              <br />
+            
           </div>
+          </div>
+
         </div>
         <Modal
           isOpen={purchaseSuccess}
@@ -682,10 +658,10 @@ const CardDetail = ({
             </Link>
           </ModalBody>
         </Modal>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+        <br />
+        <br />
+        <br />
+        <br />
 
       </div>
     </>
@@ -697,64 +673,64 @@ const CardDetail = ({
 class TokenDetails extends Component {
 
   constructor(props) {
-		super(props);
-		this.state = {
-			art3 : []
-		};
+    super(props);
+    this.state = {
+      art3: []
+    };
   }
 
   componentDidMount = async () => {
-				let rex = await this.props.contract.methods.getTokenData(this.props.matchId).call();
-				// console.log(rex);
-				let rex2 = await this.props.contract.methods.getTokenDataBatch(this.props.matchId).call();
-					var newBlock = {
-						_tokenId: this.props.matchId,
-						_tokenOwner: rex._tokenOwner,
-						_isSellings: rex._isSellings,
-						_sellprice: rex._sellprice,
-						_refbatch: rex._refbatch,
-						_tokenbidder: rex._tokenbidder,
-						_isBidding: rex._isBidding,
-						_bidprice: rex._bidprice,
-						_tokenHash: rex2._tokenHash,
-						_tokenBatchName: rex2._tokenBatchName,
-						_tokenCreator: rex2._tokenCreator,
-						_imgurl: rex2._imgurl,
-						_imgThumbnail: rex2._imgThumbnail,
+    let rex = await this.props.contract.methods.getTokenData(this.props.matchId).call();
+    // console.log(rex);
+    let rex2 = await this.props.contract.methods.getTokenDataBatch(this.props.matchId).call();
+    var newBlock = {
+      _tokenId: this.props.matchId,
+      _tokenOwner: rex._tokenOwner,
+      _isSellings: rex._isSellings,
+      _sellprice: rex._sellprice,
+      _refbatch: rex._refbatch,
+      _tokenbidder: rex._tokenbidder,
+      _isBidding: rex._isBidding,
+      _bidprice: rex._bidprice,
+      _tokenHash: rex2._tokenHash,
+      _tokenBatchName: rex2._tokenBatchName,
+      _tokenCreator: rex2._tokenCreator,
+      _imgurl: rex2._imgurl,
+      _imgThumbnail: rex2._imgThumbnail,
 
-					}
-					// console.log(newBlock)
-				
-				// if (rex2._tokenCreator == this.props.accounts) {
-				//   createrToken.push(rex);
-				// }
+    }
+    // console.log(newBlock)
 
-			this.setState({single: newBlock});
+    // if (rex2._tokenCreator == this.props.accounts) {
+    //   createrToken.push(rex);
+    // }
 
- 
+    this.setState({ single: newBlock });
+
+
   }
   render() {
     console.log(this.state.single);
-    return(
+    return (
       <CardDetail
-					tokenCreated={this.props.tokenCreated}
-					tokenPutForSale={this.props.tokenPutForSale}
-					// tokenBought={this.porps.tokenBought}
-					tokenBid={this.props.tokenBid}
-					tokenBidStarted={this.props.tokenBidStarted}
-					art={
-						this.state.single
-					}
-								
-					contract={this.props.contract}
-					accounts={this.props.accounts}
-					cre={this.props.creValue}
-					matchId={this.props.matchId}
-					
-				/>
+        tokenCreated={this.props.tokenCreated}
+        tokenPutForSale={this.props.tokenPutForSale}
+        // tokenBought={this.porps.tokenBought}
+        tokenBid={this.props.tokenBid}
+        tokenBidStarted={this.props.tokenBidStarted}
+        art={
+          this.state.single
+        }
+
+        contract={this.props.contract}
+        accounts={this.props.accounts}
+        cre={this.props.creValue}
+        matchId={this.props.matchId}
+
+      />
     );
 
-    
+
   }
 
 }
