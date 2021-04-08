@@ -14,6 +14,27 @@
 	background: rgba(0, 0, 0, .8);
 	z-index: 1000;
 
+	.input-title-wrapper {
+		margin-bottom: 45px;
+
+		.input-title {
+			height: 64px;
+			max-width: 769px;
+			width: 100%;
+			font-family: GibsonLight;
+			font-size: 64px;
+			line-height: 64px;
+			background: inherit;
+			border: none;
+			outline: none;
+			text-align: center;
+			color: #FFFFFF;
+			&::placeholder {
+				color: #FFFFFF;
+			}
+		}
+	}
+
 	.enter-title-text {
 		font-weight: 100;
 		font-size: 64px;

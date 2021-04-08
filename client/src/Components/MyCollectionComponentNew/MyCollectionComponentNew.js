@@ -40,6 +40,8 @@ import burger from "../../images/svg/burger-recently-list.svg";
 import SimpleMenu from "../Marketplace/menu/MenuListed";
 import arrow from "../../images/svg/arrow.svg";
 import SortLayout from "./SortLayout";
+import {connect} from "react-redux";
+import { setAllGallery } from "../../redux/myCollection/actions";
 
 
 
@@ -1039,7 +1041,10 @@ class MyItemComponent extends Component {
 			searchCollectionValue: '',
 			parsedSearchCollectionValue: [],
 			filteredCollectionItems: this.props.batch,
+			filteredCollectionTitle: this.props.batch,
+			searchTitle: 'Enter Title',
 		};
+		
 		// this.toggleModal1 = this.toggleModal1.bind(this);
 		this.toggleModal2 = this.toggleModal2.bind(this);
 		this.handleUploadMore = this.handleUploadMore.bind(this);
@@ -1252,9 +1257,31 @@ class MyItemComponent extends Component {
 		})
 	}
 
+	onChangeTitleCollection = (event) => {
+		const { value } = event.target;
+		this.setState({searchTitle: value});
+	}
+
+	addGalleryTitle = () => {
+		this.props.setAllGallery([...this.props.gallery, {name: this.state.searchTitle}]);
+		this.setState({sortLayout: !this.state.sortLayout});
+	}
+
+	filterMyCollectionTitle = (e, name) => {
+		if (name === 'All Cards') {
+			this.setState({
+				filteredCollectionTitle: this.props.batch
+			})
+		} else {
+			this.setState({
+				filteredCollectionTitle: this.props.batch.filter(item => item._tokenBatchName === name)
+			})
+		}
+	}
+
 	render() {
-		const { filteredCollectionItems } = this.state;
-		const Menu = this.state.art?.map((x) => {
+		const { filteredCollectionItems,filteredCollectionTitle, searchTitle } = this.state;
+		const Menu = filteredCollectionTitle.map((x) => {
 			return (
 				<div key={x._tokenId} className='item-nft'>
 					<MyCollectionCards
@@ -1377,17 +1404,22 @@ class MyItemComponent extends Component {
 							>
 								Galleries:
 							</p>
-							<p
-								style={{
-									textTransform: 'capitalize',
-									fontSize: '16px',
-									lineHeight: '24px',
-									marginBottom: '24px',
-									color: '#000000',
-								}}
-							>
-								Abstarct
-							</p>
+							{this.props.gallery.map(({name}) => (
+								<p
+									style={{
+										textTransform: 'capitalize',
+										fontSize: '16px',
+										lineHeight: '24px',
+										marginBottom: '24px',
+										color: '#000000',
+										cursor: 'pointer',
+									}}
+									onClick={(e) => this.filterMyCollectionTitle(e, name)}
+								>
+									{name}
+								</p>
+							))}
+
 							<button
 								style={{
 									fontSize: '18px',
@@ -1407,7 +1439,15 @@ class MyItemComponent extends Component {
 
 				{this.state.sortLayout
 					? <div className="sort-layout-wrapper">
-						<p className="enter-title-text">Enter Tiltle</p>
+						<div className="input-title-wrapper">
+							<input
+								type="text"
+								className="input-title"
+								value={searchTitle}
+								onChange={this.onChangeTitleCollection}
+							/>
+						</div>
+						{/*<p className="enter-title-text">Enter Tiltle</p>*/}
 						<div className="enter-title">
 							<input
 								type="text"
@@ -1417,6 +1457,7 @@ class MyItemComponent extends Component {
 							/>
 							<button
 								className="button-done"
+								onClick={(e) => this.addGalleryTitle(e)}
 							>
 								Done
 							</button>
@@ -1654,4 +1695,12 @@ class MyItemComponent extends Component {
 	}
 }
 
-export default MyItemComponent;
+const mapStateToProps = (state) => ({
+	gallery: state.myCollection.galleryValue,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+	setAllGallery: (data) => dispatch(setAllGallery(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyItemComponent);
