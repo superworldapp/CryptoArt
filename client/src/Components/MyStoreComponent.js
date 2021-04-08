@@ -46,6 +46,7 @@ import Allpatrender2 from "./Allpatrender2";
 import ModalUploadToMyStore from "./ModalUploadToMyStore/ModalUploadToMyStore";
 import ModalListingNft from "./ModalListingNft/ModalListingNft";
 import UploadsTab from "./UploadsTab";
+import Loading from "./Loading/loading";
 
 const SHA256 = require('crypto-js/sha256');
 
@@ -381,6 +382,7 @@ class MyStoreComponent extends Component {
 
 	render() {
 		const {batch} = this.props
+		// console.log('=====>batch', batch);
 		const {artStatus} = this.state
 		const {art2} = this.props
 		let menuTwoCount = 0;
@@ -406,7 +408,8 @@ class MyStoreComponent extends Component {
 				menuTwoCount++;
 
 				return (
-					<Allpatrender2
+					// <Allpatrender2
+					<Allpatrender
 						key={x._tokenId}
 						art={x}
 						contract={this.props.contract}
@@ -435,7 +438,7 @@ class MyStoreComponent extends Component {
 		});
 
 		const Menu4 = this.state.art3?.map((x) => {
-			if (x._isBidding === true && ((x._bidend * 1000) <= Date.now()) ) {
+			if (x._isBidding === true && ((x._bidend * 1000) <= Date.now())) {
 				cntended++;
 				menuFourCount++;
 				return (
@@ -474,7 +477,6 @@ class MyStoreComponent extends Component {
 						</div>
 					</div>
 					<Col className='mystore-art-container'>
-						{console.log('========>this.state!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', this.state)}
 						<StyledTabs value={artStatus} onChange={this.onArtStatusChange}>
 							<StyledTab
 								label={`Uploads${this.props.batch.length > 0 ? ` (${this.props.batch.length})` : ' (0)'}`}
@@ -494,11 +496,10 @@ class MyStoreComponent extends Component {
 							{/*<StyledTab label={'Offers'} {...artStatusTabPropsByIndex(4)} />*/}
 						</StyledTabs>
 
-						{batch && batch.length > 0
-						// {this.props.state && this.props.state.batch.length > 0
+						{/*{batch && batch.length > 0*/}
+						{this.props.batch && this.props.batch.length > 0
 							? (
 								<TabPanel value={artStatus} index={0}>
-									{console.log('========>this.props', this.props)}
 									<div className='mystore-art-queue-container row'>
 										<div className='mystore-upload-art'>
 											<Button className='mystore-upload-btn' onClick={this.toggleModal1}>
@@ -509,7 +510,8 @@ class MyStoreComponent extends Component {
 									</div>
 								</TabPanel>
 							)
-							: ''}
+							: <Loading name=''/>
+						}
 
 						<TabPanel value={artStatus} index={1}>
 							<div className='mystore-art-queue-container row'>
@@ -530,20 +532,6 @@ class MyStoreComponent extends Component {
 						</TabPanel>
 					</Col>
 				</Row>
-
-				{batch && batch.length === 0
-					? (
-						<img
-							style={
-								{
-									width: '300px',
-									height: '300px',
-								}
-							}
-							src={loader}
-						/>
-					)
-				: null}
 
 				<ModalUploadToMyStore
 					isOpen={this.state.isModalOpen1}

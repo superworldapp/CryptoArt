@@ -51,19 +51,25 @@ const EditModal = props => {
 	const [sellPrice, setSellPrice] = useState(saleTypes.BUY_NOW);
 	const [duration, setDuration] = useState(saleTypes.BUY_NOW);
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
+
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value);
-		console.log(e.target.value);
+		// console.log(e.target.value);
 	}, [])
+
 	const handleInputChange = (e) => {
 		const target = e.target;
 		setSellPrice(target.value);
 		console.log(target.value);
 	}
+
 	const handleInputChange2 = (e) => {
 		const target = e.target;
-		setDuration(target.value);
-		console.log(target.value);
+		
+		const timestamp = new Date(target.value.split(".").reverse().join(".")).getTime();
+		setDuration(timestamp);
+		console.log(timestamp);
+		
 	}
 
 	const handleSubmit = (event) => {
@@ -87,7 +93,7 @@ const EditModal = props => {
 		
 		//let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
 		let price = ((sellPrice) * ETHER).toString();
-		let times = 1615401942
+		let times = duration/1000;
 		const res = await contract.methods
 		.startbid(
 		  tokenID,
@@ -130,10 +136,6 @@ const EditModal = props => {
 		}
 	}, [saleType])
 
-	const handleClick = () => {
-		Sale().then()
-	}
-
 	return (
 
 
@@ -157,7 +159,7 @@ const EditModal = props => {
 				<Form>
 
 					<FormGroup className='form-group-preview'>
-						{<img style={{height: '20', width: '20%'}}
+						{<img style={{width: '95px', margin: '0 auto'}}
 									className='control-preview-img'
 									src={imgThumb}
 									alt={imgThumb}
@@ -220,8 +222,9 @@ const EditModal = props => {
 						</Label>
 						<Input
 							disabled={saleType === saleTypes.BUY_NOW}
-							className='text-input'
-							type='text'
+							className='text-input date'
+							type='datetime-local'
+							onChange={handleInputChange2}
 						/>
 						<span className='after-input-text'>Days</span>
 					</FormGroup>

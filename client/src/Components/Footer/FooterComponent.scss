@@ -4,9 +4,9 @@
 	font-family: 'Gibson', sans-serif !important;
 }
 
-	.MuiContainer-maxWidthLg {
-		max-width: 85% !important;
-	}
+.MuiContainer-maxWidthLg {
+	max-width: 85% !important;
+}
 
 .footer {
 	overflow-x: hidden;
@@ -108,14 +108,28 @@
 	}
 }
 
+.rc-anchor-invisible {
+	height: 74px;
+	width: 70px;
+}
+
 .hubspot-form {
-	width: 480px;
+	width: 400px;
 	height: 243px;
 	text-align: left;
 }
 
 @media screen and (min-width: 1440px) and (max-width: 1919px) {
+	.footer {
+		.section {
+			h2.header {
+				font-size: 45px;
+			}
+		}
+	}
+
 	.footer-container {
+
 		h6.header {
 			font-size: 17px;
 		}
@@ -127,6 +141,18 @@
 }
 
 @media screen and (max-width: 1280px) {
+	.footer {
+		.section {
+			h2.header {
+				font-size: 45px;
+			}
+		}
+	}
+
+	.description-header {
+		font-size: 17px;
+	}
+
 	section.footer-section {
 		padding: 50px 0;
 	}

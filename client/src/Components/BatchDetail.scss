@@ -105,6 +105,11 @@ h5 {
         height: 550px;
         border-radius: 10px;
       }
+
+      .batchVideo {
+        width: 640px!important;
+        height: 300px!important;
+      }
     }
 
     .batchInfo {
@@ -279,12 +284,22 @@ h5 {
         border-radius: 5%;
         border: 0;
         margin: 0 24px 31px 0!important;
+        overflow: hidden;
 
 
         .card-background-image {
           height: 210px;
           border-radius: 5%;
           object-fit: cover;
+
+        }
+
+        .cardVideo {
+          width: 100%!important;
+          height: 210px!important;
+          video {
+            object-fit: cover;
+          }
         }
 
         .cardImgOverlay {
@@ -427,6 +442,50 @@ h5 {
   }
 }
 
+@media screen and (max-width: 1440px) {
+  .batchWrapper {
+
+    .batchView {
+
+      .batchImgBlock {
+
+        .batchImg {
+          width: 300px;
+          height: 300px;
+        }
+        .batchVideo {
+          padding-left: 108px;
+        }
+      }
+
+      .batchInfo {
+        .batchCreator {
+
+          .batchImgCreator {
+          }
+
+          .batchName {
+          }
+
+          .batchNameArtist {
+          }
+        }
+
+        .batchDesc {
+          .batchTextContent {
+            padding: 0 30px 0 0;
+
+            .batchTextReadMore {
+              right: 35px;
+
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 1224px) {
   .batchWrapper {
 
@@ -437,6 +496,12 @@ h5 {
         .batchImg {
           width: 300px;
           height: 300px;
+        }
+        .batchVideo {
+          margin-top: 25px;
+          padding-left: 0;
+          width: 515px !important;
+          height: 217px !important;
         }
       }
 
@@ -478,6 +543,11 @@ h5 {
         .batchImg {
           width: 300px;
           height: 300px;
+        }
+        .batchVideo {
+          margin-top: 0!important;
+          width: 310px !important;
+          height: 230px !important;
         }
       }
 

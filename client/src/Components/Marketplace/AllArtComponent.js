@@ -8,7 +8,8 @@ import CreateChipList from './CreateChipList';
 import {
 	setAllData,
 	setFilteredData,
-	setSearchValue
+	setSearchValue,
+	setSearchValueState,
 } from '../../redux/marketplace/actions';
 
 import burger from '../../images/svg/burger-recently-list.svg';
@@ -28,14 +29,16 @@ const AllItemComponent = (props) => {
 	const handleRemove = (elem) => {
 		setChecked(checked.filter(el => el !== elem))
 		if (elem.key === WORD_KEY) {
-			props.setSearchValue({searchValue: ''})
-			setWord(null)
+			props.setSearchValue({searchValue: ''});
+			props.setSearchValueState({searchValueState: ''});
+			setWord(null);
 		}
 	};
 
 	const handleRemoveAll = () => {
-		setChecked([])
-		props.setSearchValue({searchValue: ''})
+		setChecked([]);
+		props.setSearchValue({searchValue: ''});
+		props.setSearchValueState({searchValueState: ''});
 		setWord(null)
 	};
 
@@ -48,12 +51,7 @@ const AllItemComponent = (props) => {
 	};
 
 	useEffect(() => {
-		const batchItem = props.batch.find(word => props.searchValue.toLowerCase() === word._tokenBatchName.toLowerCase());
-
-		if (batchItem) {
-			const word = batchItem._tokenBatchName.toLowerCase()
-			setWord(word)
-		}
+		setWord(props.searchValue)
 	}, [props.searchValue])
 
 	useEffect(() => {
@@ -61,10 +59,14 @@ const AllItemComponent = (props) => {
 			const wordObj = checked.find(({key}) => key === WORD_KEY)
 
 			if (wordObj) {
-				setChecked(checked.map(item => item.key !== WORD_KEY ? item : {...item, name: word}))
+				if (wordObj.name.length !== 0) {
+					setChecked(checked.map(item => item.key !== WORD_KEY ? item : {...item, name: word}))
+				}
 			} else {
 				setChecked([...checked, {name: word, key: WORD_KEY}])
 			}
+		} else {
+			setChecked(checked.filter(item => item.key !== WORD_KEY))
 		}
 	}, [word])
 
@@ -75,13 +77,15 @@ const AllItemComponent = (props) => {
 				let result = null
 
 				if (cheap.key === WORD_KEY) {
-					result = cheap.name === batchItem._tokenBatchName.toLowerCase()
+					result = word && new RegExp(word, 'i').test(batchItem._tokenBatchName)
 				} else if (cheap.name === 'Images') {
 					result = batchItem._imgurl.match(/(?<=\.)(?:jpe?g|png|gif|svg|tiff)$/i)
 				} else if (cheap.name === 'GIF') {
 					result = batchItem._imgurl.match(/(?<=\.)(?:gif)$/i)
 				} else if (cheap.name === 'Video') {
 					result = batchItem._imgurl.match(/(?<=\.)(?:mpeg-4|mp4|mov|avi|wmv)$/i)
+				} else if (cheap.name === 'Audio') {
+					result = batchItem._imgurl.match(/(?<=\.)(?:mp3)$/i)
 				}
 
 				return result
@@ -156,12 +160,14 @@ const mapStateToProps = (state) => ({
 	chips: state.marketplace.chipData,
 	filteredData: state.marketplace.setFilteredData,
 	searchValue: state.marketplace.searchValue,
+	searchValueState: state.marketplace.searchValueState,
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	setAllData: (data) => dispatch(setAllData(data)),
 	setSearchValue: (data) => dispatch(setSearchValue(data)),
 	setFilteredData: (data) => dispatch(setFilteredData(data)),
+	setSearchValueState: (data) => dispatch(setSearchValueState(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllItemComponent);
