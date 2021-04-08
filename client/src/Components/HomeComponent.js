@@ -715,6 +715,7 @@ class Home extends Component {
 																					time
 																				}) => (
 										<Card className="cardWrapper">
+											
 											<CardImg
 												top
 												className="card-background-image"
@@ -745,9 +746,10 @@ class Home extends Component {
 															{usdPrice || '($985.56 USD)'}
 														</p>
 													</CardText>
+													<a href='https://map.superworldapp.com/' target='_blank'>
 													<div>
 														<button className='card-buy-button'>{btnName}</button>
-													</div>
+													</div></a>
 												</div>
 												<div className='card-buy-time'>
 													<p className='card-buy-time-text'>
@@ -755,6 +757,7 @@ class Home extends Component {
 													</p>
 												</div>
 											</CardBody>
+											
 										</Card>
 									))}
 								</div>

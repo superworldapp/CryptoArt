@@ -217,7 +217,7 @@ class Allpatrender extends Component {
 		this.setState({auctionLoading: false, listForAuctionSuccess: true});
 		// console.log(res);
 	};
-
+ 
 	EndAuction = async () => {
 		this.setState({endAuctionLoading: true});
 		const res = await this.props.contract.methods
@@ -1178,21 +1178,6 @@ class MyItemComponent extends Component {
 
 		}
 
-
-		// for (let i = 1; i <= response.length; i++) {
-		//   let rex = await this.props.contract?.methods.getTokenDataBatch(1).call();
-		//   response[i]._tokenHash = '0x454';
-		//   response[i]._tokenBatchName = rex._tokenBatchName;
-		//   response[i]._tokenCreator = rex._tokenCreator;
-		//   response[i]._imgurl = rex._imgurl;
-		//   response[i]._imgThumbnail = rex._imgThumbnail;
-
-		//   if (rex._tokenCreator == this.props.accounts) {
-		//     createrToken.push(rex);
-		//   }
-		// }
-		// console.log(this.props.art);
-		// console.log(createrToken);
 		allDocs = [];
 		allDocs = response;
 		console.log(response);
@@ -1200,14 +1185,14 @@ class MyItemComponent extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const { batch } = this.props
+		const { art } = this.state
 		const { parsedSearchCollectionValue } = this.state
 
 		if (prevState.parsedSearchCollectionValue !== parsedSearchCollectionValue) {
 			this.setState({
 				filteredCollectionItems: parsedSearchCollectionValue.length === 0
-					? batch
-					: batch.filter(batchItem => {
+					? art
+					: art.filter(batchItem => {
 							return parsedSearchCollectionValue.find(value => value.toLowerCase() === batchItem._tokenBatchName.toLowerCase())
 						})
 			})
@@ -1269,9 +1254,9 @@ class MyItemComponent extends Component {
 
 	render() {
 		const { filteredCollectionItems } = this.state;
-		const Menu = this.props.batch?.map((x) => {
+		const Menu = this.state.art?.map((x) => {
 			return (
-				<div key={x._batchId} className='item-nft'>
+				<div key={x._tokenId} className='item-nft'>
 					<MyCollectionCards
 						art={x}
 						contract={this.props.contract}
@@ -1320,7 +1305,7 @@ class MyItemComponent extends Component {
 							color: "#5540C7",
 						}}
 					>
-						172 NFTs
+						{this.state.art.length} NFTs
 					</p>
 					<div
 						style={{
