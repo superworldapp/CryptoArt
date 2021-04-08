@@ -138,6 +138,7 @@ class Header extends Component {
     );
     this.changeUsernameOnSubmit = this.changeUsernameOnSubmit.bind(this);
     this.changePasswordOnSubmit = this.changePasswordOnSubmit.bind(this);
+    this.getEmailLength = this.getEmailLength.bind(this);
   }
 
   async componentDidMount() {
@@ -158,6 +159,18 @@ class Header extends Component {
 
   toggleNav() {
     this.setState({ isNavOpen: !this.state.isNavOpen });
+  }
+
+  getEmailLength(email) {
+    let diff;
+    if (email.length < 15) {
+      diff = 15 - email.length;
+      for (let i = 0; i < diff; i++) {
+        email += 'x';
+      }
+    }
+    console.log('email', email);
+    return email;
   }
 
   openWalletModal = () => {
@@ -482,7 +495,7 @@ class Header extends Component {
                       className='rounded-circle'
                       id='profile'
                       src={`data:image/png;base64,${new Identicon(
-                        new Date().toString()
+                        this.getEmailLength(Cookies.get('email')).toString()
                       )}`}
                       style={{
                         maxWidth: '30px',
