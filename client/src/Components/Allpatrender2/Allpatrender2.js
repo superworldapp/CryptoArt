@@ -361,7 +361,7 @@ class Allpatrender2 extends Component {
 									margin: '0px',
 								}}>
 									{
-										this.props.art._sellprice !== 0
+										this.props.art._isSellings
 											? Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
 											: Number(Web3.utils.fromWei(this.props.art._bidprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
 									}

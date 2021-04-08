@@ -88,7 +88,7 @@ const ModalListingNft = props => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		onClosed();
+		
 
 		if (saleType === saleTypes.AUCTION){
 			StartAuction();
