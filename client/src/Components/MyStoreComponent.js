@@ -409,7 +409,7 @@ class MyStoreComponent extends Component {
 
 				return (
 					// <Allpatrender2
-					<Allpatrender
+					<Allpatrender2
 						key={x._tokenId}
 						art={x}
 						contract={this.props.contract}

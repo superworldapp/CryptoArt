@@ -218,7 +218,7 @@ const EditModal = props => {
 					</FormGroup>
 					<FormGroup className={saleType === saleTypes.BUY_NOW ? 'form-disabled' : ''}>
 						<Label className='label' htmlFor='buynow'>
-							Duration
+							End Date
 						</Label>
 						<Input
 							disabled={saleType === saleTypes.BUY_NOW}
@@ -226,7 +226,7 @@ const EditModal = props => {
 							type='datetime-local'
 							onChange={handleInputChange2}
 						/>
-						<span className='after-input-text'>Days</span>
+						<span className='after-input-text'></span>
 					</FormGroup>
 					<div className='submit-button-wrapper'>
 						<button

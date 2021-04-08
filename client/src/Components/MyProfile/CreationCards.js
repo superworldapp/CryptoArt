@@ -8,9 +8,14 @@ import {
 	CardImgOverlay,
 	CardTitle,
 } from 'reactstrap';
-
+import Web3 from 'web3';
 import './CreationCards.scss';
 import heart from '../../images/svg/heart-card-img.svg';
+
+const convert = (ethprice) => {
+	return (Web3.utils.fromWei(ethprice.toString(), 'ether'))
+}
+
 
 const CreationCards = (props) => {
 	return (
@@ -39,7 +44,7 @@ const CreationCards = (props) => {
 				</div>
 				<div className='card-text-info'>
 					<CardText className="card-text-info-price">
-						{props.price}
+						{convert(props.price)}
 						<p className="card-text-info-usd">
 							{props.usdPrice}
 						</p>
