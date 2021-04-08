@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	Card,
 	CardBody,
@@ -11,6 +11,8 @@ import {
 import Web3 from 'web3';
 import './CreationCards.scss';
 import heart from '../../images/svg/heart-card-img.svg';
+import Sound from "react-sound";
+import ReactPlayer from "react-player";
 
 const convert = (ethprice) => {
 	return (Web3.utils.fromWei(ethprice.toString(), 'ether'))
@@ -18,14 +20,60 @@ const convert = (ethprice) => {
 
 
 const CreationCards = (props) => {
+	const [soundPlaying, setSoundPlaying] = useState('');
+
+	const displayFileType = () => {
+		if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(props.cardImage)) {
+			return (
+				<CardImg
+					top
+					className="card-background-image"
+					src={props.cardImage}
+					alt='Card image'
+				/>
+			);
+		} else if (/\.(?:wav|mp3)$/i.test(props.cardImage)) {
+			return (
+				<>
+					<button
+						style={{
+							zIndex: '1'
+						}}
+						onClick={() => setSoundPlaying(soundPlaying)}>
+						{soundPlaying ? 'Pause' : 'Play'}
+					</button>
+					<Sound
+						url={props.cardImage}
+						playStatus={
+							soundPlaying
+								? Sound.status.PLAYING
+								: ''
+						}
+						playFromPosition={300 /* in milliseconds */}
+						// onLoading={this.handleSongLoading}
+						// onPlaying={this.handleSongPlaying}
+						// onFinishedPlaying={this.handleSongFinishedPlaying}
+					/>
+				</>
+			);
+		} else if (
+			/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
+				props.cardImage
+			)
+		) {
+			return (
+				<ReactPlayer
+					className="cardVideo"
+					loop={true}
+					playing={true}
+					url={props.cardImage}
+				/>
+			);
+		}
+	};
 	return (
 		<Card className='card-wrapper'>
-			<CardImg
-				top
-				className="card-background-image"
-				src={props.cardImage}
-				alt='image3'
-			/>
+			{displayFileType()}
 			<CardImgOverlay className="card-img-overlay">
 				<img className="card-user-img" src={props.profileImage} alt="userImg"/>
 				<img src={heart} alt="heart" className="card-user-heart"/>

@@ -8,12 +8,24 @@
 	width: 280px;
 	border-radius: 5%;
 	border: 0;
+	overflow: hidden;
 
 	.card-background-image-collection {
 		height: 268px;
 		width: 280px;
 		border-radius: 5%;
 		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+		overflow: hidden;
+	}
+
+	.cardVideo {
+		width: 100%!important;
+		height: 268px!important;
+		video {
+			object-fit: cover;
+			height: 100% !important;
+			width: 100% !important;
+		}
 	}
 
 	.card-img-overlay-collection {
