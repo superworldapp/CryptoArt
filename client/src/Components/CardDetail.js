@@ -216,7 +216,14 @@ const CardDetail = ({
   const buyOrSell = () => {
     if (art?._isSellings) {
       return (
-        <div>
+        <React.Fragment>
+         {/* <div className= "View2">
+         <Input type="text" name="price" id="priceEnter" className="priceInput" onChange={handlepriceInput}> 
+         </Input>
+         &nbsp;
+        <Label className="labelName"> BETH</Label>
+           </div> */}
+           <div>
           <button
             className='batchcardbid-btn'
             onClick={handlePurchase}
@@ -226,18 +233,27 @@ const CardDetail = ({
           </button>
           <div>{loadingPurchase ? <img src={loader} /> : <div></div>}</div>
         </div>
+
+        </React.Fragment>
+       
       );
     } else if (art?._isBidding) {
       return (
         <React.Fragment>
+          {/* <div className ="View2">
           <Input
             type='text'
             id='sellPrice'
             name='sellPrice'
 
-            style={{ width: '50%', alignSelf: 'center' }}
-            onChange={handleInputChange}
+            className="priceInput"
+            onChange={handlepriceInput}
           ></Input>
+           &nbsp;
+        <Label className="labelName"> PETH</Label>
+
+          </div> */}
+          
           <div>
             <button
               className='batchcardbid-btn'
@@ -484,14 +500,15 @@ const CardDetail = ({
                 <div className="View-1">
                   <div className= "View-2">
                     <div className="View2">
-                      <Input type="text" name="price" id="priceEnter" className="priceInput" onChange={handlepriceInput}>
+                      
+                      <Input type="text" name="price" id="priceEnter" className="priceInput" onChange={handlepriceInput}>  
                         {/* {Web3.utils.fromWei('5000000', 'ether')}{' '} */}
-                      </Input>
-        &nbsp;
-        <Label className="labelName">ETH</Label>
+                        </Input>  
+          &nbsp;
+        <Label className="labelName">ETH</Label>  
                     </div>
                     <div className="View1">
-                      <p className="labelName">
+                      <p className="priceOutput">
                         <span >
 
                           {(
@@ -499,7 +516,7 @@ const CardDetail = ({
                             //   '50000000000000',
                             //   'ether'
                             // ) 
-                            priceInputValue * ethPrice[dropdownValue]
+                            (priceInputValue * ethPrice[dropdownValue]).toFixed(4)
                           )}
 
                         </span>
@@ -520,10 +537,10 @@ const CardDetail = ({
                       </p> 
                     </div>
                   </div>
-                  <div>
-                    
-                  </div>
+                  <div className = "buy-or-sell">
                   {buyOrSell()}
+                  </div>
+                 
                   </div>
                   <div style={{
                     marginLeft: '1rem', marginTop: '1.5rem'
