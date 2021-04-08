@@ -139,6 +139,7 @@ class Header extends Component {
     this.changeUsernameOnSubmit = this.changeUsernameOnSubmit.bind(this);
     this.changePasswordOnSubmit = this.changePasswordOnSubmit.bind(this);
     this.getEmailLength = this.getEmailLength.bind(this);
+    this.getIdenticon = this.getIdenticon.bind(this);
   }
 
   async componentDidMount() {
@@ -171,6 +172,12 @@ class Header extends Component {
     }
     console.log('email', email);
     return email;
+  }
+
+  getIdenticon() {
+    return `data:image/png;base64,${new Identicon(
+      this.getEmailLength(Cookies.get('email')).toString()
+    )}`;
   }
 
   openWalletModal = () => {
@@ -494,9 +501,7 @@ class Header extends Component {
                     <img
                       className='rounded-circle'
                       id='profile'
-                      src={`data:image/png;base64,${new Identicon(
-                        this.getEmailLength(Cookies.get('email')).toString()
-                      )}`}
+                      src={this.getIdenticon()}
                       style={{
                         maxWidth: '30px',
                       }}
@@ -977,7 +982,7 @@ class Header extends Component {
                         // marginLeft: '-0.2rem',
                         // marginBottom: '0.75rem',
                       }}
-                      to='/myprofile'
+                      to={'/myprofile'}
                     >
                       <MenuItem disableGutters>
                         <span

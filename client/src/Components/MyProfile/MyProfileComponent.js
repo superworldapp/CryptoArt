@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tabs, Tab, withStyles } from '@material-ui/core';
 import { RiTwitterLine, RiInstagramLine, RiGlobalLine } from 'react-icons/ri';
 import { FiFacebook, FiYoutube, FiUpload, FiMail } from 'react-icons/fi';
@@ -6,7 +6,8 @@ import MyCreation from './Tabs/MyCreationsCards';
 import MyCollectionsCards from './Tabs/MyCollectionsCards';
 import RecentActivity from './Tabs/RecentActivityPage';
 import ModalEditProfile from './Modal/ModalEditProfile';
-
+import Auth from '../Auth';
+import Axios from 'axios';
 import coverImage from '../../images/profileBg.jpg';
 import profileImage from '../../images/svg/profile-image.svg';
 import successLogo from '../../images/svg/successLogo.svg';
@@ -17,10 +18,28 @@ const MyProfileComponent = (props) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [isEdit, setIsEdit] = useState(false);
   const [linksStore, setLinksStore] = useState();
-
+  const [currentUser, setCurrentUser] = useState();
   const setLinksState = (e) => {
     setLinksStore(e);
   };
+
+  const getUser = () => {
+    let auth = Auth.getToken();
+    if (!auth || !auth.userId) {
+      return;
+    }
+    Axios.post(`${process.env.REACT_APP_SW_API_URL}/user/get/`, {
+      userId: auth.userId,
+    }).then((res) => {
+      if (res.data && res.data.r == 's' && res.data.data) {
+        setCurrentUser(res.data.data);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);
@@ -95,7 +114,7 @@ const MyProfileComponent = (props) => {
             </div>
           </div>
           <p className='user-name'>
-            @amelia_creator
+            {currentUser !== undefined ? '@' + currentUser.username : '...'}
             <img src={successLogo} alt='logo' />
           </p>
           <div className='name_block_creator'>
