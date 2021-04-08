@@ -363,7 +363,7 @@ class Allpatrender extends Component {
 				<div className='card-img-top-all-art'>
 					{/* <Link to={`/card/${this.props.art._tokenId}`}> */}
 
-					<Link to={`/batch/${this.props.art._batchId}`}>
+					<Link to={`/card/${this.props.art._tokenId}`}>
 						{/* <CardImg
 							className={orientation}
 							top

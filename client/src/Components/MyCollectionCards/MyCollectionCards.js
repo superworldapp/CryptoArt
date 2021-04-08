@@ -106,7 +106,7 @@ class MyCollectionCards extends Component {
 				className='my-collection-queue-card'
 			>
 				<div className='mystore-queue-card-img'>
-					<Link to={`/batch/${this.props.art._batchId}`}>
+					<Link to={`/card/${this.props.art._tokenId}`}>
 						{/* <CardImg
 							top
 							src={this.props.art._imgurl}
