@@ -196,7 +196,7 @@ class MyStoreComponent extends Component {
 
 	toggleModal2() {
 		this.setState({
-			uploadSuccess: !this.state.uploadSuccess,
+			uploadSuccess: false,
 			loadingAfterSend: false,
 		});
 	}
