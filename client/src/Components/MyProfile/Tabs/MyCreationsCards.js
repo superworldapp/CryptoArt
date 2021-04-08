@@ -15,7 +15,7 @@ const MyCreationCards = (props) => {
 		cardTitle: item._tokenBatchName,
 		CardSubtitle: 'by',
 		CardSubtitleName: 'Amelia',
-		price: item._bidprice,
+		price: item._sellprice,
 		usdPrice: '($985.56 USD)',
 		time: '26 hrs 42 mins remaining',
 	}))
