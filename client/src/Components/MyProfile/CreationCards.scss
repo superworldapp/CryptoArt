@@ -61,7 +61,7 @@
 	}
 
 	.card-user-body {
-		margin-top: 5px;
+		margin-top: 8px;
 		display: flex;
 		justify-content: center;
 		font-style: italic;
@@ -83,11 +83,10 @@
 
 	.card-text-info {
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-around;
 		margin-top: 18px;
 
 		.card-text-info-price {
-			margin-left: 9px;
 			font-size: 16px;
 			line-height: 16px;
 			color: #5540C7;
