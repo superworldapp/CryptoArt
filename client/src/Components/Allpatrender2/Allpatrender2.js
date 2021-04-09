@@ -8,6 +8,7 @@ import Web3 from 'web3';
 import Sound from 'react-sound';
 import ReactPlayer from 'react-player';
 import EditModal from "../EditModal";
+import Axios from "axios";
 
 class Allpatrender2 extends Component {
 	// let day = moment.unix(art.dateofComp);
@@ -30,6 +31,7 @@ class Allpatrender2 extends Component {
 			endAuctionLoading: false,
 			endAuctionSuccess: false,
 			isEditModal: false,
+			ethPrice: {},
 		};
 		this.toggleModal = this.toggleModal.bind(this);
 		this.toggleListForAuction = this.toggleListForAuction.bind(this);
@@ -51,8 +53,19 @@ class Allpatrender2 extends Component {
 	componentDidMount = async () => {
 		//;'let newArr = await this.props.art?.filter((x) => x._isSellings);
 		this.setState({art: this.props.art});
-
-
+		const getEthDollarPrice = () => {
+			try {
+				Axios.get(
+					`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,btc,eur,gpb&include_24hr_change=false`
+				).then((res) => {
+					// console.log(typeof res.data.ethereum.usd_24h_change);
+					this.setState({ethPrice:res.data.ethereum});
+				});
+			} catch {
+				console.log('could not get the request');
+			}
+		};
+		getEthDollarPrice();
 	}
 	buyItem = async () => {
 		try {
@@ -338,6 +351,10 @@ class Allpatrender2 extends Component {
 			return `${hours} Hrs ${minutes} Min Remaining`
 		}
 
+		const usdPrice = (ethprice) => {
+			return (Number(Web3.utils.fromWei(ethprice.toString(), 'ether')))
+		}
+
 		const img = new Image();
 		let orientation;
 		img.onload = function () {
@@ -347,6 +364,7 @@ class Allpatrender2 extends Component {
 		};
 		img.src = this.state.art.imgurl;
 		img.onload();
+
 		return (
 			<Card
 				className='mystore-active-card'
@@ -386,17 +404,51 @@ class Allpatrender2 extends Component {
 										fontSize: '12px',
 										color: '#5540C7',
 										margin: '0px'
-									}}>( $1,580.10 USD )</p>
+									}}>
+									  {
+											Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')) === 0
+												? `($${(usdPrice(this.props.art._bidprice)*this.state.ethPrice.usd).toFixed(2)} USD)`
+												: `($${(usdPrice(this.props.art._sellprice)*this.state.ethPrice.usd).toFixed(2)} USD)`
+										}
+								</p>
 							</span>
-							<button
-								onClick={this.props.type==3?this.EndAuction : this.closeEditToken}
-								className="button_mint"
-							>
-								{this.props.type==3?'End' : 'Edit'}
-							</button>
+							{
+								this.state.art._bidend === '0'
+									? (
+										(
+											<button
+												onClick={this.props.type === 3 ? this.EndAuction : this.closeEditToken}
+												className="button_mint"
+											>
+												Edit
+											</button>
+										)
+									)
+									: Date.now() / 1000 < this.state.art._bidend
+									? (
+										(
+											<button
+												onClick={this.props.type === 3 ? this.EndAuction : this.closeEditToken}
+												className="button_mint_end"
+												disabled
+											>
+												End
+											</button>
+										)
+									)
+									: (
+										<button
+											onClick={this.props.type === 3 ? this.EndAuction : this.closeEditToken}
+											className={this.props.type === 2 ? "button_mint_end" : "button_mint"}
+											disabled={this.props.type === 2}
+										>
+											End
+										</button>
+									)
+							}
 							<>
-								
-							
+
+
 								<Modal
 									isOpen={this.state.listForAuctionSuccess}
 									toggle={this.toggleListForAuction}
@@ -542,7 +594,7 @@ class Allpatrender2 extends Component {
 										</button>
 									</ModalBody>
 								</Modal>
-								
+
 							</>
 						</div>
 						<p className="card-body-time">
@@ -551,11 +603,7 @@ class Allpatrender2 extends Component {
 									? ''
 									: Date.now() / 1000 < this.state.art._bidend
 									? setDate()
-									: (<p className="red">Auction Timer Ended</p>)}
-						</p>
-						<p className="card-body-time">
-							{
-								this.state.art._bidend === 0 && ''
+									: (<p className="red">Auction Timer Ended</p>)
 							}
 						</p>
 						<div style={{display: 'flex', justifyContent: 'center'}}>

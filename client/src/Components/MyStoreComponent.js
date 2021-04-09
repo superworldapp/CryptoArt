@@ -3,22 +3,7 @@ import {Link} from 'react-router-dom';
 //import moment from 'moment';
 import {
 	Button,
-	Form,
-	FormGroup,
-	Label,
-	Input,
 	Col,
-	Card,
-	CardImg,
-	CardTitle,
-	CardBody,
-	CardImgOverlay,
-	Badge,
-	CardSubtitle,
-	CardText,
-	Modal,
-	ModalHeader,
-	ModalBody,
 	Container,
 	Row,
 } from 'reactstrap';
@@ -47,6 +32,7 @@ import ModalUploadToMyStore from "./ModalUploadToMyStore/ModalUploadToMyStore";
 import UploadsTab from "./UploadsTab";
 import Loading from "./Loading/loading";
 import SuccessfulModals from "./SuccessfulModals";
+import {connect} from "react-redux";
 
 const SHA256 = require('crypto-js/sha256');
 
@@ -201,6 +187,7 @@ class MyStoreComponent extends Component {
 		});
 	}
 
+
 	refreshMyArt() {
 		return this.setState({
 			isModalOpen1: false,
@@ -272,7 +259,7 @@ class MyStoreComponent extends Component {
 			// }
 
 			// console.log('data', data);
-			this.toggleModal1();
+			// this.toggleModal1();
 			this.setState({isLoading: false, uploadSuccess: true});
 		} catch (err) {
 			this.setLoadingAfterSend()
@@ -405,7 +392,7 @@ class MyStoreComponent extends Component {
 		// TODO optimize
 		const nftsListed = batch.reduce((count, item) => +item._mintedEditions + count, 0)
 
-		const Menu1 = batch?.map((x) => {
+		const Menu1 = this.props.art3?.map((x) => {
 
 			return (
 				<UploadsTab
@@ -417,7 +404,7 @@ class MyStoreComponent extends Component {
 			);
 		});
 
-		const Menu2 = this.state.art3?.map((x) => {
+		const Menu2 = this.props.art3?.map((x) => {
 			if ((x._isSellings === false) && (x._isBidding === false)) {
 				menuTwoCount++;
 				return (
@@ -433,7 +420,7 @@ class MyStoreComponent extends Component {
 			}
 		});
 
-		const Menu3 = this.state.art3?.map((x) => {
+		const Menu3 = this.props.art3?.map((x) => {
 			if (x._isSellings === true || (x._isBidding === true && !((x._bidend * 1000) <= Date.now() && x._bidend !== 0))) {
 				cntactive++;
 				menuThreeCount++;
@@ -450,7 +437,7 @@ class MyStoreComponent extends Component {
 			}
 		});
 
-		const Menu4 = this.state.art3?.map((x) => {
+		const Menu4 = this.props.art3?.map((x) => {
 			if (x._isBidding === true && ((x._bidend * 1000) <= Date.now())) {
 				cntended++;
 				menuFourCount++;
@@ -782,4 +769,8 @@ const artStatusTabPropsByIndex = index => {
 	};
 }
 
-export default MyStoreComponent;
+const mapStateToProps = (state) => ({
+	art3: state.myStoreComponent.art3,
+});
+
+export default connect(mapStateToProps, null)(MyStoreComponent);

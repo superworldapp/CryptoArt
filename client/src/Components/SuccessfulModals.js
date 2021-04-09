@@ -10,7 +10,6 @@ export class SuccessfulModals extends Component {
 	}
 
 	render() {
-		console.log('=====>123', this.props);
 		const variation = this.props.variation;
 		if (variation === 0) {
 			return (

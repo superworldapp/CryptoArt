@@ -69,8 +69,9 @@ class UploadsTab extends Component {
 	}
 
 	toggleModal2() {
+		console.log('=====>this.state.uploadSucces', this.state.uploadSuccess);
 		this.setState({
-			uploadSuccess: !this.state.uploadSuccess,
+			uploadSuccess: false,
 			loadingAfterSend: false,
 		});
 	}
@@ -373,7 +374,7 @@ class UploadsTab extends Component {
 				className='mystore-queue-card'
 			>
 				 {/*<a href={this.props.art.imgurl} target='_blank'> */}
-				 {this.props.art._mintedEditions > 0 ? <span className='card-counter'>{this.props.art._mintedEditions}</span> : ''}
+				{this.props.art._mintedEditions > 0 ? <span className='card-counter'>{this.props.art._mintedEditions}</span> : ''}
 				<div className='mystore-queue-card-img'>
 					<Link to={`/batch/${this.props.art._batchId}`}>
 						{/* <CardImg

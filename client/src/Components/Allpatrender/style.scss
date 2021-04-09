@@ -1,8 +1,21 @@
 @import '../../styles/global';
 
+.end_mint {
+  background-color: #888888;
+}
+
 .button_mint {
   color: white;
   background-color: #5540C7;
+  font-size: 18px;
+  width: 120px;
+  border-radius: 10px;
+  font-family: $fontFamily;
+}
+
+.button_mint_end {
+  background-color: #888888;
+  color: white;
   font-size: 18px;
   width: 120px;
   border-radius: 10px;
