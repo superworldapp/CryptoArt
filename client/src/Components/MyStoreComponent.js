@@ -393,7 +393,6 @@ class MyStoreComponent extends Component {
 		const nftsListed = batch.reduce((count, item) => +item._mintedEditions + count, 0)
 
 		const Menu1 = this.props.art3?.map((x) => {
-
 			return (
 				<UploadsTab
 					key={x._tokenId}

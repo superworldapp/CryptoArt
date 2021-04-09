@@ -355,7 +355,7 @@ class Allpatrender extends Component {
 			>
 				{/*<a href={this.props.art.imgurl} target='_blank'> */}
 				{/*{+art[3] > 0 && <span className='card-counter'>+{art[3]}</span>}*/}
-				<Link to={`/batch/${this.props.art._batchId}`}>
+				<Link to={`/batch/${this.props.art._refbatch}`}>
 					<div className='mystore-queue-card-img'>
 						{displayFileType()}
 					</div>

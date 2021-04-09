@@ -32,6 +32,7 @@ class UploadsTab extends Component {
 			loadingAfterSend: false,
 		};
 		this.toggleModal = this.toggleModal.bind(this);
+		this.toggleModal2 = this.toggleModal2.bind(this);
 		this.toggleListForAuction = this.toggleListForAuction.bind(this);
 		this.toggleListForSale = this.toggleListForSale.bind(this);
 		this.toggleEndAuction = this.toggleEndAuction.bind(this);
@@ -69,7 +70,6 @@ class UploadsTab extends Component {
 	}
 
 	toggleModal2() {
-		console.log('=====>this.state.uploadSucces', this.state.uploadSuccess);
 		this.setState({
 			uploadSuccess: false,
 			loadingAfterSend: false,
@@ -119,15 +119,16 @@ class UploadsTab extends Component {
 			this.setState({
 				isMintModal: !this.state.isMintModal,
 			});
-			console.log('========>e', e);
 
 			this.setLoadingAfterSend()
 			const res = await this.props.contract.methods
-				.mintTokenBatch(this.props.art._batchId,e)
+				.mintTokenBatch(this.props.art._refbatch,e)
 				.send({from: this.props.accounts, gas: 5000000});
 			this.toggleModal2()
+			this.setState({isLoading: false, uploadSuccess: true});
 		} catch (err) {
 			this.setLoadingAfterSend()
+			this.setState({loadingError: true});
 		}
 }
 
@@ -376,7 +377,7 @@ class UploadsTab extends Component {
 				 {/*<a href={this.props.art.imgurl} target='_blank'> */}
 				{this.props.art._mintedEditions > 0 ? <span className='card-counter'>{this.props.art._mintedEditions}</span> : ''}
 				<div className='mystore-queue-card-img'>
-					<Link to={`/batch/${this.props.art._batchId}`}>
+					<Link to={`/batch/${this.props.art._refbatch}`}>
 						{/* <CardImg
 							top
 							src={this.props.art._imgurl}

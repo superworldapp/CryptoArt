@@ -3,6 +3,8 @@ import Modal from "../Modal";
 import {Form, FormGroup, Input, Label} from "reactstrap";
 import './style.scss';
 import Checkbox from "./checkbox/checkbox";
+import SuccessfulModals from "../SuccessfulModals";
+import Loading from "../Loading/loading";
 
 const saleTypes = {
 	AUCTION: 'AUCTION',
@@ -51,9 +53,9 @@ const ModalListingNft = props => {
 	const [initialValue, setInitialValue] = useState({tokenPrice: '', duration: ''});
 	const [duration, setDuration] = useState(saleTypes.BUY_NOW);
 	const [sellPrice, setSellPrice] = useState(saleTypes.BUY_NOW);
-	const [loadingSend, setLoadingSend] = useState(false);
-	const [loadingSendEnd, setLoadingEnd] = useState(false);
 
+	const [uploadSuccess, setUploadSuccess] = useState(false);
+	const [loadingAfterSend, setLoadingAfterSend] = useState(false);
 
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value);
@@ -72,7 +74,6 @@ const ModalListingNft = props => {
 		const timestamp = new Date(target.value.split(".").reverse().join(".")).getTime();
 		setDuration(timestamp);
 		console.log(timestamp);
-
 	}
 
 
@@ -88,38 +89,49 @@ const ModalListingNft = props => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		
 
-		if (saleType === saleTypes.AUCTION){
+
+		if (saleType === saleTypes.AUCTION) {
 			StartAuction();
+		} else {
+			Sale(true)
 		}
-		else{Sale(true)};
+	}
+
+	const toggleModal2 = () => {
+		setUploadSuccess(false);
+		setLoadingAfterSend(false);
+	}
+	const handleUploadMore = () => {
+		window.location.reload()
 	}
 
 	const StartAuction = async () => {
-		//	this.setState({ auctionLoading: true });
+		try {
+			let price = ((sellPrice) * ETHER).toString();
+			let times = duration / 1000;
 
-		//let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
-		let price = ((sellPrice) * ETHER).toString();
-		let times = duration/1000;
-		const res = await contract.methods
-			.startbid(
-				tokenID,
-				price,
-				times
-			)
-			.send({ from: accounts, gas: 5000000 });
-		console.log('res1', res);
-		//	this.setState({ auctionLoading: false, listForAuctionSuccess: true });
-		console.log(res);
+			setLoadingAfterSend(!loadingAfterSend);
+			const res = await contract.methods
+				.startbid(
+					tokenID,
+					price,
+					times
+				)
+				.send({from: accounts, gas: 5000000});
+
+			console.log('res1', res);
+			toggleModal2();
+
+		} catch (err) {
+			setLoadingAfterSend(!loadingAfterSend)
+		}
 	};
 
 	const Sale = async (isListed) => {
-		// let tokenId = tokenID
-		// let sellprice = "1000000000000000000"
 		let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
 		try {
-			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+			setLoadingAfterSend(!loadingAfterSend);
 			const res = await contract.methods
 				.Sale(
 					tokenID,
@@ -127,10 +139,12 @@ const ModalListingNft = props => {
 					isListed,
 				)
 				.send({from: accounts, gas: 5000000});
-			console.log('res1', res);
-			let data;
+
+			console.log('res', res);
+			toggleModal2();
+
 		} catch (error) {
-			console.error(error)
+			setLoadingAfterSend(!loadingAfterSend)
 		}
 	}
 
@@ -231,6 +245,22 @@ const ModalListingNft = props => {
 							Confirm
 						</button>
 					</div>
+
+					{
+						loadingAfterSend
+							? <Loading name="Listing NFT"/>
+							: null
+					}
+
+					{
+						<SuccessfulModals
+							isOpen={uploadSuccess}
+							toggle={toggleModal2}
+							onClose={toggleModal2}
+							variation={2}
+							handleUploadMore={handleUploadMore}
+						/>
+					}
 				</Form>
 			)}
 		/>
