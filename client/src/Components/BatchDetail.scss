@@ -101,8 +101,9 @@ h5 {
       flex-grow: 1;
 
       .batchImg {
+        object-fit: contain;
         width: 554px;
-        height: 550px;
+        height: 350px;
         border-radius: 10px;
       }
 
@@ -495,7 +496,7 @@ h5 {
 
         .batchImg {
           width: 300px;
-          height: 300px;
+          height: 245px;
         }
         .batchVideo {
           margin-top: 25px;
@@ -542,7 +543,7 @@ h5 {
           margin-right: 30px;
         .batchImg {
           width: 300px;
-          height: 300px;
+          height: 245px;
         }
         .batchVideo {
           margin-top: 0!important;

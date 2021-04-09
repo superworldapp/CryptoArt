@@ -162,6 +162,16 @@ class Header extends Component {
     this.setState({ isNavOpen: !this.state.isNavOpen });
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(prevState.isNavOpen !== this.state.isNavOpen){
+      if(this.state.isNavOpen){
+        document.body.style = "overflow-y: hidden"
+      } else {
+        document.body.style = "overflow-y: scroll"
+      }
+    }
+  }
+
   getEmailLength(email) {
     let diff;
     if (email.length < 15) {
@@ -358,7 +368,7 @@ class Header extends Component {
       <>
         <Navbar light expand='md' className='navbarMain'>
           <NavbarToggler onClick={this.toggleNav} />
-          <NavbarBrand>
+          <NavbarBrand className="navbarBrand">
             <NavLink to='/home'>
               <img
                 src={LogoImg}

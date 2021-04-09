@@ -40,6 +40,8 @@ import { IoIosArrowDown } from 'react-icons/io'
 import { BorderAll } from '@material-ui/icons';
 import heart from '../images/svg/batchHeart.svg';
 import avatar from '../images/svg/batchAvatar.svg';
+import Sound from "react-sound";
+import ReactPlayer from "react-player";
 
 const CardDetail = ({
   art,
@@ -54,6 +56,7 @@ const CardDetail = ({
   tokenBidStarted,
 }) => {
   console.log(art);
+  console.log(`==========>art`, art);
 
   const [ethPrice, setEthPrice] = useState({});
   const [creValue, setCreValue] = useState([]);
@@ -68,6 +71,8 @@ const CardDetail = ({
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownValue, setDropdownValue] = useState('usd');
   const [priceInputValue, setpriceInputValue] = useState('');
+  const [soundPlaying, setSoundPlaying] = useState('');
+
   const changeValue = (e) => {
     setDropdownValue(e.currentTarget.textContent);
   };
@@ -75,6 +80,54 @@ const CardDetail = ({
     setpriceInputValue(event.target.value);
     //console.log(handleInput);
   };
+console.log(`==========>art?._imgurl`,art?._imgurl);
+  const displayFileType = () => {
+    if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(art?._imgurl)) {
+      return (
+        <a href={art?._imgurl} target='_blank'>
+          <img src={art?._imgurl} className='detail-img' alt='...'/>
+        </a>
+      );
+    } else if (/\.(?:wav|mp3)$/i.test(art?._imgurl)) {
+      return (
+        <>
+          <button
+            style={{
+              zIndex: '1'
+            }}
+            onClick={() => setSoundPlaying(soundPlaying)}>
+            {soundPlaying ? 'Pause' : 'Play'}
+          </button>
+          <Sound
+            url={art?._imgurl}
+            playStatus={
+              soundPlaying
+                ? Sound.status.PLAYING
+                : ''
+            }
+            playFromPosition={300 /* in milliseconds */}
+            // onLoading={this.handleSongLoading}
+            // onPlaying={this.handleSongPlaying}
+            // onFinishedPlaying={this.handleSongFinishedPlaying}
+          />
+        </>
+      );
+    } else if (
+      /\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
+        art?._imgurl
+      )
+    ) {
+      return (
+        <ReactPlayer
+          className="cardVideo"
+          loop={true}
+          playing={true}
+          url={art?._imgurl}
+        />
+      );
+    }
+  };
+
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const converttoether = (x) => {
@@ -449,9 +502,7 @@ const CardDetail = ({
       <div className='detail-wrapper'>
         <div className="detail-view">
           <div className='detail-imgblock'>
-            <a href={art?._imgurl} target='_blank'>
-              <img src={art?._imgurl} className='detail-img' alt='...' />
-            </a>
+            {displayFileType()}
           </div>
           
             <div className='detail-info'>
