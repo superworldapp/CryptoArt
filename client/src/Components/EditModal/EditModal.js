@@ -42,9 +42,9 @@ const EditModal = props => {
 		isOpen,
 		toggle,
 		onClosed,
-		fileName,
 		imgThumb,
 	} = props
+	console.log('=====>props2', props);
 
 	const auctionInputRef = useRef(null)
 	const buyNowInputRef = useRef(null)
@@ -65,11 +65,11 @@ const EditModal = props => {
 
 	const handleInputChange2 = (e) => {
 		const target = e.target;
-		
+
 		const timestamp = new Date(target.value.split(".").reverse().join(".")).getTime();
 		setDuration(timestamp);
 		console.log(timestamp);
-		
+
 	}
 
 	const handleSubmit = (event) => {
@@ -78,7 +78,7 @@ const EditModal = props => {
 			StartAuction();
 		 }
 		else{Sale(true)};
-		
+
 		toggle();
 	}
 
@@ -88,9 +88,9 @@ const EditModal = props => {
 		toggle();
 	}
 	const StartAuction = async () => {
-		console.log(sellPrice,duration);
+		// console.log(sellPrice,duration);
 	//	this.setState({ auctionLoading: true });
-		
+
 		//let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
 		let price = ((sellPrice) * ETHER).toString();
 		let times = duration/1000;
@@ -105,6 +105,7 @@ const EditModal = props => {
 	//	this.setState({ auctionLoading: false, listForAuctionSuccess: true });
 		console.log(res);
 	  };
+
 	const Sale = async (isListed) => {
 		// let tokenId = tokenID
 		// let sellprice = "1000000000000000000"
@@ -218,7 +219,7 @@ const EditModal = props => {
 					</FormGroup>
 					<FormGroup className={saleType === saleTypes.BUY_NOW ? 'form-disabled' : ''}>
 						<Label className='label' htmlFor='buynow'>
-							Duration
+							End Date
 						</Label>
 						<Input
 							disabled={saleType === saleTypes.BUY_NOW}
@@ -226,7 +227,7 @@ const EditModal = props => {
 							type='datetime-local'
 							onChange={handleInputChange2}
 						/>
-						<span className='after-input-text'>Days</span>
+						<span className='after-input-text'></span>
 					</FormGroup>
 					<div className='submit-button-wrapper'>
 						<button

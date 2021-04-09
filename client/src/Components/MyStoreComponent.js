@@ -44,9 +44,9 @@ import checkmark from '../images/svg/checkmark.svg';
 import Allpatrender from "./Allpatrender";
 import Allpatrender2 from "./Allpatrender2";
 import ModalUploadToMyStore from "./ModalUploadToMyStore/ModalUploadToMyStore";
-import ModalListingNft from "./ModalListingNft/ModalListingNft";
 import UploadsTab from "./UploadsTab";
 import Loading from "./Loading/loading";
+import SuccessfulModals from "./SuccessfulModals";
 
 const SHA256 = require('crypto-js/sha256');
 
@@ -124,6 +124,7 @@ class MyStoreComponent extends Component {
 			indextab: 7,
 			cntactive: 0,
 
+			loadingAfterSend : false,
 			isListModalOpen: false,
 		};
 		this.toggleModal1 = this.toggleModal1.bind(this);
@@ -138,7 +139,9 @@ class MyStoreComponent extends Component {
 		this.toggleListModal = this.toggleListModal.bind(this);
 		this.onListButtonClick = this.onListButtonClick.bind(this);
 		this.onListModalClosed = this.onListModalClosed.bind(this);
-		this.accUsername = this.accUsername.bind(this)
+		this.accUsername = this.accUsername.bind(this);
+
+		this.setLoadingAfterSend = this.setLoadingAfterSend.bind(this);
 	}
 
 	accUsername = (accNum) => {
@@ -161,6 +164,11 @@ class MyStoreComponent extends Component {
 		else return '@Annonymous';
 	};
 
+	setLoadingAfterSend() {
+		this.setState({
+			loadingAfterSend: !this.state.loadingAfterSend,
+		})
+	}
 
 	toggleListModal() {
 		this.setState({
@@ -188,7 +196,8 @@ class MyStoreComponent extends Component {
 
 	toggleModal2() {
 		this.setState({
-			uploadSuccess: !this.state.uploadSuccess,
+			uploadSuccess: false,
+			loadingAfterSend: false,
 		});
 	}
 
@@ -196,8 +205,9 @@ class MyStoreComponent extends Component {
 		return this.setState({
 			isModalOpen1: false,
 		})
-		if (!this.state.isModalOpen1 && !this.state.uploadSuccess)
-			window.location.reload();
+		// window.location.reload()
+		// if (!this.state.isModalOpen1 && !this.state.uploadSuccess)
+		// 	window.location.reload();
 	}
 
 	onArtStatusChange(e, artStatus) {
@@ -205,8 +215,9 @@ class MyStoreComponent extends Component {
 	}
 
 	handleUploadMore() {
-		this.toggleModal2();
-		this.toggleModal1();
+		// this.toggleModal2();
+		// this.toggleModal1();
+		window.location.reload()
 	}
 
 
@@ -218,6 +229,7 @@ class MyStoreComponent extends Component {
 		let nos = 30;
 
 		try {
+			this.setLoadingAfterSend()
 			const res = await this.props.contract.methods
 				.createtokenBatch(
 					tokenHash,
@@ -228,6 +240,7 @@ class MyStoreComponent extends Component {
 					imgUrl
 				)
 				.send({from: this.props.accounts, gas: 5000000});
+			this.toggleModal2()
 
 			let data;
 
@@ -262,6 +275,7 @@ class MyStoreComponent extends Component {
 			this.toggleModal1();
 			this.setState({isLoading: false, uploadSuccess: true});
 		} catch (err) {
+			this.setLoadingAfterSend()
 			this.setState({loadingError: true});
 			// console.error(err.message);
 		}
@@ -406,9 +420,8 @@ class MyStoreComponent extends Component {
 		const Menu2 = this.state.art3?.map((x) => {
 			if ((x._isSellings === false) && (x._isBidding === false)) {
 				menuTwoCount++;
-
 				return (
-					// <Allpatrender2
+					// need <Allpatrender
 					<Allpatrender
 						key={x._tokenId}
 						art={x}
@@ -447,6 +460,7 @@ class MyStoreComponent extends Component {
 						art={x}
 						contract={this.props.contract}
 						accounts={this.props.accounts}
+						type={3}
 					/>
 				);
 			}
@@ -676,45 +690,19 @@ class MyStoreComponent extends Component {
 				{/*</Modal>*/}
 
 				{/* UPLOAD SUCCESS MODAL */}
-
-				<Modal
+				<SuccessfulModals
 					isOpen={this.state.uploadSuccess}
-					onClosed={this.refreshMyArt}
 					toggle={this.toggleModal2}
-					className='modal-xl'
-				>
-					<ModalHeader toggle={this.toggleModal2}>
-						<div></div>
-					</ModalHeader>
-					<ModalBody
-						style={{
-							display: 'flex',
-							flexDirection: 'column',
-							justifyContent: 'center',
-							font: 'Gibson',
-							height: '20rem',
-							paddingBottom: '5rem',
-						}}
-					>
-						<img src={checkmark}/>
-						<p
-							style={{
-								textAlign: 'center',
-								fontSize: '1.25rem',
-								fontWeight: '450',
-								marginTop: '1rem',
-							}}
-						>
-							Hey @megan462, your upload was successful!
-						</p>
-						<p style={{textAlign: 'center', color: 'gray', fontSize: '12px'}}>
-							You can view your recent uploaded file in “MyStore”
-						</p>
-						<button className='upload-more-btn' onClick={this.handleUploadMore}>
-							UPLOAD MORE
-						</button>
-					</ModalBody>
-				</Modal>
+					onClose={this.toggleModal2}
+					variation={0}
+					handleUploadMore={this.handleUploadMore}
+				/>
+
+				{
+					this.state.loadingAfterSend
+						? <Loading name="Uploading File" />
+						: null
+				}
 			</Container>
 		);
 	}
@@ -734,7 +722,7 @@ const TabPanel = props => {
 			{value === index && <>{children}</>}
 		</div>
 	);
-}
+};
 
 const StyledTab = withStyles({
 	root: {

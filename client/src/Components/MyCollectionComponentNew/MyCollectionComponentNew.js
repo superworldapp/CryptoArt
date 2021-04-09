@@ -40,6 +40,8 @@ import burger from "../../images/svg/burger-recently-list.svg";
 import SimpleMenu from "../Marketplace/menu/MenuListed";
 import arrow from "../../images/svg/arrow.svg";
 import SortLayout from "./SortLayout";
+import {connect} from "react-redux";
+import { setAllGallery } from "../../redux/myCollection/actions";
 
 
 
@@ -217,7 +219,7 @@ class Allpatrender extends Component {
 		this.setState({auctionLoading: false, listForAuctionSuccess: true});
 		// console.log(res);
 	};
-
+ 
 	EndAuction = async () => {
 		this.setState({endAuctionLoading: true});
 		const res = await this.props.contract.methods
@@ -361,7 +363,7 @@ class Allpatrender extends Component {
 				<div className='card-img-top-all-art'>
 					{/* <Link to={`/card/${this.props.art._tokenId}`}> */}
 
-					<Link to={`/batch/${this.props.art._batchId}`}>
+					<Link to={`/card/${this.props.art._tokenId}`}>
 						{/* <CardImg
 							className={orientation}
 							top
@@ -1038,8 +1040,12 @@ class MyItemComponent extends Component {
 			sortLayout: false,
 			searchCollectionValue: '',
 			parsedSearchCollectionValue: [],
-			filteredCollectionItems: this.props.batch,
+			parsedSearchCollectionValueTitle: [],
+			filteredCollectionItems: [],
+			filteredCollectionTitle: [],
+			searchTitle: 'Enter Title',
 		};
+		
 		// this.toggleModal1 = this.toggleModal1.bind(this);
 		this.toggleModal2 = this.toggleModal2.bind(this);
 		this.handleUploadMore = this.handleUploadMore.bind(this);
@@ -1178,37 +1184,33 @@ class MyItemComponent extends Component {
 
 		}
 
-
-		// for (let i = 1; i <= response.length; i++) {
-		//   let rex = await this.props.contract?.methods.getTokenDataBatch(1).call();
-		//   response[i]._tokenHash = '0x454';
-		//   response[i]._tokenBatchName = rex._tokenBatchName;
-		//   response[i]._tokenCreator = rex._tokenCreator;
-		//   response[i]._imgurl = rex._imgurl;
-		//   response[i]._imgThumbnail = rex._imgThumbnail;
-
-		//   if (rex._tokenCreator == this.props.accounts) {
-		//     createrToken.push(rex);
-		//   }
-		// }
-		// console.log(this.props.art);
-		// console.log(createrToken);
 		allDocs = [];
 		allDocs = response;
 		console.log(response);
 		this.setState({art: allDocs, batchart: createrToken});
+		this.setState({filteredCollectionItems: allDocs});
+		this.setState({filteredCollectionTitle: allDocs});
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const { batch } = this.props
-		const { parsedSearchCollectionValue } = this.state
+		const { parsedSearchCollectionValue, parsedSearchCollectionValueTitle, art } = this.state
 
 		if (prevState.parsedSearchCollectionValue !== parsedSearchCollectionValue) {
 			this.setState({
 				filteredCollectionItems: parsedSearchCollectionValue.length === 0
-					? batch
-					: batch.filter(batchItem => {
+					? art
+					: art.filter(batchItem => {
 							return parsedSearchCollectionValue.find(value => value.toLowerCase() === batchItem._tokenBatchName.toLowerCase())
+						})
+			})
+		}
+		
+		if (prevState.parsedSearchCollectionValueTitle !== parsedSearchCollectionValueTitle) {
+			this.setState({
+				filteredCollectionTitle: parsedSearchCollectionValueTitle.length === 0
+					? art
+					: art.filter(batchItem => {
+							return parsedSearchCollectionValueTitle.find(value => value.toLowerCase() === batchItem._tokenBatchName.toLowerCase())
 						})
 			})
 		}
@@ -1267,11 +1269,35 @@ class MyItemComponent extends Component {
 		})
 	}
 
+	onChangeTitleCollection = (event) => {
+		const { value } = event.target;
+		this.setState({searchTitle: value});
+	}
+
+	addGalleryTitle = () => {
+		this.props.setAllGallery([...this.props.gallery, {name: this.state.searchTitle}]);
+		this.setState({sortLayout: !this.state.sortLayout});
+	}
+
+	filterMyCollectionTitle = (e, name) => {
+		const parsedSearchCollectionValueTitle = name.split(/[^a-zA-Z0-9]+/g).filter(item => item !== '');
+		if (name === 'All Cards') {
+			this.setState({
+				filteredCollectionTitle: this.state.art
+			})
+		} else {
+			this.setState({
+				parsedSearchCollectionValueTitle
+			})
+		}
+	}
+
 	render() {
-		const { filteredCollectionItems } = this.state;
-		const Menu = this.props.batch?.map((x) => {
+		const { filteredCollectionItems,filteredCollectionTitle, searchTitle } = this.state;
+
+		const Menu = filteredCollectionTitle?.map((x) => {
 			return (
-				<div key={x._batchId} className='item-nft'>
+				<div key={x._tokenId} className='item-nft'>
 					<MyCollectionCards
 						art={x}
 						contract={this.props.contract}
@@ -1320,7 +1346,7 @@ class MyItemComponent extends Component {
 							color: "#5540C7",
 						}}
 					>
-						172 NFTs
+						{this.state.art.length} NFTs
 					</p>
 					<div
 						style={{
@@ -1392,17 +1418,22 @@ class MyItemComponent extends Component {
 							>
 								Galleries:
 							</p>
-							<p
-								style={{
-									textTransform: 'capitalize',
-									fontSize: '16px',
-									lineHeight: '24px',
-									marginBottom: '24px',
-									color: '#000000',
-								}}
-							>
-								Abstarct
-							</p>
+							{this.props.gallery.map(({name}) => (
+								<p
+									style={{
+										textTransform: 'capitalize',
+										fontSize: '16px',
+										lineHeight: '24px',
+										marginBottom: '24px',
+										color: '#000000',
+										cursor: 'pointer',
+									}}
+									onClick={(e) => this.filterMyCollectionTitle(e, name)}
+								>
+									{name}
+								</p>
+							))}
+
 							<button
 								style={{
 									fontSize: '18px',
@@ -1422,7 +1453,15 @@ class MyItemComponent extends Component {
 
 				{this.state.sortLayout
 					? <div className="sort-layout-wrapper">
-						<p className="enter-title-text">Enter Tiltle</p>
+						<div className="input-title-wrapper">
+							<input
+								type="text"
+								className="input-title"
+								value={searchTitle}
+								onChange={this.onChangeTitleCollection}
+							/>
+						</div>
+						{/*<p className="enter-title-text">Enter Tiltle</p>*/}
 						<div className="enter-title">
 							<input
 								type="text"
@@ -1432,6 +1471,7 @@ class MyItemComponent extends Component {
 							/>
 							<button
 								className="button-done"
+								onClick={(e) => this.addGalleryTitle(e)}
 							>
 								Done
 							</button>
@@ -1669,4 +1709,12 @@ class MyItemComponent extends Component {
 	}
 }
 
-export default MyItemComponent;
+const mapStateToProps = (state) => ({
+	gallery: state.myCollection.galleryValue,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+	setAllGallery: (data) => dispatch(setAllGallery(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyItemComponent);

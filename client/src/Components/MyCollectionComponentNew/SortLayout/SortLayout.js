@@ -5,6 +5,8 @@ import checkmark from "../../../images/svg/checkmark.svg";
 import loader from "../../../images/loader.svg";
 import {cardpills, ETHER} from "../../MyStoreComponent";
 import './style.scss';
+import Sound from "react-sound";
+import ReactPlayer from "react-player";
 
 class SortLayout extends Component {
 	constructor(props) {
@@ -26,6 +28,61 @@ class SortLayout extends Component {
 	}
 
 	render() {
+		const displayFileType = () => {
+			console.log(this.props.art._imgurl);
+			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.art._imgurl)) {
+				return (
+					<CardImg
+						className={orientation}
+						top
+						src={this.props.art._imgurl}
+						alt='Card image'
+					/>
+				);
+			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgurl)) {
+				return (
+					<>
+						<button
+							style={{
+								zIndex: '1'
+							}}
+							onClick={() =>
+								this.setState({
+									soundPlaying: !this.state.soundPlaying
+								})
+							}>
+							{this.state.soundPlaying ? 'Pause' : 'Play'}
+						</button>
+						<Sound
+							url={this.props.art._imgurl}
+							playStatus={
+								this.state.soundPlaying
+									? Sound.status.PLAYING
+									: ''
+							}
+							playFromPosition={300 /* in milliseconds */}
+							onLoading={this.handleSongLoading}
+							onPlaying={this.handleSongPlaying}
+							onFinishedPlaying={this.handleSongFinishedPlaying}
+						/>
+					</>
+				);
+			} else if (
+				/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
+					this.props.art._imgurl
+				)
+			) {
+				return (
+					<ReactPlayer
+						class={orientation}
+						style={{maxWidth: '270px'}}
+						loop={true}
+						playing={true}
+						url={this.props.art._imgurl}
+					/>
+				);
+			}
+		};
 		const colorpills = () => {
 			// if (this.props.art._isSelling) return cardpills[1];
 			// else if (this.props.art._isBidding) return cardpills[3];
@@ -49,11 +106,7 @@ class SortLayout extends Component {
 				className='my-collection-sort-layout'
 			>
 				<div className='mystore-queue-card-img'>
-					<CardImg
-						top
-						src={this.props.art._imgurl}
-						alt='Card image'
-					/>
+					{displayFileType()}
 				</div>
 			</Card>
 		);

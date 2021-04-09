@@ -35,6 +35,7 @@ import ReactPlayer from 'react-player';
 // import heart from "../images/svg/Heart.svg";
 import dropdownarrow from "../assets/svg/Drop down arrow.svg";
 import Web3 from 'web3';
+import Axios from "axios";
 
 const ETHER = 1000000000000000000;
 export const cardpills = [
@@ -81,6 +82,7 @@ class Allpatrender extends Component {
       endAuctionLoading: false,
       endAuctionSuccess: false,
       isArtModalOpen: false,
+      ethPrice: {},
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.toggleArtModal = this.toggleArtModal.bind(this);
@@ -97,6 +99,23 @@ class Allpatrender extends Component {
 
     //this.toggleAuction = this.toggleAuction.bind(this);
   }
+
+  componentDidMount() {
+    const getEthDollarPrice = () => {
+      try {
+        Axios.get(
+          `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,btc,eur,gpb&include_24hr_change=false`
+        ).then((res) => {
+          // console.log(typeof res.data.ethereum.usd_24h_change);
+          this.setState({ethPrice:res.data.ethereum});
+        });
+      } catch {
+        console.log('could not get the request');
+      }
+    };
+    getEthDollarPrice();
+  }
+
   buyItem = async () => {
 
     try {
@@ -332,6 +351,9 @@ class Allpatrender extends Component {
 			}
 		};
 
+    const usdPrice = (ethprice) => {
+      return (Number(Web3.utils.fromWei(ethprice.toString(), 'ether')))
+    }
 
     const accUsername = (accNum) => {
       if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
@@ -364,8 +386,8 @@ class Allpatrender extends Component {
     };
     img.src = this.props.BatchCreated._imgurl;
     img.onload();
-console.log(`==========>this.props.art`, this.props.art);
-console.log(`==========>this.props.BatchCreated`, this.props.BatchCreated);
+// console.log(`==========>this.props.art`, this.props.art);
+// console.log(`==========>this.props.BatchCreated`, this.props.BatchCreated);
     return (
 
       <div>
@@ -413,9 +435,17 @@ console.log(`==========>this.props.BatchCreated`, this.props.BatchCreated);
             </div>
             <div className='card-text-info'>
               <CardText className="card-text-info-price">
-                {Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')==0? Web3.utils.fromWei(this.props.art._bidprice.toString(), 'ether') : Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')}
+                {
+                  Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')) === 0
+                  ? Number(Web3.utils.fromWei(this.props.art._bidprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
+                  : Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
+                }
                 <p className="card-text-info-usd">
-                  {this.props.usdPrice || '($985.56 USD)'}
+                  {
+                    Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')) === 0
+                  ? `($${(usdPrice(this.props.art._bidprice)*this.state.ethPrice.usd).toFixed(2)} USD)`
+                  : `($${(usdPrice(this.props.art._sellprice)*this.state.ethPrice.usd).toFixed(2)} USD)`
+                  }
                 </p>
               </CardText>
               <div>

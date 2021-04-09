@@ -8,6 +8,8 @@ import './style.scss';
 import Sound from 'react-sound';
 import ReactPlayer from 'react-player';
 import MintModal from "../MintModal/MintModal";
+import Loading from "../Loading/loading";
+import SuccessfulModals from "../SuccessfulModals";
 
 class UploadsTab extends Component {
 	constructor(props) {
@@ -25,6 +27,9 @@ class UploadsTab extends Component {
 			endAuctionLoading: false,
 			endAuctionSuccess: false,
 			isMintModal: false,
+
+			uploadSuccess: false,
+			loadingAfterSend: false,
 		};
 		this.toggleModal = this.toggleModal.bind(this);
 		this.toggleListForAuction = this.toggleListForAuction.bind(this);
@@ -63,6 +68,19 @@ class UploadsTab extends Component {
 		});
 	}
 
+	toggleModal2() {
+		this.setState({
+			uploadSuccess: !this.state.uploadSuccess,
+			loadingAfterSend: false,
+		});
+	}
+
+	setLoadingAfterSend() {
+		this.setState({
+			loadingAfterSend: !this.state.loadingAfterSend,
+		})
+	}
+
 	toggleAuction() {
 		this.setState({
 			isModalAucOpen: !this.state.isModalAucOpen,
@@ -96,14 +114,20 @@ class UploadsTab extends Component {
 	}
 
 	async sendMintToken(e) {
-		this.setState({
-			isMintModal: !this.state.isMintModal,
-		});
-		console.log('========>e', e);
+		try {
+			this.setState({
+				isMintModal: !this.state.isMintModal,
+			});
+			console.log('========>e', e);
 
-		const res = await this.props.contract.methods
-			.mintTokenBatch(this.props.art._batchId,e)
-			.send({from: this.props.accounts, gas: 5000000});
+			this.setLoadingAfterSend()
+			const res = await this.props.contract.methods
+				.mintTokenBatch(this.props.art._batchId,e)
+				.send({from: this.props.accounts, gas: 5000000});
+			this.toggleModal2()
+		} catch (err) {
+			this.setLoadingAfterSend()
+		}
 }
 
 	handleInputChange(event) {
@@ -129,13 +153,19 @@ class UploadsTab extends Component {
 					amountToMint,
 				)
 				.send({from: this.props.accounts, gas: 5000000});
-
 			console.log('res', res);
 			let data;
 		} catch (error) {
 			console.error(error)
 		}
 	}
+
+	handleUploadMore() {
+		// this.toggleModal2();
+		// this.toggleModal1();
+		window.location.reload()
+	}
+
 	Sale = async () => {
 		let tokenId = 1
 		let sellprice = "100000000000000000"
@@ -671,9 +701,23 @@ class UploadsTab extends Component {
 									/>
 									: null
 							}
+							{
+								this.state.loadingAfterSend
+									? <Loading name="Minting in Progress" />
+									: null
+							}
 						</div>
 					</CardBody>
 				</div>
+				{
+					<SuccessfulModals
+						isOpen={this.state.uploadSuccess}
+						toggle={this.toggleModal2}
+						onClose={this.toggleModal2}
+						variation={1}
+						handleUploadMore={this.handleUploadMore}
+					/>
+				}
 			</Card>
 		);
 	}

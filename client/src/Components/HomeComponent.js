@@ -41,6 +41,7 @@ import profile from "../images/svg/avatar.svg";
 
 import './HomeComponent.scss';
 import '../App.css';
+import Axios from "axios";
 
 
 const mockTrendingNft = [
@@ -158,8 +159,25 @@ class Home extends Component {
 			selectedFile: null,
 			loggedIn: false,
 			startClicked: false,
+			ethPrice: {},
 		};
 		this.handleStartClick = this.handleStartClick.bind(this);
+	}
+
+	componentDidMount() {
+		const getEthDollarPrice = () => {
+			try {
+				Axios.get(
+					`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,btc,eur,gpb&include_24hr_change=false`
+				).then((res) => {
+					// console.log(typeof res.data.ethereum.usd_24h_change);
+					this.setState({ethPrice:res.data.ethereum});
+				});
+			} catch {
+				console.log('could not get the request');
+			}
+		};
+		getEthDollarPrice();
 	}
 
 	cData = () => {
@@ -444,9 +462,7 @@ class Home extends Component {
 											<p className='text2'>
 
 												Each day brings something new,
-												view our ever changing
-												<br/>
-												gallery of NFT's from a wide range
+												view our ever changing gallery of NFT's from a wide range
 												of salon creators
 												<br/>
 												{/* And share it in your{' '}
@@ -677,7 +693,8 @@ class Home extends Component {
                       <CardText className="card-text-info-price">
                         {price || '0.5ETH'}
                         <p className="card-text-info-usd">
-                          {usdPrice || '($985.56 USD)'}
+													{`($${(0.5*this.state.ethPrice.usd).toFixed(2)} USD)`}
+                          {/*{usdPrice*ethPrice || '($985.56 USD)'}*/}
                         </p>
                       </CardText>
                       <div>
@@ -715,6 +732,7 @@ class Home extends Component {
 																					time
 																				}) => (
 										<Card className="cardWrapper">
+											
 											<CardImg
 												top
 												className="card-background-image"
@@ -745,9 +763,10 @@ class Home extends Component {
 															{usdPrice || '($985.56 USD)'}
 														</p>
 													</CardText>
+													<a href='https://map.superworldapp.com/' target='_blank'>
 													<div>
 														<button className='card-buy-button'>{btnName}</button>
-													</div>
+													</div></a>
 												</div>
 												<div className='card-buy-time'>
 													<p className='card-buy-time-text'>
@@ -755,6 +774,7 @@ class Home extends Component {
 													</p>
 												</div>
 											</CardBody>
+											
 										</Card>
 									))}
 								</div>

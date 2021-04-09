@@ -157,6 +157,7 @@ const ModalUploadToMyStore = props => {
   }, [inputFileRef.current])
 
   const onConfirmClick = useCallback(e => {
+    onClosed()
     onConfirm(e, controls)
   }, [controls])
 

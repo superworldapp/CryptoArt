@@ -9,10 +9,21 @@
 	width: 240px;
 	border-radius: 5%;
 	border: 0;
+	overflow: hidden;
 
 	.card-background-image {
 		height: 210px;
 		border-radius: 5%;
+	}
+
+	.cardVideo {
+		width: 100%!important;
+		height: 210px!important;
+		video {
+			object-fit: cover;
+			height: 100% !important;
+			width: 100% !important;
+		}
 	}
 
 	.card-img-overlay {

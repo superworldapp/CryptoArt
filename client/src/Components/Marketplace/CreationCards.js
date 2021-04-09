@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Card,
 	CardBody,
@@ -14,9 +14,11 @@ import ReactPlayer from 'react-player';
 import heart from '../../images/svg/heartSvg.svg';
 import profile from '../../images/svg/avatar.svg';
 import './CreationCards.scss';
+import Axios from "axios";
 
 const CreationCards = (props) => {
 	const [soundPlaying, setSoundPlaying] = useState('');
+	const [ethPrice, setEthPrice] = useState({});
 
 	const displayFileType = () => {
 		if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(props._imgurl)) {
@@ -67,6 +69,24 @@ const CreationCards = (props) => {
 			);
 		}
 	};
+
+	const getEthDollarPrice = () => {
+		try {
+			Axios.get(
+				`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,btc,eur,gpb&include_24hr_change=false`
+			).then((res) => {
+				// console.log(typeof res.data.ethereum.usd_24h_change);
+				setEthPrice(res.data.ethereum);
+			});
+		} catch {
+			console.log('could not get the request');
+		}
+	};
+
+	useEffect(() => {
+		getEthDollarPrice()
+	}, [])
+
 	const accUsername = (accNum) => {
 		if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
 			return '@Chitra';
@@ -192,7 +212,7 @@ const CreationCards = (props) => {
 						<CardText className="card-text-info-price">
 							{props.price || '0.5ETH'}
 							<p className="card-text-info-usd">
-								{props.usdPrice || '($985.56 USD)'}
+								{`($${(0.5*ethPrice.usd).toFixed(2)} USD)`}
 							</p>
 						</CardText>
 						<div>

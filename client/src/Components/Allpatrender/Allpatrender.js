@@ -11,6 +11,7 @@ import MintModal from "../MintModal/MintModal";
 import ModalUploadToMyStore from "../ModalUploadToMyStore/ModalUploadToMyStore";
 import ModalListingNft from "../ModalListingNft";
 import Loading from "../Loading/loading";
+import EditModal from "../EditModal";
 
 
 class Allpatrender extends Component {
@@ -51,7 +52,7 @@ class Allpatrender extends Component {
 		this.refreshMyArt = this.refreshMyArt.bind(this);
 		this.Sale = this.Sale.bind(this);
 		this.mintTokenBatch = this.mintTokenBatch.bind(this);
-		this.mintTokenBatch = this.mintTokenBatch.bind(this);
+		this.CloseListModal = this.CloseListModal.bind(this);
 
 		this.handleOpenListModal = this.handleOpenListModal.bind(this);
 	}
@@ -72,6 +73,12 @@ class Allpatrender extends Component {
 	handleOpenListModal() {
 		this.setState({
 			openListModal: !this.state.openListModal,
+		})
+	}
+
+	CloseListModal() {
+		this.setState({
+			openListModal: false,
 		})
 	}
 
@@ -350,7 +357,7 @@ class Allpatrender extends Component {
 				{/*{+art[3] > 0 && <span className='card-counter'>+{art[3]}</span>}*/}
 				<Link to={`/batch/${this.props.art._batchId}`}>
 					<div className='mystore-queue-card-img'>
-						 {displayFileType()}
+						{displayFileType()}
 					</div>
 				</Link>
 				<div className='card-body-wrapper'>
@@ -894,17 +901,16 @@ class Allpatrender extends Component {
 				{
 					this.state.openListModal
 						? <ModalListingNft
+							contract={this.props.contract}
+							accounts={this.props.accounts}
 							isOpen={this.state.openListModal}
 							toggle={this.handleOpenListModal}
-							onClose={this.handleOpenListModal}
+							onClose={this.CloseListModal}
 							imgThumb={this.props.art._imgThumbnail}
+							tokenID={this.props.art._tokenId}
 						/>
 						: null
 				}
-
-				{/*<Loading*/}
-				{/*	name='Uploading File'*/}
-				{/*/>*/}
 			</Card>
 		);
 	}

@@ -45,13 +45,12 @@ class Allpatrender2 extends Component {
 		this.refreshMyArt = this.refreshMyArt.bind(this);
 		this.mintToken = this.mintToken.bind(this);
 		this.Sale = this.Sale.bind(this);
-
 		//this.toggleAuction = this.toggleAuction.bind(this);
 	}
 
 	componentDidMount = async () => {
 		//;'let newArr = await this.props.art?.filter((x) => x._isSellings);
-	 	this.setState({art: this.props.art});
+		this.setState({art: this.props.art});
 
 
 	}
@@ -162,6 +161,19 @@ class Allpatrender2 extends Component {
 		window.location.reload();
 		console.log(res);
 	};
+	// closeBidowner = async() => {
+	// 	let tokenId = 1
+	// 	try {
+	// 	  const res = await this.props.methods
+	// 		.closeBidOwner(
+	// 			this.state.art._tokenId
+	// 		)
+	// 		.send({ from: this.props.accounts, gas: 5000000 });
+	// 	  console.log('res', res);
+	// 	} catch(error){
+	// 		console.error(error)
+	// 	}
+	//   }
 	StartAuction = async () => {
 		this.setState({auctionLoading: true});
 		let startprice = "1000000000000000000"
@@ -178,13 +190,13 @@ class Allpatrender2 extends Component {
 		console.log(res);
 	};
 	EndAuction = async () => {
-		this.setState({endAuctionLoading: true});
+		//this.setState({endAuctionLoading: true});
 		const res = await this.props.contract.methods
 			.closeBidOwner(
 				this.props.art._tokenId,
 			)
 			.send({from: this.props.accounts, gas: 5000000});
-		this.setState({endAuctionLoading: false, endAuctionSuccess: true});
+		//this.setState({endAuctionLoading: false, endAuctionSuccess: true});
 		console.log(res);
 	};
 	AddBid = async () => {
@@ -197,9 +209,10 @@ class Allpatrender2 extends Component {
 		console.log(res);
 	};
 	CloseBid = async () => {
+		console.log(this.state.art._tokenId)
 		const res = await this.props.contract.methods
-			.closBid(this.state.art._tokenId)
-			.send({from: this.props.accounts, gas: 7000000});
+			.closeBid(this.state.art._tokenId)
+			.send({from: this.props.accounts, gas: 5000000});
 		console.log(res);
 	};
 
@@ -314,6 +327,17 @@ class Allpatrender2 extends Component {
 		};
 		let x = colorpills();
 
+		const setDate = () => {
+			const milliSec = Number(this.state.art._bidend * 1000) - Date.now();
+			console.log('=====>milliSec', milliSec);
+			let hours = Math.floor((milliSec / (1000 * 60 * 60))).toFixed(0);
+			let minutes = ((milliSec / (1000 * 60)) % 60).toFixed(0)
+			hours = (hours < 10) ? "0" + hours : hours;
+			minutes = (minutes < 10) ? "0" + minutes : minutes;
+
+			return `${hours} Hrs ${minutes} Min Remaining`
+		}
+
 		const img = new Image();
 		let orientation;
 		img.onload = function () {
@@ -350,9 +374,9 @@ class Allpatrender2 extends Component {
 									margin: '0px',
 								}}>
 									{
-										this.props.art._sellprice !== 0
-										? Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
-										: Number(Web3.utils.fromWei(this.props.art._bidprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
+										this.props.art._isSellings
+											? Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
+											: Number(Web3.utils.fromWei(this.props.art._bidprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
 									}
 								</p>
 								<p
@@ -365,195 +389,14 @@ class Allpatrender2 extends Component {
 									}}>( $1,580.10 USD )</p>
 							</span>
 							<button
-								onClick={this.closeEditToken}
+								onClick={this.props.type==3?this.EndAuction : this.closeEditToken}
 								className="button_mint"
 							>
-								Edit
+								{this.props.type==3?'End' : 'Edit'}
 							</button>
 							<>
-								{/* {Auc ? (
-                <button
-                  className={b1}
-                  //className={auc1}
-                  //className='abtn'
-                  type='submit'
-                  // color='primary'
-                  onClick={
-                    this.props.art._isBidding
-                      ? this.EndAuction
-                      : this.StartAuction
-                  }
-                  //onClick = {this.toggleAuction}
-                >
-                  End Auction
-                </button>
-              ) : (
-                <button
-                  className={b}
-                  //className={auc1}
-                  //className='abtn'
-                  style ={{ color :'white', backgroundColor:'#5540C7', fontSize: '14px', width: '100px', borderRadius: '10px' }}
-
-                  // color='primary'
-                  onClick={
-                    this.props.art._isBidding
-                      ? this.EndAuction
-                      : this.StartAuction
-                  }
-                //   onClick = {this.toggleAuction}
-                >
-                  Edit
-                </button>
-              )} */}
-
-
-								{/* <button
-                className={b}
-                //className={auc1}
-                //className='abtn'
-                type='submit'
-                // color='primary'
-                onClick={
-                  this.props.art.auction.isBidding
-                    ? this.EndAuction
-                    : this.StartAuction
-                }
-                //onClick = {this.toggleAuction}
-              >
-                {Auc}
-              </button> */}
-								{/* {this.state.endAuctionLoading ? <img src={loader} /> : <div></div>}
-              {forAuc === 'visible' ? (
-                <button
-                  style={{
-                    color: 'white',
-                    border: 'none',
-                    backgroundColor: 'white',
-                  }}
-                >
-                  but
-                </button>
-              ) : (
-                <div></div>
-              )} */}
-
-								{/* <Modal
-                isOpen={this.state.isModalOpen}
-                toggle={this.toggleModal}
-                className='modal_popup'
-              >
-                <ModalHeader toggle={this.toggleModal} className='pl-5'>
-                  Put For Sale
-                </ModalHeader>
-                <Card className='artCard' style={{ height: '50%' }}>
-                  <CardImg
-                    top
-                    className='displayImage'
-                    src={this.props.art._imgurl}
-                    alt='Card image'
-                  />
-                  <CardBody>
-                    <div className='ctext' style={{ padding: '2px' }}>
-                      <CardSubtitle
-                        style={{
-                          position: 'relative',
-                          fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#B3B3B3',
-                        }}
-                      >
-                        Title
-                      </CardSubtitle>
-                      <CardSubtitle
-                        style={{
-                          position: 'relative',
-                          fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: '#B3B3B3',
-                        }}
-                      >
-                        Price
-                      </CardSubtitle>
-                    </div>
-                    <div className='ctext' style={{ padding: '2px' }}>
-                      <CardText
-                        style={{
-                          position: 'relative',
-                          fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: 'black',
-                        }}
-                      >
-                        {this.props.art._tokenBatchName}
-                      </CardText>
-                      <CardText
-                        style={{
-                          position: 'relative',
-                          fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: 'black',
-                        }}
-                      >
-                        {Web3.utils.fromWei(
-                          this.props.art._sellprice.toString(),
-                          'ether'
-                        )}{' '}
-                        ETH
-                      </CardText>
-                    </div>
-                    <div className='ctext1'>
-                      <p
-                        style={{
-                          position: 'relative',
-                          fontFamily: 'Gibson',
-                          fontSize: '15px',
-                          color: 'black',
-                          marginTop: '2%',
-                        }}
-                      >
-                        Sell Price :{' '}
-                      </p>
-                      <p>
-                        {' '}
-                        <Input
-                          type='text'
-                          id='sellPrice'
-                          name='sellPrice'
-                          onChange={this.handleInputChange}
-                        ></Input>
-                      </p>
-                    </div>
-                    <div>
-                      <div>
-                        <button
-                          className='abtn'
-                          style={{
-                            left: '32%',
-                            color: 'white',
-                            backgroundColor: '#5540C7',
-                          }}
-                          type='submit'
-                          onClick={this.putForSale}
-                        >
-                          Confirm
-                        </button>{' '}
-                      </div>
-                      <div
-                        style={{ display: 'flex', justifyContent: 'flex-end' }}
-                      >
-                        {this.state.putForSaleLoading ? (
-                          <img src={loader} />
-                        ) : (
-                          <div></div>
-                        )}
-                      </div>
-                    </div>
-
-                  </CardBody>
-                </Card>
-              </Modal> */}
-
-								{/* LIST FOR AUCTION MODAL */}
+								
+							
 								<Modal
 									isOpen={this.state.listForAuctionSuccess}
 									toggle={this.toggleListForAuction}
@@ -699,150 +542,22 @@ class Allpatrender2 extends Component {
 										</button>
 									</ModalBody>
 								</Modal>
-								{/* <Modal
-                              isOpen={this.state.isModalAucOpen}
-                              toggle={this.toggleAuction}
-                              className='modal_popup'>
-                              <ModalHeader
-                                  toggle={this.toggleAuction}
-                                  className='pl-5'>
-                                  Start Auction
-                              </ModalHeader>
-                              <Card className='artCard' style={{height:'50%'}}>
-                                  <CardImg
-                                      top
-                                      className="displayImage"
-                                      src={this.props.art.imgurl}
-                                      alt='Card image'
-                                  />
-                                  <CardBody
-                                  >
-                                  <div className="ctext" style={{padding:'5px', height:'1rem'}}>
-                                      <CardSubtitle style={{
-                                          position:'relative',
-                                          fontFamily:'Gibson',
-                                          fontSize:'15px',
-                                          color:'#B3B3B3',
-
-                                      }}>
-                                      Title
-                                      </CardSubtitle>
-                                      <CardSubtitle
-                                      style={{
-                                          position:'relative',
-                                          fontFamily:'Gibson',
-                                          fontSize:'15px',
-                                          color:'#B3B3B3',
-                                      }}
-                                      >
-                                          Price
-                                      </CardSubtitle>
-                                  </div>
-                                  <div className="ctext" style={{ padding:'5px'}}>
-                                      <CardText
-                                      style={{
-                                          position:'relative',
-                                          fontFamily:'Gibson',
-                                          fontSize:'15px',
-                                          color:'black',
-                                      }}
-                                      >
-                                          {this.props.art.tokenTitle}
-                                      </CardText>
-                                      <CardText
-                                      style={{
-                                          position:'relative',
-                                          fontFamily:'Gibson',
-                                          fontSize:'15px',
-                                          color:'black',
-                                      }}
-                                      >
-                                          {Web3.utils.fromWei(
-                                  this.props.art.tokenSellPrice.toString(),
-                                  'ether'
-                                  )}{' '}
-                                  ETH
-                                      </CardText>
-                                  </div>
-                                  <div className="ctext1" style={{ padding:'2px'}}>
-                                      <p
-                                      style={{
-                                          position:'relative',
-                                          fontFamily:'Gibson',
-                                          fontSize:'15px',
-                                          color:'black',
-                                          marginTop:'2%'
-                                      }}
-                                      >Start Bid : </p>
-                                      <p>
-                                          <Input
-                                          style= {{ width:'80%'}}
-                                              type='text'
-                                              id='bidPrice'
-                                              name='bidPrice'
-                                              onChange={
-                                                  this.handleInputChange
-                                              }></Input>
-                                      </p>
-                                      <p
-                                      style={{
-                                          position:'relative',
-                                          fontFamily:'Gibson',
-                                          fontSize:'15px',
-                                          color:'black',
-                                          marginTop:'2%'
-                                      }}
-                                      > ETH
-                                       </p>
-                                  </div>
-                                   <div className="ctext1">
-                                      <p
-                                      style={{
-                                          position:'relative',
-                                          fontFamily:'Gibson',
-                                          fontSize:'15px',
-                                          color:'black',
-                                          marginTop:'2%'
-                                      }}
-                                      >Duration : </p>
-                                      <p>
-
-                                          <Input
-                                          style= {{ width:'80%'}}
-                                              type='text'
-                                              id='bidPrice'
-                                              name='bidPrice'
-                                              onChange={
-                                                  this.handleInputChange
-                                              }></Input>
-                                      </p>
-                                      <p
-                                      style={{
-                                          position:'relative',
-                                          fontFamily:'Gibson',
-                                          fontSize:'15px',
-                                          color:'black',
-                                          marginTop:'2%'
-                                      }}
-                                      >Days </p>
-                                  </div>
-                                  <div>
-                                  <button
-                                      className="abtn" style={{
-                                          left:'32%', color: 'white', backgroundColor:'#5540C7'
-                                      }}
-                                          type='submit'
-                                          onClick={this.putForSale}>
-                                          Confirm
-                                      </button>{' '}
-                                  </div>
-                                  </CardBody>
-                              </Card>
-                          </Modal>  */}
+								
 							</>
 						</div>
-						<p className="card-body-time">{Date.now()/1000 < this.state.art._bidend ? this.state.art._bidend - (Date.now()/1000)  : ''}</p>
-						{/*<p className="card-body-time red">Auction Timer Ended</p>*/}
+						<p className="card-body-time">
+							{
+								this.state.art._bidend === '0'
+									? ''
+									: Date.now() / 1000 < this.state.art._bidend
+									? setDate()
+									: (<p className="red">Auction Timer Ended</p>)}
+						</p>
+						<p className="card-body-time">
+							{
+								this.state.art._bidend === 0 && ''
+							}
+						</p>
 						<div style={{display: 'flex', justifyContent: 'center'}}>
 							{this.state.delistLoading ? (
 								<img height='35' src={loader} alt="load"/>
@@ -856,7 +571,7 @@ class Allpatrender2 extends Component {
 							)}
 						</div>
 					</CardBody>
-					{console.log('=====>this.state.art', this.state.art)}
+					{/*{console.log('=====>this.state.art2', this.state.art)}*/}
 				</div>
 				{
 					this.state.isEditModal
