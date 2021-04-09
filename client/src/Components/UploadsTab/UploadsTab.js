@@ -377,7 +377,7 @@ class UploadsTab extends Component {
 				 {/*<a href={this.props.art.imgurl} target='_blank'> */}
 				{this.props.art._mintedEditions > 0 ? <span className='card-counter'>{this.props.art._mintedEditions}</span> : ''}
 				<div className='mystore-queue-card-img'>
-					<Link to={`/batch/${this.props.art._refbatch}`}>
+					<Link to={`/batch/${this.props.art._batchId}`}>
 						{/* <CardImg
 							top
 							src={this.props.art._imgurl}

@@ -388,10 +388,10 @@ class MyStoreComponent extends Component {
 		// TODO optimize
 		const nftsListed = batch.reduce((count, item) => +item._mintedEditions + count, 0)
 
-		const Menu1 = this.props.art3?.map((x) => {
+		const Menu1 = this.props.batch?.map((x) => {
 			return (
 				<UploadsTab
-					key={x._tokenId}
+					key={x._batchId}
 					art={x}
 					contract={this.props.contract}
 					accounts={this.props.accounts}

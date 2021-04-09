@@ -186,7 +186,13 @@ class Header extends Component {
 
   getIdenticon() {
     return `data:image/png;base64,${new Identicon(
-      this.getEmailLength(Cookies.get('email')).toString()
+      this.getEmailLength(Cookies.get('email')).toString(),{
+        foreground: [85, 64, 199, 255],               
+        background: [255, 255, 255, 255],        
+        margin: 0.2,                              
+        size: 1080,                                
+        format: 'png'                             
+      }
     )}`;
   }
 

@@ -2,13 +2,15 @@ pragma solidity ^0.8.0;
 pragma experimental ABIEncoderV2;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v4.0/contracts/token/ERC721/ERC721.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v4.0/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v4.0/contracts/access/Ownable.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v4.0/contracts/utils/math/SafeMath.sol";
 
-contract NFTSalon is ERC721, Ownable {
+contract NFTSalon is ERC721Enumerable, Ownable {
     using SafeMath for uint256;
+    //using EnumerableSet for EnumerableSet.UintSet;
     uint totalBalance  = 0;
-    uint totalSupply = 0;
+    //uint totalSupply = 0;
     uint public buyId = 0;
     string public metaUrl;
     uint256 public percentageCut;
@@ -42,7 +44,9 @@ contract NFTSalon is ERC721, Ownable {
     mapping(uint256 => bool) public openMinting; // Key -> Batch ID  : Value -> minting open or not
     mapping(uint256 => uint256) tokenBatchPrice; // Key -> Batch ID  : Value -> price of Batch
     //Batch end
-
+    
+   mapping(address => mapping(uint256 => uint256)) public tokensOwnedByWallet;
+    
     //Token
     mapping(uint256 => address) tokenOwner;
     mapping(uint256 => bool) public isSellings;
@@ -157,30 +161,32 @@ contract NFTSalon is ERC721, Ownable {
 
     function mintToken(uint256 tokenBatchId) public {
         uint safeState = totalMintedTokens[tokenBatchId] + 1 ;
+        uint256 tokenId;
+        
         if (openMinting[tokenBatchId]) {
             require(safeState <= tokenBatchEditionSize[tokenBatchId]);
-            totalSupply += 1;
-            uint256 tokenId = totalSupply;
+            tokenId = totalSupply() + 1;
             _safeMint(msg.sender, tokenId);
             tokenOwner[tokenId] = msg.sender;
             referenceTotokenBatch[tokenId] = tokenBatchId;
             tokenEditionNumber[tokenId] += 1;
             totalMintedTokens[tokenBatchId]++;
+            tokensOwnedByWallet[msg.sender][tokenId] = tokenId;
 
 
         }
         else {
             require(tokenCreator[tokenBatchId] == msg.sender);
             require(safeState <= tokenBatchEditionSize[tokenBatchId]);
-            totalSupply += 1;
-            uint256 tokenId = totalSupply;
+            tokenId = totalSupply() + 1;
             _safeMint(msg.sender, tokenId);
             tokenOwner[tokenId] = msg.sender;
             referenceTotokenBatch[tokenId] = tokenBatchId;
             tokenEditionNumber[tokenId] += 1;
             totalMintedTokens[tokenBatchId]++;
+            tokensOwnedByWallet[msg.sender][tokenId] = tokenId;
         }
-        emit tokenCreated(totalSupply, msg.sender, block.timestamp, tokenBatchId);
+        emit tokenCreated(tokenId, msg.sender, block.timestamp, tokenBatchId);
     }
 
     // Use : List token for sell (It you want to resell you re-list)
@@ -191,9 +197,9 @@ contract NFTSalon is ERC721, Ownable {
         require(tokenCreator[x] == msg.sender);
         isSellings[_tokenId] = isListed;
         sellPrices[_tokenId] = _sellPrice;
-        if (isListed) {
-            setApprovalForAll(address(this), true) ;
-        }
+        // if (isListed) {
+        //     setApprovalForAll(address(this), true) ;
+        // }
         emit tokenPutForSale(_tokenId, msg.sender, _sellPrice,isListed, block.timestamp);
     }
 
@@ -237,7 +243,7 @@ contract NFTSalon is ERC721, Ownable {
     // Use : Gets all information about a token from the Token ID
     // Input : Token ID
     // Output : Token owner, if it is currently for sale, sell price, referefence to its token batch, auctions, token bidder, if it is bidding, and bid price
-    function getTokenData(uint256 tokenId) public view returns(address _tokenOwner, bool _isSellings, uint _sellPrice, uint _refBatch, address _tokenBidder, uint _bidEnd, bool _isBidding, uint _bidPrice) {
+    function getTokenData(uint256 tokenId) public view returns(address _tokenOwner, bool _isSellings, uint _sellPrice, uint _refBatch, address _tokenBidder, uint _bidEnd, bool _isBidding, uint _bidPrice,uint _tokenId) {
         _tokenOwner = tokenOwner[tokenId];
         _isSellings = isSellings[tokenId];
         _sellPrice = sellPrices[tokenId];
@@ -247,6 +253,7 @@ contract NFTSalon is ERC721, Ownable {
         _isBidding = y.isBidding;
         _bidPrice = y.bidPrice;
         _bidEnd = y.bidEnd;
+        _tokenId = tokenId;
 
     }
 
@@ -353,6 +360,8 @@ contract NFTSalon is ERC721, Ownable {
         }
 
         _transfer(seller, addr, _tokenId);
+        delete tokensOwnedByWallet[seller][_tokenId];
+        tokensOwnedByWallet[addr][_tokenId] = _tokenId;
         emit tokenBought(_tokenId,addr,seller,block.timestamp,val);
         return true;
     }

@@ -395,6 +395,9 @@ class Main extends Component {
 									batch={this.state.batch?.filter(
 										(batch) => batch._tokenCreator === this.state.accounts
 									)}
+									art={this.state.art2?.filter(
+										(artSingle) => (artSingle._tokenOwner === this.state.accounts && artSingle._tokenCreator != this.state.accounts)
+									)}
 								/>
 								</PageWrapper>
 							)}

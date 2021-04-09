@@ -255,15 +255,15 @@ const ModalListingNft = props => {
 					</FormGroup>
 					<FormGroup className={saleType === saleTypes.BUY_NOW ? 'form-disabled' : ''}>
 						<Label className='label' htmlFor='buynow'>
-							Duration
+						End Date
 						</Label>
 						<Input
 							disabled={saleType === saleTypes.BUY_NOW}
 							className='text-input date'
-							type='date'
+							type='datetime-local'
 							onChange={handleInputChange2}
 						/>
-						<span className='after-input-text'>Days</span>
+						
 					</FormGroup>
 					<div className='submit-button-wrapper'>
 						<button

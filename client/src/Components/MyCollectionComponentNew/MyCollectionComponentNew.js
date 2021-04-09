@@ -366,12 +366,7 @@ class Allpatrender extends Component {
 					{/* <Link to={`/card/${this.props.art._tokenId}`}> */}
 
 					<Link to={`/card/${this.props.art._tokenId}`}>
-						{/* <CardImg
-							className={orientation}
-							top
-							src={this.props.art._imgurl}
-							alt='Card image'
-						/> */}
+						
 						{displayFileType()}
 
 						<CardImgOverlay>
@@ -414,9 +409,7 @@ class Allpatrender extends Component {
 							</CardSubtitle>
 						</div>
 
-						{/* <CardTitle className="ctext">
-                        Item Title : {this.props.art.tokenTitle} {this.props.art.tokenCreator}
-                    </CardTitle> */}
+						
 						<div className='ctext'>
 							<CardText
 								style={{
@@ -454,153 +447,15 @@ class Allpatrender extends Component {
 							>
 								{this.props.art?._tokenBatchName}
 							</CardText>
-							{/* <CardText
-                style={{
-                  position: 'relative',
-                  fontFamily: 'Gibson',
-                  fontSize: '13px',
-                  color: 'black',
-                  textDecoration: 'none',
-                }}
-              >
-                {Web3.utils.fromWei(
-                  this.props.art._sellprice.toString(),
-                  'ether'
-                )}{' '}
-                ETH
-              </CardText> */}
+							
 						</div>
-						{/* <CardText>
-                        <small>
-                            Item Creator : {this.props.art.tokenCreator}
-                        </small>
-                    </CardText>
-                    <CardText className={pr}>
-                        <small>
-                            Item Sell Price :{' '}
-                            {Web3.utils.fromWei(
-                                this.props.art.tokenSellPrice.toString(),
-                                'ether'
-                            )}{' '}
-                            ETH
-                        </small>
-                    </CardText> */}
+						
 					</div>
 					<div
 						className='ctext'
 						style={{padding: '0px', height: '2rem', marginTop: '5%'}}
 					>
-						{/* {reSellOrSell ? (
-              <button
-                className={auc2}
-                //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
-                // color='primary'
-                onClick={this.toggleModal}
-              >
-                Relist
-              </button>
-            ) : (
-              <button
-                className={auc1}
-                //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
-                // color='primary'
-                onClick={this.toggleModal}
-              >
-                Sell
-              </button>
-            )} */}
-						{/* <button
-              className={auc1}
-              //className='abtn' style ={{ color :'white', backgroundColor:"#5540C7"}}
-              // color='primary'
-              onClick={this.toggleModal}
-            >
-              {reSellOrSell}
-            </button> */}
-						{/* <button
-              className={but1}
-              //className='abtn'
-              type='submit'
-              onClick={this.DeSale}
-            >
-              Delist
-            </button> */}
-						{/* {forAuc === 'visible' ? (
-              <button
-                style={{
-                  color: 'white',
-                  border: 'none',
-                  backgroundColor: 'white',
-                }}
-              >
-                but
-              </button>
-            ) : (
-              <div></div>
-            )} */}
-						{/* {Auc ? (
-              <button
-                className={b1}
-                //className={auc1}
-                //className='abtn'
-                type='submit'
-                // color='primary'
-                onClick={
-                  this.props.art._isBidding
-                    ? this.EndAuction
-                    : this.StartAuction
-                }
-                //onClick = {this.toggleAuction}
-              >
-                End Auction
-              </button>
-            ) : (
-              <button
-                className={b}
-                //className={auc1}
-                //className='abtn'
-                type='submit'
-                // color='primary'
-                onClick={
-                  this.props.art._isBidding
-                    ? this.EndAuction
-                    : this.StartAuction
-                }
-                //onClick = {this.toggleAuction}
-              >
-                Auction
-              </button>
-            )} */}
-
-						{/* <button
-              className={b}
-              //className={auc1}
-              //className='abtn'
-              type='submit'
-              // color='primary'
-              onClick={
-                this.props.art.auction.isBidding
-                  ? this.EndAuction
-                  : this.StartAuction
-              }
-              //onClick = {this.toggleAuction}
-            >
-              {Auc}
-            </button> */}
-						{/* {this.state.endAuctionLoading ? <img src={loader} /> : <div></div>}
-            {forAuc === 'visible' ? (
-              <button
-                style={{
-                  color: 'white',
-                  border: 'none',
-                  backgroundColor: 'white',
-                }}
-              >
-                but
-              </button>
-            ) : (
-              <div></div>
-            )} */}
+						
 
 						<Modal
 							isOpen={this.state.isModalOpen}
@@ -629,16 +484,7 @@ class Allpatrender extends Component {
 										>
 											Title
 										</CardSubtitle>
-										{/* <CardSubtitle
-                      style={{
-                        position: 'relative',
-                        fontFamily: 'Gibson',
-                        fontSize: '15px',
-                        color: '#B3B3B3',
-                      }}
-                    >
-                      Price
-                    </CardSubtitle> */}
+										
 									</div>
 									<div className='ctext' style={{padding: '2px'}}>
 										<CardText
@@ -651,20 +497,7 @@ class Allpatrender extends Component {
 										>
 											{this.props.art._tokenBatchName}
 										</CardText>
-										{/* <CardText
-                      style={{
-                        position: 'relative',
-                        fontFamily: 'Gibson',
-                        fontSize: '15px',
-                        color: 'black',
-                      }}
-                    >
-                      {Web3.utils.fromWei(
-                        this.props.art._sellprice.toString(),
-                        'ether'
-                      )}{' '}
-                      ETH
-                    </CardText> */}
+										
 									</div>
 									<div className='ctext1'>
 										<p
@@ -864,144 +697,7 @@ class Allpatrender extends Component {
 								</button>
 							</ModalBody>
 						</Modal>
-						{/* <Modal
-                            isOpen={this.state.isModalAucOpen}
-                            toggle={this.toggleAuction}
-                            className='modal_popup'>
-                            <ModalHeader
-                                toggle={this.toggleAuction}
-                                className='pl-5'>
-                                Start Auction
-                            </ModalHeader>
-                            <Card className='artCard' style={{height:'50%'}}>
-                                <CardImg
-                                    top
-                                    className="displayImage"
-                                    src={this.props.art.imgurl}
-                                    alt='Card image'
-                                />
-                                <CardBody
-                                >
-                                <div className="ctext" style={{padding:'5px', height:'1rem'}}>
-                                    <CardSubtitle style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'#B3B3B3',
-                                    }}>
-                                    Title
-                                    </CardSubtitle>
-                                    <CardSubtitle
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'#B3B3B3',
-                                    }}
-                                    >
-                                        Price
-                                    </CardSubtitle>
-                                </div>
-                                <div className="ctext" style={{ padding:'5px'}}>
-                                    <CardText
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                    }}
-                                    >
-                                        {this.props.art.tokenTitle}
-                                    </CardText>
-                                    <CardText
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                    }}
-                                    >
-                                        {Web3.utils.fromWei(
-                                this.props.art.tokenSellPrice.toString(),
-                                'ether'
-                                )}{' '}
-                                ETH
-                                    </CardText>
-                                </div>
-                                <div className="ctext1" style={{ padding:'2px'}}>
-                                    <p
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                        marginTop:'2%'
-                                    }}
-                                    >Start Bid : </p>
-                                    <p>
-                                        <Input
-                                        style= {{ width:'80%'}}
-                                            type='text'
-                                            id='bidPrice'
-                                            name='bidPrice'
-                                            onChange={
-                                                this.handleInputChange
-                                            }></Input>
-                                    </p>
-                                    <p
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                        marginTop:'2%'
-                                    }}
-                                    > ETH
-                                     </p>
-                                </div>
-                                 <div className="ctext1">
-                                    <p
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                        marginTop:'2%'
-                                    }}
-                                    >Duration : </p>
-                                    <p>
-                                        <Input
-                                        style= {{ width:'80%'}}
-                                            type='text'
-                                            id='bidPrice'
-                                            name='bidPrice'
-                                            onChange={
-                                                this.handleInputChange
-                                            }></Input>
-                                    </p>
-                                    <p
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                        marginTop:'2%'
-                                    }}
-                                    >Days </p>
-                                </div>
-                                <div>
-                                <button
-                                    className="abtn" style={{
-                                        left:'32%', color: 'white', backgroundColor:'#5540C7'
-                                    }}
-                                        type='submit'
-                                        onClick={this.putForSale}>
-                                        Confirm
-                                    </button>{' '}
-                                </div>
-                                </CardBody>
-                            </Card>
-                        </Modal>  */}
+						
 					</div>
 					<div style={{display: 'flex', justifyContent: 'center'}}>
 						{this.state.delistLoading ? (
@@ -1160,7 +856,7 @@ class MyItemComponent extends Component {
 		for (let i = 1; i <= res; i++) {
 			let rex = await this.props.contract?.methods.getTokenData(i).call();
 			let rex2 = await this.props.contract?.methods.getTokenDataBatch(i).call();
-			if (rex._tokenOwner == this.props.accounts) {
+			if (rex._tokenOwner == this.props.accounts && rex2._tokenCreator != this.props.accounts) {
 				var newBlock = {
 					_tokenId: i,
 					_tokenOwner: rex._tokenOwner,
@@ -1352,7 +1048,7 @@ class MyItemComponent extends Component {
 									color: "#000000",
 								}}
 							>
-								MyCollections
+								MyCollection
 							</p>
 
 							<p
@@ -1509,185 +1205,7 @@ class MyItemComponent extends Component {
 						</div>
 					</div>
 					: null}
-				{/*<Modal*/}
-				{/*	isOpen={this.state.isModalOpen1}*/}
-				{/*	toggle={this.toggleModal1}*/}
-				{/*	onClosed={this.refreshMyArt}*/}
-				{/*	className='uploadpopup'*/}
-				{/*>*/}
-				{/*	<ModalHeader toggle={this.toggleModal1}>*/}
-				{/*		<p*/}
-				{/*			style={{*/}
-				{/*				fontFamily: 'Gibson',*/}
-				{/*				fontSize: '25px',*/}
-				{/*				fontWeight: '800',*/}
-				{/*				marginTop: '10px',*/}
-				{/*				textAlign: 'left',*/}
-				{/*				marginLeft: '7px',*/}
-				{/*				marginBottom: '0rem',*/}
-				{/*				textTransform: 'uppercase',*/}
-				{/*			}}*/}
-				{/*		>*/}
-				{/*			Upload New Item*/}
-				{/*		</p>*/}
-				{/*		<p*/}
-				{/*			style={{*/}
-				{/*				fontFamily: 'Gibson',*/}
-				{/*				fontSize: '15px',*/}
-				{/*				fontWeight: '800',*/}
-				{/*				textAlign: 'left',*/}
-				{/*				marginLeft: '7px',*/}
-				{/*			}}*/}
-				{/*		>*/}
-				{/*			Image, Video, Audio or 3D Model*/}
-				{/*		</p>*/}
-				{/*	</ModalHeader>*/}
-				{/*	<ModalBody>*/}
-				{/*		<Form>*/}
-				{/*			<FormGroup>*/}
-				{/*				<Label*/}
-				{/*					htmlFor='artHash'*/}
-				{/*					className='uploadlabel'*/}
-				{/*					style={{*/}
-				{/*						fontFamily: 'Gibson',*/}
-				{/*						fontSize: '20px',*/}
-				{/*						color: 'black',*/}
-				{/*					}}*/}
-				{/*				>*/}
-				{/*					File to Upload*/}
-				{/*				</Label>*/}
-				{/*				<Input*/}
-				{/*					//style={{ marginLeft: '1.0rem' }}*/}
-				{/*					type='file'*/}
-				{/*					onChange={this.fileSelectHandler}*/}
-				{/*				/>*/}
-				{/*			</FormGroup>*/}
-
-				{/*			<FormGroup>*/}
-				{/*				<Label*/}
-				{/*					htmlFor='title'*/}
-				{/*					className='uploadlabel'*/}
-				{/*					style={{*/}
-				{/*						fontFamily: 'Gibson',*/}
-				{/*						fontSize: '20px',*/}
-				{/*						color: 'black',*/}
-				{/*					}}*/}
-				{/*				>*/}
-				{/*					Name**/}
-				{/*				</Label>*/}
-				{/*				<Input*/}
-				{/*					type='text'*/}
-				{/*					id='title'*/}
-				{/*					name='title'*/}
-				{/*					onChange={this.handleInputChange}*/}
-				{/*				/>*/}
-				{/*			</FormGroup>*/}
-				{/*			<FormGroup>*/}
-				{/*				<Label*/}
-				{/*					htmlFor='title'*/}
-				{/*					className='uploadlabel'*/}
-				{/*					style={{*/}
-				{/*						fontFamily: 'Gibson',*/}
-				{/*						fontSize: '20px',*/}
-				{/*						color: 'black',*/}
-				{/*					}}*/}
-				{/*				>*/}
-				{/*					Description*/}
-				{/*				</Label>*/}
-				{/*				<Input*/}
-				{/*					type='textarea'*/}
-				{/*					id='des'*/}
-				{/*					name='des'*/}
-				{/*					onChange={this.handleInputChange}*/}
-				{/*				/>*/}
-				{/*			</FormGroup>*/}
-				{/*			<FormGroup>*/}
-				{/*				<Label*/}
-				{/*					htmlFor='price'*/}
-				{/*					className='uploadlabel'*/}
-				{/*					style={{*/}
-				{/*						fontFamily: 'Gibson',*/}
-				{/*						fontSize: '20px',*/}
-				{/*						color: 'black',*/}
-				{/*					}}*/}
-				{/*				>*/}
-				{/*					Token Price*/}
-				{/*				</Label>*/}
-				{/*				<Input*/}
-				{/*					style={{width: '50%'}}*/}
-				{/*					type='text'*/}
-				{/*					id='price'*/}
-				{/*					name='price'*/}
-				{/*					onChange={this.handleInputChange}*/}
-				{/*				/>*/}
-				{/*				<Label*/}
-				{/*					className='uploadlabel'*/}
-				{/*					style={{*/}
-				{/*						fontFamily: 'Gibson',*/}
-				{/*						fontSize: '20px',*/}
-				{/*						color: 'black',*/}
-				{/*					}}*/}
-				{/*				>*/}
-				{/*					{' '}*/}
-				{/*					ETH*/}
-				{/*				</Label>*/}
-				{/*			</FormGroup>*/}
-				{/*			<FormGroup>*/}
-				{/*				<Label*/}
-				{/*					htmlFor='nos'*/}
-				{/*					className='uploadlabel'*/}
-				{/*					style={{*/}
-				{/*						fontFamily: 'Gibson',*/}
-				{/*						fontSize: '20px',*/}
-				{/*						color: 'black',*/}
-				{/*					}}*/}
-				{/*				>*/}
-				{/*					No. of Tokens*/}
-				{/*				</Label>*/}
-				{/*				<Input*/}
-				{/*					style={{width: '40%', marginRight: '11rem'}}*/}
-				{/*					placeholder='1'*/}
-				{/*					type='number'*/}
-				{/*					id='nos'*/}
-				{/*					name='nos'*/}
-				{/*					onChange={this.handleInputChange}*/}
-				{/*				/>*/}
-				{/*			</FormGroup>*/}
-				{/*			<br/>*/}
-				{/*			<button*/}
-				{/*				className='abtn'*/}
-				{/*				style={{*/}
-				{/*					color: 'white',*/}
-				{/*					left: '9rem',*/}
-				{/*					backgroundColor: '#5548C7',*/}
-				{/*					fontSize: '18px',*/}
-				{/*				}}*/}
-				{/*				//color='primary'*/}
-				{/*				onClick={this.fileUploadHandler}*/}
-				{/*			>*/}
-				{/*				Upload*/}
-				{/*			</button>*/}
-				{/*			{this.state.isLoading ? (*/}
-				{/*				<img*/}
-				{/*					style={{display: 'flex', verticalAlign: 'none'}}*/}
-				{/*					src={loader}*/}
-				{/*				/>*/}
-				{/*			) : (*/}
-				{/*				<></>*/}
-				{/*			)}*/}
-				{/*			{this.state.loadingError ? (*/}
-				{/*				<div style={{color: 'red', fontFamily: 'Gibson'}}>*/}
-				{/*					There was a transaction/processing error. Please try again.*/}
-				{/*				</div>*/}
-				{/*			) : (*/}
-				{/*				<></>*/}
-				{/*			)}*/}
-				{/*			<br/>*/}
-				{/*		</Form>*/}
-				{/*	</ModalBody>*/}
-				{/*</Modal>*/}
-
-				{/* UPLOAD SUCCESS MODAL */}
+				
 
 				<Modal
 					isOpen={this.state.uploadSuccess}

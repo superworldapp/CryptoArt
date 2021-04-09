@@ -58,7 +58,13 @@ const MyProfileComponent = (props) => {
 
   const getIdenticon = () => {
     return `data:image/png;base64,${new Identicon(
-      getEmailLength(Cookies.get('email')).toString()
+      getEmailLength(Cookies.get('email')).toString(),{
+        foreground: [85, 64, 199, 255],               
+        background: [255, 255, 255, 255],        
+        margin: 0.2,                              
+        size: 1080,                                
+        format: 'png'                             
+      }
     )}`;
   };
 
@@ -224,7 +230,7 @@ const MyProfileComponent = (props) => {
       </StyledTabs>
       {selectedTab === 0 && <MyCreation />}
       {selectedTab === 1 && (
-        <MyCollectionsCards collectionBatch={props.batch} />
+        <MyCollectionsCards collectionBatch={props.art} />
       )}
       {selectedTab === 2 && <RecentActivity />}
     </>
