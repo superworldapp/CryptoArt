@@ -355,6 +355,16 @@ class Allpatrender extends Component {
       return (Number(Web3.utils.fromWei(ethprice.toString(), 'ether')))
     }
 
+    const setDate = () => {
+    	const milliSec = Number(this.props.art._bidend * 1000) - Date.now();
+    	let hours = Math.floor((milliSec / (1000 * 60 * 60))).toFixed(0);
+    	let minutes = ((milliSec / (1000 * 60)) % 60).toFixed(0)
+    	hours = (hours < 10) ? "0" + hours : hours;
+    	minutes = (minutes < 10) ? "0" + minutes : minutes;
+
+    	return `${hours} Hrs ${minutes} Min Remaining`
+    }
+
     const accUsername = (accNum) => {
       if (accNum === '0xB4C33fFc72AF371ECaDcF72673D5644B24946256')
         return '@Chitra';
@@ -455,7 +465,13 @@ class Allpatrender extends Component {
             <div className='card-buy-time'>
               <p className='card-buy-time-text'>
                 {/* {this.props.art._bidend} */}
-                {Date.now()/1000 < this.props.art._bidend ? this.props.art._bidend - (Date.now()/1000)  : 0}
+                {
+                	this.props.art._bidend === '0'
+                		? ''
+                		: Date.now() / 1000 < this.props.art._bidend
+                		? setDate()
+                		: (<p className="red">Auction Timer Ended</p>)
+                }
               </p>
             </div>
           </CardBody>

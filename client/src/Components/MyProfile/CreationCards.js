@@ -45,6 +45,16 @@ const CreationCards = (props) => {
 		getEthDollarPrice();
 	}, []);
 
+	const setDate = () => {
+		const milliSec = Number(props.time * 1000) - Date.now();
+		let hours = Math.floor((milliSec / (1000 * 60 * 60))).toFixed(0);
+		let minutes = ((milliSec / (1000 * 60)) % 60).toFixed(0)
+		hours = (hours < 10) ? "0" + hours : hours;
+		minutes = (minutes < 10) ? "0" + minutes : minutes;
+
+		return `${hours} Hrs ${minutes} Min Remaining`
+	}
+
 	const displayFileType = () => {
 		if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(props.cardImage)) {
 			return (
@@ -126,7 +136,13 @@ const CreationCards = (props) => {
 				</div>
 				<div className='card-buy-time'>
 					<p className='card-buy-time-text'>
-						{props.time}
+						{
+							props.time === '0'
+								? ''
+								: Date.now() / 1000 < props.time
+								? setDate()
+								: (<p className="red">Auction Timer Ended</p>)
+						}
 					</p>
 				</div>
 			</CardBody>

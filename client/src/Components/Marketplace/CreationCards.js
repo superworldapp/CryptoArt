@@ -70,6 +70,16 @@ const CreationCards = (props) => {
 		}
 	};
 
+	// const setDate = () => {
+	// 	const milliSec = Number(props._bidend * 1000) - Date.now();
+	// 	let hours = Math.floor((milliSec / (1000 * 60 * 60))).toFixed(0);
+	// 	let minutes = ((milliSec / (1000 * 60)) % 60).toFixed(0)
+	// 	hours = (hours < 10) ? "0" + hours : hours;
+	// 	minutes = (minutes < 10) ? "0" + minutes : minutes;
+	//
+	// 	return `${hours} Hrs ${minutes} Min Remaining`
+	// }
+
 	const getEthDollarPrice = () => {
 		try {
 			Axios.get(
@@ -106,72 +116,6 @@ const CreationCards = (props) => {
 			return '@Alex';
 		else return '@Annonymous';
 	};
-
-	// const img = new Image();
-	// 	let orientation;
-	// 	img.onload = function () {
-	// 		let width = this.width;
-	// 		let height = this.height;
-	// 		orientation = width < height ? 'portrait' : 'landscape';
-	// 	};
-	// 	img.src = this.props.art.imgurl;
-	// 	img.onload();
-
-	// const displayFileType = () => {
-	// 	if (/\.(jpe?g|png|gif|bmp)$/i.test(this.props.art._imgurl)) {
-	// 		return (
-	// 			<CardImg
-	// 				className={orientation}
-	// 				top
-	// 				src={this.props.art._imgurl}
-	// 				alt='Card image'></CardImg>
-	// 		);
-	// 	} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgurl)) {
-	// 		return (
-	// 			<>
-	// 				<button
-	// 					style={{
-	// 						zIndex: '1'
-	// 					}}
-	// 					onClick={() =>
-	// 						this.setState({
-	// 							soundPlaying: !this.state.soundPlaying
-	// 						})
-	// 					}>
-	// 					{this.state.soundPlaying ? 'Pause' : 'Play'}
-	// 				</button>
-	// 				<Sound
-	// 					url={this.props.art._imgurl}
-	// 					playStatus={
-	// 						this.state.soundPlaying
-	// 							? Sound.status.PLAYING
-	// 							: ''
-	// 					}
-	// 					playFromPosition={300 /* in milliseconds */}
-	// 					onLoading={this.handleSongLoading}
-	// 					onPlaying={this.handleSongPlaying}
-	// 					onFinishedPlaying={this.handleSongFinishedPlaying}
-	// 				/>
-	// 			</>
-	// 		);
-	// 	} else if (
-	// 		/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
-	// 			this.props.art._imgurl
-	// 		)
-	// 	) {
-	// 		return (
-	// 			<ReactPlayer
-	// 				className={orientation}
-	// 				style={{ maxWidth: '270px' }}
-	// 				loop={true}
-	// 				playing={true}
-	// 				url={this.props.art._imgurl}
-	// 			/>
-	// 		);
-	// 	}
-	// };
-
-		
 
 	return (
 		<Link
@@ -222,6 +166,13 @@ const CreationCards = (props) => {
 					<div className='card-buy-time'>
 						<p className='card-buy-time-text'>
 							{props.time || '26 hrs 42 mins remaining'}
+							{/*{*/}
+							{/*	props._bidend === '0'*/}
+							{/*		? ''*/}
+							{/*		: Date.now() / 1000 < props._bidend*/}
+							{/*		? setDate()*/}
+							{/*		: (<p className="red">Auction Timer Ended</p>)*/}
+							{/*}*/}
 						</p>
 					</div>
 				</CardBody>

@@ -17,7 +17,7 @@ const MyCreationCards = (props) => {
 		CardSubtitleName: 'Amelia',
 		price: item._sellprice,
 		usdPrice: '($985.56 USD)',
-		time: '26 hrs 42 mins remaining',
+		time: item._bidend,
 	}))
 
 	return (
