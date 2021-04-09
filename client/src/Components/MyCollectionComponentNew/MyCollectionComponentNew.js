@@ -1201,9 +1201,14 @@ class MyItemComponent extends Component {
 			this.setState({
 				filteredCollectionItems: parsedSearchCollectionValue.length === 0
 					? art
-					: art.filter(batchItem => {
-							return parsedSearchCollectionValue.find(value => value.toLowerCase() === batchItem._tokenBatchName.toLowerCase())
-						})
+					: art.filter((word) => {
+						const wordParts = word._tokenBatchName.split(/[, ]+/g);
+						return wordParts.find((wordPart) => {
+							return parsedSearchCollectionValue.find((parsedWordFromSearcher) => {
+								return wordPart.toLowerCase().includes(parsedWordFromSearcher);
+							});
+						});
+					})
 			})
 		}
 		
@@ -1211,9 +1216,14 @@ class MyItemComponent extends Component {
 			this.setState({
 				filteredCollectionTitle: parsedSearchCollectionValueTitle.length === 0
 					? art
-					: art.filter(batchItem => {
-							return parsedSearchCollectionValueTitle.find(value => value.toLowerCase() === batchItem._tokenBatchName.toLowerCase())
-						})
+					: art.filter((word) => {
+						const wordParts = word._tokenBatchName.split(/[, ]+/g);
+						return wordParts.find((wordPart) => {
+							return parsedSearchCollectionValueTitle.find((parsedWordFromSearcher) => {
+								return wordPart.toLowerCase().includes(parsedWordFromSearcher);
+							});
+						});
+					})
 			})
 		}
 	}
@@ -1264,7 +1274,9 @@ class MyItemComponent extends Component {
 
 	onSearchCollectionChange = (event) => {
 		const { value } = event.target;
-		const parsedSearchCollectionValue = value.split(/[^a-zA-Z0-9]+/g).filter(item => item !== '')
+		const parsedSearchCollectionValue = Array.from(
+			value.match(/[^, ]+/g) || []
+		).map((item) => item.toLowerCase());
 		this.setState({
 			searchCollectionValue: value,
 			parsedSearchCollectionValue,
@@ -1282,7 +1294,10 @@ class MyItemComponent extends Component {
 	}
 
 	filterMyCollectionTitle = (e, name) => {
-		const parsedSearchCollectionValueTitle = name.split(/[^a-zA-Z0-9]+/g).filter(item => item !== '');
+		const parsedSearchCollectionValueTitle = Array.from(
+			name.match(/[^, ]+/g) || []
+		).map((item) => item.toLowerCase());
+
 		if (name === 'All Cards') {
 			this.setState({
 				filteredCollectionTitle: this.state.art
