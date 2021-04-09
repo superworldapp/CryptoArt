@@ -1040,6 +1040,7 @@ class MyItemComponent extends Component {
 			sortLayout: false,
 			searchCollectionValue: '',
 			parsedSearchCollectionValue: [],
+			parsedSearchCollectionValueTitle: [],
 			filteredCollectionItems: [],
 			filteredCollectionTitle: [],
 			searchTitle: 'Enter Title',
@@ -1188,12 +1189,11 @@ class MyItemComponent extends Component {
 		console.log(response);
 		this.setState({art: allDocs, batchart: createrToken});
 		this.setState({filteredCollectionItems: allDocs});
-		this.setState({filteredCollectionItemsTitle: allDocs, batchart: createrToken});
+		this.setState({filteredCollectionTitle: allDocs});
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const { art } = this.state
-		const { parsedSearchCollectionValue } = this.state
+		const { parsedSearchCollectionValue, parsedSearchCollectionValueTitle, art } = this.state
 
 		if (prevState.parsedSearchCollectionValue !== parsedSearchCollectionValue) {
 			this.setState({
@@ -1201,6 +1201,16 @@ class MyItemComponent extends Component {
 					? art
 					: art.filter(batchItem => {
 							return parsedSearchCollectionValue.find(value => value.toLowerCase() === batchItem._tokenBatchName.toLowerCase())
+						})
+			})
+		}
+		
+		if (prevState.parsedSearchCollectionValueTitle !== parsedSearchCollectionValueTitle) {
+			this.setState({
+				filteredCollectionTitle: parsedSearchCollectionValueTitle.length === 0
+					? art
+					: art.filter(batchItem => {
+							return parsedSearchCollectionValueTitle.find(value => value.toLowerCase() === batchItem._tokenBatchName.toLowerCase())
 						})
 			})
 		}
@@ -1270,20 +1280,22 @@ class MyItemComponent extends Component {
 	}
 
 	filterMyCollectionTitle = (e, name) => {
-		this.setState({filteredCollectionTitle: this.state.art});
+		const parsedSearchCollectionValueTitle = name.split(/[^a-zA-Z0-9]+/g).filter(item => item !== '');
 		if (name === 'All Cards') {
-			return this.state.art;
+			this.setState({
+				filteredCollectionTitle: this.state.art
+			})
 		} else {
-			// return this.state.art.filter(item => item._tokenBatchName === name)
-			return this.setState({
-				art: this.state.filteredCollectionTitle.filter(item => item._tokenBatchName === name)
+			this.setState({
+				parsedSearchCollectionValueTitle
 			})
 		}
 	}
 
 	render() {
 		const { filteredCollectionItems,filteredCollectionTitle, searchTitle } = this.state;
-		const Menu = this.state.art?.map((x) => {
+
+		const Menu = filteredCollectionTitle?.map((x) => {
 			return (
 				<div key={x._tokenId} className='item-nft'>
 					<MyCollectionCards
