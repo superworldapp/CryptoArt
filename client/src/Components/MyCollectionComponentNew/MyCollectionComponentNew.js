@@ -42,6 +42,8 @@ import arrow from "../../images/svg/arrow.svg";
 import SortLayout from "./SortLayout";
 import {connect} from "react-redux";
 import { setAllGallery } from "../../redux/myCollection/actions";
+import Loading from '../Loading/loading';
+
 
 
 
@@ -1322,134 +1324,140 @@ class MyItemComponent extends Component {
 		const ch = 'visible';
 		return (
 			<div className='artContainer'>
-				<div>
-					<p
-						style={{
-							fontFamily: 'Gibson',
-							fontSize: '64px',
-							marginTop: '53px',
-							textAlign: 'left',
-							lineHeight: "64px",
-							color: "#000000",
-						}}
-					>
-						MyCollections
-					</p>
-
-					<p
-						style={{
-							fontFamily: 'Gibson',
-							fontSize: '24px',
-							marginTop: '15px',
-							textAlign: 'left',
-							lineHeight: "24px",
-							color: "#5540C7",
-						}}
-					>
-						{this.state.art.length} NFTs
-					</p>
-					<div
-						style={{
-							display: 'flex',
-							flexWrap: 'wrap',
-							minHeight: '800px',
-						}}
-					>
-						<div
-							style={{
-								marginTop: '65px',
-								maxWidth: '300px',
-								width: '100%',
-								display: 'flex',
-								alignItems: 'end',
-								flexDirection: 'column',
-								marginRight: '120px',
-							}}
-						>
+				{filteredCollectionTitle && filteredCollectionTitle.length > 0
+					? (
+						<div>
 							<p
 								style={{
-									textTransform: 'uppercase',
-									fontSize: '18px',
-									fontWeight: 'bold',
-									lineHeight: '23px',
-									marginBottom: '10px',
-									color: '#000000',
+									fontFamily: 'Gibson',
+									fontSize: '64px',
+									marginTop: '53px',
+									textAlign: 'left',
+									lineHeight: "64px",
+									color: "#000000",
 								}}
 							>
-								sort by:
+								MyCollections
 							</p>
+
 							<p
 								style={{
-									marginBottom: '50px',
-									width: '100%',
+									fontFamily: 'Gibson',
+									fontSize: '24px',
+									marginTop: '15px',
+									textAlign: 'left',
+									lineHeight: "24px",
+									color: "#5540C7",
+								}}
+							>
+								{this.state.art.length} NFTs
+							</p>
+							<div
+								style={{
 									display: 'flex',
+									flexWrap: 'wrap',
+									minHeight: '800px',
 								}}
 							>
-								<select
-									id="dropdown"
-									// onChange={}
+								<div
 									style={{
-										fontFamily: 'Gibson',
-										width: '75%',
-										borderTop: 'none',
-										borderLeft: 'none',
-										borderRight: 'none',
-										fontSize: '18px',
-										marginLeft: '-3px',
-										background: 'none',
+										marginTop: '65px',
+										maxWidth: '300px',
+										width: '100%',
+										display: 'flex',
+										alignItems: 'end',
+										flexDirection: 'column',
+										marginRight: '120px',
 									}}
 								>
-									<option value="" className="option-selected">New</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-								</select>
-							</p>
-							<p
-								style={{
-									textTransform: 'uppercase',
-									fontWeight: 'bold',
-									fontSize: '18px',
-									lineHeight: '23px',
-									marginBottom: '10px',
-									color: '#000000',
-								}}
-							>
-								Galleries:
-							</p>
-							{this.props.gallery.map(({name}) => (
-								<p
-									style={{
-										textTransform: 'capitalize',
-										fontSize: '16px',
-										lineHeight: '24px',
-										marginBottom: '24px',
-										color: '#000000',
-										cursor: 'pointer',
-									}}
-									onClick={(e) => this.filterMyCollectionTitle(e, name)}
-								>
-									{name}
-								</p>
-							))}
+									<p
+										style={{
+											textTransform: 'uppercase',
+											fontSize: '18px',
+											fontWeight: 'bold',
+											lineHeight: '23px',
+											marginBottom: '10px',
+											color: '#000000',
+										}}
+									>
+										sort by:
+									</p>
+									<p
+										style={{
+											marginBottom: '50px',
+											width: '100%',
+											display: 'flex',
+										}}
+									>
+										<select
+											id="dropdown"
+											// onChange={}
+											style={{
+												fontFamily: 'Gibson',
+												width: '75%',
+												borderTop: 'none',
+												borderLeft: 'none',
+												borderRight: 'none',
+												fontSize: '18px',
+												marginLeft: '-3px',
+												background: 'none',
+											}}
+										>
+											<option value="" className="option-selected">New</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+										</select>
+									</p>
+									<p
+										style={{
+											textTransform: 'uppercase',
+											fontWeight: 'bold',
+											fontSize: '18px',
+											lineHeight: '23px',
+											marginBottom: '10px',
+											color: '#000000',
+										}}
+									>
+										Galleries:
+									</p>
+									{this.props.gallery.map(({name}) => (
+										<p
+											style={{
+												textTransform: 'capitalize',
+												fontSize: '16px',
+												lineHeight: '24px',
+												marginBottom: '24px',
+												color: '#000000',
+												cursor: 'pointer',
+											}}
+											onClick={(e) => this.filterMyCollectionTitle(e, name)}
+										>
+											{name}
+										</p>
+									))}
 
-							<button
-								style={{
-									fontSize: '18px',
-									lineHeight: '18px',
-									color: '#5540C7',
-									background: 'none',
-									border: '0',
-								}}
-								onClick={this.handleClickAdd}
-							>
-								+ Add
-							</button>
+									<button
+										style={{
+											fontSize: '18px',
+											lineHeight: '18px',
+											color: '#5540C7',
+											background: 'none',
+											border: '0',
+										}}
+										onClick={this.handleClickAdd}
+									>
+										+ Add
+									</button>
+								</div>
+								<div className='my-art-row'>{Menu}</div>
+							</div>
 						</div>
-						<div className='my-art-row'>{Menu}</div>
-					</div>
-				</div>
+					)
+					: <Loading name=''/>
+				}
+
 
 				{this.state.sortLayout
 					? <div className="sort-layout-wrapper">
