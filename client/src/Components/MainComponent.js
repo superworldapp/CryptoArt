@@ -19,6 +19,7 @@ import Axios from 'axios';
 import MyCollectionComponentNew from "./MyCollectionComponentNew/MyCollectionComponentNew";
 import {setArt} from "../redux/myStoreComponent/actions";
 import {connect} from "react-redux";
+import PageWrapper from "../HOC/PageWrapper";
 //import HDWalletProvider from "@truffle/hdwallet-provider";
 let allDocs = [];
 
@@ -218,6 +219,12 @@ class Main extends Component {
 	render() {
 		const TokenWithId = ({match}) => {
 			return (
+				<PageWrapper
+					contract={this.state.contract}
+					accounts={this.state.accounts}
+					balance={this.state.balance}
+					web3={this.state.web3}
+				>
 				<TokenDetail
 					tokenCreated={this.state.tokensCreated?.filter(
 						(token) => token.returnValues.tokenId === match.params.id
@@ -244,11 +251,18 @@ class Main extends Component {
 					matchId={match.params.id}
 
 				/>
+				</PageWrapper>
 			);
 		};
 
 		const BatchWithId = ({match}) => {
 			return (
+				<PageWrapper
+					contract={this.state.contract}
+					accounts={this.state.accounts}
+					balance={this.state.balance}
+					web3={this.state.web3}
+				>
 				<BatchDetail
 					BatchCreated={this.state.batch?.filter(
 						(batch) => batch._batchId === match.params.id
@@ -258,57 +272,78 @@ class Main extends Component {
 					allTokens={this.state.art}
 					matchId={match.params.id}
 				/>
+				</PageWrapper>
 			);
 		};
 		return (
 			<div className='App'>
-				<Header
-					contract={this.state.contract}
-					accounts={this.state.accounts}
-					balance={this.state.balance}
-					web3={this.state.web3}
-				/>
 				<div style={{minHeight: '1010px'}}>
 					<Switch>
 						<Route
 							exact
 							path='/home'
 							component={() => (
+								<PageWrapper
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									balance={this.state.balance}
+									web3={this.state.web3}
+								>
 								<Home
 									contract={this.state.contract}
 									accounts={this.state.accounts}
 								/>
+								</PageWrapper>
 							)}
 						/>
 						<Route
 							exact
 							path='/allart'
 							component={() => (
+								<PageWrapper
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									balance={this.state.balance}
+									web3={this.state.web3}
+								>
 								<AllItemComponent
 									contract={this.state.contract}
 									accounts={this.state.accounts}
 									batch={this.state.batch}
 								/>
+								</PageWrapper>
 							)}
 						/>
 						<ProtectedRoute
 							exact
 							path='/mycollections'
 							component={() => (
+								<PageWrapper
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									balance={this.state.balance}
+									web3={this.state.web3}
+								>
 								<MyItemComponent
 									contract={this.state.contract}
 									accounts={this.state.accounts}
 									batch={this.state.batch?.filter(
 										(batch) => batch._tokenCreator === this.state.accounts
 									)}
-
 								/>
+								</PageWrapper>
 							)}
 						/>
 						<ProtectedRoute
 							exact
 							path='/mycollection'
 							component={() => (
+								<PageWrapper
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									balance={this.state.balance}
+									web3={this.state.web3}
+								>
 								<MyCollectionComponentNew
 									contract={this.state.contract}
 									accounts={this.state.accounts}
@@ -318,6 +353,7 @@ class Main extends Component {
 									art2={this.state.art2}
 									// art2own = {this.state.art2?.filter((art2s) => art2s._tokenOwner == this.state.accounts)}
 								/>
+								</PageWrapper>
 							)}
 						/>
 
@@ -325,6 +361,12 @@ class Main extends Component {
 							exact
 							path='/mystore'
 							component={() => (
+								<PageWrapper
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									balance={this.state.balance}
+									web3={this.state.web3}
+								>
 								<MyStoreComponent
 									state={this.state}
 									contract={this.state.contract}
@@ -334,6 +376,7 @@ class Main extends Component {
 									)}
 									art2={this.state.art2}
 								/>
+								</PageWrapper>
 							)}
 						/>
 
@@ -341,12 +384,19 @@ class Main extends Component {
 							exact
 							path='/myprofile'
 							component={() => (
+								<PageWrapper
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									balance={this.state.balance}
+									web3={this.state.web3}
+								>
 								<Profile
 									state={this.state}
 									batch={this.state.batch?.filter(
 										(batch) => batch._tokenCreator === this.state.accounts
 									)}
 								/>
+								</PageWrapper>
 							)}
 						/>
 						<Route path='/card/:id' component={TokenWithId}/>
@@ -356,17 +406,30 @@ class Main extends Component {
 						<Route
 							path='/card/:id'
 							component={(props) => (
+								<PageWrapper
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									balance={this.state.balance}
+									web3={this.state.web3}
+								>
 								<TokenDetail
 
 									contract={this.state.contract}
 									accounts={this.state.accounts}
 									art={this.state.art2}
 								/>
+								</PageWrapper>
 							)}
 						/>
 						<Route
 							path='/batch/:id'
 							component={(props) => (
+								<PageWrapper
+									contract={this.state.contract}
+									accounts={this.state.accounts}
+									balance={this.state.balance}
+									web3={this.state.web3}
+								>
 								<BatchDetail
 
 									contract={this.state.contract}
@@ -374,6 +437,7 @@ class Main extends Component {
 									art={this.state.batch}
 
 								/>
+								</PageWrapper>
 							)}
 						/>
 
