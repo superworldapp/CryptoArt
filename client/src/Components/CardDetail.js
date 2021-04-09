@@ -534,7 +534,7 @@ const CardDetail = ({
                       </p>
                       <p>
                         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                          <DropdownToggle caret className="priceDropdown" > USD</DropdownToggle>
+                          <DropdownToggle caret className="priceDropdown" > </DropdownToggle>
                           <DropdownMenu>
                             {Object.keys(ethPrice).map((keyName, idx) => {
                               return (
