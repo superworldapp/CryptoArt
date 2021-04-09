@@ -5,6 +5,8 @@ import './style.scss';
 import Checkbox from "./checkbox/checkbox";
 import SuccessfulModals from "../SuccessfulModals";
 import Loading from "../Loading/loading";
+import Axios from "axios";
+import Web3 from "web3";
 
 const saleTypes = {
 	AUCTION: 'AUCTION',
@@ -56,6 +58,8 @@ const ModalListingNft = props => {
 
 	const [uploadSuccess, setUploadSuccess] = useState(false);
 	const [loadingAfterSend, setLoadingAfterSend] = useState(false);
+
+	const [ethPrice, setEthPrice] = useState({});
 
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value);
@@ -149,6 +153,27 @@ const ModalListingNft = props => {
 		}
 	}
 
+	// const getEthDollarPrice = () => {
+	// 	try {
+	// 		Axios.get(
+	// 			`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,btc,eur,gpb&include_24hr_change=false`
+	// 		).then((res) => {
+	// 			console.log(typeof res.data.ethereum.usd_24h_change);
+				// setEthPrice(res.data.ethereum);
+			// });
+		// } catch {
+		// 	console.log('could not get the request');
+		// }
+	// };
+
+	// useEffect(() => {
+	// 	getEthDollarPrice();
+	// }, []);
+
+	// const usdPrice = (ethprice) => {
+	// 	return (Number(Web3.utils.fromWei(ethprice.toString(), 'ether')))
+	// }
+
 	return (
 		<Modal
 			toggle={toggle}
@@ -223,8 +248,10 @@ const ModalListingNft = props => {
 							onChange={handleInputChange}
 						/>
 						<span className='after-input-text'>
-              ETH<span>($1,580.10 USD)</span>
-            </span>
+              ETH
+							{/*<span>{`($${(usdPrice(props.price) * ethPrice.usd).toFixed(2)} USD)`}</span>*/}
+							<span>($1,580.10 USD)</span>
+						</span>
 					</FormGroup>
 					<FormGroup className={saleType === saleTypes.BUY_NOW ? 'form-disabled' : ''}>
 						<Label className='label' htmlFor='buynow'>

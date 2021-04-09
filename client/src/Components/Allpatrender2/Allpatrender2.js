@@ -619,11 +619,12 @@ class Allpatrender2 extends Component {
 							)}
 						</div>
 					</CardBody>
-					{/*{console.log('=====>this.state.art2', this.state.art)}*/}
+					{/*{console.log('=====>this.state', this.state)}*/}
 				</div>
 				{
 					this.state.isEditModal
 						? <EditModal
+							price={this.state.art._sellprice}
 							tokenID={this.state.art._tokenId}
 							contract={this.props.contract}
 							accounts={this.props.accounts}

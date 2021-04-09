@@ -7,6 +7,8 @@ import Modal from "../Modal";
 import './EditModal.scss';
 import Loading from "../Loading/loading";
 import SuccessfulModals from "../SuccessfulModals";
+import Web3 from "web3";
+import Axios from "axios";
 
 const saleTypes = {
 	AUCTION: 'AUCTION',
@@ -56,6 +58,8 @@ const EditModal = props => {
 
 	const [uploadSuccess, setUploadSuccess] = useState(false);
 	const [loadingAfterSend, setLoadingAfterSend] = useState(false);
+
+	const [ethPrice, setEthPrice] = useState({});
 
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value);
@@ -148,6 +152,19 @@ const EditModal = props => {
 		}
 	}
 
+	const getEthDollarPrice = () => {
+		try {
+			Axios.get(
+				`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,btc,eur,gpb&include_24hr_change=false`
+			).then((res) => {
+				// console.log(typeof res.data.ethereum.usd_24h_change);
+				setEthPrice(res.data.ethereum);
+			});
+		} catch {
+			console.log('could not get the request');
+		}
+	};
+
 	useEffect(() => {
 		if (saleType === saleTypes.AUCTION) {
 			initialControls.tokenPrice.disabled = true
@@ -158,8 +175,15 @@ const EditModal = props => {
 		}
 	}, [saleType])
 
-	return (
+	useEffect(() => {
+		getEthDollarPrice();
+	}, []);
 
+	const usdPrice = (ethprice) => {
+		return (Number(Web3.utils.fromWei(ethprice.toString(), 'ether')))
+	}
+
+	return (
 
 		<Modal
 			isOpen={isOpen}
@@ -190,10 +214,14 @@ const EditModal = props => {
 					</FormGroup>
 					<FormGroup>
 						<div className="sale-block">
-							<Label className='sale-type-label'>
+							<Label
+								disabled
+								className="sale-type-label form-disabled"
+							>
 								Auction
 							</Label>
 							<Checkbox
+								disabled
 								className='sale-input'
 								type='checkbox'
 								name='sale-type'
@@ -235,7 +263,10 @@ const EditModal = props => {
 							onChange={handleInputChange}
 						/>
 						<span className='after-input-text'>
-              ETH<span>($1,580.10 USD)</span>
+              ETH
+							<span>
+								{`($${(usdPrice(props.price) * ethPrice.usd).toFixed(2)} USD)`}
+							</span>
             </span>
 					</FormGroup>
 					<FormGroup className={saleType === saleTypes.BUY_NOW ? 'form-disabled' : ''}>

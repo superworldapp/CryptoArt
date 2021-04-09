@@ -902,6 +902,7 @@ class Allpatrender extends Component {
 				{
 					this.state.openListModal
 						? <ModalListingNft
+							// price={this.state.art._sellprice}
 							contract={this.props.contract}
 							accounts={this.props.accounts}
 							isOpen={this.state.openListModal}
