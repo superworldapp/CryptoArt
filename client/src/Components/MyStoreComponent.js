@@ -460,6 +460,7 @@ class MyStoreComponent extends Component {
 						art={x}
 						contract={this.props.contract}
 						accounts={this.props.accounts}
+						type={3}
 					/>
 				);
 			}
