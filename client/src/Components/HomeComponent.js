@@ -645,72 +645,147 @@ class Home extends Component {
               <br/>
               <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
 
-              <div className="trendNftMain">
-                <div className="trendTitle">
-                  <div className="trendTitleMain">
-                    Trending NFTs
-                  </div>
-                  <div className="trendViewMore">
-                    View More
-                  </div>
-                </div>
-                <div className="cardMain">
-                {mockTrendingNft.map(({
-                                 img,
-                                 profileImg,
-                                 title,
-                                 userName,
-                                 price,
-                                 usdPrice,
-                                 btnName,
-                                 time
-                               }) => (
-                  <Card className="cardWrapper">
-                  <CardImg
-                    top
-                    className="card-background-image"
-                    src={img}
-                    alt='image3'
-                  />
-                  <CardImgOverlay className="cardImgOverlay">
-                    <div className="userImg">
-                      <img src={profileImg || profile} alt="userImg"/>
-                    </div>
-                    <CardTitle className="card-user-title">
-                      {title || 'none'}
-                    </CardTitle>
-                  </CardImgOverlay>
-                  <CardBody className="card-body">
-                    <div className="card-user-body">
-                      <CardSubtitle className="card-created-by">
-                        by
-                      </CardSubtitle>
-                      <CardSubtitle className="card-subtitle-name">
-                        {userName || ''}
-                      </CardSubtitle>
-                    </div>
-                    <div className='card-text-info'>
-                      <CardText className="card-text-info-price">
-                        {price || '0.5ETH'}
-                        <p className="card-text-info-usd">
-													{`($${(0.5*this.state.ethPrice.usd).toFixed(2)} USD)`}
-                          {/*{usdPrice*ethPrice || '($985.56 USD)'}*/}
-                        </p>
-                      </CardText>
-                      <div>
-                        <button className='card-buy-button'>{btnName}</button>
-                      </div>
-                    </div>
-                    <div className='card-buy-time'>
-                      <p className='card-buy-time-text'>
-                        {time}
-                      </p>
-                    </div>
-                  </CardBody>
-                </Card>
-                ))}
-                </div>
-              </div>
+							{!isMobile
+								?
+								(
+									<div className="trendNftMain">
+										<div className="trendTitle">
+											<div className="trendTitleMain">
+												Trending NFTs
+											</div>
+											<div className="trendViewMore">
+												View More
+											</div>
+										</div>
+										<div className="cardMain">
+											{mockTrendingNft.map(({
+																							img,
+																							profileImg,
+																							title,
+																							userName,
+																							price,
+																							usdPrice,
+																							btnName,
+																							time
+																						}) => (
+												<Card className="cardWrapper">
+													<CardImg
+														top
+														className="card-background-image"
+														src={img}
+														alt='image3'
+													/>
+													<CardImgOverlay className="cardImgOverlay">
+														<div className="userImg">
+															<img src={profileImg || profile} alt="userImg"/>
+														</div>
+														<CardTitle className="card-user-title">
+															{title || 'none'}
+														</CardTitle>
+													</CardImgOverlay>
+													<CardBody className="card-body">
+														<div className="card-user-body">
+															<CardSubtitle className="card-created-by">
+																by
+															</CardSubtitle>
+															<CardSubtitle className="card-subtitle-name">
+																{userName || ''}
+															</CardSubtitle>
+														</div>
+														<div className='card-text-info'>
+															<CardText className="card-text-info-price">
+																{price || '0.5ETH'}
+																<p className="card-text-info-usd">
+																	{`($${(0.5*this.state.ethPrice.usd).toFixed(2)} USD)`}
+																	{/*{usdPrice*ethPrice || '($985.56 USD)'}*/}
+																</p>
+															</CardText>
+															<div>
+																<button className='card-buy-button'>{btnName}</button>
+															</div>
+														</div>
+														<div className='card-buy-time'>
+															<p className='card-buy-time-text'>
+																{time}
+															</p>
+														</div>
+													</CardBody>
+												</Card>
+											))}
+										</div>
+									</div>
+
+								)
+								:
+								(
+									<div className="trendNftMain">
+										<div className="trendTitle">
+											<div className="trendTitleMain">
+												Trending NFTs
+											</div>
+										</div>
+											<div className="cardMain">
+												{mockTrendingNft.map(({
+																								img,
+																								profileImg,
+																								title,
+																								userName,
+																								price,
+																								usdPrice,
+																								btnName,
+																								time
+																							}) => (
+													<Card className="cardWrapper">
+														<CardImg
+															top
+															className="card-background-image"
+															src={img}
+															alt='image3'
+														/>
+														<CardImgOverlay className="cardImgOverlay">
+															<div className="userImg">
+																<img src={profileImg || profile} alt="userImg"/>
+															</div>
+															<CardTitle className="card-user-title">
+																{title || 'none'}
+															</CardTitle>
+														</CardImgOverlay>
+														<CardBody className="card-body">
+															<div className="card-user-body">
+																<CardSubtitle className="card-created-by">
+																	by
+																</CardSubtitle>
+																<CardSubtitle className="card-subtitle-name">
+																	{userName || ''}
+																</CardSubtitle>
+															</div>
+															<div className='card-text-info'>
+																<CardText className="card-text-info-price">
+																	{price || '0.5ETH'}
+																	<p className="card-text-info-usd">
+																		{`($${(0.5*this.state.ethPrice.usd).toFixed(2)} USD)`}
+																		{/*{usdPrice*ethPrice || '($985.56 USD)'}*/}
+																	</p>
+																</CardText>
+																<div>
+																	<button className='card-buy-button'>{btnName}</button>
+																</div>
+															</div>
+															<div className='card-buy-time'>
+																<p className='card-buy-time-text'>
+																	{time}
+																</p>
+															</div>
+														</CardBody>
+													</Card>
+												))}
+											</div>
+										<div className="trendViewMore">
+											View More
+										</div>
+									</div>
+
+								)}
 							<div className="trendNftMain">
 								<div className="trendTitle">
 									<div className="trendTitleMain">

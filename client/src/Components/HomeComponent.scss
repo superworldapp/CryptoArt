@@ -725,6 +725,24 @@ img.rounded-circle {
 
   .image10 {
     height: 5rem;
+    border-radius: 23px;
+    border-bottom-left-radius: 23px;
+    border-bottom-right-radius: 23px;
+  }
+  .home-slider-multiple {
+    width: 4rem;
+    border-radius: 10px;
   }
 
+  .trendNftMain {
+    padding: 55px 50px 30px;
+    .trendTitle {
+      justify-content: center;
+      font-family: GibsonSemiBold;
+      font-size: 18px;
+      line-height: 18px;
+      color: #000;
+    }
+
+  }
 }
