@@ -229,8 +229,6 @@ class MyStoreComponent extends Component {
 				.send({from: this.props.accounts, gas: 5000000});
 			this.toggleModal2()
 
-			let data;
-
 			// if (Array.isArray(res.events.tokencreated)) {
 			//   data = await res.events.tokencreated.map((token) =>
 			//     Axios.post(`https://geo.superworldapp.com/api/json/token/add`, {
@@ -258,8 +256,6 @@ class MyStoreComponent extends Component {
 			//   );
 			// }
 
-			// console.log('data', data);
-			// this.toggleModal1();
 			this.setState({isLoading: false, uploadSuccess: true});
 		} catch (err) {
 			this.setLoadingAfterSend()
@@ -540,142 +536,6 @@ class MyStoreComponent extends Component {
 					onConfirm={this.fileUploadHandler}
 				/>
 
-				{/*<ModalListingNft*/}
-				{/*	onOpen={this.onListModalOpen}*/}
-				{/*	onClose={this.onListModalClosed}*/}
-				{/*	toggle={this.toggleListModal}*/}
-				{/*	fileName='Leopard.png'*/}
-				{/*/>*/}
-
-				{/*<Modal*/}
-				{/*  isOpen={this.state.isModalOpen1}*/}
-				{/*  toggle={this.toggleModal1}*/}
-				{/*  onClosed={this.refreshMyArt}*/}
-				{/*  className='uploadpopup'*/}
-				{/*>*/}
-				{/*  <ModalHeader toggle={this.toggleModal1}>*/}
-				{/*    <div className='title'>*/}
-				{/*      Upload New Item*/}
-				{/*    </div>*/}
-				{/*    <div className='subtitle'>*/}
-				{/*      Image, Video, Audio or 3D Model*/}
-				{/*    </div>*/}
-				{/*  </ModalHeader>*/}
-				{/*  <ModalBody>*/}
-				{/*    <Form>*/}
-				{/*      <FormGroup>*/}
-				{/*        <Label*/}
-				{/*          htmlFor='artHash'*/}
-				{/*          className='uploadlabel'*/}
-				{/*        >*/}
-				{/*          File to Upload*/}
-				{/*        </Label>*/}
-				{/*        <Input*/}
-				{/*          //style={{ marginLeft: '1.0rem' }}*/}
-				{/*          type='file'*/}
-				{/*          onChange={this.fileSelectHandler}*/}
-				{/*        />*/}
-				{/*      </FormGroup>*/}
-
-				{/*      <FormGroup>*/}
-				{/*        <Label*/}
-				{/*          htmlFor='title'*/}
-				{/*          className='uploadlabel'*/}
-				{/*        >*/}
-				{/*          Name**/}
-				{/*        </Label>*/}
-				{/*        <Input*/}
-				{/*          type='text'*/}
-				{/*          id='title'*/}
-				{/*          name='title'*/}
-				{/*          onChange={this.handleInputChange}*/}
-				{/*        />*/}
-				{/*      </FormGroup>*/}
-				{/*      <FormGroup>*/}
-				{/*        <Label*/}
-				{/*          htmlFor='title'*/}
-				{/*          className='uploadlabel'*/}
-				{/*        >*/}
-				{/*          Description*/}
-				{/*        </Label>*/}
-				{/*        <Input*/}
-				{/*          type='textarea'*/}
-				{/*          id='des'*/}
-				{/*          name='des'*/}
-				{/*          onChange={this.handleInputChange}*/}
-				{/*        />*/}
-				{/*      </FormGroup>*/}
-				{/*      <FormGroup>*/}
-				{/*        <Label*/}
-				{/*          htmlFor='price'*/}
-				{/*          className='uploadlabel'*/}
-				{/*        >*/}
-				{/*          Token Price*/}
-				{/*        </Label>*/}
-				{/*        <Input*/}
-				{/*          style={{ width: '50%' }}*/}
-				{/*          type='text'*/}
-				{/*          id='price'*/}
-				{/*          name='price'*/}
-				{/*          onChange={this.handleInputChange}*/}
-				{/*        />*/}
-				{/*        <Label*/}
-				{/*          className='uploadlabel token-price'*/}
-				{/*        >*/}
-				{/*          ETH*/}
-				{/*        </Label>*/}
-				{/*      </FormGroup>*/}
-				{/*      <FormGroup>*/}
-				{/*        <Label*/}
-				{/*          htmlFor='nos'*/}
-				{/*          className='uploadlabel'*/}
-				{/*        >*/}
-				{/*          No. of Tokens*/}
-				{/*        </Label>*/}
-				{/*        <Input*/}
-				{/*          style={{ width: '40%', marginRight: '11rem' }}*/}
-				{/*          placeholder='1'*/}
-				{/*          type='number'*/}
-				{/*          id='nos'*/}
-				{/*          name='nos'*/}
-				{/*          onChange={this.handleInputChange}*/}
-				{/*        />*/}
-				{/*      </FormGroup>*/}
-				{/*      <br />*/}
-				{/*      <button*/}
-				{/*        className='abtn'*/}
-				{/*        style={{*/}
-				{/*          color: 'white',*/}
-				{/*          left: '9rem',*/}
-				{/*          backgroundColor: '#5548C7',*/}
-				{/*          fontSize: '18px',*/}
-				{/*        }}*/}
-				{/*        //color='primary'*/}
-				{/*        onClick={this.fileUploadHandler}*/}
-				{/*      >*/}
-				{/*        Upload*/}
-				{/*      </button>*/}
-				{/*      {this.state.isLoading ? (*/}
-				{/*        <img*/}
-				{/*          style={{ display: 'flex', verticalAlign: 'none' }}*/}
-				{/*          src={loader}*/}
-				{/*        />*/}
-				{/*      ) : (*/}
-				{/*        <div></div>*/}
-				{/*      )}*/}
-				{/*      {this.state.loadingError ? (*/}
-				{/*        <div style={{ color: 'red', fontFamily: 'Gibson' }}>*/}
-				{/*          There was a transaction/processing error. Please try again.*/}
-				{/*        </div>*/}
-				{/*      ) : (*/}
-				{/*        <div></div>*/}
-				{/*      )}*/}
-				{/*      <br />*/}
-				{/*    </Form>*/}
-				{/*  </ModalBody>*/}
-				{/*</Modal>*/}
-
-				{/* UPLOAD SUCCESS MODAL */}
 				<SuccessfulModals
 					isOpen={this.state.uploadSuccess}
 					toggle={this.toggleModal2}

@@ -90,7 +90,6 @@ const ModalListingNft = props => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-
 		if (saleType === saleTypes.AUCTION) {
 			StartAuction();
 		} else {
@@ -122,7 +121,7 @@ const ModalListingNft = props => {
 
 			console.log('res1', res);
 			toggleModal2();
-
+			setUploadSuccess(!uploadSuccess);
 		} catch (err) {
 			setLoadingAfterSend(!loadingAfterSend)
 		}
@@ -131,6 +130,7 @@ const ModalListingNft = props => {
 	const Sale = async (isListed) => {
 		let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
 		try {
+
 			setLoadingAfterSend(!loadingAfterSend);
 			const res = await contract.methods
 				.Sale(
@@ -142,6 +142,7 @@ const ModalListingNft = props => {
 
 			console.log('res', res);
 			toggleModal2();
+			setUploadSuccess(!uploadSuccess);
 
 		} catch (error) {
 			setLoadingAfterSend(!loadingAfterSend)

@@ -5,6 +5,8 @@ import Checkbox from "./checkbox/checkbox";
 import Modal from "../Modal";
 
 import './EditModal.scss';
+import Loading from "../Loading/loading";
+import SuccessfulModals from "../SuccessfulModals";
 
 const saleTypes = {
 	AUCTION: 'AUCTION',
@@ -52,6 +54,9 @@ const EditModal = props => {
 	const [duration, setDuration] = useState(saleTypes.BUY_NOW);
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
 
+	const [uploadSuccess, setUploadSuccess] = useState(false);
+	const [loadingAfterSend, setLoadingAfterSend] = useState(false);
+
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value);
 		// console.log(e.target.value);
@@ -74,44 +79,58 @@ const EditModal = props => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		 if (saleType === saleTypes.AUCTION){
+		if (saleType === saleTypes.AUCTION) {
 			StartAuction();
-		 }
-		else{Sale(true)};
-
-		toggle();
+		} else {
+			Sale(true)
+		}
 	}
 
 	const handleSubmit2 = (event) => {
 		event.preventDefault();
 		Sale(false);
-		toggle();
 	}
-	const StartAuction = async () => {
-		// console.log(sellPrice,duration);
-	//	this.setState({ auctionLoading: true });
 
-		//let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
-		let price = ((sellPrice) * ETHER).toString();
-		let times = duration/1000;
-		const res = await contract.methods
-		.startbid(
-		  tokenID,
-		  price,
-		  times
-		)
-		.send({ from: accounts, gas: 5000000 });
-	  console.log('res', res);
-	//	this.setState({ auctionLoading: false, listForAuctionSuccess: true });
-		console.log(res);
-	  };
+	const toggleModal2 = () => {
+		setUploadSuccess(false);
+		setLoadingAfterSend(false);
+	}
+	const handleUploadMore = () => {
+		window.location.reload()
+	}
+
+	const StartAuction = async () => {
+		try {
+			let price = ((sellPrice) * ETHER).toString();
+			let times = duration / 1000;
+
+			setLoadingAfterSend(!loadingAfterSend);
+			const res = await contract.methods
+				.startbid(
+					tokenID,
+					price,
+					times
+				)
+				.send({from: accounts, gas: 5000000});
+			toggleModal2();
+			setUploadSuccess(!uploadSuccess);
+			console.log('res', res);
+			//	this.setState({ auctionLoading: false, listForAuctionSuccess: true });
+			console.log(res);
+		} catch (err) {
+			setLoadingAfterSend(!loadingAfterSend)
+		}
+	};
 
 	const Sale = async (isListed) => {
 		// let tokenId = tokenID
 		// let sellprice = "1000000000000000000"
 		let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
 		try {
+
 			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+
+			setLoadingAfterSend(!loadingAfterSend);
 			const res = await contract.methods
 				.Sale(
 					tokenID,
@@ -121,9 +140,11 @@ const EditModal = props => {
 				.send({from: accounts, gas: 5000000});
 
 			console.log('res', res);
-			let data;
+			toggleModal2();
+			setUploadSuccess(!uploadSuccess);
+
 		} catch (error) {
-			console.error(error)
+			setLoadingAfterSend(!loadingAfterSend)
 		}
 	}
 
@@ -243,6 +264,23 @@ const EditModal = props => {
 							Take Down
 						</button>
 					</div>
+
+					{
+						loadingAfterSend
+							? <Loading name="Relisting"/>
+							: null
+					}
+
+					{
+						<SuccessfulModals
+							isOpen={uploadSuccess}
+							toggle={toggleModal2}
+							onClose={toggleModal2}
+							variation={3}
+							handleUploadMore={handleUploadMore}
+						/>
+					}
+
 				</Form>
 			)}
 		/>

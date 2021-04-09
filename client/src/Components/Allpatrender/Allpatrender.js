@@ -77,6 +77,7 @@ class Allpatrender extends Component {
 	}
 
 	CloseListModal() {
+		console.log('=====>123', 123);
 		this.setState({
 			openListModal: false,
 		})
