@@ -21,7 +21,7 @@ const MintModal = (props) => {
 	}
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		send(1);
+		send(valueInput);
 	}
 
 	return (
