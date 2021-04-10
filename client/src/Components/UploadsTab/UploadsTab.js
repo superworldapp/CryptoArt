@@ -102,10 +102,10 @@ class UploadsTab extends Component {
 	}
 
 	refreshMyArt() {
-		if (
-			(!this.state.toggleListForSale && !this.state.listForSaleSuccess) ||
-			(!this.state.toggleListForAuction && !this.state.listForAuctionSuccess)
-		)
+		if 
+			(!this.state.isLoading && this.state.uploadSuccess)
+			
+		
 			window.location.reload();
 	}
 
@@ -117,23 +117,54 @@ class UploadsTab extends Component {
 
 	async sendMintToken(e) {
 		
-		
-			// this.setState({
-			// 	isMintModal: !this.state.isMintModal,
-			// });
+			try{
+			this.setState({
+				isMintModal: !this.state.isMintModal,
+			});
 
-			// this.setLoadingAfterSend()
+			this.setLoadingAfterSend()
 			console.log("start");
 			const res = await this.props.contract.methods
-				.mintTokenBatch(this.props.art._refbatch,e)
+				.mintTokenBatch(this.props.art._batchId,e)
 				.send({from: this.props.accounts, gas: 5000000});
 			this.toggleModal2()
-			this.setState({isLoading: false, uploadSuccess: true});
-			console.log('end;');
-			// this.setLoadingAfterSend()
+			
+			console.log('res',res);
+			let data;
+			if (Array.isArray(res.events.tokencreated)) {
+				data = await res.events.tokencreated.map((token) =>
+				  Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
+					tokenId: token.returnValues.tokenId.toString(),
+					description: 'Artwork',
+					image: this.props.art._imgurl,
+					name: this.props.art._tokenBatchName,
+					blockchain: 'e',
+					networkId: 4
+				  })
+				);
+			  } else {
+				data = await Axios.post(
+				  `http://geo.superworldapp.com/api/json/token/add`,
+				  {
+					tokenId: res.events.tokencreated.returnValues.tokenId.toString(),
+					description: 'Artwork',
+					image: this.props.art._imgurl,
+					name: this.props.art._tokenBatchName,
+					blockchain: 'e',
+					networkId: 4,
+				  }
+				);
+			  }
+			  console.log(data);
+			  this.setState({isLoading: false, uploadSuccess: true});
+			  this.refreshMyArt();
+		}
+		catch (err) { //this.setLoadingAfterSend()
 			// this.setState({loadingError: true});
+		}
 		
 }
+
 
 	handleInputChange(event) {
 		const target = event.target;

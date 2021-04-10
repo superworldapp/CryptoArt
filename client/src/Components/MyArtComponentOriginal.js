@@ -1026,32 +1026,32 @@ class MyItemComponent extends Component {
       console.log('res', res);
       let data;
 
-      // if (Array.isArray(res.events.tokencreated)) {
-      //   data = await res.events.tokencreated.map((token) =>
-      //     Axios.post(`https://geo.superworldapp.com/api/json/token/add`, {
-      //       tokenId: token.returnValues.tokenId.toString(),
-      //       description: 'A unique piece of art',
-      //       image: imgUrl,
-      //       name: tokenTitle,
-      //       blockchain: 'e',
-      //       networkId: 4,
-      //       price: tokenPrice,
-      //     })
-      //   );
-      // } else {
-      //   data = await Axios.post(
-      //     `https://geo.superworldapp.com/api/json/token/add`,
-      //     {
-      //       tokenId: res.events.tokencreated.returnValues.tokenId.toString(),
-      //       description: 'A unique piece of art',
-      //       image: imgUrl,
-      //       name: tokenTitle,
-      //       blockchain: 'e',
-      //       networkId: 4,
-      //       price: tokenPrice,
-      //     }
-      //   );
-      // }
+      if (Array.isArray(res.events.tokencreated)) {
+        data = await res.events.tokenCreated.map((token) =>
+          Axios.post(`https://geo.superworldapp.com/api/json/token/add`, {
+            tokenId: token.returnValues.tokenId.toString(),
+            description: 'A unique piece of art',
+            image: imgUrl,
+            name: tokenTitle,
+            blockchain: 'e',
+            networkId: 4,
+            price: tokenPrice,
+          })
+        );
+      } else {
+        data = await Axios.post(
+          `https://geo.superworldapp.com/api/json/token/add`,
+          {
+            tokenId: res.events.tokenCreated.returnValues.tokenId.toString(),
+            description: 'A unique piece of art',
+            image: imgUrl,
+            name: tokenTitle,
+            blockchain: 'e',
+            networkId: 4,
+            price: tokenPrice,
+          }
+        );
+      }
 
       console.log('data', data);
       this.toggleModal1();

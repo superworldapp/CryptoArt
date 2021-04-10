@@ -194,7 +194,7 @@ class MyStoreComponent extends Component {
 		})
 		// window.location.reload()
 		// if (!this.state.isModalOpen1 && !this.state.uploadSuccess)
-		// 	window.location.reload();
+		 	window.location.reload();
 	}
 
 	onArtStatusChange(e, artStatus) {
@@ -493,7 +493,7 @@ class MyStoreComponent extends Component {
 						</StyledTabs>
 
 						{/*{batch && batch.length > 0*/}
-						{this.props.batch && this.props.batch.length > 0
+						{this.props.batch && this.props.batch.length >= 0
 							? (
 								<TabPanel value={artStatus} index={0}>
 									<div className='mystore-art-queue-container row'>
