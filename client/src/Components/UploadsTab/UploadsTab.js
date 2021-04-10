@@ -9,6 +9,7 @@ import Sound from 'react-sound';
 import ReactPlayer from 'react-player';
 import MintModal from "../MintModal/MintModal";
 import Loading from "../Loading/loading";
+import Axios from 'axios';
 import SuccessfulModals from "../SuccessfulModals";
 
 class UploadsTab extends Component {
@@ -115,21 +116,23 @@ class UploadsTab extends Component {
 	}
 
 	async sendMintToken(e) {
-		try {
-			this.setState({
-				isMintModal: !this.state.isMintModal,
-			});
+		
+		
+			// this.setState({
+			// 	isMintModal: !this.state.isMintModal,
+			// });
 
-			this.setLoadingAfterSend()
+			// this.setLoadingAfterSend()
+			console.log("start");
 			const res = await this.props.contract.methods
 				.mintTokenBatch(this.props.art._refbatch,e)
 				.send({from: this.props.accounts, gas: 5000000});
 			this.toggleModal2()
 			this.setState({isLoading: false, uploadSuccess: true});
-		} catch (err) {
-			this.setLoadingAfterSend()
-			this.setState({loadingError: true});
-		}
+			console.log('end;');
+			// this.setLoadingAfterSend()
+			// this.setState({loadingError: true});
+		
 }
 
 	handleInputChange(event) {

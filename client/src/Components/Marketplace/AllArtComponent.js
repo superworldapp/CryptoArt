@@ -143,10 +143,10 @@ const AllItemComponent = (props) => {
 						<div className="creation_cards">
 							{checked.length > 0
 								? props.filteredData.map((item) => (
-									<CreationCards props={props} {...item}/>
+									<CreationCards props={props} {...item} art={props.art}/>
 								))
 								: props.batch.map((item) => (
-									<CreationCards props={props} {...item}/>
+									<CreationCards props={props} {...item} art={props.art}/>
 								))}
 						</div>
 					</div>

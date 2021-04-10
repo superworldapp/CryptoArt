@@ -310,6 +310,7 @@ class Main extends Component {
 									contract={this.state.contract}
 									accounts={this.state.accounts}
 									batch={this.state.batch}
+									art={this.state.art2}
 								/>
 								</PageWrapper>
 							)}

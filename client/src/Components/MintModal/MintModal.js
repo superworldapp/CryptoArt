@@ -16,7 +16,12 @@ const MintModal = (props) => {
 	const [valueInput, setValueInput] = useState(0);
 
 	const handleInput = (e) => {
-		setValueInput(e.target.value)
+		setValueInput(e.target.value);
+		console.log(e.target.value);
+	}
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		send(1);
 	}
 
 	return (
@@ -36,7 +41,7 @@ const MintModal = (props) => {
 				</>
 			)}
 			body={(
-				<Form>
+				<Form >
 					{/* <FormGroup>
 						<span className='label'>File</span>
 						<span className='file-name'>{arturl}</span>
@@ -59,7 +64,7 @@ const MintModal = (props) => {
 						</Label>
 						<Input onChange={handleInput} className='text-input' type='text'/>
 					</FormGroup>
-					<button disabled={!valueInput} onClick={() => send(valueInput)} className="submit-button">Confirm</button>
+					<button disabled={!valueInput} onClick={handleSubmit} className="submit-button">Confirm</button>
 				</Form>
 			)}
 		/>

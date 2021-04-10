@@ -15,11 +15,12 @@ import heart from '../../images/svg/heartSvg.svg';
 import profile from '../../images/svg/avatar.svg';
 import './CreationCards.scss';
 import Axios from "axios";
+import Web3 from 'web3';
 
-const CreationCards = (props) => {
+const CreationCards = (props,art) => {
 	const [soundPlaying, setSoundPlaying] = useState('');
 	const [ethPrice, setEthPrice] = useState({});
-
+	const [highest,setHighest] = useState('1000000000000000000000');
 	const displayFileType = () => {
 		if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(props._imgurl)) {
 			return (
@@ -93,8 +94,20 @@ const CreationCards = (props) => {
 		}
 	};
 
+	const getHighest = () => {
+		// art.map((it) => {
+		// 	if(it._refbatch == props._batchId){
+		// 		if(it._sellprice<highest){
+		// 			setHighest(it._sellprice);
+		// 		}
+		// 	}
+		// })
+		console.log(art);
+	}
+
 	useEffect(() => {
-		getEthDollarPrice()
+		getEthDollarPrice();
+	//	getHighest();
 	}, [])
 
 	const accUsername = (accNum) => {
@@ -154,7 +167,7 @@ const CreationCards = (props) => {
 					</div>
 					<div className='card-text-info'>
 						<CardText className="card-text-info-price">
-							{props.price || '0.5ETH'}
+							{props.price || 0.5 } 'ETH'
 							<p className="card-text-info-usd">
 								{`($${(0.5*ethPrice.usd).toFixed(2)} USD)`}
 							</p>
@@ -165,7 +178,7 @@ const CreationCards = (props) => {
 					</div>
 					<div className='card-buy-time'>
 						<p className='card-buy-time-text'>
-							{props.time || '26 hrs 42 mins remaining'}
+							{/* {props.time || '26 hrs 42 mins remaining'} */}
 							{/*{*/}
 							{/*	props._bidend === '0'*/}
 							{/*		? ''*/}

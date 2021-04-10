@@ -469,7 +469,7 @@ class MyStoreComponent extends Component {
 							<h5>NFTs Minted:</h5><span>{nftsListed}</span>
 						</div>
 						<div className='mystore-nft-status-container-row'>
-							<h5>NFTs Sold:</h5><span>0</span>
+							<h5>NFTs Owned:</h5><span>{menuTwoCount+menuThreeCount+menuFourCount}</span>
 						</div>
 					</div>
 					<Col className='mystore-art-container'>
