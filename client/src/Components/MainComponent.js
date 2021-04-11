@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import BNContract2 from '../contracts/Cryptoart.json';
-import BNContract from '../contracts/Cryptoart2.json';
+import BNContract from '../contracts/Cryptoart.json';
+import BNContract2 from '../contracts/Cryptoart2.json';
 import getWeb3 from '../getWeb3';
 import '../App.css';
 import Header from './HeaderComponent';
@@ -92,16 +92,16 @@ class Main extends Component {
 						_tokenId: i,
 						_tokenOwner: rex._tokenOwner,
 						_isSellings: rex._isSellings,
-						_sellprice: rex._sellprice,
-						_refbatch: rex._refbatch,
-						_tokenbidder: rex._tokenbidder,
+						_sellprice: rex._sellPrice,
+						_refbatch: rex._refBatch,
+						_tokenbidder: rex._tokenBidder,
 						_isBidding: rex._isBidding,
-						_bidprice: rex._bidprice,
-						_bidend: rex._bidend,
+						_bidprice: rex._bidPrice,
+						_bidend: rex._bidEnd,
 						_tokenHash: rex2._tokenHash,
 						_tokenBatchName: rex2._tokenBatchName,
 						_tokenCreator: rex2._tokenCreator,
-						_imgurl: rex2._imgurl,
+						_imgurl: rex2._imgUrl,
 						_imgThumbnail: rex2._imgThumbnail,
 					}
 					response.push(newBlock);

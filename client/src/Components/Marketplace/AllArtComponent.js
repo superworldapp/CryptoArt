@@ -79,13 +79,13 @@ const AllItemComponent = (props) => {
 				if (cheap.key === WORD_KEY) {
 					result = word && new RegExp(word, 'i').test(batchItem._tokenBatchName)
 				} else if (cheap.name === 'Images') {
-					result = batchItem._imgurl.match(/(?<=\.)(?:jpe?g|png|gif|svg|tiff)$/i)
+					result = batchItem._imgUrl.match(/(?<=\.)(?:jpe?g|png|gif|svg|tiff)$/i)
 				} else if (cheap.name === 'GIF') {
-					result = batchItem._imgurl.match(/(?<=\.)(?:gif)$/i)
+					result = batchItem._imgUrl.match(/(?<=\.)(?:gif)$/i)
 				} else if (cheap.name === 'Video') {
-					result = batchItem._imgurl.match(/(?<=\.)(?:mpeg-4|mp4|mov|avi|wmv)$/i)
+					result = batchItem._imgUrl.match(/(?<=\.)(?:mpeg-4|mp4|mov|avi|wmv)$/i)
 				} else if (cheap.name === 'Audio') {
-					result = batchItem._imgurl.match(/(?<=\.)(?:mp3)$/i)
+					result = batchItem._imgUrl.match(/(?<=\.)(?:mp3)$/i)
 				}
 
 				return result

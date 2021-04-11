@@ -27,11 +27,11 @@ const CreationCards = (props,art) => {
 				<CardImg
 					top
 					className="card-background-image"
-					src={props._imgurl}
+					src={props._imgUrl}
 					alt='Card image'
 				/>
 			);
-		} else if (/\.(?:wav|mp3)$/i.test(props._imgurl)) {
+		} else if (/\.(?:wav|mp3)$/i.test(props._imgUrl)) {
 			return (
 				<>
 					<button
@@ -42,7 +42,7 @@ const CreationCards = (props,art) => {
 						{soundPlaying ? 'Pause' : 'Play'}
 					</button>
 					<Sound
-						url={props._imgurl}
+						url={props._imgUrl}
 						playStatus={
 							soundPlaying
 								? Sound.status.PLAYING
@@ -57,7 +57,7 @@ const CreationCards = (props,art) => {
 			);
 		} else if (
 			/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
-				props._imgurl
+				props._imgUrl
 			)
 		) {
 			return (
@@ -65,7 +65,7 @@ const CreationCards = (props,art) => {
 					className="cardVideo"
 					loop={true}
 					playing={true}
-					url={props._imgurl}
+					url={props._imgUrl}
 				/>
 			);
 		}
