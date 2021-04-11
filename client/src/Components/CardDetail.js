@@ -187,12 +187,14 @@ console.log(`==========>art?._imgurl`,art?._imgurl);
 
   }
   const AddBid = async () => {
+    console.log(handleInput);
     setLoadingPlaceBid(true);
     const res = await contract.methods.addBid(art._tokenId).send({
       from: accounts,
       gas: 1000000,
-      value: (handleInput * ETHER).toString(),
+      value: (priceInputValue * ETHER).toString(),
     });
+    console.log(handleInput)
     setLoadingPlaceBid(false);
     setBidSuccess(true);
     console.log(res);
@@ -318,145 +320,7 @@ console.log(`==========>art?._imgurl`,art?._imgurl);
             </button>
             <div>{loadingPlaceBid ? <img src={loader} /> : <div></div>}</div>
           </div>
-          {/* <Modal
-                        isOpen={modalOpen}
-                        toggle={isToggleModal}
-                        className='modal_popup'>
-                        <ModalHeader toggle={isToggleModal} className='pl-5'>
-                            Start Auction
-                        </ModalHeader>
-                        <Card className='artCard' style={{ height: '50%' }}>
-                            <CardImg
-                                top
-                                className='displayImage'
-                                src={art.imgurl}
-                                alt='Card image'
-                            />
-                            <CardBody>
-                                <div
-                                    className='ctext'
-                                    style={{ padding: '5px', height: '1rem' }}>
-                                    <CardSubtitle
-                                        style={{
-                                            position: 'relative',
-                                            fontFamily: 'Gibson',
-                                            fontSize: '15px',
-                                            color: '#B3B3B3'
-                                        }}>
-                                        Title
-                                    </CardSubtitle>
-                                    <CardSubtitle
-                                        style={{
-                                            position: 'relative',
-                                            fontFamily: 'Gibson',
-                                            fontSize: '15px',
-                                            color: '#B3B3B3'
-                                        }}>
-                                        Price
-                                    </CardSubtitle>
-                                </div>
-                                <div
-                                    className='ctext'
-                                    style={{ padding: '5px' }}>
-                                    <CardText
-                                        style={{
-                                            position: 'relative',
-                                            fontFamily: 'Gibson',
-                                            fontSize: '15px',
-                                            color: 'black'
-                                        }}>
-                                        {art.tokenTitle}
-                                    </CardText>
-                                    <CardText
-                                        style={{
-                                            position: 'relative',
-                                            fontFamily: 'Gibson',
-                                            fontSize: '15px',
-                                            color: 'black'
-                                        }}>
-                                        {Web3.utils.fromWei(
-                                            art.tokenSellPrice.toString(),
-                                            'ether'
-                                        )}{' '}
-                                        ETH
-                                    </CardText>
-                                </div>
-                                <div
-                                    className='ctext1'
-                                    style={{ padding: '2px' }}>
-                                    <p
-                                        style={{
-                                            position: 'relative',
-                                            fontFamily: 'Gibson',
-                                            fontSize: '15px',
-                                            color: 'black',
-                                            marginTop: '2%'
-                                        }}>
-                                        Start Bid :{' '}
-                                    </p>
-                                    <p>
-                                        <Input
-                                            style={{ width: '80%' }}
-                                            type='text'
-                                            id='bidPrice'
-                                            name='bidPrice'></Input>
-                                    </p>
-                                    <p
-                                        style={{
-                                            position: 'relative',
-                                            fontFamily: 'Gibson',
-                                            fontSize: '15px',
-                                            color: 'black',
-                                            marginTop: '2%'
-                                        }}>
-                                        {' '}
-                                        ETH
-                                    </p>
-                                </div>
-                                <div className='ctext1'>
-                                    <p
-                                        style={{
-                                            position: 'relative',
-                                            fontFamily: 'Gibson',
-                                            fontSize: '15px',
-                                            color: 'black',
-                                            marginTop: '2%'
-                                        }}>
-                                        Duration :{' '}
-                                    </p>
-                                    <p>
-                                        <Input
-                                            style={{ width: '80%' }}
-                                            type='text'
-                                            id='bidPrice'
-                                            name='bidPrice'></Input>
-                                    </p>
-                                    <p
-                                        style={{
-                                            position: 'relative',
-                                            fontFamily: 'Gibson',
-                                            fontSize: '15px',
-                                            color: 'black',
-                                            marginTop: '2%'
-                                        }}>
-                                        Days{' '}
-                                    </p>
-                                </div>
-                                <div>
-                                    <button
-                                        className='abtn'
-                                        style={{
-                                            left: '32%',
-                                            color: 'white',
-                                            backgroundColor: '#5540C7'
-                                        }}
-                                        type='submit'>
-                                        Confirm
-                                    </button>{' '}
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </Modal> */}
+         
         </React.Fragment>
       );
     }
