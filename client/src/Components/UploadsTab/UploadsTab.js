@@ -131,17 +131,25 @@ class UploadsTab extends Component {
 			
 			console.log('res',res);
 			let data;
+			let data1 = [];
 			if (Array.isArray(res.events.tokencreated)) {
-				data = await res.events.tokencreated.map((token) =>
-				  Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
-					tokenId: token.returnValues.tokenId.toString(),
+				console.log(res.events.tokencreated.length);
+				for(let k = 0;k<res.events.tokencreated.length;k++){
+				
+					
+				  data1 = await Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
+					tokenId: res.events.tokencreated[k].returnValues.tokenId.toString(),
 					description: 'Artwork',
 					image: this.props.art._imgurl,
 					name: this.props.art._tokenBatchName,
 					blockchain: 'e',
 					networkId: 4
-				  })
+			//	  })
+				}
+				
 				);
+				console.log(data1);
+			}
 			  } else {
 				data = await Axios.post(
 				  `http://geo.superworldapp.com/api/json/token/add`,
@@ -157,7 +165,7 @@ class UploadsTab extends Component {
 			  }
 			  console.log(data);
 			  this.setState({isLoading: false, uploadSuccess: true});
-			  this.refreshMyArt();
+			 // this.refreshMyArt();
 		}
 		catch (err) { //this.setLoadingAfterSend()
 			// this.setState({loadingError: true});

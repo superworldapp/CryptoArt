@@ -1056,6 +1056,7 @@ class MyItemComponent extends Component {
       console.log('data', data);
       this.toggleModal1();
       this.setState({ isLoading: false, uploadSuccess: true });
+      this.refreshMyArt();
     } catch (err) {
       this.setState({ loadingError: true });
       console.error(err.message);
