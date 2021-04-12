@@ -1,8 +1,10 @@
 import React, {useRef, useEffect, useState, useReducer, useCallback} from 'react';
 import Modal from "../Modal";
-import { Form, FormGroup, Input, Label} from "reactstrap";
+import {CardImg, Form, FormGroup, Input, Label} from "reactstrap";
 import loader from "../../images/loader.svg";
 import './style.scss';
+import Sound from "react-sound";
+import ReactPlayer from "react-player";
 
 const CHANGE_FILE_VALUE = 'CHANGE_FILE_VALUE';
 const CHANGE_NAME_VALUE = 'CHANGE_NAME_VALUE';
@@ -109,6 +111,7 @@ const ModalUploadToMyStore = props => {
   const inputFileRef = useRef(null)
   const [controls, controlsDispatch] = useReducer(controlsReducer, initialControls);
   const [isValidForm, setIsValidForm] = useState(false);
+  const [soundPlaying, setSoundPlaying] = useState('');
 
   useEffect(()=>{
     controlsDispatch({type: RESET_VALUE})
@@ -165,6 +168,54 @@ const ModalUploadToMyStore = props => {
     setIsValidForm(controls.name.value && controls.file.value)
   }, [controls])
 
+  const displayFileType = () => {
+    if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(controls.fileThumb.value.name)) {
+      return (
+        <img
+          className='control-preview-img'
+          src={controls.fileThumb.url}
+          alt={controls.fileThumb.value.name}
+        />
+      );
+    } else if (/\.(?:wav|mp3)$/i.test(controls.fileThumb.value.name)) {
+      return (
+        <>
+          <button
+            style={{
+              zIndex: '1'
+            }}
+            onClick={() => setSoundPlaying(soundPlaying)}>
+            {soundPlaying ? 'Pause' : 'Play'}
+          </button>
+          <Sound
+            url={controls.fileThumb.url}
+            playStatus={
+              soundPlaying
+                ? Sound.status.PLAYING
+                : ''
+            }
+            playFromPosition={300 /* in milliseconds */}
+            // onLoading={this.handleSongLoading}
+            // onPlaying={this.handleSongPlaying}
+            // onFinishedPlaying={this.handleSongFinishedPlaying}
+          />
+        </>
+      );
+    } else if (
+      /\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
+        controls.fileThumb.value.name
+      )
+    ) {
+      return (
+        <ReactPlayer
+          className="video-card"
+          loop={true}
+          playing={true}
+          url={controls.fileThumb.url}
+        />
+      );
+    }
+  };
 
   return (
     <Modal
@@ -252,11 +303,7 @@ const ModalUploadToMyStore = props => {
           <FormGroup className='form-group-preview'>
             {!controls.fileThumb.url
               ? null
-              : <img
-                className='control-preview-img'
-                src={controls.fileThumb.url}
-                alt={controls.fileThumb.value.name}
-              />
+              : displayFileType()
             }
           </FormGroup>
           <FormGroup>
