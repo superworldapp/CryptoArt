@@ -507,7 +507,7 @@ console.log(`==========>art?._imgUrl`,art?._imgUrl);
         </div>
 
         <SuccessfulModals
-          isOpen={true}
+          isOpen={purchaseSuccess}
           toggle={togglePurchaseSuccess}
           variation={5}
           handleUploadMore={handleUploadMore}
