@@ -209,6 +209,7 @@ class MyStoreComponent extends Component {
 
 
 	creatingItems = async (x) => {
+		console.log("------>")
 		let tokenHash = this.state.artHash.toString();
 		let tokenTitle = this.state.title;
 		let tokenPrice = (this.state.price * ETHER).toString();
@@ -218,7 +219,7 @@ class MyStoreComponent extends Component {
 		try {
 			this.setLoadingAfterSend()
 			const res = await this.props.contract.methods
-				.createtokenBatch(
+				.createTokenBatch(
 					tokenHash,
 					tokenTitle,
 					nos,
@@ -346,6 +347,7 @@ class MyStoreComponent extends Component {
 		});
 		event.preventDefault();
 		// const hash = await blobToSHA256(this.state.selectedFile);
+		console.log('=====>')
 		let hash = '';
 		await this.setState({isLoading: true, loadingError: false, artHash: hash});
 		await this.fileAwsHandler(controls.file.value, this.creatingItems);
@@ -357,6 +359,7 @@ class MyStoreComponent extends Component {
 			.extname(file.name)
 			.toLowerCase()}`;
 		// console.log(newfilename);
+		console.log("---------->>>")
 		let params = {
 			ACL: 'public-read',
 			Bucket: BUCKET_NAME,
