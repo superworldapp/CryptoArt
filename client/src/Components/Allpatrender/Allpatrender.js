@@ -441,14 +441,14 @@ class Allpatrender extends Component {
 						isOpen={this.state.uploadSuccess}
 						toggle={this.toggleModal2}
 						onClose={this.toggleModal2}
-						variation={0}
+						variation={2}
 						handleUploadMore={this.handleUploadMore}
 					/>
 				}
 
 				{
 					this.state.loadingAfterSend
-						? <Loading name="Uploading File"/>
+						? <Loading name="Listing NFT"/>
 						: null
 				}
 			</Card>

@@ -9,6 +9,9 @@ import Sound from 'react-sound';
 import ReactPlayer from 'react-player';
 import EditModal from "../EditModal";
 import Axios from "axios";
+import SuccessfulModals from "../SuccessfulModals";
+import Loading from "../Loading/loading";
+import ModalListingNft from "../ModalListingNft";
 
 class Allpatrender2 extends Component {
 	// let day = moment.unix(art.dateofComp);
@@ -32,6 +35,9 @@ class Allpatrender2 extends Component {
 			endAuctionSuccess: false,
 			isEditModal: false,
 			ethPrice: {},
+
+			uploadSuccess: false,
+			loadingError: false,
 		};
 		this.toggleModal = this.toggleModal.bind(this);
 		this.toggleListForAuction = this.toggleListForAuction.bind(this);
@@ -45,9 +51,13 @@ class Allpatrender2 extends Component {
 		this.EndAuction = this.EndAuction.bind(this);
 		this.closeEditToken = this.closeEditToken.bind(this);
 		this.refreshMyArt = this.refreshMyArt.bind(this);
-		this.mintToken = this.mintToken.bind(this);
 		this.Sale = this.Sale.bind(this);
 		//this.toggleAuction = this.toggleAuction.bind(this);
+
+		this.CloseEditModal = this.CloseEditModal.bind(this);
+		this.handleUploadMore = this.handleUploadMore.bind(this);
+		this.handleOpenListModal = this.handleOpenListModal.bind(this);
+		this.setLoadingAfterSend = this.setLoadingAfterSend.bind(this);
 	}
 
 	componentDidMount = async () => {
@@ -86,6 +96,35 @@ class Allpatrender2 extends Component {
 		});
 	}
 
+	toggleModal2() {
+		this.setState({
+			uploadSuccess: false,
+			loadingAfterSend: false,
+		});
+	}
+
+	handleUploadMore() {
+		window.location.reload()
+	}
+
+	handleOpenListModal() {
+		this.setState({
+			openListModal: !this.state.openListModal,
+		})
+	}
+
+	CloseEditModal() {
+		this.setState({
+			isEditModal: false,
+		})
+	}
+
+	setLoadingAfterSend() {
+		this.setState({
+			loadingAfterSend: !this.state.loadingAfterSend,
+		})
+	}
+
 	toggleAuction() {
 		this.setState({
 			isModalAucOpen: !this.state.isModalAucOpen,
@@ -112,9 +151,6 @@ class Allpatrender2 extends Component {
 			window.location.reload();
 	}
 
-	mintToken() {
-	}
-
 	handleInputChange(event) {
 		const target = event.target;
 		const value = target.value;
@@ -124,26 +160,30 @@ class Allpatrender2 extends Component {
 		});
 	}
 
-	Sale = async () => {
-		let tokenId = 1
-		let sellprice = "1000000000000000000"
-		let isListed = true
+	Sale = async (isListed, sellPrice) => {
+		let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
 		try {
-			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
+
+			this.setLoadingAfterSend()
+			this.CloseEditModal()
 			const res = await this.props.contract.methods
 				.Sale(
-					tokenId,
-					sellprice,
+					this.props.art._tokenId,
+					price,
 					isListed,
 				)
 				.send({from: this.props.accounts, gas: 5000000});
 
 			console.log('res', res);
-			let data;
-		} catch (error) {
-			console.error(error)
+			this.toggleModal2();
+			this.setState({isLoading: false, uploadSuccess: true});
+		} catch (err) {
+			this.setLoadingAfterSend()
+			this.setState({loadingError: true});
 		}
+		this.setState({isLoading: false});
 	}
+
 	putForSale = async () => {
 		this.setState({putForSaleLoading: true});
 		const res = await this.props.contract.methods
@@ -187,21 +227,32 @@ class Allpatrender2 extends Component {
 	// 		console.error(error)
 	// 	}
 	//   }
-	StartAuction = async () => {
-		this.setState({auctionLoading: true});
-		let startprice = "1000000000000000000"
-		let times = 1615401942
-		const res = await this.props.contract.methods
-			.startbid(
-				this.state.art._tokenId,
-				startprice,
-				times
-			)
-			.send({from: this.props.accounts, gas: 5000000});
-		console.log('res', res);
-		this.setState({auctionLoading: false, listForAuctionSuccess: true});
-		console.log(res);
+
+	StartAuction = async (sellPrice, duration) => {
+		try {
+			let price = ((sellPrice) * ETHER).toString();
+			let times = duration / 1000;
+
+			this.setLoadingAfterSend()
+			this.CloseEditModal()
+			const res = await this.props.contract.methods
+				.startBid(
+					this.props.art._tokenId,
+					price,
+					times
+				)
+				.send({from: this.props.accounts, gas: 5000000});
+
+			console.log('resStartAuction', res);
+			this.toggleModal2();
+			this.setState({isLoading: false, uploadSuccess: true});
+		} catch (err) {
+			this.setLoadingAfterSend()
+			this.setState({loadingError: true});
+		}
+		this.setState({isLoading: false});
 	};
+
 	EndAuction = async () => {
 		//this.setState({endAuctionLoading: true});
 		const res = await this.props.contract.methods
@@ -446,156 +497,6 @@ class Allpatrender2 extends Component {
 										</button>
 									)
 							}
-							<>
-
-
-								<Modal
-									isOpen={this.state.listForAuctionSuccess}
-									toggle={this.toggleListForAuction}
-									onClosed={this.refreshMyArt}
-									className='modal-xl'
-								>
-									<ModalHeader toggle={this.toggleListForAuction}>
-										<></>
-									</ModalHeader>
-									<ModalBody
-										style={{
-											display: 'flex',
-											flexDirection: 'column',
-											justifyContent: 'center',
-											font: 'Gibson',
-											height: '20rem',
-											paddingBottom: '5rem',
-										}}
-									>
-										<p
-											style={{
-												textAlign: 'center',
-												fontSize: '1.25rem',
-												fontWeight: '450',
-												marginTop: '1rem',
-											}}
-										>
-											Congratulations!
-										</p>
-										<img src={checkmark} alt="checkmark"/>
-										<p
-											style={{
-												textAlign: 'center',
-												color: 'gray',
-												fontSize: '12px',
-											}}
-										>
-											Your item has been listed for auction in the marketplace!
-										</p>
-										<button
-											className='upload-more-btn'
-											onClick={this.toggleListForAuction}
-										>
-											BACK TO MY COLLECTIONS
-										</button>
-									</ModalBody>
-								</Modal>
-
-								{/* LIST FOR SALE MODAL */}
-								<Modal
-									isOpen={this.state.listForSaleSuccess}
-									toggle={this.toggleListForSale}
-									onClosed={this.refreshMyArt}
-									className='modal-xl'
-								>
-									<ModalHeader toggle={this.toggleListForSale}>
-										<></>
-									</ModalHeader>
-									<ModalBody
-										style={{
-											display: 'flex',
-											flexDirection: 'column',
-											justifyContent: 'center',
-											font: 'Gibson',
-											height: '20rem',
-											paddingBottom: '5rem',
-										}}
-									>
-										<p
-											style={{
-												textAlign: 'center',
-												fontSize: '1.25rem',
-												fontWeight: '450',
-												marginTop: '1rem',
-											}}
-										>
-											Congratulations!
-										</p>
-										<img src={checkmark} alt="checkmark"/>
-										<p
-											style={{
-												textAlign: 'center',
-												color: 'gray',
-												fontSize: '12px',
-											}}
-										>
-											Your item has been listed for sale in the marketplace!
-										</p>
-										<button
-											className='upload-more-btn'
-											onClick={this.toggleListForSale}
-										>
-											BACK TO MY COLLECTIONS
-										</button>
-									</ModalBody>
-								</Modal>
-
-								{/* END AUCTION MODAL */}
-								<Modal
-									isOpen={this.state.endAuctionSuccess}
-									toggle={this.toggleEndAuction}
-									onClosed={this.refreshMyArt}
-									className='modal-xl'
-								>
-									<ModalHeader toggle={this.toggleEndAuction}>
-										<></>
-									</ModalHeader>
-									<ModalBody
-										style={{
-											display: 'flex',
-											flexDirection: 'column',
-											justifyContent: 'center',
-											font: 'Gibson',
-											height: '20rem',
-											paddingBottom: '5rem',
-										}}
-									>
-										<p
-											style={{
-												textAlign: 'center',
-												fontSize: '1.25rem',
-												fontWeight: '450',
-												marginTop: '1rem',
-											}}
-										>
-											Done!
-										</p>
-										<img src={checkmark} alt="checkmark"/>
-										<p
-											style={{
-												textAlign: 'center',
-												color: 'gray',
-												fontSize: '12px',
-											}}
-										>
-											You have ended the auction for your item.
-										</p>
-										<button
-											className='upload-more-btn'
-											onClick={this.toggleEndAuction}
-										>
-											BACK TO MY COLLECTIONS
-										</button>
-									</ModalBody>
-								</Modal>
-
-							</>
 						</div>
 						<p className="card-body-time">
 							{
@@ -619,8 +520,8 @@ class Allpatrender2 extends Component {
 							)}
 						</div>
 					</CardBody>
-					{/*{console.log('=====>this.state', this.state)}*/}
 				</div>
+
 				{
 					this.state.isEditModal
 						? <EditModal
@@ -630,9 +531,28 @@ class Allpatrender2 extends Component {
 							accounts={this.props.accounts}
 							isOpen={this.state.isEditModal}
 							toggle={this.closeEditToken}
+							onClose={this.CloseEditModal}
 							imgThumb={this.state.art._imgThumbnail}
 							fileName="BackCountry.png"
+							onStartAuction={(sellPrice, duration) => this.StartAuction(sellPrice, duration)}
+							onSale={(isListed, sellPrice) => this.Sale(isListed, sellPrice)}
 						/>
+						: null
+				}
+
+				{
+					<SuccessfulModals
+						isOpen={this.state.uploadSuccess}
+						toggle={this.toggleModal2}
+						onClose={this.toggleModal2}
+						variation={3}
+						handleUploadMore={this.handleUploadMore}
+					/>
+				}
+
+				{
+					this.state.loadingAfterSend
+						? <Loading name="Relisting"/>
 						: null
 				}
 			</Card>

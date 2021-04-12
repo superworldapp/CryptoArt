@@ -35,18 +35,14 @@ const initialControls = {
 	}
 }
 
-const ETHER = '1000000000000000000';
-
-
 const EditModal = props => {
 	const {
-		contract,
-		accounts,
-		tokenID,
 		isOpen,
 		toggle,
 		onClosed,
 		imgThumb,
+		onStartAuction,
+		onSale,
 	} = props
 	console.log('=====>props2', props);
 
@@ -56,14 +52,10 @@ const EditModal = props => {
 	const [duration, setDuration] = useState(saleTypes.BUY_NOW);
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
 
-	const [uploadSuccess, setUploadSuccess] = useState(false);
-	const [loadingAfterSend, setLoadingAfterSend] = useState(false);
-
 	const [ethPrice, setEthPrice] = useState({});
 
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value);
-		// console.log(e.target.value);
 	}, [])
 
 	const handleInputChange = (e) => {
@@ -84,72 +76,15 @@ const EditModal = props => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (saleType === saleTypes.AUCTION) {
-			StartAuction();
+			onStartAuction(sellPrice, duration);
 		} else {
-			Sale(true)
+			onSale(true, sellPrice)
 		}
 	}
 
 	const handleSubmit2 = (event) => {
 		event.preventDefault();
-		Sale(false);
-	}
-
-	const toggleModal2 = () => {
-		setUploadSuccess(false);
-		setLoadingAfterSend(false);
-	}
-	const handleUploadMore = () => {
-		window.location.reload()
-	}
-
-	const StartAuction = async () => {
-		try {
-			let price = ((sellPrice) * ETHER).toString();
-			let times = duration / 1000;
-
-			setLoadingAfterSend(!loadingAfterSend);
-			const res = await contract.methods
-				.startbid(
-					tokenID,
-					price,
-					times
-				)
-				.send({from: accounts, gas: 5000000});
-			toggleModal2();
-			setUploadSuccess(!uploadSuccess);
-			console.log('res', res);
-			//	this.setState({ auctionLoading: false, listForAuctionSuccess: true });
-			console.log(res);
-		} catch (err) {
-			setLoadingAfterSend(!loadingAfterSend)
-		}
-	};
-
-	const Sale = async (isListed) => {
-		// let tokenId = tokenID
-		// let sellprice = "1000000000000000000"
-		let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
-		try {
-
-			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
-
-			setLoadingAfterSend(!loadingAfterSend);
-			const res = await contract.methods
-				.Sale(
-					tokenID,
-					price,
-					isListed,
-				)
-				.send({from: accounts, gas: 5000000});
-
-			console.log('res', res);
-			toggleModal2();
-			setUploadSuccess(!uploadSuccess);
-
-		} catch (error) {
-			setLoadingAfterSend(!loadingAfterSend)
-		}
+		onSale(false);
 	}
 
 	const getEthDollarPrice = () => {
@@ -279,7 +214,7 @@ const EditModal = props => {
 							type='datetime-local'
 							onChange={handleInputChange2}
 						/>
-						<span className='after-input-text'></span>
+						<span className='after-input-text'/>
 					</FormGroup>
 					<div className='submit-button-wrapper'>
 						<button
@@ -295,23 +230,6 @@ const EditModal = props => {
 							Take Down
 						</button>
 					</div>
-
-					{
-						loadingAfterSend
-							? <Loading name="Relisting"/>
-							: null
-					}
-
-					{
-						<SuccessfulModals
-							isOpen={uploadSuccess}
-							toggle={toggleModal2}
-							onClose={toggleModal2}
-							variation={3}
-							handleUploadMore={handleUploadMore}
-						/>
-					}
-
 				</Form>
 			)}
 		/>
