@@ -66,36 +66,34 @@ const Footer = () => {
 										</Typography>
 										<ul className="list">
 											<li>
-												<Link className="link" to="/real-estate/" variant="body2"
-															component="a">Virtual Real Estate
-												</Link>
+												<a className="link" href="https://www.superworldapp.com/real-estate/"
+													 target="_blank" rel="noopener noreferrer" variant="subtitle1">
+													Virtual Real Estate
+												</a>
 											</li>
-											{/*<li>*/}
-											{/*	<Link className="link" to="/nft/nft-salon/" variant="subtitle1"*/}
-											{/*				component="a">NFT Salon*/}
-											{/*	</Link>*/}
-											{/*</li>*/}
-											{/*/!*<li>*!/*/}
-											{/*/!*    <Link className="link" to="/nft/starchamber/" variant="subtitle1"*!/*/}
-											{/*/!*          component="a">NFT Star Chamber*!/*/}
-											{/*/!*    </Link>*!/*/}
-											{/*/!*</li>*!/*/}
-											{/*<li>*/}
-											{/*	<a className="link" href="https://forms.gle/RUaBWBdTCt9uYHeW6"*/}
-											{/*		 target="_blank" rel="noopener noreferrer" variant="subtitle1">*/}
-											{/*		Inner Circle*/}
-											{/*	</a>*/}
-											{/*</li>*/}
-											{/*<li>*/}
-											{/*	<a className="link" href="https://forms.gle/hVdagW8PRG2y2X2U7"*/}
-											{/*		 target="_blank" rel="noopener noreferrer" variant="subtitle1">*/}
-											{/*		Collector's Corner*/}
-											{/*	</a>*/}
-											{/*</li>*/}
 											<li>
-												<Link className="link" to="/mobile-app/" variant="subtitle1"
-															component="a">Mobile App
-												</Link>
+												<a className="link" href="https://www.superworldapp.com/nft/nft-salon/"
+													 target="_blank" rel="noopener noreferrer" variant="subtitle1">
+													NFT Salon
+												</a>
+											</li>
+											<li>
+												<a className="link" href="https://forms.gle/RUaBWBdTCt9uYHeW6"
+													 target="_blank" rel="noopener noreferrer" variant="subtitle1">
+													Inner Circle
+												</a>
+											</li>
+											<li>
+												<a className="link" href="https://forms.gle/hVdagW8PRG2y2X2U7"
+													 target="_blank" rel="noopener noreferrer" variant="subtitle1">
+													Collector's Corner
+												</a>
+											</li>
+											<li>
+												<a className="link" href="https://www.superworldapp.com/mobile-app/"
+													 target="_blank" rel="noopener noreferrer" variant="subtitle1">
+													Mobile App
+												</a>
 											</li>
 										</ul>
 									</Grid>
@@ -107,14 +105,16 @@ const Footer = () => {
 										</Typography>
 										<ul className="list">
 											<li>
-												<Link className="link" to="/about/our-team/" variant="subtitle1"
-															component="a">Our Team
-												</Link>
+												<a className="link" href="https://www.superworldapp.com/about/our-team/"
+													 target="_blank" rel="noopener noreferrer" variant="subtitle1">
+													Our Team
+												</a>
 											</li>
 											<li>
-												<Link className="link" to="/about/media/" variant="subtitle1"
-															component="a">Media
-												</Link>
+												<a className="link" href="https://www.superworldapp.com/about/media/"
+													 target="_blank" rel="noopener noreferrer" variant="subtitle1">
+													Careers
+												</a>
 											</li>
 											<li>
 												<a className="link" href="https://angel.co/company/superworld"
@@ -138,16 +138,16 @@ const Footer = () => {
 										</Typography>
 										<ul className="list">
 											<li>
-												<Link className="link" to="/contact/faq/" variant="subtitle1"
-															component="a">
+												<a className="link" href="https://www.superworldapp.com/contact/faq/"
+													 target="_blank" rel="noopener noreferrer" variant="subtitle1">
 													FAQs
-												</Link>
+												</a>
 											</li>
 											<li>
-												<Link className="link" to="/contact/technical-resources/"
-															variant="subtitle1" component="a">
+												<a className="link" href="https://www.superworldapp.com/contact/technical-resources/"
+													 target="_blank" rel="noopener noreferrer" variant="subtitle1">
 													Insider's Guide
-												</Link>
+												</a>
 											</li>
 										</ul>
 									</Grid>
