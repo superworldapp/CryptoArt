@@ -23,7 +23,7 @@ class SocialShare extends Component {
           }
           hashtag='#superworld'
         >
-          <FacebookIcon size={36} round={true} />
+          <FacebookIcon size={32} round={true} />
         </FacebookShareButton>
         <EmailShareButton
           url={'https://www.superworldapp.com/'}
@@ -32,7 +32,7 @@ class SocialShare extends Component {
           }
           hashtag='#superworld'
         >
-          <EmailIcon size={36} round={true} />
+          <EmailIcon size={32} round={true} />
         </EmailShareButton>
         <TwitterShareButton
           url={'https://www.superworldapp.com/'}
@@ -41,7 +41,7 @@ class SocialShare extends Component {
           }
           hashtag='#superworld'
         >
-          <TwitterIcon size={36} round={true} />
+          <TwitterIcon size={32} round={true} />
         </TwitterShareButton>
         <LinkedinShareButton
           url={'https://www.superworldapp.com/'}
@@ -50,7 +50,7 @@ class SocialShare extends Component {
           }
           hashtag='#superworld'
         >
-          <LinkedinIcon size={36} round={true} />
+          <LinkedinIcon size={32} round={true} />
         </LinkedinShareButton>
       </div>
     );

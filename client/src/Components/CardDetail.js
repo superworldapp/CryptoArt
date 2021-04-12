@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Component } from 'react';
 import TableBody from './TableBody';
-import { Link } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import cx from "classnames";
 import {
   Card,
@@ -42,6 +42,7 @@ import heart from '../images/svg/batchHeart.svg';
 import avatar from '../images/svg/batchAvatar.svg';
 import Sound from "react-sound";
 import ReactPlayer from "react-player";
+import SuccessfulModals from "./SuccessModal/SuccessfulModals";
 
 const CardDetail = ({
   art,
@@ -72,6 +73,12 @@ const CardDetail = ({
   const [dropdownValue, setDropdownValue] = useState('usd');
   const [priceInputValue, setpriceInputValue] = useState('');
   const [soundPlaying, setSoundPlaying] = useState('');
+
+  const history = useHistory();
+
+  const handleUploadMore = () => {
+    history.push('/mycollection')
+  }
 
   const changeValue = (e) => {
     setDropdownValue(e.currentTarget.textContent);
@@ -186,6 +193,7 @@ console.log(`==========>art?._imgUrl`,art?._imgUrl);
       handlePurchase();
 
   }
+
   const AddBid = async () => {
     console.log(handleInput);
     setLoadingPlaceBid(true);
@@ -497,56 +505,13 @@ console.log(`==========>art?._imgUrl`,art?._imgUrl);
           </div>
 
         </div>
-        <Modal
-          isOpen={purchaseSuccess}
-          toggle={togglePurchaseSuccess}
-          className='modal-xl'
-        >
-          <ModalHeader toggle={togglePurchaseSuccess}>
-            <div></div>
-          </ModalHeader>
-          <ModalBody
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              font: 'Gibson',
-              height: '20rem',
-              paddingBottom: '5rem',
-            }}
-          >
-            <p
-              style={{
-                textAlign: 'center',
-                fontSize: '1.25rem',
-                fontWeight: '450',
-                marginTop: '1rem',
-              }}
-            >
-              Congratulations!
-            </p>
-            <img src={checkmark} />
 
-            <p
-              style={{
-                textAlign: 'center',
-                color: 'gray',
-                fontSize: '12px',
-              }}
-            >
-              You have successfully made the purchase!
-            </p>
-            <Link
-              to='/mycollections'
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
-              <button className='upload-more-btn'>VIEW MY COLLECTIONS</button>
-            </Link>
-          </ModalBody>
-        </Modal>
+        <SuccessfulModals
+          isOpen={true}
+          toggle={togglePurchaseSuccess}
+          variation={5}
+          handleUploadMore={handleUploadMore}
+        />
 
         <Modal
           isOpen={bidSuccess}
