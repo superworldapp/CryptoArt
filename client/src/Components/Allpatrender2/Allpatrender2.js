@@ -270,7 +270,7 @@ class Allpatrender2 extends Component {
 
 			const res = await this.props.contract.methods
 				.closeBidOwner(
-					this.props.art._tokenId,
+					this.props.art._tokenId
 				)
 				.send({from: this.props.accounts, gas: 5000000});
 
