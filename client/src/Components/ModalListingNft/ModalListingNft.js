@@ -7,6 +7,8 @@ import SuccessfulModals from "../SuccessfulModals";
 import Loading from "../Loading/loading";
 import Axios from "axios";
 import Web3 from "web3";
+import Sound from "react-sound";
+import ReactPlayer from "react-player";
 
 const saleTypes = {
 	AUCTION: 'AUCTION',
@@ -54,12 +56,14 @@ const ModalListingNft = props => {
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
 	const [initialValue, setInitialValue] = useState({tokenPrice: '', duration: ''});
 	const [duration, setDuration] = useState(saleTypes.BUY_NOW);
-	const [sellPrice, setSellPrice] = useState(saleTypes.BUY_NOW);
+	const [sellPrice, setSellPrice] = useState(0);
 
 	const [uploadSuccess, setUploadSuccess] = useState(false);
 	const [loadingAfterSend, setLoadingAfterSend] = useState(false);
 
 	const [ethPrice, setEthPrice] = useState({});
+
+	const [soundPlaying, setSoundPlaying] = useState('');
 
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value);
@@ -153,26 +157,73 @@ const ModalListingNft = props => {
 		}
 	}
 
-	// const getEthDollarPrice = () => {
-	// 	try {
-	// 		Axios.get(
-	// 			`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,btc,eur,gpb&include_24hr_change=false`
-	// 		).then((res) => {
-	// 			console.log(typeof res.data.ethereum.usd_24h_change);
-				// setEthPrice(res.data.ethereum);
-			// });
-		// } catch {
-		// 	console.log('could not get the request');
-		// }
-	// };
+	const displayFileType = () => {
+		if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(imgThumb)) {
+			return (
+				<img
+					style={{width: '92px', margin: '0 auto'}}
+					className='control-preview-img'
+					src={imgThumb}
+					alt={imgThumb}
+				/>
+			);
+		} else if (/\.(?:wav|mp3)$/i.test(imgThumb)) {
+			return (
+				<>
+					<button
+						style={{
+							zIndex: '1'
+						}}
+						onClick={() => setSoundPlaying(soundPlaying)}>
+						{soundPlaying ? 'Pause' : 'Play'}
+					</button>
+					<Sound
+						url={imgThumb}
+						playStatus={
+							soundPlaying
+								? Sound.status.PLAYING
+								: ''
+						}
+						playFromPosition={300 /* in milliseconds */}
+						// onLoading={this.handleSongLoading}
+						// onPlaying={this.handleSongPlaying}
+						// onFinishedPlaying={this.handleSongFinishedPlaying}
+					/>
+				</>
+			);
+		} else if (
+			/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
+				imgThumb
+			)
+		) {
+			return (
+				<ReactPlayer
+					className="video-card"
+					loop={true}
+					playing={true}
+					url={imgThumb}
+				/>
+			);
+		}
+	};
 
-	// useEffect(() => {
-	// 	getEthDollarPrice();
-	// }, []);
+	const getEthDollarPrice = () => {
+		try {
+			Axios.get(
+				`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,btc,eur,gpb&include_24hr_change=false`
+			).then((res) => {
+				console.log(typeof res.data.ethereum.usd_24h_change);
+				setEthPrice(res.data.ethereum);
+			});
+		} catch {
+			console.log('could not get the request');
+		}
+	};
 
-	// const usdPrice = (ethprice) => {
-	// 	return (Number(Web3.utils.fromWei(ethprice.toString(), 'ether')))
-	// }
+	useEffect(() => {
+		getEthDollarPrice();
+	}, []);
+
 
 	return (
 		<Modal
@@ -194,12 +245,7 @@ const ModalListingNft = props => {
 			body={(
 				<Form>
 					<FormGroup className='form-group-preview'>
-						{<img style={{width: '95px', margin: '0 auto'}}
-									className='control-preview-img'
-									src={imgThumb}
-									alt={imgThumb}
-						/>
-						}
+						{displayFileType()}
 					</FormGroup>
 					<FormGroup>
 						<div className="sale-block">
@@ -249,8 +295,7 @@ const ModalListingNft = props => {
 						/>
 						<span className='after-input-text'>
               ETH
-							{/*<span>{`($${(usdPrice(props.price) * ethPrice.usd).toFixed(2)} USD)`}</span>*/}
-							<span>($1,580.10 USD)</span>
+							<span>{`($${(sellPrice * ethPrice.usd).toFixed(2)} USD)`}</span>
 						</span>
 					</FormGroup>
 					<FormGroup className={saleType === saleTypes.BUY_NOW ? 'form-disabled' : ''}>
