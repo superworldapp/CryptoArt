@@ -432,6 +432,9 @@ class Allpatrender extends Component {
 							onClose={this.CloseListModal}
 							onStartAuction={(sellPrice, duration) => this.StartAuction(sellPrice, duration)}
 							onSale={(isListed, sellPrice) => this.Sale(isListed, sellPrice)}
+							contract={this.props.contract}
+							accounts={this.props.accounts}
+							tokenID = {this.props.art._tokenId}
 						/>
 						: null
 				}

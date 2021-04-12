@@ -13,12 +13,7 @@ const initialState = {
 			id: 1,
 		},
 		{
-			name: "TRENDING",
-			lists: [{name: 'Text', key: 3}, {name: 'Text', key: 4}, {name: 'Text', key: 5}, {name: 'Text', key: 6}],
-			id: 2,
-		},
-		{
-			name: "Type",
+			name: "TYPE",
 			lists: [
 				{
 					name: 'Images',

@@ -16,11 +16,11 @@ import ReactPlayer from "react-player";
 import Axios from "axios";
 
 const convert = (ethprice) => {
-	return (Number(Web3.utils.fromWei(ethprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH')
+	return (ethprice && Number(Web3.utils.fromWei(ethprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH')
 }
 
 const usdPrice = (ethprice) => {
-	return (Number(Web3.utils.fromWei(ethprice.toString(), 'ether')))
+	return (ethprice && Number(Web3.utils.fromWei(ethprice.toString(), 'ether')))
 }
 
 const CreationCards = (props) => {
@@ -125,7 +125,7 @@ const CreationCards = (props) => {
 				</div>
 				<div className='card-text-info'>
 					<CardText className="card-text-info-price">
-						{convert(props.price)}
+						{props.price && convert(props.price)}
 						<p className="card-text-info-usd">
 							{`($${(usdPrice(props.price)*ethPrice.usd).toFixed(2)} USD)`}
 						</p>

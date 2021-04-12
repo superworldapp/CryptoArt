@@ -10,14 +10,14 @@ import {connect} from "react-redux";
 const MyCreationCards = (props) => {
 
 	const newArt3 = props.art3.map((item) => ({
-		cardImage: item._imgurl,
+		cardImage: item._imgUrl,
 		profileImage: profile,
 		cardTitle: item._tokenBatchName,
 		CardSubtitle: 'by',
 		CardSubtitleName: 'Amelia',
-		price: item._sellprice,
+		price: item._sellPrice,
 		usdPrice: '($985.56 USD)',
-		time: item._bidend,
+		time: item._bidEnd,
 	}))
 
 	return (

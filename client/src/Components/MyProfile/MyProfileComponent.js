@@ -150,11 +150,11 @@ const MyProfileComponent = (props) => {
               <img src={pencil} alt='pencil' id='pencil' onClick={handleEdit} />
             </p>
           </div>
-          {/* <p className="location">
+          <p className="location">
 						{linksStore && linksStore.bio || 'Bagno a Ripoli, Tuscany, Italy'}
-					</p> */}
-          <SocialShare />
-          {/* <div className='social-media'>
+					</p>
+          {/*<SocialShare />*/}
+          <div className='social-media'>
             <a
               href={(linksStore && 'http://' + linksStore.email) || '#!'}
               className='icon'
@@ -212,7 +212,7 @@ const MyProfileComponent = (props) => {
             <a href='#!' className='icon'>
               <FiUpload size={24} color='black' />
             </a>
-          </div> */}
+          </div>
         </div>
       </div>
       <StyledTabs
@@ -230,7 +230,7 @@ const MyProfileComponent = (props) => {
       </StyledTabs>
       {selectedTab === 0 && <MyCreation />}
       {selectedTab === 1 && (
-        <MyCollectionsCards collectionBatch={props.art} />
+        <MyCollectionsCards collectionBatch={props.batch} />
       )}
       {selectedTab === 2 && <RecentActivity />}
     </>

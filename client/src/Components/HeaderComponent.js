@@ -8,8 +8,6 @@ import {
   Collapse,
   NavItem,
   InputGroup,
-  InputGroupAddon,
-  InputGroupText,
   Input,
 } from 'reactstrap';
 import { connect } from 'react-redux';
@@ -539,9 +537,8 @@ class Header extends Component {
                       onClose={this.handleClose}
                       PaperProps={{
                         style: {
-                          // maxHeight: ITEM_HEIGHT * 4.5,
-                          // width: '300px',
-                          // padding: '1px',
+                          padding: '10px',
+                          width: '15%',
                         },
                       }}
                       anchorOrigin={{
@@ -557,118 +554,45 @@ class Header extends Component {
                         disableGutters
                         classes={{ root: this.state.profileMenuClasses.text2 }}
                       >
-                        <div
-                          style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            borderBottom: '1px solid #F2F2F2',
-                            minWidth: '100%',
-                            maxHeight: '10px',
-                            padding: '10px 0px 20px 15px',
-                          }}
-                        >
+                        <div className="change-header">
                           <div
-                            style={{
-                              cursor: 'pointer',
-                              width: '20%',
-                              maxHeight: '10px',
-                              transform: 'scale(.7, .7)',
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              marginLeft: '-8%',
-                            }}
+                            className="change-header-text"
                             onClick={this.changeUsernameHandleClick}
                           >
-                            <ArrowBackIosIcon fontSize='small' color='action' />
+                            <ArrowBackIosIcon
+                              color='action'
+                              className="change-header-img"
+                            />
                           </div>
-                          <p
-                            style={{
-                              width: '80%',
-                              maxHeight: '10px',
-                              color: '#000000',
-                              fontWeight: 'bold',
-                              fontSize: '11px',
-                              marginBottom: '8%',
-                            }}
-                          >
-                            &#8288;Change Username
-                          </p>
+                          <div className="change-header-text-user">
+                            Change Username
+                          </div>
                         </div>
                       </MenuItem>
                       <MenuItem
                         disableGutters
                         classes={{ root: this.state.profileMenuClasses.text2 }}
                       >
-                        <div
-                          style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            borderBottom: '1px solid #F2F2F2',
-                            minWidth: '100%',
-                            whiteSpace: 'pre-line',
-                            maxHeight: '50px',
-                          }}
-                        >
-                          <p
-                            style={{
-                              color: '#000000',
-                              width: '100%',
-                              fontSize: '11px',
-                              fontWeight: 600,
-                              maxHeight: '12px',
-                              margin: '0 0 0 5%',
-                            }}
-                          >
-                            &#8288;Current Username
-                          </p>
-                          <p
-                            style={{
-                              color: '#000000',
-                              width: '100%',
-                              fontSize: '10px',
-                              margin: '3% 0 10% 5%',
-                              maxHeight: '10px',
-                            }}
-                          >
+                        <div className="change-body">
+                          <div className='change-body-user'>
+                            Current Username
+                          </div>
+                          <div className="change-body-name">
                             {this.state.newUsernameToDisplay
                               ? this.state.newUsernameToDisplay
                               : this.state.currentUser.username}
-                          </p>
+                          </div>
                         </div>
                       </MenuItem>
                       <MenuItem
                         disableGutters
                         classes={{ root: this.state.profileMenuClasses.text2 }}
                       >
-                        <div
-                          style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            minWidth: '100%',
-                            whiteSpace: 'pre-line',
-                          }}
-                        >
-                          <p
-                            style={{
-                              color: '#888888',
-                              fontSize: '11px',
-                              margin: '0 0 0 5%',
-                              maxHeight: '10px',
-                            }}
-                          >
-                            &#8288;New Username
-                          </p>
-                          <div
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                            }}
-                          >
+                        <div className="change-block-main">
+                          <div className="change-block-main-user">
+                            New Username
+                          </div>
+                          <div className="change-block-main-contain">
                             <Input
                               key='newUsernameInput'
                               id='newUsername'
@@ -676,6 +600,7 @@ class Header extends Component {
                               classes={{
                                 input: this.state.profileMenuClasses.input,
                               }}
+                              className="input-change-username"
                               disableUnderline
                               placeholder='New Username'
                               name='newUsername'
@@ -684,16 +609,7 @@ class Header extends Component {
                             />
                           </div>
                           <Button
-                            style={{
-                              width: '100px',
-                              height: '26px',
-                              margin: '7% 0 0 5%',
-                              borderRadius: '15px',
-                              fontSize: '11px',
-                              backgroundColor: '#5540C7',
-                              color: '#FFFFFF',
-                              fontWeight: 600,
-                            }}
+                            className="change-block-main-button-one"
                             onClick={this.changeUsernameOnSubmit}
                           >
                             CONFIRM
