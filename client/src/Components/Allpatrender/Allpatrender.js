@@ -273,16 +273,16 @@ class Allpatrender extends Component {
 		};
 
 		const displayFileType = () => {
-			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.art._imgurl)) {
+			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.art._imgUrl)) {
 				return (
 					<CardImg
 						className={orientation}
 						top
-						src={this.props.art._imgurl}
+						src={this.props.art._imgUrl}
 						alt='Card image'
 					/>
 				);
-			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgurl)) {
+			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgUrl)) {
 				return (
 					<>
 						<button
@@ -297,7 +297,7 @@ class Allpatrender extends Component {
 							{this.state.soundPlaying ? 'Pause' : 'Play'}
 						</button>
 						<Sound
-							url={this.props.art._imgurl}
+							url={this.props.art._imgUrl}
 							playStatus={
 								this.state.soundPlaying
 									? Sound.status.PLAYING
@@ -312,7 +312,7 @@ class Allpatrender extends Component {
 				);
 			} else if (
 				/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
-					this.props.art._imgurl
+					this.props.art._imgUrl
 				)
 			) {
 				return (
@@ -321,7 +321,7 @@ class Allpatrender extends Component {
 						style={{maxWidth: '270px'}}
 						loop={true}
 						playing={true}
-						url={this.props.art._imgurl}
+						url={this.props.art._imgUrl}
 					/>
 				);
 			}
@@ -343,7 +343,7 @@ class Allpatrender extends Component {
 			let height = this.height;
 			orientation = width < height ? 'portrait' : 'landscape';
 		};
-		img.src = this.props.art.imgurl;
+		img.src = this.props.art.imgUrl;
 		img.onload();
 
 		return (
@@ -354,7 +354,7 @@ class Allpatrender extends Component {
 				// className={buk}//{this.props.art._isBidding ? buk : bak}
 				className='mystore-queue-card'
 			>
-				{/*<a href={this.props.art.imgurl} target='_blank'> */}
+				{/*<a href={this.props.art.imgUrl} target='_blank'> */}
 				{/*{+art[3] > 0 && <span className='card-counter'>+{art[3]}</span>}*/}
 				<Link to={`/batch/${this.props.art._refbatch}`}>
 					<div className='mystore-queue-card-img'>
@@ -495,7 +495,7 @@ class Allpatrender extends Component {
                 <CardImg
                   top
                   className='displayImage'
-                  src={this.props.art._imgurl}
+                  src={this.props.art._imgUrl}
                   alt='Card image'
                 />
                 <CardBody>
@@ -757,7 +757,7 @@ class Allpatrender extends Component {
                                 <CardImg
                                     top
                                     className="displayImage"
-                                    src={this.props.art.imgurl}
+                                    src={this.props.art.imgUrl}
                                     alt='Card image'
                                 />
                                 <CardBody

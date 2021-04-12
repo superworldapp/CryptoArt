@@ -38,7 +38,7 @@ class UploadsTab extends Component {
 		this.toggleListForSale = this.toggleListForSale.bind(this);
 		this.toggleEndAuction = this.toggleEndAuction.bind(this);
 		this.handleInputChange = this.handleInputChange.bind(this);
-		this.buyItem = this.buyItem.bind(this);
+		
 		this.putForSale = this.putForSale.bind(this);
 		this.DeSale = this.DeSale.bind(this);
 		this.StartAuction = this.StartAuction.bind(this);
@@ -51,18 +51,6 @@ class UploadsTab extends Component {
 		this.mintTokenBatch = this.mintTokenBatch.bind(this);
 	}
 
-	buyItem = async () => {
-		try {
-			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
-			const res = await this.props.contract.methods
-				.buyToken(this.props.art._tokenId)
-				.send({from: this.props.accounts, value: this.props.art._sellprice, gas: 5000000});
-			console.log('res', res);
-
-		} catch (error) {
-			console.error(error)
-		}
-	};
 
 	toggleModal() {
 		this.setState({
@@ -132,37 +120,37 @@ class UploadsTab extends Component {
 			console.log('res',res);
 			let data;
 			let data1 = [];
-			if (Array.isArray(res.events.tokencreated)) {
-				console.log(res.events.tokencreated.length);
-				for(let k = 0;k<res.events.tokencreated.length;k++){
+			// if (Array.isArray(res.events.tokencreated)) {
+			// 	console.log(res.events.tokencreated.length);
+			// 	for(let k = 0;k<res.events.tokencreated.length;k++){
 				
 					
-				  data1 = await Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
-					tokenId: res.events.tokencreated[k].returnValues.tokenId.toString(),
-					description: 'Artwork',
-					image: this.props.art._imgurl,
-					name: this.props.art._tokenBatchName,
-					blockchain: 'e',
-					networkId: 4
-			//	  })
-				}
+			// 	  data1 = await Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
+			// 		tokenId: res.events.tokencreated[k].returnValues.tokenId.toString(),
+			// 		description: 'Artwork',
+			// 		image: this.props.art._imgUrl,
+			// 		name: this.props.art._tokenBatchName,
+			// 		blockchain: 'e',
+			// 		networkId: 4
+			// //	  })
+			// 	}
 				
-				);
-				console.log(data1);
-			}
-			  } else {
-				data = await Axios.post(
-				  `http://geo.superworldapp.com/api/json/token/add`,
-				  {
-					tokenId: res.events.tokencreated.returnValues.tokenId.toString(),
-					description: 'Artwork',
-					image: this.props.art._imgurl,
-					name: this.props.art._tokenBatchName,
-					blockchain: 'e',
-					networkId: 4,
-				  }
-				);
-			  }
+			// 	);
+			// 	console.log(data1);
+			// }
+			//   } else {
+			// 	data = await Axios.post(
+			// 	  `http://geo.superworldapp.com/api/json/token/add`,
+			// 	  {
+			// 		tokenId: res.events.tokencreated.returnValues.tokenId.toString(),
+			// 		description: 'Artwork',
+			// 		image: this.props.art._imgUrl,
+			// 		name: this.props.art._tokenBatchName,
+			// 		blockchain: 'e',
+			// 		networkId: 4,
+			// 	  }
+			// 	);
+			//   }
 			  console.log(data);
 			  this.setState({isLoading: false, uploadSuccess: true});
 			 // this.refreshMyArt();
@@ -338,16 +326,16 @@ class UploadsTab extends Component {
 		};
 
 		const displayFileType = () => {
-			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.art._imgurl)) {
+			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.art._imgUrl)) {
 				return (
 					<CardImg
 						className={orientation}
 						top
-						src={this.props.art._imgurl}
+						src={this.props.art._imgUrl}
 						alt='Card image'
 					/>
 				);
-			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgurl)) {
+			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgUrl)) {
 				return (
 					<>
 						<button
@@ -362,7 +350,7 @@ class UploadsTab extends Component {
 							{this.state.soundPlaying ? 'Pause' : 'Play'}
 						</button>
 						<Sound
-							url={this.props.art._imgurl}
+							url={this.props.art._imgUrl}
 							playStatus={
 								this.state.soundPlaying
 									? Sound.status.PLAYING
@@ -377,7 +365,7 @@ class UploadsTab extends Component {
 				);
 			} else if (
 				/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
-					this.props.art._imgurl
+					this.props.art._imgUrl
 				)
 			) {
 				return (
@@ -386,7 +374,7 @@ class UploadsTab extends Component {
 						style={{maxWidth: '270px'}}
 						loop={true}
 						playing={true}
-						url={this.props.art._imgurl}
+						url={this.props.art._imgUrl}
 					/>
 				);
 			}
@@ -408,7 +396,7 @@ class UploadsTab extends Component {
 			let height = this.height;
 			orientation = width < height ? 'portrait' : 'landscape';
 		};
-		img.src = this.props.art.imgurl;
+		img.src = this.props.art.imgUrl;
 		img.onload();
 
 		return (
@@ -583,146 +571,7 @@ class UploadsTab extends Component {
 									</button>
 								</ModalBody>
 							</Modal>
-							{/* <Modal
-                            isOpen={this.state.isModalAucOpen}
-                            toggle={this.toggleAuction}
-                            className='modal_popup'>
-                            <ModalHeader
-                                toggle={this.toggleAuction}
-                                className='pl-5'>
-                                Start Auction
-                            </ModalHeader>
-                            <Card className='artCard' style={{height:'50%'}}>
-                                <CardImg
-                                    top
-                                    className="displayImage"
-                                    src={this.props.art.imgurl}
-                                    alt='Card image'
-                                />
-                                <CardBody
-                                >
-                                <div className="ctext" style={{padding:'5px', height:'1rem'}}>
-                                    <CardSubtitle style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'#B3B3B3',
-
-                                    }}>
-                                    Title
-                                    </CardSubtitle>
-                                    <CardSubtitle
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'#B3B3B3',
-                                    }}
-                                    >
-                                        Price
-                                    </CardSubtitle>
-                                </div>
-                                <div className="ctext" style={{ padding:'5px'}}>
-                                    <CardText
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                    }}
-                                    >
-                                        {this.props.art.tokenTitle}
-                                    </CardText>
-                                    <CardText
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                    }}
-                                    >
-                                        {Web3.utils.fromWei(
-                                this.props.art.tokenSellPrice.toString(),
-                                'ether'
-                                )}{' '}
-                                ETH
-                                    </CardText>
-                                </div>
-                                <div className="ctext1" style={{ padding:'2px'}}>
-                                    <p
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                        marginTop:'2%'
-                                    }}
-                                    >Start Bid : </p>
-                                    <p>
-                                        <Input
-                                        style= {{ width:'80%'}}
-                                            type='text'
-                                            id='bidPrice'
-                                            name='bidPrice'
-                                            onChange={
-                                                this.handleInputChange
-                                            }></Input>
-                                    </p>
-                                    <p
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                        marginTop:'2%'
-                                    }}
-                                    > ETH
-                                     </p>
-                                </div>
-                                 <div className="ctext1">
-                                    <p
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                        marginTop:'2%'
-                                    }}
-                                    >Duration : </p>
-                                    <p>
-
-                                        <Input
-                                        style= {{ width:'80%'}}
-                                            type='text'
-                                            id='bidPrice'
-                                            name='bidPrice'
-                                            onChange={
-                                                this.handleInputChange
-                                            }></Input>
-                                    </p>
-                                    <p
-                                    style={{
-                                        position:'relative',
-                                        fontFamily:'Gibson',
-                                        fontSize:'15px',
-                                        color:'black',
-                                        marginTop:'2%'
-                                    }}
-                                    >Days </p>
-                                </div>
-                                <div>
-                                <button
-                                    className="abtn" style={{
-                                        left:'32%', color: 'white', backgroundColor:'#5540C7'
-                                    }}
-                                        type='submit'
-                                        onClick={this.putForSale}>
-                                        Confirm
-                                    </button>{' '}
-                                </div>
-                                </CardBody>
-                            </Card>
-                        </Modal>  */}
+							
 						</div>
 						<div style={{display: 'flex', justifyContent: 'center'}}>
 							{this.state.delistLoading ? (
@@ -741,7 +590,7 @@ class UploadsTab extends Component {
 										isOpen={this.state.isMintModal}
 										toggle={this.closeMintToken}
 										send={this.sendMintToken}
-										arturl={this.props.art._imgurl}
+										arturl={this.props.art._imgUrl}
 									/>
 									: null
 							}

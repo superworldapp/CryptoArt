@@ -122,7 +122,7 @@ class Allpatrender extends Component {
     //function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
       const res = await this.props.contract.methods
         .buyToken(this.props.art._tokenId)
-        .send({ from: this.props.accounts,value: this.props.art._sellprice, gas: 5000000 });
+        .send({ from: this.props.accounts,value: this.props.art._sellPrice, gas: 5000000 });
       console.log('res', res);
 
     } catch(error){
@@ -217,7 +217,7 @@ class Allpatrender extends Component {
     let startprice = "1000000000000000000"
    let times = 1615401942
     const res = await this.props.contract.methods
-    .startbid(
+    .startBid(
       this.props.art._tokenId,
       startprice,
       times
@@ -290,23 +290,23 @@ class Allpatrender extends Component {
     let artOwner = this.props.art.tokenOwner;
 
     let pr =
-      Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether') == 0
+      Web3.utils.fromWei(this.props.art._sellPrice.toString(), 'ether') == 0
         ? 'invisible'
         : 'visible';
     let reSellOrSell = this.props.art._isSellings;
     let Auc = this.props.art._isBidding;
     let accNum = this.props.art._tokenCreator;
     const displayFileType = () => {
-			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.BatchCreated._imgurl)) {
+			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.BatchCreated._imgUrl)) {
 				return (
 					<CardImg
             top
             className="card-background-image"
-						src={this.props.BatchCreated._imgurl}
+						src={this.props.BatchCreated._imgUrl}
 						alt='Card image'
 					/>
 				);
-			} else if (/\.(?:wav|mp3)$/i.test(this.props.BatchCreated._imgurl)) {
+			} else if (/\.(?:wav|mp3)$/i.test(this.props.BatchCreated._imgUrl)) {
 				return (
 					<>
 						<button
@@ -321,7 +321,7 @@ class Allpatrender extends Component {
 							{this.state.soundPlaying ? 'Pause' : 'Play'}
 						</button>
 						<Sound
-							url={this.props.BatchCreated._imgurl}
+							url={this.props.BatchCreated._imgUrl}
 							playStatus={
 								this.state.soundPlaying
 									? Sound.status.PLAYING
@@ -336,7 +336,7 @@ class Allpatrender extends Component {
 				);
 			} else if (
 				/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
-					this.props.BatchCreated._imgurl
+					this.props.BatchCreated._imgUrl
 				)
 			) {
 				return (
@@ -345,7 +345,7 @@ class Allpatrender extends Component {
 						// style={{maxWidth: '200px', maxheight:'200px'}}
 						loop={true}
 						playing={true}
-						url={this.props.BatchCreated._imgurl}
+						url={this.props.BatchCreated._imgUrl}
 					/>
 				);
 			}
@@ -394,7 +394,7 @@ class Allpatrender extends Component {
       let height = this.height;
       orientation = width < height ? 'portrait' : 'landscape';
     };
-    img.src = this.props.BatchCreated._imgurl;
+    img.src = this.props.BatchCreated._imgUrl;
     img.onload();
 // console.log(`==========>this.props.art`, this.props.art);
 // console.log(`==========>this.props.BatchCreated`, this.props.BatchCreated);
@@ -446,15 +446,15 @@ class Allpatrender extends Component {
             <div className='card-text-info'>
               <CardText className="card-text-info-price">
                 {
-                  Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')) === 0
-                  ? Number(Web3.utils.fromWei(this.props.art._bidprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
-                  : Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
+                  Number(Web3.utils.fromWei(this.props.art._sellPrice.toString(), 'ether')) === 0
+                  ? Number(Web3.utils.fromWei(this.props.art._bidPrice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
+                  : Number(Web3.utils.fromWei(this.props.art._sellPrice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
                 }
                 <p className="card-text-info-usd">
                   {
-                    Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')) === 0
-                  ? `($${(usdPrice(this.props.art._bidprice)*this.state.ethPrice.usd).toFixed(2)} USD)`
-                  : `($${(usdPrice(this.props.art._sellprice)*this.state.ethPrice.usd).toFixed(2)} USD)`
+                    Number(Web3.utils.fromWei(this.props.art._sellPrice.toString(), 'ether')) === 0
+                  ? `($${(usdPrice(this.props.art._bidPrice)*this.state.ethPrice.usd).toFixed(2)} USD)`
+                  : `($${(usdPrice(this.props.art._sellPrice)*this.state.ethPrice.usd).toFixed(2)} USD)`
                   }
                 </p>
               </CardText>
@@ -466,9 +466,9 @@ class Allpatrender extends Component {
               <p className='card-buy-time-text'>
                 {/* {this.props.art._bidend} */}
                 {
-                	this.props.art._bidend === '0'
+                	this.props.art._bidEnd === '0'
                 		? ''
-                		: Date.now() / 1000 < this.props.art._bidend
+                		: Date.now() / 1000 < this.props.art._bidEnd
                 		? setDate()
                 		: (<p className="red">Auction Timer Ended</p>)
                 }
@@ -511,7 +511,7 @@ class Allpatrender extends Component {
         className='art-modal-popup'
       >
       <img
-        src={this.props.art._imgurl}
+        src={this.props.art._imgUrl}
         style={{
           height: '75%',
         }} />
@@ -631,12 +631,12 @@ this.displayFileType2 = this.displayFileType2.bind(this);
  
 
   displayFileType2 = () => {
-    if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.BatchCreated[0]._imgurl)) {
+    if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.BatchCreated[0]._imgUrl)) {
       return (
        
-        <img src={this.props.BatchCreated[0]._imgurl} className="batchImg" alt='batch img'/>
+        <img src={this.props.BatchCreated[0]._imgUrl} className="batchImg" alt='batch img'/>
       );
-    } else if (/\.(?:wav|mp3)$/i.test(this.props.BatchCreated[0]._imgurl)) {
+    } else if (/\.(?:wav|mp3)$/i.test(this.props.BatchCreated[0]._imgUrl)) {
       return (
         <>
           <button
@@ -651,7 +651,7 @@ this.displayFileType2 = this.displayFileType2.bind(this);
             {this.state.soundPlaying ? 'Pause' : 'Play'}
           </button>
           <Sound
-            url={this.props.BatchCreated[0]._imgurl}
+            url={this.props.BatchCreated[0]._imgUrl}
             playStatus={
               this.state.soundPlaying
                 ? Sound.status.PLAYING
@@ -666,7 +666,7 @@ this.displayFileType2 = this.displayFileType2.bind(this);
       );
     } else if (
       /\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
-        this.props.BatchCreated[0]._imgurl
+        this.props.BatchCreated[0]._imgUrl
       )
     ) {
       return (
@@ -674,7 +674,7 @@ this.displayFileType2 = this.displayFileType2.bind(this);
           className="batchVideo"
           loop={true}
           playing={true}
-          url={this.props.BatchCreated[0]._imgurl}
+          url={this.props.BatchCreated[0]._imgUrl}
         />
       );
     }
@@ -704,7 +704,7 @@ console.log(`==========>this.props`, this.props);
     
      console.log(this.props.BatchCreated[0])
      let batchID = this.props.matchId; 
-     tokenInBatch = this.props.allTokens?.filter((x) => x._refbatch == batchID);
+     tokenInBatch = this.props.allTokens?.filter((x) => x._refBatch == batchID);
      console.log('Header', tokenInBatch);
       let newTokenBatch
      if(!this.state.viewMore){
@@ -736,7 +736,7 @@ console.log(`==========>this.props`, this.props);
       <div className="batchWrapper">
         <div className="batchView">
           <div className="batchImgBlock">
-            <a href={this.props.BatchCreated[0]._imgurl} target='_blank'>
+            <a href={this.props.BatchCreated[0]._imgUrl} target='_blank'>
               {this.displayFileType2()}
             </a>
           </div>
@@ -792,84 +792,7 @@ console.log(`==========>this.props`, this.props);
           </div>
         </div>
       </div>
-      {/*    <div>*/}
-      {/*      <div className='information d-flex flex-column'>*/}
-      {/*        <div>*/}
-      {/*          <h4>*/}
-      {/*            {this.props.BatchCreated[0]._tokenBatchName}*/}
-      {/*          </h4>*/}
-      {/*        </div>*/}
-      {/*        <div className="View">*/}
-      {/*          <p className="style2">*/}
-      {/*            Starting from 6.5ETH*/}
-      {/*          </p>*/}
-      {/*          &nbsp;*/}
-      {/*          &nbsp;*/}
-      {/*          <p className="style2">*/}
-      {/*            {this.props.BatchCreated[0]._unmintedEditions}*/}
-      {/*          </p>*/}
-
-      {/*        </div>*/}
-      {/*        <div>*/}
-      {/*          <p className="style1">*/}
-      {/*            <img*/}
-      {/*              className="userimg"*/}
-      {/*              src={anonUser}*/}
-      {/*            ></img> {' '}*/}
-      {/*            Created by{' '}*/}
-      {/*            <span className='text-primary'>{this.accUsername(this.props.BatchCreated?._tokenCreator)}</span>*/}
-      {/*          </p>*/}
-
-      {/*        </div>*/}
-      {/*        <div>*/}
-      {/*          <h5> Description</h5>*/}
-      {/*          <p className="style1">*/}
-
-      {/*          </p>*/}
-      {/*        </div>*/}
-      {/*        <div style={{display: 'flex', justifyContent: 'space-between',}}>*/}
-      {/*          /!* <h5>*/}
-      {/*        History*/}
-      {/*      </h5>*/}
-      {/*    <button  style={{ marginBottom: '1rem', border:'none' }} onClick={collapsetoggle}>*/}
-      {/*      <img src= {dropdownarrow} alt = "img">*/}
-      {/*      </img>*/}
-
-      {/*    </button> *!/*/}
-      {/*          /!* <Collapse isOpen={isOpen} className = "collapse1">*/}
-      {/*  <p className ="style2">*/}
-      {/*  Anim pariatur cliche reprehenderit,*/}
-      {/*     enim eiusmod high life accusamus terry richardson ad squid. Nihil*/}
-      {/*     anim keffiyeh helvetica, craft beer labore wes anderson cred*/}
-      {/*     nesciunt sapiente ea proident.*/}
-
-      {/*  </p>*/}
-      {/*    */}
-      {/*    */}
-      {/*</Collapse> *!/*/}
-      {/*        </div>*/}
-
-      {/*        /!* <div*/}
-      {/*        className='card py-3'*/}
-      {/*        style={{*/}
-      {/*          width: '30rem',*/}
-      {/*        }}*/}
-      {/*      >*/}
-      {/*        <h4>{this.props.BatchCreated._tokenBatchName}</h4>*/}
-      {/*        */}
-      {/*      </div> *!/*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-        {/*<br/>*/}
-        {/*<Col className='second-row-col-2'>*/}
-        {/*  <div>*/}
-        {/*    {Menu}*/}
-        {/*  </div>*/}
-        {/*</Col>*/}
-        {/*<br/>*/}
-        {/*<br/>*/}
-      {/*</div>*/}
+      
     </>
   );
 };

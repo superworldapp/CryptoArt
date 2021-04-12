@@ -72,7 +72,7 @@ class Allpatrender2 extends Component {
 			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
 			const res = await this.props.contract.methods
 				.buyToken(this.state.art._tokenId)
-				.send({from: this.props.accounts, value: this.state.art._sellprice, gas: 5000000});
+				.send({from: this.props.accounts, value: this.state.art._sellPrice, gas: 5000000});
 			console.log('res', res);
 
 		} catch (error) {
@@ -276,16 +276,16 @@ class Allpatrender2 extends Component {
 		};
 
 		const displayFileType = () => {
-			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.art._imgurl)) {
+			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.art._imgUrl)) {
 				return (
 					<CardImg
 						className={orientation}
 						top
-						src={this.props.art._imgurl}
+						src={this.props.art._imgUrl}
 						alt='Card image'
 					/>
 				);
-			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgurl)) {
+			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgUrl)) {
 				return (
 					<>
 						<button
@@ -300,7 +300,7 @@ class Allpatrender2 extends Component {
 							{this.state.soundPlaying ? 'Pause' : 'Play'}
 						</button>
 						<Sound
-							url={this.props.art._imgurl}
+							url={this.props.art._imgUrl}
 							playStatus={
 								this.state.soundPlaying
 									? Sound.status.PLAYING
@@ -315,7 +315,7 @@ class Allpatrender2 extends Component {
 				);
 			} else if (
 				/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
-					this.props.art._imgurl
+					this.props.art._imgUrl
 				)
 			) {
 				return (
@@ -324,7 +324,7 @@ class Allpatrender2 extends Component {
 						style={{maxWidth: '270px'}}
 						loop={true}
 						playing={true}
-						url={this.props.art._imgurl}
+						url={this.props.art._imgUrl}
 					/>
 				);
 			}
@@ -341,7 +341,7 @@ class Allpatrender2 extends Component {
 		let x = colorpills();
 
 		const setDate = () => {
-			const milliSec = Number(this.state.art._bidend * 1000) - Date.now();
+			const milliSec = Number(this.state.art._bidEnd * 1000) - Date.now();
 			console.log('=====>milliSec', milliSec);
 			let hours = Math.floor((milliSec / (1000 * 60 * 60))).toFixed(0);
 			let minutes = ((milliSec / (1000 * 60)) % 60).toFixed(0)
@@ -362,7 +362,7 @@ class Allpatrender2 extends Component {
 			let height = this.height;
 			orientation = width < height ? 'portrait' : 'landscape';
 		};
-		img.src = this.state.art.imgurl;
+		img.src = this.state.art.imgUrl;
 		img.onload();
 
 		return (
@@ -393,8 +393,8 @@ class Allpatrender2 extends Component {
 								}}>
 									{
 										this.props.art._isSellings
-											? Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
-											: Number(Web3.utils.fromWei(this.props.art._bidprice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
+											? Number(Web3.utils.fromWei(this.props.art._sellPrice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
+											: Number(Web3.utils.fromWei(this.props.art._bidPrice.toString(), 'ether')).toFixed(2) + ' ' + 'ETH'
 									}
 								</p>
 								<p
@@ -406,14 +406,14 @@ class Allpatrender2 extends Component {
 										margin: '0px'
 									}}>
 									  {
-											Number(Web3.utils.fromWei(this.props.art._sellprice.toString(), 'ether')) === 0
-												? `($${(usdPrice(this.props.art._bidprice)*this.state.ethPrice.usd).toFixed(2)} USD)`
-												: `($${(usdPrice(this.props.art._sellprice)*this.state.ethPrice.usd).toFixed(2)} USD)`
+											Number(Web3.utils.fromWei(this.props.art._sellPrice.toString(), 'ether')) === 0
+												? `($${(usdPrice(this.props.art._bidPrice)*this.state.ethPrice.usd).toFixed(2)} USD)`
+												: `($${(usdPrice(this.props.art._sellPrice)*this.state.ethPrice.usd).toFixed(2)} USD)`
 										}
 								</p>
 							</span>
 							{
-								this.state.art._bidend === '0'
+								this.state.art._bidEnd === '0'
 									? (
 										(
 											<button
@@ -424,7 +424,7 @@ class Allpatrender2 extends Component {
 											</button>
 										)
 									)
-									: Date.now() / 1000 < this.state.art._bidend
+									: Date.now() / 1000 < this.state.art._bidEnd
 									? (
 										(
 											<button
@@ -599,9 +599,9 @@ class Allpatrender2 extends Component {
 						</div>
 						<p className="card-body-time">
 							{
-								this.state.art._bidend === '0'
+								this.state.art._bidEnd === '0'
 									? ''
-									: Date.now() / 1000 < this.state.art._bidend
+									: Date.now() / 1000 < this.state.art._bidEnd
 									? setDate()
 									: (<p className="red">Auction Timer Ended</p>)
 							}
@@ -624,7 +624,7 @@ class Allpatrender2 extends Component {
 				{
 					this.state.isEditModal
 						? <EditModal
-							price={this.state.art._sellprice}
+							price={this.state.art._sellPrice}
 							tokenID={this.state.art._tokenId}
 							contract={this.props.contract}
 							accounts={this.props.accounts}

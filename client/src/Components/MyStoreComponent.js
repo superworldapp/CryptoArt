@@ -288,16 +288,16 @@ class MyStoreComponent extends Component {
 					_tokenId: i,
 					_tokenOwner: rex._tokenOwner,
 					_isSellings: rex._isSellings,
-					_sellprice: rex._sellprice,
-					_refbatch: rex._refbatch,
-					_tokenbidder: rex._tokenbidder,
+					_sellPrice: rex._sellPrice,
+					_refBatch: rex._refBatch,
+					_tokenBidder: rex._tokenBidder,
 					_isBidding: rex._isBidding,
-					_bidprice: rex._bidprice,
-					_bidend: rex._bidend,
+					_bidPrice: rex._bidPrice,
+					_bidEnd: rex._bidEnd,
 					_tokenHash: rex2._tokenHash,
 					_tokenBatchName: rex2._tokenBatchName,
 					_tokenCreator: rex2._tokenCreator,
-					_imgurl: rex2._imgurl,
+					_imgUrl: rex2._imgUrl,
 					_imgThumbnail: rex2._imgThumbnail,
 					__mintedEditions: rex2._mintedEditions
 
@@ -416,7 +416,7 @@ class MyStoreComponent extends Component {
 		});
 
 		const Menu3 = this.props.art3?.map((x) => {
-			if (x._isSellings === true || (x._isBidding === true && !((x._bidend * 1000) <= Date.now() && x._bidend !== 0))) {
+			if (x._isSellings === true || (x._isBidding === true && !((x._bidEnd * 1000) <= Date.now() && x._bidEnd !== 0))) {
 				cntactive++;
 				menuThreeCount++;
 
@@ -433,7 +433,7 @@ class MyStoreComponent extends Component {
 		});
 
 		const Menu4 = this.props.art3?.map((x) => {
-			if (x._isBidding === true && ((x._bidend * 1000) <= Date.now())) {
+			if (x._isBidding === true && ((x._bidEnd * 1000) <= Date.now())) {
 				cntended++;
 				menuFourCount++;
 				return (

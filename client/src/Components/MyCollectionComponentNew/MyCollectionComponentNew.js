@@ -132,7 +132,7 @@ class Allpatrender extends Component {
 			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
 			const res = await this.props.contract.methods
 				.buyToken(this.props.art._tokenId)
-				.send({from: this.props.accounts, value: this.props.art._sellprice, gas: 5000000});
+				.send({from: this.props.accounts, value: this.props.art._sellPrice, gas: 5000000});
 			// console.log('res', res);
 
 		} catch (error) {
@@ -265,17 +265,17 @@ class Allpatrender extends Component {
 		// let Auc = this.props.art._isBidding;
 		let accNum = this.props.art._tokenCreator;
 		const displayFileType = () => {
-			console.log(this.props.art._imgurl);
-			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.art._imgurl)) {
+			console.log(this.props.art._imgUrl);
+			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.art._imgUrl)) {
 				return (
 					<CardImg
 						className={orientation}
 						top
-						src={this.props.art._imgurl}
+						src={this.props.art._imgUrl}
 						alt='Card image'
 					/>
 				);
-			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgurl)) {
+			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgUrl)) {
 				return (
 					<>
 						<button
@@ -290,7 +290,7 @@ class Allpatrender extends Component {
 							{this.state.soundPlaying ? 'Pause' : 'Play'}
 						</button>
 						<Sound
-							url={this.props.art._imgurl}
+							url={this.props.art._imgUrl}
 							playStatus={
 								this.state.soundPlaying
 									? Sound.status.PLAYING
@@ -305,7 +305,7 @@ class Allpatrender extends Component {
 				);
 			} else if (
 				/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
-					this.props.art._imgurl
+					this.props.art._imgUrl
 				)
 			) {
 				return (
@@ -314,7 +314,7 @@ class Allpatrender extends Component {
 						style={{maxWidth: '270px'}}
 						loop={true}
 						playing={true}
-						url={this.props.art._imgurl}
+						url={this.props.art._imgUrl}
 					/>
 				);
 			}
@@ -351,7 +351,7 @@ class Allpatrender extends Component {
 			let height = this.height;
 			orientation = width < height ? 'portrait' : 'landscape';
 		};
-		img.src = this.props.art.imgurl;
+		img.src = this.props.art.imgUrl;
 		img.onload();
 
 		return (
@@ -361,7 +361,7 @@ class Allpatrender extends Component {
 			<Card
 				className='card-artcard'
 			>
-				{/* <a href={this.props.art.imgurl} target='_blank'> */}
+				{/* <a href={this.props.art.imgUrl} target='_blank'> */}
 				<div className='card-img-top-all-art'>
 					{/* <Link to={`/card/${this.props.art._tokenId}`}> */}
 
@@ -469,7 +469,7 @@ class Allpatrender extends Component {
 								<CardImg
 									top
 									className='displayImage'
-									src={this.props.art._imgurl}
+									src={this.props.art._imgUrl}
 									alt='Card image'
 								/>
 								<CardBody>
@@ -861,15 +861,15 @@ class MyItemComponent extends Component {
 					_tokenId: i,
 					_tokenOwner: rex._tokenOwner,
 					_isSellings: rex._isSellings,
-					_sellprice: rex._sellprice,
-					_refbatch: rex._refbatch,
-					_tokenbidder: rex._tokenbidder,
+					_sellPrice: rex._sellPrice,
+					_refBatch: rex._refBatch,
+					_tokenBidder: rex._tokenBidder,
 					_isBidding: rex._isBidding,
-					_bidprice: rex._bidprice,
+					_bidPrice: rex._bidPrice,
 					_tokenHash: rex2._tokenHash,
 					_tokenBatchName: rex2._tokenBatchName,
 					_tokenCreator: rex2._tokenCreator,
-					_imgurl: rex2._imgurl,
+					_imgUrl: rex2._imgUrl,
 					_imgThumbnail: rex2._imgThumbnail,
 
 				}

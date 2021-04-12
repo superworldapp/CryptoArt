@@ -68,6 +68,7 @@ class Main extends Component {
 			allDocs = [];
 			allDocs = response;
 			this.setState({batch: allDocs});
+			console.log(this.state.batch);
 			let rexponse = [];
 			let resx2 = await instance.methods.totalSupply().call();
 			// console.log(resx2);
@@ -92,16 +93,16 @@ class Main extends Component {
 						_tokenId: i,
 						_tokenOwner: rex._tokenOwner,
 						_isSellings: rex._isSellings,
-						_sellprice: rex._sellPrice,
-						_refbatch: rex._refBatch,
-						_tokenbidder: rex._tokenBidder,
+						_sellPrice: rex._sellPrice,
+						_refBatch: rex._refBatch,
+						_tokenBidder: rex._tokenBidder,
 						_isBidding: rex._isBidding,
-						_bidprice: rex._bidPrice,
-						_bidend: rex._bidEnd,
+						_bidPrice: rex._bidPrice,
+						_bidEnd: rex._bidEnd,
 						_tokenHash: rex2._tokenHash,
 						_tokenBatchName: rex2._tokenBatchName,
 						_tokenCreator: rex2._tokenCreator,
-						_imgurl: rex2._imgUrl,
+						_imgUrl: rex2._imgUrl,
 						_imgThumbnail: rex2._imgThumbnail,
 					}
 					response.push(newBlock);

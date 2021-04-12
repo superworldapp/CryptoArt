@@ -80,15 +80,15 @@ const CardDetail = ({
     setpriceInputValue(event.target.value);
     //console.log(handleInput);
   };
-console.log(`==========>art?._imgurl`,art?._imgurl);
+console.log(`==========>art?._imgUrl`,art?._imgUrl);
   const displayFileType = () => {
-    if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(art?._imgurl)) {
+    if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(art?._imgUrl)) {
       return (
-        <a href={art?._imgurl} target='_blank'>
-          <img src={art?._imgurl} className='detail-img' alt='...'/>
+        <a href={art?._imgUrl} target='_blank'>
+          <img src={art?._imgUrl} className='detail-img' alt='...'/>
         </a>
       );
-    } else if (/\.(?:wav|mp3)$/i.test(art?._imgurl)) {
+    } else if (/\.(?:wav|mp3)$/i.test(art?._imgUrl)) {
       return (
         <>
           <button
@@ -99,7 +99,7 @@ console.log(`==========>art?._imgurl`,art?._imgurl);
             {soundPlaying ? 'Pause' : 'Play'}
           </button>
           <Sound
-            url={art?._imgurl}
+            url={art?._imgUrl}
             playStatus={
               soundPlaying
                 ? Sound.status.PLAYING
@@ -114,7 +114,7 @@ console.log(`==========>art?._imgurl`,art?._imgurl);
       );
     } else if (
       /\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
-        art?._imgurl
+        art?._imgUrl
       )
     ) {
       return (
@@ -122,7 +122,7 @@ console.log(`==========>art?._imgurl`,art?._imgurl);
           className="cardVideo"
           loop={true}
           playing={true}
-          url={art?._imgurl}
+          url={art?._imgUrl}
         />
       );
     }
@@ -252,7 +252,7 @@ console.log(`==========>art?._imgurl`,art?._imgurl);
     setLoadingPurchase(true);
     const res = await contract?.methods.buyToken(art._tokenId).send({
       from: accounts,
-      value: art?._sellprice.toString(),
+      value: art?._sellPrice.toString(),
       gas: 7000000,
     });
     setLoadingPurchase(false);
@@ -420,7 +420,7 @@ console.log(`==========>art?._imgurl`,art?._imgurl);
                   <div className="current-offer">
                     {art?._isSellings ? "Selling at:": "Current offer:" }
                     &ensp;
-                <div className="offer-price">{art?._isSellings ? converttoether(art?._sellprice) : (art?._isBidding ? converttoether(art?._bidprice) : 0)}</div>
+                <div className="offer-price">{art?._isSellings ? converttoether(art?._sellPrice) : (art?._isBidding ? converttoether(art?._bidPrice) : 0)}</div>
                   </div>
                 </div>
                 <div className="View-1">
@@ -629,15 +629,15 @@ class TokenDetails extends Component {
       _tokenId: this.props.matchId,
       _tokenOwner: rex._tokenOwner,
       _isSellings: rex._isSellings,
-      _sellprice: rex._sellprice,
-      _refbatch: rex._refbatch,
-      _tokenbidder: rex._tokenbidder,
+      _sellPrice: rex._sellPrice,
+      _refBatch: rex._refBatch,
+      _tokenBidder: rex._tokenBidder,
       _isBidding: rex._isBidding,
-      _bidprice: rex._bidprice,
+      _bidPrice: rex._bidPrice,
       _tokenHash: rex2._tokenHash,
       _tokenBatchName: rex2._tokenBatchName,
       _tokenCreator: rex2._tokenCreator,
-      _imgurl: rex2._imgurl,
+      _imgUrl: rex2._imgUrl,
       _imgThumbnail: rex2._imgThumbnail,
 
     }

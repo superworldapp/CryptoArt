@@ -29,17 +29,17 @@ class SortLayout extends Component {
 
 	render() {
 		const displayFileType = () => {
-			console.log(this.props.art._imgurl);
-			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.art._imgurl)) {
+			console.log(this.props.art._imgUrl);
+			if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.art._imgUrl)) {
 				return (
 					<CardImg
 						className={orientation}
 						top
-						src={this.props.art._imgurl}
+						src={this.props.art._imgUrl}
 						alt='Card image'
 					/>
 				);
-			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgurl)) {
+			} else if (/\.(?:wav|mp3)$/i.test(this.props.art._imgUrl)) {
 				return (
 					<>
 						<button
@@ -54,7 +54,7 @@ class SortLayout extends Component {
 							{this.state.soundPlaying ? 'Pause' : 'Play'}
 						</button>
 						<Sound
-							url={this.props.art._imgurl}
+							url={this.props.art._imgUrl}
 							playStatus={
 								this.state.soundPlaying
 									? Sound.status.PLAYING
@@ -69,7 +69,7 @@ class SortLayout extends Component {
 				);
 			} else if (
 				/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
-					this.props.art._imgurl
+					this.props.art._imgUrl
 				)
 			) {
 				return (
@@ -78,7 +78,7 @@ class SortLayout extends Component {
 						style={{maxWidth: '270px'}}
 						loop={true}
 						playing={true}
-						url={this.props.art._imgurl}
+						url={this.props.art._imgUrl}
 					/>
 				);
 			}
@@ -98,7 +98,7 @@ class SortLayout extends Component {
 			let height = this.height;
 			orientation = width < height ? 'portrait' : 'landscape';
 		};
-		img.src = this.props.art.imgurl;
+		img.src = this.props.art.imgUrl;
 		img.onload();
 
 		return (

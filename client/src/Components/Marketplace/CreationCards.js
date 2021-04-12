@@ -22,7 +22,7 @@ const CreationCards = (props,art) => {
 	const [ethPrice, setEthPrice] = useState({});
 	const [highest,setHighest] = useState('1000000000000000000000');
 	const displayFileType = () => {
-		if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(props._imgurl)) {
+		if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(props._imgUrl)) {
 			return (
 				<CardImg
 					top
