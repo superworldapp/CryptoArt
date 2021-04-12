@@ -37,7 +37,7 @@ class Allpatrender extends Component {
 			endAuctionSuccess: false,
 			isMintModal: false,
 			soundPlaying: false,
-
+			loadingAfterSend : false,
 			openListModal: false,
 
 			uploadSuccess: false,

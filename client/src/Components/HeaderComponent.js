@@ -146,11 +146,13 @@ class Header extends Component {
     };
 
     const { userId } = Auth.getToken();
+    
     return Axios.post(`${process.env.REACT_APP_SW_API_URL}/user/get`, {
       userId: userId,
     })
       .then((res) => {
         this.setState({ currentUser: res.data.data });
+        console.log("current===============>",this.state.currentUser)
         localStorage.setItem('userName', res.data.data.username);
       })
       .catch((e) => {
@@ -517,7 +519,7 @@ class Header extends Component {
                     <img
                       className='rounded-circle'
                       id='profile'
-                      src={this.getIdenticon()}
+                      src={this.state.currentUser && this.state.currentUser.urlPhoto || this.getIdenticon()}
                       style={{
                         maxWidth: '30px',
                       }}

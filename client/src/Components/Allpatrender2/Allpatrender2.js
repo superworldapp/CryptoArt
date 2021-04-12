@@ -266,7 +266,7 @@ class Allpatrender2 extends Component {
 
 	EndAuction = async () => {
 		try {
-			this.setLoadingAfterSend()
+			//this.setLoadingAfterSend()
 
 			const res = await this.props.contract.methods
 				.closeBidOwner(
@@ -278,9 +278,9 @@ class Allpatrender2 extends Component {
 			this.toggleModal2();
 			this.setState({isLoading: false, uploadSuccess: true});
 		} catch (err) {
-			this.setState({uploadError: true})
-			this.setLoadingAfterSend()
-			this.setState({loadingError: true});
+			// this.setState({uploadError: true})
+			// this.setLoadingAfterSend()
+			// this.setState({loadingError: true});
 		}
 		this.setState({isLoading: false});
 	};
