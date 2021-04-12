@@ -9,7 +9,7 @@ import Sound from 'react-sound';
 import ReactPlayer from 'react-player';
 import EditModal from "../EditModal";
 import Axios from "axios";
-import SuccessfulModals from "../SuccessfulModals";
+import SuccessfulModals from "../SuccessModal/SuccessfulModals";
 import Loading from "../Loading/loading";
 import ModalListingNft from "../ModalListingNft";
 
@@ -38,6 +38,7 @@ class Allpatrender2 extends Component {
 
 			uploadSuccess: false,
 			loadingError: false,
+			uploadError: false,
 		};
 		this.toggleModal = this.toggleModal.bind(this);
 		this.toggleListForAuction = this.toggleListForAuction.bind(this);
@@ -58,6 +59,8 @@ class Allpatrender2 extends Component {
 		this.handleUploadMore = this.handleUploadMore.bind(this);
 		this.handleOpenListModal = this.handleOpenListModal.bind(this);
 		this.setLoadingAfterSend = this.setLoadingAfterSend.bind(this);
+
+
 	}
 
 	componentDidMount = async () => {
@@ -69,7 +72,7 @@ class Allpatrender2 extends Component {
 					`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,btc,eur,gpb&include_24hr_change=false`
 				).then((res) => {
 					// console.log(typeof res.data.ethereum.usd_24h_change);
-					this.setState({ethPrice:res.data.ethereum});
+					this.setState({ethPrice: res.data.ethereum});
 				});
 			} catch {
 				console.log('could not get the request');
@@ -77,6 +80,7 @@ class Allpatrender2 extends Component {
 		};
 		getEthDollarPrice();
 	}
+
 	buyItem = async () => {
 		try {
 			//function Sale(uint256 _tokenId,uint _sellprice,bool isListed)
@@ -199,6 +203,7 @@ class Allpatrender2 extends Component {
 		this.toggleModal();
 		console.log(res);
 	};
+
 	DeSale = async () => {
 		this.setState({delistLoading: true});
 		const res = await this.props.contract.methods
@@ -254,15 +259,26 @@ class Allpatrender2 extends Component {
 	};
 
 	EndAuction = async () => {
-		//this.setState({endAuctionLoading: true});
-		const res = await this.props.contract.methods
-			.closeBidOwner(
-				this.props.art._tokenId,
-			)
-			.send({from: this.props.accounts, gas: 5000000});
-		//this.setState({endAuctionLoading: false, endAuctionSuccess: true});
-		console.log(res);
+		try {
+			this.setLoadingAfterSend()
+
+			const res = await this.props.contract.methods
+				.closeBidOwner(
+					this.props.art._tokenId,
+				)
+				.send({from: this.props.accounts, gas: 5000000});
+
+			console.log(res);
+			this.toggleModal2();
+			this.setState({isLoading: false, uploadSuccess: true});
+		} catch (err) {
+			this.setState({uploadError: true})
+			this.setLoadingAfterSend()
+			this.setState({loadingError: true});
+		}
+		this.setState({isLoading: false});
 	};
+
 	AddBid = async () => {
 		const res = await this.props.contract.methods
 			.addBid(
@@ -458,8 +474,8 @@ class Allpatrender2 extends Component {
 									}}>
 									  {
 											Number(Web3.utils.fromWei(this.props.art._sellPrice.toString(), 'ether')) === 0
-												? `($${(usdPrice(this.props.art._bidPrice)*this.state.ethPrice.usd).toFixed(2)} USD)`
-												: `($${(usdPrice(this.props.art._sellPrice)*this.state.ethPrice.usd).toFixed(2)} USD)`
+												? `($${(usdPrice(this.props.art._bidPrice) * this.state.ethPrice.usd).toFixed(2)} USD)`
+												: `($${(usdPrice(this.props.art._sellPrice) * this.state.ethPrice.usd).toFixed(2)} USD)`
 										}
 								</p>
 							</span>
@@ -539,22 +555,27 @@ class Allpatrender2 extends Component {
 						/>
 						: null
 				}
-
-				{
+				
 					<SuccessfulModals
 						isOpen={this.state.uploadSuccess}
 						toggle={this.toggleModal2}
 						onClose={this.toggleModal2}
-						variation={3}
+						variation={this.props.type === 2 ? 3 : 4}
 						handleUploadMore={this.handleUploadMore}
 					/>
-				}
 
 				{
 					this.state.loadingAfterSend
-						? <Loading name="Relisting"/>
+						? <Loading name={this.props.type === 2 ? 'Relisting' : 'Ending Auction'}/>
 						: null
 				}
+
+				{
+					this.state.uploadError
+					? <Loading name='Error Uploading' type='error'/>
+					: null
+				}
+				
 			</Card>
 		);
 	}

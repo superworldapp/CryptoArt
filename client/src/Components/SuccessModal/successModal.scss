@@ -1,0 +1,42 @@
+.modal-xl {
+
+	.modal-content {
+		max-width: 815px;
+		height: 300px;
+		border-radius: 8px;
+
+		.modal-success-wrapper {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			max-height: 300px;
+			height: 100%;
+
+			.modal-success-img {
+				width: 80px;
+				height: 80px;
+				margin: 0 auto 20px;
+			}
+
+			.modal-success-head {
+				text-align: center;
+				font-size: 21px;
+				line-height: 21px;
+				font-weight: 450;
+				color: #000;
+			}
+
+			.modal-success-desc {
+				margin-top: 20px!important;
+				text-align: center;
+				color: #888888;
+				font-size: 15px;
+				line-height: 15px;
+			}
+
+			.modal-success-btn {
+				margin-top: 34px;
+			}
+		}
+	}
+}

@@ -10,7 +10,7 @@ import ReactPlayer from 'react-player';
 import MintModal from "../MintModal/MintModal";
 import Loading from "../Loading/loading";
 import Axios from 'axios';
-import SuccessfulModals from "../SuccessfulModals";
+import SuccessfulModals from "../SuccessModal/SuccessfulModals";
 
 class UploadsTab extends Component {
 	constructor(props) {

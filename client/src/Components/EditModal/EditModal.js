@@ -6,7 +6,7 @@ import Modal from "../Modal";
 
 import './EditModal.scss';
 import Loading from "../Loading/loading";
-import SuccessfulModals from "../SuccessfulModals";
+import SuccessfulModals from "../SuccessModal/SuccessfulModals";
 import Web3 from "web3";
 import Axios from "axios";
 

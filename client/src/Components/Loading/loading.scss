@@ -26,3 +26,22 @@
 	color: #5540C7!important;
 	margin-bottom: 56px;
 }
+
+.error {
+	p {
+		color: #FF0000;
+	}
+
+	button {
+		margin-top: 50px;
+		width: 235px;
+		height: 55px;
+		background: none;
+		border: 2px solid #FFFFFF;
+		border-radius: 10px;
+		font-size: 19px;
+		line-height: 19px;
+		text-align: center;
+		color: #FFFFFF;
+	}
+}

@@ -12,7 +12,7 @@ import ModalUploadToMyStore from "../ModalUploadToMyStore/ModalUploadToMyStore";
 import ModalListingNft from "../ModalListingNft";
 import Loading from "../Loading/loading";
 import EditModal from "../EditModal";
-import SuccessfulModals from "../SuccessfulModals";
+import SuccessfulModals from "../SuccessModal/SuccessfulModals";
 
 
 class Allpatrender extends Component {

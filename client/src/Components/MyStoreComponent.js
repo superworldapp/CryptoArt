@@ -31,7 +31,7 @@ import Allpatrender2 from "./Allpatrender2";
 import ModalUploadToMyStore from "./ModalUploadToMyStore/ModalUploadToMyStore";
 import UploadsTab from "./UploadsTab";
 import Loading from "./Loading/loading";
-import SuccessfulModals from "./SuccessfulModals";
+import SuccessfulModals from "./SuccessModal/SuccessfulModals";
 import {connect} from "react-redux";
 
 const SHA256 = require('crypto-js/sha256');

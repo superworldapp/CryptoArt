@@ -18,6 +18,14 @@ const Loading = props => {
 	}));
 	const classes = useStyles();
 
+	if (props.type && props.type === 'error') {
+		return (
+			<div className='loading-modal error'>
+				<p>{name}</p>
+				<button onClick={() => {window.location.reload()}}>Try Again</button>
+			</div>
+		);
+	}
 	return (
 		<div className='loading-modal'>
 			<div className={classes.root}>
