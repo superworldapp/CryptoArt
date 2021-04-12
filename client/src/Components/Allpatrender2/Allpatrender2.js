@@ -60,7 +60,7 @@ class Allpatrender2 extends Component {
 		this.handleOpenListModal = this.handleOpenListModal.bind(this);
 		this.setLoadingAfterSend = this.setLoadingAfterSend.bind(this);
 
-
+		this.CloseLoadingError = this.CloseLoadingError.bind(this);
 	}
 
 	componentDidMount = async () => {
@@ -120,6 +120,12 @@ class Allpatrender2 extends Component {
 	CloseEditModal() {
 		this.setState({
 			isEditModal: false,
+		})
+	}
+
+	CloseLoadingError() {
+		this.setState({
+			uploadError: false,
 		})
 	}
 
@@ -572,7 +578,7 @@ class Allpatrender2 extends Component {
 
 				{
 					this.state.uploadError
-					? <Loading name='Error Uploading' type='error'/>
+					? <Loading name='Error Uploading' type='error' onClose={this.CloseLoadingError}/>
 					: null
 				}
 				

@@ -6,6 +6,7 @@ import './loading.scss';
 const Loading = props => {
 	const {
 		name,
+		onClose,
 	} = props
 
 	const useStyles = makeStyles((theme) => ({
@@ -22,7 +23,9 @@ const Loading = props => {
 		return (
 			<div className='loading-modal error'>
 				<p>{name}</p>
-				<button onClick={() => {window.location.reload()}}>Try Again</button>
+				<button onClick={onClose}>
+					Try Again
+				</button>
 			</div>
 		);
 	}
