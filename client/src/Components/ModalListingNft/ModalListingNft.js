@@ -3,10 +3,6 @@ import Modal from "../Modal";
 import {Form, FormGroup, Input, Label} from "reactstrap";
 import './style.scss';
 import Checkbox from "./checkbox/checkbox";
-import SuccessfulModals from "../SuccessfulModals";
-import Loading from "../Loading/loading";
-import Axios from "axios";
-import Web3 from "web3";
 
 const saleTypes = {
 	AUCTION: 'AUCTION',
@@ -32,18 +28,15 @@ const initialControls = {
 	}
 }
 
-const ETHER = '1000000000000000000';
-
 
 const ModalListingNft = props => {
 	const {
 		toggle,
-		onClosed,
+		onClose,
 		isOpen,
 		imgThumb,
-		contract,
-		accounts,
-		tokenID,
+		onSale,
+		onStartAuction
 	} = props
 
 	console.log('=====>props1', props);
@@ -52,18 +45,11 @@ const ModalListingNft = props => {
 	const buyNowInputRef = useRef(null)
 
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
-	const [initialValue, setInitialValue] = useState({tokenPrice: '', duration: ''});
 	const [duration, setDuration] = useState(saleTypes.BUY_NOW);
 	const [sellPrice, setSellPrice] = useState(saleTypes.BUY_NOW);
 
-	const [uploadSuccess, setUploadSuccess] = useState(false);
-	const [loadingAfterSend, setLoadingAfterSend] = useState(false);
-
-	const [ethPrice, setEthPrice] = useState({});
-
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value);
-		// console.log(e.target.value);
 	}, [])
 
 	const handleInputChange = (e) => {
@@ -95,89 +81,16 @@ const ModalListingNft = props => {
 		event.preventDefault();
 
 		if (saleType === saleTypes.AUCTION) {
-			StartAuction();
+			onStartAuction(sellPrice, duration);
 		} else {
-			Sale(true)
+			onSale(true, sellPrice)
 		}
 	}
-
-	const toggleModal2 = () => {
-		setUploadSuccess(false);
-		setLoadingAfterSend(false);
-	}
-	const handleUploadMore = () => {
-		window.location.reload()
-	}
-
-	const StartAuction = async () => {
-		try {
-			let price = ((sellPrice) * ETHER).toString();
-			let times = duration / 1000;
-
-			setLoadingAfterSend(!loadingAfterSend);
-			const res = await contract.methods
-				.startbid(
-					tokenID,
-					price,
-					times
-				)
-				.send({from: accounts, gas: 5000000});
-
-			console.log('res1', res);
-			toggleModal2();
-			setUploadSuccess(!uploadSuccess);
-		} catch (err) {
-			setLoadingAfterSend(!loadingAfterSend)
-		}
-	};
-
-	const Sale = async (isListed) => {
-		let price = isListed === true ? ((sellPrice) * ETHER).toString() : 0;
-		try {
-
-			setLoadingAfterSend(!loadingAfterSend);
-			const res = await contract.methods
-				.Sale(
-					tokenID,
-					price,
-					isListed,
-				)
-				.send({from: accounts, gas: 5000000});
-
-			console.log('res', res);
-			toggleModal2();
-			setUploadSuccess(!uploadSuccess);
-
-		} catch (error) {
-			setLoadingAfterSend(!loadingAfterSend)
-		}
-	}
-
-	// const getEthDollarPrice = () => {
-	// 	try {
-	// 		Axios.get(
-	// 			`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,btc,eur,gpb&include_24hr_change=false`
-	// 		).then((res) => {
-	// 			console.log(typeof res.data.ethereum.usd_24h_change);
-				// setEthPrice(res.data.ethereum);
-			// });
-		// } catch {
-		// 	console.log('could not get the request');
-		// }
-	// };
-
-	// useEffect(() => {
-	// 	getEthDollarPrice();
-	// }, []);
-
-	// const usdPrice = (ethprice) => {
-	// 	return (Number(Web3.utils.fromWei(ethprice.toString(), 'ether')))
-	// }
 
 	return (
 		<Modal
 			toggle={toggle}
-			onClosed={onClosed}
+			onClosed={onClose}
 			isOpen={isOpen}
 			className='modal-listing-nft'
 			unmountOnClose
@@ -255,7 +168,7 @@ const ModalListingNft = props => {
 					</FormGroup>
 					<FormGroup className={saleType === saleTypes.BUY_NOW ? 'form-disabled' : ''}>
 						<Label className='label' htmlFor='buynow'>
-						End Date
+							End Date
 						</Label>
 						<Input
 							disabled={saleType === saleTypes.BUY_NOW}
@@ -263,7 +176,7 @@ const ModalListingNft = props => {
 							type='datetime-local'
 							onChange={handleInputChange2}
 						/>
-						
+
 					</FormGroup>
 					<div className='submit-button-wrapper'>
 						<button
@@ -273,22 +186,6 @@ const ModalListingNft = props => {
 							Confirm
 						</button>
 					</div>
-
-					{
-						loadingAfterSend
-							? <Loading name="Listing NFT"/>
-							: null
-					}
-
-					{
-						<SuccessfulModals
-							isOpen={uploadSuccess}
-							toggle={toggleModal2}
-							onClose={toggleModal2}
-							variation={2}
-							handleUploadMore={handleUploadMore}
-						/>
-					}
 				</Form>
 			)}
 		/>

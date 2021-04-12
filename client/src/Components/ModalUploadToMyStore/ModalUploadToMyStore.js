@@ -1,7 +1,6 @@
 import React, {useRef, useEffect, useState, useReducer, useCallback} from 'react';
 import Modal from "../Modal";
 import { Form, FormGroup, Input, Label} from "reactstrap";
-import loader from "../../images/loader.svg";
 import './style.scss';
 
 const CHANGE_FILE_VALUE = 'CHANGE_FILE_VALUE';
