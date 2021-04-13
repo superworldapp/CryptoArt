@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import {
 	Container,
 	Card,
@@ -12,9 +12,10 @@ import {
 	Col,
 	CardTitle,
 } from 'reactstrap';
+import { Carousel } from 'react-responsive-carousel';
 
 import Auth from './Auth';
-import { LayoutContext } from '../state/Layout/context';
+import {LayoutContext} from '../state/Layout/context';
 
 import image1 from '../images/image 166.png';
 import image2 from '../images/image 167.png';
@@ -171,7 +172,7 @@ class Home extends Component {
 					`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd,btc,eur,gpb&include_24hr_change=false`
 				).then((res) => {
 					// console.log(typeof res.data.ethereum.usd_24h_change);
-					this.setState({ethPrice:res.data.ethereum});
+					this.setState({ethPrice: res.data.ethereum});
 				});
 			} catch {
 				console.log('could not get the request');
@@ -242,6 +243,13 @@ class Home extends Component {
 
 	render() {
 		const isMobile = window.innerWidth < 500;
+		const settings = {
+			dots: true,
+			infinite: true,
+			speed: 500,
+			slidesToShow: 1,
+			slidesToScroll: 1
+		};
 		if (this.state.loggedIn && this.state.startClicked) {
 			return <Redirect to='/allart'/>;
 		} else {
@@ -255,83 +263,79 @@ class Home extends Component {
 							{!isMobile ?
 								(
 									<div className="upperView">
-									<div className="sectionText1">
-										<h1 id='header'>WELCOME TO THE SUPERWORLD NFT SALON</h1>
-										<p className='text1'>
-											{' '}
-											BUY
-											<span className="text2">
-                      and
+										<div className="sectionText1">
+											<h1 id='header'>WELCOME TO THE SUPERWORLD NFT SALON</h1>
+											<p className='text1'>
+												BUY
+												<span className="text2">
+                      &nbsp;and&nbsp;
                     </span>
-											SELL
-											<span className="text2">
-                    {' '} your favorite NFT's and 
+												SELL&nbsp;
+												<span className="text2">
+                     your favorite NFT's and
                     <br/>
                     make a {' '}
                     </span>
-											<a target='blank' href='https://www.superworldapp.com/'>
-												SuperWorld
-											</a> {' '}
-											all your own
-										</p>
-										<div id='start-btn'>
-											<button
-												className='start-btn'
-												onClick={this.handleStartClick}
-											>
-												Explore
-											</button>
+												<a target='blank' href='https://www.superworldapp.com/' className="text1">
+													SuperWorld
+												</a> {' '}
+												<span className="text2">all your own</span>
+											</p>
+											<div id='start-btn'>
+												<button
+													className='start-btn'
+													onClick={this.handleStartClick}
+												>
+													Explore
+												</button>
+											</div>
+										</div>
+										<div className="col1">
+											<div className='home-slider'>
+												<figure>
+													<img className='topimage' src={image1} alt='img'/>
+													<img className='topimage' src={image2} alt='img'/>
+													<img className='topimage' src={image3} alt='img'/>
+													<img className='topimage' src={image4} alt='img'/>
+													<img className='topimage' src={image1} alt='img'/>
+												</figure>
+											</div>
 										</div>
 									</div>
-									<div className="col1">
-
-										<div className='home-slider'>
-											<figure>
-												<img className='topimage' src={image1} alt='img'/>
-												<img className='topimage' src={image2} alt='img'/>
-												<img className='topimage' src={image3} alt='img'/>
-												<img className='topimage' src={image4} alt='img'/>
-												<img className='topimage' src={image1} alt='img'/>
-											</figure>
-										</div>
-
-									</div>
-								</div>
 								)
 								:
 								(
 									<div className="upperView">
-									<div className="sectionText1">
-										<h1 id ='header'>WELCOME TO THE SUPERWORLD NFT SALON</h1>
-										<p className='text1'>
-											{' '}
-											BUY
-											<span className="text2">
-                      and
+										<div className="sectionText1">
+											<h1 id='header'>WELCOME TO THE SUPERWORLD NFT SALON</h1>
+											<p className='text1'>
+												BUY
+												<span className="text2">
+                      &nbsp;and&nbsp;
                     </span>
-											SELL
-											<span className="text2">
-                    {' '}your favorite NFTs  and 
+												SELL&nbsp;
+												<span className="text2">
+                    your favorite NFTs  and
                     <br/>
                     make a {' '}
                     </span>
-											<a target='blank' href='https://www.superworldapp.com/'>
-												SuperWorld
-											</a>
-											all your own
-										</p>
-									</div>
-									<div className="col1">
-										<div className='home-slider'>
-											<figure>
-												<img className='topimage' src={image1} alt='img'/>
-												<img className='topimage' src={image2} alt='img'/>
-												<img className='topimage' src={image3} alt='img'/>
-												<img className='topimage' src={image4} alt='img'/>
-												<img className='topimage' src={image1} alt='img'/>
-											</figure>
+												<a target='blank' href='https://www.superworldapp.com/' className="text1">
+													SuperWorld
+												</a>{' '}
+												<span className="text2">all your own</span>
+											</p>
 										</div>
-									</div>
+										<div className="col1">
+											<div className='home-slider'>
+												<figure>
+													<img className='topimage' src={image1} alt='img'/>
+													<img className='topimage' src={image2} alt='img'/>
+													<img className='topimage' src={image3} alt='img'/>
+													<img className='topimage' src={image4} alt='img'/>
+													<img className='topimage' src={image1} alt='img'/>
+												</figure>
+											</div>
+										</div>
 										<div id='start-btn'>
 											<button
 												className='start-btn'
@@ -340,7 +344,7 @@ class Home extends Component {
 												Explore
 											</button>
 										</div>
-								</div>
+									</div>
 								)
 							}
 							<br/>
@@ -351,142 +355,138 @@ class Home extends Component {
 
 							{!isMobile ?
 								(<div className='middleView'>
-								<div className="col2">
-									<Row className = "gridRow1">
-									<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-1'>
-												<figure>
-													<img src={image2} className="image10" alt="image10"/>
-													<img src={image3} className="image10" alt="image10"/>
-													<img src={image2} className="image10" alt="image10"/>
-													<img src={image3} className="image10" alt="image10"/>
-													<img src={image2} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-2'>
-												<figure>
-													<img src={image3} className="image10" alt="image10"/>
-													<img src={image4} className="image10" alt="image10"/>
-													<img src={image3} className="image10" alt="image10"/>
-													<img src={image4} className="image10" alt="image10"/>
-													<img src={image3} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-3'>
-												<figure>
-													<img src={image4} className="image10" alt="image10"/>
-													<img src={image5} className="image10" alt="image10"/>
-													<img src={image4} className="image10" alt="image10"/>
-													<img src={image5} className="image10" alt="image10"/>
-													<img src={image4} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-									</Row>
-									<Row className = "gridRow2">
-									<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-4'>
-												<figure>
-													<img src={image5} className="image10" alt="image10"/>
-													<img src={image6} className="image10" alt="image10"/>
-													<img src={image5} className="image10" alt="image10"/>
-													<img src={image6} className="image10" alt="image10"/>
-													<img src={image5} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-5'>
-												<figure>
-													<img src={image6} className="image10" alt="image10"/>
-													<img src={image7} className="image10" alt="image10"/>
-													<img src={image6} className="image10" alt="image10"/>
-													<img src={image7} className="image10" alt="image10"/>
-													<img src={image6} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-6'>
-												<figure>
-													<img src={image7} className="image10" alt="image10"/>
-													<img src={image8} className="image10" alt="image10"/>
-													<img src={image7} className="image10" alt="image10"/>
-													<img src={image8} className="image10" alt="image10"/>
-													<img src={image7} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-									</Row>
-									<Row className = "gridRow3">
-									<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-7'>
-												<figure>
-													<img src={image8} className="image10" alt="image10"/>
-													<img src={image9} className="image10" alt="image10"/>
-													<img src={image8} className="image10" alt="image10"/>
-													<img src={image9} className="image10" alt="image10"/>
-													<img src={image8} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-8'>
-												<figure>
-													<img src={image9} className="image10" alt="image10"/>
-													<img src={image10} className="image10" alt="image10"/>
-													<img src={image9} className="image10" alt="image10"/>
-													<img src={image10} className="image10" alt="image10"/>
-													<img src={image9} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-9'>
-												<figure>
-													<img src={image10} className="image10" alt="image10"/>
-													<img src={image11} className="image10" alt="image10"/>
-													<img src={image10} className="image10" alt="image10"/>
-													<img src={image11} className="image10" alt="image10"/>
-													<img src={image10} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-									</Row>
-									
-								</div>
-								<div className="col3">
-								<div className="sectionText2">
-									<h1 id='header2'> FEATURED NFTs </h1>
-									<p className='text2'>
-
-										Check out NFTs from our rotating 
-										gallery of <br/> new and established artists, musicians, <br/> designers,
-										and content creators
-										<br/>
-										{/* And share it in your{' '}
+										<div className="col2">
+											<Row className="gridRow1">
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-1'>
+														<figure>
+															<img src={image2} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image2} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image2} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-2'>
+														<figure>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-3'>
+														<figure>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+											</Row>
+											<Row className="gridRow2">
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-4'>
+														<figure>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-5'>
+														<figure>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-6'>
+														<figure>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+											</Row>
+											<Row className="gridRow3">
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-7'>
+														<figure>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-8'>
+														<figure>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-9'>
+														<figure>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image11} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image11} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+											</Row>
+										</div>
+										<div className="col3">
+											<div className="sectionText2">
+												<h1 id='header2'> FEATURED NFTs </h1>
+												<p className='textFeaturedNft'>
+													Check out NFTs from our rotating
+													gallery of new and established
+													artists, musicians, designers
+													and content creators
+													{/* And share it in your{' '}
 			<a target='blank' href='https://www.superworldapp.com/'>
 			  SuperWorld
 			</a> */}
-										
-										<br/>
-									</p>
-									<div id='start-btn'>
-										<button
-											className='start-btn'
-											onClick={this.handleStartClick}
-										>
-											Explore
-										</button>
-									</div>
+												</p>
+												<div id='start-btn'>
+													<button
+														className='start-btn'
+														onClick={this.handleStartClick}
+													>
+														Explore
+													</button>
+												</div>
 
-								</div>
-								</div>
-								{/* <div className='col1'>
+											</div>
+										</div>
+										{/* <div className='col1'>
 		  <img className='img1' src={image1} alt='image1' />
 		  <img className='ellispse' src={p1} alt='ellipse' />
 		  <img className='image8' src={Nate1} alt='img' />
@@ -509,283 +509,442 @@ class Home extends Component {
 		  ></Grid>
 		</div>
 	  </div> */}
-							</div>
-						)
-						:
-						(
-							<div className='middleView'>
-								<div className="sectionText2">
-									<h1 id='header2'>FEATURED NFTs</h1>
-									<p className='textFeature'>
-									Check out NFTs from our rotating 
-									gallery of new and established artists, musicians, designers,
-									and content creators
-									</p>
-								</div>
-								<div className="col2">
-									<Row around="xs" className="gridRow1">
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-1'>
-												<figure>
-													<img src={image2} className="image10" alt="image10"/>
-													<img src={image3} className="image10" alt="image10"/>
-													<img src={image2} className="image10" alt="image10"/>
-													<img src={image3} className="image10" alt="image10"/>
-													<img src={image2} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-2'>
-												<figure>
-													<img src={image3} className="image10" alt="image10"/>
-													<img src={image4} className="image10" alt="image10"/>
-													<img src={image3} className="image10" alt="image10"/>
-													<img src={image4} className="image10" alt="image10"/>
-													<img src={image3} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-3'>
-												<figure>
-													<img src={image4} className="image10" alt="image10"/>
-													<img src={image5} className="image10" alt="image10"/>
-													<img src={image4} className="image10" alt="image10"/>
-													<img src={image5} className="image10" alt="image10"/>
-													<img src={image4} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-									</Row>
-									<Row around="xs" className="gridRow2">
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-4'>
-												<figure>
-													<img src={image5} className="image10" alt="image10"/>
-													<img src={image6} className="image10" alt="image10"/>
-													<img src={image5} className="image10" alt="image10"/>
-													<img src={image6} className="image10" alt="image10"/>
-													<img src={image5} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-5'>
-												<figure>
-													<img src={image6} className="image10" alt="image10"/>
-													<img src={image7} className="image10" alt="image10"/>
-													<img src={image6} className="image10" alt="image10"/>
-													<img src={image7} className="image10" alt="image10"/>
-													<img src={image6} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-6'>
-												<figure>
-													<img src={image7} className="image10" alt="image10"/>
-													<img src={image8} className="image10" alt="image10"/>
-													<img src={image7} className="image10" alt="image10"/>
-													<img src={image8} className="image10" alt="image10"/>
-													<img src={image7} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-									</Row>
-									<Row around="xs" className="gridRow3">
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-7'>
-												<figure>
-													<img src={image8} className="image10" alt="image10"/>
-													<img src={image9} className="image10" alt="image10"/>
-													<img src={image8} className="image10" alt="image10"/>
-													<img src={image9} className="image10" alt="image10"/>
-													<img src={image8} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-8'>
-												<figure>
-													<img src={image9} className="image10" alt="image10"/>
-													<img src={image10} className="image10" alt="image10"/>
-													<img src={image9} className="image10" alt="image10"/>
-													<img src={image10} className="image10" alt="image10"/>
-													<img src={image9} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-										<Col xs={2} className="gridCol1">
-											<div className='home-slider-multiple home-slider-multiple-9'>
-												<figure>
-													<img src={image10} className="image10" alt="image10"/>
-													<img src={image11} className="image10" alt="image10"/>
-													<img src={image10} className="image10" alt="image10"/>
-													<img src={image11} className="image10" alt="image10"/>
-													<img src={image10} className="image10" alt="image10"/>
-												</figure>
-											</div>
-										</Col>
-									</Row>
-								</div>
-								<div id='start-btn'>
-									<button
-										className='start-btn'
-										onClick={this.handleStartClick}
-									>
-										Explore
-									</button>
-								</div>
-							</div>
-						)
-					}
-									
-              <br />
-              <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
-              <br/>
-              <div style={{height: '1.5rem', backgroundColor:' #D5D7FA'}}></div>
+									</div>
+								)
+								:
+								(
+									<div className='middleView'>
+										<div className="sectionText2">
+											<h1 id='header2'>FEATURED NFTs</h1>
+											<p className='textFeature'>
+												Check out NFTs from our rotating
+												gallery of new and established artists, musicians, designers,
+												and content creators
+											</p>
+										</div>
+										<div className="col2">
+											<Row around="xs" className="gridRow1">
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-1'>
+														<figure>
+															<img src={image2} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image2} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image2} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-2'>
+														<figure>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image3} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-3'>
+														<figure>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image4} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+											</Row>
+											<Row around="xs" className="gridRow2">
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-4'>
+														<figure>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image5} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-5'>
+														<figure>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image6} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-6'>
+														<figure>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image7} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+											</Row>
+											<Row around="xs" className="gridRow3">
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-7'>
+														<figure>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image8} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-8'>
+														<figure>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image9} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+												<Col xs={2} className="gridCol1">
+													<div className='home-slider-multiple home-slider-multiple-9'>
+														<figure>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image11} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+															<img src={image11} className="image10" alt="image10"/>
+															<img src={image10} className="image10" alt="image10"/>
+														</figure>
+													</div>
+												</Col>
+											</Row>
+										</div>
+										<div id='start-btn'>
+											<button
+												className='start-btn'
+												onClick={this.handleStartClick}
+											>
+												Explore
+											</button>
+										</div>
+									</div>
+								)
+							}
 
-              <div className="trendNftMain">
-                <div className="trendTitle">
-                  <div className="trendTitleMain">
-                    Trending NFTs
-                  </div>
-                  <div className="trendViewMore">
-                    View More
-                  </div>
-                </div>
-                <div className="cardMain">
-                {mockTrendingNft.map(({
-                                 img,
-                                 profileImg,
-                                 title,
-                                 userName,
-                                 price,
-                                 usdPrice,
-                                 btnName,
-                                 time
-                               }) => (
-                  <Card className="cardWrapper">
-                  <CardImg
-                    top
-                    className="card-background-image"
-                    src={img}
-                    alt='image3'
-                  />
-                  <CardImgOverlay className="cardImgOverlay">
-                    <div className="userImg">
-                      <img src={profileImg || profile} alt="userImg"/>
-                    </div>
-                    <CardTitle className="card-user-title">
-                      {title || 'none'}
-                    </CardTitle>
-                  </CardImgOverlay>
-                  <CardBody className="card-body">
-                    <div className="card-user-body">
-                      <CardSubtitle className="card-created-by">
-                        by
-                      </CardSubtitle>
-                      <CardSubtitle className="card-subtitle-name">
-                        {userName || ''}
-                      </CardSubtitle>
-                    </div>
-                    <div className='card-text-info'>
-                      <CardText className="card-text-info-price">
-                        {price || '0.5ETH'}
-                        <p className="card-text-info-usd">
-													{`($${(0.5*this.state.ethPrice.usd).toFixed(2)} USD)`}
-                          {/*{usdPrice*ethPrice || '($985.56 USD)'}*/}
-                        </p>
-                      </CardText>
-                      <div>
-                        <button className='card-buy-button'>{btnName}</button>
-                      </div>
-                    </div>
-                    <div className='card-buy-time'>
-                      <p className='card-buy-time-text'>
-                        {time}
-                      </p>
-                    </div>
-                  </CardBody>
-                </Card>
-                ))}
-                </div>
-              </div>
-							<div className="trendNftMain">
-								<div className="trendTitle">
-									<div className="trendTitleMain">
-										Popular Real Estate
+							<br/>
+							<div style={{height: '1.5rem', backgroundColor: ' #D5D7FA'}}></div>
+							<br/>
+							<div style={{height: '1.5rem', backgroundColor: ' #D5D7FA'}}></div>
+
+							{!isMobile
+								? (
+									<div className="trendNftMain">
+										<div className="trendTitle">
+											<div className="trendTitleMain">
+												Trending NFTs
+											</div>
+											<div className="trendViewMore">
+												View More
+											</div>
+										</div>
+										<div className="cardMain">
+											{mockTrendingNft.map(({
+																							img,
+																							profileImg,
+																							title,
+																							userName,
+																							price,
+																							usdPrice,
+																							btnName,
+																							time
+																						}) => (
+												<Card className="cardWrapper">
+													<CardImg
+														top
+														className="card-background-image"
+														src={img}
+														alt='image3'
+													/>
+													<CardImgOverlay className="cardImgOverlay">
+														<div className="userImg">
+															<img src={profileImg || profile} alt="userImg"/>
+														</div>
+														<CardTitle className="card-user-title">
+															{title || 'none'}
+														</CardTitle>
+													</CardImgOverlay>
+													<CardBody className="card-body">
+														<div className="card-user-body">
+															<CardSubtitle className="card-created-by">
+																by
+															</CardSubtitle>
+															<CardSubtitle className="card-subtitle-name">
+																{userName || ''}
+															</CardSubtitle>
+														</div>
+														<div className='card-text-info'>
+															<CardText className="card-text-info-price">
+																{price || '0.5ETH'}
+																<p className="card-text-info-usd">
+																	{`($${(0.5 * this.state.ethPrice.usd).toFixed(2)} USD)`}
+																	{/*{usdPrice*ethPrice || '($985.56 USD)'}*/}
+																</p>
+															</CardText>
+															<div>
+																<button className='card-buy-button'>{btnName}</button>
+															</div>
+														</div>
+														<div className='card-buy-time'>
+															<p className='card-buy-time-text'>
+																{time}
+															</p>
+														</div>
+													</CardBody>
+												</Card>
+											))}
+										</div>
+									</div>
+							) : (
+									<div className="trendNftMain">
+										<div className="trendTitle">
+											<div className="trendTitleMain">
+												Trending NFTs
+											</div>
+										</div>
+										<div className="cardMain">
+											<Carousel
+												width='239px'
+												infiniteLoop
+												showStatus={false}
+												showThumbs={false}
+												showArrows={false}
+											>
+												{mockTrendingNft.map(({
+																								img,
+																								profileImg,
+																								title,
+																								userName,
+																								price,
+																								usdPrice,
+																								btnName,
+																								time
+																							}) => (
+													<Card className="cardWrapper">
+														<CardImg
+															top
+															className="card-background-image"
+															src={img}
+															alt='image3'
+														/>
+														<CardImgOverlay className="cardImgOverlay">
+															<div className="userImg">
+																<img src={profileImg || profile} alt="userImg"/>
+															</div>
+															<CardTitle className="card-user-title">
+																{title || 'none'}
+															</CardTitle>
+														</CardImgOverlay>
+														<CardBody className="card-body">
+															<div className="card-user-body">
+																<CardSubtitle className="card-created-by">
+																	by
+																</CardSubtitle>
+																<CardSubtitle className="card-subtitle-name">
+																	{userName || ''}
+																</CardSubtitle>
+															</div>
+															<div className='card-text-info'>
+																<CardText className="card-text-info-price">
+																	{price || '0.5ETH'}
+																	<p className="card-text-info-usd">
+																		{`($${(0.5 * this.state.ethPrice.usd).toFixed(2)} USD)`}
+																		{/*{usdPrice*ethPrice || '($985.56 USD)'}*/}
+																	</p>
+																</CardText>
+																<div>
+																	<button className='card-buy-button'>{btnName}</button>
+																</div>
+															</div>
+															<div className='card-buy-time'>
+																<p className='card-buy-time-text'>
+																	{time}
+																</p>
+															</div>
+														</CardBody>
+													</Card>
+												))}
+											</Carousel>
+										</div>
+										<div className="trendViewMore">
+											View More
+										</div>
+									</div>
+								)}
+
+							{!isMobile ? (
+								<div className="trendNftMain">
+									<div className="trendTitle">
+										<div className="trendTitleMain">
+											Popular Real Estate
+										</div>
+										<div className="trendViewMore">
+											View More
+										</div>
+									</div>
+									<div className="cardMain">
+										{mockRealEstate.map(({
+																					 img,
+																					 profileImg,
+																					 title,
+																					 userName,
+																					 price,
+																					 usdPrice,
+																					 btnName,
+																					 time
+																				 }) => (
+											<Card className="cardWrapper">
+
+												<CardImg
+													top
+													className="card-background-image"
+													src={img}
+													alt='image3'
+												/>
+												<CardImgOverlay className="cardImgOverlay">
+													<div className="userImg">
+														<img src={profileImg || profile} alt="userImg"/>
+													</div>
+													<CardTitle className="card-user-title">
+														{title || 'none'}
+													</CardTitle>
+												</CardImgOverlay>
+												<CardBody className="card-body">
+													<div className="card-user-body">
+														<CardSubtitle className="card-created-by">
+															by
+														</CardSubtitle>
+														<CardSubtitle className="card-subtitle-name">
+															{userName || ''}
+														</CardSubtitle>
+													</div>
+													<div className='card-text-info'>
+														<CardText className="card-text-info-price">
+															{price || '0.5ETH'}
+															<p className="card-text-info-usd">
+																{usdPrice || '($985.56 USD)'}
+															</p>
+														</CardText>
+														<a href='https://map.superworldapp.com/' target='_blank'>
+															<div>
+																<button className='card-buy-button'>{btnName}</button>
+															</div>
+														</a>
+													</div>
+													<div className='card-buy-time'>
+														<p className='card-buy-time-text'>
+															{time}
+														</p>
+													</div>
+												</CardBody>
+
+											</Card>
+										))}
+									</div>
+								</div>
+							) : (
+								<div className="trendNftMain">
+									<div className="trendTitle">
+										<div className="trendTitleMain">
+											Popular Real Estate
+										</div>
+									</div>
+									<div className="cardMain">
+										<Carousel
+											width='239px'
+											infiniteLoop
+											showStatus={false}
+											showThumbs={false}
+											showArrows={false}
+										>
+										{mockRealEstate.map(({
+																					 img,
+																					 profileImg,
+																					 title,
+																					 userName,
+																					 price,
+																					 usdPrice,
+																					 btnName,
+																					 time
+																				 }) => (
+											<Card className="cardWrapper">
+												<CardImg
+													top
+													className="card-background-image"
+													src={img}
+													alt='image3'
+												/>
+												<CardImgOverlay className="cardImgOverlay">
+													<div className="userImg">
+														<img src={profileImg || profile} alt="userImg"/>
+													</div>
+													<CardTitle className="card-user-title">
+														{title || 'none'}
+													</CardTitle>
+												</CardImgOverlay>
+												<CardBody className="card-body">
+													<div className="card-user-body">
+														<CardSubtitle className="card-created-by">
+															by
+														</CardSubtitle>
+														<CardSubtitle className="card-subtitle-name">
+															{userName || ''}
+														</CardSubtitle>
+													</div>
+													<div className='card-text-info'>
+														<CardText className="card-text-info-price">
+															{price || '0.5ETH'}
+															<p className="card-text-info-usd">
+																{usdPrice || '($985.56 USD)'}
+															</p>
+														</CardText>
+														<a href='https://map.superworldapp.com/' target='_blank'>
+															<div>
+																<button className='card-buy-button'>{btnName}</button>
+															</div>
+														</a>
+													</div>
+													<div className='card-buy-time'>
+														<p className='card-buy-time-text'>
+															{time}
+														</p>
+													</div>
+												</CardBody>
+
+											</Card>
+										))}
+										</Carousel>
 									</div>
 									<div className="trendViewMore">
 										View More
 									</div>
 								</div>
-								<div className="cardMain">
-									{mockRealEstate.map(({
-																					img,
-																					profileImg,
-																					title,
-																					userName,
-																					price,
-																					usdPrice,
-																					btnName,
-																					time
-																				}) => (
-										<Card className="cardWrapper">
-											
-											<CardImg
-												top
-												className="card-background-image"
-												src={img}
-												alt='image3'
-											/>
-											<CardImgOverlay className="cardImgOverlay">
-												<div className="userImg">
-													<img src={profileImg || profile} alt="userImg"/>
-												</div>
-												<CardTitle className="card-user-title">
-													{title || 'none'}
-												</CardTitle>
-											</CardImgOverlay>
-											<CardBody className="card-body">
-												<div className="card-user-body">
-													<CardSubtitle className="card-created-by">
-														by
-													</CardSubtitle>
-													<CardSubtitle className="card-subtitle-name">
-														{userName || ''}
-													</CardSubtitle>
-												</div>
-												<div className='card-text-info'>
-													<CardText className="card-text-info-price">
-														{price || '0.5ETH'}
-														<p className="card-text-info-usd">
-															{usdPrice || '($985.56 USD)'}
-														</p>
-													</CardText>
-													<a href='https://map.superworldapp.com/' target='_blank'>
-													<div>
-														<button className='card-buy-button'>{btnName}</button>
-													</div></a>
-												</div>
-												<div className='card-buy-time'>
-													<p className='card-buy-time-text'>
-														{time}
-													</p>
-												</div>
-											</CardBody>
-											
-										</Card>
-									))}
-								</div>
-							</div>
+							)}
 						</Container>
 					</div>
-        </>
-      );
-    }
-  }
+				</>
+			);
+		}
+	}
 }
 
 export default Home;
