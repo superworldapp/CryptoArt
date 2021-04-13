@@ -195,7 +195,6 @@
 			text-transform: uppercase;
 			outline: none;
 			border: none;
-
 			&:first-child {
 				margin-right: 25px;
 			}
@@ -203,6 +202,7 @@
 	}
 
 	.set-following-btn {
+		opacity: .6;
 		text-align: center;
 		border: 2px solid #C3BBEC;
 		border-radius: 10px;
