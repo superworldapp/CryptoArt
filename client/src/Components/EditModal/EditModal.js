@@ -9,6 +9,8 @@ import Loading from "../Loading/loading";
 import SuccessfulModals from "../SuccessModal/SuccessfulModals";
 import Web3 from "web3";
 import Axios from "axios";
+import Sound from "react-sound";
+import ReactPlayer from "react-player";
 
 const saleTypes = {
 	AUCTION: 'AUCTION',
@@ -48,11 +50,13 @@ const EditModal = props => {
 
 	const auctionInputRef = useRef(null)
 	const buyNowInputRef = useRef(null)
-	const [sellPrice, setSellPrice] = useState(saleTypes.BUY_NOW);
+	const [sellPrice, setSellPrice] = useState(0);
 	const [duration, setDuration] = useState(saleTypes.BUY_NOW);
 	const [saleType, setSaleType] = useState(saleTypes.BUY_NOW);
 
 	const [ethPrice, setEthPrice] = useState({});
+
+	const [soundPlaying, setSoundPlaying] = useState('');
 
 	const onSaleTypeChange = useCallback(e => {
 		setSaleType(e.target.value);
@@ -118,6 +122,56 @@ const EditModal = props => {
 		return (Number(Web3.utils.fromWei(ethprice.toString(), 'ether')))
 	}
 
+	const displayFileType = () => {
+		if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(imgThumb)) {
+			return (
+				<img style={{width: '95px', margin: '0 auto'}}
+						 className='control-preview-img'
+						 src={imgThumb}
+						 alt={imgThumb}
+				/>
+			);
+		} else if (/\.(?:wav|mp3)$/i.test(imgThumb)) {
+			return (
+				<>
+					<button
+						style={{
+							zIndex: '1'
+						}}
+						onClick={() => setSoundPlaying(soundPlaying)}>
+						{soundPlaying ? 'Pause' : 'Play'}
+					</button>
+					<Sound
+						url={imgThumb}
+						playStatus={
+							soundPlaying
+								? Sound.status.PLAYING
+								: ''
+						}
+						playFromPosition={300 /* in milliseconds */}
+						// onLoading={this.handleSongLoading}
+						// onPlaying={this.handleSongPlaying}
+						// onFinishedPlaying={this.handleSongFinishedPlaying}
+					/>
+				</>
+			);
+		} else if (
+			/\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
+				imgThumb
+			)
+		) {
+			return (
+				<ReactPlayer
+					className="video-card"
+					loop={true}
+					playing={true}
+					url={imgThumb}
+				/>
+			);
+		}
+	};
+
+
 	return (
 
 		<Modal
@@ -140,12 +194,7 @@ const EditModal = props => {
 				<Form>
 
 					<FormGroup className='form-group-preview'>
-						{<img style={{width: '95px', margin: '0 auto'}}
-									className='control-preview-img'
-									src={imgThumb}
-									alt={imgThumb}
-						/>
-						}
+						{displayFileType()}
 					</FormGroup>
 					<FormGroup>
 						<div className="sale-block">
@@ -200,7 +249,7 @@ const EditModal = props => {
 						<span className='after-input-text'>
               ETH
 							<span>
-								{`($${(usdPrice(props.price) * ethPrice.usd).toFixed(2)} USD)`}
+								{`($${(sellPrice * ethPrice.usd).toFixed(2)} USD)`}
 							</span>
             </span>
 					</FormGroup>

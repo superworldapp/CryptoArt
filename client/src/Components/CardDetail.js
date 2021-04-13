@@ -204,7 +204,8 @@ console.log(`==========>art?._imgUrl`,art?._imgUrl);
     });
     console.log(handleInput)
     setLoadingPlaceBid(false);
-    setBidSuccess(true);
+    setPurchaseSuccess(true);
+    //setBidSuccess(true);
     console.log(res);
   };
 
@@ -333,7 +334,15 @@ console.log(`==========>art?._imgUrl`,art?._imgUrl);
       );
     }
   };
+  const setDate = () => {
+    const milliSec = Number(this.props.art._bidEnd * 1000) - Date.now();
+    let hours = Math.floor((milliSec / (1000 * 60 * 60))).toFixed(0);
+    let minutes = ((milliSec / (1000 * 60)) % 60).toFixed(0)
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
 
+    return `${hours} Hrs ${minutes} Min Remaining`
+  }
   useEffect(() => {
     getCreData();
     getEthDollarPrice();
@@ -420,7 +429,13 @@ console.log(`==========>art?._imgUrl`,art?._imgUrl);
                   {art?._isSellings ?
                   <div></div> :
                   <div className="detail-time">
-                    Bid ends in
+                    Bid ends in {
+                	art?._bidEnd === '0'
+                		? ''
+                		: Date.now() / 1000 < art?._bidEnd
+                		? setDate()
+                		: (<p className="red">Auction Timer Ended</p>)
+                }
                 </div>
                  }
                 </div>

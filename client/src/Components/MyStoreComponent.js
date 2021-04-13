@@ -95,6 +95,7 @@ class MyStoreComponent extends Component {
 			docCount: 0,
 			art: [],
 			batchart: [],
+			batch:[],
 			cust: [],
 			manuf: [],
 			isModalOpen1: false,
@@ -276,6 +277,16 @@ class MyStoreComponent extends Component {
 	}
 
 	async componentDidMount() {
+		let response3 = [];
+		let resx1 = await this.props.contract?.methods.tokenBatchIndex().call();
+			for (let i = 1; i <= resx1; i++) {
+				const rexx = await this.props.contract?.methods.getTokenBatchData(i).call();
+				if(rexx._tokenCreator == this.props.accounts){
+				response3.push(rexx);
+				}
+			}
+			
+			this.setState({batch: response3});
 		let res = await this.props.contract?.methods.totalSupply().call();
 
 		let response = [];
@@ -313,24 +324,7 @@ class MyStoreComponent extends Component {
 		}
 		this.setState({art3: response, batchart: createrToken});
 
-		// for (let i = 1; i <= response.length; i++) {
-		//   let rex = await this.props.contract?.methods.getTokenDataBatch(1).call();
-		//   response[i]._tokenHash = '0x454';
-		//   response[i]._tokenBatchName = rex._tokenBatchName;
-		//   response[i]._tokenCreator = rex._tokenCreator;
-		//   response[i]._imgurl = rex._imgurl;
-		//   response[i]._imgThumbnail = rex._imgThumbnail;
-
-		//   if (rex._tokenCreator == this.props.accounts) {
-		//     createrToken.push(rex);
-		//   }
-		// }
-
-		// console.log(createrToken);
-		// allDocs = [];
-		// allDocs = response;
-		// console.log(response);
-		// this.setState({ art: allDocs , batchart: createrToken });
+		
 	}
 
 	fileSelectHandler = (event) => {
@@ -391,7 +385,7 @@ class MyStoreComponent extends Component {
 		// TODO optimize
 		const nftsListed = batch.reduce((count, item) => +item._mintedEditions + count, 0)
 
-		const Menu1 = this.props.batch?.map((x) => {
+		const Menu1 = this.state.batch?.map((x) => {
 			return (
 				<UploadsTab
 					key={x._batchId}

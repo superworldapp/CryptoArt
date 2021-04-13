@@ -134,7 +134,7 @@ const MyProfileComponent = (props) => {
         </div>
         <div className='exampl'>
           <div className='user-container'>
-            <img className='user-img' src={getIdenticon()} alt='user-img' />
+            <img className='user-img' src={currentUser && currentUser.urlPhoto || getIdenticon()} alt='user-img' />
             <div className={'user-img-hover'}>
               <div className='edit'>Edit</div>
               <div className='upload'>Upload</div>
@@ -146,15 +146,17 @@ const MyProfileComponent = (props) => {
           </p>
           <div className='name_block_creator'>
             <p className='creator-name'>
-              {(linksStore && linksStore.name) || 'Anonymous'}
+              {currentUser !== undefined ? currentUser.name : 'Anonymous'}
               <img src={pencil} alt='pencil' id='pencil' onClick={handleEdit} />
             </p>
           </div>
-          {/* <p className="location">
-						{linksStore && linksStore.bio || 'Bagno a Ripoli, Tuscany, Italy'}
-					</p> */}
-          <SocialShare />
-          {/* <div className='social-media'>
+          <p className="location">
+						{currentUser !== undefined ? currentUser.about : '...'}
+					</p>
+          <button>Followings : {currentUser && currentUser.followings}</button>
+          <button>Followers : {currentUser && currentUser.followers}</button>
+          {/*<SocialShare />*/}
+          <div className='social-media'>
             <a
               href={(linksStore && 'http://' + linksStore.email) || '#!'}
               className='icon'
@@ -212,7 +214,7 @@ const MyProfileComponent = (props) => {
             <a href='#!' className='icon'>
               <FiUpload size={24} color='black' />
             </a>
-          </div> */}
+          </div>
         </div>
       </div>
       <StyledTabs
@@ -230,7 +232,7 @@ const MyProfileComponent = (props) => {
       </StyledTabs>
       {selectedTab === 0 && <MyCreation />}
       {selectedTab === 1 && (
-        <MyCollectionsCards collectionBatch={props.art} />
+        <MyCollectionsCards collectionBatch={props.batch} />
       )}
       {selectedTab === 2 && <RecentActivity />}
     </>
