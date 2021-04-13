@@ -198,13 +198,25 @@
         {
           "indexed": true,
           "internalType": "address",
-          "name": "stcl",
+          "name": "lister",
           "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "isBid",
+          "type": "bool"
         },
         {
           "indexed": false,
           "internalType": "uint256",
           "name": "tokenPrice",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "endTime",
           "type": "uint256"
         },
         {
@@ -254,19 +266,13 @@
         {
           "indexed": true,
           "internalType": "address",
-          "name": "stcl",
+          "name": "bidder",
           "type": "address"
         },
         {
           "indexed": false,
-          "internalType": "bool",
-          "name": "isBid",
-          "type": "bool"
-        },
-        {
-          "indexed": false,
           "internalType": "uint256",
-          "name": "close",
+          "name": "tokenPrice",
           "type": "uint256"
         },
         {
@@ -435,6 +441,25 @@
       "name": "Sale",
       "outputs": [],
       "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "a",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -1512,30 +1537,6 @@
           "internalType": "string",
           "name": "",
           "type": "string"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "tokensOwnedByWallet",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -15297,7 +15298,7 @@
     "4": {
       "events": {},
       "links": {},
-      "address": "0x232D16e3bb32Ad7f131F7dE34737D4ebe8ff6136",
+      "address": "0x0ACaCFc2108903AD2632A0378AB3f4EeF9233Dfb",
       "transactionHash": "0x010ba33cfebbd0a688e846fbf3b510dbc159af93a31e55e92d0c13de34a0e2d3"
     },
     "5777": {

@@ -230,12 +230,12 @@ class MyStoreComponent extends Component {
 				)
 				.send({from: this.props.accounts, gas: 5000000});
 			this.toggleModal2()
-
-			// if (Array.isArray(res.events.tokencreated)) {
-			//   data = await res.events.tokencreated.map((token) =>
+			let data ;
+			// if (Array.isArray(res.events.tokenCreated)) {
+			//   data = await res.events.tokenCreated.map((token) =>
 			//     Axios.post(`https://geo.superworldapp.com/api/json/token/add`, {
 			//       tokenId: token.returnValues.tokenId.toString(),
-			//       description: 'A unique piece of art',
+			//       description: this.state.description,
 			//       image: imgUrl,
 			//       name: tokenTitle,
 			//       blockchain: 'e',
@@ -247,8 +247,8 @@ class MyStoreComponent extends Component {
 			//   data = await Axios.post(
 			//     `https://geo.superworldapp.com/api/json/token/add`,
 			//     {
-			//       tokenId: res.events.tokencreated.returnValues.tokenId.toString(),
-			//       description: 'A unique piece of art',
+			//       tokenId: res.events.tokenCreated.returnValues.tokenId.toString(),
+			//       description: this.state.description,
 			//       image: imgUrl,
 			//       name: tokenTitle,
 			//       blockchain: 'e',
