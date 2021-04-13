@@ -1,0 +1,51 @@
+.history {
+	width: 500px;
+	position: relative;
+	text-align: start;
+	font-family: 'gibson', sans-serif;
+	font-style: normal;
+	row-gap: 20px;
+}
+
+.row-history-card {
+	width: 520px;
+	height: 90px;
+	margin: 0 auto 20px;
+	padding: 0;
+	background: #FFFFFF;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 15px;
+
+	.row-history-card-body {
+		display: flex;
+		justify-content: end;
+		align-items: center;
+		padding-left: 24px;
+
+		img {
+			width: 44px;
+			height: 44px;
+			margin-right: 9px;
+		}
+
+		.price {
+			text-decoration-color: #5146BF;
+			font-size: 18px;
+			line-height: 10px;
+		}
+
+		.history-detail {
+			font-family: GibsonBold;
+			font-weight: 600;
+			font-size: 18px;
+			line-height: 18px;
+		}
+
+		.time {
+			margin-top: 5px;
+			font-size: 14px;
+			line-height: 18px;
+			color: #000000;
+		}
+	}
+}
