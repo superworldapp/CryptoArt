@@ -153,7 +153,6 @@ a {
   font-weight: bold;
   color: #888888;
   font-size: 1.8rem;
-  margin: 2px;
   margin-top: 2rem;
   width: 100%;
   text-align: left;
@@ -496,13 +495,13 @@ img.rounded-circle {
     margin-bottom: 46px;
 
     .trendTitleMain {
-      font-family: GibsonSemiBold;
+      font-family: GibsonSemiBold!important;
       font-size: 18px;
       line-height: 18px;
       color: #000000;
     }
     .trendViewMore {
-      font-family: GibsonSemiBold;
+      font-family: GibsonSemiBold!important;
       font-size: 18px;
       line-height: 18px;
       color: #B2B2B2;
@@ -660,6 +659,86 @@ img.rounded-circle {
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 1920px) {
+  .trendNftMain {
+    .trendTitle {
+      padding-left: 14px;
+      padding-right: 31px;
+    }
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  #header {
+    width: 466px;
+    font-size: 55px!important;
+    line-height: 55px;
+  }
+
+  #header2 {
+    font-size: 55px!important;
+    line-height: 55px;
+  }
+
+  .text1 {
+    font-size: 24px;
+  }
+  .text2{
+    font-size: 24px;
+  }
+
+  .textFeaturedNft {
+    font-size: 24px!important;
+    line-height: 24px;
+    max-width: 400px;
+  }
+
+  .start-btn {
+    font-size: 18px;
+    font-style: normal;
+    padding: 4px 34px;
+  }
+
+  .trendNftMain {
+    .trendTitle {
+      padding-left: 0;
+      padding-right: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  #header {
+    width: 390px;
+    font-size: 46px!important;
+    line-height: 46px;
+  }
+
+  #header2 {
+    font-size: 46px!important;
+    line-height: 46px;
+  }
+
+  .text1 {
+    font-size: 20px;
+  }
+  .text2{
+    font-size: 20px;
+  }
+
+  .textFeaturedNft {
+    font-size: 20px!important;
+    line-height: 20px;
+    max-width: 330px;
+  }
+
+  .start-btn {
+    font-size: 16px;
+    font-style: normal;
+    padding: 4px 30px;
   }
 }
 

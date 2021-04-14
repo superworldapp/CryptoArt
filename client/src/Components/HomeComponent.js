@@ -32,6 +32,12 @@ import image12 from '../images/image 25.png';
 import image13 from '../images/image 28.png';
 import image14 from '../images/image 130.png';
 import image15 from '../images/image 24.png';
+import avatarCj from '../images/svg/avatarCj.svg';
+import avatarKuli from '../images/svg/avatarKuli.svg';
+import avatarMai from '../images/svg/avatarMai.svg';
+import avatarOlivia from '../images/svg/avatarOlivia.svg';
+import avatarSara from '../images/svg/avatarSara.svg';
+import avatarLogo from '../images/svg/avatarLogo.svg';
 import AnkorWat from '../images/Mask Group-2.png';
 import Bluedomesofoia from '../images/Mask Group-1.png';
 import Greatwalls from '../images/Mask Group.png';
@@ -48,7 +54,7 @@ import Axios from "axios";
 const mockTrendingNft = [
 	{
 		img: image11,
-		profileImg: avatar,
+		profileImg: avatarCj,
 		title: 'Octo',
 		userName: 'Cjsmith',
 		price: '0.5 ETH',
@@ -58,7 +64,7 @@ const mockTrendingNft = [
 	},
 	{
 		img: image12,
-		profileImg: avatar,
+		profileImg: avatarSara,
 		title: 'New Planet Pitstop',
 		userName: 'SaraViz',
 		price: '0.5 ETH',
@@ -68,7 +74,7 @@ const mockTrendingNft = [
 	},
 	{
 		img: image13,
-		profileImg: avatar,
+		profileImg: avatarOlivia,
 		title: 'Break Free',
 		userName: 'Olivia',
 		price: '0.5 ETH',
@@ -78,7 +84,7 @@ const mockTrendingNft = [
 	},
 	{
 		img: image14,
-		profileImg: avatar,
+		profileImg: avatarMai,
 		title: 'Look',
 		userName: 'Mai',
 		price: '0.5 ETH',
@@ -88,7 +94,7 @@ const mockTrendingNft = [
 	},
 	{
 		img: image15,
-		profileImg: avatar,
+		profileImg: avatarKuli,
 		title: 'Faces',
 		userName: 'kyliehart',
 		price: '0.5 ETH',
@@ -101,7 +107,7 @@ const mockTrendingNft = [
 const mockRealEstate = [
 	{
 		img: AnkorWat,
-		profileImg: avatar,
+		profileImg: avatarLogo,
 		title: 'Angkor Wat',
 		userName: 'Super World',
 		price: '0.1 ETH',
@@ -111,7 +117,7 @@ const mockRealEstate = [
 	},
 	{
 		img: Bluedomesofoia,
-		profileImg: avatar,
+		profileImg: avatarLogo,
 		title: 'Blue Domes of Oia',
 		userName: 'Super World',
 		price: '0.1 ETH',
@@ -121,7 +127,7 @@ const mockRealEstate = [
 	},
 	{
 		img: Greatwalls,
-		profileImg: avatar,
+		profileImg: avatarLogo,
 		title: 'Great Wall',
 		userName: 'Super World',
 		price: '0.1 ETH',
@@ -131,7 +137,7 @@ const mockRealEstate = [
 	},
 	{
 		img: Downtowntoronto,
-		profileImg: avatar,
+		profileImg: avatarLogo,
 		title: 'Downtown Toronto',
 		userName: 'Super World',
 		price: '0.1 ETH',
@@ -141,7 +147,7 @@ const mockRealEstate = [
 	},
 	{
 		img: Timesquare,
-		profileImg: avatar,
+		profileImg: avatarLogo,
 		title: 'Times Square',
 		userName: 'Super World',
 		price: '0.1 ETH',
