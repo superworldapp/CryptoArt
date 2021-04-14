@@ -24,7 +24,8 @@ h4 {
 
 
 .detail-img {
-	width: 530px;
+	max-width: 530px;
+	width: 100%;
 	height: 504px;
 	border-radius: 10px;
 	object-fit: cover;
@@ -113,7 +114,8 @@ h4 {
 	padding-right: 17px;
 
 	.eth-price-name {
-		width: 105px;
+		min-width: 110px;
+		width: 100%;
 		text-align: left;
 		overflow: hidden;
 	}
@@ -353,6 +355,12 @@ h4 {
 	width: 100%;
 }
 
+.detail-group {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .detail-DescText {
 	font-family: GibsonLight;
 	font-size: 14px;
@@ -385,4 +393,173 @@ h4 {
 
 .MuiList-root MuiMenu-list MuiList-padding {
 	width: 190px;
+}
+
+@media screen and (max-width: 1200px) {
+	.detail-wrapper {
+		padding: 20px 20px 90px 20px;
+		overflow: hidden;
+		box-sizing: border-box;
+
+		.detail-view {
+			flex-direction: column;
+			align-items: center;
+
+			.detail-imgblock {
+				margin-right: 0;
+
+				img {
+					height: 330px;
+				}
+			}
+
+			.detail-header {
+				margin-top: 7px;
+				justify-content: space-between;
+
+				.detail-name {
+					font-size: 18px;
+					line-height: 31px;
+				}
+
+				img {
+					height: 22px;
+					width: 22px;
+				}
+			}
+
+			.editionNumber {
+				font-size: 14px;
+				line-height: 14px;
+			}
+
+			.detail-creator {
+				flex-direction: column;
+				justify-content: center;
+				align-items: end;
+
+				.detail-by {
+					font-size: 14px;
+					line-height: 16px;
+				}
+
+				img {
+					height: 22px;
+					width: 22px;
+				}
+			}
+
+			.View2, .View1, .View-2, .batchcardbid-btn {
+				width: 280px;
+			}
+
+			.View2 {
+				margin-bottom: 15px;
+				width: 280px;
+
+				.priceInput {
+					width: 210px;
+				}
+			}
+
+			.View-2 {
+				margin-bottom: 24px;
+			}
+
+			.batchcardbid-btn {
+				height: 36px;
+			}
+
+			.eth-price-name {
+				width: 210px;
+			}
+
+			.btn-secondary {
+				width: 280px;
+			}
+
+			.detail-DescTitle {
+				font-size: 18px;
+				line-height: 18px;
+			}
+
+			.detail-DescText {
+				font-size: 14px;
+			}
+
+			.row-history-card {
+				width: 320px;
+				height: 63px;
+			}
+
+			.history-detail {
+				font-size: 11px;
+				line-height: 11px;
+			}
+
+			.row-history-card-body .price {
+				font-size: 13px;
+				font-weight: bold;
+			}
+
+			.row-history-card-body .time {
+				margin-top: 0;
+			}
+		}
+	}
+
+
+	.History-btn {
+		max-width: 520px;
+		width: 100%;
+	}
+
+	.priceCard {
+		max-width: 520px;
+		width: 100%;
+	}
+
+	.View-1 {
+		flex-direction: column;
+		padding-left: 0;
+		align-items: center;
+
+		.buy-or-sell {
+			margin-left: 0;
+		}
+	}
+
+	.history {
+		max-width: 520px;
+		width: 100%;
+	}
+
+	.eth-price-list {
+		.eth-price-name {
+			min-width: 205px;
+			width: 100%;
+		}
+	}
+	.MuiList-padding {
+		padding: 0 !important;
+
+		.MuiMenuItem-root {
+			border-bottom: 2px solid #F8F8F8!important;
+		}
+	}
+
+	.MuiMenu-paper {
+		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1) !important;
+		border-radius: 10px!important;
+		left: 45px!important;
+	}
+
+	.detail-time {
+		font-size: 14px;
+		p {
+			span {
+				display: block;
+			}
+		}
+	}
 }

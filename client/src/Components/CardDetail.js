@@ -427,19 +427,23 @@ const CardDetail = ({
 						</div>
 
 						<div className="detail-creator">
-							<div className="detailImg-creator">
-								<img src={avatar} alt="avatar"/>
+							<div className="detail-group">
+								<div className="detailImg-creator">
+									<img src={avatar} alt="avatar"/>
+								</div>
+								<div className="detail-by">
+									Owned by&ensp;
+									<div className='detail-NameArtist'>{accUsername(art?._tokenOwner)}</div>
+								</div>
 							</div>
-							<div className="detail-by">
-								Owned by&ensp;
-								<div className='detail-NameArtist'>{accUsername(art?._tokenOwner)}</div>
-							</div>
-							<div className="detailImg-creator">
-								<img src={avatar} alt="avatar"/>
-							</div>
-							<div className="detail-by">
-								Created by&ensp;
-								<div className='detail-NameArtist'>{accUsername(art?._tokenCreator)}</div>
+							<div className="detail-group">
+								<div className="detailImg-creator">
+									<img src={avatar} alt="avatar"/>
+								</div>
+								<div className="detail-by">
+									Created by&ensp;
+									<div className='detail-NameArtist'>{accUsername(art?._tokenCreator)}</div>
+								</div>
 							</div>
 						</div>
 						{art && console.log('=====>art.?_isSellings, art.?_isSellings', art)}
