@@ -167,7 +167,7 @@ const CreationCards = (props,art) => {
 					</div>
 					<div className='card-text-info'>
 						<CardText className="card-text-info-price">
-							{props.price || 0.5 } 'ETH'
+							{props.price || 0.5 } ETH
 							<p className="card-text-info-usd">
 								{`($${(0.5*ethPrice.usd).toFixed(2)} USD)`}
 							</p>

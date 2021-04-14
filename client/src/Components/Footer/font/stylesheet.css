@@ -47,7 +47,7 @@
 }
 
 @font-face {
-    font-family: 'Gibson';
+    font-family: 'GibsonBold';
     src: url('Gibson-Bold.eot');
     src: local('Gibson Bold'), local('Gibson-Bold'),
         url('Gibson-Bold.eot?#iefix') format('embedded-opentype'),
@@ -83,7 +83,7 @@
 }
 
 @font-face {
-    font-family: 'Gibson';
+    font-family: 'GibsonSemiBold';
     src: url('Gibson-SemiBold.eot');
     src: local('Gibson SemiBold'), local('Gibson-SemiBold'),
         url('Gibson-SemiBold.eot?#iefix') format('embedded-opentype'),

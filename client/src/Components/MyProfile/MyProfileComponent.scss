@@ -168,6 +168,53 @@
 	}
 }
 
+.follow-field {
+	margin-bottom: 59px;
+
+	.follow-btn-row {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 20px;
+		margin-top: 25px;
+
+		span {
+			display: block;
+		}
+
+		.follow-btn {
+			text-align: center;
+			background: #5540C7;
+			border-radius: 10px;
+			width: 236px;
+			height: 75px;
+			font-weight: bold;
+			font-size: 20px;
+			line-height: 26px;
+			align-items: center;
+			color: #FFFFFF;
+			text-transform: uppercase;
+			outline: none;
+			border: none;
+			&:first-child {
+				margin-right: 25px;
+			}
+		}
+	}
+
+	.set-following-btn {
+		opacity: .6;
+		text-align: center;
+		border: 2px solid #C3BBEC;
+		border-radius: 10px;
+		width: 300px;
+		height: 57px;
+		font-size: 24px;
+		line-height: 24px;
+		color: #000000;
+		outline: none;
+	}
+}
+
 .profile-info-blur {
 	background: #000;
 	opacity: .5;

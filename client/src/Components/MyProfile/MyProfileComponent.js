@@ -153,8 +153,6 @@ const MyProfileComponent = (props) => {
           <p className="location">
 						{currentUser !== undefined ? currentUser.about : '...'}
 					</p>
-          <button>Followings : {currentUser && currentUser.followings}</button>
-          <button>Followers : {currentUser && currentUser.followers}</button>
           {/*<SocialShare />*/}
           <div className='social-media'>
             <a
@@ -214,6 +212,13 @@ const MyProfileComponent = (props) => {
             <a href='#!' className='icon'>
               <FiUpload size={24} color='black' />
             </a>
+          </div>
+          <div className="follow-field">
+            <div className="follow-btn-row">
+              <button className="follow-btn">Followings <span>{currentUser && currentUser.followings || '0'}</span></button>
+              <button className="follow-btn">Followers <span>{currentUser && currentUser.followers || '0'}</span></button>
+            </div>
+            <button disabled className="set-following-btn">Follow</button>
           </div>
         </div>
       </div>
