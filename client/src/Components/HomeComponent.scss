@@ -892,6 +892,36 @@ img.rounded-circle {
       .carousel .control-dots .dot {
         background-color: #C4C4C4;
       }
+
+      .carousel.carousel-slider .control-arrow:hover {
+        background-color: inherit;
+      }
+
+      .carousel.carousel-slider .control-arrow {
+        top: 330px;
+        color: #000000;
+      }
+
+      .carousel .control-next.control-arrow:before {
+        border-left: 8px solid #000000;
+      }
+
+      .carousel .control-prev.control-arrow:before {
+        border-left: 8px solid #000000;
+        transform: rotate(180deg);
+      }
+
+      .cardWrapper {
+
+        .cardImgOverlay {
+
+          .userImg {
+            img {
+              width: 31px;
+            }
+          }
+        }
+      }
     }
   }
 }

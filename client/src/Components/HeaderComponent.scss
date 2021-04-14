@@ -153,6 +153,13 @@ a.nav-link.active {
     align-items: center;
     justify-content: center;
   }
+
+  .navCollapseItem {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: auto;
+  }
 }
 
 .change-header {
@@ -276,6 +283,30 @@ a.nav-link.active {
       width: 100vw;
       top: 95px;
       left: 0;
+    }
+    .navCollapseItem {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin: auto;
+    }
+    .navItemHeader {
+      margin: 0 10px;
+      height: 40px;
+      font-size: 24px;
+      line-height: 22px;
+      text-transform: none;
+    }
+    .navItemHeaderUserName {
+      font-family: GibsonSemiBold!important;
+      font-size: 24px;
+      line-height: 22px;
+      padding: 0;
+      text-decoration: none;
+      color: #5540C7;
+      text-transform: none;
+      margin: 0 10px;
+      height: 30px;
     }
   }
 }

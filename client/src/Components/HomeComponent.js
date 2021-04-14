@@ -733,7 +733,6 @@ class Home extends Component {
 												infiniteLoop
 												showStatus={false}
 												showThumbs={false}
-												showArrows={false}
 											>
 												{mockTrendingNft.map(({
 																								img,
@@ -880,7 +879,6 @@ class Home extends Component {
 											infiniteLoop
 											showStatus={false}
 											showThumbs={false}
-											showArrows={false}
 										>
 										{mockRealEstate.map(({
 																					 img,
