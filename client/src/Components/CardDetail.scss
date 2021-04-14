@@ -67,7 +67,7 @@ h4 {
 }
 
 .priceInput {
-	padding-left: 15px!important;
+	padding-left: 15px !important;
 	width: 120px;
 	height: 2rem;
 	border: 0;
@@ -78,7 +78,7 @@ h4 {
 .priceOutput {
 	display: flex;
 	align-items: center;
-	padding-left: 15px!important;
+	padding-left: 15px !important;
 	width: 120px;
 	height: 2rem;
 	border: 0;
@@ -103,8 +103,31 @@ h4 {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	padding: 0 27px;
 }
+
+
+.eth-price-list {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding-right: 17px;
+
+	.eth-price-name {
+		width: 105px;
+		text-align: left;
+		overflow: hidden;
+	}
+}
+
+.my-class-main {
+	width: 190px;
+}
+
+//.MuiMenu-list {
+//	width: 190px;
+//	padding: 0;
+//	margin: 0;
+//}
 
 .View1 {
 	width: 190px;
@@ -115,6 +138,39 @@ h4 {
 	box-sizing: border-box;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
+
+	.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+		background: #F8F8F8;
+		border: 0;
+		box-shadow: none;
+		color: #000;
+	}
+
+	.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show > .btn-secondary.dropdown-toggle:focus {
+		box-shadow: none;
+	}
+
+	.btn-secondary {
+		background: #F8F8F8;
+		border: 0;
+		box-shadow: none;
+		color: #000;
+		width: 190px;
+	}
+
+	.btn-secondary:hover {
+		background: #F8F8F8;
+		border: 0;
+		box-shadow: none;
+		color: #000;
+	}
+
+	.btn-secondary:focus {
+		background: #F8F8F8;
+		border: 0;
+		box-shadow: none;
+		color: #000;
+	}
 }
 
 .View2 {
@@ -127,6 +183,11 @@ h4 {
 	box-sizing: border-box;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
+
+	.form-control:focus {
+		border: none;
+		box-shadow: none;
+	}
 }
 
 .View-1 {
@@ -153,35 +214,6 @@ h4 {
 	height: 2rem;
 	font-family: Gibson;
 	border-radius: 10px;
-
-	.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
-		background: #F8F8F8;
-		border: 0;
-		box-shadow: none;
-		color: #000;
-	}
-
-	.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show>.btn-secondary.dropdown-toggle:focus {
-		box-shadow: none;
-	}
-	.btn-secondary:hover {
-		background: #F8F8F8;
-		border: 0;
-		box-shadow: none;
-		color: #000;
-	}
-
-	.btn-secondary:focus {
-		background: #F8F8F8;
-		border: 0;
-		box-shadow: none;
-		color: #000;
-	}
-
-	.form-control:focus {
-		border: none;
-		box-shadow: none;
-	}
 }
 
 .button-border {
@@ -223,6 +255,7 @@ h4 {
 	font-family: GibsonRegular;
 	font-size: 16px;
 	line-height: 21px;
+	padding-left: 0;
 	color: rgba(0, 0, 0, 0.5);
 }
 
@@ -263,7 +296,7 @@ h4 {
 }
 
 .current-offer {
-	margin: 24px 0;
+	margin: 24px 27px;
 	font-family: Nunito;
 	font-size: 16px;
 	line-height: 16px;
@@ -348,4 +381,8 @@ h4 {
 	font-size: 24px;
 	line-height: 24px;
 	color: #000000;
+}
+
+.MuiList-root MuiMenu-list MuiList-padding {
+	width: 190px;
 }

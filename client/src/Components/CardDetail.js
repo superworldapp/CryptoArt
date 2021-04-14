@@ -3,41 +3,20 @@ import TableBody from './TableBody';
 import {Link, useHistory} from 'react-router-dom';
 import cx from "classnames";
 import {
-	Card,
-	CardBody,
-	CardSubtitle,
-	CardText,
-	CardImg,
-	CardHeader,
-	Table,
 	Input,
 	Label,
 	Modal,
 	ModalHeader,
 	ModalBody,
-	Dropdown,
-	DropdownToggle,
-	DropdownMenu,
-	DropdownItem,
 	Button,
 	Collapse
 } from 'reactstrap';
 import loader from '../images/loader.svg';
-import image3 from '../images/image 6.png';
-import image4 from '../images/image 23.png';
-import image5 from '../images/image 25.png';
-import image6 from '../images/image 28.png';
-import image7 from '../images/image 29.png';
-import annonuser from '../images/user.png';
 import checkmark from '../images/svg/checkmark.svg';
 import Web3 from 'web3';
 import Axios from 'axios';
-import anonUser from '../images/user.png';
-import openeye from "../assets/svg/eyeopen.svg";
-import Outlineheart from "../assets/svg/heartoutline.svg";
 import "./CardDetail.scss";
 import {IoIosArrowDown} from 'react-icons/io'
-import {BorderAll} from '@material-ui/icons';
 import heart from '../images/svg/batchHeart.svg';
 import avatar from '../images/svg/batchAvatar.svg';
 import Sound from "react-sound";
@@ -49,8 +28,6 @@ const CardDetail = ({
 											art,
 											accounts,
 											contract,
-											cre,
-											matchId,
 											tokenCreated,
 											tokenPutForSale,
 											tokenBought,
@@ -163,6 +140,10 @@ const CardDetail = ({
 			return '@Magdalena';
 		else if (accNum === '0xA64a71dAC0F4F61FD1e569F59a31c0860c0A33d5')
 			return '@MagdalenaTest';
+		else if (accNum === '0xE337525DD5d34fC683f43CbBDF3e1EDe0833B744')
+			return '@Viktor';
+		else if (accNum === '0x32c93d70E9813fFe62a2fCf6189F14A4ff2e8cB3')
+			return '@Alex';
 		else return '@Annonymous';
 	};
 
@@ -278,6 +259,24 @@ const CardDetail = ({
 		setBidSuccess(!bidSuccess);
 	};
 
+	function getMounthString() {
+		let month = [];
+		month[0] = "January";
+		month[1] = "February";
+		month[2] = "March";
+		month[3] = "April";
+		month[4] = "May";
+		month[5] = "June";
+		month[6] = "July";
+		month[7] = "August";
+		month[8] = "September";
+		month[9] = "October";
+		month[10] = "November";
+		month[11] = "December";
+
+		return month[new Date().getMonth()];;
+	}
+
 	const buyOrSell = () => {
 		if (art?._isSellings) {
 			return (
@@ -294,7 +293,7 @@ const CardDetail = ({
 							onClick={handlePurchase}
 
 						>
-							Place Bid
+							Buy Now
 						</button>
 						<div>{loadingPurchase ? <img src={loader}/> : <div></div>}</div>
 					</div>
@@ -336,13 +335,20 @@ const CardDetail = ({
 		}
 	};
 	const setDate = () => {
-		const milliSec = Number(this.props.art._bidEnd * 1000) - Date.now();
+		const milliSec = Number(art?._bidEnd * 1000) - Date.now();
 		let hours = Math.floor((milliSec / (1000 * 60 * 60))).toFixed(0);
 		let minutes = ((milliSec / (1000 * 60)) % 60).toFixed(0)
 		hours = (hours < 10) ? "0" + hours : hours;
 		minutes = (minutes < 10) ? "0" + minutes : minutes;
 
-		return `${hours} Hrs ${minutes} Min Remaining`
+		return <span><b>{hours}hrs {minutes}min </b>
+			{getMounthString() + ' '}
+			{new Date().getDay()},
+			{new Date().getFullYear() + ' '}
+			at
+			{' ' + new Date().toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}
+			{' ' + new Date().getTimezoneOffset() / 60}
+			</span>
 	}
 	const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -436,79 +442,171 @@ const CardDetail = ({
 								<div className='detail-NameArtist'>{accUsername(art?._tokenCreator)}</div>
 							</div>
 						</div>
-						<div className='priceCard '>
-							<div className="card-div">
-								{console.log('=====>art?._bidEnd', art)}
-								{art?._isSellings
-									? <></>
-									: <div className="detail-time">
-										Bid ends in {
-										art?._bidEnd === '0'
-											? ''
-											: Date.now() < art?._bidEnd
-											? setDate()
-											: (<p className="red red-paragraph">Auction Timer Ended</p>)
-									}
+						{art && console.log('=====>art.?_isSellings, art.?_isSellings', art)}
+						{
+							art && art._isSellings
+								? (<div className='priceCard '>
+									<div className="View">
+										<div className="current-offer">
+											{art?._isSellings ? "Selling at:" : "Current offer:"}
+											<div className="offer-price">
+												{art?._isSellings ? converttoether(art?._sellPrice) : (art?._isBidding ? converttoether(art?._bidPrice) : 0)}
+											</div>
+										</div>
 									</div>
-								}
-							</div>
-							<div className="View">
-								<div className="current-offer">
-									{art?._isSellings ? "Selling at:" : "Current offer:"}
-									<div
-										className="offer-price">{art?._isSellings ? converttoether(art?._sellPrice) : (art?._isBidding ? converttoether(art?._bidPrice) : 0)}</div>
-								</div>
-							</div>
-							<div className="View-1">
-								<div className="View-2">
-									<div className="View2">
+									<div className="View-1">
+										<div className="View-2">
+											<div className="View2">
 
-										<Input type="text" name="price" id="priceEnter" className="priceInput" onChange={handlepriceInput}>
-											{/* {Web3.utils.fromWei('5000000', 'ether')}{' '} */}
-										</Input>
-										<Label className="labelName">ETH</Label>
+												<Input type="text" name="price" id="priceEnter" className="priceInput"
+															 onChange={handlepriceInput}>
+													{/* {Web3.utils.fromWei('5000000', 'ether')}{' '} */}
+												</Input>
+												<Label className="labelName">ETH</Label>
+											</div>
+											<div className="View1">
+												<Button
+													className="priceOutput"
+													aria-controls="simple-menu"
+													aria-haspopup="true"
+													onClick={handleClick}
+												>
+													<div className='eth-price-list'>
+														<span className='eth-price-name'>{(priceInputValue * ethPrice['usd']).toFixed(4)}</span>
+														<span>USB</span>
+													</div>
+												</Button>
+												<Menu
+													id="simple-menu"
+													anchorEl={anchorEl}
+													keepMounted
+													open={Boolean(anchorEl)}
+													onClose={handleClose}
+												>
+													<MenuItem onClick={handleClose}>
+														<div className='eth-price-list'>
+															<span className='eth-price-name'>{(priceInputValue * ethPrice['usd']).toFixed(4)}</span>
+															<span>USD</span>
+														</div>
+													</MenuItem>
+													<MenuItem onClick={handleClose}>
+														<div className='eth-price-list'>
+															<span className='eth-price-name'>{(priceInputValue * ethPrice['btc']).toFixed(4)}</span>
+															<span>BTC</span>
+														</div>
+													</MenuItem>
+													<MenuItem onClick={handleClose}>
+														<div className='eth-price-list'>
+															<span className='eth-price-name'>{(priceInputValue * ethPrice['eur']).toFixed(4)}</span>
+															<span>EUR</span>
+														</div>
+													</MenuItem>
+												</Menu>
+											</div>
+										</div>
+										<div className="buy-or-sell">
+											{buyOrSell()}
+										</div>
+
 									</div>
-									<div className="View1">
-										<Button
-											className="priceOutput"
-											aria-controls="simple-menu"
-											aria-haspopup="true"
-											onClick={handleClick}
-										>
-											{priceInputValue * ethPrice['usd'] + 'USD'}
-										</Button>
-										<Menu
-											id="simple-menu"
-											anchorEl={anchorEl}
-											keepMounted
-											open={Boolean(anchorEl)}
-											onClose={handleClose}
-										>
-											<MenuItem onClick={handleClose}>
-												{priceInputValue * ethPrice['usd'] + 'USD'}
-											</MenuItem>
-											<MenuItem onClick={handleClose}>
-												{priceInputValue * ethPrice['btc'] + 'BTC'}
-											</MenuItem>
-											<MenuItem onClick={handleClose}>
-												{priceInputValue * ethPrice['eur'] + 'EUR'}
-											</MenuItem>
-										</Menu>
+									<div style={{
+										marginLeft: '1rem', marginTop: '1.5rem'
+									}}>
+										{/* <button className='batchcardbid-btn'> PLACE BID</button> */}
 									</div>
-								</div>
-								<div className="buy-or-sell">
-									{buyOrSell()}
-								</div>
+								</div>)
+								: art && art._isBidding
+								? (<div className='priceCard '>
+									<div className="card-div">
+										{art?._isSellings
+											? <></>
+											: <div className="detail-time">
+												{
+												art?._bidEnd === '0'
+													? ''
+														: Date.now() / 1000 < art?._bidEnd
+													? (<p>Sales end in  {setDate()}</p>)
+													: (<p className="red red-paragraph">Auction Timer Ended</p>)
+												}
+											</div>
+										}
+									</div>
+									<div className="View">
+										<div className="current-offer">
+											{art?._isSellings ? "Selling at:" : "Current offer:"}
+											<div className="offer-price">
+												{art?._isSellings
+													? Number(converttoether(art?._sellPrice)).toFixed(2) + ' ETH'
+													: (art?._isBidding
+														? Number(converttoether(art?._bidPrice)).toFixed(2) + ' ETH'
+														: 0)
+												}
+											</div>
+										</div>
+									</div>
+									<div className="View-1">
+										<div className="View-2">
+											<div className="View2">
 
-							</div>
-							<div style={{
-								marginLeft: '1rem', marginTop: '1.5rem'
-							}}>
-								{/* <button className='batchcardbid-btn'> PLACE BID</button> */}
-							</div>
+												<Input type="text" name="price" id="priceEnter" className="priceInput"
+															 onChange={handlepriceInput}>
+													{/* {Web3.utils.fromWei('5000000', 'ether')}{' '} */}
+												</Input>
+												<Label className="labelName">ETH</Label>
+											</div>
+											<div className="View1">
+												<Button
+													className="priceOutput"
+													aria-controls="simple-menu"
+													aria-haspopup="true"
+													onClick={handleClick}
+												>
+													<div className='eth-price-list'>
+														<span className='eth-price-name'>{(priceInputValue * ethPrice['usd']).toFixed(4)}</span>
+														<span>USB</span>
+													</div>
+												</Button>
+												<Menu
+													id="simple-menu"
+													anchorEl={anchorEl}
+													keepMounted
+													open={Boolean(anchorEl)}
+													onClose={handleClose}
+												>
+													<MenuItem onClick={handleClose}>
+														<div className='eth-price-list'>
+															<span className='eth-price-name'>{(priceInputValue * ethPrice['usd']).toFixed(4)}</span>
+															<span>USD</span>
+														</div>
+													</MenuItem>
+													<MenuItem onClick={handleClose}>
+														<div className='eth-price-list'>
+															<span className='eth-price-name'>{(priceInputValue * ethPrice['btc']).toFixed(4)}</span>
+															<span>BTC</span>
+														</div>
+													</MenuItem>
+													<MenuItem onClick={handleClose}>
+														<div className='eth-price-list'>
+															<span className='eth-price-name'>{(priceInputValue * ethPrice['eur']).toFixed(4)}</span>
+															<span>EUR</span>
+														</div>
+													</MenuItem>
+												</Menu>
+											</div>
+										</div>
+										<div className="buy-or-sell">
+											{buyOrSell()}
+										</div>
 
-
-						</div>
+									</div>
+									<div style={{
+										marginLeft: '1rem', marginTop: '1.5rem'
+									}}>
+										{/* <button className='batchcardbid-btn'> PLACE BID</button> */}
+									</div>
+								</div>)
+								: null
+						}
 						<div className="detail-Desc ">
 							<div className="detail-DescTitle"> Description</div>
 							<div className="detail-DescText">{text}</div>
@@ -524,12 +622,8 @@ const CardDetail = ({
 							<Collapse isOpen={isOpen}>
 								<TableBody cre={creValue}/>
 							</Collapse>
-							<br/>
-							<br/>
-
 						</div>
 					</div>
-
 				</div>
 
 				<SuccessfulModals
@@ -591,11 +685,6 @@ const CardDetail = ({
 						</Link>
 					</ModalBody>
 				</Modal>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-
 			</div>
 		</>
 	);
@@ -612,35 +701,38 @@ class TokenDetails extends Component {
 	}
 
 	componentDidMount = async () => {
-		let rex = await this.props.contract.methods.getTokenData(this.props.matchId).call();
-		// console.log(rex);
-		let rex2 = await this.props.contract.methods.getTokenDataBatch(this.props.matchId).call();
-		var newBlock = {
-			_tokenId: this.props.matchId,
-			_tokenOwner: rex._tokenOwner,
-			_isSellings: rex._isSellings,
-			_sellPrice: rex._sellPrice,
-			_refBatch: rex._refBatch,
-			_tokenBidder: rex._tokenBidder,
-			_isBidding: rex._isBidding,
-			_bidPrice: rex._bidPrice,
-			_tokenHash: rex2._tokenHash,
-			_tokenBatchName: rex2._tokenBatchName,
-			_tokenCreator: rex2._tokenCreator,
-			_imgUrl: rex2._imgUrl,
-			_imgThumbnail: rex2._imgThumbnail,
+		if (this.props.contract) {
+			let rex = await this.props.contract.methods.getTokenData(this.props.matchId).call();
+			// console.log(rex);
+			let rex2 = await this.props.contract.methods.getTokenDataBatch(this.props.matchId).call();
+			var newBlock = {
+				_tokenId: this.props.matchId,
+				_tokenOwner: rex._tokenOwner,
+				_isSellings: rex._isSellings,
+				_sellPrice: rex._sellPrice,
+				_refBatch: rex._refBatch,
+				_tokenBidder: rex._tokenBidder,
+				_isBidding: rex._isBidding,
+				_bidPrice: rex._bidPrice,
+				_bidEnd: rex._bidEnd,
+				_tokenHash: rex2._tokenHash,
+				_tokenBatchName: rex2._tokenBatchName,
+				_tokenCreator: rex2._tokenCreator,
+				_imgUrl: rex2._imgUrl,
+				_imgThumbnail: rex2._imgThumbnail,
+			}
+			// console.log(newBlock)
+
+			// if (rex2._tokenCreator == this.props.accounts) {
+			//   createrToken.push(rex);
+			// }
+
+			this.setState({single: newBlock});
 		}
-		// console.log(newBlock)
-
-		// if (rex2._tokenCreator == this.props.accounts) {
-		//   createrToken.push(rex);
-		// }
-
-		this.setState({single: newBlock});
 	}
 
 	render() {
-		console.log(this.state.single);
+		console.log('ooooooooooooosushdaiu', this.state.single);
 		return (
 			<CardDetail
 				tokenCreated={this.props.tokenCreated}

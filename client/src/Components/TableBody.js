@@ -92,7 +92,7 @@ const TableBody = ({cre}) => {
 													Number(item?.returnValues.sellPrice).toString(),
 													'ether'
 												)} ETH `
-												: 'null'}</span>
+												: 'null '}</span>
 										{item?.returnValues.tokenCreator
 											? 'by ' + accUsername(item?.returnValues.tokenCreator)
 											: 'by ' + accUsername(item?.returnValues.seller)}
