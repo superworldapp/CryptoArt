@@ -413,7 +413,7 @@ class MyStoreComponent extends Component {
 		});
 
 		const Menu3 = this.props.art3?.map((x) => {
-			if (x._isSellings === true || (x._isBidding === true && !((x._bidEnd * 1000) <= Date.now() && x._bidEnd !== 0))) {
+			if (x._isSellings === true || (x._isBidding === true && !((x._bidEnd * 1000) <= Date.now() && x._bidEnd !== 0)) || (x._tokenBidder == this.props.accounts)) {
 				cntactive++;
 				menuThreeCount++;
 

@@ -125,9 +125,9 @@ class UploadsTab extends Component {
 				for(let k = 0;k<res.events.tokenCreated.length;k++){
 				
 					
-				  data1 = await Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
+				  data1 = await Axios.post(`http://geo.superworldapp.com/api/json/token/update`, {
 					tokenId: res.events.tokenCreated[k].returnValues.tokenId.toString(),
-					description: 'NewArtwork',
+					description: 'NewArtwork2',
 					image: this.props.art._imgUrl,
 					name: this.props.art._tokenBatchName,
 					blockchain: 'e',
@@ -140,10 +140,10 @@ class UploadsTab extends Component {
 			}
 			  } else {
 				data = await Axios.post(
-				  `http://geo.superworldapp.com/api/json/token/add`,
+				  `http://geo.superworldapp.com/api/json/token/`,
 				  {
 					tokenId: res.events.tokenCreated.returnValues.tokenId.toString(),
-					description: 'NewArtwork',
+					description: 'NewArtwork2',
 					image: this.props.art._imgUrl,
 					name: this.props.art._tokenBatchName,
 					blockchain: 'e',

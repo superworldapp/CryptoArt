@@ -235,7 +235,7 @@ const MyProfileComponent = (props) => {
         {/*<Tab label="Favourites"/>*/}
         <StyledTab label='Recent activity' />
       </StyledTabs>
-      {selectedTab === 0 && <MyCreation />}
+      {selectedTab === 0 && <MyCreation  />}
       {selectedTab === 1 && (
         <MyCollectionsCards collectionBatch={props.batch} />
       )}

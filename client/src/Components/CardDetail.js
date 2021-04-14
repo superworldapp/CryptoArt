@@ -477,7 +477,7 @@ const CardDetail = ({
 												>
 													<div className='eth-price-list'>
 														<span className='eth-price-name'>{(priceInputValue * ethPrice['usd']).toFixed(4)}</span>
-														<span>USB</span>
+														<span>USD</span>
 													</div>
 												</Button>
 												<Menu
@@ -567,7 +567,7 @@ const CardDetail = ({
 												>
 													<div className='eth-price-list'>
 														<span className='eth-price-name'>{(priceInputValue * ethPrice['usd']).toFixed(4)}</span>
-														<span>USB</span>
+														<span>USD</span>
 													</div>
 												</Button>
 												<Menu
