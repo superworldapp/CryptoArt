@@ -54,6 +54,7 @@
     "react-map-gl": "^6.0.3",
     "react-player": "^2.9.0",
     "react-redux": "^7.2.3",
+    "react-responsive-carousel": "^3.2.18",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.4",
     "react-share": "^4.4.0",

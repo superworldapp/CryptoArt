@@ -466,11 +466,11 @@ class Allpatrender extends Component {
               <p className='card-buy-time-text'>
                 {/* {this.props.art._bidend} */}
                 {
-                	this.props.art._bidEnd === '0'
+                	(this.props.art._bidEnd === '0') 
                 		? ''
-                		: Date.now() / 1000 < this.props.art._bidEnd
+                		: Date.now() / 1000 < this.props.art._bidEnd 
                 		? setDate()
-                		: (<p className="red">Auction Timer Ended</p>)
+                		:(this.props.art._isBidding)?(<p className="red">Auction Timer Ended</p>) : ''
                 }
               </p>
             </div>
@@ -631,12 +631,12 @@ this.displayFileType2 = this.displayFileType2.bind(this);
  
 
   displayFileType2 = () => {
-    if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.BatchCreated[0]._imgUrl)) {
+    if (/\.(jpe?g|png|gif|bmp|svg)$/i.test(this.props.BatchCreated[0]?._imgUrl)) {
       return (
        
-        <img src={this.props.BatchCreated[0]._imgUrl} className="batchImg" alt='batch img'/>
+        <img src={this.props.BatchCreated[0]?._imgUrl} className="batchImg" alt='batch img'/>
       );
-    } else if (/\.(?:wav|mp3)$/i.test(this.props.BatchCreated[0]._imgUrl)) {
+    } else if (/\.(?:wav|mp3)$/i.test(this.props.BatchCreated[0]?._imgUrl)) {
       return (
         <>
           <button
@@ -651,7 +651,7 @@ this.displayFileType2 = this.displayFileType2.bind(this);
             {this.state.soundPlaying ? 'Pause' : 'Play'}
           </button>
           <Sound
-            url={this.props.BatchCreated[0]._imgUrl}
+            url={this.props.BatchCreated[0]?._imgUrl}
             playStatus={
               this.state.soundPlaying
                 ? Sound.status.PLAYING
@@ -666,7 +666,7 @@ this.displayFileType2 = this.displayFileType2.bind(this);
       );
     } else if (
       /\.(?:mov|avi|wmv|flv|3pg|mp4|mpg)$/i.test(
-        this.props.BatchCreated[0]._imgUrl
+        this.props.BatchCreated[0]?._imgUrl
       )
     ) {
       return (
@@ -674,7 +674,7 @@ this.displayFileType2 = this.displayFileType2.bind(this);
           className="batchVideo"
           loop={true}
           playing={true}
-          url={this.props.BatchCreated[0]._imgUrl}
+          url={this.props.BatchCreated[0]?._imgUrl}
         />
       );
     }
@@ -708,9 +708,9 @@ console.log(`==========>this.props`, this.props);
      console.log('Header', tokenInBatch);
       let newTokenBatch
      if(!this.state.viewMore){
-       newTokenBatch = tokenInBatch.slice(0,15)
+       newTokenBatch = tokenInBatch?.slice(0,15)
      }
-     const Menu = (this.state.viewMore ? tokenInBatch : newTokenBatch).map((x) => {
+     const Menu = (this.state.viewMore ? tokenInBatch : newTokenBatch)?.map((x) => {
       return (
         <div key={1}>
           <Allpatrender
@@ -736,14 +736,14 @@ console.log(`==========>this.props`, this.props);
       <div className="batchWrapper">
         <div className="batchView">
           <div className="batchImgBlock">
-            <a href={this.props.BatchCreated[0]._imgUrl} target='_blank'>
+            <a href={this.props.BatchCreated[0]?._imgUrl} target='_blank'>
               {this.displayFileType2()}
             </a>
           </div>
           <div className="batchInfo">
             <div className="batchHeader">
               <div className="batchName">
-                {this.props.BatchCreated[0]._tokenBatchName}
+                {this.props.BatchCreated[0]?._tokenBatchName}
               </div>
               <div><img src={heart} alt="heart"/></div>
             </div>
@@ -752,7 +752,7 @@ console.log(`==========>this.props`, this.props);
                 Starting from 6.5ETH
               </div>
               <div className="batchRemain">
-                x of {this.props.BatchCreated[0]._mintedEditions} Remaining
+                x of {this.props.BatchCreated[0]?._mintedEditions} Remaining
               </div>
             </div>
             <div className="batchCreator">
@@ -761,7 +761,7 @@ console.log(`==========>this.props`, this.props);
               </div>
               <div className="batchName">
                 Created by&ensp;
-                <div className="batchNameArtist">{this.accUsername(this.props.BatchCreated[0]._tokenCreator)}</div>
+                <div className="batchNameArtist">{this.accUsername(this.props.BatchCreated[0]?._tokenCreator)}</div>
               </div>
             </div>
             <div className="batchDesc">
@@ -780,7 +780,7 @@ console.log(`==========>this.props`, this.props);
         <div className="batchCards">
           <div className="batchCardsHead">
             <div className="batchToken">All Tokens</div>
-            <div className="batchViewMore">{tokenInBatch.length > 15
+            <div className="batchViewMore">{tokenInBatch?.length > 15
               ? <div onClick={() => this.setState({viewMore: !this.state.viewMore})}>
                 View More
               </div>

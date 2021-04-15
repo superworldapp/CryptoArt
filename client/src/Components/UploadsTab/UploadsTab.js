@@ -120,37 +120,37 @@ class UploadsTab extends Component {
 			console.log('res',res);
 			let data;
 			let data1 = [];
-			// if (Array.isArray(res.events.tokencreated)) {
-			// 	console.log(res.events.tokencreated.length);
-			// 	for(let k = 0;k<res.events.tokencreated.length;k++){
+			if (Array.isArray(res.events.tokenCreated)) {
+				console.log(res.events.tokenCreated.length);
+				for(let k = 0;k<res.events.tokenCreated.length;k++){
 				
 					
-			// 	  data1 = await Axios.post(`http://geo.superworldapp.com/api/json/token/add`, {
-			// 		tokenId: res.events.tokencreated[k].returnValues.tokenId.toString(),
-			// 		description: 'Artwork',
-			// 		image: this.props.art._imgUrl,
-			// 		name: this.props.art._tokenBatchName,
-			// 		blockchain: 'e',
-			// 		networkId: 4
-			// //	  })
-			// 	}
+				  data1 = await Axios.post(`http://geo.superworldapp.com/api/json/token/update`, {
+					tokenId: res.events.tokenCreated[k].returnValues.tokenId.toString(),
+					description: 'NewArtwork2',
+					image: this.props.art._imgUrl,
+					name: this.props.art._tokenBatchName,
+					blockchain: 'e',
+					networkId: 4
+			//	  })
+				}
 				
-			// 	);
-			// 	console.log(data1);
-			// }
-			//   } else {
-			// 	data = await Axios.post(
-			// 	  `http://geo.superworldapp.com/api/json/token/add`,
-			// 	  {
-			// 		tokenId: res.events.tokencreated.returnValues.tokenId.toString(),
-			// 		description: 'Artwork',
-			// 		image: this.props.art._imgUrl,
-			// 		name: this.props.art._tokenBatchName,
-			// 		blockchain: 'e',
-			// 		networkId: 4,
-			// 	  }
-			// 	);
-			//   }
+				);
+				console.log(data1);
+			}
+			  } else {
+				data = await Axios.post(
+				  `http://geo.superworldapp.com/api/json/token/`,
+				  {
+					tokenId: res.events.tokenCreated.returnValues.tokenId.toString(),
+					description: 'NewArtwork2',
+					image: this.props.art._imgUrl,
+					name: this.props.art._tokenBatchName,
+					blockchain: 'e',
+					networkId: 4,
+				  }
+				);
+			  }
 			  console.log(data);
 			  this.setState({isLoading: false, uploadSuccess: true});
 			 // this.refreshMyArt();
