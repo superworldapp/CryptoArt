@@ -476,7 +476,7 @@ h3 {
 	object-fit: cover;
 }
 
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1020px) {
 	.mystore-art-queue-container {
 		margin-left: 0;
 		margin-top: 0;
@@ -491,8 +491,6 @@ h3 {
 
 			.head-mystore-first {
 				text-transform: capitalize!important;
-				font-size: 36px!important;
-				line-height: 36px!important;
 				font-weight: normal!important;
 			}
 
@@ -527,6 +525,14 @@ h3 {
 	.mystore-art-queue-container {
 		justify-content: end!important;
 		padding-left: 20px!important;
+	}
+
+
+	.head-mystore-first {
+		text-transform: capitalize!important;
+		font-size: 36px!important;
+		line-height: 36px!important;
+		font-weight: normal!important;
 	}
 
 	.mystore-art-active-container {
