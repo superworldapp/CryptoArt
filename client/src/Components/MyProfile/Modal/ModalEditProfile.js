@@ -1,4 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import Axios from "axios";
+
+import Auth from "../../Auth";
 
 import email from '../../../images/svg/iconMail.svg'
 import twitter from '../../../images/svg/iconTwitter.svg'
@@ -9,26 +12,75 @@ import info from '../../../images/svg/logoInfo.svg'
 import website from '../../../images/svg/websiteIcon.svg'
 import './ModalEditProfile.scss';
 
-const ModalEditProfile = ({isEdit, setLinksState}) => {
-	const [form, setForm] = useState({
-		name: '',
-		bio: '',
-		email: '',
-		twitter: '',
-		inst: '',
-		facebook: '',
-		youtube: '',
-		website: '',
-	});
+const ModalEditProfile = ({isEdit, setLinksState, emailName, form, setForm, getUser}) => {
 
 	const icoInp = [
-		{name: 'E-mail', img: email, type: 'email'},
-		{name: 'Twitter', img: twitter, type: 'twitter'},
-		{name: 'Instagram', img: inst, type: 'inst'},
-		{name: 'Facebook', img: facebook, type: 'facebook'},
-		{name: 'Youtube', img: youtube, type: 'youtube'},
-		{name: 'Website', img: website, type: 'website'},
+		{
+			name: 'E-mail',
+			img: email,
+			type: 'email',
+			value: emailName
+		},
+		{
+			name: 'Twitter',
+			img: twitter,
+			type: 'twitter',
+			value: setLinksState.social.twitter
+		},
+		{
+			name: 'Instagram',
+			img: inst,
+			type: 'instagram',
+			value: setLinksState.social.instagram
+		},
+		{
+			name: 'Facebook',
+			img: facebook,
+			type: 'facebook',
+			value: setLinksState.social.facebook
+		},
+		{
+			name: 'Youtube',
+			img: youtube,
+			type: 'youtube',
+			value: setLinksState.social.youtube
+		},
+		{
+			name: 'Website',
+			img: website,
+			type: 'website',
+			value: setLinksState.social.website
+		},
 	];
+
+	const changeUsernameOnSubmit = () => {
+		Axios.defaults.headers = {
+			Authorization: Auth.getToken(),
+		};
+		const tk = Auth.getToken();
+		const { userId, session } = tk;
+		Axios.post(
+			`${process.env.REACT_APP_SW_API_URL}/user/update/${userId}/${session}`,
+			{
+				name: form.name,
+				about: form.about,
+				email: form.email,
+				social: {
+					instagram: form.instagram,
+					facebook: form.facebook,
+					youtube: form.youtube,
+					twitter: form.twitter,
+					website: form.website,
+				}
+			}
+		)
+			.then((response) => {
+				getUser()
+			})
+			.catch((error) => {
+				// console.log(error);
+			});
+	};
 
 	const handleUserInput = (event, target) => {
 		const {value} = event.target
@@ -51,8 +103,8 @@ const ModalEditProfile = ({isEdit, setLinksState}) => {
 	}
 
 	const handleSaveInfo = () => {
-		setLinksState(form);
-		isEdit()
+		changeUsernameOnSubmit();
+		isEdit();
 	}
 
 	return (
@@ -62,11 +114,16 @@ const ModalEditProfile = ({isEdit, setLinksState}) => {
 				<div className="content-edit-profile">
 					<div className="with-icon-block">
 						<span>Name</span>
-						<input type="text" onChange={e => handleUserInput(e, 'name')}/>
+						<input
+							type="text"
+							defaultValue={setLinksState.name}
+							onChange={e => handleUserInput(e, 'name')}/>
 					</div>
 					<div className="with-icon-block">
 						<span>Bio</span>
-						<textarea onChange={e => handleUserInput(e, 'bio')}/>
+						<textarea
+							defaultValue={setLinksState.about}
+							onChange={e => handleUserInput(e, 'about')}/>
 					</div>
 					<div className="icon-block-scroll">
 						{icoInp.map((item) => (
@@ -76,7 +133,21 @@ const ModalEditProfile = ({isEdit, setLinksState}) => {
 									<span>{item.name}</span>
 								</div>
 								<div className="input_icon">
-									<input type="text" onChange={e => handleUserInput(e, item.type)}/>
+									{item.type === 'email'
+										? (
+											<input
+												type="text"
+												className="input_icon_readonly"
+												placeholder={item.value}
+												readOnly
+											/>
+									) : (
+											<input
+												type="text"
+												defaultValue={item.value}
+												onChange={e => handleUserInput(e, item.type)}
+											/>
+										)}
 									<img src={info} alt="info"/>
 								</div>
 							</div>

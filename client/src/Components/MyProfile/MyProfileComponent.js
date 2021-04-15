@@ -20,11 +20,19 @@ import Cookies from 'js-cookie';
 const MyProfileComponent = (props) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [isEdit, setIsEdit] = useState(false);
-  const [linksStore, setLinksStore] = useState();
   const [currentUser, setCurrentUser] = useState();
-  const setLinksState = (e) => {
-    setLinksStore(e);
-  };
+
+  const [form, setForm] = useState({
+    name: '',
+    about: '',
+    social: {
+      twitter: '',
+      instagram: '',
+      facebook: '',
+      youtube: '',
+      website: '',
+    },
+  });
 
   const getUser = () => {
     let auth = Auth.getToken();
@@ -36,6 +44,7 @@ const MyProfileComponent = (props) => {
     }).then((res) => {
       if (res.data && res.data.r == 's' && res.data.data) {
         setCurrentUser(res.data.data);
+        setForm(res.data.data);
       }
     });
   };
@@ -56,6 +65,8 @@ const MyProfileComponent = (props) => {
     return email;
   };
 
+  const emailName = (Cookies.get('email')).toString();
+  
   const getIdenticon = () => {
     return `data:image/png;base64,${new Identicon(
       getEmailLength(Cookies.get('email')).toString(),{
@@ -124,10 +135,17 @@ const MyProfileComponent = (props) => {
   })((props) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
 
   return (
-    <>
+  <>
       <div className='profile-info'>
         {isEdit ? (
-          <ModalEditProfile setLinksState={setLinksState} isEdit={handleEdit} />
+          <ModalEditProfile
+            setLinksState={currentUser}
+            getUser={getUser}
+            isEdit={handleEdit}
+            emailName={emailName}
+            form={form}
+            setForm={setForm}
+          />
         ) : null}
         <div className='cover-container'>
           <img src={coverImage} alt='cover-img' />
@@ -156,56 +174,56 @@ const MyProfileComponent = (props) => {
           {/*<SocialShare />*/}
           <div className='social-media'>
             <a
-              href={(linksStore && 'http://' + linksStore.email) || '#!'}
+              href={`mailto:${emailName}` || '#!'}
               className='icon'
               target='_blank'
             >
-              {(linksStore && linksStore.email && (
+              {(emailName && emailName && (
                 <FiMail size={24} color='grey' />
               )) || <FiMail size={24} color='black' />}
             </a>
             <a
-              href={(linksStore && 'http://' + linksStore.twitter) || '#!'}
+              href={(currentUser && currentUser.social.twitter) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(linksStore && linksStore.twitter && (
+              {(currentUser && currentUser.social.twitter && (
                 <RiTwitterLine size={24} color='grey' />
               )) || <RiTwitterLine size={24} color='black' />}
             </a>
             <a
-              href={(linksStore && 'http://' + linksStore.inst) || '#!'}
+              href={(currentUser && currentUser.social.instagram) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(linksStore && linksStore.inst && (
+              {(currentUser && currentUser.social.instagram && (
                 <RiInstagramLine size={24} color='grey' />
               )) || <RiInstagramLine size={24} color='black' />}
             </a>
             <a
-              href={(linksStore && 'http://' + linksStore.facebook) || '#!'}
+              href={(currentUser && currentUser.social.facebook) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(linksStore && linksStore.facebook && (
+              {(currentUser && currentUser.social.facebook && (
                 <FiFacebook size={24} color='grey' />
               )) || <FiFacebook size={24} color='black' />}
             </a>
             <a
-              href={(linksStore && 'http://' + linksStore.youtube) || '#!'}
+              href={(currentUser && currentUser.social.youtube) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(linksStore && linksStore.youtube && (
+              {(currentUser && currentUser.social.youtube && (
                 <FiYoutube size={24} color='grey' />
               )) || <FiYoutube size={24} color='black' />}
             </a>
             <a
-              href={(linksStore && 'http://' + linksStore.website) || '#!'}
+              href={(currentUser && currentUser.social.website) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(linksStore && linksStore.youtube && (
+              {(currentUser && currentUser.social.website && (
                 <RiGlobalLine size={24} color='grey' />
               )) || <RiGlobalLine size={24} color='black' />}
             </a>

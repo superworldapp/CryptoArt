@@ -118,12 +118,14 @@ class Header extends Component {
       changePasswordSuccessDialogOpen: false,
       changePasswordErrorMessage: '',
       searchValue: '',
+      skipLogo: true,
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.getnewHash = this.getnewHash.bind(this);
     this.openWalletModal = this.openWalletModal.bind(this);
     this.inputFocus = this.inputFocus.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.setSkipLogo = this.setSkipLogo.bind(this);
     this.handleNotifyDropDownClick = this.handleNotifyDropDownClick.bind(this);
     this.handleNotifyDropDownClickAway = this.handleNotifyDropDownClickAway.bind(
       this
@@ -162,6 +164,7 @@ class Header extends Component {
 
   toggleNav() {
     this.setState({ isNavOpen: !this.state.isNavOpen });
+    this.setSkipLogo();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -172,6 +175,10 @@ class Header extends Component {
         document.body.style = "overflow-y: scroll"
       }
     }
+  }
+
+  setSkipLogo() {
+    this.setState({skipLogo: !this.state.skipLogo})
   }
 
   getEmailLength(email) {
@@ -1196,17 +1203,23 @@ class Header extends Component {
           </Navbar>
         ) : (
           <Navbar light expand='md' className='navbarMain'>
-            <NavbarToggler onClick={this.toggleNav} />
             <NavbarBrand className="navbarBrand">
-              <NavLink to='/home'>
-                <img
-                  src={LogoImg}
-                  alt='Logo Image'
-                  id='logo-img'
-                  className='imgLogo'
-                />
-              </NavLink>
+              {this.state.skipLogo ? (
+                <NavLink to='/home'>
+                  <img
+                    src={LogoImg}
+                    alt='Logo Image'
+                    id='logo-img'
+                    className='imgLogo'
+                  />
+                </NavLink>
+              ) : null }
+
             </NavbarBrand>
+            <NavbarToggler
+              onClick={this.toggleNav}
+              className={`${this.state.isNavOpen === true ? 'togle_nav_img' : ''}`}
+            />
             {!window.location.href.includes('home') && (
               <>
                 <InputGroup
@@ -1265,6 +1278,11 @@ class Header extends Component {
                 </NavItem>
                 {Auth.getAuth() ? (
                   <>
+                    <NavItem>
+                      <NavLink className='navItemHeader' to='/myprofile'>
+                        MyProfile
+                      </NavLink>
+                    </NavItem>
                   <NavItem>
                     <NavLink className='navItemHeader' to='/mycollection'>
                       MyCollection
@@ -1286,6 +1304,35 @@ class Header extends Component {
                     Help
                   </NavLink>
                 </NavItem>
+                {Auth.getAuth() ? (
+                <MenuItem
+                  className='navItemHeaderUserName'
+                  onClick={() => {
+                    Axios.defaults.headers = {
+                      Authorization: Auth.getToken(),
+                    };
+                    Axios.post(
+                      `${process.env.REACT_APP_API_URL}/user/logout`
+                    )
+                      .then(() => {
+                        // console.log('LOGGED OUT');
+                      })
+                      .catch((_e) => {
+                        // console.log('LOGGED OUT ERROR');
+                        // console.log(_e);
+                      });
+                    Auth.logout();
+                    this.handleClose();
+                    window.location.reload();
+                  }}
+                >
+                  <div>
+                    Log Out
+                  </div>
+                </MenuItem>
+                  ) : (
+                    <div/>
+                )}
                 <SignInModal initContracts={this.props.initContracts} />
               </Nav>
             </Collapse>

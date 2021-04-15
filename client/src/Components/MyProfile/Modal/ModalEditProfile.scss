@@ -160,6 +160,10 @@
 						}
 					}
 
+					.input_icon_readonly {
+						cursor: not-allowed;
+					}
+
 					* {
 						display: block;
 					}
