@@ -526,7 +526,7 @@ h3 {
 @media screen and (max-width: 680px) {
 	.mystore-art-queue-container {
 		justify-content: end!important;
-		padding-left: 30px!important;
+		padding-left: 20px!important;
 	}
 
 	.mystore-art-active-container {
@@ -550,6 +550,12 @@ h3 {
 					height: 105.95px;
 				}
 			}
+		}
+	}
+
+	.loading-modal {
+		p {
+			font-size: 14px!important;
 		}
 	}
 
@@ -626,6 +632,16 @@ h3 {
 		height: 157px;
 		margin-left: 0;
 		margin-right: 10px;
+	}
+
+	.modal-success-wrapper {
+		.modal-success-head {
+			font-size: 14px!important;
+		}
+
+		.modal-success-btn {
+			margin-top: 17px!important;
+		}
 	}
 }
 
