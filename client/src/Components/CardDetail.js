@@ -51,6 +51,7 @@ const CardDetail = ({
 	const [dropdownValue, setDropdownValue] = useState('usd');
 	const [priceInputValue, setpriceInputValue] = useState('');
 	const [soundPlaying, setSoundPlaying] = useState('');
+	const [timeEndedCheck, setTimeEndedCheck] = useState(false);
 
 	const history = useHistory();
 
@@ -274,7 +275,7 @@ const CardDetail = ({
 		month[10] = "November";
 		month[11] = "December";
 
-		return month[new Date().getMonth()];;
+		return month[new Date().getMonth()];
 	}
 
 	const buyOrSell = () => {
@@ -320,10 +321,10 @@ const CardDetail = ({
 
 					<div>
 						<button
-							className='batchcardbid-btn'
+							className={timeEndedCheck ? 'batchcardbid-btn disabled-style-button' : 'batchcardbid-btn'}
+							disabled={timeEndedCheck}
 							color='primary'
 							onClick={AddBid}
-
 						>
 							Place Bid
 						</button>
@@ -346,7 +347,7 @@ const CardDetail = ({
 			{new Date().getDay()},
 			{new Date().getFullYear() + ' '}
 			at
-			{' ' + new Date().toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}
+			{' ' + new Date().toLocaleTimeString('en-US', {hour: 'numeric', hour12: true, minute: 'numeric'})}
 			{' ' + new Date().getTimezoneOffset() / 60}
 			</span>
 	}
@@ -368,11 +369,19 @@ const CardDetail = ({
 			let newart = await art;
 			setart2(newart);
 			get();
-		};
+		}
+
 		// console.log(matchId)
 		// console.log('Header', myProperties);
 	}, []);
 
+	useEffect(() => {
+		if (Date.now() / 1000 < art?._bidEnd) {
+			setTimeEndedCheck(false);
+		} else {
+			setTimeEndedCheck(true);
+		}
+	}, [art])
 	//   const buyItem = async () => {
 	//         const res = await contract.methods
 	//             .buyToken(art.tokenIdentifier)
@@ -450,23 +459,23 @@ const CardDetail = ({
 						{
 							art && art._isSellings
 								? (<div className='priceCard '>
-									<div className="View">
-										<div className="current-offer">
-											{art?._isSellings ? "Selling at:" : "Current offer:"}
-											<div className="offer-price">
-												{art?._isSellings ? converttoether(art?._sellPrice) : (art?._isBidding ? converttoether(art?._bidPrice) : 0)}
-											</div>
-										</div>
-									</div>
 									<div className="View-1">
 										<div className="View-2">
-											<div className="View2">
-
-												<Input type="text" name="price" id="priceEnter" className="priceInput"
-															 onChange={handlepriceInput}>
-													{/* {Web3.utils.fromWei('5000000', 'ether')}{' '} */}
-												</Input>
-												<Label className="labelName">ETH</Label>
+											<div className="View view-sell">
+												<div className="current-offer-sell">
+													{art?._isSellings ? "Selling at:" : "Current offer:"}
+													<div className="offer-price">
+														{art?._isSellings
+															? Number(converttoether(art?._sellPrice)).toFixed(2) + ' ETH'
+															: (art?._isBidding
+																? Number(converttoether(art?._bidPrice)).toFixed(2) + ' ETH'
+																: 0)
+														}
+													</div>
+												</div>
+												<div className="buy-or-sell">
+													{buyOrSell()}
+												</div>
 											</div>
 											<div className="View1">
 												<Button
@@ -476,7 +485,12 @@ const CardDetail = ({
 													onClick={handleClick}
 												>
 													<div className='eth-price-list'>
-														<span className='eth-price-name'>{(priceInputValue * ethPrice['usd']).toFixed(4)}</span>
+														<span className='eth-price-name'>
+															{art?._isBidding
+																? (priceInputValue * ethPrice['usd']).toFixed(4)
+																: (converttoether(art?._sellPrice) * ethPrice['usd']).toFixed(4)
+															}
+														</span>
 														<span>USB</span>
 													</div>
 												</Button>
@@ -489,27 +503,39 @@ const CardDetail = ({
 												>
 													<MenuItem onClick={handleClose}>
 														<div className='eth-price-list'>
-															<span className='eth-price-name'>{(priceInputValue * ethPrice['usd']).toFixed(4)}</span>
+															<span className='eth-price-name'>
+																{art?._isBidding
+																	? (priceInputValue * ethPrice['usd']).toFixed(4)
+																	: (converttoether(art?._sellPrice) * ethPrice['usd']).toFixed(4)
+																}
+															</span>
 															<span>USD</span>
 														</div>
 													</MenuItem>
 													<MenuItem onClick={handleClose}>
 														<div className='eth-price-list'>
-															<span className='eth-price-name'>{(priceInputValue * ethPrice['btc']).toFixed(4)}</span>
+															<span className='eth-price-name'>
+																{art?._isBidding
+																	? (priceInputValue * ethPrice['btc']).toFixed(4)
+																	: (converttoether(art?._sellPrice) * ethPrice['btc']).toFixed(4)
+																}
+															</span>
 															<span>BTC</span>
 														</div>
 													</MenuItem>
 													<MenuItem onClick={handleClose}>
 														<div className='eth-price-list'>
-															<span className='eth-price-name'>{(priceInputValue * ethPrice['eur']).toFixed(4)}</span>
+															<span className='eth-price-name'>
+																{art?._isBidding
+																	? (priceInputValue * ethPrice['eur']).toFixed(4)
+																	: (converttoether(art?._sellPrice) * ethPrice['eur']).toFixed(4)
+																}
+															</span>
 															<span>EUR</span>
 														</div>
 													</MenuItem>
 												</Menu>
 											</div>
-										</div>
-										<div className="buy-or-sell">
-											{buyOrSell()}
 										</div>
 
 									</div>
@@ -526,11 +552,14 @@ const CardDetail = ({
 											? <></>
 											: <div className="detail-time">
 												{
-												art?._bidEnd === '0'
-													? ''
+													art?._bidEnd === '0'
+														? ''
 														: Date.now() / 1000 < art?._bidEnd
-													? (<p>Sales end in  {setDate()}</p>)
-													: (<p className="red red-paragraph">Auction Timer Ended</p>)
+														? (<p>Sales end in {setDate()}</p>)
+														: (
+															<p className="red red-paragraph">
+																Auction Timer Ended
+															</p>)
 												}
 											</div>
 										}
@@ -550,13 +579,24 @@ const CardDetail = ({
 									</div>
 									<div className="View-1">
 										<div className="View-2">
-											<div className="View2">
-
-												<Input type="text" name="price" id="priceEnter" className="priceInput"
-															 onChange={handlepriceInput}>
+											<div
+												className={timeEndedCheck ? 'View2 disabled-style-input' : 'View2'}
+											>
+												<Input
+													type="text"
+													name="price"
+													id="priceEnter"
+													className={timeEndedCheck ? 'priceInput disabled-style-input' : 'priceInput'}
+													disabled={timeEndedCheck}
+													onChange={handlepriceInput}>
 													{/* {Web3.utils.fromWei('5000000', 'ether')}{' '} */}
 												</Input>
-												<Label className="labelName">ETH</Label>
+												<Label
+													className={timeEndedCheck ? 'labelName disabled-style-input' : 'labelName'}
+													disabled={timeEndedCheck}
+												>
+													ETH
+												</Label>
 											</div>
 											<div className="View1">
 												<Button
@@ -566,7 +606,9 @@ const CardDetail = ({
 													onClick={handleClick}
 												>
 													<div className='eth-price-list'>
-														<span className='eth-price-name'>{(priceInputValue * ethPrice['usd']).toFixed(4)}</span>
+														<span className='eth-price-name'>
+															{(priceInputValue * ethPrice['usd']).toFixed(4)}
+														</span>
 														<span>USB</span>
 													</div>
 												</Button>
@@ -579,19 +621,25 @@ const CardDetail = ({
 												>
 													<MenuItem onClick={handleClose}>
 														<div className='eth-price-list'>
-															<span className='eth-price-name'>{(priceInputValue * ethPrice['usd']).toFixed(4)}</span>
+															<span className='eth-price-name'>
+																{(priceInputValue * ethPrice['usd']).toFixed(4)}
+															</span>
 															<span>USD</span>
 														</div>
 													</MenuItem>
 													<MenuItem onClick={handleClose}>
 														<div className='eth-price-list'>
-															<span className='eth-price-name'>{(priceInputValue * ethPrice['btc']).toFixed(4)}</span>
+															<span className='eth-price-name'>
+																{(priceInputValue * ethPrice['btc']).toFixed(4)}
+															</span>
 															<span>BTC</span>
 														</div>
 													</MenuItem>
 													<MenuItem onClick={handleClose}>
 														<div className='eth-price-list'>
-															<span className='eth-price-name'>{(priceInputValue * ethPrice['eur']).toFixed(4)}</span>
+															<span className='eth-price-name'>
+																{(priceInputValue * ethPrice['eur']).toFixed(4)}
+															</span>
 															<span>EUR</span>
 														</div>
 													</MenuItem>

@@ -28,6 +28,7 @@ h5 {
 .View {
   display: flex;
   justify-content: flex-start;
+  align-items: flex-end;
 }
 
 .style2 {
@@ -81,6 +82,16 @@ h5 {
   font-family: GibsonSemiBold;
   text-align: center;
   border: 0;
+}
+
+.disabled-style-button {
+  background-color: #888888!important;
+  color: #fff;
+}
+
+.disabled-style-input {
+  background-color: #e9ecef !important;
+  color: #000;
 }
 
 .collapse1 {

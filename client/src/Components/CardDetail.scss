@@ -304,6 +304,17 @@ h4 {
 	display: flex;
 }
 
+.current-offer-sell {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.view-sell {
+	width: 280px;
+	margin: 28px -80px;
+}
+
 .buy-or-sell {
 	margin-top: 4px;
 	margin-left: 21px;
@@ -561,5 +572,16 @@ h4 {
 				display: block;
 			}
 		}
+	}
+
+	.view-sell {
+		width: 280px;
+		margin: 28px 0 8px;
+		align-items: baseline;
+		flex-direction: column;
+	}
+
+	.View {
+		align-items: end!important;
 	}
 }
