@@ -450,25 +450,23 @@ class MyStoreComponent extends Component {
 			<Container fluid>
 
 				<Row className='mystore-first-row-container'>
-					<Col>
-						<h1
-							style={{
-								fontFamily: 'Gibson',
-								fontSize: '64px',
-								textAlign: 'left',
-							}}
-						>MyStore</h1>
+					<Col className='col-mystore-first'>
+						<h1 className="head-mystore-first">
+							MyStore
+						</h1>
+						<div className='mystore-nft-status-container'>
+							<div className='mystore-nft-status-container-row'>
+								<h5>NFTs Minted:</h5>
+								<span>{nftsListed}</span>
+							</div>
+							<div className='mystore-nft-status-container-row'>
+								<h5>NFTs Owned:</h5>
+								<span>{menuTwoCount+menuThreeCount+menuFourCount}</span>
+							</div>
+						</div>
 					</Col>
 				</Row>
 				<Row className='mystore-second-row-container'>
-					<div className='mystore-nft-status-container'>
-						<div className='mystore-nft-status-container-row'>
-							<h5>NFTs Minted:</h5><span>{nftsListed}</span>
-						</div>
-						<div className='mystore-nft-status-container-row'>
-							<h5>NFTs Owned:</h5><span>{menuTwoCount+menuThreeCount+menuFourCount}</span>
-						</div>
-					</div>
 					<Col className='mystore-art-container'>
 						<StyledTabs value={artStatus} onChange={this.onArtStatusChange}>
 							<StyledTab
@@ -579,6 +577,13 @@ const StyledTab = withStyles({
 		marginRight: '70px',
 		'&:focus': {
 			outline: 'none',
+		},
+		'@media screen and (max-width: 1340px)': {
+			marginRight: '0',
+		},
+		'@media screen and (max-width: 770px)': {
+			fontSize: '10px',
+			lineHeight: '10px',
 		},
 		opacity: 1,
 	},

@@ -475,3 +475,162 @@ h3 {
 	height: 280px;
 	object-fit: cover;
 }
+
+@media screen and (max-width: 1060px) {
+	.mystore-art-queue-container {
+		margin-left: 0;
+		margin-top: 0;
+	}
+
+	.mystore-first-row-container {
+		padding-left: 0;
+		.col-mystore-first {
+			display: flex;
+			padding: 7px;
+			align-items: flex-end;
+
+			.head-mystore-first {
+				text-transform: capitalize!important;
+				font-size: 36px!important;
+				line-height: 36px!important;
+				font-weight: normal!important;
+			}
+
+			.mystore-nft-status-container {
+				margin-left: 15px;
+				display: flex;
+				width: 100%;
+				justify-content: space-between;
+				align-items: center;
+
+				.mystore-nft-status-container-row {
+					justify-content: end;
+					h5, span {
+						font-size: 10px;
+						line-height: 10px;
+					}
+
+					span {
+						margin-left: 20px;
+					}
+
+					h5 {
+						font-weight: normal!important;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 680px) {
+	.mystore-art-queue-container {
+		justify-content: end!important;
+		padding-left: 30px!important;
+	}
+
+	.mystore-art-active-container {
+		margin-left: 0!important;
+		margin-top: 0!important;
+		justify-content: end!important;
+		padding-left: 30px!important;
+
+		.mystore-active-card {
+			width: 163px;
+			margin-left: 0;
+			margin-right: 10px;
+			height: 233px;
+
+			.mystore-active-card-img {
+				width: 163px;
+				height: 168px;
+
+				img {
+					width: 163px;
+					height: 105.95px;
+				}
+			}
+		}
+	}
+
+	.card-body {
+		height: 72px;
+
+		.second-section {
+			margin-top: 12px!important;
+		}
+
+		h3 {
+			font-size: 14px!important;
+			line-height: 14px;
+		}
+
+		p {
+			font-size: 9px!important;
+			line-height: 9px!important;
+		}
+
+		.button_mint, .button_mint_end {
+			width: 58px!important;
+			height: 19px!important;
+			font-size: 14px;
+			line-height: 14px;
+		}
+	}
+
+	.card-body-time {
+		margin-top: 6px!important;
+	}
+
+	.mystore-art-container {
+		padding: 0;
+	}
+
+	.mystore-queue-card {
+		width: 163px;
+		margin-left: 0;
+		margin-right: 10px;
+		height: 233px;
+
+		.card-counter {
+			font-size: 10px;
+		}
+		.card-img-top, {
+			width: 163px;
+			height: 105.95px;
+		}
+
+		.mystore-queue-card-img {
+			width: 163px;
+			height: 168px;
+		}
+
+		.card-body{
+			height: 72px;
+			h3 {
+				font-size: 14px;
+				line-height: 14px;
+			}
+
+			.button_mint {
+				width: 58px;
+				height: 19px;
+				font-size: 14px;
+				line-height: 14px;
+			}
+		}
+	}
+
+	.mystore-upload-art {
+		width: 163px;
+		height: 157px;
+		margin-left: 0;
+		margin-right: 10px;
+	}
+}
+
+@media screen and (max-width: 680px) {
+	.modal-content {
+		max-width: 356px;
+	}
+}

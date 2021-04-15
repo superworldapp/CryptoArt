@@ -125,7 +125,23 @@
 }
 
 @media screen and (max-width: 600px) {
-	.modal-listing-nft {
+	.submit-button {
+		width: 173px;
+		height: 40.9px;
+		font-size: 19px;
+		line-height: 19px;
+		padding: 0!important;
+	}
+
+	.submit-button-two {
+		width: 173px;
+		height: 40.9px;
+		font-size: 19px;
+		line-height: 19px;
+		padding: 0!important;
+	}
+
+		.modal-listing-nft {
 		padding-left: 0;
 		padding-right: 0;
 

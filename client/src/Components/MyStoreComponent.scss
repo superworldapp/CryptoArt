@@ -1,142 +1,292 @@
 @import '../styles/global';
 
 .mystore-first-row-container {
-    /* border: 1px solid red; */
-    margin-top: 60px;
-    margin-bottom: 12px;
-    padding-left: 18px;
+	/* border: 1px solid red; */
+	margin-top: 60px;
+	margin-bottom: 12px;
+	padding-left: 18px;
+
+	.col-mystore-first {
+		.head-mystore-first {
+			font-size: 64px !important;
+			font-family: 'Gibson' !important;
+			text-align: left !important;
+		}
+	}
 }
 
 .mystore-second-row-container {
-    /* border: 1px solid red; */
+	/* border: 1px solid red; */
 }
 
 .mystore-art-container {
-    /* border: 1px solid red; */
+	/* border: 1px solid red; */
 }
 
 .mystore-nft-status-container {
-    /* border: 1px solid blue; */
-    width: 185px;
-    margin-top: 5px;
-    padding-left: 35px;
-    margin-right: 195px;
+	/* border: 1px solid blue; */
+	width: 185px;
+	margin-top: 5px;
 }
 
 .mystore-nft-status-container-row {
-    font-family: $fontFamily;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 18px;
-    font-weight: 400;
-    align-items: center;
-    line-height: 18px;
+	font-family: $fontFamily;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 18px;
+	font-weight: 400;
+	align-items: center;
+	line-height: 18px;
 }
 
 .mystore-nft-status-container-row {
-    h5, span {
-        font-size: 18px;
-        margin: 0;
-        padding: 0;
-    }
+	h5, span {
+		font-size: 18px;
+		margin: 0;
+		padding: 0;
+	}
 }
 
 .mystore-nft-status-container-row h5 {
-    text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 .mystore-art-status-container {
-    /* border: 1px solid black; */
-    font-family: $fontFamily;
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    flex-wrap: nowrap;
-    overflow: hidden;
+	/* border: 1px solid black; */
+	font-family: $fontFamily;
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+	flex-wrap: nowrap;
+	overflow: hidden;
 }
 
 .mystore-art-status-container h2 {
-    font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 
 .mystore-art-status-container button {
-    white-space: nowrap;
-    margin: 0 15px;
+	white-space: nowrap;
+	margin: 0 15px;
 }
 
 @media screen and (max-width: 660px) {
-    .mystore-art-status-container {
-        overflow-x: scroll;
-        justify-content: normal;
-    }
+	.mystore-art-status-container {
+		overflow-x: scroll;
+		justify-content: normal;
+	}
 }
 
 .mystore-art-status-container button {
-    border: none;
-    background-color: #FFFFFF;
+	border: none;
+	background-color: #FFFFFF;
 }
 
 .mystore-art-queue-container, .mystore-art-active-container {
-    display: flex;
-    margin-top: 30px;
-    min-height: 300px;
+	display: flex;
+	margin-top: 30px;
+	min-height: 300px;
+	margin-left: 50px;
+	max-width: 980px;
+	width: 100%;
 }
 
 @media screen and (max-width: 640px) {
-    .mystore-art-queue-container, .mystore-art-active-container {
-        justify-content: center;
-    }
+	.mystore-art-queue-container, .mystore-art-active-container {
+		justify-content: center;
+	}
 
-    .mystore-nft-status-container {
-        margin-right: 0;
-    }
+	.mystore-nft-status-container {
+		margin-right: 0;
+	}
 }
 
 .mystore-queue-card, .mystore-active-card {
-    height: 400px;
-    width: 280px;
+	height: 400px;
+	width: 280px;
 }
 
 .mystore-queue-card-img, .mystore-active-card-img {
-    height: 18rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	height: 18rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 
 .mystore-upload-art {
-    width: 280px;
-    height: 268px;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    margin: 10px 20px 20px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	width: 280px;
+	height: 268px;
+	background: #FFFFFF;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	margin: 10px 20px 20px 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .mystore-upload-btn {
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    background: #5540C7;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	background: #5540C7;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .mystore-upload-add {
-    width: 43px;
-    height: 43px;
-    font-family: Gibson;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 48px;
-    line-height: 48px;
-    text-transform: uppercase;
-    color: #FFFFFF;
+	width: 43px;
+	height: 43px;
+	font-family: Gibson;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 48px;
+	line-height: 48px;
+	text-transform: uppercase;
+	color: #FFFFFF;
+}
+
+@media screen and (max-width: 1060px) {
+	.mystore-art-active-container {
+		margin: 0;
+	}
+
+	.Component-root-1 {
+		padding: 10px !important;
+	}
+
+	.mystore-art-queue-container {
+		margin-left: 0;
+		margin-top: 0;
+	}
+
+	.mystore-first-row-container {
+		padding-left: 0;
+
+		.col-mystore-first {
+			display: flex;
+			padding: 7px 7px 7px 35px;
+			align-items: flex-end;
+
+			.head-mystore-first {
+				text-transform: capitalize !important;
+				font-size: 36px !important;
+				line-height: 36px !important;
+				font-weight: normal !important;
+			}
+
+			.mystore-nft-status-container {
+				margin-left: 15px;
+				display: flex;
+				width: 100%;
+				justify-content: end;
+				align-items: center;
+
+				.mystore-nft-status-container-row {
+					justify-content: end;
+					margin-left: 10px;
+					margin-bottom: 13px;
+
+					&:first-child {
+						margin-left: 0;
+					}
+
+					h5, span {
+						font-size: 18px;
+						line-height: 18px;
+					}
+
+					span {
+						margin-left: 20px;
+					}
+
+					h5 {
+						font-weight: normal !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 680px) {
+	.mystore-nft-status-container-row {
+		justify-content: end;
+		margin-left: 10px;
+		margin-bottom: 18px!important;
+
+		&:first-child {
+			margin-left: 0;
+		}
+
+		h5, span {
+			font-size: 10px!important;
+			line-height: 10px!important;
+		}
+
+		span {
+			margin-left: 20px;
+		}
+
+		h5 {
+			font-weight: normal !important;
+		}
+	}
+
+	.mystore-art-container {
+		padding: 0;
+	}
+	.mystore-first-row-container {
+		.col-mystore-first {
+			padding: 7px;
+		}
+	}
+
+	.mystore-queue-card {
+		width: 163px;
+		margin-left: 0;
+		margin-right: 10px;
+		height: 233px;
+
+		.card-counter {
+			font-size: 10px;
+		}
+
+		.card-img-top, {
+			width: 163px;
+			height: 105.95px;
+		}
+
+		.mystore-queue-card-img {
+			width: 163px;
+			height: 168px;
+		}
+
+		.card-body {
+			height: 72px;
+
+			h3 {
+				font-size: 14px;
+				line-height: 14px;
+			}
+
+			.button_mint {
+				width: 58px;
+				height: 19px;
+				font-size: 14px;
+				line-height: 14px;
+			}
+		}
+	}
+
+	.mystore-upload-art {
+		width: 163px;
+		height: 157px;
+		margin-left: 0;
+		margin-right: 10px;
+	}
 }
