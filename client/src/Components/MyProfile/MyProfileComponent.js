@@ -181,8 +181,8 @@ console.log(`==========>currentUser`, currentUser);
               target='_blank'
             >
               {(emailName && emailName && (
-                <FiMail size={24} color='grey' />
-              )) || <FiMail size={24} color='black' />}
+                <FiMail size={24} color='black' />
+              )) || <FiMail size={24} color='grey' />}
             </a>
             <a
               href={(currentUser && currentUser.social?.twitter) || '#!'}
@@ -190,8 +190,8 @@ console.log(`==========>currentUser`, currentUser);
               target='_blank'
             >
               {(currentUser && currentUser.social?.twitter && (
-                <RiTwitterLine size={24} color='grey' />
-              )) || <RiTwitterLine size={24} color='black' />}
+                <RiTwitterLine size={24} color='black' />
+              )) || <RiTwitterLine size={24} color='grey' />}
             </a>
             <a
               href={(currentUser && currentUser.social?.instagram) || '#!'}
@@ -199,8 +199,8 @@ console.log(`==========>currentUser`, currentUser);
               target='_blank'
             >
               {(currentUser && currentUser.social?.instagram && (
-                <RiInstagramLine size={24} color='grey' />
-              )) || <RiInstagramLine size={24} color='black' />}
+                <RiInstagramLine size={24} color='black' />
+              )) || <RiInstagramLine size={24} color='grey' />}
             </a>
             <a
               href={(currentUser && currentUser.social?.facebook) || '#!'}
@@ -208,8 +208,8 @@ console.log(`==========>currentUser`, currentUser);
               target='_blank'
             >
               {(currentUser && currentUser.social?.facebook && (
-                <FiFacebook size={24} color='grey' />
-              )) || <FiFacebook size={24} color='black' />}
+                <FiFacebook size={24} color='black' />
+              )) || <FiFacebook size={24} color='grey' />}
             </a>
             <a
               href={(currentUser && currentUser.social?.youtube) || '#!'}
@@ -217,8 +217,8 @@ console.log(`==========>currentUser`, currentUser);
               target='_blank'
             >
               {(currentUser && currentUser.social?.youtube && (
-                <FiYoutube size={24} color='grey' />
-              )) || <FiYoutube size={24} color='black' />}
+                <FiYoutube size={24} color='black' />
+              )) || <FiYoutube size={24} color='grey' />}
             </a>
             <a
               href={(currentUser && currentUser.social?.website) || '#!'}
@@ -226,11 +226,11 @@ console.log(`==========>currentUser`, currentUser);
               target='_blank'
             >
               {(currentUser && currentUser.social?.website && (
-                <RiGlobalLine size={24} color='grey' />
-              )) || <RiGlobalLine size={24} color='black' />}
+                <RiGlobalLine size={24} color='black' />
+              )) || <RiGlobalLine size={24} color='grey' />}
             </a>
             <a href='#!' className='icon'>
-              <FiUpload size={24} color='black' />
+              <FiUpload size={24} color='grey' />
             </a>
           </div>
           <div className="follow-field">
