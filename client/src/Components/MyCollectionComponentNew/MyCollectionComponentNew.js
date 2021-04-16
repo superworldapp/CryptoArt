@@ -221,7 +221,7 @@ class Allpatrender extends Component {
 		this.setState({auctionLoading: false, listForAuctionSuccess: true});
 		// console.log(res);
 	};
- 
+
 	EndAuction = async () => {
 		this.setState({endAuctionLoading: true});
 		const res = await this.props.contract.methods
@@ -366,7 +366,7 @@ class Allpatrender extends Component {
 					{/* <Link to={`/card/${this.props.art._tokenId}`}> */}
 
 					<Link to={`/card/${this.props.art._tokenId}`}>
-						
+
 						{displayFileType()}
 
 						<CardImgOverlay>
@@ -409,7 +409,7 @@ class Allpatrender extends Component {
 							</CardSubtitle>
 						</div>
 
-						
+
 						<div className='ctext'>
 							<CardText
 								style={{
@@ -447,15 +447,15 @@ class Allpatrender extends Component {
 							>
 								{this.props.art?._tokenBatchName}
 							</CardText>
-							
+
 						</div>
-						
+
 					</div>
 					<div
 						className='ctext'
 						style={{padding: '0px', height: '2rem', marginTop: '5%'}}
 					>
-						
+
 
 						<Modal
 							isOpen={this.state.isModalOpen}
@@ -484,7 +484,7 @@ class Allpatrender extends Component {
 										>
 											Title
 										</CardSubtitle>
-										
+
 									</div>
 									<div className='ctext' style={{padding: '2px'}}>
 										<CardText
@@ -497,7 +497,7 @@ class Allpatrender extends Component {
 										>
 											{this.props.art._tokenBatchName}
 										</CardText>
-										
+
 									</div>
 									<div className='ctext1'>
 										<p
@@ -697,7 +697,7 @@ class Allpatrender extends Component {
 								</button>
 							</ModalBody>
 						</Modal>
-						
+
 					</div>
 					<div style={{display: 'flex', justifyContent: 'center'}}>
 						{this.state.delistLoading ? (
@@ -743,7 +743,7 @@ class MyItemComponent extends Component {
 			filteredCollectionTitle: [],
 			searchTitle: 'Enter Title',
 		};
-		
+
 		// this.toggleModal1 = this.toggleModal1.bind(this);
 		this.toggleModal2 = this.toggleModal2.bind(this);
 		this.handleUploadMore = this.handleUploadMore.bind(this);
@@ -856,7 +856,7 @@ class MyItemComponent extends Component {
 		for (let i = 1; i <= res; i++) {
 			let rex = await this.props.contract?.methods.getTokenData(i).call();
 			let rex2 = await this.props.contract?.methods.getTokenDataBatch(i).call();
-			if (rex._tokenOwner == this.props.accounts && rex2._tokenCreator != this.props.accounts) {
+			if (rex._tokenOwner === this.props.accounts) {
 				var newBlock = {
 					_tokenId: i,
 					_tokenOwner: rex._tokenOwner,
@@ -874,6 +874,7 @@ class MyItemComponent extends Component {
 
 				}
 				response.push(newBlock);
+				console.log('=====>response!!!!!!!!!!', response);
 				// console.log(newBlock)
 			}
 			if (rex2._tokenCreator == this.props.accounts) {
@@ -907,7 +908,7 @@ class MyItemComponent extends Component {
 					})
 			})
 		}
-		
+
 		if (prevState.parsedSearchCollectionValueTitle !== parsedSearchCollectionValueTitle) {
 			this.setState({
 				filteredCollectionTitle: parsedSearchCollectionValueTitle.length === 0
@@ -1205,7 +1206,7 @@ class MyItemComponent extends Component {
 						</div>
 					</div>
 					: null}
-				
+
 
 				<Modal
 					isOpen={this.state.uploadSuccess}

@@ -59,7 +59,6 @@ class Main extends Component {
 		  })
 			.then((res) => {
 			  this.setState({ currentUser: res.data.data });
-			  console.log("currentxxxxxxxx======>",this.state.currentUser)
 			})
 	}
 	componentDidMount = async () => {
@@ -365,6 +364,7 @@ class Main extends Component {
 									web3={this.state.web3}
 								>
 								<MyCollectionComponentNew
+									state={this.state}
 									contract={this.state.contract}
 									accounts={this.state.accounts}
 									batch={this.state.batch?.filter(

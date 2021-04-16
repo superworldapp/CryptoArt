@@ -152,7 +152,6 @@ class Header extends Component {
     })
       .then((res) => {
         this.setState({ currentUser: res.data.data });
-        console.log("current===============>",this.state.currentUser)
         localStorage.setItem('userName', res.data.data.username);
       })
       .catch((e) => {
