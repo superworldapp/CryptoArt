@@ -492,7 +492,7 @@ const CardDetail = ({
 																: (converttoether(art?._sellPrice) * ethPrice['usd']).toFixed(4)
 															}
 														</span>
-														<span>USB</span>
+														<span>USD</span>
 													</div>
 												</Button>
 												<Menu
@@ -610,7 +610,7 @@ const CardDetail = ({
 														<span className='eth-price-name'>
 															{(priceInputValue * ethPrice['usd']).toFixed(4)}
 														</span>
-														<span>USB</span>
+														<span>USD</span>
 													</div>
 												</Button>
 												<Menu
