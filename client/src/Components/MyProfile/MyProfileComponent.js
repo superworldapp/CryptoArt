@@ -33,7 +33,7 @@ const MyProfileComponent = (props) => {
       website: '',
     },
   });
-
+console.log(`==========>currentUser`, currentUser);
   const getUser = () => {
     let auth = Auth.getToken();
     if (!auth || !auth.userId) {
@@ -152,7 +152,7 @@ const MyProfileComponent = (props) => {
         </div>
         <div className='exampl'>
           <div className='user-container'>
-            <img className='user-img' src={currentUser && currentUser.urlPhoto || getIdenticon()} alt='user-img' />
+            <img className='user-img' src={currentUser && currentUser?.urlPhoto || getIdenticon()} alt='user-img' />
             <div className={'user-img-hover'}>
               <div className='edit'>Edit</div>
               <div className='upload'>Upload</div>
@@ -164,12 +164,12 @@ const MyProfileComponent = (props) => {
           </p>
           <div className='name_block_creator'>
             <p className='creator-name'>
-              {currentUser !== undefined ? currentUser.name : 'Anonymous'}
+              {currentUser !== undefined ? currentUser?.name : 'Anonymous'}
               <img src={pencil} alt='pencil' id='pencil' onClick={handleEdit} />
             </p>
           </div>
           <p className="location">
-						{currentUser !== undefined ? currentUser.about : '...'}
+						{currentUser !== undefined ? currentUser?.about : '...'}
 					</p>
           {/*<SocialShare />*/}
           <div className='social-media'>
@@ -183,47 +183,47 @@ const MyProfileComponent = (props) => {
               )) || <FiMail size={24} color='black' />}
             </a>
             <a
-              href={(currentUser && currentUser.social.twitter) || '#!'}
+              href={(currentUser && currentUser.social?.twitter) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(currentUser && currentUser.social.twitter && (
+              {(currentUser && currentUser.social?.twitter && (
                 <RiTwitterLine size={24} color='grey' />
               )) || <RiTwitterLine size={24} color='black' />}
             </a>
             <a
-              href={(currentUser && currentUser.social.instagram) || '#!'}
+              href={(currentUser && currentUser.social?.instagram) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(currentUser && currentUser.social.instagram && (
+              {(currentUser && currentUser.social?.instagram && (
                 <RiInstagramLine size={24} color='grey' />
               )) || <RiInstagramLine size={24} color='black' />}
             </a>
             <a
-              href={(currentUser && currentUser.social.facebook) || '#!'}
+              href={(currentUser && currentUser.social?.facebook) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(currentUser && currentUser.social.facebook && (
+              {(currentUser && currentUser.social?.facebook && (
                 <FiFacebook size={24} color='grey' />
               )) || <FiFacebook size={24} color='black' />}
             </a>
             <a
-              href={(currentUser && currentUser.social.youtube) || '#!'}
+              href={(currentUser && currentUser.social?.youtube) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(currentUser && currentUser.social.youtube && (
+              {(currentUser && currentUser.social?.youtube && (
                 <FiYoutube size={24} color='grey' />
               )) || <FiYoutube size={24} color='black' />}
             </a>
             <a
-              href={(currentUser && currentUser.social.website) || '#!'}
+              href={(currentUser && currentUser.social?.website) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(currentUser && currentUser.social.website && (
+              {(currentUser && currentUser.social?.website && (
                 <RiGlobalLine size={24} color='grey' />
               )) || <RiGlobalLine size={24} color='black' />}
             </a>
@@ -233,8 +233,8 @@ const MyProfileComponent = (props) => {
           </div>
           <div className="follow-field">
             <div className="follow-btn-row">
-              <button className="follow-btn">Followings <span>{currentUser && currentUser.followings || '0'}</span></button>
-              <button className="follow-btn">Followers <span>{currentUser && currentUser.followers || '0'}</span></button>
+              <button className="follow-btn">Followings <span>{currentUser && currentUser?.followings || '0'}</span></button>
+              <button className="follow-btn">Followers <span>{currentUser && currentUser?.followers || '0'}</span></button>
             </div>
             <button disabled className="set-following-btn">Follow</button>
           </div>

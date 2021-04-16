@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Axios from "axios";
 
 import Auth from "../../Auth";
@@ -25,31 +25,31 @@ const ModalEditProfile = ({isEdit, setLinksState, emailName, form, setForm, getU
 			name: 'Twitter',
 			img: twitter,
 			type: 'twitter',
-			value: setLinksState.social.twitter
+			value: setLinksState.social?.twitter
 		},
 		{
 			name: 'Instagram',
 			img: inst,
 			type: 'instagram',
-			value: setLinksState.social.instagram
+			value: setLinksState.social?.instagram
 		},
 		{
 			name: 'Facebook',
 			img: facebook,
 			type: 'facebook',
-			value: setLinksState.social.facebook
+			value: setLinksState.social?.facebook
 		},
 		{
 			name: 'Youtube',
 			img: youtube,
 			type: 'youtube',
-			value: setLinksState.social.youtube
+			value: setLinksState.social?.youtube
 		},
 		{
 			name: 'Website',
 			img: website,
 			type: 'website',
-			value: setLinksState.social.website
+			value: setLinksState.social?.website
 		},
 	];
 
