@@ -32,6 +32,7 @@ import profileCard from '../images/svg/avatar.svg';
 import "./BatchDetail.scss";
 import Sound from 'react-sound';
 import ReactPlayer from 'react-player';
+import arrow from '../images/svg/arrow-up.svg';
 // import heart from "../images/svg/Heart.svg";
 import dropdownarrow from "../assets/svg/Drop down arrow.svg";
 import Web3 from 'web3';
@@ -600,7 +601,8 @@ class BatchDetail extends Component{
     super(props);
     this.state = {
       readMore: true,
-      viewMore: false
+      viewMore: false,
+      viewMoreMobile: false,
     }
 this.accUsername = this.accUsername.bind(this);
 this.displayFileType2 = this.displayFileType2.bind(this);
@@ -695,9 +697,13 @@ this.displayFileType2 = this.displayFileType2.bind(this);
     else return '@Annonymous';
   };
 
-
+  scrollUp = () => {
+    window.scrollTo(0,0);
+  }
 
 render(){
+  const isMobile = window.innerWidth < 500;
+
   let tokenInBatch;
 console.log(`==========>this.props`, this.props);
     //getCreData();
@@ -706,11 +712,18 @@ console.log(`==========>this.props`, this.props);
      let batchID = this.props.matchId; 
      tokenInBatch = this.props.allTokens?.filter((x) => x._refBatch == batchID);
      console.log('Header', tokenInBatch);
-      let newTokenBatch
+      let newTokenBatch;
+      let newTokenBatchMobile;
+
      if(!this.state.viewMore){
        newTokenBatch = tokenInBatch?.slice(0,15)
      }
-     const Menu = (this.state.viewMore ? tokenInBatch : newTokenBatch)?.map((x) => {
+     if(!this.state.viewMoreMobile) {
+       newTokenBatchMobile = tokenInBatch?.slice(0,4)
+     }
+     const Menu = (!isMobile
+       ? this.state.viewMore ? tokenInBatch : newTokenBatch
+       : this.state.viewMoreMobile ? tokenInBatch : newTokenBatchMobile)?.map((x) => {
       return (
         <div key={1}>
           <Allpatrender
@@ -730,7 +743,6 @@ console.log(`==========>this.props`, this.props);
     'resonating with the sound of ticking clocks serenely draws out the muted anxiety underlying the division of Korean peninsula following the ' +
     'war in the 1950’s. The ensemble takes place at the Peace Culture Bunker'
 
-
   return (
     <>
       <div className="batchWrapper">
@@ -745,7 +757,7 @@ console.log(`==========>this.props`, this.props);
               <div className="batchName">
                 {this.props.BatchCreated[0]?._tokenBatchName}
               </div>
-              <div><img src={heart} alt="heart"/></div>
+              <div><img src={heart} alt="heart" className="imgHeart"/></div>
             </div>
             <div className="batchSell">
               <div className="batchStart">
@@ -760,7 +772,7 @@ console.log(`==========>this.props`, this.props);
                 <img src={avatar} alt="avatar"/>
               </div>
               <div className="batchName">
-                Created by&ensp;
+                Created by&nbsp;
                 <div className="batchNameArtist">{this.accUsername(this.props.BatchCreated[0]?._tokenCreator)}</div>
               </div>
             </div>
@@ -777,20 +789,44 @@ console.log(`==========>this.props`, this.props);
             </div>
           </div>
         </div>
-        <div className="batchCards">
-          <div className="batchCardsHead">
-            <div className="batchToken">All Tokens</div>
-            <div className="batchViewMore">{tokenInBatch?.length > 15
-              ? <div onClick={() => this.setState({viewMore: !this.state.viewMore})}>
-                View More
+        {!isMobile ? (
+          <div className="batchCards">
+            <div className="batchCardsHead">
+              <div className="batchToken">All Tokens</div>
+              <div className="batchViewMore">{tokenInBatch?.length > 15
+                ? <div onClick={() => this.setState({viewMore: !this.state.viewMore})}>
+                  View More
+                </div>
+                : ''}
               </div>
-              : ''}
+            </div>
+            <div className="batchCards">
+              {Menu}
             </div>
           </div>
+        ) : (
           <div className="batchCards">
-            {Menu}
+            <div className="batchCardsHead">
+              <div className="batchToken">All Tokens</div>
+            </div>
+            <div className="batchCards">
+              {Menu}
+            </div>
+            <div className="batchViewMore">{tokenInBatch?.length > 4
+              ? <button
+                className={`${!this.state.viewMoreMobile ? 'buttonViewMore' : 'buttonViewMoreM'}`}
+                onClick={() => this.setState({viewMoreMobile: !this.state.viewMoreMobile})}>
+                more
+              </button>
+              : ''}
+            </div>
+            {this.state.viewMoreMobile &&
+              <button className="buttonUp" onClick={this.scrollUp}>
+                <img src={arrow} alt="arrow"/>
+              </button>
+            }
           </div>
-        </div>
+        )}
       </div>
       
     </>

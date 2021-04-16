@@ -8,6 +8,7 @@ import {
 	CardImgOverlay,
 	CardTitle,
 } from 'reactstrap';
+import {connect} from "react-redux";
 import Web3 from 'web3';
 import './CreationCards.scss';
 import heart from '../../images/svg/heart-card-img.svg';
@@ -108,7 +109,7 @@ const CreationCards = (props) => {
 		<Card className='card-wrapper'>
 			{displayFileType()}
 			<CardImgOverlay className="card-img-overlay">
-				<img className="card-user-img" src={props.profileImage} alt="userImg"/>
+				<img className="card-user-img" src={props.currentUser?.urlPhoto} alt="userImg"/>
 				<img src={heart} alt="heart" className="card-user-heart"/>
 				<CardTitle className="card-user-title">
 					{props.cardTitle}
@@ -120,7 +121,7 @@ const CreationCards = (props) => {
 						{props.CardSubtitle}
 					</CardSubtitle>
 					<CardSubtitle className="card-subtitle-name">
-						{props.CardSubtitleName}
+						{props.currentUser?.username}
 					</CardSubtitle>
 				</div>
 				<div className='card-text-info'>
@@ -150,4 +151,8 @@ const CreationCards = (props) => {
 	)
 }
 
-export default CreationCards;
+const mapStateToProps = (state) => ({
+	currentUser: state.myProfile.currentUserValue,
+});
+
+export default connect(mapStateToProps, null)( CreationCards);

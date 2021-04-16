@@ -140,7 +140,8 @@ a.nav-link.active {
       height: 60px;
   }
   .navItemHeader {
-    font-family: GibsonSemiBold!important;
+    font-family: 'Gibson', sans-serif!important;
+    font-weight: 600;
     font-size: 22px;
     line-height: 22px;
     padding: 0;
@@ -281,7 +282,7 @@ a.nav-link.active {
       height: 100vh;
       z-index: 10;
       width: 100vw;
-      top: 95px;
+      top: 91px;
       left: 0;
     }
     .navCollapseItem {
@@ -299,6 +300,7 @@ a.nav-link.active {
     }
     .navItemHeaderUserName {
       font-family: GibsonSemiBold!important;
+      font-weight: bold;
       font-size: 24px;
       line-height: 22px;
       padding: 0;
@@ -306,7 +308,18 @@ a.nav-link.active {
       color: #5540C7;
       text-transform: none;
       margin: 0 10px;
+      min-height: auto;
       height: 30px;
+    }
+    .navbar-toggler {
+      border-color: #d5d7fa;
+    }
+    .togle_nav_img {
+      .navbar-toggler-icon {
+        background-image: url("../images/svg/closeIcon.svg");
+        width: 23px;
+        height: 23px;
+      }
     }
   }
 }

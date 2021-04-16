@@ -23,6 +23,7 @@ import { Alert } from '@material-ui/lab';
 import { useHistory } from 'react-router-dom';
 import ConnectWalletModal from '../ConnectWalletModal/ConnectWalletModal';
 import Auth from '../Auth.js';
+import Loading from "../Loading/loading";
 
 interface IHeader {
   initContracts: () => void;
@@ -428,7 +429,7 @@ const SignInModal = (
                   <Grid item xs={12}>
                     <>
                       {loading && (
-                        <CircularProgress size={24} className='progress' />
+                        <Loading />
                       )}
                       <Button
                         type='submit'
@@ -561,7 +562,7 @@ const SignInModal = (
                   <Grid item xs={12}>
                     <>
                       {loading && (
-                        <CircularProgress size={24} className='progress' />
+                       <Loading />
                       )}
                       <Button
                         type='submit'
@@ -708,7 +709,7 @@ const SignInModal = (
                   <Grid item xs={12}>
                     <>
                       {loading && (
-                        <CircularProgress size={24} className='progress' />
+                        <Loading />
                       )}
                       <Button
                         type='submit'
@@ -849,7 +850,7 @@ const SignInModal = (
                   <Grid item xs={12}>
                     <>
                       {loading && (
-                        <CircularProgress size={24} className='progress' />
+                          <Loading />
                       )}
                       <Button
                         type='submit'

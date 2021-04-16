@@ -13,19 +13,28 @@ import profileImage from '../../images/svg/profile-image.svg';
 import successLogo from '../../images/svg/successLogo.svg';
 import pencil from '../../images/pencil.png';
 import './MyProfileComponent.scss';
-import SocialShare from './SocialShare';
 import Identicon from 'identicon.js';
 import Cookies from 'js-cookie';
+import {connect} from "react-redux";
+import {setCurrentUser} from "../../redux/myProfile/actions";
 
 const MyProfileComponent = (props) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [isEdit, setIsEdit] = useState(false);
-  const [linksStore, setLinksStore] = useState();
   const [currentUser, setCurrentUser] = useState();
-  const setLinksState = (e) => {
-    setLinksStore(e);
-  };
 
+  const [form, setForm] = useState({
+    name: '',
+    about: '',
+    social: {
+      twitter: '',
+      instagram: '',
+      facebook: '',
+      youtube: '',
+      website: '',
+    },
+  });
+console.log(`==========>currentUser`, currentUser);
   const getUser = () => {
     let auth = Auth.getToken();
     if (!auth || !auth.userId) {
@@ -36,6 +45,8 @@ const MyProfileComponent = (props) => {
     }).then((res) => {
       if (res.data && res.data.r == 's' && res.data.data) {
         setCurrentUser(res.data.data);
+        setForm(res.data.data);
+        props.setCurrentUser(res.data.data)
       }
     });
   };
@@ -56,6 +67,8 @@ const MyProfileComponent = (props) => {
     return email;
   };
 
+  const emailName = (Cookies.get('email')).toString();
+  
   const getIdenticon = () => {
     return `data:image/png;base64,${new Identicon(
       getEmailLength(Cookies.get('email')).toString(),{
@@ -124,17 +137,24 @@ const MyProfileComponent = (props) => {
   })((props) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
 
   return (
-    <>
+  <>
       <div className='profile-info'>
         {isEdit ? (
-          <ModalEditProfile setLinksState={setLinksState} isEdit={handleEdit} />
+          <ModalEditProfile
+            setLinksState={currentUser}
+            getUser={getUser}
+            isEdit={handleEdit}
+            emailName={emailName}
+            form={form}
+            setForm={setForm}
+          />
         ) : null}
         <div className='cover-container'>
           <img src={coverImage} alt='cover-img' />
         </div>
         <div className='exampl'>
           <div className='user-container'>
-            <img className='user-img' src={currentUser && currentUser.urlPhoto || getIdenticon()} alt='user-img' />
+            <img className='user-img' src={currentUser && currentUser?.urlPhoto || getIdenticon()} alt='user-img' />
             <div className={'user-img-hover'}>
               <div className='edit'>Edit</div>
               <div className='upload'>Upload</div>
@@ -146,77 +166,77 @@ const MyProfileComponent = (props) => {
           </p>
           <div className='name_block_creator'>
             <p className='creator-name'>
-              {currentUser !== undefined ? currentUser.name : 'Anonymous'}
+              {currentUser !== undefined ? currentUser?.name : 'Anonymous'}
               <img src={pencil} alt='pencil' id='pencil' onClick={handleEdit} />
             </p>
           </div>
           <p className="location">
-						{currentUser !== undefined ? currentUser.about : '...'}
+						{currentUser !== undefined ? currentUser?.about : '...'}
 					</p>
           {/*<SocialShare />*/}
           <div className='social-media'>
             <a
-              href={(linksStore && 'http://' + linksStore.email) || '#!'}
+              href={`mailto:${emailName}` || '#!'}
               className='icon'
               target='_blank'
             >
-              {(linksStore && linksStore.email && (
-                <FiMail size={24} color='grey' />
-              )) || <FiMail size={24} color='black' />}
+              {(emailName && emailName && (
+                <FiMail size={24} color='black' />
+              )) || <FiMail size={24} color='grey' />}
             </a>
             <a
-              href={(linksStore && 'http://' + linksStore.twitter) || '#!'}
+              href={(currentUser && currentUser.social?.twitter) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(linksStore && linksStore.twitter && (
-                <RiTwitterLine size={24} color='grey' />
-              )) || <RiTwitterLine size={24} color='black' />}
+              {(currentUser && currentUser.social?.twitter && (
+                <RiTwitterLine size={24} color='black' />
+              )) || <RiTwitterLine size={24} color='grey' />}
             </a>
             <a
-              href={(linksStore && 'http://' + linksStore.inst) || '#!'}
+              href={(currentUser && currentUser.social?.instagram) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(linksStore && linksStore.inst && (
-                <RiInstagramLine size={24} color='grey' />
-              )) || <RiInstagramLine size={24} color='black' />}
+              {(currentUser && currentUser.social?.instagram && (
+                <RiInstagramLine size={24} color='black' />
+              )) || <RiInstagramLine size={24} color='grey' />}
             </a>
             <a
-              href={(linksStore && 'http://' + linksStore.facebook) || '#!'}
+              href={(currentUser && currentUser.social?.facebook) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(linksStore && linksStore.facebook && (
-                <FiFacebook size={24} color='grey' />
-              )) || <FiFacebook size={24} color='black' />}
+              {(currentUser && currentUser.social?.facebook && (
+                <FiFacebook size={24} color='black' />
+              )) || <FiFacebook size={24} color='grey' />}
             </a>
             <a
-              href={(linksStore && 'http://' + linksStore.youtube) || '#!'}
+              href={(currentUser && currentUser.social?.youtube) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(linksStore && linksStore.youtube && (
-                <FiYoutube size={24} color='grey' />
-              )) || <FiYoutube size={24} color='black' />}
+              {(currentUser && currentUser.social?.youtube && (
+                <FiYoutube size={24} color='black' />
+              )) || <FiYoutube size={24} color='grey' />}
             </a>
             <a
-              href={(linksStore && 'http://' + linksStore.website) || '#!'}
+              href={(currentUser && currentUser.social?.website) || '#!'}
               className='icon'
               target='_blank'
             >
-              {(linksStore && linksStore.youtube && (
-                <RiGlobalLine size={24} color='grey' />
-              )) || <RiGlobalLine size={24} color='black' />}
+              {(currentUser && currentUser.social?.website && (
+                <RiGlobalLine size={24} color='black' />
+              )) || <RiGlobalLine size={24} color='grey' />}
             </a>
             <a href='#!' className='icon'>
-              <FiUpload size={24} color='black' />
+              <FiUpload size={24} color='grey' />
             </a>
           </div>
           <div className="follow-field">
             <div className="follow-btn-row">
-              <button className="follow-btn">Followings <span>{currentUser && currentUser.followings || '0'}</span></button>
-              <button className="follow-btn">Followers <span>{currentUser && currentUser.followers || '0'}</span></button>
+              <button className="follow-btn">Followings <span>{currentUser && currentUser?.followings || '0'}</span></button>
+              <button className="follow-btn">Followers <span>{currentUser && currentUser?.followers || '0'}</span></button>
             </div>
             <button disabled className="set-following-btn">Follow</button>
           </div>
@@ -235,7 +255,7 @@ const MyProfileComponent = (props) => {
         {/*<Tab label="Favourites"/>*/}
         <StyledTab label='Recent activity' />
       </StyledTabs>
-      {selectedTab === 0 && <MyCreation  />}
+      {selectedTab === 0 && <MyCreation currentuser={currentUser}/>}
       {selectedTab === 1 && (
         <MyCollectionsCards collectionBatch={props.batch} />
       )}
@@ -244,4 +264,8 @@ const MyProfileComponent = (props) => {
   );
 };
 
-export default MyProfileComponent;
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (data) => dispatch(setCurrentUser(data)),
+});
+
+export default connect(null, mapDispatchToProps)(MyProfileComponent);
