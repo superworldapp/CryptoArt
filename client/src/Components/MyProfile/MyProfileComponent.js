@@ -13,9 +13,10 @@ import profileImage from '../../images/svg/profile-image.svg';
 import successLogo from '../../images/svg/successLogo.svg';
 import pencil from '../../images/pencil.png';
 import './MyProfileComponent.scss';
-import SocialShare from './SocialShare';
 import Identicon from 'identicon.js';
 import Cookies from 'js-cookie';
+import {connect} from "react-redux";
+import {setCurrentUser} from "../../redux/myProfile/actions";
 
 const MyProfileComponent = (props) => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -45,6 +46,7 @@ console.log(`==========>currentUser`, currentUser);
       if (res.data && res.data.r == 's' && res.data.data) {
         setCurrentUser(res.data.data);
         setForm(res.data.data);
+        props.setCurrentUser(res.data.data)
       }
     });
   };
@@ -253,7 +255,7 @@ console.log(`==========>currentUser`, currentUser);
         {/*<Tab label="Favourites"/>*/}
         <StyledTab label='Recent activity' />
       </StyledTabs>
-      {selectedTab === 0 && <MyCreation  />}
+      {selectedTab === 0 && <MyCreation currentuser={currentUser}/>}
       {selectedTab === 1 && (
         <MyCollectionsCards collectionBatch={props.batch} />
       )}
@@ -262,4 +264,8 @@ console.log(`==========>currentUser`, currentUser);
   );
 };
 
-export default MyProfileComponent;
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (data) => dispatch(setCurrentUser(data)),
+});
+
+export default connect(null, mapDispatchToProps)(MyProfileComponent);

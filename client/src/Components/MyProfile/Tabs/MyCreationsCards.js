@@ -24,7 +24,7 @@ const MyCreationCards = (props) => {
 		<div className="creation-wrapper">
 			<div className="creation">
 				{newArt3.map((item) => (
-					<CreationCards {...item}/>
+					<CreationCards {...item} />
 				))}
 			</div>
 		</div>
