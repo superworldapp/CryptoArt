@@ -474,6 +474,7 @@ h3 {
 .card-img-top {
 	height: 280px;
 	object-fit: cover;
+	border-radius: 10px 10px 0 0;
 }
 
 @media screen and (max-width: 1020px) {
@@ -610,6 +611,7 @@ h3 {
 		.card-img-top, {
 			width: 163px;
 			height: 105.95px;
+			border-radius: 10px;
 		}
 
 		.mystore-queue-card-img {

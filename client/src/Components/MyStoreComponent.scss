@@ -107,7 +107,7 @@
 }
 
 .mystore-queue-card-img, .mystore-active-card-img {
-	height: 18rem;
+	height: 280px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -256,9 +256,10 @@
 			font-size: 10px;
 		}
 
-		.card-img-top, {
+		.card-img-top {
 			width: 163px;
 			height: 105.95px;
+			border-radius: 10px;
 		}
 
 		.mystore-queue-card-img {

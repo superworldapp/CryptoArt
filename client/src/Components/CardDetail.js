@@ -23,6 +23,7 @@ import Sound from "react-sound";
 import ReactPlayer from "react-player";
 import SuccessfulModals from "./SuccessModal/SuccessfulModals";
 import {Menu, MenuItem} from "@material-ui/core";
+import Loading from "./Loading/loading";
 
 const CardDetail = ({
 											art,
@@ -57,6 +58,7 @@ const CardDetail = ({
 
 	const handleUploadMore = () => {
 		history.push('/mycollection')
+		window.location.reload();
 	}
 
 	const changeValue = (e) => {
@@ -292,11 +294,10 @@ const CardDetail = ({
 						<button
 							className='batchcardbid-btn'
 							onClick={handlePurchase}
-
 						>
 							Buy Now
 						</button>
-						<div>{loadingPurchase ? <img src={loader}/> : <div></div>}</div>
+						<div>{loadingPurchase && <Loading />}</div>
 					</div>
 
 				</React.Fragment>
@@ -328,7 +329,7 @@ const CardDetail = ({
 						>
 							Place Bid
 						</button>
-						<div>{loadingPlaceBid ? <img src={loader}/> : <div></div>}</div>
+						<div>{loadingPlaceBid && <Loading />}</div>
 					</div>
 
 				</React.Fragment>
