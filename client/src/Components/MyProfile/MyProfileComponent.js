@@ -57,8 +57,8 @@ console.log(`==========>currentUser`, currentUser);
 
   const getEmailLength = (email) => {
     let diff;
-    if (email.length < 15) {
-      diff = 15 - email.length;
+    if (email?.length < 15) {
+      diff = 15 - email?.length;
       for (let i = 0; i < diff; i++) {
         email += 'x';
       }
@@ -67,19 +67,21 @@ console.log(`==========>currentUser`, currentUser);
     return email;
   };
 
-  const emailName = (Cookies.get('email')).toString();
-  
+  const emailName = (Cookies.get('email'))?.toString();
+
   const getIdenticon = () => {
-    return `data:image/png;base64,${new Identicon(
-      getEmailLength(Cookies.get('email')).toString(),{
-        foreground: [85, 64, 199, 255],               
-        background: [255, 255, 255, 255],        
-        margin: 0.2,                              
-        size: 1080,                                
-        format: 'png'                             
+    let id = getEmailLength(Cookies.get('email')) ? this.getEmailLength(Cookies.get('email')).toString() : "x12345678901234";
+
+    return `data:image/png;base64,${new Identicon(id,{
+        foreground: [85, 64, 199, 255],
+        background: [255, 255, 255, 255],
+        margin: 0.2,
+        size: 1080,
+        format: 'png'
       }
     )}`;
-  };
+  }
+
 
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);

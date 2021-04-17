@@ -148,7 +148,7 @@ class Header extends Component {
     };
 
     const { userId } = Auth.getToken();
-    
+
     return Axios.post(`${process.env.REACT_APP_SW_API_URL}/user/get`, {
       userId: userId,
     })
@@ -182,8 +182,8 @@ class Header extends Component {
 
   getEmailLength(email) {
     let diff;
-    if (email.length < 15) {
-      diff = 15 - email.length;
+    if (email?.length < 15) {
+      diff = 15 - email?.length;
       for (let i = 0; i < diff; i++) {
         email += 'x';
       }
@@ -193,15 +193,16 @@ class Header extends Component {
   }
 
   getIdenticon() {
-    return `data:image/png;base64,${new Identicon(
-      this.getEmailLength(Cookies.get('email')).toString(),{
-        foreground: [85, 64, 199, 255],               
-        background: [255, 255, 255, 255],        
-        margin: 0.2,                              
-        size: 1080,                                
-        format: 'png'                             
+    let id = this.getEmailLength(Cookies.get('email')) ? this.getEmailLength(Cookies.get('email')).toString() : "x12345678901234";
+
+    return `data:image/png;base64,${new Identicon(id,{
+        foreground: [85, 64, 199, 255],
+        background: [255, 255, 255, 255],
+        margin: 0.2,
+        size: 1080,
+        format: 'png'
       }
-    )}`;
+    )}` ;
   }
 
   openWalletModal = () => {
