@@ -132,18 +132,18 @@ contract NFTSalon is ERC721Enumerable, Ownable {
             percentages[i] = royaltyPercentageMemory[tokenBatchId][i];
         }
     }
-
+    //Not Gonna use this
     // Use : Removes royalties only owner of the batch can do this
     // Input : Token Batch ID
     // Output : Removes all royalty adresses
-    function clearRoyalties(uint256 tokenBatchId) public creatorToken(tokenBatchId) {
-        for (uint256 i=0; i<royaltyLengthMemory[tokenBatchId]; i++) {
-            royaltyAddressMemory[tokenBatchId][i] = payable(address(0x0));
-            royaltyPercentageMemory[tokenBatchId][i] = 0;
-        }
+    // function clearRoyalties(uint256 tokenBatchId) public creatorToken(tokenBatchId) {
+    //     for (uint256 i=0; i<royaltyLengthMemory[tokenBatchId]; i++) {
+    //         royaltyAddressMemory[tokenBatchId][i] = payable(address(0x0));
+    //         royaltyPercentageMemory[tokenBatchId][i] = 0;
+    //     }
 
-        royaltyLengthMemory[tokenBatchId] = 0;
-    }
+    //     royaltyLengthMemory[tokenBatchId] = 0;
+    // }
 
     // Use : Minting new tokens from batch
     // Input : Token Batch ID, minting amount
@@ -261,7 +261,7 @@ contract NFTSalon is ERC721Enumerable, Ownable {
     // Use : Start a bid
     // Input : Token ID and start price
     // Output : Emit bidStarted event by giving token ID, address, setting event to true, false(represents the creator), and time stamp
-    function startBid(uint _tokenId, uint256 _startPrice, uint _endTimestamp) public {
+    function startBid(uint _tokenId, uint256 _startPrice, uint _endTimestamp) public ownerToken(_tokenId){
         auctions[_tokenId].bidEnd = _endTimestamp;
         auctions[_tokenId].isBidding = true; 
         auctions[_tokenId].bidPrice = _startPrice;
@@ -291,9 +291,8 @@ contract NFTSalon is ERC721Enumerable, Ownable {
     // Use : Allows SuperWorld to close a bid
     // Input : Token ID
     // Output : Emit bidStarted event by giving token ID, address, sets bidding to false, true(represents SuperWorld) and, timestamp
-    function closeBid(uint _tokenId) public {
+    function closeBid(uint _tokenId) public onlyOwner{
         require(auctions[_tokenId].bidEnd < block.timestamp);
-        require(auctions[_tokenId].bidder == payable(msg.sender)); // TODO : wrong assertion
         auctions[_tokenId].bidder.transfer(auctions[_tokenId].bidPrice);
         auctions[_tokenId].bidder = payable(address(0x0));
         auctions[_tokenId].bidPrice = 0;
@@ -373,7 +372,7 @@ contract NFTSalon is ERC721Enumerable, Ownable {
     // Use : Close bid by owner
     // Input : Token ID
     // Output : Calls _buytoken function by giving Token ID, bidder,bid price, and 2(triggers a two in _buytoken function)
-    function closeBidOwner(uint _tokenId)public returns(bool) {
+    function closeBidOwner(uint _tokenId)public ownerToken(_tokenId) returns(bool) {
         if (auctions[_tokenId].bidder == payable(address(0x0))) {
             auctions[_tokenId].bidEnd = 0;
             auctions[_tokenId].isBidding = false;
