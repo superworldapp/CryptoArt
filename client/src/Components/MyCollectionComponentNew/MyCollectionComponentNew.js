@@ -1038,6 +1038,7 @@ class MyItemComponent extends Component {
 				{filteredCollectionTitle && filteredCollectionTitle.length > 0
 					? (
 						<div>
+
 							<p
 								style={{
 									fontFamily: 'Gibson',
@@ -1046,6 +1047,10 @@ class MyItemComponent extends Component {
 									textAlign: 'left',
 									lineHeight: "64px",
 									color: "#000000",
+									'@media only screen and (max-width: 500px)': {
+										fontSize: '10px',
+										lineHeight: '10px',
+									},
 								}}
 							>
 								MyCollection
@@ -1059,6 +1064,7 @@ class MyItemComponent extends Component {
 									textAlign: 'left',
 									lineHeight: "24px",
 									color: "#5540C7",
+
 								}}
 							>
 								{this.state.art.length} NFTs

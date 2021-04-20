@@ -475,3 +475,27 @@ h3 {
 	height: 280px;
 	object-fit: cover;
 }
+
+@media screen and (max-width: 500px) {
+	.artContainer {
+		padding: 0px;
+		margin-left: 5px;
+	}
+	.item-nft {
+		width: 50%;
+		height: 30%;
+		margin-bottom: 5px;
+		// max-width: 280px;
+		// max-height: 268px;
+		margin-right: 5px;
+		overflow: hidden;
+			
+	}
+	.my-art-row {
+		margin-top: 5px;
+		width: 100%;
+		display: flex;
+		justify-content: flex-start;
+		flex-wrap: nowrap;
+	}
+}
